@@ -11,19 +11,36 @@
 
 package de.weltraumschaf.commons;
 
+import java.io.PrintStream;
+import org.junit.After;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Test cases for {@link CapturingOutputStream}.
- * 
+ *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class CapturingOutputStreamTest {
 
-    @Ignore
-    @Test public void writeAndGetCapturedOutput() {
+    private final CapturingOutputStream sut = new CapturingOutputStream();
+    private PrintStream backup;
 
+    @Before public void changeSystemOut() {
+        backup = System.out;
+        System.setOut(new PrintStream(sut));
+    }
+
+    @After public void restoreSystemOut() {
+        System.setOut(backup);
+    }
+
+    @Test public void writeAndGetCapturedOutput() {
+        assertEquals("", sut.getCapturedOutput());
+        System.out.print("foo");
+        assertEquals("foo", sut.getCapturedOutput());
+        System.out.print("bar");
+        assertEquals("foobar", sut.getCapturedOutput());
     }
 }

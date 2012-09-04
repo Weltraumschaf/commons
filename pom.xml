@@ -22,7 +22,7 @@
         <developer>
             <id>Weltraumschaf</id>
             <name>Sven Strittmatter</name>
-            <email>ich@weltraumschaf.de</email>
+            <email>weltraumschaf@googlemail.com</email>
         </developer>
     </developers>
 
@@ -35,7 +35,7 @@
                 LICENSE
 
                 "THE BEER-WARE LICENSE" (Revision 42):
-                "Sven Strittmatter" &lt;ich(at)weltraumschaf(dot)de&gt; wrote this file.
+                "Sven Strittmatter" &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
                 As long as you retain this notice you can do whatever you want with
                 this stuff. If we meet some day, and you think this stuff is worth it,
                 you can buy me a beer in return.
@@ -220,6 +220,16 @@
                 <plugin>
                     <artifactId>maven-jxr-plugin</artifactId>
                     <version>2.3</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.4</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>2.2</version>
                 </plugin>
 
                 <plugin>
@@ -479,6 +489,43 @@
                         <ruleset>/rulesets/design.xml</ruleset>
                     </rulesets>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

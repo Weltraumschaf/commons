@@ -8,7 +8,7 @@
         <version>7</version>
     </parent>
 
-    <groupId>de.weltraumschaf.commons</groupId>
+    <groupId>de.weltraumschaf</groupId>
     <artifactId>commons</artifactId>
     <version>0.1.2-SNAPSHOT</version>
     <packaging>jar</packaging>

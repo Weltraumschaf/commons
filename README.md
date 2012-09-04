@@ -15,9 +15,9 @@ along with this [guide][1].
 - CapturingOutputStream
 - IOStreams
 
-### Version 0.2.0
+### Version 0.1.1
 
-- TBD
+- Fix POM and add signatures.
 
 ### File Signatures
 

@@ -17,6 +17,37 @@ import java.io.PrintStream;
 /**
  * Immutable aggregate object which contains STDIN, STDOUT and STDERR streams.
  *
+ * It is not good practice to clutter production code with calls to
+ * {@link System#out}, {@link System#err}, and {@link System#in}. But on the
+ * other hand most applications must do I/O to the user. This aggregate object
+ * contains I/O streams to pass around as injected dependency. It is onluy
+ * necessary to the systems IO only at the main applications entry point:
+ *
+ * <code>
+ * public void main(final String[] args) {
+ *      IOStreams io = new IOStreams(System.in, System.out, System.err);
+ *
+ *      // Pass around the io object to your client code.
+ *
+ *      System.exit(0);
+ * }
+ * </code>
+ *
+ * In the test code it will be easy to replace the I/O with mocks:
+ *
+ * <code>
+ * @Test public void someTestWithIO() {
+ *      IOStreams io = new IOStreams(mock(InputStream.class),
+ *                                   mock(PrintStream.class),
+ *                                   mock(PrintStream.class));
+ *
+ *      // Pass around the io object to your client code and assert something.
+ * }
+ * </code>
+ *
+ * As a convenience method for creating an I/O streams object with the default I/O streams
+ * of {@link System} you can use {@link IOStreams#newDefault()}.
+ *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class IOStreams {

@@ -20,6 +20,12 @@ along with this [guide][1].
 
 - Fix POM and add signatures.
 
+### Version 0.1.2
+
+- Add more documentation.
+- Add <code>toString()</code>, <code>hashCode()</code>, <code>equals()</code>
+  to <code>CapturingOutputStream()</code>
+
 ### File Signatures
 
 To receive the keys type:

@@ -56,4 +56,31 @@ public class CapturingOutputStream extends OutputStream {
         return capturedOutput.toString();
     }
 
+    @Override
+    public String toString() {
+        return String.format("CapturingOutputStream{capturedOutput=%s}", capturedOutput);
+    }
+
+    @Override
+    public int hashCode() {
+        return capturedOutput.toString().hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        final CapturingOutputStream other = (CapturingOutputStream) obj;
+
+        return capturedOutput.toString().equals(other.capturedOutput.toString());
+    }
+
+
+
 }

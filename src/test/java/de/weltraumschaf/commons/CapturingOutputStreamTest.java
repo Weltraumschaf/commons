@@ -12,6 +12,7 @@
 package de.weltraumschaf.commons;
 
 import java.io.PrintStream;
+import static org.hamcrest.CoreMatchers.*;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -37,10 +38,43 @@ public class CapturingOutputStreamTest {
     }
 
     @Test public void writeAndGetCapturedOutput() {
-        assertEquals("", sut.getCapturedOutput());
+        assertThat("", is(sut.getCapturedOutput()));
         System.out.print("foo");
-        assertEquals("foo", sut.getCapturedOutput());
+        assertThat("foo", is(sut.getCapturedOutput()));
         System.out.print("bar");
-        assertEquals("foobar", sut.getCapturedOutput());
+        assertThat("foobar", is(sut.getCapturedOutput()));
     }
+
+    @Test public void getStringRepresentation() {
+        final PrintStream stream = new PrintStream(sut);
+        stream.print("foobar");
+        assertThat("CapturingOutputStream{capturedOutput=foobar}", is(sut.toString()));
+    }
+
+    @Test public void testHashCode() {
+        final PrintStream stream = new PrintStream(sut);
+        stream.print("foobar");
+        final CapturingOutputStream other = new CapturingOutputStream();
+        final PrintStream streamOther = new PrintStream(other);
+        streamOther.print("foobar");
+        assertThat(other.hashCode(), is(sut.hashCode()));
+    }
+
+    @Test public void equals() {
+        final PrintStream stream = new PrintStream(sut);
+        stream.print("foobar");
+        final CapturingOutputStream other = new CapturingOutputStream();
+        final PrintStream streamOther = new PrintStream(other);
+        streamOther.print("foobar");
+        final CapturingOutputStream other2 = new CapturingOutputStream();
+        final PrintStream streamOther2 = new PrintStream(other2);
+        streamOther2.print("snafu");
+
+        assertThat(sut.equals("foobar"), is(false));
+        assertThat(sut.equals(null), is(false));
+        assertThat(sut.equals(other), is(true));
+        assertThat(sut.equals(other2), is(false));
+        assertThat(other.equals(other2), is(false));
+    }
+
 }

@@ -17,6 +17,18 @@ import java.io.OutputStream;
 /**
  * Captures the written bytes into a string buffer.
  *
+ * This type of object is useful in tests to capture output written to {@link System#out}
+ * or {@link System#err}:
+ *
+ * <code>
+ * CapturingOutputStream out = new CapturingOutputStream();
+ * System.setOut(out);
+ *
+ * // ... executes to code which calls System.out()
+ *
+ * String output = out.getCapturedOutput();
+ * </code>
+ *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class CapturingOutputStream extends OutputStream {

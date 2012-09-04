@@ -29,6 +29,9 @@ import java.io.OutputStream;
  * String output = out.getCapturedOutput();
  * </code>
  *
+ * This capturing output streams buffers everything written to {@link OutputStream#write(int)},
+ * if you want to reset the buffer you must create a new instance.
+ *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class CapturingOutputStream extends OutputStream {

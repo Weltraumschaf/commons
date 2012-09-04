@@ -12,8 +12,9 @@ along with this [guide][1].
 
 ### Version 0.1.0
 
-- CapturingOutputStream
-- IOStreams
+- <code>CapturingOutputStream</code>: Can be used to capture output print
+  to <code>System.out</code> or <code>System.err</code>.
+- <code>IOStreams</code>:
 
 ### Version 0.1.1
 

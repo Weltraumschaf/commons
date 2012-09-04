@@ -8,6 +8,31 @@ to minimize code duplication oevr the projects.
 This is my first artefact I try to deploy to Maven Central Repository
 along with this [guide][1].
 
+## Goal
+
+Goal of this class library is to share common functionality to reduce duplicated
+code. Further goal is to have no external dependencies. Only external dependencies
+are [JUnit][3] and [Mockito][4] for testing.
+
+## Usage
+
+Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
+
+    <dependencies>
+
+        <!-- ... -->
+
+        <dependency>
+            <!-- http://weltraumschaf.github.com/commons/ -->
+            <groupId>de.weltraumschaf</groupId>
+            <artifactId>commons</artifactId>
+            <version>0.1.4</version>
+        </dependency>
+
+        <!-- ... -->
+
+    <dependencies>
+
 ## Versions
 
 ### Version 0.1.0
@@ -27,6 +52,14 @@ along with this [guide][1].
   to <code>CapturingOutputStream()</code>.
 - Add example code and documentation to <code>IOStreams</code>.
 
+### Version 0.1.3
+
+- Messing around with releasing to Sonatype Nexus in combination with GitHub.
+
+### Version 0.1.4
+
+- First successful promoted release.
+
 ### File Signatures
 
 To receive the keys type:
@@ -34,3 +67,6 @@ To receive the keys type:
     $ gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys BA265082
 
 [1]: http://maven.apache.org/guides/mini/guide-central-repository-upload.html
+[2]: http://maven.apache.org/
+[3]: http://www.junit.org/
+[4]: http://code.google.com/p/mockito/

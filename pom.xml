@@ -56,9 +56,8 @@
     <scm>
         <connection>scm:git:git://github.com/weltraumschaf/commons.git</connection>
         <developerConnection>scm:git:git@github.com:weltraumschaf/commons.git</developerConnection>
-        <url>git@github.com:weltraumschaf/commons.git</url>
-      <tag>commons-0.1.2</tag>
-  </scm>
+        <url>https://github.com/weltraumschaf/commons.git</url>
+    </scm>
 
     <distributionManagement>
         <site>

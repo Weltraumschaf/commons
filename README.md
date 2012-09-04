@@ -14,7 +14,7 @@ along with this [guide][1].
 
 - <code>CapturingOutputStream</code>: Can be used to capture output print
   to <code>System.out</code> or <code>System.err</code>.
-- <code>IOStreams</code>:
+- <code>IOStreams</code>: Immutable object to aggregate I/O streams.
 
 ### Version 0.1.1
 
@@ -24,12 +24,13 @@ along with this [guide][1].
 
 - Add more documentation.
 - Add <code>toString()</code>, <code>hashCode()</code>, <code>equals()</code>
-  to <code>CapturingOutputStream()</code>
+  to <code>CapturingOutputStream()</code>.
+- Add example code and documentation to <code>IOStreams</code>.
 
 ### File Signatures
 
 To receive the keys type:
 
-    $ gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 45585598
+    $ gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys BA265082
 
 [1]: http://maven.apache.org/guides/mini/guide-central-repository-upload.html

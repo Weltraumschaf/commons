@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -10,7 +9,7 @@
 
     <groupId>de.weltraumschaf</groupId>
     <artifactId>commons</artifactId>
-    <version>0.1.2-SNAPSHOT</version>
+    <version>0.1.2</version>
     <packaging>jar</packaging>
 
     <name>Commons</name>
@@ -36,7 +35,7 @@
         <license>
             <name>THE BEER-WARE LICENSE</name>
             <url>http://www.weltraumschaf.de/the-beer-ware-license.txt</url>
-            <distribution>>repo</distribution>
+            <distribution>repo</distribution>
             <comments>
                 LICENSE
 
@@ -58,7 +57,8 @@
         <connection>scm:git:git://github.com/weltraumschaf/commons.git</connection>
         <developerConnection>scm:git:git@github.com:weltraumschaf/commons.git</developerConnection>
         <url>git@github.com:weltraumschaf/commons.git</url>
-    </scm>
+      <tag>commons-0.1.2</tag>
+  </scm>
 
     <distributionManagement>
         <site>
@@ -335,7 +335,7 @@
                         <format>xml</format>
                     </formats>
                     <instrumentation>
-                        <excludes/>
+                        <excludes />
                     </instrumentation>
                 </configuration>
                 <executions>

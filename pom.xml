@@ -523,6 +523,9 @@
 
             <plugin>
                 <artifactId>maven-gpg-plugin</artifactId>
+                <configuration>
+                    <keyname>BA265082</keyname>
+                </configuration>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>

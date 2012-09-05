@@ -36,7 +36,7 @@ import java.io.PrintStream;
  * In the test code it will be easy to replace the I/O with mocks:
  *
  * <code>
- * @Test public void someTestWithIO() {
+ * &#064;Test public void someTestWithIO() {
  *      IOStreams io = new IOStreams(mock(InputStream.class),
  *                                   mock(PrintStream.class),
  *                                   mock(PrintStream.class));

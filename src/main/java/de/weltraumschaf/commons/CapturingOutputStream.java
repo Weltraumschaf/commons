@@ -81,6 +81,4 @@ public class CapturingOutputStream extends OutputStream {
         return capturedOutput.toString().equals(other.capturedOutput.toString());
     }
 
-
-
 }

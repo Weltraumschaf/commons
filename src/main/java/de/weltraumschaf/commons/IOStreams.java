@@ -20,7 +20,7 @@ import java.io.PrintStream;
  * It is not good practice to clutter production code with calls to
  * {@link System#out}, {@link System#err}, and {@link System#in}. But on the
  * other hand most applications must do I/O to the user. This aggregate object
- * contains I/O streams to pass around as injected dependency. It is onluy
+ * contains I/O streams to pass around as injected dependency. It is only
  * necessary to the systems IO only at the main applications entry point:
  *
  * <code>

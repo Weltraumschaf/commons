@@ -54,24 +54,30 @@ public class CapturingOutputStreamTest {
     @Test public void testHashCode() {
         final PrintStream stream = new PrintStream(sut);
         stream.print("foobar");
+        stream.close();
         final CapturingOutputStream other = new CapturingOutputStream();
         final PrintStream streamOther = new PrintStream(other);
         streamOther.print("foobar");
+        streamOther.close();
         assertThat(other.hashCode(), is(sut.hashCode()));
     }
 
+    @SuppressWarnings({"IncompatibleEquals", "ObjectEqualsNull"}) // I want to test this explicetly.
     @Test public void equals() {
         final PrintStream stream = new PrintStream(sut);
         stream.print("foobar");
+        stream.close();
         final CapturingOutputStream other = new CapturingOutputStream();
         final PrintStream streamOther = new PrintStream(other);
         streamOther.print("foobar");
+        streamOther.close();
         final CapturingOutputStream other2 = new CapturingOutputStream();
         final PrintStream streamOther2 = new PrintStream(other2);
         streamOther2.print("snafu");
+        streamOther2.close();
 
-        assertThat(sut.equals("foobar"), is(false));
-        assertThat(sut.equals(null), is(false));
+        assertThat(sut.equals("foobar"), is(false)); // NOPMD sut is never null.
+        assertThat(sut.equals(null), is(false)); // NOPMD Explicety check that null will return in false.
         assertThat(sut.equals(other), is(true));
         assertThat(sut.equals(other2), is(false));
         assertThat(other.equals(other2), is(false));

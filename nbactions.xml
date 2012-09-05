@@ -39,4 +39,36 @@
                 <exec.workingdir>/Users/sxs/src/java/umleto</exec.workingdir>
             </properties>
         </action>
+        <action>
+            <actionName>build</actionName>
+            <goals>
+                <goal>install</goal>
+            </goals>
+            <properties>
+                <gpg.passphrase></gpg.passphrase>
+                <gpg.executable>/usr/local/bin/gpg</gpg.executable>
+            </properties>
+        </action>
+        <action>
+            <actionName>rebuild</actionName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+            </goals>
+            <properties>
+                <gpg.passphrase></gpg.passphrase>
+                <gpg.executable>/usr/local/bin/gpg</gpg.executable>
+            </properties>
+        </action>
+        <action>
+            <actionName>build-with-dependencies</actionName>
+            <reactor>also-make</reactor>
+            <goals>
+                <goal>install</goal>
+            </goals>
+            <properties>
+                <gpg.passphrase></gpg.passphrase>
+                <gpg.executable>/usr/local/bin/gpg</gpg.executable>
+            </properties>
+        </action>
     </actions>

@@ -40,7 +40,7 @@ import java.util.Properties;
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public final class Version {
+public class Version {
 
     /**
      * Available properties in the file.

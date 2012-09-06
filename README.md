@@ -62,8 +62,8 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 
 ### Version 0.2.0
 
-- Version
-- Invokable
+- <code>Version</code>: Reads the current version from a property file.
+- <code>Invokable</code>: Application object invokable by command line interface.
 
 ### File Signatures
 

@@ -18,16 +18,35 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Holds {@link Runnable callbacks} to execute them in any order.
  *
+ * Example:
+ * <code>
+ * ShutDownHook hook = new ShutDownHook();
+ * hook.register(new Runnable() {
+ *
+ *      &#064;Override
+ *      public void  run() {
+ *          // Your shutdown code.
+ *      }
+ *
+ * });
+ * </code>
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class ShutDownHook extends Thread {
 
-    private final Set<Runnable> shutDownCallbacks = new HashSet<Runnable>();
+    /**
+     * Set of callbacks.
+     */
+    private final Set<Runnable> callbacks = new HashSet<Runnable>();
 
+    /**
+     * Iterates over all {@link #callbacks} and run them.
+     */
     @Override
     public void run() {
-        final Iterator<Runnable> iterator = shutDownCallbacks.iterator();
+        final Iterator<Runnable> iterator = callbacks.iterator();
 
         while (iterator.hasNext()) {
             final Runnable callback = iterator.next();
@@ -39,8 +58,14 @@ public class ShutDownHook extends Thread {
         }
     }
 
-    public ShutDownHook registerShutdownCallback(final Runnable callback) {
-        shutDownCallbacks.add(callback);
+    /**
+     * Registers a callback.
+     *
+     * @param callback Runnable object.
+     * @return Return itself for method chaining.
+     */
+    public ShutDownHook register(final Runnable callback) {
+        callbacks.add(callback);
         return this;
     }
 

@@ -16,14 +16,14 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Holds the current version from a property file.
+ * Reads the current version from a property file.
  *
  * The property files only defines one property:
  * <pre>
  *  version=1.0.0
  * </pre>
  *
- * This property file may be processed by a maven filter to provide the verison from
+ * This property file may be processed by a Maven filter to provide the verison from
  * the pom.xml:
  * <pre>
  *  version=${pom.version}

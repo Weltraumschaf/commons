@@ -11,29 +11,79 @@
 package de.weltraumschaf.commons;
 
 /**
+ * Abstract base implementation of an command line invokable.
+ *
+ * Extend this class in your client code.
+ *
+ * Example:
+ * <code>
+ *
+ * public class MyApp extends InvokableAdapter {
+ *
+ *      public static void main(final String[] args) {
+ *          InvokableAdapter.main(new App(args));
+ *      }
+ *
+ *      &#064;Override
+ *      public void execute() throws Exception {
+ *          // Your application code here.
+ *      }
+ *
+ * }
+ * </code>
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public abstract class InvokableAdapter implements Invokable {
 
+    /**
+     * Copy of the command line arguments.
+     */
     private final String[] args;
 
+    /**
+     * I/O streams.
+     */
     private IOStreams ioStreams;
 
+    /**
+     * Container for shutdown {@link Runnable callbacks}.
+     */
     private final ShutDownHook shutDownHooks = new ShutDownHook();
 
+    /**
+     * Copies the command line arguments.
+     *
+     * @param args Command line arguments.
+     */
     public InvokableAdapter(final String[] args) {
         this.args = args.clone();
     }
 
+    /**
+     * Invokes {@link #main(de.weltraumschaf.commons.Invokable, de.weltraumschaf.commons.IOStreams)
+     * invokable} with default I/O.
+     *
+     * @param invokanle Implementation to invoke.
+     */
     public static void main(Invokable invokanle) {
         main(invokanle, IOStreams.newDefault());
     }
 
-    public static void main(Invokable invokanle, final IOStreams ioStreams ) {
+    /**
+     * Inject the I/O streams to the invokable and then calls {@link Invokable#init()} and
+     * then {@link Invokable#execute()}.
+     *
+     * This method handles ell thrown {@link Exception} and calls {@link System#exit(int)}.
+     *
+     * @param invokanle Implementation to invoke.
+     * @param ioStreams I/O streams.
+     */
+    public static void main(final Invokable invokanle, final IOStreams ioStreams) {
         invokanle.setIoStreams(ioStreams);
 
         try {
+            invokanle.init();
             invokanle.execute();
         } catch (Exception ex) {
             ioStreams.println(ex.getMessage());
@@ -43,13 +93,23 @@ public abstract class InvokableAdapter implements Invokable {
         System.exit(0);
     }
 
+    /**
+     * Adds shutdown hook to runtime.
+     *
+     * @throws Exception Various exceptions from the runtime.
+     */
     @Override
-    public void execute() throws Exception {
+    public void init() throws Exception {
         Runtime.getRuntime().addShutdownHook(shutDownHooks);
     }
 
-    protected String[] getArgs() {
-        return args;
+    /**
+     * Get the command line arguments.
+     *
+     * @return Returns copy of the arguments array.
+     */
+    public String[] getArgs() {
+        return args.clone();
     }
 
     @Override
@@ -62,6 +122,11 @@ public abstract class InvokableAdapter implements Invokable {
         this.ioStreams = ioStreams;
     }
 
+    /**
+     * Get the shutdown hook object for registering callbacks executed on shutdown.
+     *
+     * @return Returns the shutdown object.
+     */
     protected ShutDownHook getShutDownHooks() {
         return shutDownHooks;
     }

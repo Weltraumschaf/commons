@@ -61,7 +61,9 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 - First successful promoted release.
 
 ### Version 0.2.0
+
 - Version
+- Invokable
 
 ### File Signatures
 

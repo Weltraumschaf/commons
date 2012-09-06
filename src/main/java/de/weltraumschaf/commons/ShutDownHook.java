@@ -14,6 +14,8 @@ package de.weltraumschaf.commons;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -29,7 +31,11 @@ public class ShutDownHook extends Thread {
 
         while (iterator.hasNext()) {
             final Invokable callback = iterator.next();
-            callback.execute();
+            try {
+                callback.execute();
+            } catch (Exception ex) {
+                Logger.getLogger(ShutDownHook.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

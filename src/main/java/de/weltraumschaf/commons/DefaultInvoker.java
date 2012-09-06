@@ -40,7 +40,7 @@ public class DefaultInvoker implements Invokable {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
         Runtime.getRuntime().addShutdownHook(shutDownHooks);
     }
 

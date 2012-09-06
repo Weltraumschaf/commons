@@ -17,6 +17,6 @@ package de.weltraumschaf.commons;
  */
 public interface Invokable {
 
-    void execute();
+    void execute() throws Exception;
 
 }

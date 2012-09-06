@@ -23,24 +23,25 @@ import java.util.logging.Logger;
  */
 public class ShutDownHook extends Thread {
 
-    private final Set<Invokable> shutDownCallbacks = new HashSet<Invokable>();
+    private final Set<Runnable> shutDownCallbacks = new HashSet<Runnable>();
 
     @Override
     public void run() {
-        final Iterator<Invokable> iterator = shutDownCallbacks.iterator();
+        final Iterator<Runnable> iterator = shutDownCallbacks.iterator();
 
         while (iterator.hasNext()) {
-            final Invokable callback = iterator.next();
+            final Runnable callback = iterator.next();
             try {
-                callback.execute();
+                callback.run();
             } catch (Exception ex) {
                 Logger.getLogger(ShutDownHook.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    public void registerShutdownCallback(final Invokable callback) {
+    public ShutDownHook registerShutdownCallback(final Runnable callback) {
         shutDownCallbacks.add(callback);
+        return this;
     }
 
 }

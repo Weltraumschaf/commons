@@ -18,5 +18,7 @@ package de.weltraumschaf.commons;
 public interface Invokable {
 
     void execute() throws Exception;
+    IOStreams getIoStreams();
+    void setIoStreams(IOStreams ioStreams);
 
 }

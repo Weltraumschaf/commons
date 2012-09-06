@@ -14,29 +14,33 @@ package de.weltraumschaf.commons;
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public class DefaultInvoker implements Invokable {
+public abstract class InvokableAdapter implements Invokable {
 
     private final String[] args;
 
-    private final IOStreams ioStreams;
+    private IOStreams ioStreams;
 
     private final ShutDownHook shutDownHooks = new ShutDownHook();
 
-    public DefaultInvoker(final String[] args, final IOStreams ioStreams) {
+    public InvokableAdapter(final String[] args) {
         this.args = args.clone();
-        this.ioStreams = ioStreams;
     }
 
-    public static void main(final String[] args) {
-        final IOStreams ioStreams = IOStreams.newDefault();
+    public static void main(Invokable invokanle) {
+        main(invokanle, IOStreams.newDefault());
+    }
+
+    public static void main(Invokable invokanle, final IOStreams ioStreams ) {
+        invokanle.setIoStreams(ioStreams);
 
         try {
-            final Invokable application = new DefaultInvoker(args, ioStreams);
-            application.execute();
+            invokanle.execute();
         } catch (Exception ex) {
-            ioStreams.getStderr().println(ex.getMessage());
+            ioStreams.println(ex.getMessage());
             System.exit(-1);
         }
+
+        System.exit(0);
     }
 
     @Override
@@ -48,8 +52,14 @@ public class DefaultInvoker implements Invokable {
         return args;
     }
 
-    protected IOStreams getIoStreams() {
+    @Override
+    public IOStreams getIoStreams() {
         return ioStreams;
+    }
+
+    @Override
+    public void setIoStreams(IOStreams ioStreams) {
+        this.ioStreams = ioStreams;
     }
 
     protected ShutDownHook getShutDownHooks() {

@@ -17,7 +17,7 @@ along with this [guide][1].
 
 ### Version 0.2.0
 
-- TBD
+- Version
 
 ### File Signatures
 

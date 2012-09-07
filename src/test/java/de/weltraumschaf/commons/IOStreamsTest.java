@@ -18,8 +18,9 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 /**
+ * Test cases for {@link IOStreams}.
  *
- * @author sxs
+ * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class IOStreamsTest {
 

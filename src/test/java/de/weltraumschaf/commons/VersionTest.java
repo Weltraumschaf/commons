@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
+ * Test cases for {@link Version}.
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */

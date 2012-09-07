@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+// CHECKSTYLE:OFF
 /**
  * Reads the current version from a property file.
  *
@@ -40,6 +41,7 @@ import java.util.Properties;
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
+// CHECKSTYLE:ON
 public final class Version {
 
     /**

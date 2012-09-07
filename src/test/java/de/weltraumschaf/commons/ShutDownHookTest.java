@@ -11,6 +11,7 @@
 
 package de.weltraumschaf.commons;
 
+import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
 
@@ -19,6 +20,8 @@ import static org.mockito.Mockito.*;
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
+@java.lang.SuppressWarnings("CallToThreadRun")
+@SuppressWarnings(value="RU_INVOKE_RUN", justification="Testing correct template method behaviour.")
 public class ShutDownHookTest {
 
     private final ShutDownHook sut = new ShutDownHook();
@@ -38,7 +41,8 @@ public class ShutDownHookTest {
         verify(callback3, times(1)).run();
     }
 
-    @Test public void registerAndRunCalbacks() {
+    @Test
+    public void registerAndRunCalbacks() {
         final Runnable callback1 = mock(Runnable.class);
         final Runnable callback2 = mock(Runnable.class);
         final Runnable callback3 = mock(Runnable.class);

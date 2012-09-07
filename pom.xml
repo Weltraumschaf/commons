@@ -93,6 +93,13 @@
             <version>1.9.5-rc1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <!-- http://findbugs.sourceforge.net/manual/annotations.html -->
+            <groupId>net.sourceforge.findbugs</groupId>
+            <artifactId>annotations</artifactId>
+            <version>1.3.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

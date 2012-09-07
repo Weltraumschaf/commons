@@ -47,4 +47,11 @@ public interface Invokable {
      */
     void setIoStreams(IOStreams ioStreams);
 
+    /**
+     * Exits the invokable.
+     *
+     * @param status exit status.
+     */
+    void exit(int status);
+
 }

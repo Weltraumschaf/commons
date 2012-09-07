@@ -87,10 +87,10 @@ public abstract class InvokableAdapter implements Invokable {
             invokanle.execute();
         } catch (Exception ex) {
             ioStreams.println(ex.getMessage());
-            System.exit(-1);
+            invokanle.exit(-1);
         }
 
-        System.exit(0);
+        invokanle.exit(0);
     }
 
     /**
@@ -99,7 +99,7 @@ public abstract class InvokableAdapter implements Invokable {
      * @throws Exception Various exceptions from the runtime.
      */
     @Override
-    public void init() throws Exception {
+    public final void init() throws Exception {
         Runtime.getRuntime().addShutdownHook(shutDownHooks);
     }
 
@@ -129,6 +129,11 @@ public abstract class InvokableAdapter implements Invokable {
      */
     protected ShutDownHook getShutDownHooks() {
         return shutDownHooks;
+    }
+
+    @Override
+    public void exit(int status) {
+        System.exit(status);
     }
 
 }

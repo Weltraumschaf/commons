@@ -141,7 +141,7 @@
 
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>2.6</version>
                 </plugin>
 
                 <plugin>
@@ -151,7 +151,7 @@
 
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.12.1</version>
+                    <version>2.12.3</version>
                 </plugin>
 
                 <plugin>
@@ -166,7 +166,7 @@
 
                 <plugin>
                     <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>2.5.1</version>
                 </plugin>
 
                 <plugin>
@@ -191,7 +191,7 @@
 
                 <plugin>
                     <artifactId>maven-shade-plugin</artifactId>
-                    <version>1.7.1</version>
+                    <version>2.0</version>
                 </plugin>
 
                 <plugin>
@@ -221,7 +221,7 @@
 
                 <plugin>
                     <artifactId>maven-project-info-reports-plugin</artifactId>
-                    <version>2.5</version>
+                    <version>2.5.1</version>
                 </plugin>
 
                 <plugin>

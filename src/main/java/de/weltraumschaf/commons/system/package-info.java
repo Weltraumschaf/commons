@@ -10,9 +10,9 @@
  */
 
 /**
- * Library of classes used in several projects.
+ * Abstractions for system things.
  *
  * <p>This package is a part of the open-source
  * <a href="https://github.com/Weltraumschaf/commons">Commons</a></p>
  */
-package de.weltraumschaf.commons;
+package de.weltraumschaf.commons.system;

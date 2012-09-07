@@ -9,10 +9,14 @@
  *
  */
 
+package de.weltraumschaf.commons.system;
+
 /**
- * Library of classes used in several projects.
  *
- * <p>This package is a part of the open-source
- * <a href="https://github.com/Weltraumschaf/commons">Commons</a></p>
+ * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-package de.weltraumschaf.commons;
+public interface ExitCode {
+
+    int getCode();
+
+}

@@ -9,10 +9,18 @@
  *
  */
 
+package de.weltraumschaf.commons.system;
+
 /**
- * Library of classes used in several projects.
+ * Common shared functionality for exiters.
  *
- * <p>This package is a part of the open-source
- * <a href="https://github.com/Weltraumschaf/commons">Commons</a></p>
+ * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-package de.weltraumschaf.commons;
+public abstract class BaseExiter implements Exitable {
+
+    @Override
+    public void exit(ExitCode status) {
+        exit(status.getCode());
+    }
+
+}

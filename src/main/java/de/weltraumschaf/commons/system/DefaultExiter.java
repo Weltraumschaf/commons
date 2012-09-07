@@ -9,10 +9,18 @@
  *
  */
 
+package de.weltraumschaf.commons.system;
+
 /**
- * Library of classes used in several projects.
+ * Invokes {@link System#exit(int)}.
  *
- * <p>This package is a part of the open-source
- * <a href="https://github.com/Weltraumschaf/commons">Commons</a></p>
+ * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-package de.weltraumschaf.commons;
+public class DefaultExiter extends BaseExiter {
+
+    @Override
+    public void exit(int status) {
+        System.exit(status);
+    }
+
+}

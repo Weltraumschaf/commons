@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="1.0" branch-rate="1.0" lines-covered="29" lines-valid="29" branches-covered="4" branches-valid="4" complexity="1.3076923076923077" version="1.9.4.1" timestamp="1346798076144">
+<coverage line-rate="0.8627450980392157" branch-rate="0.8" lines-covered="88" lines-valid="102" branches-covered="8" branches-valid="10" complexity="1.1956521739130435" version="1.9.4.1" timestamp="1347203488968">
 	<sources>
 		<source>--source</source>
 		<source>/Users/sxs/src/java/commons/src/main/java</source>
 	</sources>
 	<packages>
-		<package name="de.weltraumschaf.commons" line-rate="1.0" branch-rate="1.0" complexity="1.3076923076923077">
+		<package name="de.weltraumschaf.commons" line-rate="0.9148936170212766" branch-rate="0.8" complexity="1.225">
 			<classes>
 				<class name="de.weltraumschaf.commons.CapturingOutputStream" filename="de/weltraumschaf/commons/CapturingOutputStream.java" line-rate="1.0" branch-rate="1.0" complexity="1.8">
 					<methods>
@@ -87,11 +87,11 @@
 					<methods>
 						<method name="&lt;init&gt;" signature="(Ljava/io/InputStream;Ljava/io/PrintStream;Ljava/io/PrintStream;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="77" hits="13" branch="false"/>
-								<line number="78" hits="13" branch="false"/>
-								<line number="79" hits="13" branch="false"/>
-								<line number="80" hits="13" branch="false"/>
-								<line number="81" hits="13" branch="false"/>
+								<line number="77" hits="18" branch="false"/>
+								<line number="78" hits="18" branch="false"/>
+								<line number="79" hits="18" branch="false"/>
+								<line number="80" hits="18" branch="false"/>
+								<line number="81" hits="18" branch="false"/>
 							</lines>
 						</method>
 						<method name="getStderr" signature="()Ljava/io/PrintStream;" line-rate="1.0" branch-rate="1.0">
@@ -106,12 +106,12 @@
 						</method>
 						<method name="getStdout" signature="()Ljava/io/PrintStream;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="107" hits="3" branch="false"/>
+								<line number="107" hits="5" branch="false"/>
 							</lines>
 						</method>
 						<method name="newDefault" signature="()Lde/weltraumschaf/commons/IOStreams;" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="116" hits="6" branch="false"/>
+								<line number="116" hits="11" branch="false"/>
 							</lines>
 						</method>
 						<method name="printStackTraceToStdErr" signature="(Ljava/lang/Exception;)V" line-rate="1.0" branch-rate="1.0">
@@ -122,8 +122,8 @@
 						</method>
 						<method name="println" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
 							<lines>
-								<line number="143" hits="1" branch="false"/>
-								<line number="144" hits="1" branch="false"/>
+								<line number="143" hits="3" branch="false"/>
+								<line number="144" hits="3" branch="false"/>
 							</lines>
 						</method>
 						<method name="printlnErr" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
@@ -134,21 +134,375 @@
 						</method>
 					</methods>
 					<lines>
-						<line number="77" hits="13" branch="false"/>
-						<line number="78" hits="13" branch="false"/>
-						<line number="79" hits="13" branch="false"/>
-						<line number="80" hits="13" branch="false"/>
-						<line number="81" hits="13" branch="false"/>
+						<line number="77" hits="18" branch="false"/>
+						<line number="78" hits="18" branch="false"/>
+						<line number="79" hits="18" branch="false"/>
+						<line number="80" hits="18" branch="false"/>
+						<line number="81" hits="18" branch="false"/>
 						<line number="89" hits="4" branch="false"/>
 						<line number="98" hits="1" branch="false"/>
-						<line number="107" hits="3" branch="false"/>
-						<line number="116" hits="6" branch="false"/>
+						<line number="107" hits="5" branch="false"/>
+						<line number="116" hits="11" branch="false"/>
 						<line number="125" hits="1" branch="false"/>
 						<line number="126" hits="1" branch="false"/>
 						<line number="134" hits="1" branch="false"/>
 						<line number="135" hits="1" branch="false"/>
-						<line number="143" hits="1" branch="false"/>
-						<line number="144" hits="1" branch="false"/>
+						<line number="143" hits="3" branch="false"/>
+						<line number="144" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="de.weltraumschaf.commons.Invokable" filename="de/weltraumschaf/commons/Invokable.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
+				<class name="de.weltraumschaf.commons.InvokableAdapter" filename="de/weltraumschaf/commons/InvokableAdapter.java" line-rate="0.7241379310344828" branch-rate="1.0" complexity="1.0909090909090908">
+					<methods>
+						<method name="&lt;init&gt;" signature="([Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="51" hits="7" branch="false"/>
+								<line number="61" hits="7" branch="false"/>
+								<line number="68" hits="7" branch="false"/>
+								<line number="69" hits="7" branch="false"/>
+								<line number="70" hits="7" branch="false"/>
+							</lines>
+						</method>
+						<method name="exit" signature="(I)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="145" hits="0" branch="false"/>
+								<line number="146" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="exit" signature="(Lde/weltraumschaf/commons/system/ExitCode;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="150" hits="0" branch="false"/>
+								<line number="151" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getArgs" signature="()[Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="121" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="getIoStreams" signature="()Lde/weltraumschaf/commons/IOStreams;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="126" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="getShutDownHooks" signature="()Lde/weltraumschaf/commons/ShutDownHook;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="140" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="init" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="112" hits="0" branch="false"/>
+								<line number="113" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="main" signature="(Lde/weltraumschaf/commons/Invokable;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="79" hits="3" branch="false"/>
+								<line number="80" hits="3" branch="false"/>
+							</lines>
+						</method>
+						<method name="main" signature="(Lde/weltraumschaf/commons/Invokable;Lde/weltraumschaf/commons/IOStreams;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="92" hits="4" branch="false"/>
+								<line number="95" hits="4" branch="false"/>
+								<line number="96" hits="3" branch="false"/>
+								<line number="97" hits="2" branch="false"/>
+								<line number="98" hits="2" branch="false"/>
+								<line number="99" hits="2" branch="false"/>
+								<line number="100" hits="2" branch="false"/>
+								<line number="102" hits="4" branch="false"/>
+								<line number="103" hits="4" branch="false"/>
+							</lines>
+						</method>
+						<method name="setExiter" signature="(Lde/weltraumschaf/commons/system/Exitable;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="155" hits="0" branch="false"/>
+								<line number="156" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="setIoStreams" signature="(Lde/weltraumschaf/commons/IOStreams;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="131" hits="1" branch="false"/>
+								<line number="132" hits="1" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="51" hits="7" branch="false"/>
+						<line number="61" hits="7" branch="false"/>
+						<line number="68" hits="7" branch="false"/>
+						<line number="69" hits="7" branch="false"/>
+						<line number="70" hits="7" branch="false"/>
+						<line number="79" hits="3" branch="false"/>
+						<line number="80" hits="3" branch="false"/>
+						<line number="92" hits="4" branch="false"/>
+						<line number="95" hits="4" branch="false"/>
+						<line number="96" hits="3" branch="false"/>
+						<line number="97" hits="2" branch="false"/>
+						<line number="98" hits="2" branch="false"/>
+						<line number="99" hits="2" branch="false"/>
+						<line number="100" hits="2" branch="false"/>
+						<line number="102" hits="4" branch="false"/>
+						<line number="103" hits="4" branch="false"/>
+						<line number="112" hits="0" branch="false"/>
+						<line number="113" hits="0" branch="false"/>
+						<line number="121" hits="2" branch="false"/>
+						<line number="126" hits="2" branch="false"/>
+						<line number="131" hits="1" branch="false"/>
+						<line number="132" hits="1" branch="false"/>
+						<line number="140" hits="1" branch="false"/>
+						<line number="145" hits="0" branch="false"/>
+						<line number="146" hits="0" branch="false"/>
+						<line number="150" hits="0" branch="false"/>
+						<line number="151" hits="0" branch="false"/>
+						<line number="155" hits="0" branch="false"/>
+						<line number="156" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="de.weltraumschaf.commons.ShutDownHook" filename="de/weltraumschaf/commons/ShutDownHook.java" line-rate="1.0" branch-rate="1.0" complexity="2.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="37" hits="9" branch="false"/>
+								<line number="42" hits="9" branch="false"/>
+							</lines>
+						</method>
+						<method name="register" signature="(Ljava/lang/Runnable;)Lde/weltraumschaf/commons/ShutDownHook;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="68" hits="6" branch="false"/>
+								<line number="69" hits="6" branch="false"/>
+							</lines>
+						</method>
+						<method name="run" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="49" hits="2" branch="false"/>
+								<line number="51" hits="8" branch="true" condition-coverage="100% (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100%"/>
+									</conditions>
+								</line>
+								<line number="52" hits="6" branch="false"/>
+								<line number="54" hits="6" branch="false"/>
+								<line number="55" hits="1" branch="false"/>
+								<line number="56" hits="1" branch="false"/>
+								<line number="57" hits="5" branch="false"/>
+								<line number="58" hits="6" branch="false"/>
+								<line number="59" hits="2" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="37" hits="9" branch="false"/>
+						<line number="42" hits="9" branch="false"/>
+						<line number="49" hits="2" branch="false"/>
+						<line number="51" hits="8" branch="true" condition-coverage="100% (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100%"/>
+							</conditions>
+						</line>
+						<line number="52" hits="6" branch="false"/>
+						<line number="54" hits="6" branch="false"/>
+						<line number="55" hits="1" branch="false"/>
+						<line number="56" hits="1" branch="false"/>
+						<line number="57" hits="5" branch="false"/>
+						<line number="58" hits="6" branch="false"/>
+						<line number="59" hits="2" branch="false"/>
+						<line number="68" hits="6" branch="false"/>
+						<line number="69" hits="6" branch="false"/>
+					</lines>
+				</class>
+				<class name="de.weltraumschaf.commons.Version" filename="de/weltraumschaf/commons/Version.java" line-rate="1.0" branch-rate="0.5" complexity="1.2857142857142858">
+					<methods>
+						<method name="&lt;init&gt;" signature="(Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="112" hits="1" branch="false"/>
+								<line number="120" hits="1" branch="false"/>
+								<line number="121" hits="1" branch="false"/>
+								<line number="122" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="getVersion" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="154" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="load" signature="()V" line-rate="1.0" branch-rate="0.5">
+							<lines>
+								<line number="132" hits="1" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="133" hits="1" branch="false"/>
+								<line number="136" hits="1" branch="false"/>
+								<line number="137" hits="1" branch="false"/>
+								<line number="138" hits="1" branch="false"/>
+								<line number="139" hits="1" branch="false"/>
+								<line number="141" hits="1" branch="true" condition-coverage="50% (1/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="50%"/>
+									</conditions>
+								</line>
+								<line number="142" hits="1" branch="false"/>
+								<line number="146" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="toString" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="165" hits="1" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="112" hits="1" branch="false"/>
+						<line number="120" hits="1" branch="false"/>
+						<line number="121" hits="1" branch="false"/>
+						<line number="122" hits="1" branch="false"/>
+						<line number="132" hits="1" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="133" hits="1" branch="false"/>
+						<line number="136" hits="1" branch="false"/>
+						<line number="137" hits="1" branch="false"/>
+						<line number="138" hits="1" branch="false"/>
+						<line number="139" hits="1" branch="false"/>
+						<line number="141" hits="1" branch="true" condition-coverage="50% (1/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="50%"/>
+							</conditions>
+						</line>
+						<line number="142" hits="1" branch="false"/>
+						<line number="146" hits="1" branch="false"/>
+						<line number="154" hits="2" branch="false"/>
+						<line number="165" hits="1" branch="false"/>
+					</lines>
+				</class>
+				<class name="de.weltraumschaf.commons.Version$PropertyNames" filename="de/weltraumschaf/commons/Version.java" line-rate="1.0" branch-rate="1.0" complexity="1.2857142857142858">
+					<methods>
+						<method name="&lt;clinit&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="50" hits="1" branch="false"/>
+								<line number="55" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="&lt;init&gt;" signature="(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="73" hits="1" branch="false"/>
+								<line number="74" hits="1" branch="false"/>
+								<line number="75" hits="1" branch="false"/>
+								<line number="76" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="getDefaultValue" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="94" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="toString" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="85" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="valueOf" signature="(Ljava/lang/String;)Lde/weltraumschaf/commons/Version$PropertyNames;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+							</lines>
+						</method>
+						<method name="values" signature="()[Lde/weltraumschaf/commons/Version$PropertyNames;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="50" hits="1" branch="false"/>
+						<line number="55" hits="1" branch="false"/>
+						<line number="73" hits="1" branch="false"/>
+						<line number="74" hits="1" branch="false"/>
+						<line number="75" hits="1" branch="false"/>
+						<line number="76" hits="1" branch="false"/>
+						<line number="85" hits="2" branch="false"/>
+						<line number="94" hits="2" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+		<package name="de.weltraumschaf.commons.system" line-rate="0.25" branch-rate="1.0" complexity="1.0">
+			<classes>
+				<class name="de.weltraumschaf.commons.system.DefaultExiter" filename="de/weltraumschaf/commons/system/DefaultExiter.java" line-rate="0.3333333333333333" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="19" hits="7" branch="false"/>
+							</lines>
+						</method>
+						<method name="exit" signature="(I)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="23" hits="0" branch="false"/>
+								<line number="24" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="19" hits="7" branch="false"/>
+						<line number="23" hits="0" branch="false"/>
+						<line number="24" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="de.weltraumschaf.commons.system.ExitCode" filename="de/weltraumschaf/commons/system/ExitCode.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
+				<class name="de.weltraumschaf.commons.system.Exitable" filename="de/weltraumschaf/commons/system/Exitable.java" line-rate="1.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+					</methods>
+					<lines>
+					</lines>
+				</class>
+				<class name="de.weltraumschaf.commons.system.ExitableAdapter" filename="de/weltraumschaf/commons/system/ExitableAdapter.java" line-rate="0.3333333333333333" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="19" hits="7" branch="false"/>
+							</lines>
+						</method>
+						<method name="exit" signature="(Lde/weltraumschaf/commons/system/ExitCode;)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="23" hits="0" branch="false"/>
+								<line number="24" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="19" hits="7" branch="false"/>
+						<line number="23" hits="0" branch="false"/>
+						<line number="24" hits="0" branch="false"/>
+					</lines>
+				</class>
+				<class name="de.weltraumschaf.commons.system.NullExiter" filename="de/weltraumschaf/commons/system/NullExiter.java" line-rate="0.0" branch-rate="1.0" complexity="1.0">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="21" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="exit" signature="(I)V" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="26" hits="0" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="21" hits="0" branch="false"/>
+						<line number="26" hits="0" branch="false"/>
 					</lines>
 				</class>
 			</classes>

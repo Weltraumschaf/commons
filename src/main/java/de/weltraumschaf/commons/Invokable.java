@@ -11,6 +11,9 @@
 
 package de.weltraumschaf.commons;
 
+import de.weltraumschaf.commons.system.ExitCode;
+import de.weltraumschaf.commons.system.Exitable;
+
 /**
  * An invokable is an application object invokable by command line interface.
  *
@@ -52,6 +55,20 @@ public interface Invokable {
      *
      * @param status exit status.
      */
+    void exit(ExitCode status);
+
+    /**
+     * Exits the invokable.
+     *
+     * @param status exit status.
+     */
     void exit(int status);
+
+    /**
+     * Set an exiter to handle exit calls.
+     *
+     * @param exiter Object which handles exit calls.
+     */
+    void setExiter(Exitable exiter);
 
 }

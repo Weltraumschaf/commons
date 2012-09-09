@@ -16,7 +16,7 @@ package de.weltraumschaf.commons.system;
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public abstract class BaseExiter implements Exitable {
+public abstract class ExitableAdapter implements Exitable {
 
     @Override
     public void exit(ExitCode status) {

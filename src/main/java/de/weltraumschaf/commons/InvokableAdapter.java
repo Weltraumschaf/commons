@@ -10,6 +10,10 @@
  */
 package de.weltraumschaf.commons;
 
+import de.weltraumschaf.commons.system.DefaultExiter;
+import de.weltraumschaf.commons.system.ExitCode;
+import de.weltraumschaf.commons.system.Exitable;
+
 /**
  * Abstract base implementation of an command line invokable.
  *
@@ -42,14 +46,19 @@ public abstract class InvokableAdapter implements Invokable {
     private final String[] args;
 
     /**
+     * Container for shutdown {@link Runnable callbacks}.
+     */
+    private final ShutDownHook shutDownHooks = new ShutDownHook();
+
+    /**
      * I/O streams.
      */
     private IOStreams ioStreams;
 
     /**
-     * Container for shutdown {@link Runnable callbacks}.
+     * Abstraction for {@link System#exit(int)}.
      */
-    private final ShutDownHook shutDownHooks = new ShutDownHook();
+    private Exitable exiter = new DefaultExiter();
 
     /**
      * Copies the command line arguments.
@@ -133,7 +142,17 @@ public abstract class InvokableAdapter implements Invokable {
 
     @Override
     public void exit(int status) {
-        System.exit(status);
+        exiter.exit(status);
+    }
+
+    @Override
+    public void exit(ExitCode status) {
+        exiter.exit(status);
+    }
+
+    @Override
+    public void setExiter(final Exitable exiter) {
+        this.exiter = exiter;
     }
 
 }

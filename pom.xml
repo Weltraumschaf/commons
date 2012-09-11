@@ -518,7 +518,6 @@
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
-                    <detectLinks>true</detectLinks>
                     <bottom>
                         Copyright &amp;copy; 2012 &lt;a href="http://www.weltraumschaf.de/" target="_blank"&gt;
                         Sven Strittmatter&lt;/a&gt;. All Rights Reserved.
@@ -533,7 +532,7 @@
                         <link>http://docs.oracle.com/javase/6/docs/api/</link>
                         <!-- test dependencies -->
                         <link>http://junit.sourceforge.net/javadoc/</link>
-                        <link>http://docs.mockito.googlecode.com/hg/latest/index.html</link>
+                        <link>http://docs.mockito.googlecode.com/hg/latest/</link>
                     </links>
                 </configuration>
                 <executions>

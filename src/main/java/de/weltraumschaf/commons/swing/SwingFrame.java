@@ -15,7 +15,6 @@ import de.weltraumschaf.commons.system.DefaultExiter;
 import de.weltraumschaf.commons.system.Exitable;
 import java.awt.BorderLayout;
 import java.awt.HeadlessException;
-import java.awt.LayoutManager;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.logging.Level;
@@ -50,7 +49,7 @@ public class SwingFrame extends JFrame {
     /**
      * Abstraction for {@link System#exit(int)}.
      */
-    private Exitable exiter = new DefaultExiter();
+    private transient Exitable exiter = new DefaultExiter();
 
     /**
      * Initializes the content pane layout with {@link java.awt.BorderLayout} and add

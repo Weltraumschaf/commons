@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
@@ -27,7 +28,7 @@ import static org.mockito.Mockito.*;
  */
 public class MenuBarBuilderTest {
 
-    @Test @Ignore
+    @Test
     public void buildMenuBar() {
         final ActionListener listener1 = mock(ActionListener.class);
         final ActionListener listener2 = mock(ActionListener.class);
@@ -58,33 +59,34 @@ public class MenuBarBuilderTest {
 
         assertEquals(4, menubar.getComponentCount());
 
-        final JMenu file = (JMenu) menubar.getComponent(0);
-        assertEquals("File", file.getName());
-        assertEquals(2, file.getComponentCount());
-        final JMenuItem open = (JMenuItem) file.getComponent(0);
-        assertEquals("Open", open.getName());
+        final JMenu file = menubar.getMenu(0);
+        assertEquals("File", file.getActionCommand());
+        assertEquals(3, file.getItemCount());
+        final JMenuItem open = file.getItem(0);
+        assertEquals("Open", open.getActionCommand());
         assertSame(listener1, open.getActionListeners()[0]);
-        final JMenuItem save = (JMenuItem) file.getComponent(1);
-        assertEquals("Save", open.getName());
-        assertSame(listener2, open.getActionListeners()[0]);
+        assertNull(file.getItem(1));
+        final JMenuItem save = file.getItem(2);
+        assertEquals("Save", save.getActionCommand());
+        assertSame(listener2, save.getActionListeners()[0]);
 
-        final JMenu edit = (JMenu) menubar.getComponent(0);
-        assertEquals("Edit", edit.getName());
-        assertEquals(1, edit.getComponentCount());
-        final JMenuItem foo = (JMenuItem) file.getComponent(0);
-        assertEquals("foo", foo.getName());
+        final JMenu edit = menubar.getMenu(1);
+        assertEquals("Edit", edit.getActionCommand());
+        assertEquals(1, edit.getItemCount());
+        final JMenuItem foo = edit.getItem(0);
+        assertEquals("foo", foo.getActionCommand());
 
-        final JMenu view = (JMenu) menubar.getComponent(0);
-        assertEquals("View", view.getName());
-        assertEquals(1, view.getComponentCount());
-        final JMenuItem bar = (JMenuItem) file.getComponent(0);
-        assertEquals("bar", bar.getName());
+        final JMenu view = menubar.getMenu(2);
+        assertEquals("View", view.getActionCommand());
+        assertEquals(1, view.getItemCount());
+        final JMenuItem bar = view.getItem(0);
+        assertEquals("bar", bar.getActionCommand());
 
-        final JMenu window = (JMenu) menubar.getComponent(0);
-        assertEquals("Window", window.getName());
-        assertEquals(1, window.getComponentCount());
-        final JMenuItem baz = (JMenuItem) file.getComponent(0);
-        assertEquals("baz", baz.getName());
+        final JMenu window = menubar.getMenu(3);
+        assertEquals("Window", window.getActionCommand());
+        assertEquals(1, window.getItemCount());
+        final JMenuItem baz = window.getItem(0);
+        assertEquals("baz", baz.getActionCommand());
     }
 
 }

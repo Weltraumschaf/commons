@@ -11,6 +11,7 @@
 
 package de.weltraumschaf.commons.swing;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JToolBar;
 
@@ -63,12 +64,22 @@ public final class ToolBarBuilder {
     /**
      * Creates a button in the tool bar.
      *
-     * @param imageResourcePath Path to the buttons image resource.
+     * @param iconResourcePath Path to the button's icon resource.
      * @return A button builder.
      */
-    public ToolBarButtonBuilder button(final String imageResourcePath) {
-        final ImageIcon image = new ImageIcon(getClass().getResource(imageResourcePath));
-        final ToolBarButtonBuilder builder = new ToolBarButtonBuilder(image, this);
+    public ToolBarButtonBuilder button(final String iconResourcePath) {
+        final Icon icon = new ImageIcon(getClass().getResource(iconResourcePath));
+        return button(icon);
+    }
+
+    /**
+     * Creates a button in the tool bar.
+     *
+     * @param icon Icon of the button.
+     * @return A button builder.
+     */
+    public ToolBarButtonBuilder button(final Icon icon) {
+        final ToolBarButtonBuilder builder = new ToolBarButtonBuilder(icon, this);
         toolbar.add(builder.getButton());
         return builder;
     }

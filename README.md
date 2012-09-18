@@ -65,6 +65,14 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 - <code>Version</code>: Reads the current version from a property file.
 - <code>Invokable</code>: Application object invokable by command line interface.
 
+### Version 0.2.1
+
+- <code>Exitable</code>: Abstraction for <code>java.lang.System#exit()</code>.
+
+### Version 0.2.2
+
+- <code>SwingFrame</code>: Common base functionality for a Swing main window.
+
 ## File Signatures
 
 To receive the keys type:

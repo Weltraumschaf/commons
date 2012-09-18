@@ -58,17 +58,17 @@ public class ToolBarBuilderTest {
 
         assertEquals(3, toolbar.getComponentCount());
 
-        final JButton folder = (JButton) toolbar.getComponentAtIndex(0);
+        final JButton folder = (JButton) toolbar.getComponent(0);
         assertSame(listener1, folder.getActionListeners()[0]);
         assertEquals(tooltip1, folder.getToolTipText());
         assertSame(icon1, folder.getIcon());
 
-        final JButton disk = (JButton) toolbar.getComponentAtIndex(1);
+        final JButton disk = (JButton) toolbar.getComponent(1);
         assertSame(listener2, disk.getActionListeners()[0]);
         assertEquals(tooltip2, disk.getToolTipText());
         assertSame(icon2, disk.getIcon());
 
-        final JButton page = (JButton) toolbar.getComponentAtIndex(2);
+        final JButton page = (JButton) toolbar.getComponent(2);
         assertSame(listener3, page.getActionListeners()[0]);
         assertEquals(tooltip3, page.getToolTipText());
         assertSame(icon3, page.getIcon());

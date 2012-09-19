@@ -25,4 +25,12 @@ public class SwingFrameTest {
     public void init() {
     }
 
+    @Test public void isMacOs() {
+        if (System.getProperty("os.name").equals(SwingFrame.MAC_OSX)) {
+            assertTrue(SwingFrame.isMacOs());
+        } else {
+            assertFalse(SwingFrame.isMacOs());
+        }
+    }
+
 }

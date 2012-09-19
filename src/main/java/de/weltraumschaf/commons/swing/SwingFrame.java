@@ -36,6 +36,8 @@ public class SwingFrame extends JFrame {
      */
     private static final Logger LOGGER = Logger.getLogger(SwingFrame.class.getName());
 
+    static final String MAC_OSX = "Mac OS X";
+
     /**
      * Centered panel for the main UI.
      */
@@ -104,9 +106,8 @@ public class SwingFrame extends JFrame {
      *
      * @return true or false.
      */
-    private boolean isMacOs() {
-        // FIXME: Implement this method.
-        return true;
+    public static boolean isMacOs() {
+        return System.getProperty("os.name").equals(MAC_OSX);
     }
 
     /**

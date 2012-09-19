@@ -37,6 +37,33 @@ import java.util.logging.Logger;
 public class ShutDownHook extends Thread {
 
     /**
+     * Default logger for this class.
+     */
+    private static final Logger DEFAULT_LOGGER = Logger.getLogger(ShutDownHook.class.getName());
+
+    /**
+     * Logger instance.
+     */
+    private final Logger logger;
+
+    /**
+     * Initializes {@link #logger} with {@link #DEFAULT_LOGGER}.
+     */
+    public ShutDownHook() {
+        this(DEFAULT_LOGGER);
+    }
+
+    /**
+     * Designated constructor.
+     *
+     * @param logger Logger to use by this class.
+     */
+    public ShutDownHook(final Logger logger) {
+        super();
+        this.logger = logger;
+    }
+
+    /**
      * Set of callbacks.
      */
     private final Set<Runnable> callbacks = new HashSet<Runnable>();
@@ -49,11 +76,10 @@ public class ShutDownHook extends Thread {
         final Iterator<Runnable> iterator = callbacks.iterator();
 
         while (iterator.hasNext()) {
-            final Runnable callback = iterator.next();
             try {
-                callback.run();
+                iterator.next().run();
             } catch (Exception ex) {
-                Logger.getLogger(ShutDownHook.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, "Exception thrown by running a callback!", ex);
             }
         }
     }

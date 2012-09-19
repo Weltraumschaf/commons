@@ -68,7 +68,7 @@ public class CapturingOutputStream extends OutputStream {
 
     @Override
     public boolean equals(final Object obj) {
-        if (! (obj instanceof CapturingOutputStream)) {
+        if (!(obj instanceof CapturingOutputStream)) {
             return false;
         }
 

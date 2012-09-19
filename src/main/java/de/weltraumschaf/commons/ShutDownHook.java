@@ -45,7 +45,7 @@ public class ShutDownHook extends Thread {
      * Set of callbacks.
      */
     private final Set<Runnable> callbacks = new HashSet<Runnable>();
-    
+
     /**
      * Logger instance.
      */

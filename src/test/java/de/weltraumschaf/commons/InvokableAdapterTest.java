@@ -14,7 +14,6 @@ package de.weltraumschaf.commons;
 import java.io.InputStream;
 import java.io.PrintStream;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 import org.junit.Test;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;

@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 @java.lang.SuppressWarnings("CallToThreadRun")
-@SuppressWarnings(value="RU_INVOKE_RUN", justification="Testing correct template method behaviour.")
+@SuppressWarnings(value = "RU_INVOKE_RUN", justification = "Testing correct template method behaviour.")
 public class ShutDownHookTest {
 
     private final Logger logger = mock(Logger.class);

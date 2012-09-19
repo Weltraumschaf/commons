@@ -62,7 +62,7 @@ public class CapturingOutputStreamTest {
         assertThat(other.hashCode(), is(sut.hashCode()));
     }
 
-    @SuppressWarnings({"IncompatibleEquals", "ObjectEqualsNull"}) // I want to test this explicetly.
+    @SuppressWarnings({ "IncompatibleEquals", "ObjectEqualsNull" }) // I want to test this explicetly.
     @Test public void equals() {
         final PrintStream stream = new PrintStream(sut);
         stream.print("foobar");

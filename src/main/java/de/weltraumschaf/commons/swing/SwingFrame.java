@@ -32,11 +32,14 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class SwingFrame extends JFrame {
 
     /**
+     * System property for Mac OS X.
+     */
+    static final String MAC_OSX = "Mac OS X";
+
+    /**
      * Logging facility.
      */
     private static final Logger LOGGER = Logger.getLogger(SwingFrame.class.getName());
-
-    static final String MAC_OSX = "Mac OS X";
 
     /**
      * Centered panel for the main UI.

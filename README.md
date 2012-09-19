@@ -72,6 +72,8 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 ### Version 0.2.2
 
 - <code>SwingFrame</code>: Common base functionality for a Swing main window.
+- <code>MenuBarBuilder</code>: Simple internal DSL to create menu bars.
+- <code>ToolBarBuilder</code>: Simple internal DSL to create tool bars.
 
 ## File Signatures
 

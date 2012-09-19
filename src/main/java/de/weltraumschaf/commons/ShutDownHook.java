@@ -42,6 +42,11 @@ public class ShutDownHook extends Thread {
     private static final Logger DEFAULT_LOGGER = Logger.getLogger(ShutDownHook.class.getName());
 
     /**
+     * Set of callbacks.
+     */
+    private final Set<Runnable> callbacks = new HashSet<Runnable>();
+    
+    /**
      * Logger instance.
      */
     private final Logger logger;
@@ -62,11 +67,6 @@ public class ShutDownHook extends Thread {
         super();
         this.logger = logger;
     }
-
-    /**
-     * Set of callbacks.
-     */
-    private final Set<Runnable> callbacks = new HashSet<Runnable>();
 
     /**
      * Iterates over all {@link #callbacks} and run them.

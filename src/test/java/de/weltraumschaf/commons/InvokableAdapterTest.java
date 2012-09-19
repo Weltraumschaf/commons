@@ -28,7 +28,7 @@ public class InvokableAdapterTest {
 
     private final String[] args = new String[] {"foo", "bar", "baz"};
 
-    private final InvokableAdapter app = new InvokableAdapter(args) {
+    private final InvokableAdapter sut = new InvokableAdapter(args) {
 
         @Override
         public void execute() throws Exception {
@@ -91,19 +91,19 @@ public class InvokableAdapterTest {
     }
 
     @Test public void getArgs() {
-        assertArrayEquals(args, app.getArgs());
-        assertNotSame(args, app.getArgs());
+        assertArrayEquals(args, sut.getArgs());
+        assertNotSame(args, sut.getArgs());
     }
 
     @Test public void getShutDownHook() {
-        assertNotNull(app.getShutDownHooks());
+        assertNotNull(sut.getShutDownHooks());
     }
 
     @Test public void getAndSetIo() {
-        assertNull(app.getIoStreams());
+        assertNull(sut.getIoStreams());
         final IOStreams io = IOStreams.newDefault();
-        app.setIoStreams(io);
-        assertSame(io, app.getIoStreams());
+        sut.setIoStreams(io);
+        assertSame(io, sut.getIoStreams());
     }
 
 }

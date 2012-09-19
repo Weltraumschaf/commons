@@ -33,7 +33,7 @@ public class MenuBarBuilderTest {
         final ActionListener listener1 = mock(ActionListener.class);
         final ActionListener listener2 = mock(ActionListener.class);
 
-        JMenuBar menubar = MenuBarBuilder.builder()
+        final JMenuBar menubar = MenuBarBuilder.builder()
             .menu("File")
                 .item("Open")
                     .addListener(listener1)

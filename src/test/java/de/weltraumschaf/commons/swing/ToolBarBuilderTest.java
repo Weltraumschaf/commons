@@ -41,7 +41,7 @@ public class ToolBarBuilderTest {
         final Icon icon2 = new ImageIcon(getClass().getResource(path + "/disk_16x16.gif"));
         final Icon icon3 = new ImageIcon(getClass().getResource(path + "/page_16x16.gif"));
 
-        JToolBar toolbar = ToolBarBuilder.builder()
+        final JToolBar toolbar = ToolBarBuilder.builder()
             .button(icon1)
                 .toolTipText(tooltip1)
                 .addListener(listener1)

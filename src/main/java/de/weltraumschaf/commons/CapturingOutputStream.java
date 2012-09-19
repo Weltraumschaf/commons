@@ -67,12 +67,8 @@ public class CapturingOutputStream extends OutputStream {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-
-        if (getClass() != obj.getClass()) {
+    public boolean equals(final Object obj) {
+        if (! (obj instanceof CapturingOutputStream)) {
             return false;
         }
 

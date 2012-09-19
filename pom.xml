@@ -9,7 +9,7 @@
 
     <groupId>de.weltraumschaf</groupId>
     <artifactId>commons</artifactId>
-    <version>0.2.2-SNAPSHOT</version>
+    <version>0.2.2</version>
     <packaging>jar</packaging>
 
     <name>Commons</name>
@@ -57,7 +57,7 @@
         <connection>scm:git:git://github.com/Weltraumschaf/commons.git</connection>
         <developerConnection>scm:git:git@github.com:Weltraumschaf/commons.git</developerConnection>
         <url>https://github.com/Weltraumschaf/commons.git</url>
-      <tag>HEAD</tag>
+      <tag>0.2.2</tag>
   </scm>
 
     <distributionManagement>

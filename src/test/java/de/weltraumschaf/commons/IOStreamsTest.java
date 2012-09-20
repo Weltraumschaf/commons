@@ -48,7 +48,7 @@ public class IOStreamsTest {
 
     @Test public void printlnErr() {
         final String msg = "some text";
-        mockedStreams.printlnErr(msg);
+        mockedStreams.error(msg);
         verify(mockedStreams.getStderr(), times(1)).println(msg);
     }
 

@@ -59,11 +59,15 @@ public final class IOStreams {
 
     /**
      * Standard output stream.
+     *
+     * FIXME: Consider encoding (UTF-8).
      */
     private final PrintStream stdout;
 
     /**
      * Standard error stream.
+     *
+     * FIXME: Consider encoding (UTF-8).
      */
     private final PrintStream stderr;
 
@@ -117,7 +121,7 @@ public final class IOStreams {
     }
 
     /**
-     * Prints exception stack trace to {@link System#err}.
+     * Prints exception stack trace.
      *
      * @param ex Exception to print.
      */
@@ -126,16 +130,16 @@ public final class IOStreams {
     }
 
     /**
-     * Prints line to STDERR.
+     * Prints error line.
      *
      * @param str String to print.
      */
-    public void printlnErr(final String str) {
+    public void error(final String str) {
         getStderr().println(str);
     }
 
     /**
-     * Prints line to STDOUT.
+     * Prints line.
      *
      * @param str String to print.
      */

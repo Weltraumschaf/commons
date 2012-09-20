@@ -42,6 +42,11 @@ public class SwingFrame extends JFrame {
     private static final Logger LOGGER = Logger.getLogger(SwingFrame.class.getName());
 
     /**
+     * Id for serialization.
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
      * Centered panel for the main UI.
      */
     protected final JPanel panel = new JPanel();
@@ -81,6 +86,7 @@ public class SwingFrame extends JFrame {
 
         initMenu();
         initToolBar();
+        initPanel();
         pack();
     }
 
@@ -169,4 +175,15 @@ public class SwingFrame extends JFrame {
     protected void initToolBar() {
         // Empty template method.
     }
+
+    /**
+     * Template method for main UI initialization.
+     *
+     * Override this method with your custom code to add components
+     * to {@link #panel}.
+     */
+    protected void initPanel() {
+        // Empty template method.
+    }
+
 }

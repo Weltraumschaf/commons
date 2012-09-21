@@ -85,7 +85,7 @@ public final class IOStreams {
     }
 
     /**
-     * Get standard error output stream.
+     * Get standard errorln output stream.
      *
      * @return Print stream object.
      */
@@ -125,7 +125,7 @@ public final class IOStreams {
      *
      * @param ex Exception to print.
      */
-    public void printStackTraceToStdErr(Exception ex) {
+    public void printStackTrace(Exception ex) {
         ex.printStackTrace(getStderr());
     }
 
@@ -134,17 +134,35 @@ public final class IOStreams {
      *
      * @param str String to print.
      */
-    public void error(final String str) {
+    public void errorln(final String str) {
         getStderr().println(str);
     }
 
     /**
-     * Prints line.
+     * Prints error.
+     *
+     * @param str String to print.
+     */
+    public void error(final String str) {
+        getStderr().print(str);
+    }
+
+    /**
+     * Prints string line.
      *
      * @param str String to print.
      */
     public void println(final String str) {
         getStdout().println(str);
+    }
+
+    /**
+     * Prints string.
+     *
+     * @param str String to print.
+     */
+    public void print(final String str) {
+        getStdout().print(str);
     }
 
 }

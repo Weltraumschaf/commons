@@ -48,7 +48,7 @@ public class IOStreamsTest {
 
     @Test public void printlnErr() {
         final String msg = "some text";
-        mockedStreams.error(msg);
+        mockedStreams.errorln(msg);
         verify(mockedStreams.getStderr(), times(1)).println(msg);
     }
 
@@ -57,7 +57,7 @@ public class IOStreamsTest {
         final Exception ex = mock(Exception.class);
         final IOStreams streams = new IOStreams(mock(InputStream.class), mock(PrintStream.class), err);
 
-        streams.printStackTraceToStdErr(ex);
+        streams.printStackTrace(ex);
         verify(ex, times(1)).printStackTrace(err);
     }
 

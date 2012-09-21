@@ -95,7 +95,7 @@ public abstract class InvokableAdapter implements Invokable {
             invokanle.init();
             invokanle.execute();
         } catch (Exception ex) {
-            ioStreams.error(ex.getMessage());
+            ioStreams.errorln(ex.getMessage());
             invokanle.exit(-1);
         }
 

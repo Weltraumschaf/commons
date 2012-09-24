@@ -237,10 +237,10 @@
                     <version>2.3</version>
                 </plugin>
 
-                <plugin>
+                <!--<plugin>
                     <artifactId>maven-gpg-plugin</artifactId>
                     <version>1.4</version>
-                </plugin>
+                </plugin>-->
 
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
@@ -331,6 +331,8 @@
             <plugin>
                 <artifactId>maven-release-plugin</artifactId>
                 <configuration>
+                    <localCheckout>true</localCheckout>
+                    <pushChanges>false</pushChanges>
                     <goals>deploy</goals>
                 </configuration>
             </plugin>
@@ -579,7 +581,7 @@
                 </executions>
             </plugin>
 
-            <plugin>
+            <!--<plugin>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <configuration>
                     <keyname>BA265082</keyname>
@@ -587,13 +589,13 @@
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
-                        <phase>verify</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>sign</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>

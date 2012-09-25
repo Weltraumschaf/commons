@@ -9,7 +9,7 @@
 
     <groupId>de.weltraumschaf</groupId>
     <artifactId>commons</artifactId>
-    <version>0.2.3</version>
+    <version>0.2.3-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Commons</name>
@@ -57,8 +57,8 @@
         <connection>scm:git:git://github.com/Weltraumschaf/commons.git</connection>
         <developerConnection>scm:git:git@github.com:Weltraumschaf/commons.git</developerConnection>
         <url>https://github.com/Weltraumschaf/commons.git</url>
-      <tag>0.2.3</tag>
-  </scm>
+        <tag>0.2.2</tag>
+    </scm>
 
     <distributionManagement>
         <site>
@@ -580,22 +580,39 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!--<plugin>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <configuration>
-                    <keyname>BA265082</keyname>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
     </build>
+
+    <profiles>
+         <!-- http://jpz-log.info/archives/2010/12/14/1446/ -->
+        <profile>
+            <id>release-sign-artifacts</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.4</version>
+                        <configuration>
+                            <keyname>BA265082</keyname>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

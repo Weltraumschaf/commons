@@ -11,9 +11,9 @@
 
 package de.weltraumschaf.commons.swing;
 
-import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
+import org.junit.Test;
+import static org.mockito.Mockito.*;
 
 /**
  *
@@ -21,8 +21,29 @@ import org.junit.Ignore;
  */
 public class SwingFrameTest {
 
-    @Test @Ignore
-    public void init() {
+    @Test
+    public void initWithoutBindExitOnClose() {
+        final SwingFrame sut = mock(SwingFrame.class, CALLS_REAL_METHODS);
+        sut.init();
+
+        verify(sut, times(1)).initLookAndFeel();
+        verify(sut, never()).bindWindowClosing();
+        verify(sut, times(1)).initMenu();
+        verify(sut, times(1)).initToolBar();
+        verify(sut, times(1)).initPanel();
+    }
+
+    @Test
+    public void initWithBindExitOnClose() {
+        final SwingFrame sut = mock(SwingFrame.class, CALLS_REAL_METHODS);
+        sut.setExitOnCloseWindow(true);
+        sut.init();
+
+        verify(sut, times(1)).initLookAndFeel();
+        verify(sut, times(1)).bindWindowClosing();
+        verify(sut, times(1)).initMenu();
+        verify(sut, times(1)).initToolBar();
+        verify(sut, times(1)).initPanel();
     }
 
     @Test public void isMacOs() {

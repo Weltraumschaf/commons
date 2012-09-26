@@ -40,13 +40,25 @@ public class IOStreamsTest {
         assertSame(System.out, defaultStreams.getStdout());
     }
 
+    @Test public void print() {
+        final String msg = "some text";
+        mockedStreams.print(msg);
+        verify(mockedStreams.getStdout(), times(1)).print(msg);
+    }
+
     @Test public void println() {
         final String msg = "some text";
         mockedStreams.println(msg);
         verify(mockedStreams.getStdout(), times(1)).println(msg);
     }
 
-    @Test public void printlnErr() {
+    @Test public void error() {
+        final String msg = "some text";
+        mockedStreams.error(msg);
+        verify(mockedStreams.getStderr(), times(1)).print(msg);
+    }
+
+    @Test public void errorln() {
         final String msg = "some text";
         mockedStreams.errorln(msg);
         verify(mockedStreams.getStderr(), times(1)).println(msg);

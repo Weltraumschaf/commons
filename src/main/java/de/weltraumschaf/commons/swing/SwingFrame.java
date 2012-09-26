@@ -14,7 +14,6 @@ package de.weltraumschaf.commons.swing;
 import de.weltraumschaf.commons.system.DefaultExiter;
 import de.weltraumschaf.commons.system.Exitable;
 import java.awt.BorderLayout;
-import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.logging.Level;
@@ -54,7 +53,12 @@ public class SwingFrame extends JFrame {
     /**
      * Whether to exit the whole application on closing window.
      */
-    protected boolean exitOnCloseWindow;
+    private boolean exitOnCloseWindow;
+
+    /**
+     * Whether to call {@link JFrame#pack()} or not.
+     */
+    private boolean packComponents;
 
     /**
      * Abstraction for {@link System#exit(int)}.
@@ -66,9 +70,8 @@ public class SwingFrame extends JFrame {
      * {@link #panel} to the center.
      *
      * @param title the title for the frame
-     * @exception HeadlessException if GraphicsEnvironment.isHeadless() returns true.
      */
-    public SwingFrame(final String title) throws HeadlessException {
+    public SwingFrame(final String title) {
         super(title);
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(panel, BorderLayout.CENTER);

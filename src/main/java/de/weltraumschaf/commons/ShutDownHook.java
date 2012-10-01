@@ -34,7 +34,7 @@ import java.util.logging.Logger;
  * </code>
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public class ShutDownHook extends Thread {
+class ShutDownHook extends Thread {
 
     /**
      * Default logger for this class.

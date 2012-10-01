@@ -75,7 +75,7 @@ public abstract class InvokableAdapter implements Invokable {
      *
      * @param invokanle Implementation to invoke.
      */
-    public static void main(Invokable invokanle) {
+    public static final void main(Invokable invokanle) {
         main(invokanle, IOStreams.newDefault());
     }
 
@@ -88,7 +88,7 @@ public abstract class InvokableAdapter implements Invokable {
      * @param invokanle Implementation to invoke.
      * @param ioStreams I/O streams.
      */
-    public static void main(final Invokable invokanle, final IOStreams ioStreams) {
+    public static final void main(final Invokable invokanle, final IOStreams ioStreams) {
         invokanle.setIoStreams(ioStreams);
 
         try {
@@ -117,17 +117,17 @@ public abstract class InvokableAdapter implements Invokable {
      *
      * @return Returns copy of the arguments array.
      */
-    public String[] getArgs() {
+    public final String[] getArgs() {
         return args.clone();
     }
 
     @Override
-    public IOStreams getIoStreams() {
+    public final IOStreams getIoStreams() {
         return ioStreams;
     }
 
     @Override
-    public void setIoStreams(IOStreams ioStreams) {
+    public final void setIoStreams(IOStreams ioStreams) {
         this.ioStreams = ioStreams;
     }
 
@@ -136,22 +136,22 @@ public abstract class InvokableAdapter implements Invokable {
      *
      * @return Returns the shutdown object.
      */
-    protected ShutDownHook getShutDownHooks() {
+    protected final ShutDownHook getShutDownHooks() {
         return shutDownHooks;
     }
 
     @Override
-    public void exit(int status) {
+    public final void exit(int status) {
         exiter.exit(status);
     }
 
     @Override
-    public void exit(ExitCode status) {
+    public final void exit(ExitCode status) {
         exiter.exit(status);
     }
 
     @Override
-    public void setExiter(final Exitable exiter) {
+    public final void setExiter(final Exitable exiter) {
         this.exiter = exiter;
     }
 

@@ -75,6 +75,10 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 - <code>MenuBarBuilder</code>: Simple internal DSL to create menu bars.
 - <code>ToolBarBuilder</code>: Simple internal DSL to create tool bars.
 
+### Version 0.2.3
+
+- Refactorings for better design, clean code, and extensability.
+
 ## File Signatures
 
 To receive the keys type:

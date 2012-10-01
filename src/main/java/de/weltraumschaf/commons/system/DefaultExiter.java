@@ -16,7 +16,7 @@ package de.weltraumschaf.commons.system;
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public class DefaultExiter extends ExitableAdapter {
+public final class DefaultExiter extends ExitableAdapter {
 
     @Override
     public void exit(int status) {

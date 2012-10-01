@@ -18,7 +18,7 @@ package de.weltraumschaf.commons.system;
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public class NullExiter extends ExitableAdapter {
+public final class NullExiter extends ExitableAdapter {
 
     @Override
     public void exit(final int status) {

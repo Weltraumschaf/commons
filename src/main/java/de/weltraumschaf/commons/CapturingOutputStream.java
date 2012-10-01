@@ -34,7 +34,7 @@ import java.io.OutputStream;
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public class CapturingOutputStream extends OutputStream {
+public final class CapturingOutputStream extends OutputStream {
 
     /**
      * Buffers the output.

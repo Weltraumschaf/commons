@@ -46,7 +46,7 @@ public class SwingFrame extends JFrame {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Centered panel for the main UI.
+     * Centered panel for the main UI in a bordered layout.
      */
     protected final JPanel panel = new JPanel();
 
@@ -54,11 +54,6 @@ public class SwingFrame extends JFrame {
      * Whether to exit the whole application on closing window.
      */
     private boolean exitOnCloseWindow;
-
-    /**
-     * Whether to call {@link JFrame#pack()} or not.
-     */
-    private boolean packComponents;
 
     /**
      * Abstraction for {@link System#exit(int)}.
@@ -90,7 +85,6 @@ public class SwingFrame extends JFrame {
         initMenu();
         initToolBar();
         initPanel();
-        pack();
     }
 
     /**
@@ -100,7 +94,7 @@ public class SwingFrame extends JFrame {
      *
      * @param exitOnCloseWindow True or false.
      */
-    public void setExitOnCloseWindow(boolean exitOnCloseWindow) {
+    public final void setExitOnCloseWindow(boolean exitOnCloseWindow) {
         this.exitOnCloseWindow = exitOnCloseWindow;
     }
 
@@ -109,8 +103,17 @@ public class SwingFrame extends JFrame {
      *
      * @param exiter Object which handles exit calls.
      */
-    public void setExiter(final Exitable exiter) {
+    public final void setExiter(final Exitable exiter) {
         this.exiter = exiter;
+    }
+
+    /**
+     * Get the main panel of the frame to add components.
+     *
+     * @return Returns reference of {@link #panel}.
+     */
+    public final JPanel getPanel() {
+        return panel;
     }
 
     /**
@@ -149,6 +152,11 @@ public class SwingFrame extends JFrame {
 
     /**
      * Binds on the window closing event and calls the exiter to exit application.
+     *
+     * This method add a default window listener which {@link #exiter exits}
+     * on {@link WindowAdapter#windowClosing(java.awt.event.WindowEvent)}.
+     * You may override this method for other behaviour. This method is only
+     * invoked if {@link #setExitOnCloseWindow(boolean)} is set true.
      */
     protected void bindWindowClosing() {
         addWindowListener(new WindowAdapter() {

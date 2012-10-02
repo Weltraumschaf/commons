@@ -12,6 +12,7 @@
 package de.weltraumschaf.commons.swing;
 
 import java.awt.event.ActionListener;
+import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,7 +29,7 @@ import static org.mockito.Mockito.*;
 public class ToolBarBuilderTest {
 
     @Test
-    public void testSomeMethod() {
+    public void buildToolBar() {
         final ActionListener listener1 = mock(ActionListener.class);
         final ActionListener listener2 = mock(ActionListener.class);
         final ActionListener listener3 = mock(ActionListener.class);
@@ -36,7 +37,7 @@ public class ToolBarBuilderTest {
         final String tooltip2 = "Save current document.";
         final String tooltip3 = "Create a new document.";
         final String path = "/de/weltraumschaf/commons/swing";
-        final Icon icon1 = new ImageIcon(getClass().getResource(path + "/folder_16x16.gif"));
+        final URL icon1 = getClass().getResource(path + "/folder_16x16.gif");
         final Icon icon2 = new ImageIcon(getClass().getResource(path + "/disk_16x16.gif"));
         final Icon icon3 = new ImageIcon(getClass().getResource(path + "/page_16x16.gif"));
 
@@ -60,7 +61,7 @@ public class ToolBarBuilderTest {
         final JButton folder = (JButton) toolbar.getComponent(0);
         assertSame(listener1, folder.getActionListeners()[0]);
         assertEquals(tooltip1, folder.getToolTipText());
-        assertSame(icon1, folder.getIcon());
+        assertNotNull(folder.getIcon());
 
         final JButton disk = (JButton) toolbar.getComponent(1);
         assertSame(listener2, disk.getActionListeners()[0]);

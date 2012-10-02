@@ -11,6 +11,7 @@
 
 package de.weltraumschaf.commons.swing;
 
+import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JToolBar;
@@ -64,12 +65,11 @@ public final class ToolBarBuilder {
     /**
      * Creates a button in the tool bar.
      *
-     * @param iconResourcePath Path to the button's icon resource.
+     * @param iconResource Path to the button's icon resource.
      * @return A button builder.
      */
-    public ToolBarButtonBuilder button(final String iconResourcePath) {
-        final Icon icon = new ImageIcon(getClass().getResource(iconResourcePath));
-        return button(icon);
+    public ToolBarButtonBuilder button(final URL iconResource) {
+        return button(new ImageIcon(iconResource));
     }
 
     /**

@@ -66,4 +66,27 @@ public class SwingFrameTest {
         }
     }
 
+    @Test public void bindAndExitOnWindowClosing() {
+        final SwingFrame sut = new SwingFrame("foobar");
+        final Exitable exiter = mock(Exitable.class);
+
+        sut.setExiter(exiter);
+        sut.setExitOnCloseWindow(true);
+        sut.init();
+        sut.dispatchEvent(new WindowEvent(sut, WindowEvent.WINDOW_CLOSING));
+
+        verify(exiter, times(1)).exit(0);
+    }
+
+    @Test public void notBindAndExitOnWindowClosing() {
+        final SwingFrame sut = new SwingFrame("foobar");
+        final Exitable exiter = mock(Exitable.class);
+
+        sut.setExiter(exiter);
+        sut.init();
+        sut.dispatchEvent(new WindowEvent(sut, WindowEvent.WINDOW_CLOSING));
+
+        verify(exiter, never()).exit(0);
+    }
+
 }

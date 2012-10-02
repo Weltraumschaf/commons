@@ -11,6 +11,9 @@
 
 package de.weltraumschaf.commons.swing;
 
+import de.weltraumschaf.commons.system.Exitable;
+import java.awt.BorderLayout;
+import java.awt.event.WindowEvent;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
@@ -20,6 +23,15 @@ import static org.mockito.Mockito.*;
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class SwingFrameTest {
+
+    @Test
+    public void constructObject() {
+        final String title = "foobar";
+        final SwingFrame sut = new SwingFrame(title);
+        assertEquals(title, sut.getTitle());
+        assertTrue(sut.getContentPane().getLayout() instanceof BorderLayout);
+        assertSame(sut.getPanel(), sut.getContentPane().getComponent(0));
+    }
 
     @Test
     public void initWithoutBindExitOnClose() {

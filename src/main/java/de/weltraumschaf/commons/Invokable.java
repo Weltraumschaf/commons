@@ -26,7 +26,7 @@ public interface Invokable {
      *
      * @throws Exception If something goes wrong.
      */
-    void init() throws Exception;
+    void init();
 
     /**
      * Template method for main application code.

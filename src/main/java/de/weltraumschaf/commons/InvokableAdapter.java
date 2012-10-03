@@ -104,12 +104,10 @@ public abstract class InvokableAdapter implements Invokable {
 
     /**
      * Adds shutdown hook to runtime.
-     *
-     * @throws Exception Various exceptions from the runtime.
      */
     @Override
-    public final void init() throws Exception {
-        Runtime.getRuntime().addShutdownHook(shutDownHooks);
+    public final void init() {
+        runtime.addShutdownHook(shutDownHook);
     }
 
     /**

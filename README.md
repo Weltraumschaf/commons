@@ -79,6 +79,11 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 
 - Refactorings for better design, clean code, and extensability.
 
+### Version 0.2.4
+
+- Refactoring and test improvements.
+- Fix the license and automatically add it to source.
+
 ## File Signatures
 
 To receive the keys type:

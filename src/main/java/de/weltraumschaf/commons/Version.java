@@ -130,17 +130,26 @@ public final class Version {
      */
     public void load() throws IOException {
         if (!propertiesLoaded) {
-            InputStream in = null;
+            loadImpl();
+            propertiesLoaded = true;
+        }
+    }
 
-            try {
-                in = getClass().getResourceAsStream(propertyFileName);
-                properties.load(in);
+    /**
+     * Encapsulates the file loading.
+     *
+     * @throws IOException On IO errors of the property file.
+     */
+    void loadImpl() throws IOException {
+        InputStream in = null;
+
+        try {
+            in = getClass().getResourceAsStream(propertyFileName);
+            properties.load(in);
+            in.close();
+        } finally {
+            if (null != in) {
                 in.close();
-                propertiesLoaded = true;
-            } finally {
-                if (null != in) {
-                    in.close();
-                }
             }
         }
     }

@@ -48,7 +48,7 @@ public abstract class InvokableAdapter implements Invokable {
     /**
      * Container for shutdown {@link Runnable callbacks}.
      */
-    private final ShutDownHook shutDownHooks = new ShutDownHook();
+    private final ShutDownHook shutDownHook;
 
     /**
      * I/O streams.
@@ -60,13 +60,21 @@ public abstract class InvokableAdapter implements Invokable {
      */
     private Exitable exiter = new DefaultExiter();
 
+    private final Runtime runtime;
+
     /**
      * Copies the command line arguments.
      *
      * @param args Command line arguments.
      */
     public InvokableAdapter(final String[] args) {
+        this(args, Runtime.getRuntime(), new ShutDownHook());
+    }
+
+    public InvokableAdapter(final String[] args, final Runtime runtime, final ShutDownHook shutDownHook) {
         this.args = args.clone();
+        this.runtime = runtime;
+        this.shutDownHook = shutDownHook;
     }
 
     /**
@@ -75,7 +83,7 @@ public abstract class InvokableAdapter implements Invokable {
      *
      * @param invokanle Implementation to invoke.
      */
-    public static final void main(Invokable invokanle) {
+    public static void main(final Invokable invokanle) {
         main(invokanle, IOStreams.newDefault());
     }
 
@@ -88,7 +96,7 @@ public abstract class InvokableAdapter implements Invokable {
      * @param invokanle Implementation to invoke.
      * @param ioStreams I/O streams.
      */
-    public static final void main(final Invokable invokanle, final IOStreams ioStreams) {
+    public static void main(final Invokable invokanle, final IOStreams ioStreams) {
         invokanle.setIoStreams(ioStreams);
 
         try {
@@ -130,12 +138,12 @@ public abstract class InvokableAdapter implements Invokable {
     }
 
     /**
-     * Get the shutdown hook object for registering callbacks executed on shutdown.
+     * Register a {@link Runnable callback} as shut down hook.
      *
-     * @return Returns the shutdown object.
+     * @param callback On shutdown running callback.
      */
-    protected final ShutDownHook getShutDownHooks() {
-        return shutDownHooks;
+    public final void registerShutdownHook(final Runnable callback) {
+        shutDownHook.register(callback);
     }
 
     @Override

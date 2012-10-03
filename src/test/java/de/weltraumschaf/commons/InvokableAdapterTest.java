@@ -11,11 +11,12 @@
 
 package de.weltraumschaf.commons;
 
+import de.weltraumschaf.commons.system.Exitable;
 import java.io.InputStream;
 import java.io.PrintStream;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.junit.Test;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 /**
@@ -94,15 +95,52 @@ public class InvokableAdapterTest {
         assertNotSame(args, sut.getArgs());
     }
 
-    @Test public void getShutDownHook() {
-        assertNotNull(sut.getShutDownHooks());
-    }
-
     @Test public void getAndSetIo() {
         assertNull(sut.getIoStreams());
         final IOStreams io = IOStreams.newDefault();
         sut.setIoStreams(io);
         assertSame(io, sut.getIoStreams());
+    }
+
+    @Test public void callExiter() {
+        final Exitable exiter = mock(Exitable.class);
+        sut.setExiter(exiter);
+        InvokableAdapter.main(sut);
+        verify(exiter, times(1)).exit(0);
+    }
+
+    @Test public void registerShutdownHooksOnInit() {
+        final Runtime runtime = mock(Runtime.class);
+        final ShutDownHook hook = mock(ShutDownHook.class);
+        final InvokableAdapter _sut = new InvokableAdapter(args, runtime, hook) {
+
+            @Override
+            public void execute() throws Exception {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+        };
+
+        _sut.init();
+        verify(runtime, times(1)).addShutdownHook(hook);
+    }
+
+
+    @Test public void registerShutDownHook() {
+        final Runtime runtime = mock(Runtime.class);
+        final ShutDownHook hook = mock(ShutDownHook.class);
+        final Runnable callback = mock(Runnable.class);
+        final InvokableAdapter _sut = new InvokableAdapter(args, runtime, hook) {
+
+            @Override
+            public void execute() throws Exception {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+        };
+
+        _sut.registerShutdownHook(callback);
+        verify(hook, times(1)).register(callback);
     }
 
 }

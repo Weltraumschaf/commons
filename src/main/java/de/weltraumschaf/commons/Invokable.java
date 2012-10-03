@@ -23,8 +23,6 @@ public interface Invokable {
 
     /**
      * Initializes the invokable.
-     *
-     * @throws Exception If something goes wrong.
      */
     void init();
 

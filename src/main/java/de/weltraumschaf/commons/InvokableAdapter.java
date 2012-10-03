@@ -60,6 +60,9 @@ public abstract class InvokableAdapter implements Invokable {
      */
     private Exitable exiter = new DefaultExiter();
 
+    /**
+     * Runtime for registering callbacks.
+     */
     private final Runtime runtime;
 
     /**
@@ -71,6 +74,13 @@ public abstract class InvokableAdapter implements Invokable {
         this(args, Runtime.getRuntime(), new ShutDownHook());
     }
 
+    /**
+     * Dedicated constructor.
+     *
+     * @param args Command line arguments.
+     * @param runtime Runtime for registering callbacks.
+     * @param shutDownHook Object to hold shutdown hooks.
+     */
     public InvokableAdapter(final String[] args, final Runtime runtime, final ShutDownHook shutDownHook) {
         this.args = args.clone();
         this.runtime = runtime;

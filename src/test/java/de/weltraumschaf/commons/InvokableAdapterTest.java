@@ -11,6 +11,7 @@
 
 package de.weltraumschaf.commons;
 
+import de.weltraumschaf.commons.system.ExitCode;
 import de.weltraumschaf.commons.system.Exitable;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -107,6 +108,10 @@ public class InvokableAdapterTest {
         sut.setExiter(exiter);
         InvokableAdapter.main(sut);
         verify(exiter, times(1)).exit(0);
+
+        final ExitCode code = mock(ExitCode.class);
+        sut.exit(code);
+        verify(exiter, times(1)).exit(code);
     }
 
     @Test public void registerShutdownHooksOnInit() {

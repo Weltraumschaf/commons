@@ -626,7 +626,7 @@
                     <execution>
                         <phase>install</phase>
                         <goals>
-                            <goal>format</goal>
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>

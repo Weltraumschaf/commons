@@ -303,6 +303,12 @@
                     <version>2.0</version>
                 </plugin>
 
+                <plugin>
+                    <groupId>com.mycila.maven-license-plugin</groupId>
+                    <artifactId>maven-license-plugin</artifactId>
+                    <version>1.9.0</version>
+                </plugin>
+
             </plugins>
         </pluginManagement>
 
@@ -606,9 +612,15 @@
                     </properties>
                     <encoding>UTF-8</encoding>
                     <useDefaultExcludes>true</useDefaultExcludes>
+                    <strictCheck>true</strictCheck>
                     <mapping>
                         <java>SLASHSTAR_STYLE</java>
                     </mapping>
+                    <excludes>
+                        <exclude>.gitignore</exclude>
+                        <exclude>LICENSE</exclude>
+                        <exclude>README.md</exclude>
+                    </excludes>
                 </configuration>
                 <executions>
                     <execution>

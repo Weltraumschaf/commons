@@ -13,6 +13,7 @@ package de.weltraumschaf.commons;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
@@ -24,9 +25,14 @@ import static org.mockito.Mockito.*;
  */
 public class IOStreamsTest {
 
-    private final IOStreams defaultStreams = IOStreams.newDefault();
+    private final IOStreams defaultStreams;
     private final IOStreams mockedStreams = new IOStreams(
             mock(InputStream.class), mock(PrintStream.class), mock(PrintStream.class));
+
+    public IOStreamsTest() throws UnsupportedEncodingException {
+        super();
+        defaultStreams = IOStreams.newDefault();
+    }
 
     @Test public void testGetStderrOnDefault() {
         assertSame(System.err, defaultStreams.getStderr());

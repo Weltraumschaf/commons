@@ -14,6 +14,9 @@ package de.weltraumschaf.commons;
 import de.weltraumschaf.commons.system.DefaultExiter;
 import de.weltraumschaf.commons.system.ExitCode;
 import de.weltraumschaf.commons.system.Exitable;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Abstract base implementation of an command line invokable.
@@ -95,7 +98,12 @@ public abstract class InvokableAdapter implements Invokable {
      * @param invokanle Implementation to invoke.
      */
     public static void main(final Invokable invokanle) {
-        main(invokanle, IOStreams.newDefault());
+        try {
+            main(invokanle, IOStreams.newDefault());
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(InvokableAdapter.class.getName()).log(Level.SEVERE, null, ex);
+            invokanle.exit(-1);
+        }
     }
 
     /**

@@ -15,6 +15,7 @@ import de.weltraumschaf.commons.system.ExitCode;
 import de.weltraumschaf.commons.system.Exitable;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
@@ -95,7 +96,7 @@ public class InvokableAdapterTest {
         assertNotSame(args, sut.getArgs());
     }
 
-    @Test public void getAndSetIo() {
+    @Test public void getAndSetIo() throws UnsupportedEncodingException {
         assertNull(sut.getIoStreams());
         final IOStreams io = IOStreams.newDefault();
         sut.setIoStreams(io);

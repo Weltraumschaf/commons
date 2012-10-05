@@ -13,6 +13,8 @@ package de.weltraumschaf.commons;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 /**
  * Immutable aggregate object which contains STDIN, STDOUT and STDERR streams.
@@ -53,21 +55,22 @@ import java.io.PrintStream;
 public final class IOStreams {
 
     /**
+     * Default character encoding for out put print streams.
+     */
+    public static final String DEFAULT_ENCODING = "UTF-8";
+
+    /**
      * Standard input stream.
      */
     private final InputStream stdin;
 
     /**
      * Standard output stream.
-     *
-     * FIXME: Consider encoding (UTF-8).
      */
     private final PrintStream stdout;
 
     /**
      * Standard error stream.
-     *
-     * FIXME: Consider encoding (UTF-8).
      */
     private final PrintStream stderr;
 
@@ -112,12 +115,32 @@ public final class IOStreams {
     }
 
     /**
-     * Creates a new streams object initialized with {@link System#in}, {@link System#out}, and {@link System#err}.
+     * Creates same as {@link #newDefault(java.lang.String)} but with {@link #DEFAULT_ENCODING} as encoding.
      *
      * @return Return always new instance.
+     * @throws UnsupportedEncodingException If system does not support {@link #DEFAULT_ENCODING encoding}.
      */
-    public static IOStreams newDefault() {
-        return new IOStreams(System.in, System.out, System.err);
+    public static IOStreams newDefault() throws UnsupportedEncodingException {
+        return newDefault(DEFAULT_ENCODING);
+    }
+
+    /**
+     * Creates a new streams object initialized with {@link System#in}, {@link System#out}, and {@link System#err}.
+     *
+     * The output {@link PrintStream "print streams"} get {@link #DEFAULT_ENCODING} as encoding set.
+     * Also the {@link System#out}, and {@link System#err} are changed with a copy of the original
+     * print stream with the encoding.
+     *
+     * @param encoding Character encoding.
+     * @return Return always new instance.
+     * @throws UnsupportedEncodingException If system does not support passed encoding.
+     */
+    public static IOStreams newDefault(final String encoding) throws UnsupportedEncodingException {
+        final PrintStream out = new PrintStream(System.out, true, encoding);
+        final PrintStream err = new PrintStream(System.err, true, encoding);
+        System.setOut(out);
+        System.setErr(err);
+        return new IOStreams(System.in, out, err);
     }
 
     /**

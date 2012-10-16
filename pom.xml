@@ -620,6 +620,7 @@
                         <exclude>.gitignore</exclude>
                         <exclude>LICENSE</exclude>
                         <exclude>README.md</exclude>
+                        <exclude>.idea/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>

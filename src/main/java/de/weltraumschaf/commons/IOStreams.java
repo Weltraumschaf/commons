@@ -14,7 +14,6 @@ package de.weltraumschaf.commons;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 
 /**
  * Immutable aggregate object which contains STDIN, STDOUT and STDERR streams.
@@ -52,7 +51,7 @@ import java.nio.charset.Charset;
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public final class IOStreams {
+public final class IOStreams implements IO {
 
     /**
      * Default character encoding for out put print streams.
@@ -148,6 +147,7 @@ public final class IOStreams {
      *
      * @param ex Exception to print.
      */
+    @Override
     public void printStackTrace(Exception ex) {
         ex.printStackTrace(getStderr());
     }
@@ -157,6 +157,7 @@ public final class IOStreams {
      *
      * @param str String to print.
      */
+    @Override
     public void errorln(final String str) {
         getStderr().println(str);
     }
@@ -166,6 +167,7 @@ public final class IOStreams {
      *
      * @param str String to print.
      */
+    @Override
     public void error(final String str) {
         getStderr().print(str);
     }
@@ -175,6 +177,7 @@ public final class IOStreams {
      *
      * @param str String to print.
      */
+    @Override
     public void println(final String str) {
         getStdout().println(str);
     }
@@ -184,6 +187,7 @@ public final class IOStreams {
      *
      * @param str String to print.
      */
+    @Override
     public void print(final String str) {
         getStdout().print(str);
     }

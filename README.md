@@ -84,6 +84,10 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 - Refactoring and test improvements.
 - Fix the license and automatically add it to source.
 
+### Version 0.2.5
+
+- <code>IO</code>: Print stack trace of Throwable instead of Exception.
+
 ## File Signatures
 
 To receive the keys type:

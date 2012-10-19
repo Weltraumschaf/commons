@@ -43,7 +43,7 @@ public interface IO {
      *
      * @param ex Exception to print.
      */
-    void printStackTrace(Exception ex);
+    void printStackTrace(Throwable ex);
 
     /**
      * Prints string line.

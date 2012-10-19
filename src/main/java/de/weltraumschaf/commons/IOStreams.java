@@ -148,7 +148,7 @@ public final class IOStreams implements IO {
      * @param ex Exception to print.
      */
     @Override
-    public void printStackTrace(Exception ex) {
+    public void printStackTrace(Throwable ex) {
         ex.printStackTrace(getStderr());
     }
 

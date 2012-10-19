@@ -87,6 +87,8 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 ### Version 0.2.5
 
 - <code>IO</code>: Print stack trace of Throwable instead of Exception.
+- <code>OperatingSystem</code>:
+- <code>BrowserLauncher</code>:
 
 ## File Signatures
 

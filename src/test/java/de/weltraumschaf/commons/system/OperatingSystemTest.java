@@ -28,4 +28,12 @@ public class OperatingSystemTest {
         assertEquals(OperatingSystem.UNKNOWN, OperatingSystem.determine("foobar"));
     }
 
+    @Test
+    public void getName() {
+        assertEquals("win", OperatingSystem.WINDOWS.getName());
+        assertEquals("linux", OperatingSystem.LINUX.getName());
+        assertEquals("mac os x", OperatingSystem.MACOSX.getName());
+        assertEquals("", OperatingSystem.UNKNOWN.getName());
+    }
+
 }

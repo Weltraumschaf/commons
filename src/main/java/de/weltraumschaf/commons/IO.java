@@ -11,6 +11,9 @@
  */
 package de.weltraumschaf.commons;
 
+import java.io.InputStream;
+import java.io.PrintStream;
+
 /**
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
@@ -51,5 +54,26 @@ public interface IO {
      * @param str String to print.
      */
     void println(final String str);
+
+    /**
+     * Get standard errorln output stream.
+     *
+     * @return Print stream object.
+     */
+    PrintStream getStderr();
+
+    /**
+     * Get standard input stream.
+     *
+     * @return Input stream object.
+     */
+    InputStream getStdin();
+
+    /**
+     * Get standard output stream.
+     *
+     * @return Print stream object.
+     */
+    PrintStream getStdout();
 
 }

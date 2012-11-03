@@ -91,6 +91,7 @@ public final class IOStreams implements IO {
      *
      * @return Print stream object.
      */
+    @Override
     public PrintStream getStderr() {
         return stderr;
     }
@@ -100,6 +101,7 @@ public final class IOStreams implements IO {
      *
      * @return Input stream object.
      */
+    @Override
     public InputStream getStdin() {
         return stdin;
     }
@@ -109,6 +111,7 @@ public final class IOStreams implements IO {
      *
      * @return Print stream object.
      */
+    @Override
     public PrintStream getStdout() {
         return stdout;
     }

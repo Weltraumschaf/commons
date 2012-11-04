@@ -73,10 +73,10 @@
     </ciManagement>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.version.compileTarget>1.6</project.version.compileTarget>
-        <project.version.source>1.6</project.version.source>
-        <project.version.maven>3.0.3</project.version.maven>
+        <build.sourceEncoding>UTF-8</build.sourceEncoding>
+        <compileTarget.version>1.6</compileTarget.version>
+        <source.version>1.6</source.version>
+        <maven.version>3.0.3</maven.version>
     </properties>
 
     <dependencies>
@@ -91,7 +91,7 @@
             <!-- http://code.google.com/p/mockito/ -->
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>1.9.5-rc1</version>
+            <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -119,12 +119,7 @@
 
     <build>
         <defaultGoal>install</defaultGoal>
-        <directory>${project.basedir}/target</directory>
-        <outputDirectory>${project.build.directory}/classes</outputDirectory>
-        <finalName>${project.artifactId}-${project.version}</finalName>
-        <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
-        <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-        <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+        <finalName>${project.groupId}-${project.artifactId}-${project.version}</finalName>
 
         <extensions>
             <extension>
@@ -316,9 +311,9 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>${project.version.source}</source>
-                    <target>${project.version.compileTarget}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <source>${source.version}</source>
+                    <target>${compileTarget.version}</target>
+                    <encoding>${build.sourceEncoding}</encoding>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
                 </configuration>
@@ -334,10 +329,10 @@
                                 <DependencyConvergence />
                                 <requirePluginVersions />
                                 <requireJavaVersion>
-                                    <version>${project.version.compileTarget}</version>
+                                    <version>${compileTarget.version}</version>
                                 </requireJavaVersion>
                                 <requireMavenVersion>
-                                    <version>${project.version.maven}</version>
+                                    <version>${maven.version}</version>
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
@@ -382,7 +377,7 @@
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <encoding>${build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
 
@@ -543,9 +538,9 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <configuration>
                     <linkXref>true</linkXref>
-                    <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
+                    <sourceEncoding>${build.sourceEncoding}</sourceEncoding>
                     <minimumTokens>100</minimumTokens>
-                    <targetJdk>${project.version.compileTarget}</targetJdk>
+                    <targetJdk>${compileTarget.version}</targetJdk>
                     <!-- http://pmd.sourceforge.net/rules/index.html -->
                     <rulesets>
                         <ruleset>/rulesets/basic.xml</ruleset>
@@ -580,9 +575,9 @@
                     <doctitle>${project.name} - ${project.version}</doctitle>
                     <windowtitle>${project.name} - ${project.version}</windowtitle>
                     <show>private</show>
-                    <charset>${project.build.sourceEncoding}</charset>
-                    <docencoding>${project.build.sourceEncoding}</docencoding>
-                    <source>${project.version.source}</source>
+                    <charset>${build.sourceEncoding}</charset>
+                    <docencoding>${build.sourceEncoding}</docencoding>
+                    <source>${source.version}</source>
                     <links>
                         <link>http://docs.oracle.com/javase/6/docs/api/</link>
                         <!-- test dependencies -->

@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  * public class MyApp extends InvokableAdapter {
  *
  *      public static void main(final String[] args) {
- *          InvokableAdapter.main(new App(args));
+ *          InvokableAdapter.main(new MyApp(args));
  *      }
  *
  *      &#064;Override
@@ -116,6 +116,21 @@ public abstract class InvokableAdapter implements Invokable {
      * @param ioStreams I/O streams.
      */
     public static void main(final Invokable invokanle, final IOStreams ioStreams) {
+        main(invokanle, ioStreams, false);
+    }
+
+    /**
+     * Inject the I/O streams to the invokable and then calls {@link Invokable#init()} and
+     * then {@link Invokable#execute()}.
+     *
+     * This method handles ell thrown {@link Exception} and calls {@link System#exit(int)},
+     * and prints stack trace if <code>debug</code> is <tt>true</tt>.
+     *
+     * @param invokanle implementation to invoke
+     * @param ioStreams I/O streams
+     * @param debug print stack trace if true
+     */
+    public static void main(final Invokable invokanle, final IOStreams ioStreams, final boolean debug) {
         invokanle.setIoStreams(ioStreams);
 
         try {
@@ -123,6 +138,9 @@ public abstract class InvokableAdapter implements Invokable {
             invokanle.execute();
         } catch (Exception ex) {
             ioStreams.errorln(ex.getMessage());
+            if (debug) {
+                ioStreams.printStackTrace(ex);
+            }
             invokanle.exit(-1);
         }
 

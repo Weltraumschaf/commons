@@ -11,9 +11,8 @@
  */
 package de.weltraumschaf.commons.system;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  *
@@ -21,8 +20,9 @@ import org.junit.Ignore;
  */
 public class BrowserLauncherTest {
 
-    @Test
+    @Test @Ignore("Implement test.")
     public void openBrowser() {
+        // Implement test.
     }
 
 }

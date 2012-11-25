@@ -76,8 +76,10 @@ public class CapturingOutputStreamTest {
         streamOther2.print("snafu");
         streamOther2.close();
 
+        // CHECKSTYLE:OFF
         assertThat(sut.equals("foobar"), is(false)); // NOPMD sut is never null.
         assertThat(sut.equals(null), is(false)); // NOPMD Explicety check that null will return in false.
+        // CHECKSTYLE:ON
         assertThat(sut.equals(other), is(true));
         assertThat(sut.equals(other2), is(false));
         assertThat(other.equals(other2), is(false));

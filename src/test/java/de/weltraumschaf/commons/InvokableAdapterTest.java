@@ -117,7 +117,7 @@ public class InvokableAdapterTest {
     @Test public void registerShutdownHooksOnInit() {
         final Runtime runtime = mock(Runtime.class);
         final ShutDownHook hook = mock(ShutDownHook.class);
-        final InvokableAdapter _sut = new InvokableAdapter(args, runtime, hook) {
+        final InvokableAdapter otherSut = new InvokableAdapter(args, runtime, hook) {
 
             @Override
             public void execute() throws Exception {
@@ -126,7 +126,7 @@ public class InvokableAdapterTest {
 
         };
 
-        _sut.init();
+        otherSut.init();
         verify(runtime, times(1)).addShutdownHook(hook);
     }
 
@@ -135,7 +135,7 @@ public class InvokableAdapterTest {
         final Runtime runtime = mock(Runtime.class);
         final ShutDownHook hook = mock(ShutDownHook.class);
         final Runnable callback = mock(Runnable.class);
-        final InvokableAdapter _sut = new InvokableAdapter(args, runtime, hook) {
+        final InvokableAdapter otherSut = new InvokableAdapter(args, runtime, hook) {
 
             @Override
             public void execute() throws Exception {
@@ -144,7 +144,7 @@ public class InvokableAdapterTest {
 
         };
 
-        _sut.registerShutdownHook(callback);
+        otherSut.registerShutdownHook(callback);
         verify(hook, times(1)).register(callback);
     }
 

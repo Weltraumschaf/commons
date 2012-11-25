@@ -29,15 +29,16 @@ public class ShutDownHookTest {
     private final Logger logger = mock(Logger.class);
     private final ShutDownHook sut = new ShutDownHook(logger);
 
-    @Test public void registerAndRunCalbacksWhichThrowsException() {
+    @Test
+    public void registerAndRunCalbacksWhichThrowsException() {
         final Runnable callback1 = mock(Runnable.class);
         final Runnable callback2 = mock(Runnable.class);
         final RuntimeException ex = new RuntimeException();
         doThrow(ex).when(callback2).run();
         final Runnable callback3 = mock(Runnable.class);
         sut.register(callback1)
-           .register(callback2)
-           .register(callback3);
+                .register(callback2)
+                .register(callback3);
 
         sut.run();
 
@@ -47,18 +48,18 @@ public class ShutDownHookTest {
         verify(callback3, times(1)).run();
     }
 
-    @Test public void registerAndRunCalbacks() {
+    @Test
+    public void registerAndRunCalbacks() {
         final Runnable callback1 = mock(Runnable.class);
         final Runnable callback2 = mock(Runnable.class);
         final Runnable callback3 = mock(Runnable.class);
         sut.register(callback1)
-           .register(callback2)
-           .register(callback3);
+                .register(callback2)
+                .register(callback3);
 
         sut.run();
         verify(callback1, times(1)).run();
         verify(callback2, times(1)).run();
         verify(callback3, times(1)).run();
     }
-
 }

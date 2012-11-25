@@ -268,6 +268,7 @@ public class ShellCommand {
         DOT("dot"),
         /** Tree subcommand for dump command. */
         TREE("tree"),
+        /** Bidirectional tree subcommand for dump command. */
         BITREE("bitree");
 
         /**

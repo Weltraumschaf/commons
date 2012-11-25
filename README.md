@@ -97,7 +97,7 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 
 ### Version 0.2.7
 
-    TBD
+- Introduce shell package: Provides basics for an interactive shell w/ input parsing.
 
 ## File Signatures
 

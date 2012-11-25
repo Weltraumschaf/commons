@@ -95,14 +95,14 @@ public abstract class InvokableAdapter implements Invokable {
      * Invokes {@link #main(de.weltraumschaf.commons.Invokable, de.weltraumschaf.commons.IOStreams)
      * invokable} with default I/O.
      *
-     * @param invokanle Implementation to invoke.
+     * @param invokable Implementation to invoke.
      */
-    public static void main(final Invokable invokanle) {
+    public static void main(final Invokable invokable) {
         try {
-            main(invokanle, IOStreams.newDefault());
+            main(invokable, IOStreams.newDefault());
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(InvokableAdapter.class.getName()).log(Level.SEVERE, null, ex);
-            invokanle.exit(-1);
+            invokable.exit(-1);
         }
     }
 
@@ -112,11 +112,11 @@ public abstract class InvokableAdapter implements Invokable {
      *
      * This method handles ell thrown {@link Exception} and calls {@link System#exit(int)}.
      *
-     * @param invokanle Implementation to invoke.
+     * @param invokable Implementation to invoke.
      * @param ioStreams I/O streams.
      */
-    public static void main(final Invokable invokanle, final IOStreams ioStreams) {
-        main(invokanle, ioStreams, false);
+    public static void main(final Invokable invokable, final IOStreams ioStreams) {
+        main(invokable, ioStreams, false);
     }
 
     /**
@@ -126,25 +126,25 @@ public abstract class InvokableAdapter implements Invokable {
      * This method handles ell thrown {@link Exception} and calls {@link System#exit(int)},
      * and prints stack trace if <code>debug</code> is <tt>true</tt>.
      *
-     * @param invokanle implementation to invoke
+     * @param invokable implementation to invoke
      * @param ioStreams I/O streams
      * @param debug print stack trace if true
      */
-    public static void main(final Invokable invokanle, final IOStreams ioStreams, final boolean debug) {
-        invokanle.setIoStreams(ioStreams);
+    public static void main(final Invokable invokable, final IOStreams ioStreams, final boolean debug) {
+        invokable.setIoStreams(ioStreams);
 
         try {
-            invokanle.init();
-            invokanle.execute();
+            invokable.init();
+            invokable.execute();
         } catch (Exception ex) {
             ioStreams.errorln(ex.getMessage());
             if (debug) {
                 ioStreams.printStackTrace(ex);
             }
-            invokanle.exit(-1);
+            invokable.exit(-1);
         }
 
-        invokanle.exit(0);
+        invokable.exit(0);
     }
 
     /**

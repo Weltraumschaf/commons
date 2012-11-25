@@ -92,7 +92,8 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 
 ### Version 0.2.6
 
-    TBD
+- <code>ShutDownHook</code>: Is now public, because it is exported API by InvokableAdapter.
+- <code>InvokableAdapter</code>: Add debug option to print stack trace on errors during execution.
 
 ### Version 0.2.7
 

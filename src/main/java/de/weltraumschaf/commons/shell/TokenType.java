@@ -14,30 +14,42 @@ package de.weltraumschaf.commons.shell;
 /**
  * Type of tokens scanned from interactive shell.
  *
+ * TODO: Add float: float = [ 0..9 ] '.' { 0..9 } .
+ * TODO: Add boolean: boolean = 'true' | 'false' | 'on' | ' off' .
+ *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public enum TokenType {
 
     /**
      * A command or subcommand literal.
+     *
+     * Any literal starting with a alphabetical character: keyword = literal .
      */
     KEYWORD,
     /**
      * Defines a quote delimited string.
      *
-     * '...' or "..."
+     * Any characters between matching quotes:
+     * <pre>
+     * string = ''' any-character { any-character } '''
+     *        | '"' any-character { any-character } '"' .
+     * </pre>
      */
     STRING,
     /**
      * Defines literal string token type.
      *
-     * [a-zA-Z][a-zA-Z0-9]+
+     * Any literal starting with a alphabetical character:
+     * <pre>
+     * literal = a..Z { a..Z | 0..9] } .
+     * </pre>
      */
     LITERAL,
     /**
      * Defines integer token type.
      *
-     * [0-9]+
+     * Any literal only containing digits: number = 0..9 { 0..9 } .
      */
     NUMBER;
 

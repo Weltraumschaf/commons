@@ -50,15 +50,6 @@ class DefaultParser implements Parser {
     private final CommandVerifier verifier;
 
     /**
-     * USes a {@link NullCommandVerifier} as command verifier.
-     *
-     * @param scanner to scan input line
-     */
-    public DefaultParser(final Scanner scanner) {
-        this(scanner, new NullCommandVerifier());
-    }
-
-    /**
      * Dedicated constructor.
      *
      * @param scanner to scan input line

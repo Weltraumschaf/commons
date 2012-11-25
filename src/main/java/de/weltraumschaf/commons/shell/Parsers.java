@@ -41,7 +41,14 @@ public final class Parsers {
      * @return new instance
      */
     public static Parser newParser(final Scanner s) {
-        return new DefaultParser(s);
+        return newParser(Scanners.newScanner(), new NullCommandVerifier());
     }
 
+    public static Parser newParser(final CommandVerifier v) {
+        return newParser(Scanners.newScanner(), v);
+    }
+
+    public static Parser newParser(final Scanner s, final CommandVerifier v) {
+        return new DefaultParser(s, v);
+    }
 }

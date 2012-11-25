@@ -46,13 +46,13 @@ public class DefaultScannerTest {
         final StringBuilder input = new StringBuilder();
         final List<CommandType> types = Lists.newArrayList();
 
-        for (final ShellCommand.NeuronMainType t : ShellCommand.NeuronMainType.values()) {
+        for (final NeuronMainType t : NeuronMainType.values()) {
             input.append(t).append(' ');
             types.add(t);
         }
 
-        for (final ShellCommand.NeuronSubType t : ShellCommand.NeuronSubType.values()) {
-            if (t == ShellCommand.NeuronSubType.NONE) {
+        for (final NeuronSubType t : NeuronSubType.values()) {
+            if (t == NeuronSubType.NONE) {
                 continue;
             }
             input.append(t).append(' ');

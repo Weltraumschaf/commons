@@ -44,7 +44,7 @@ public class NeuronCommandVerifier implements CommandVerifier {
             case EXIT:
             case HELP:
             case RESET:
-                if (cmd.getSubCommand() != ShellCommand.NeuronSubType.NONE) {
+                if (cmd.getSubCommand() != NeuronSubType.NONE) {
                     throw new SyntaxException(String.format("Command '%s' does not support subcommand '%s'!",
                                                             cmd.getCommand(), cmd.getSubCommand()));
                 }
@@ -82,7 +82,7 @@ public class NeuronCommandVerifier implements CommandVerifier {
     private void verifyNodeCommand(final ShellCommand cmd) throws SyntaxException {
         final int argumentCount = cmd.getArguments().size();
 
-        if (cmd.getSubCommand() == ShellCommand.NeuronSubType.NONE) {
+        if (cmd.getSubCommand() == NeuronSubType.NONE) {
             throw new SyntaxException(String.format("Command '%s' must have sub command!", cmd.getCommand()));
         }
 

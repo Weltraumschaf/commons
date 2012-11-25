@@ -12,8 +12,6 @@
 package de.weltraumschaf.commons.shell;
 
 import com.google.common.collect.Lists;
-import de.weltraumschaf.commons.shell.ShellCommand.NeuronMainType;
-import de.weltraumschaf.commons.shell.ShellCommand.NeuronSubType;
 import java.util.List;
 
 /**

@@ -11,8 +11,6 @@
  */
 package de.weltraumschaf.commons.shell;
 
-import de.weltraumschaf.commons.shell.ShellCommand.NeuronMainType;
-import de.weltraumschaf.commons.shell.ShellCommand.NeuronSubType;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import org.junit.Ignore;

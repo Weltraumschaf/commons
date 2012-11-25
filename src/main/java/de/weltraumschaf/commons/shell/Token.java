@@ -18,6 +18,8 @@ import java.util.Set;
 /**
  * Represent a token scanned from interactive shell input.
  *
+ * TODO Make independent from Neuron Main- and SubType.
+ *
  * @param <T> Type of the token value.
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
@@ -30,12 +32,12 @@ public final class Token<T> {
 
     static {
         // Initialize keywords with command strings.
-        for (final ShellCommand.NeuronMainType t : ShellCommand.NeuronMainType.values()) {
+        for (final NeuronMainType t : NeuronMainType.values()) {
             KEYWORDS.add(t.toString());
         }
         // Initialize keywords with sub command strings.
-        for (final ShellCommand.NeuronSubType t : ShellCommand.NeuronSubType.values()) {
-            if (t == ShellCommand.NeuronSubType.NONE) {
+        for (final NeuronSubType t : NeuronSubType.values()) {
+            if (t == NeuronSubType.NONE) {
                 // Has an empty string literal, so ignore.
                 continue;
             }

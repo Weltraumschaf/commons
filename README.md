@@ -87,8 +87,16 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 ### Version 0.2.5
 
 - <code>IO</code>: Print stack trace of Throwable instead of Exception.
-- <code>OperatingSystem</code>:
-- <code>BrowserLauncher</code>:
+- <code>OperatingSystem</code>: Helper to determine the OS the JVM runs on.
+- <code>BrowserLauncher</code>: HElper to open an URL in systems default browser.
+
+### Version 0.2.6
+
+    TBD
+
+### Version 0.2.7
+
+    TBD
 
 ## File Signatures
 

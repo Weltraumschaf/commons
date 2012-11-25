@@ -12,15 +12,10 @@
 package de.weltraumschaf.commons.shell;
 
 /**
- * Verifies nothing.
+ * Marker interface for shell main command types.
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public class NullCommandVerifier implements CommandVerifier {
-
-    @Override
-    public void verifyCommand(ShellCommand cmd) throws SyntaxException {
-        // Does nothing.
-    }
+public interface MainCommandType extends CommandType {
 
 }

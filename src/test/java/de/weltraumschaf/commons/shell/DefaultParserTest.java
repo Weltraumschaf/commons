@@ -11,8 +11,8 @@
  */
 package de.weltraumschaf.commons.shell;
 
-import de.weltraumschaf.commons.shell.ShellCommand.MainType;
-import de.weltraumschaf.commons.shell.ShellCommand.SubType;
+import de.weltraumschaf.commons.shell.ShellCommand.NeuronMainType;
+import de.weltraumschaf.commons.shell.ShellCommand.NeuronSubType;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
@@ -34,18 +34,18 @@ public class DefaultParserTest {
     @Test
     public void parse_comand() throws SyntaxException {
         ShellCommand c = sut.parse("help");
-        assertThat(c.getCommand(), is(MainType.HELP));
-        assertThat(c.getSubCommand(), is(SubType.NONE));
+        assertThat(c.getCommand(), is(NeuronMainType.HELP));
+        assertThat(c.getSubCommand(), is(NeuronSubType.NONE));
         assertThat(c.getArguments().size(), is(0));
 
         c = sut.parse("reset");
-        assertThat(c.getCommand(), is(MainType.RESET));
-        assertThat(c.getSubCommand(), is(SubType.NONE));
+        assertThat(c.getCommand(), is(NeuronMainType.RESET));
+        assertThat(c.getSubCommand(), is(NeuronSubType.NONE));
         assertThat(c.getArguments().size(), is(0));
 
         c = sut.parse("exit");
-        assertThat(c.getCommand(), is(MainType.EXIT));
-        assertThat(c.getSubCommand(), is(SubType.NONE));
+        assertThat(c.getCommand(), is(NeuronMainType.EXIT));
+        assertThat(c.getSubCommand(), is(NeuronSubType.NONE));
         assertThat(c.getArguments().size(), is(0));
     }
 
@@ -74,24 +74,24 @@ public class DefaultParserTest {
     @Test
     public void parse_comandWithSubcommandAndOneArgument() throws SyntaxException {
         ShellCommand c = sut.parse("node add 1234");
-        assertThat(c.getCommand(), is(MainType.NODE));
-        assertThat(c.getSubCommand(), is(SubType.ADD));
+        assertThat(c.getCommand(), is(NeuronMainType.NODE));
+        assertThat(c.getSubCommand(), is(NeuronSubType.ADD));
         assertThat(c.getArguments().size(), is(1));
         Token<Integer> t = c.getArguments().get(0);
         assertThat(t.getType(), is(TokenType.NUMBER));
         assertThat(t.getValue(), is(1234));
 
         c = sut.parse("node del 5678");
-        assertThat(c.getCommand(), is(MainType.NODE));
-        assertThat(c.getSubCommand(), is(SubType.DEL));
+        assertThat(c.getCommand(), is(NeuronMainType.NODE));
+        assertThat(c.getSubCommand(), is(NeuronSubType.DEL));
         assertThat(c.getArguments().size(), is(1));
         t = c.getArguments().get(0);
         assertThat(t.getType(), is(TokenType.NUMBER));
         assertThat(t.getValue(), is(5678));
 
         c = sut.parse("node info 5678");
-        assertThat(c.getCommand(), is(MainType.NODE));
-        assertThat(c.getSubCommand(), is(SubType.INFO));
+        assertThat(c.getCommand(), is(NeuronMainType.NODE));
+        assertThat(c.getSubCommand(), is(NeuronSubType.INFO));
         assertThat(c.getArguments().size(), is(1));
         t = c.getArguments().get(0);
         assertThat(t.getType(), is(TokenType.NUMBER));

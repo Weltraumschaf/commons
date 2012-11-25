@@ -1,15 +1,14 @@
 /*
- *  LICENSE
+ * LICENSE
  *
  * "THE BEER-WARE LICENSE" (Revision 43):
- * "Sven Strittmatter" <weltraumschaf@googlemail.com> wrote this file.
+ * "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com> wrote this file.
  * As long as you retain this notice you can do whatever you want with
  * this stuff. If we meet some day, and you think this stuff is worth it,
  * you can buy me a non alcohol-free beer in return.
  *
- * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
+ * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-
 package de.weltraumschaf.commons.shell;
 
 import java.util.List;
@@ -45,7 +44,7 @@ public class NeuronCommandVerifier implements CommandVerifier {
             case EXIT:
             case HELP:
             case RESET:
-                if (cmd.getSubCommand() != ShellCommand.SubType.NONE) {
+                if (cmd.getSubCommand() != ShellCommand.NeuronSubType.NONE) {
                     throw new SyntaxException(String.format("Command '%s' does not support subcommand '%s'!",
                                                             cmd.getCommand(), cmd.getSubCommand()));
                 }
@@ -72,7 +71,7 @@ public class NeuronCommandVerifier implements CommandVerifier {
     }
 
     /**
-     * Verify commands of main command type {@link MainType#NODE}.
+     * Verify commands of main command type {@link NeuronMainType#NODE}.
      *
      * Consistency checks are:
      * - correct number of arguments for sub command type
@@ -83,7 +82,7 @@ public class NeuronCommandVerifier implements CommandVerifier {
     private void verifyNodeCommand(final ShellCommand cmd) throws SyntaxException {
         final int argumentCount = cmd.getArguments().size();
 
-        if (cmd.getSubCommand() == ShellCommand.SubType.NONE) {
+        if (cmd.getSubCommand() == ShellCommand.NeuronSubType.NONE) {
             throw new SyntaxException(String.format("Command '%s' must have sub command!", cmd.getCommand()));
         }
 
@@ -130,7 +129,7 @@ public class NeuronCommandVerifier implements CommandVerifier {
     }
 
     /**
-     * Verify commands of main command type {@link MainType#MESSAGE}.
+     * Verify commands of main command type {@link NeuronMainType#MESSAGE}.
      *
      * Consistency checks are:
      * - correct number and type of arguments
@@ -162,7 +161,7 @@ public class NeuronCommandVerifier implements CommandVerifier {
     }
 
     /**
-     * Verify commands of main command type {@link MainType#SAMPLE}.
+     * Verify commands of main command type {@link NeuronMainType#SAMPLE}.
      *
      * Consistency checks are:
      * - correct sub commands
@@ -176,7 +175,7 @@ public class NeuronCommandVerifier implements CommandVerifier {
     }
 
     /**
-     * Verify commands of main command type {@link de.weltraumschaf.commons.shell.ShellCommand.MainType#DUMP}.
+     * Verify commands of main command type {@link de.weltraumschaf.commons.shell.ShellCommand.NeuronMainType#DUMP}.
      *
      * Consistency checks are:
      * - correct sub commands

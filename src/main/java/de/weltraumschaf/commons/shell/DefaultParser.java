@@ -12,8 +12,8 @@
 package de.weltraumschaf.commons.shell;
 
 import com.google.common.collect.Lists;
-import de.weltraumschaf.commons.shell.ShellCommand.MainType;
-import de.weltraumschaf.commons.shell.ShellCommand.SubType;
+import de.weltraumschaf.commons.shell.ShellCommand.NeuronMainType;
+import de.weltraumschaf.commons.shell.ShellCommand.NeuronSubType;
 import java.util.List;
 
 /**
@@ -88,8 +88,8 @@ class DefaultParser implements Parser {
             throw new SyntaxException("Command expected as first input!");
         }
 
-        final MainType command = ShellCommand.determineCommand(commandtoken);
-        SubType subCommand = SubType.NONE;
+        final NeuronMainType command = ShellCommand.determineCommand(commandtoken);
+        NeuronSubType subCommand = NeuronSubType.NONE;
         int argumentBegin = 1;
 
         if (tokens.size() > 1) {

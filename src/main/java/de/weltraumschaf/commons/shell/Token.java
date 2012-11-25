@@ -30,12 +30,12 @@ public final class Token<T> {
 
     static {
         // Initialize keywords with command strings.
-        for (final ShellCommand.MainType t : ShellCommand.MainType.values()) {
+        for (final ShellCommand.NeuronMainType t : ShellCommand.NeuronMainType.values()) {
             KEYWORDS.add(t.toString());
         }
         // Initialize keywords with sub command strings.
-        for (final ShellCommand.SubType t : ShellCommand.SubType.values()) {
-            if (t == ShellCommand.SubType.NONE) {
+        for (final ShellCommand.NeuronSubType t : ShellCommand.NeuronSubType.values()) {
+            if (t == ShellCommand.NeuronSubType.NONE) {
                 // Has an empty string literal, so ignore.
                 continue;
             }

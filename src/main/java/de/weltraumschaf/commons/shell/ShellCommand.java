@@ -30,19 +30,19 @@ public class ShellCommand {
     /**
      * Map the literal command string to corresponding type enum.
      */
-    private static final Map<String, MainType> COMMANDS = Maps.newHashMap();
+    private static final Map<String, NeuronMainType> COMMANDS = Maps.newHashMap();
 
     /**
      * Map the literal sub command string to corresponding type enum.
      */
-    private static final Map<String, SubType> SUB_COMMANDS = Maps.newHashMap();
+    private static final Map<String, NeuronSubType> SUB_COMMANDS = Maps.newHashMap();
 
     static {
-        for (final MainType t : MainType.values()) {
+        for (final NeuronMainType t : NeuronMainType.values()) {
             COMMANDS.put(t.toString(), t);
         }
-        for (final SubType t : SubType.values()) {
-            if (t == SubType.NONE) {
+        for (final NeuronSubType t : NeuronSubType.values()) {
+            if (t == NeuronSubType.NONE) {
                 continue; // Ignore to do not recognize empty strings in #isSubCommand().
             }
             SUB_COMMANDS.put(t.toString(), t);
@@ -52,14 +52,14 @@ public class ShellCommand {
     /**
      * Obligatory main command.
      */
-    private final MainType command;
+    private final NeuronMainType command;
 
     /**
      * Optional sub command.
      *
-     * If the main type does not support sub commands this will be {@link SubType#NONE}.
+     * If the main type does not support sub commands this will be {@link NeuronSubType#NONE}.
      */
-    private final SubType subCommand;
+    private final NeuronSubType subCommand;
 
     /**
      * Optional arguments.
@@ -74,8 +74,8 @@ public class ShellCommand {
      * @param command main command
      * @param arguments command arguments, may be an empty list
      */
-    public ShellCommand(final MainType command, final List<Token> arguments) {
-        this(command, SubType.NONE, arguments);
+    public ShellCommand(final NeuronMainType command, final List<Token> arguments) {
+        this(command, NeuronSubType.NONE, arguments);
     }
 
     /**
@@ -85,7 +85,7 @@ public class ShellCommand {
      * @param subCommand sub command
      * @param arguments command arguments, may be an empty list
      */
-    public ShellCommand(final MainType command, final SubType subCommand, final List<Token> arguments) {
+    public ShellCommand(final NeuronMainType command, final NeuronSubType subCommand, final List<Token> arguments) {
         super();
         this.command    = command;
         this.subCommand = subCommand;
@@ -97,18 +97,18 @@ public class ShellCommand {
      *
      * @return main type of command
      */
-    public MainType getCommand() {
+    public NeuronMainType getCommand() {
         return command;
     }
 
     /**
      * Get optional command sub type.
      *
-     * If the main type does not support any sub type {@link SubType#NONE} will be returned.
+     * If the main type does not support any sub type {@link NeuronSubType#NONE} will be returned.
      *
      * @return sub type of command
      */
-    public SubType getSubCommand() {
+    public NeuronSubType getSubCommand() {
         return subCommand;
     }
 
@@ -147,7 +147,7 @@ public class ShellCommand {
      * @throws IllegalArgumentException if, token is not a main command
      * // CHECKSTYLE:ON
      */
-    static MainType determineCommand(final Token<String> t) {
+    static NeuronMainType determineCommand(final Token<String> t) {
         if (! isCommand(t)) {
             throw new IllegalArgumentException(String.format("'%s' is not a command!", t.getValue()));
         }
@@ -178,7 +178,7 @@ public class ShellCommand {
      * @throws IllegalArgumentException if, token is not a sub command
      * // CHECKSTYLE:ON
      */
-    static SubType determineSubCommand(final Token<String> t) {
+    static NeuronSubType determineSubCommand(final Token<String> t) {
         if (! isSubCommand(t)) {
             throw new IllegalArgumentException(String.format("'%s' is not a sub command!", t.getValue()));
         }
@@ -195,16 +195,11 @@ public class ShellCommand {
     }
 
     /**
-     * Marker interface for shell command types.
-     */
-    public interface Type {
-
-    }
-
-    /**
      * Enumerates the available commands.
+     *
+     * TODO Move back into Neuron project.
      */
-    public enum MainType implements Type {
+    public enum NeuronMainType implements MainCommandType {
 
         /** Help command. */
         HELP("help"),
@@ -231,7 +226,7 @@ public class ShellCommand {
          *
          * @param name literal shell command string
          */
-        private MainType(final String name) {
+        private NeuronMainType(final String name) {
             this.name = name;
         }
 
@@ -244,8 +239,10 @@ public class ShellCommand {
 
     /**
      * Enumerates the optional subcommands.
+     *
+     * TODO Move back into Neuron project.
      */
-    public enum SubType implements Type {
+    public enum NeuronSubType implements MainCommandType {
         /** No sub command. */
         NONE(""),
         /** Add sub command for node command. */
@@ -281,7 +278,7 @@ public class ShellCommand {
          *
          * @param name literal shell command string
          */
-        private SubType(final String name) {
+        private NeuronSubType(final String name) {
             this.name = name;
         }
 

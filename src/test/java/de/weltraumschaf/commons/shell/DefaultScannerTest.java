@@ -44,15 +44,15 @@ public class DefaultScannerTest {
     @Test
     public void scan_keywords() throws SyntaxException {
         final StringBuilder input = new StringBuilder();
-        final List<ShellCommand.Type> types = Lists.newArrayList();
+        final List<CommandType> types = Lists.newArrayList();
 
-        for (final ShellCommand.MainType t : ShellCommand.MainType.values()) {
+        for (final ShellCommand.NeuronMainType t : ShellCommand.NeuronMainType.values()) {
             input.append(t).append(' ');
             types.add(t);
         }
 
-        for (final ShellCommand.SubType t : ShellCommand.SubType.values()) {
-            if (t == ShellCommand.SubType.NONE) {
+        for (final ShellCommand.NeuronSubType t : ShellCommand.NeuronSubType.values()) {
+            if (t == ShellCommand.NeuronSubType.NONE) {
                 continue;
             }
             input.append(t).append(' ');

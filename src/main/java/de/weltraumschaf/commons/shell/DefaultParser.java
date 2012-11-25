@@ -254,7 +254,7 @@ class DefaultParser implements Parser {
     }
 
     /**
-     * Verify commands of main command type {@link ShellCommand.MainType#Dump}.
+     * Verify commands of main command type {@link de.weltraumschaf.commons.shell.ShellCommand.MainType#DUMP}.
      *
      * Consistency checks are:
      * - correct sub commands

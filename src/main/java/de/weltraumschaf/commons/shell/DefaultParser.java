@@ -49,6 +49,8 @@ class DefaultParser implements Parser {
      */
     private final CommandVerifier verifier;
 
+    private final LiteralCommandMap commandMap = null;
+
     /**
      * Dedicated constructor.
      *
@@ -77,21 +79,22 @@ class DefaultParser implements Parser {
             throw new SyntaxException("Command expected as first input!");
         }
 
-        final NeuronMainType command = ShellCommand.determineCommand(commandtoken);
-        NeuronSubType subCommand = NeuronSubType.NONE;
+        final MainCommandType command = commandMap.determineCommand(commandtoken);
+        // TODO If I use nul here, the command object should reflect this to prevent NPE.
+        SubCommandType subCommand = null;
         int argumentBegin = 1;
 
         if (tokens.size() > 1) {
             final Token secondToken = tokens.get(1);
 
             if (secondToken.getType() == TokenType.KEYWORD) {
-                if (! ShellCommand.isSubCommand(secondToken)) {
+                if (! commandMap.isSubCommand(secondToken)) {
                     throw new SyntaxException(
                             String.format("Command '%s' followed by bad keyword '%s' as sub command!",
                                           commandtoken.getValue(), secondToken.getValue()));
                 }
                 ++argumentBegin;
-                subCommand = ShellCommand.determineSubCommand(secondToken);
+                subCommand = commandMap.determineSubCommand(secondToken);
             }
         }
 

@@ -28,21 +28,22 @@ public final class Token<T> {
     /**
      * Holds all keyword strings.
      */
+    @Deprecated
     private static final Set<String> KEYWORDS = Sets.newHashSet();
 
     static {
-        // Initialize keywords with command strings.
-        for (final NeuronMainType t : NeuronMainType.values()) {
-            KEYWORDS.add(t.toString());
-        }
-        // Initialize keywords with sub command strings.
-        for (final NeuronSubType t : NeuronSubType.values()) {
-            if (t == NeuronSubType.NONE) {
-                // Has an empty string literal, so ignore.
-                continue;
-            }
-            KEYWORDS.add(t.toString());
-        }
+//        // Initialize keywords with command strings.
+//        for (final NeuronMainType t : NeuronMainType.values()) {
+//            KEYWORDS.add(t.toString());
+//        }
+//        // Initialize keywords with sub command strings.
+//        for (final NeuronSubType t : NeuronSubType.values()) {
+//            if (t == NeuronSubType.NONE) {
+//                // Has an empty string literal, so ignore.
+//                continue;
+//            }
+//            KEYWORDS.add(t.toString());
+//        }
     }
 
     /**
@@ -137,7 +138,9 @@ public final class Token<T> {
      *
      * @param value string to check
      * @return true if the string is a reserved keyword, else false
+     * @deprecated Remove this.
      */
+    @Deprecated
     public static boolean isKeyword(final String value) {
         return KEYWORDS.contains(value);
     }

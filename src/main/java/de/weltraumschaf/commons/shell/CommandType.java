@@ -11,6 +11,8 @@
  */
 package de.weltraumschaf.commons.shell;
 
+import java.util.List;
+
 /**
  * Marker interface for shell command types.
  *

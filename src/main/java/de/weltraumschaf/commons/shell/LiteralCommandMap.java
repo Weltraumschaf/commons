@@ -32,11 +32,19 @@ public abstract class LiteralCommandMap {
     private final Map<String, SubCommandType> subCommands = Maps.newHashMap();
 
     /**
+     * Default sub command for commands w/o sub commands.
+     */
+    private final SubCommandType defaultSubCommand;
+
+    /**
      * Calls the template methods {@link #initCommandMap(java.util.Map)}
      * and {@link #initSubCommandMap(java.util.Map)}.
+     *
+     * @param defaultSubCommand sub command used for commands w/o sub command, usualy a NONE type
      */
-    public LiteralCommandMap() {
+    public LiteralCommandMap(final SubCommandType defaultSubCommand) {
         super();
+        this.defaultSubCommand = defaultSubCommand;
         initCommandMap(commands);
         initSubCommandMap(subCommands);
     }
@@ -44,13 +52,21 @@ public abstract class LiteralCommandMap {
     /**
      * Determines if the string literal value of the token is a main command.
      *
-     * TODO Maybe remove this.
-     *
-     * @param t token to check
+     * @param token token to check
      * @return true if the token is a command else false
      */
-    public final boolean isCommand(final Token<String> t) {
-        return commands.containsKey(t.getValue());
+    public final boolean isCommand(final Token<String> token) {
+        return isCommand(token.getValue());
+    }
+
+    /**
+     * Determines if the string literal value is a main command.
+     *
+     * @param token token string to check
+     * @return true if the token is a command else false
+     */
+    public final boolean isCommand(final String token) {
+        return commands.containsKey(token);
     }
 
     /**
@@ -75,13 +91,21 @@ public abstract class LiteralCommandMap {
     /**
      * Determines if the string literal value of the token is a sub command.
      *
-     * TODO Maybe remove this.
-     *
-     * @param t token to check
+     * @param token token to check
      * @return true if the token is a sub command else false
      */
-    public final boolean isSubCommand(final Token<String> t) {
-        return subCommands.containsKey(t.getValue());
+    public final boolean isSubCommand(final Token<String> token) {
+        return isSubCommand(token.getValue());
+    }
+
+    /**
+     * Determines if the string literal value is a sub command.
+     *
+     * @param token token string to check
+     * @return true if the token is a sub command else false
+     */
+    public final boolean isSubCommand(final String token) {
+        return subCommands.containsKey(token);
     }
 
     /**
@@ -102,6 +126,18 @@ public abstract class LiteralCommandMap {
         }
 
         return subCommands.get(t.getValue());
+    }
+
+    /**
+     * Get the default sub command for commands w/o sub commands.
+     *
+     * Usually your sub command enum should specify a special type for a non
+     * sub command.
+     *
+     * @return the enum type of the "none" sub command
+     */
+    public SubCommandType getDefaultSubCommand() {
+        return defaultSubCommand;
     }
 
     /**

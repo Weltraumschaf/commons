@@ -13,6 +13,7 @@ package de.weltraumschaf.commons.shell;
 
 import com.google.common.collect.Lists;
 import java.util.List;
+import java.util.Map;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
@@ -29,7 +30,7 @@ public class DefaultScannerTest {
     // CHECKSTYLE:OFF
     @Rule public ExpectedException thrown = ExpectedException.none();
     // CHECKSTYLE:ON
-    private final DefaultScanner sut = new DefaultScanner();
+    private final Scanner sut = Scanners.newScanner(new LiteralCommandMapStub());
 
     @Test(expected = IllegalArgumentException.class)
     public void scan_nullArgument() throws SyntaxException {
@@ -42,23 +43,23 @@ public class DefaultScannerTest {
         assertThat(tokens.size(), is(0));
     }
 
-    @Test @Ignore("TODO USe stub implementaion as inner classes")
+    @Test
     public void scan_keywords() throws SyntaxException {
         final StringBuilder input = new StringBuilder();
         final List<CommandType> types = Lists.newArrayList();
 
-//        for (final NeuronMainType t : NeuronMainType.values()) {
-//            input.append(t).append(' ');
-//            types.add(t);
-//        }
+        for (final MainCommandType t : TestMainType.values()) {
+            input.append(t).append(' ');
+            types.add(t);
+        }
 
-//        for (final NeuronSubType t : NeuronSubType.values()) {
-//            if (t == NeuronSubType.NONE) {
-//                continue;
-//            }
-//            input.append(t).append(' ');
-//            types.add(t);
-//        }
+        for (final SubCommandType t : TestSubType.values()) {
+            if (t == TestSubType.NONE) {
+                continue;
+            }
+            input.append(t).append(' ');
+            types.add(t);
+        }
 
         final List<Token> tokens = sut.scan(input.toString());
         int tokenId = 0;
@@ -127,21 +128,21 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_lineWithMultipleLiterals() throws SyntaxException {
-        final List<Token> tokens = sut.scan("foo bar baz1");
+        final List<Token> tokens = sut.scan("loo lar laz1");
 
         assertThat(tokens.size(), is(3));
 
         Token<String> token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("foo"));
+        assertThat(token.getValue(), is("loo"));
 
         token = tokens.get(1);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("bar"));
+        assertThat(token.getValue(), is("lar"));
 
         token = tokens.get(2);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("baz1"));
+        assertThat(token.getValue(), is("laz1"));
     }
 
     @Test
@@ -173,15 +174,15 @@ public class DefaultScannerTest {
     }
 
     @Test
-    public void scan_lineWithLiteralAndNumbers() throws SyntaxException {
+    public void scan_lineWithLiteralKeywordAndNumbers() throws SyntaxException {
         Token<Integer> intToken;
         Token<String> strToken;
-        List<Token> tokens = sut.scan("foo 1234 5678 bar");
+        List<Token> tokens = sut.scan("loo 1234 5678 bar");
 
         assertThat(tokens.size(), is(4));
         strToken = tokens.get(0);
         assertThat(strToken.getType(), is(TokenType.LITERAL));
-        assertThat(strToken.getValue(), is("foo"));
+        assertThat(strToken.getValue(), is("loo"));
         intToken = tokens.get(1);
         assertThat(intToken.getType(), is(TokenType.NUMBER));
         assertThat(intToken.getValue(), is(1234));
@@ -189,19 +190,19 @@ public class DefaultScannerTest {
         assertThat(intToken.getType(), is(TokenType.NUMBER));
         assertThat(intToken.getValue(), is(5678));
         strToken = tokens.get(3);
-        assertThat(strToken.getType(), is(TokenType.LITERAL));
+        assertThat(strToken.getType(), is(TokenType.KEYWORD));
         assertThat(strToken.getValue(), is("bar"));
 
-        tokens = sut.scan("1234 foo bar 5678");
+        tokens = sut.scan("1234 loo bar 5678");
         assertThat(tokens.size(), is(4));
         intToken = tokens.get(0);
         assertThat(intToken.getType(), is(TokenType.NUMBER));
         assertThat(intToken.getValue(), is(1234));
         strToken = tokens.get(1);
         assertThat(strToken.getType(), is(TokenType.LITERAL));
-        assertThat(strToken.getValue(), is("foo"));
+        assertThat(strToken.getValue(), is("loo"));
         strToken = tokens.get(2);
-        assertThat(strToken.getType(), is(TokenType.LITERAL));
+        assertThat(strToken.getType(), is(TokenType.KEYWORD));
         assertThat(strToken.getValue(), is("bar"));
         intToken = tokens.get(3);
         assertThat(intToken.getType(), is(TokenType.NUMBER));
@@ -214,6 +215,48 @@ public class DefaultScannerTest {
         thrown.expect(SyntaxException.class);
         thrown.expectMessage("Bad character 'f' in number starting with '1234'!");
         sut.scan("1234foo");
+    }
+
+    private enum TestMainType implements MainCommandType {
+        FOO("foo"), BAR("bar"), BAZ("baz");
+
+        private final String literal;
+
+        private TestMainType(final String literal) {
+            this.literal = literal;
+        }
+
+        @Override
+        public String toString() {
+            return literal;
+        }
+
+    }
+
+    private enum TestSubType implements SubCommandType {
+        NONE();
+    }
+
+    private static class LiteralCommandMapStub extends LiteralCommandMap {
+
+        public LiteralCommandMapStub() {
+            super(TestSubType.NONE);
+        }
+
+        @Override
+        protected void initCommandMap(final Map<String, MainCommandType> map) {
+            for (final MainCommandType t : TestMainType.values()) {
+                map.put(t.toString(), t);
+            }
+        }
+
+        @Override
+        protected void initSubCommandMap(final Map<String, SubCommandType> map) {
+            for (final SubCommandType t : TestSubType.values()) {
+                map.put(t.toString(), t);
+            }
+        }
+
     }
 
 }

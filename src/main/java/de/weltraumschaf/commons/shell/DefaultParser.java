@@ -49,18 +49,23 @@ class DefaultParser implements Parser {
      */
     private final CommandVerifier verifier;
 
-    private final LiteralCommandMap commandMap = null;
+    /**
+     * Map used to determine command keywords.
+     */
+    private final LiteralCommandMap commandMap;
 
     /**
      * Dedicated constructor.
      *
      * @param scanner to scan input line
      * @param verifier verifies parsed commands
+     * @param commandMap maps string literals to command keywords
      */
-    public DefaultParser(final Scanner scanner, final CommandVerifier verifier) {
+    public DefaultParser(final Scanner scanner, final CommandVerifier verifier, final LiteralCommandMap commandMap) {
         super();
         this.scanner = scanner;
         this.verifier = verifier;
+        this.commandMap = commandMap;
     }
 
     /**
@@ -80,8 +85,7 @@ class DefaultParser implements Parser {
         }
 
         final MainCommandType command = commandMap.determineCommand(commandtoken);
-        // TODO If I use nul here, the command object should reflect this to prevent NPE.
-        SubCommandType subCommand = null;
+        SubCommandType subCommand = commandMap.getDefaultSubCommand();
         int argumentBegin = 1;
 
         if (tokens.size() > 1) {

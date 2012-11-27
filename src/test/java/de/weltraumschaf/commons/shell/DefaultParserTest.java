@@ -11,8 +11,7 @@
  */
 package de.weltraumschaf.commons.shell;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import java.util.Map;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,7 +26,7 @@ public class DefaultParserTest {
     // CHECKSTYLE:OFF
     @Rule public ExpectedException thrown = ExpectedException.none();
     // CHECKSTYLE:ON
-    private final DefaultParser sut = new DefaultParser(new DefaultScanner(), new NullCommandVerifier());
+    private final Parser sut = Parsers.newParser(new LiteralCommandMapStub());
 
     @Test @Ignore("TODO USe stub implementaion as inner classes")
     public void parse_comand() throws SyntaxException {
@@ -96,6 +95,24 @@ public class DefaultParserTest {
 //        t = c.getArguments().get(0);
 //        assertThat(t.getType(), is(TokenType.NUMBER));
 //        assertThat(t.getValue(), is(5678));
+    }
+
+    private static class LiteralCommandMapStub extends LiteralCommandMap {
+
+        public LiteralCommandMapStub() {
+            super(null);
+        }
+
+        @Override
+        protected void initCommandMap(Map<String, MainCommandType> map) {
+
+        }
+
+        @Override
+        protected void initSubCommandMap(Map<String, SubCommandType> map) {
+
+        }
+
     }
 
 }

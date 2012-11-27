@@ -26,29 +26,46 @@ public final class Parsers {
     }
 
     /**
-     * Creates a new parser with default scanner implementation.
+     * Creates a new parser with default scanner implementation and {@link NullCommandVerifier}.
      *
+     * @param m map key word literals to command types
      * @return new instance
      */
-    public static Parser newParser() {
-        return newParser(Scanners.newScanner());
+    public static Parser newParser(final LiteralCommandMap m) {
+        return newParser(Scanners.newScanner(m), m);
     }
 
     /**
-     * Create new parser with custom scanner.
+     * Create new parser with custom scanner and {@link NullCommandVerifier}.
      *
      * @param s used to tokenize input
+     * @param m map key word literals to command types
      * @return new instance
      */
-    public static Parser newParser(final Scanner s) {
-        return newParser(Scanners.newScanner(), new NullCommandVerifier());
+    public static Parser newParser(final Scanner s, final LiteralCommandMap m) {
+        return newParser(Scanners.newScanner(m), new NullCommandVerifier(), m);
     }
 
-    public static Parser newParser(final CommandVerifier v) {
-        return newParser(Scanners.newScanner(), v);
+    /**
+     * Creates parser with {@link DefaultScanner}.
+     *
+     * @param v verifies parsed commands
+     * @param m map key word literals to command types
+     * @return new instance
+     */
+    public static Parser newParser(final CommandVerifier v, final LiteralCommandMap m) {
+        return newParser(Scanners.newScanner(m), v, m);
     }
 
-    public static Parser newParser(final Scanner s, final CommandVerifier v) {
-        return new DefaultParser(s, v);
+    /**
+     * Creates parser.
+     *
+     * @param s used to tokenize input
+     * @param v verifies parsed commands
+     * @param m map key word literals to command types
+     * @return new instance
+     */
+    public static Parser newParser(final Scanner s, final CommandVerifier v, final LiteralCommandMap m) {
+        return new DefaultParser(s, v, m);
     }
 }

@@ -28,10 +28,11 @@ public final class Scanners {
     /**
      * Creates a new scanner.
      *
+     * @param commandMap map key word literals to command types
      * @return new instance
      */
-    public static Scanner newScanner() {
-        return new DefaultScanner();
+    public static Scanner newScanner(final LiteralCommandMap commandMap) {
+        return new DefaultScanner(commandMap);
     }
 
 }

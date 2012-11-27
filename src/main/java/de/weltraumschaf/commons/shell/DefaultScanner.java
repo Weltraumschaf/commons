@@ -27,6 +27,21 @@ import java.util.List;
 class DefaultScanner implements Scanner {
 
     /**
+     * Maps command literal strings to command types.
+     */
+    private final LiteralCommandMap commandMap;
+
+    /**
+     * Dedicated constructor.
+     *
+     * @param commandMap map key word literals to command types
+     */
+    public DefaultScanner(final LiteralCommandMap commandMap) {
+        super();
+        this.commandMap = commandMap;
+    }
+
+    /**
      * Scans give line and returns list of recognized tokens.
      *
      * @param line line to scan.
@@ -94,7 +109,7 @@ class DefaultScanner implements Scanner {
 
         final String tokenString = value.toString();
 
-        if (Token.isKeyword(tokenString)) {
+        if (isKeyword(tokenString)) {
             return Token.newKeywordToken(tokenString);
         } else {
             return Token.newLiteralToken(tokenString);
@@ -167,6 +182,19 @@ class DefaultScanner implements Scanner {
         }
 
         return Token.newStringToken(value.toString());
+    }
+
+    /**
+     * Determines if a token string is a keyword.
+     *
+     * Checks the string against {@link LiteralCommandMap#isCommand(java.lang.String)} and
+     * {@link LiteralCommandMap#isSubCommand(java.lang.String)}.
+     *
+     * @param token string to check
+     * @return true if given string is a keyword else false
+     */
+    private boolean isKeyword(String token) {
+        return commandMap.isCommand(token) || commandMap.isSubCommand(token);
     }
 
 }

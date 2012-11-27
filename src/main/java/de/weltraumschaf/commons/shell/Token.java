@@ -12,39 +12,14 @@
 package de.weltraumschaf.commons.shell;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Sets;
-import java.util.Set;
 
 /**
  * Represent a token scanned from interactive shell input.
- *
- * TODO Make independent from Neuron Main- and SubType.
  *
  * @param <T> Type of the token value.
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class Token<T> {
-
-    /**
-     * Holds all keyword strings.
-     */
-    @Deprecated
-    private static final Set<String> KEYWORDS = Sets.newHashSet();
-
-    static {
-//        // Initialize keywords with command strings.
-//        for (final NeuronMainType t : NeuronMainType.values()) {
-//            KEYWORDS.add(t.toString());
-//        }
-//        // Initialize keywords with sub command strings.
-//        for (final NeuronSubType t : NeuronSubType.values()) {
-//            if (t == NeuronSubType.NONE) {
-//                // Has an empty string literal, so ignore.
-//                continue;
-//            }
-//            KEYWORDS.add(t.toString());
-//        }
-    }
 
     /**
      * Type of token.
@@ -131,18 +106,6 @@ public final class Token<T> {
                       .add("type", type)
                       .add("value", value)
                       .toString();
-    }
-
-    /**
-     * Determines if a string is a reserved keyword.
-     *
-     * @param value string to check
-     * @return true if the string is a reserved keyword, else false
-     * @deprecated Remove this.
-     */
-    @Deprecated
-    public static boolean isKeyword(final String value) {
-        return KEYWORDS.contains(value);
     }
 
 }

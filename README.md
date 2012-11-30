@@ -26,7 +26,7 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
             <!-- http://weltraumschaf.github.com/commons/ -->
             <groupId>de.weltraumschaf</groupId>
             <artifactId>commons</artifactId>
-            <version>0.1.4</version>
+            <version>0.3.0</version>
         </dependency>
 
         <!-- ... -->
@@ -95,9 +95,9 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 - <code>ShutDownHook</code>: Is now public, because it is exported API by InvokableAdapter.
 - <code>InvokableAdapter</code>: Add debug option to print stack trace on errors during execution.
 
-### Version 0.2.7
+### Version 0.3.0
 
-- Introduce shell package: Provides basics for an interactive shell w/ input parsing.
+- Introduce shell package: Provides basics for an interactive shell w/ input command parsing.
 
 ## File Signatures
 

@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -70,19 +69,25 @@ public class DefaultScannerTest {
         }
     }
 
-    @Test @Ignore("TODO USe stub implementaion as inner classes")
+    @Test
     public void scan_lineWithSingleKeyword() throws SyntaxException {
-        List<Token> tokens = sut.scan("help");
+        List<Token> tokens = sut.scan(TestMainType.FOO.toString());
         assertThat(tokens.size(), is(1));
         Token<String> token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.KEYWORD));
-        assertThat(token.getValue(), is("help"));
+        assertThat(token.getValue(), is(TestMainType.FOO.toString()));
 
-        tokens = sut.scan("exit");
+        tokens = sut.scan(TestMainType.BAR.toString());
         assertThat(tokens.size(), is(1));
         token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.KEYWORD));
-        assertThat(token.getValue(), is("exit"));
+        assertThat(token.getValue(), is(TestMainType.BAR.toString()));
+
+        tokens = sut.scan(TestMainType.BAZ.toString());
+        assertThat(tokens.size(), is(1));
+        token = tokens.get(0);
+        assertThat(token.getType(), is(TokenType.KEYWORD));
+        assertThat(token.getValue(), is(TestMainType.BAZ.toString()));
     }
 
     @Test

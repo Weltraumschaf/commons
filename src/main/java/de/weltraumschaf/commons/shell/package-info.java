@@ -12,12 +12,115 @@
 /**
  * Sub package for a simple interactive shell.
  *
- * Contains:
- * - input scanner/parser
- * - helper classes for scanning
- * - shell command and token abstraction
- *
  * <p>This package is a part of the open-source
  * <a href="https://github.com/Weltraumschaf/commons">Commons</a></p>
+ *
+ * Contains:
+ * <ul>
+ *  <li>input scanner/parser</li>
+ *  <li>helper classes for scanning</li>
+ *  <li>shell command and token abstraction</li>
+ * </ul>
+ *
+ * <h3>Example</h3>
+ *
+ * <p>First define main and sub command types.</p>
+ *
+ * <pre>
+ * public enum MyMainType implements MainCommandType {
+ *
+ *     HELP("help"),
+ *     FOO("foo"),
+ *     EXIT("exit");
+ *
+ *     // Literal command string used in shell.
+ *     private final String literal;
+ *
+ *     private NeuronMainType(final String name) {
+ *         this.literal = name;
+ *     }
+ *
+ *     {@literal @}Override
+ *     public String toString() {
+ *         return literal;
+ *     }
+ * }
+ *
+ * public enum MySubType implements SubCommandType {
+ *
+ *     NONE(""), // Default for main commands w/o sub commands.
+ *     BAR("bar"),
+ *     BAZ("baz");
+ *
+ *     // Literal sub command string used in shell.
+ *     private final String literal;
+ *
+ *     private NeuronSubType(final String name) {
+ *         this.literal = name;
+ *     }
+ *
+ *     {@literal @}Override
+ *     public String toString() {
+ *         return literal;
+ *     }
+ * }
+ * </pre>
+ *
+ * <p>And then define a literal to command map:</p>
+ *
+ * <pre>
+ * public class MyLiteralCommandMap extends LiteralCommandMap {
+ *
+ *     public MyLiteralCommandMap() {
+ *         super(MySubType.NONE); // Default for main commands w/o sub commands.
+ *     }
+ *
+ *     {@literal @}Override
+ *     protected void initCommandMap(Map<String, MainCommandType> map) {
+ *         for (final MyMainType t : MyMainType.values()) {
+ *             map.put(t.toString(), t);
+ *         }
+ *     }
+ *
+ *     {@literal @}Override
+ *     protected void initSubCommandMap(Map<String, SubCommandType> map) {
+ *         for (final MySubType t : MySubType.values()) {
+ *             if (t.toString().isEmpty()) {
+ *                 continue; // Ignore to do not recognize empty strings as sub command in parser.
+ *             }
+ *             map.put(t.toString(), t);
+ *         }
+ *     }
+ * }
+ * </pre>
+ *
+ * <p>Now you can implement a simple REPL:</p>
+ *
+ * <pre>
+ * Parser parser = Parsers.newParser(new MyLiteralCommandMap());
+ * BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+ *
+ * while (true) {
+ *     System.out.println("prompt> ");
+ *     final String inputLine = input.readLine();
+ *
+ *     try {
+ *         final ShellCommand cmd = parser.parse(inputLine);
+ *         // Do something with the shell command...
+ *
+ *         if (shellCmd.getCommand() == NeuronMainType.EXIT) {
+ *             break;
+ *         }
+ *     } catch (SyntaxException ex) {
+ *         System.out.println("Error: " + ex.getMessage());
+ *     }
+ * }
+ *
+ * input.close();
+ * </pre>
+ *
+ * <p>If you want to verify the parsed commands, e.g. check if a command has a proper subcommand or arguments
+ * you must implement {@link de.weltraumschaf.commons.shell.CommandVerifier} and pass it to the
+ * {@link de.weltraumschaf.commons.shell.Parsers parser factory}.</p>
  */
 package de.weltraumschaf.commons.shell;

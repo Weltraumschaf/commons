@@ -33,7 +33,8 @@ public class ShellCommand {
     /**
      * Optional sub command.
      *
-     * If the main type does not support sub commands this will be {@link SubCommandType#NONE}.
+     * If the shell command does not support sub commands this will be the value of
+     * {@link LiteralCommandMap#getDefaultSubCommand()}.
      */
     private final SubCommandType subCommand;
 
@@ -70,7 +71,8 @@ public class ShellCommand {
     /**
      * Get optional command sub type.
      *
-     * If the main type does not support any sub type {@link SubCommandType#NONE} will be returned.
+     * If the main type does not support any sub type the same value as {@link LiteralCommandMap#getDefaultSubCommand()}
+     * will be returned.
      *
      * @return sub type of command
      */

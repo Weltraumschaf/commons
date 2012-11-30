@@ -12,6 +12,8 @@
 package de.weltraumschaf.commons.shell;
 
 import java.util.Map;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
@@ -28,23 +30,23 @@ public class DefaultParserTest {
     // CHECKSTYLE:ON
     private final Parser sut = Parsers.newParser(new LiteralCommandMapStub());
 
-    @Test @Ignore("TODO USe stub implementaion as inner classes")
+    @Test
     public void parse_comand() throws SyntaxException {
         // Move this code to neuron.
-        ShellCommand c = sut.parse("help");
-//        assertThat(c.getCommand(), is(NeuronMainType.HELP));
-//        assertThat(c.getSubCommand(), is(NeuronSubType.NONE));
-//        assertThat(c.getArguments().size(), is(0));
-//
-//        c = sut.parse("reset");
-//        assertThat(c.getCommand(), is(NeuronMainType.RESET));
-//        assertThat(c.getSubCommand(), is(NeuronSubType.NONE));
-//        assertThat(c.getArguments().size(), is(0));
-//
-//        c = sut.parse("exit");
-//        assertThat(c.getCommand(), is(NeuronMainType.EXIT));
-//        assertThat(c.getSubCommand(), is(NeuronSubType.NONE));
-//        assertThat(c.getArguments().size(), is(0));
+        ShellCommand c = sut.parse("foo");
+        assertThat((TestMainType) c.getCommand(), is(TestMainType.FOO));
+        assertThat((TestSubType) c.getSubCommand(), is(TestSubType.NONE));
+        assertThat(c.getArguments().size(), is(0));
+
+        c = sut.parse("bar");
+        assertThat((TestMainType) c.getCommand(), is(TestMainType.BAR));
+        assertThat((TestSubType) c.getSubCommand(), is(TestSubType.NONE));
+        assertThat(c.getArguments().size(), is(0));
+
+        c = sut.parse("baz");
+        assertThat((TestMainType) c.getCommand(), is(TestMainType.BAZ));
+        assertThat((TestSubType) c.getSubCommand(), is(TestSubType.NONE));
+        assertThat(c.getArguments().size(), is(0));
     }
 
     @Test
@@ -69,48 +71,87 @@ public class DefaultParserTest {
     public void parse_comandWithTwoArgument() {
     }
 
-    @Test @Ignore("TODO USe stub implementaion as inner classes")
+    @Test
     public void parse_comandWithSubcommandAndOneArgument() throws SyntaxException {
-        // Move this code to neuron.
-//        ShellCommand c = sut.parse("node add 1234");
-//        assertThat(c.getCommand(), is(NeuronMainType.NODE));
-//        assertThat(c.getSubCommand(), is(NeuronSubType.ADD));
-//        assertThat(c.getArguments().size(), is(1));
-//        Token<Integer> t = c.getArguments().get(0);
-//        assertThat(t.getType(), is(TokenType.NUMBER));
-//        assertThat(t.getValue(), is(1234));
-//
-//        c = sut.parse("node del 5678");
-//        assertThat(c.getCommand(), is(NeuronMainType.NODE));
-//        assertThat(c.getSubCommand(), is(NeuronSubType.DEL));
-//        assertThat(c.getArguments().size(), is(1));
-//        t = c.getArguments().get(0);
-//        assertThat(t.getType(), is(TokenType.NUMBER));
-//        assertThat(t.getValue(), is(5678));
-//
-//        c = sut.parse("node info 5678");
-//        assertThat(c.getCommand(), is(NeuronMainType.NODE));
-//        assertThat(c.getSubCommand(), is(NeuronSubType.INFO));
-//        assertThat(c.getArguments().size(), is(1));
-//        t = c.getArguments().get(0);
-//        assertThat(t.getType(), is(TokenType.NUMBER));
-//        assertThat(t.getValue(), is(5678));
+        ShellCommand c = sut.parse("foo add 1234");
+        assertThat((TestMainType) c.getCommand(), is(TestMainType.FOO));
+        assertThat((TestSubType) c.getSubCommand(), is(TestSubType.ADD));
+        assertThat(c.getArguments().size(), is(1));
+        Token<Integer> t = c.getArguments().get(0);
+        assertThat(t.getType(), is(TokenType.NUMBER));
+        assertThat(t.getValue(), is(1234));
+
+        c = sut.parse("bar del 5678");
+        assertThat((TestMainType) c.getCommand(), is(TestMainType.BAR));
+        assertThat((TestSubType) c.getSubCommand(), is(TestSubType.DEL));
+        assertThat(c.getArguments().size(), is(1));
+        t = c.getArguments().get(0);
+        assertThat(t.getType(), is(TokenType.NUMBER));
+        assertThat(t.getValue(), is(5678));
+
+        c = sut.parse("baz info 5678");
+        assertThat((TestMainType) c.getCommand(), is(TestMainType.BAZ));
+        assertThat((TestSubType) c.getSubCommand(), is(TestSubType.INFO));
+        assertThat(c.getArguments().size(), is(1));
+        t = c.getArguments().get(0);
+        assertThat(t.getType(), is(TokenType.NUMBER));
+        assertThat(t.getValue(), is(5678));
+    }
+
+    private enum TestMainType implements MainCommandType {
+        FOO("foo"), BAR("bar"), BAZ("baz");
+
+        private final String literal;
+
+        private TestMainType(final String literal) {
+            this.literal = literal;
+        }
+
+        @Override
+        public String toString() {
+            return literal;
+        }
+
+    }
+
+    private enum TestSubType implements SubCommandType {
+        ADD("add"), DEL("del"), INFO("info"), NONE();
+
+        private final String literal;
+
+        private TestSubType() {
+            this("");
+        }
+
+        private TestSubType(final String literal) {
+            this.literal = literal;
+        }
+
+        @Override
+        public String toString() {
+            return literal;
+        }
+
     }
 
     private static class LiteralCommandMapStub extends LiteralCommandMap {
 
         public LiteralCommandMapStub() {
-            super(null);
+            super(TestSubType.NONE);
         }
 
         @Override
-        protected void initCommandMap(Map<String, MainCommandType> map) {
-
+        protected void initCommandMap(final Map<String, MainCommandType> map) {
+            for (final MainCommandType t : TestMainType.values()) {
+                map.put(t.toString(), t);
+            }
         }
 
         @Override
-        protected void initSubCommandMap(Map<String, SubCommandType> map) {
-
+        protected void initSubCommandMap(final Map<String, SubCommandType> map) {
+            for (final SubCommandType t : TestSubType.values()) {
+                map.put(t.toString(), t);
+            }
         }
 
     }

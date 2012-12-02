@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -131,9 +132,9 @@ public class DefaultScannerTest {
         assertThat(token.getValue(), is("baz"));
     }
 
-    @Test
+    @Test @Ignore
     public void scan_lineWithMultipleLiterals() throws SyntaxException {
-        final List<Token> tokens = sut.scan("loo lar laz1");
+        final List<Token> tokens = sut.scan("loo l-ar laz_1");
 
         assertThat(tokens.size(), is(3));
 
@@ -143,11 +144,20 @@ public class DefaultScannerTest {
 
         token = tokens.get(1);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("lar"));
+        assertThat(token.getValue(), is("l-ar"));
 
         token = tokens.get(2);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("laz1"));
+        assertThat(token.getValue(), is("laz_1"));
+    }
+
+    @Test @Ignore
+    public void scan_literalsStartWithSpecialCharacters() throws SyntaxException {
+        List<Token> tokens = sut.scan("/foo/bar/baz");
+        assertThat(tokens.size(), is(1));
+        Token<String> token = tokens.get(0);
+        assertThat(token.getType(), is(TokenType.LITERAL));
+        assertThat(token.getValue(), is("/foo/bar/baz"));
     }
 
     @Test

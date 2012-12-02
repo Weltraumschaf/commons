@@ -77,8 +77,8 @@ class DefaultScanner implements Scanner {
         while (characterStream.hasNext()) {
             final char currentChar = characterStream.next();
 
-            if (CharacterHelper.isAlpha(currentChar)) {
-                tokens.add(scanAlphaNum(characterStream));
+            if (CharacterHelper.isAlpha(currentChar) || CharacterHelper.isSpecialChar(currentChar)) {
+                tokens.add(scanLiteral(characterStream));
             } else if (CharacterHelper.isNum(currentChar)) {
                 tokens.add(scanNumber(characterStream));
             } else if (CharacterHelper.isQuote(currentChar)) {
@@ -93,7 +93,7 @@ class DefaultScanner implements Scanner {
      * @param characterStream input line to scan
      * @return Return string type token
      */
-    private Token scanAlphaNum(final CharacterStream characterStream) {
+    private Token scanLiteral(final CharacterStream characterStream) {
         final StringBuilder value = new StringBuilder();
         value.append(characterStream.current());
 

@@ -99,6 +99,10 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 
 - Introduce shell package: Provides basics for an interactive shell w/ input command parsing.
 
+### Version 0.3.1
+
+- Allow literals starting with '-', '\\', and '/' in shell command scanner.
+
 ## File Signatures
 
 To receive the keys type:

@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -132,7 +131,7 @@ public class DefaultScannerTest {
         assertThat(token.getValue(), is("baz"));
     }
 
-    @Test @Ignore
+    @Test
     public void scan_lineWithMultipleLiterals() throws SyntaxException {
         final List<Token> tokens = sut.scan("loo l-ar laz_1");
 
@@ -151,13 +150,28 @@ public class DefaultScannerTest {
         assertThat(token.getValue(), is("laz_1"));
     }
 
-    @Test @Ignore
+    @Test
     public void scan_literalsStartWithSpecialCharacters() throws SyntaxException {
         List<Token> tokens = sut.scan("/foo/bar/baz");
         assertThat(tokens.size(), is(1));
         Token<String> token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.LITERAL));
         assertThat(token.getValue(), is("/foo/bar/baz"));
+
+        tokens = sut.scan("--foo-bar-baz");
+        assertThat(tokens.size(), is(1));
+        token = tokens.get(0);
+        assertThat(token.getType(), is(TokenType.LITERAL));
+        assertThat(token.getValue(), is("--foo-bar-baz"));
+
+        tokens = sut.scan("/foo/bar/baz --foo-bar-baz");
+        assertThat(tokens.size(), is(2));
+        token = tokens.get(0);
+        assertThat(token.getType(), is(TokenType.LITERAL));
+        assertThat(token.getValue(), is("/foo/bar/baz"));
+        token = tokens.get(1);
+        assertThat(token.getType(), is(TokenType.LITERAL));
+        assertThat(token.getValue(), is("--foo-bar-baz"));
     }
 
     @Test

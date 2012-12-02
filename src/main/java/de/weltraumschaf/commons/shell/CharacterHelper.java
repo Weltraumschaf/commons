@@ -11,12 +11,20 @@
  */
 package de.weltraumschaf.commons.shell;
 
+import com.google.common.collect.Sets;
+import java.util.Set;
+
 /**
  * Helper class to verify if a given character belong to a specified group or range of characters.
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class CharacterHelper {
+
+    /**
+     * Special characters allowed in literals.
+     */
+    private static final Set<Character> SPECIAL_CHARS = Sets.newHashSet('/', '\\', '-');
 
     /**
      * Private constructor for pure static utility class.
@@ -93,10 +101,21 @@ public final class CharacterHelper {
      * Quotes are ' and ".
      *
      * @param character a single character
-     * @return true if character is a whitespace character, unless false
+     * @return true if character is a quote character, unless false
      */
     public static boolean isQuote(final char character) {
         return '\'' == character || '"' == character;
     }
 
+    /**
+     * Checks whether a character is a special character.
+     *
+     * See {@link #SPECIAL_CHARS} for all allowed special characters.
+     *
+     * @param character a single character
+     * @return true if character is a special character, unless false
+     */
+    public static boolean isSpecialChar(final char character) {
+        return SPECIAL_CHARS.contains(character);
+    }
 }

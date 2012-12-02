@@ -140,4 +140,10 @@ public class CharacterHelperTest {
         }
     }
 
+    @Test
+    public void isSpecialChar() {
+        assertTrue(CharacterHelper.isSpecialChar('-'));
+        assertTrue(CharacterHelper.isSpecialChar('/'));
+        assertTrue(CharacterHelper.isSpecialChar('\\'));
+    }
 }

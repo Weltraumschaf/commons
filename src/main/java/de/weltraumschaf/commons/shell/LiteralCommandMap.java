@@ -17,6 +17,8 @@ import java.util.Map;
 /**
  * Maps the literal string of an command to its enum type.
  *
+ * This class is not thread safe!
+ *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public abstract class LiteralCommandMap {
@@ -45,8 +47,7 @@ public abstract class LiteralCommandMap {
     public LiteralCommandMap(final SubCommandType defaultSubCommand) {
         super();
         this.defaultSubCommand = defaultSubCommand;
-        initCommandMap(commands);
-        initSubCommandMap(subCommands);
+        init();
     }
 
     /**
@@ -153,5 +154,15 @@ public abstract class LiteralCommandMap {
      * @param map map to initialize
      */
     protected abstract void initSubCommandMap(final Map<String, SubCommandType> map);
+
+    /**
+     * Not overideable template method called in constructor.
+     *
+     * Invokes first {@link #initCommandMap(java.util.Map)} and second {@link #initSubCommandMap(java.util.Map)}.
+     */
+    private void init() {
+        initCommandMap(commands);
+        initSubCommandMap(subCommands);
+    }
 
 }

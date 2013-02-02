@@ -26,6 +26,8 @@ public class CharacterHelperTest {
         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', };
     private static final char[] NUMS = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', };
     private static final char[] WHITE_SPACES = {' ', '\n', '\r', '\t', };
+    private static final char[] OPERATORS = {'+', '-', '*', '/', '%', '&', '|', '^', '<', '>', '=',
+        ':', '?', '(', ')', '{', '}', '[', ']', '!', '~', '@', '#', '$', };
 
     @Test
     public void isAlpha() {
@@ -43,6 +45,10 @@ public class CharacterHelperTest {
 
         for (int i = 0; i < WHITE_SPACES.length; ++i) {
             assertFalse(CharacterHelper.isAlpha(WHITE_SPACES[i]));
+        }
+
+        for (int i = 0; i < OPERATORS.length; ++i) {
+            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
         }
     }
 
@@ -63,6 +69,10 @@ public class CharacterHelperTest {
         for (int i = 0; i < WHITE_SPACES.length; ++i) {
             assertFalse(CharacterHelper.isNum(WHITE_SPACES[i]));
         }
+
+        for (int i = 0; i < OPERATORS.length; ++i) {
+            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        }
     }
 
     @Test
@@ -82,6 +92,10 @@ public class CharacterHelperTest {
         for (int i = 0; i < WHITE_SPACES.length; ++i) {
             assertFalse(CharacterHelper.isAlphaNum(WHITE_SPACES[i]));
         }
+
+        for (int i = 0; i < OPERATORS.length; ++i) {
+            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        }
     }
 
     @Test
@@ -100,6 +114,10 @@ public class CharacterHelperTest {
 
         for (int i = 0; i < UP_ALPHA.length; ++i) {
             assertFalse(CharacterHelper.isWhiteSpace(UP_ALPHA[i]));
+        }
+
+        for (int i = 0; i < OPERATORS.length; ++i) {
+            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
         }
     }
 
@@ -138,6 +156,60 @@ public class CharacterHelperTest {
         for (int i = 0; i < UP_ALPHA.length; ++i) {
             assertFalse(CharacterHelper.isQuote(UP_ALPHA[i]));
         }
+
+        for (int i = 0; i < OPERATORS.length; ++i) {
+            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        }
+    }
+
+    @Test
+    public void isSingleQuote() {
+        assertTrue(CharacterHelper.isSingleQuote('\''));
+
+        for (int i = 0; i < WHITE_SPACES.length; ++i) {
+            assertFalse(CharacterHelper.isSingleQuote(WHITE_SPACES[i]));
+        }
+
+        for (int i = 0; i < NUMS.length; ++i) {
+            assertFalse(CharacterHelper.isSingleQuote(NUMS[i]));
+        }
+
+        for (int i = 0; i < LOW_ALPHA.length; ++i) {
+            assertFalse(CharacterHelper.isSingleQuote(LOW_ALPHA[i]));
+        }
+
+        for (int i = 0; i < UP_ALPHA.length; ++i) {
+            assertFalse(CharacterHelper.isSingleQuote(UP_ALPHA[i]));
+        }
+
+        for (int i = 0; i < OPERATORS.length; ++i) {
+            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        }
+    }
+
+    @Test
+    public void isDoubleQuote() {
+        assertTrue(CharacterHelper.isDoubleQuote('"'));
+
+        for (int i = 0; i < WHITE_SPACES.length; ++i) {
+            assertFalse(CharacterHelper.isDoubleQuote(WHITE_SPACES[i]));
+        }
+
+        for (int i = 0; i < NUMS.length; ++i) {
+            assertFalse(CharacterHelper.isDoubleQuote(NUMS[i]));
+        }
+
+        for (int i = 0; i < LOW_ALPHA.length; ++i) {
+            assertFalse(CharacterHelper.isDoubleQuote(LOW_ALPHA[i]));
+        }
+
+        for (int i = 0; i < UP_ALPHA.length; ++i) {
+            assertFalse(CharacterHelper.isDoubleQuote(UP_ALPHA[i]));
+        }
+
+        for (int i = 0; i < OPERATORS.length; ++i) {
+            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        }
     }
 
     @Test
@@ -145,5 +217,28 @@ public class CharacterHelperTest {
         assertTrue(CharacterHelper.isSpecialChar('-'));
         assertTrue(CharacterHelper.isSpecialChar('/'));
         assertTrue(CharacterHelper.isSpecialChar('\\'));
+    }
+
+    @Test
+    public void isOperator() {
+        for (int i = 0; i < OPERATORS.length; ++i) {
+            assertTrue(CharacterHelper.isOperator(OPERATORS[i]));
+        }
+
+        for (int i = 0; i < LOW_ALPHA.length; ++i) {
+            assertFalse(CharacterHelper.isOperator(LOW_ALPHA[i]));
+        }
+
+        for (int i = 0; i < UP_ALPHA.length; ++i) {
+            assertFalse(CharacterHelper.isOperator(UP_ALPHA[i]));
+        }
+
+        for (int i = 0; i < NUMS.length; ++i) {
+            assertFalse(CharacterHelper.isOperator(NUMS[i]));
+        }
+
+        for (int i = 0; i < WHITE_SPACES.length; ++i) {
+            assertFalse(CharacterHelper.isOperator(WHITE_SPACES[i]));
+        }
     }
 }

@@ -108,6 +108,8 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 - Introduce own packages for character/token stuff useful for lexing/parsing.
 - Introduce new token types: FLOAT, BOOLEAN.
 - Renamed token type NUMBER -> INTEGER.
+- Introduce separate methods to determine single/double quote characters.
+- Introduce method for recognizing operator characters.
 
 ## File Signatures
 

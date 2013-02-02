@@ -12,6 +12,7 @@
 package de.weltraumschaf.commons.token;
 
 import com.google.common.base.Objects;
+import de.weltraumschaf.commons.Null;
 
 /**
  * Represent a token scanned from interactive shell input.
@@ -100,6 +101,15 @@ public final class Token<T> {
      */
     public static Token<Boolean> newBooleanToken(final Boolean value) {
         return new Token<Boolean>(TokenType.BOOLEAN, value);
+    }
+
+    /**
+     * Creates a end of file token.
+     *
+     * @return {@link Null} as a placeholder
+     */
+    public static Token<Null> newEndOfFileToken() {
+        return new Token<Null>(TokenType.EOF, Null.getInstance());
     }
 
     /**

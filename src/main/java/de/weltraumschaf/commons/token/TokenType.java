@@ -61,6 +61,10 @@ public enum TokenType {
     /**
      * Defines boolean token type.
      */
-    BOOLEAN;
+    BOOLEAN,
+    /**
+     * End of file token.
+     */
+    EOF;
 
 }

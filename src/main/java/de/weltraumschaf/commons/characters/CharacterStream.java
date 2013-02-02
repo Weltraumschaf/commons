@@ -88,4 +88,20 @@ public class CharacterStream {
         return input.charAt(index);
     }
 
+    /**
+     * Look ahead one character w/o advancing the internal pointer for the current character.
+     *
+     * @return the peeked character.
+     * @throws IndexOutOfBoundsException if there are no more character to peek
+     */
+    public char peek() {
+        if (!hasNext()) {
+            throw new IndexOutOfBoundsException("No more next characters!");
+        }
+
+        final char peekedCharacter = next();
+        --index;
+        return peekedCharacter;
+    }
+
 }

@@ -88,4 +88,10 @@ public class CharacterStreamTest {
         assertThat(sut.current(), is('z'));
     }
 
+    @Test
+    public void peekCharacter() {
+        assertThat(sut.current(), is('f'));
+        assertThat(sut.peek(), is('o'));
+        assertThat(sut.current(), is('f'));
+    }
 }

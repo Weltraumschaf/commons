@@ -1,4 +1,6 @@
 de.weltraumschaf.commons
+de.weltraumschaf.commons.characters
 de.weltraumschaf.commons.shell
 de.weltraumschaf.commons.swing
 de.weltraumschaf.commons.system
+de.weltraumschaf.commons.token

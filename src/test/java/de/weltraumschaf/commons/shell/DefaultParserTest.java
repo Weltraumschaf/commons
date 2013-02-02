@@ -80,7 +80,7 @@ public class DefaultParserTest {
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.ADD));
         assertThat(c.getArguments().size(), is(1));
         Token<Integer> t = c.getArguments().get(0);
-        assertThat(t.getType(), is(TokenType.NUMBER));
+        assertThat(t.getType(), is(TokenType.INTEGER));
         assertThat(t.getValue(), is(1234));
 
         c = sut.parse("bar del 5678");
@@ -88,7 +88,7 @@ public class DefaultParserTest {
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.DEL));
         assertThat(c.getArguments().size(), is(1));
         t = c.getArguments().get(0);
-        assertThat(t.getType(), is(TokenType.NUMBER));
+        assertThat(t.getType(), is(TokenType.INTEGER));
         assertThat(t.getValue(), is(5678));
 
         c = sut.parse("baz info 5678");
@@ -96,7 +96,7 @@ public class DefaultParserTest {
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.INFO));
         assertThat(c.getArguments().size(), is(1));
         t = c.getArguments().get(0);
-        assertThat(t.getType(), is(TokenType.NUMBER));
+        assertThat(t.getType(), is(TokenType.INTEGER));
         assertThat(t.getValue(), is(5678));
     }
 

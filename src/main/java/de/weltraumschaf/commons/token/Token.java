@@ -78,8 +78,8 @@ public final class Token<T> {
      * @param value token value
      * @return new instance
      */
-    public static Token<Integer> newNumberToken(final Integer value) {
-        return new Token<Integer>(TokenType.NUMBER, value);
+    public static Token<Integer> newIntegerToken(final Integer value) {
+        return new Token<Integer>(TokenType.INTEGER, value);
     }
 
     /**

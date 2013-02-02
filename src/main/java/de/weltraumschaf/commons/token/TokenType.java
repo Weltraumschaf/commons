@@ -48,7 +48,7 @@ public enum TokenType {
      *
      * Any literal only containing digits: number = 0..9 { 0..9 } .
      */
-    NUMBER,
+    INTEGER,
     /**
      * Defines floating point number token type.
      *

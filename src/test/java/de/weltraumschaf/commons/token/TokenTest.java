@@ -76,21 +76,21 @@ public class TokenTest {
     }
 
     @Test
-    public void testToString_Number() {
-        final Token t = Token.newNumberToken(123);
+    public void testToString_integer() {
+        final Token<Integer> t = Token.newIntegerToken(123);
         assertThat(t.toString(), is("Token{type=NUMBER, value=123}"));
     }
 
     @Test
-    public void getValue_number() {
-        final Token<Integer> t = Token.newNumberToken(123);
+    public void getValue_integer() {
+        final Token<Integer> t = Token.newIntegerToken(123);
         assertThat(t.getValue(), is(123));
     }
 
     @Test
-    public void getType_number() {
-        final Token<Integer> t = Token.newNumberToken(123);
-        assertThat(t.getType(), is(TokenType.NUMBER));
+    public void getType_integer() {
+        final Token<Integer> t = Token.newIntegerToken(123);
+        assertThat(t.getType(), is(TokenType.INTEGER));
     }
 
     @Test

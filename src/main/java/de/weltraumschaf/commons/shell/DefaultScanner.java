@@ -146,7 +146,7 @@ class DefaultScanner implements Scanner {
             value.append(currentChar);
         }
 
-        return Token.newNumberToken(Integer.valueOf(value.toString()));
+        return Token.newIntegerToken(Integer.valueOf(value.toString()));
     }
 
     /**

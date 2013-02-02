@@ -9,7 +9,7 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-package de.weltraumschaf.commons.shell;
+package de.weltraumschaf.commons.characters;
 
 /**
  * Access a string as stream of characters.
@@ -26,7 +26,7 @@ package de.weltraumschaf.commons.shell;
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-class CharacterStream {
+public class CharacterStream {
 
     /**
      * Accessed string.
@@ -55,7 +55,7 @@ class CharacterStream {
      * @throws IndexOutOfBoundsException if, there are no more characters.
      * // CHECKSTYLE:ON
      */
-    char next() {
+    public char next() {
         if (!hasNext()) {
             throw new IndexOutOfBoundsException("No more next characters!");
         }
@@ -69,7 +69,7 @@ class CharacterStream {
      *
      * @return True if there are no more characters.
      */
-    boolean hasNext() {
+    public boolean hasNext() {
         return index < input.length() - 1;
     }
 
@@ -80,7 +80,7 @@ class CharacterStream {
      *
      * @return The current character.
      */
-    char current() {
+    public char current() {
         if (-1 == index) {
             next();
         }

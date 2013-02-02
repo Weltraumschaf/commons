@@ -11,6 +11,8 @@
  */
 package de.weltraumschaf.commons.shell;
 
+import de.weltraumschaf.commons.characters.CharacterStream;
+import de.weltraumschaf.commons.characters.CharacterHelper;
 import com.google.common.collect.Lists;
 import java.util.List;
 

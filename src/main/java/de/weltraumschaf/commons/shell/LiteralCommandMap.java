@@ -83,10 +83,10 @@ public abstract class LiteralCommandMap {
      * // CHECKSTYLE:ON
      */
     public final MainCommandType determineCommand(final Token<String> t) {
-        if (! isCommand(t)) {
-            throw new IllegalArgumentException(String.format("'%s' is not a command!", t.getValue()));
+        if (isCommand(t)) {
+            return commands.get(t.getValue());
         }
-        return commands.get(t.getValue());
+        throw new IllegalArgumentException(String.format("'%s' is not a command!", t.getValue()));
     }
 
     /**
@@ -121,11 +121,10 @@ public abstract class LiteralCommandMap {
      * // CHECKSTYLE:ON
      */
     public final SubCommandType determineSubCommand(final Token<String> t) {
-        if (! isSubCommand(t)) {
-            throw new IllegalArgumentException(String.format("'%s' is not a sub command!", t.getValue()));
+        if (isSubCommand(t)) {
+            return subCommands.get(t.getValue());
         }
-
-        return subCommands.get(t.getValue());
+        throw new IllegalArgumentException(String.format("'%s' is not a sub command!", t.getValue()));
     }
 
     /**

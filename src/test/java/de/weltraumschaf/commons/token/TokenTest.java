@@ -51,16 +51,16 @@ public class TokenTest {
         assertThat(t.toString(), is("Token{type=NUMBER, value=123}"));
     }
 
-//    @Test
-//    public void testToString_float() {
-//        final Token t = Token.newFloatToken(3.14);
-//        assertThat(t.toString(), is("Token{type=FLOAT, value=3.14}"));
-//    }
-//
-//    @Test
-//    public void testToString_boolean() {
-//        final Token t = Token.newBooleanToken(true);
-//        assertThat(t.toString(), is("Token{type=BOOLEAN, value=true}"));
-//    }
+    @Test
+    public void testToString_float() {
+        final Token t = Token.newFloatToken(3.14f);
+        assertThat(t.toString(), is("Token{type=FLOAT, value=3.14}"));
+    }
+
+    @Test
+    public void testToString_boolean() {
+        final Token t = Token.newBooleanToken(true);
+        assertThat(t.toString(), is("Token{type=BOOLEAN, value=true}"));
+    }
 
 }

@@ -83,6 +83,26 @@ public final class Token<T> {
     }
 
     /**
+     * Creates a float token.
+     *
+     * @param value token value
+     * @return new instance
+     */
+    public static Token<Float> newFloatToken(final Float value) {
+        return new Token<Float>(TokenType.FLOAT, value);
+    }
+
+    /**
+     * Creates a boolean token.
+     *
+     * @param value token value
+     * @return new instance
+     */
+    public static Token<Boolean> newBooleanToken(final Boolean value) {
+        return new Token<Boolean>(TokenType.BOOLEAN, value);
+    }
+
+    /**
      * Get the tokens type.
      *
      * @return type enum

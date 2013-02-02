@@ -103,6 +103,12 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 
 - Allow literals starting with '-', '\\', and '/' in shell command scanner.
 
+### Version 1.0.0
+
+- Introduce own packages for character/token stuff useful for lexing/parsing.
+- Introduce new token types: FLOAT, BOOLEAN.
+- Renamed token type NUMBER -> INTEGER.
+
 ## File Signatures
 
 To receive the keys type:

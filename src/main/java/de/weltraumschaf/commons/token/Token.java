@@ -113,6 +113,15 @@ public final class Token<T> {
     }
 
     /**
+     * Creates a comment token.
+     *
+     * @return {@link Null} as a placeholder
+     */
+    public static Token<String> newCommentToken(final String value) {
+        return new Token<String>(TokenType.COMMENT, value);
+    }
+
+    /**
      * Get the tokens type.
      *
      * @return type enum

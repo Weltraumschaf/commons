@@ -74,7 +74,6 @@ public abstract class LiteralCommandMap {
     /**
      * Determines the appropriate main command type for given string token.
      *
-     * You should check with {@link #isCommand(de.weltraumschaf.commons.shell.Token)} before invocation.
      * Determining a non command token string will result in an exception.
      *
      * @param t token to check
@@ -113,7 +112,6 @@ public abstract class LiteralCommandMap {
     /**
      * Determines the appropriate sub command type for given string token.
      *
-     * You should check with {@link #isSubCommand(de.weltraumschaf.commons.shell.Token)} before invocation.
      * Determining a non sub command token string will result in an exception.
      *
      * @param t token to check

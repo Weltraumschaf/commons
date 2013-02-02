@@ -65,6 +65,10 @@ public enum TokenType {
     /**
      * End of file token.
      */
-    EOF;
+    EOF,
+    /**
+     * Comment token.
+     */
+    COMMENT;
 
 }

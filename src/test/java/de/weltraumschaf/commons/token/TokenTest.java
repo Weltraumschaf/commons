@@ -78,7 +78,7 @@ public class TokenTest {
     @Test
     public void testToString_integer() {
         final Token<Integer> t = Token.newIntegerToken(123);
-        assertThat(t.toString(), is("Token{type=NUMBER, value=123}"));
+        assertThat(t.toString(), is("Token{type=INTEGER, value=123}"));
     }
 
     @Test

@@ -9,7 +9,7 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-package de.weltraumschaf.commons.shell;
+package de.weltraumschaf.commons.token;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -22,21 +22,45 @@ import org.junit.Test;
 public class TokenTest {
 
     @Test
-    public void testToString() {
+    public void testToString_literal() {
         Token t = Token.newLiteralToken("foo");
         assertThat(t.toString(), is("Token{type=LITERAL, value=foo}"));
+    }
 
-        t = Token.newStringToken("foo");
+    @Test
+    public void testToString_string() {
+        final Token t = Token.newStringToken("foo");
         assertThat(t.toString(), is("Token{type=STRING, value=foo}"));
+    }
 
-        t = Token.newKeywordToken("foo");
+    @Test
+    public void testToString_keyword() {
+        final Token t = Token.newKeywordToken("foo");
         assertThat(t.toString(), is("Token{type=KEYWORD, value=foo}"));
+    }
 
-        t = Token.newNumberToken(123);
-        assertThat(t.toString(), is("Token{type=NUMBER, value=123}"));
-
-        t = Token.newNumberToken(123);
+    @Test
+    public void testToString_Number() {
+        final Token t = Token.newNumberToken(123);
         assertThat(t.toString(), is("Token{type=NUMBER, value=123}"));
     }
+
+    @Test
+    public void testToString_number() {
+        final Token t = Token.newNumberToken(123);
+        assertThat(t.toString(), is("Token{type=NUMBER, value=123}"));
+    }
+
+//    @Test
+//    public void testToString_float() {
+//        final Token t = Token.newFloatToken(3.14);
+//        assertThat(t.toString(), is("Token{type=FLOAT, value=3.14}"));
+//    }
+//
+//    @Test
+//    public void testToString_boolean() {
+//        final Token t = Token.newBooleanToken(true);
+//        assertThat(t.toString(), is("Token{type=BOOLEAN, value=true}"));
+//    }
 
 }

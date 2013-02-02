@@ -11,6 +11,7 @@
  */
 package de.weltraumschaf.commons.shell;
 
+import de.weltraumschaf.commons.token.Token;
 import java.util.List;
 
 /**

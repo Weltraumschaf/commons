@@ -11,6 +11,8 @@
  */
 package de.weltraumschaf.commons.shell;
 
+import de.weltraumschaf.commons.token.Token;
+import de.weltraumschaf.commons.token.TokenType;
 import java.util.Map;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;

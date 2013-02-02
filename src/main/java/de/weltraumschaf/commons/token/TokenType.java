@@ -9,7 +9,7 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-package de.weltraumschaf.commons.shell;
+package de.weltraumschaf.commons.token;
 
 /**
  * Type of tokens scanned from interactive shell.
@@ -51,6 +51,8 @@ public enum TokenType {
      *
      * Any literal only containing digits: number = 0..9 { 0..9 } .
      */
-    NUMBER;
+    NUMBER,
+    FLOAT,
+    BOOLEAN;
 
 }

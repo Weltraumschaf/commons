@@ -115,10 +115,19 @@ public final class Token<T> {
     /**
      * Creates a comment token.
      *
-     * @return {@link Null} as a placeholder
+     * @return new instance
      */
     public static Token<String> newCommentToken(final String value) {
         return new Token<String>(TokenType.COMMENT, value);
+    }
+
+    /**
+     * Creates a comment token.
+     *
+     * @return new instance
+     */
+    public static Token<String> newOperatorToken(final String value) {
+        return new Token<String>(TokenType.OPERATOR, value);
     }
 
     /**

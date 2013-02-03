@@ -69,6 +69,10 @@ public enum TokenType {
     /**
      * Comment token.
      */
-    COMMENT;
+    COMMENT,
+    /**
+     * Operator token.
+     */
+    OPERATOR;
 
 }

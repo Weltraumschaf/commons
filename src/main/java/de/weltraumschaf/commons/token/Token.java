@@ -115,6 +115,7 @@ public final class Token<T> {
     /**
      * Creates a comment token.
      *
+     * @param value comment string
      * @return new instance
      */
     public static Token<String> newCommentToken(final String value) {
@@ -124,10 +125,20 @@ public final class Token<T> {
     /**
      * Creates a comment token.
      *
+     * @param value operator string
      * @return new instance
      */
     public static Token<String> newOperatorToken(final String value) {
         return new Token<String>(TokenType.OPERATOR, value);
+    }
+
+    /**
+     * Creates a null token.
+     *
+     * @return new instance
+     */
+    public static Token<Null> newNullToken() {
+        return new Token<Null>(TokenType.NULL, Null.getInstance());
     }
 
     /**

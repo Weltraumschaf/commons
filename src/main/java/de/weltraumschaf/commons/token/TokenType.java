@@ -74,6 +74,9 @@ public enum TokenType {
      * Operator token.
      */
     OPERATOR,
-    NIL;
+    /**
+     * Null token.
+     */
+    NULL;
 
 }

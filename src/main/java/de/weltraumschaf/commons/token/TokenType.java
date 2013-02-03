@@ -73,6 +73,7 @@ public enum TokenType {
     /**
      * Operator token.
      */
-    OPERATOR;
+    OPERATOR,
+    NIL;
 
 }

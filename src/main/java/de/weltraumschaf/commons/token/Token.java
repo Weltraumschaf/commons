@@ -104,6 +104,15 @@ public final class Token<T> {
     }
 
     /**
+     * Creates a end of line token.
+     *
+     * @return {@link Null} as a placeholder
+     */
+    public static Token<Null> newEndOfLineToken() {
+        return new Token<Null>(TokenType.EOL, Null.getInstance());
+    }
+
+    /**
      * Creates a end of file token.
      *
      * @return {@link Null} as a placeholder

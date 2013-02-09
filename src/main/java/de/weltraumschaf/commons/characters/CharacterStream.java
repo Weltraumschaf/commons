@@ -104,4 +104,13 @@ public class CharacterStream {
         return peekedCharacter;
     }
 
+    /**
+     * Get the current index position.
+     *
+     * @return initial value is -1, after first call of next 0 up to input length -1
+     */
+    public int getIndex() {
+        return index;
+    }
+
 }

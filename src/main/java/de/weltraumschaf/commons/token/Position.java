@@ -11,6 +11,8 @@
  */
 package de.weltraumschaf.commons.token;
 
+import com.google.common.base.Objects;
+
 /**
  * Represents a token position in the source string.
  *
@@ -106,6 +108,23 @@ public final class Position {
 
         str.append(String.format("(%s, %s)", getLine(), getColumn()));
         return str.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(line, column, file);
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (! (obj instanceof Position)) {
+            return false;
+        }
+
+        final Position other = (Position) obj;
+        return Objects.equal(line, other.line)
+                && Objects.equal(column, other.column)
+                && Objects.equal(file, other.file);
     }
 
 }

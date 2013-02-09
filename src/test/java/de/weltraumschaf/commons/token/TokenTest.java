@@ -23,109 +23,109 @@ public class TokenTest {
 
     @Test
     public void testToString_literal() {
-        final Token<String> t = Token.newLiteralToken("foo");
+        final Token<String> t = Tokens.newLiteralToken("foo");
         assertThat(t.toString(), is("Token{type=LITERAL, value=foo}"));
     }
 
     @Test
     public void getValue_literal() {
-        final Token<String> t = Token.newLiteralToken("foo");
+        final Token<String> t = Tokens.newLiteralToken("foo");
         assertThat(t.getValue(), is("foo"));
     }
 
     @Test
     public void getType_literal() {
-        final Token<String> t = Token.newLiteralToken("foo");
+        final Token<String> t = Tokens.newLiteralToken("foo");
         assertThat(t.getType(), is(TokenType.LITERAL));
     }
 
     @Test
     public void testToString_string() {
-        final Token<String> t = Token.newStringToken("foo");
+        final Token<String> t = Tokens.newStringToken("foo");
         assertThat(t.toString(), is("Token{type=STRING, value=foo}"));
     }
 
     @Test
     public void getValue_string() {
-        final Token<String> t = Token.newStringToken("foo");
+        final Token<String> t = Tokens.newStringToken("foo");
         assertThat(t.getValue(), is("foo"));
     }
 
     @Test
     public void getType_string() {
-        final Token<String> t = Token.newStringToken("foo");
+        final Token<String> t = Tokens.newStringToken("foo");
         assertThat(t.getType(), is(TokenType.STRING));
     }
 
     @Test
     public void testToString_keyword() {
-        final Token<String> t = Token.newKeywordToken("foo");
+        final Token<String> t = Tokens.newKeywordToken("foo");
         assertThat(t.toString(), is("Token{type=KEYWORD, value=foo}"));
     }
 
     @Test
     public void getValue_keyword() {
-        final Token<String> t = Token.newKeywordToken("foo");
+        final Token<String> t = Tokens.newKeywordToken("foo");
         assertThat(t.getValue(), is("foo"));
     }
 
     @Test
     public void getType_keyword() {
-        final Token<String> t = Token.newKeywordToken("foo");
+        final Token<String> t = Tokens.newKeywordToken("foo");
         assertThat(t.getType(), is(TokenType.KEYWORD));
     }
 
     @Test
     public void testToString_integer() {
-        final Token<Integer> t = Token.newIntegerToken(123);
+        final Token<Integer> t = Tokens.newIntegerToken(123);
         assertThat(t.toString(), is("Token{type=INTEGER, value=123}"));
     }
 
     @Test
     public void getValue_integer() {
-        final Token<Integer> t = Token.newIntegerToken(123);
+        final Token<Integer> t = Tokens.newIntegerToken(123);
         assertThat(t.getValue(), is(123));
     }
 
     @Test
     public void getType_integer() {
-        final Token<Integer> t = Token.newIntegerToken(123);
+        final Token<Integer> t = Tokens.newIntegerToken(123);
         assertThat(t.getType(), is(TokenType.INTEGER));
     }
 
     @Test
     public void testToString_float() {
-        final Token<Float> t = Token.newFloatToken(3.14f);
+        final Token<Float> t = Tokens.newFloatToken(3.14f);
         assertThat(t.toString(), is("Token{type=FLOAT, value=3.14}"));
     }
 
     @Test
     public void getValue_float() {
-        final Token<Float> t = Token.newFloatToken(3.14f);
+        final Token<Float> t = Tokens.newFloatToken(3.14f);
         assertThat(t.getValue(), is(3.14f));
     }
 
     @Test
     public void getType_float() {
-        final Token<Float> t = Token.newFloatToken(3.14f);
+        final Token<Float> t = Tokens.newFloatToken(3.14f);
         assertThat(t.getType(), is(TokenType.FLOAT));
     }
 
     @Test
     public void testToString_boolean() {
-        final Token t = Token.newBooleanToken(true);
+        final Token t = Tokens.newBooleanToken(true);
         assertThat(t.toString(), is("Token{type=BOOLEAN, value=true}"));
     }
 
     @Test
     public void getValue_boolean() {
-        final Token<Boolean> t = Token.newBooleanToken(true);
+        final Token<Boolean> t = Tokens.newBooleanToken(true);
         assertThat(t.getValue(), is(true));
     }
 
     @Test
     public void getType_boolean() {
-        final Token<Boolean> t = Token.newBooleanToken(true);
+        final Token<Boolean> t = Tokens.newBooleanToken(true);
         assertThat(t.getType(), is(TokenType.BOOLEAN));
     }
 

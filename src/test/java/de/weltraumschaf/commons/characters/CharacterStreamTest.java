@@ -13,7 +13,9 @@ package de.weltraumschaf.commons.characters;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  *
@@ -21,11 +23,40 @@ import org.junit.Test;
  */
 public class CharacterStreamTest {
 
+    @Rule public ExpectedException thrown = ExpectedException.none();
+
     private final CharacterStream sut = new CharacterStream("foo bar baz");
+    private final CharacterStream sutWithNewline = new CharacterStream("foo\n");
+    private final CharacterStream emptySut = new CharacterStream("");
+
+    @Test public void callEmptyStream() {
+        thrown.expect(IndexOutOfBoundsException.class);
+        thrown.expectMessage("No more next characters!");
+        emptySut.next();
+    }
 
     @Test
     public void callNextFirst() {
         assertThat(sut.current(), is('f'));
+    }
+
+    @Test
+    public void accessCharactersWithNewline() {
+        assertThat(sutWithNewline.next(), is('f'));
+        assertThat(sutWithNewline.current(), is('f'));
+        assertThat(sutWithNewline.hasNext(), is(true));
+
+        assertThat(sutWithNewline.next(), is('o'));
+        assertThat(sutWithNewline.current(), is('o'));
+        assertThat(sutWithNewline.hasNext(), is(true));
+
+        assertThat(sutWithNewline.next(), is('o'));
+        assertThat(sutWithNewline.current(), is('o'));
+        assertThat(sutWithNewline.hasNext(), is(true));
+
+        assertThat(sutWithNewline.next(), is('\n'));
+        assertThat(sutWithNewline.current(), is('\n'));
+        assertThat(sutWithNewline.hasNext(), is(false));
     }
 
     @Test
@@ -78,12 +109,9 @@ public class CharacterStreamTest {
         assertThat(sut.current(), is('z'));
         assertThat(sut.hasNext(), is(false));
 
-        try {
-            sut.next();
-            fail("Expected exception not thrown!");
-        } catch (IndexOutOfBoundsException ex) {
-            assertThat(ex.getMessage(), is("No more next characters!"));
-        }
+        thrown.expect(IndexOutOfBoundsException.class);
+        thrown.expectMessage("No more next characters!");
+        sut.next();
 
         assertThat(sut.current(), is('z'));
     }

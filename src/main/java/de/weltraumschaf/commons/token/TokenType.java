@@ -63,6 +63,10 @@ public enum TokenType {
      */
     BOOLEAN,
     /**
+     * End of line token.
+     */
+    EOL,
+    /**
      * End of file token.
      */
     EOF,
@@ -73,6 +77,10 @@ public enum TokenType {
     /**
      * Operator token.
      */
-    OPERATOR;
+    OPERATOR,
+    /**
+     * Null token.
+     */
+    NULL;
 
 }

@@ -12,7 +12,6 @@
 package de.weltraumschaf.commons.token;
 
 import com.google.common.base.Objects;
-import de.weltraumschaf.commons.Null;
 
 /**
  * Represent a token scanned from interactive shell input.
@@ -33,101 +32,22 @@ public final class Token<T> {
     private final T value;
 
     /**
+     * Position of the token in the source.
+     */
+    private final Position position;
+
+    /**
      * Hide constructor to force usage of factory methods.
      *
      * @param type Token type.
      * @param value Token value.
+     * @param pos source position of token
      */
-    private Token(final TokenType type, final T value) {
+    Token(final TokenType type, final T value, final Position pos) {
+        super();
         this.type = type;
         this.value = value;
-    }
-
-    /**
-     * Creates a command keyword token.
-     *
-     * @param value token value
-     * @return new instance
-     */
-    public static Token<String> newKeywordToken(final String value) {
-        return new Token<String>(TokenType.KEYWORD, value);
-    }
-
-    /**
-     * Creates a string token.
-     *
-     * @param value token value
-     * @return new instance
-     */
-    public static Token<String> newStringToken(final String value) {
-        return new Token<String>(TokenType.STRING, value);
-    }
-
-    /**
-     * Creates a literal token.
-     *
-     * @param value token value
-     * @return new instance
-     */
-    public static Token<String> newLiteralToken(final String value) {
-        return new Token<String>(TokenType.LITERAL, value);
-    }
-
-    /**
-     * Creates a number token.
-     *
-     * @param value token value
-     * @return new instance
-     */
-    public static Token<Integer> newIntegerToken(final Integer value) {
-        return new Token<Integer>(TokenType.INTEGER, value);
-    }
-
-    /**
-     * Creates a float token.
-     *
-     * @param value token value
-     * @return new instance
-     */
-    public static Token<Float> newFloatToken(final Float value) {
-        return new Token<Float>(TokenType.FLOAT, value);
-    }
-
-    /**
-     * Creates a boolean token.
-     *
-     * @param value token value
-     * @return new instance
-     */
-    public static Token<Boolean> newBooleanToken(final Boolean value) {
-        return new Token<Boolean>(TokenType.BOOLEAN, value);
-    }
-
-    /**
-     * Creates a end of file token.
-     *
-     * @return {@link Null} as a placeholder
-     */
-    public static Token<Null> newEndOfFileToken() {
-        return new Token<Null>(TokenType.EOF, Null.getInstance());
-    }
-
-    /**
-     * Creates a comment token.
-     *
-     * @return new instance
-     */
-    public static Token<String> newCommentToken(final String value) {
-        return new Token<String>(TokenType.COMMENT, value);
-    }
-
-    /**
-     * Creates a comment token.
-     *
-     * @return new instance
-     */
-    public static Token<String> newOperatorToken(final String value) {
-        return new Token<String>(TokenType.OPERATOR, value);
+        this.position = pos;
     }
 
     /**
@@ -146,6 +66,15 @@ public final class Token<T> {
      */
     public T getValue() {
         return value;
+    }
+
+    /**
+     * Get the token position.
+     *
+     * @return position instance
+     */
+    public Position getPosition() {
+        return position;
     }
 
     @Override

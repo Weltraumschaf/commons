@@ -15,6 +15,7 @@ import de.weltraumschaf.commons.token.Token;
 import de.weltraumschaf.commons.characters.CharacterStream;
 import de.weltraumschaf.commons.characters.CharacterHelper;
 import com.google.common.collect.Lists;
+import de.weltraumschaf.commons.token.Tokens;
 import java.util.List;
 
 /**
@@ -113,9 +114,9 @@ class DefaultScanner implements Scanner {
         final String tokenString = value.toString();
 
         if (isKeyword(tokenString)) {
-            return Token.newKeywordToken(tokenString);
+            return Tokens.newKeywordToken(tokenString);
         } else {
-            return Token.newLiteralToken(tokenString);
+            return Tokens.newLiteralToken(tokenString);
         }
     }
 
@@ -146,7 +147,7 @@ class DefaultScanner implements Scanner {
             value.append(currentChar);
         }
 
-        return Token.newIntegerToken(Integer.valueOf(value.toString()));
+        return Tokens.newIntegerToken(Integer.valueOf(value.toString()));
     }
 
     /**
@@ -184,7 +185,7 @@ class DefaultScanner implements Scanner {
             throw new SyntaxException(String.format("Unterminated string '%s'!", value.toString()));
         }
 
-        return Token.newStringToken(value.toString());
+        return Tokens.newStringToken(value.toString());
     }
 
     /**

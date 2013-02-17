@@ -24,6 +24,8 @@ package de.weltraumschaf.commons.characters;
  * }
  * </code>
  *
+ * TODO: Implement line and column.
+ *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class CharacterStream {

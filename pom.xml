@@ -57,7 +57,7 @@
         <connection>scm:git:git://github.com/Weltraumschaf/commons.git</connection>
         <developerConnection>scm:git:git@github.com:Weltraumschaf/commons.git</developerConnection>
         <url>https://github.com/Weltraumschaf/commons.git</url>
-        <tag>0.3.1</tag>
+        <tag>0.3.2</tag>
     </scm>
 
     <distributionManagement>
@@ -252,10 +252,10 @@
                     <version>2.3</version>
                 </plugin>
 
-                <!--<plugin>
+                <plugin>
                     <artifactId>maven-gpg-plugin</artifactId>
                     <version>1.4</version>
-                </plugin>-->
+                </plugin>
 
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
@@ -651,7 +651,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.4</version>
                         <configuration>
                             <keyname>BA265082</keyname>
                         </configuration>

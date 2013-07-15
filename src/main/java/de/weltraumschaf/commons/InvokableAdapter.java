@@ -136,12 +136,18 @@ public abstract class InvokableAdapter implements Invokable {
         try {
             invokable.init();
             invokable.execute();
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ioStreams.errorln(ex.getMessage());
+
             if (debug) {
                 ioStreams.printStackTrace(ex);
             }
-            invokable.exit(-1);
+
+            if (ex instanceof ApplicationException) { // NOPMD Don't want to duplicate code for ERR out.
+                invokable.exit(((ApplicationException) ex).getExitCode());
+            } else {
+                invokable.exit(-1);
+            }
         }
 
         invokable.exit(0);

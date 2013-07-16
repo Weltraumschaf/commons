@@ -26,7 +26,7 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
             <!-- http://weltraumschaf.github.com/commons/ -->
             <groupId>de.weltraumschaf</groupId>
             <artifactId>commons</artifactId>
-            <version>0.3.0</version>
+            <version>0.3.2</version>
         </dependency>
 
         <!-- ... -->
@@ -102,6 +102,10 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 ### Version 0.3.1
 
 - Allow literals starting with '-', '\\', and '/' in shell command scanner.
+
+### Version 0.3.2
+
+- Add ApplicationException and catch it in InvokableAdapter t ouse exit code.
 
 ## File Signatures
 

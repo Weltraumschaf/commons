@@ -9,7 +9,7 @@
 
     <groupId>de.weltraumschaf</groupId>
     <artifactId>commons</artifactId>
-    <version>0.3.2-SNAPSHOT</version>
+    <version>0.3.2</version>
     <packaging>jar</packaging>
 
     <name>Commons</name>

@@ -1,0 +1,24 @@
+html,
+body,
+button,
+input,
+select,
+textarea {
+    color: #222;
+    background-color: #F5F5F5;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+.well, .breadcrumb {
+    background-color: #E1E1E1;
+    border: 1px solid #E3E3E3;
+}

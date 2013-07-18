@@ -622,13 +622,13 @@
                 </executions>
             </plugin>
 
-            <plugin>
+<!--            <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
                 <configuration>
                     <header>LICENSE</header>
                     <properties>
-                        <year>2012</year>
+                        <year>2013</year>
                         <email>weltraumschaf(at)googlemail(dot)com</email>
                     </properties>
                     <encoding>UTF-8</encoding>
@@ -636,11 +636,12 @@
                     <strictCheck>true</strictCheck>
                     <mapping>
                         <java>SLASHSTAR_STYLE</java>
+                        <css>SLASHSTAR_STYLE</css>
                     </mapping>
                     <excludes>
                         <exclude>.gitignore</exclude>
                         <exclude>LICENSE</exclude>
-                        <exclude>README.md</exclude>
+                        <exclude>**/*.md</exclude>
                         <exclude>.idea/**</exclude>
                     </excludes>
                 </configuration>
@@ -652,7 +653,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 

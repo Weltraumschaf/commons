@@ -9,6 +9,7 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
+
 /**
  * Library of classes used in several projects.
  *

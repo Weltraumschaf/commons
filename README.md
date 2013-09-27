@@ -103,7 +103,7 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 
 - Allow literals starting with '-', '\\', and '/' in shell command scanner.
 
-### Version 0.3.2
+### Version 0.4.0
 
 - Add ApplicationException and catch it in InvokableAdapter t ouse exit code.
 - Introduce own packages for character/token stuff useful for lexing/parsing.

@@ -9,7 +9,7 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-package de.weltraumschaf.commons.shell;
+package de.weltraumschaf.commons.characters;
 
 /**
  * Access a string as stream of characters.
@@ -24,9 +24,11 @@ package de.weltraumschaf.commons.shell;
  * }
  * </code>
  *
+ * TODO: Implement line and column.
+ *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-class CharacterStream {
+public class CharacterStream {
 
     /**
      * Accessed string.
@@ -55,7 +57,7 @@ class CharacterStream {
      * @throws IndexOutOfBoundsException if, there are no more characters.
      * // CHECKSTYLE:ON
      */
-    char next() {
+    public char next() {
         if (!hasNext()) {
             throw new IndexOutOfBoundsException("No more next characters!");
         }
@@ -69,7 +71,7 @@ class CharacterStream {
      *
      * @return True if there are no more characters.
      */
-    boolean hasNext() {
+    public boolean hasNext() {
         return index < input.length() - 1;
     }
 
@@ -80,12 +82,37 @@ class CharacterStream {
      *
      * @return The current character.
      */
-    char current() {
+    public char current() {
         if (-1 == index) {
             next();
         }
 
         return input.charAt(index);
+    }
+
+    /**
+     * Look ahead one character w/o advancing the internal pointer for the current character.
+     *
+     * @return the peeked character.
+     * @throws IndexOutOfBoundsException if there are no more character to peek
+     */
+    public char peek() {
+        if (!hasNext()) {
+            throw new IndexOutOfBoundsException("No more next characters!");
+        }
+
+        final char peekedCharacter = next();
+        --index;
+        return peekedCharacter;
+    }
+
+    /**
+     * Get the current index position.
+     *
+     * @return initial value is -1, after first call of next 0 up to input length -1
+     */
+    public int getIndex() {
+        return index;
     }
 
 }

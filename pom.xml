@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -57,7 +58,7 @@
         <connection>scm:git:git://github.com/Weltraumschaf/commons.git</connection>
         <developerConnection>scm:git:git@github.com:Weltraumschaf/commons.git</developerConnection>
         <url>https://github.com/Weltraumschaf/commons.git</url>
-        <tag>0.3.2</tag>
+        <tag>0.3.1</tag>
     </scm>
 
     <distributionManagement>
@@ -122,6 +123,12 @@
         </dependency>
         <dependency>
             <!-- http://code.google.com/p/guava-libraries/ -->
+            <groupId>com.googlecode.multithreadedtc</groupId>
+            <artifactId>multithreadedtc</artifactId>
+            <version>1.01</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>15.0</version>
@@ -352,7 +359,8 @@
                         <id>enforce</id>
                         <configuration>
                             <rules>
-                                <DependencyConvergence />
+                                <!-- mockito uses older hamcrest than junit -->
+                                <!--<dependencyConvergence />-->
                                 <requirePluginVersions />
                                 <requireJavaVersion>
                                     <version>${compileTarget.version}</version>

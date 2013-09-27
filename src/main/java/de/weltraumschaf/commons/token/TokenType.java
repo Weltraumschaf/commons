@@ -9,13 +9,10 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-package de.weltraumschaf.commons.shell;
+package de.weltraumschaf.commons.token;
 
 /**
  * Type of tokens scanned from interactive shell.
- *
- * TODO: Add float: float = [ 0..9 ] '.' { 0..9 } .
- * TODO: Add boolean: boolean = 'true' | 'false' | 'on' | ' off' .
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
@@ -51,6 +48,39 @@ public enum TokenType {
      *
      * Any literal only containing digits: number = 0..9 { 0..9 } .
      */
-    NUMBER;
+    INTEGER,
+    /**
+     * Defines floating point number token type.
+     *
+     * Any literal numbers and .
+     * <pre>
+     * float = [ 0..9 ] '.' { 0..9 } .
+     * </pre>
+     */
+    FLOAT,
+    /**
+     * Defines boolean token type.
+     */
+    BOOLEAN,
+    /**
+     * End of line token.
+     */
+    EOL,
+    /**
+     * End of file token.
+     */
+    EOF,
+    /**
+     * Comment token.
+     */
+    COMMENT,
+    /**
+     * Operator token.
+     */
+    OPERATOR,
+    /**
+     * Null token.
+     */
+    NULL;
 
 }

@@ -12,6 +12,7 @@
 package de.weltraumschaf.commons.shell;
 
 import com.google.common.collect.Maps;
+import de.weltraumschaf.commons.token.Token;
 import java.util.Map;
 
 /**
@@ -73,7 +74,6 @@ public abstract class LiteralCommandMap {
     /**
      * Determines the appropriate main command type for given string token.
      *
-     * You should check with {@link #isCommand(de.weltraumschaf.commons.shell.Token)} before invocation.
      * Determining a non command token string will result in an exception.
      *
      * @param t token to check
@@ -83,10 +83,10 @@ public abstract class LiteralCommandMap {
      * // CHECKSTYLE:ON
      */
     public final MainCommandType determineCommand(final Token<String> t) {
-        if (! isCommand(t)) {
-            throw new IllegalArgumentException(String.format("'%s' is not a command!", t.getValue()));
+        if (isCommand(t)) {
+            return commands.get(t.getValue());
         }
-        return commands.get(t.getValue());
+        throw new IllegalArgumentException(String.format("'%s' is not a command!", t.getValue()));
     }
 
     /**
@@ -112,7 +112,6 @@ public abstract class LiteralCommandMap {
     /**
      * Determines the appropriate sub command type for given string token.
      *
-     * You should check with {@link #isSubCommand(de.weltraumschaf.commons.shell.Token)} before invocation.
      * Determining a non sub command token string will result in an exception.
      *
      * @param t token to check
@@ -122,11 +121,10 @@ public abstract class LiteralCommandMap {
      * // CHECKSTYLE:ON
      */
     public final SubCommandType determineSubCommand(final Token<String> t) {
-        if (! isSubCommand(t)) {
-            throw new IllegalArgumentException(String.format("'%s' is not a sub command!", t.getValue()));
+        if (isSubCommand(t)) {
+            return subCommands.get(t.getValue());
         }
-
-        return subCommands.get(t.getValue());
+        throw new IllegalArgumentException(String.format("'%s' is not a sub command!", t.getValue()));
     }
 
     /**

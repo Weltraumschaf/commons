@@ -9,7 +9,7 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-package de.weltraumschaf.commons.shell;
+package de.weltraumschaf.commons.characters;
 
 import com.google.common.collect.Sets;
 import java.util.Set;
@@ -25,6 +25,11 @@ public final class CharacterHelper {
      * Special characters allowed in literals.
      */
     private static final Set<Character> SPECIAL_CHARS = Sets.newHashSet('/', '\\', '-');
+    /**
+     * Operator characters.
+     */
+    private static final Set<Character> OPERATORS = Sets.newHashSet('+', '-', '*', '/', '%', '&',
+        '|', '^', '<', '>', '=', ':', '?', '(', ')', '{', '}', '[', ']', '!', '~', '@', '#', '$');
 
     /**
      * Private constructor for pure static utility class.
@@ -104,7 +109,31 @@ public final class CharacterHelper {
      * @return true if character is a quote character, unless false
      */
     public static boolean isQuote(final char character) {
-        return '\'' == character || '"' == character;
+        return isSingleQuote(character) || isDoubleQuote(character);
+    }
+
+    /**
+     * Checks whether a character is a single quote character.
+     *
+     * A single quotes is '.
+     *
+     * @param character a single character
+     * @return true if character is a single quote character, unless false
+     */
+    public static boolean isSingleQuote(final char character) {
+        return '\'' == character;
+    }
+
+    /**
+     * Checks whether a character is a double quote character.
+     *
+     * A single quotes is ".
+     *
+     * @param character a single character
+     * @return true if character is a double quote character, unless false
+     */
+    public static boolean isDoubleQuote(final char character) {
+        return '"' == character;
     }
 
     /**
@@ -117,5 +146,17 @@ public final class CharacterHelper {
      */
     public static boolean isSpecialChar(final char character) {
         return SPECIAL_CHARS.contains(character);
+    }
+
+    /**
+     * Checks whether a character is a operator character.
+     *
+     * See {@link #OPERATORS} for all allowed operator characters.
+     *
+     * @param character a single character
+     * @return true if character is a operator character, unless false
+     */
+    public static boolean isOperator(final char character) {
+        return OPERATORS.contains(character);
     }
 }

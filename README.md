@@ -106,6 +106,11 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 ### Version 0.3.2
 
 - Add ApplicationException and catch it in InvokableAdapter t ouse exit code.
+- Introduce own packages for character/token stuff useful for lexing/parsing.
+- Introduce new token types: FLOAT, BOOLEAN.
+- Renamed token type NUMBER -> INTEGER.
+- Introduce separate methods to determine single/double quote characters.
+- Introduce method for recognizing operator characters.
 
 ## File Signatures
 

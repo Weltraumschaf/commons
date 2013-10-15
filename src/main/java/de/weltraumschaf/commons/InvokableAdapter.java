@@ -57,7 +57,7 @@ public abstract class InvokableAdapter implements Invokable {
     /**
      * I/O streams.
      */
-    private IOStreams ioStreams;
+    private IO ioStreams;
 
     /**
      * Abstraction for {@link System#exit(int)}.
@@ -115,7 +115,7 @@ public abstract class InvokableAdapter implements Invokable {
      * @param invokable Implementation to invoke.
      * @param ioStreams I/O streams.
      */
-    public static void main(final Invokable invokable, final IOStreams ioStreams) {
+    public static void main(final Invokable invokable, final IO ioStreams) {
         main(invokable, ioStreams, false);
     }
 
@@ -130,7 +130,7 @@ public abstract class InvokableAdapter implements Invokable {
      * @param ioStreams I/O streams
      * @param debug print stack trace if true
      */
-    public static void main(final Invokable invokable, final IOStreams ioStreams, final boolean debug) {
+    public static void main(final Invokable invokable, final IO ioStreams, final boolean debug) {
         invokable.setIoStreams(ioStreams);
 
         try {
@@ -171,12 +171,12 @@ public abstract class InvokableAdapter implements Invokable {
     }
 
     @Override
-    public final IOStreams getIoStreams() {
+    public final IO getIoStreams() {
         return ioStreams;
     }
 
     @Override
-    public final void setIoStreams(IOStreams ioStreams) {
+    public final void setIoStreams(final IO ioStreams) {
         this.ioStreams = ioStreams;
     }
 

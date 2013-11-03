@@ -75,8 +75,8 @@
 
     <properties>
         <build.sourceEncoding>UTF-8</build.sourceEncoding>
-        <compileTarget.version>1.6</compileTarget.version>
-        <source.version>1.6</source.version>
+        <compileTarget.version>1.7</compileTarget.version>
+        <source.version>1.7</source.version>
         <maven.version>3.0.3</maven.version>
     </properties>
 
@@ -122,17 +122,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <!-- http://code.google.com/p/guava-libraries/ -->
             <groupId>com.googlecode.multithreadedtc</groupId>
             <artifactId>multithreadedtc</artifactId>
             <version>1.01</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>15.0</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 

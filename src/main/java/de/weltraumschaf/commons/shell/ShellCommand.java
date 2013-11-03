@@ -12,8 +12,8 @@
 package de.weltraumschaf.commons.shell;
 
 import de.weltraumschaf.commons.token.Token;
-import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
+import de.weltraumschaf.commons.guava.Lists;
+import de.weltraumschaf.commons.guava.Objects;
 import java.util.List;
 
 /**

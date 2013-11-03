@@ -11,7 +11,7 @@
  */
 package de.weltraumschaf.commons.shell;
 
-import com.google.common.collect.Maps;
+import de.weltraumschaf.commons.guava.Maps;
 import de.weltraumschaf.commons.token.Token;
 import java.util.Map;
 

@@ -11,7 +11,8 @@
  */
 package de.weltraumschaf.commons.characters;
 
-import com.google.common.collect.Sets;
+
+import de.weltraumschaf.commons.guava.Sets;
 import java.util.Set;
 
 /**

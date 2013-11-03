@@ -1,6 +1,7 @@
 package de.weltraumschaf.commons.guava;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public final class Maps {
 
@@ -42,6 +43,25 @@ public final class Maps {
      */
     public static <K, V> HashMap<K, V> newHashMap() {
         return new HashMap<K, V>();
+    }
+
+    /**
+     * Creates a <i>mutable</i> {@code HashMap} instance with the same mappings as the specified map.
+     *
+     * <p>
+     * <b>Note:</b> if mutability is not required, use {@link
+     * ImmutableMap#copyOf(Map)} instead.
+     *
+     * <p>
+     * <b>Note:</b> if {@code K} is an {@link Enum} type, use {@link
+     * #newEnumMap} instead.
+     *
+     * @param map the mappings to be placed in the new map
+     * @return a new {@code HashMap} initialized with the mappings from {@code
+     *         map}
+     */
+    public static <K, V> HashMap<K, V> newHashMap(Map<? extends K, ? extends V> map) {
+        return new HashMap<K, V>(map);
     }
 
 }

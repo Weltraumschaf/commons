@@ -1,8 +1,41 @@
+/*
+ * Copyright (C) 2007 The Guava Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.weltraumschaf.commons.guava;
 
 import java.util.Arrays;
 
+/**
+ * Helper functions that can operate on any {@code Object}.
+ *
+ * <p>
+ * See the Guava User Guide on <a
+ * href="http://code.google.com/p/guava-libraries/wiki/CommonObjectUtilitiesExplained">writing {@code Object} methods
+ * with {@code Objects}</a>.
+ *
+ * @author Laurence Gonsalves
+ * @since 2.0 (imported from Google Collections Library)
+ */
 public final class Objects {
+
+    /**
+     * Hidden for pure static facotry.
+     */
+    private Objects() {
+        super();
+    }
 
     /**
      * Determines whether two possibly-null objects are equal. Returns:
@@ -17,7 +50,7 @@ public final class Objects {
      * <p>
      * This assumes that any non-null objects passed to this function conform to the {@code equals()} contract.
      */
-    public static boolean equal(Object a, Object b) {
+    public static boolean equal(final Object a, final Object b) {
         return a == b || (a != null && a.equals(b));
     }
 
@@ -38,7 +71,7 @@ public final class Objects {
      * <b>Warning</b>: When a single object is supplied, the returned hash code does not equal the hash code of that
      * object.
      */
-    public static int hashCode(Object... objects) {
+    public static int hashCode(final Object... objects) {
         return Arrays.hashCode(objects);
     }
 
@@ -82,7 +115,7 @@ public final class Objects {
      * @param self the object to generate the string for (typically {@code this}), used only for its class name
      * @since 2.0
      */
-    public static ToStringHelper toStringHelper(Object self) {
+    public static ToStringHelper toStringHelper(final Object self) {
         return new ToStringHelper(simpleName(self.getClass()));
     }
 
@@ -96,7 +129,7 @@ public final class Objects {
      * @param clazz the {@link Class} of the instance
      * @since 7.0 (source-compatible since 2.0)
      */
-    public static ToStringHelper toStringHelper(Class<?> clazz) {
+    public static ToStringHelper toStringHelper(final Class<?> clazz) {
         return new ToStringHelper(simpleName(clazz));
     }
 
@@ -107,7 +140,7 @@ public final class Objects {
      * @param className the name of the instance type
      * @since 7.0 (source-compatible since 2.0)
      */
-    public static ToStringHelper toStringHelper(String className) {
+    public static ToStringHelper toStringHelper(final String className) {
         return new ToStringHelper(className);
     }
 
@@ -118,7 +151,7 @@ public final class Objects {
      * @return the non-null reference that was validated
      * @throws NullPointerException if {@code reference} is null
      */
-    public static <T> T checkNotNull(T reference) {
+    public static <T> T checkNotNull(final T reference) {
         if (reference == null) {
             throw new NullPointerException();
         }
@@ -126,27 +159,27 @@ public final class Objects {
     }
 
     /**
-   * {@link Class#getSimpleName()} is not GWT compatible yet, so we
-   * provide our own implementation.
-   */
-  private static String simpleName(Class<?> clazz) {
-    String name = clazz.getName();
+     * {@link Class#getSimpleName()} is not GWT compatible yet, so we provide our own implementation.
+     */
+    private static String simpleName(final Class<?> clazz) {
+        String name = clazz.getName();
 
-    // the nth anonymous class has a class name ending in "Outer$n"
-    // and local inner classes have names ending in "Outer.$1Inner"
-    name = name.replaceAll("\\$[0-9]+", "\\$");
+        // the nth anonymous class has a class name ending in "Outer$n"
+        // and local inner classes have names ending in "Outer.$1Inner"
+        name = name.replaceAll("\\$[0-9]+", "\\$");
 
-    // we want the name of the inner class all by its lonesome
-    int start = name.lastIndexOf('$');
+        // we want the name of the inner class all by its lonesome
+        int start = name.lastIndexOf('$');
 
-    // if this isn't an inner class, just find the start of the
-    // top level class name.
-    if (start == -1) {
-      start = name.lastIndexOf('.');
+        // if this isn't an inner class, just find the start of the
+        // top level class name.
+        if (start == -1) {
+            start = name.lastIndexOf('.');
+        }
+
+        return name.substring(start + 1);
     }
-    return name.substring(start + 1);
-  }
-  
+
     /**
      * Support class for {@link Objects#toStringHelper}.
      *
@@ -183,7 +216,7 @@ public final class Objects {
          * {@code null}, the string {@code "null"} is used, unless {@link #omitNullValues()} is called, in which case
          * this name/value pair will not be added.
          */
-        public ToStringHelper add(String name, Object value) {
+        public ToStringHelper add(final String name, final Object value) {
             return addHolder(name, value);
         }
 
@@ -192,7 +225,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper add(String name, boolean value) {
+        public ToStringHelper add(final String name, final boolean value) {
             return addHolder(name, String.valueOf(value));
         }
 
@@ -201,7 +234,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper add(String name, char value) {
+        public ToStringHelper add(final String name, final char value) {
             return addHolder(name, String.valueOf(value));
         }
 
@@ -210,7 +243,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper add(String name, double value) {
+        public ToStringHelper add(final String name, final double value) {
             return addHolder(name, String.valueOf(value));
         }
 
@@ -219,7 +252,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper add(String name, float value) {
+        public ToStringHelper add(final String name, final float value) {
             return addHolder(name, String.valueOf(value));
         }
 
@@ -228,7 +261,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper add(String name, int value) {
+        public ToStringHelper add(final String name, final int value) {
             return addHolder(name, String.valueOf(value));
         }
 
@@ -237,7 +270,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper add(String name, long value) {
+        public ToStringHelper add(final String name, final long value) {
             return addHolder(name, String.valueOf(value));
         }
 
@@ -247,7 +280,7 @@ public final class Objects {
          * <p>
          * It is strongly encouraged to use {@link #add(String, Object)} instead and give value a readable name.
          */
-        public ToStringHelper addValue(Object value) {
+        public ToStringHelper addValue(final Object value) {
             return addHolder(value);
         }
 
@@ -259,7 +292,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper addValue(boolean value) {
+        public ToStringHelper addValue(final boolean value) {
             return addHolder(String.valueOf(value));
         }
 
@@ -271,7 +304,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper addValue(char value) {
+        public ToStringHelper addValue(final char value) {
             return addHolder(String.valueOf(value));
         }
 
@@ -283,7 +316,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper addValue(double value) {
+        public ToStringHelper addValue(final double value) {
             return addHolder(String.valueOf(value));
         }
 
@@ -295,7 +328,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper addValue(float value) {
+        public ToStringHelper addValue(final float value) {
             return addHolder(String.valueOf(value));
         }
 
@@ -307,7 +340,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper addValue(int value) {
+        public ToStringHelper addValue(final int value) {
             return addHolder(String.valueOf(value));
         }
 
@@ -319,7 +352,7 @@ public final class Objects {
          *
          * @since 11.0 (source-compatible since 2.0)
          */
-        public ToStringHelper addValue(long value) {
+        public ToStringHelper addValue(final long value) {
             return addHolder(String.valueOf(value));
         }
 
@@ -336,9 +369,9 @@ public final class Objects {
         @Override
         public String toString() {
             // create a copy to keep it consistent in case value changes
-            boolean omitNullValuesSnapshot = omitNullValues;
+            final boolean omitNullValuesSnapshot = omitNullValues;
             String nextSeparator = "";
-            StringBuilder builder = new StringBuilder(32).append(className)
+            final StringBuilder builder = new StringBuilder(32).append(className)
                     .append('{');
             for (ValueHolder valueHolder = holderHead.next; valueHolder != null;
                     valueHolder = valueHolder.next) {
@@ -356,19 +389,19 @@ public final class Objects {
         }
 
         private ValueHolder addHolder() {
-            ValueHolder valueHolder = new ValueHolder();
+            final ValueHolder valueHolder = new ValueHolder();
             holderTail = holderTail.next = valueHolder;
             return valueHolder;
         }
 
-        private ToStringHelper addHolder(Object value) {
-            ValueHolder valueHolder = addHolder();
+        private ToStringHelper addHolder(final Object value) {
+            final ValueHolder valueHolder = addHolder();
             valueHolder.value = value;
             return this;
         }
 
-        private ToStringHelper addHolder(String name, Object value) {
-            ValueHolder valueHolder = addHolder();
+        private ToStringHelper addHolder(final String name, final Object value) {
+            final ValueHolder valueHolder = addHolder();
             valueHolder.value = value;
             valueHolder.name = checkNotNull(name);
             return this;

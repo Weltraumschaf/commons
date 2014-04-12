@@ -17,8 +17,8 @@
         <version>7</version>
     </parent>
 
-    <groupId>de.weltraumschaf</groupId>
-    <artifactId>commons</artifactId>
+    <groupId>de.weltraumschaf.commons</groupId>
+    <artifactId>reactor</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 

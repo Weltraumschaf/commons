@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>de.weltraumschaf</groupId>
-        <artifactId>commons</artifactId>
+        <groupId>de.weltraumschaf.commons</groupId>
+        <artifactId>reactor</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>de.weltraumschaf</groupId>
-    <artifactId>commons-system</artifactId>
+    <groupId>de.weltraumschaf.commons</groupId>
+    <artifactId>system</artifactId>
     <packaging>jar</packaging>
 
     <name>Commons System</name>

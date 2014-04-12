@@ -37,7 +37,7 @@ public interface Invokable {
      * Get stream object for I/O.
      *
      * @return Return always same instance until it was
-     *        {@link #setIoStreams(de.weltraumschaf.commons.IOStreams) reset}.
+     *        {@link #setIoStreams(de.weltraumschaf.commons.application.IO) reset}.
      */
     IO getIoStreams();
 

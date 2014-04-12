@@ -92,7 +92,7 @@ public abstract class InvokableAdapter implements Invokable {
     }
 
     /**
-     * Invokes {@link #main(de.weltraumschaf.commons.Invokable, de.weltraumschaf.commons.IOStreams)
+     * Invokes {@link #main(de.weltraumschaf.commons.application.Invokable, de.weltraumschaf.commons.application.IO) 
      * invokable} with default I/O.
      *
      * @param invokable Implementation to invoke.

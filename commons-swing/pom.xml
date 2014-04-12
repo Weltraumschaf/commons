@@ -19,8 +19,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>de.weltraumschaf</groupId>
-            <artifactId>commons-system</artifactId>
+            <groupId>de.weltraumschaf.commons</groupId>
+            <artifactId>system</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

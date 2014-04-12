@@ -94,8 +94,12 @@
     </prerequisites>
 
     <modules>
+        <module>commons-application</module>
         <module>commons-guava</module>
         <module>commons-legacy</module>
+        <module>commons-shell</module>
+        <module>commons-swing</module>
+        <module>commons-system</module>
     </modules>
 
     <dependencies>

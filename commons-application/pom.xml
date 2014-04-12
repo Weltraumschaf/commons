@@ -16,4 +16,12 @@
     <description>
         TBD
     </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.weltraumschaf</groupId>
+            <artifactId>commons-system</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

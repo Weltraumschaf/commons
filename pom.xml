@@ -97,7 +97,6 @@
         <module>commons-application</module>
         <module>commons-experimental</module>
         <module>commons-guava</module>
-        <module>commons-legacy</module>
         <module>commons-shell</module>
         <module>commons-swing</module>
         <module>commons-system</module>

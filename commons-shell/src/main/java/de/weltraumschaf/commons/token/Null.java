@@ -9,7 +9,7 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-package de.weltraumschaf.commons;
+package de.weltraumschaf.commons.token;
 
 /**
  * Represents a null value.

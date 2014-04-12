@@ -11,8 +11,6 @@
  */
 package de.weltraumschaf.commons.token;
 
-import de.weltraumschaf.commons.Null;
-
 /**
  * Factory to create tokens.
  *

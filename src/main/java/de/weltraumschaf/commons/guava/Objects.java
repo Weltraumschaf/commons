@@ -31,10 +31,11 @@ import java.util.Arrays;
 public final class Objects {
 
     /**
-     * Hidden for pure static facotry.
+     * Hidden for pure static factory.
      */
     private Objects() {
         super();
+        throw new UnsupportedOperationException("Constructor must not be called by reflection!");
     }
 
     /**
@@ -49,6 +50,7 @@ public final class Objects {
      *
      * <p>
      * This assumes that any non-null objects passed to this function conform to the {@code equals()} contract.
+     * </p>
      */
     public static boolean equal(final Object a, final Object b) {
         return a == b || (a != null && a.equals(b));
@@ -66,10 +68,12 @@ public final class Objects {
      *   public int hashCode() {
      *     return Objects.hashCode(getX(), getY(), getZ());
      *   }}</pre>
+     *</p>
      *
      * <p>
-     * <b>Warning</b>: When a single object is supplied, the returned hash code does not equal the hash code of that
+     * <strong>Warning</strong>: When a single object is supplied, the returned hash code does not equal the hash code of that
      * object.
+     * </p>
      */
     public static int hashCode(final Object... objects) {
         return Arrays.hashCode(objects);
@@ -108,9 +112,11 @@ public final class Objects {
      *       .add("y", null)
      *       .toString();
      *   }}</pre>
+     * </p>
      *
      * <p>
      * Note that in GWT, class names are often obfuscated.
+     * </p>
      *
      * @param self the object to generate the string for (typically {@code this}), used only for its class name
      * @since 2.0
@@ -125,7 +131,8 @@ public final class Objects {
      *
      * <p>
      * Note that in GWT, class names are often obfuscated.
-     *
+     * </p>
+     * 
      * @param clazz the {@link Class} of the instance
      * @since 7.0 (source-compatible since 2.0)
      */

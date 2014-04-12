@@ -28,10 +28,11 @@ import java.util.Iterator;
 final class Iterators {
 
     /**
-     * Hidden for pure static facotry.
+     * Hidden for pure static factory.
      */
     private Iterators() {
         super();
+        throw new UnsupportedOperationException("Constructor must not be called by reflection!");
     }
 
     /**

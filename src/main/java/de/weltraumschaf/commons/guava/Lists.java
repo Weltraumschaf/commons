@@ -30,18 +30,15 @@ import java.util.Iterator;
 public final class Lists {
 
     /**
-     * Hidden for pure static facotry.
+     * Hidden for pure static factory.
      */
     private Lists() {
         super();
+        throw new UnsupportedOperationException("Constructor must not be called by reflection!");
     }
 
     /**
      * Creates a <i>mutable</i>, empty {@code ArrayList} instance.
-     *
-     * <p>
-     * <b>Note:</b> if mutability is not required, use {@link
-     * ImmutableList#of()} instead.
      *
      * @return a new, empty {@code ArrayList}
      */
@@ -51,10 +48,6 @@ public final class Lists {
 
     /**
      * Creates a <i>mutable</i> {@code ArrayList} instance containing the given elements.
-     *
-     * <p>
-     * <b>Note:</b> if mutability is not required and the elements are non-null, use
-     * {@link ImmutableList#copyOf(Iterator)} instead.
      *
      * @param elements the elements that the list should contain, in order
      * @return a new {@code ArrayList} containing those elements
@@ -72,10 +65,6 @@ public final class Lists {
 
     /**
      * Creates a <i>mutable</i> {@code ArrayList} instance containing the given elements.
-     *
-     * <p>
-     * <b>Note:</b> if mutability is not required and the elements are non-null, use
-     * {@link ImmutableList#copyOf(Iterator)} instead.
      *
      * @param elements the elements that the list should contain, in order
      * @return a new {@code ArrayList} containing those elements

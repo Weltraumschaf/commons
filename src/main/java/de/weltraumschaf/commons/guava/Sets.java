@@ -29,22 +29,16 @@ import java.util.HashSet;
 public final class Sets {
 
     /**
-     * Hidden for pure static facotry.
+     * Hidden for pure static factory.
      */
     private Sets() {
         super();
+        throw new UnsupportedOperationException("Constructor must not be called by reflection!");
     }
 
     /**
-   * Creates a <i>mutable</i> {@code HashSet} instance containing the given
+   * Creates a <em>mutable</em> {@code HashSet} instance containing the given
    * elements in unspecified order.
-   *
-   * <p><b>Note:</b> if mutability is not required and the elements are
-   * non-null, use an overload of {@link ImmutableSet#of()} (for varargs) or
-   * {@link ImmutableSet#copyOf(Object[])} (for an array) instead.
-   *
-   * <p><b>Note:</b> if {@code E} is an {@link Enum} type, use {@link
-   * EnumSet#of(Enum, Enum[])} instead.
    *
    * @param elements the elements that the set should contain
    * @return a new {@code HashSet} containing those elements (minus duplicates)
@@ -57,7 +51,7 @@ public final class Sets {
 
     /**
    * Creates a {@code HashSet} instance, with a high enough "initial capacity"
-   * that it <i>should</i> hold {@code expectedSize} elements without growth.
+   * that it <em>should</em> hold {@code expectedSize} elements without growth.
    * This behavior cannot be broadly guaranteed, but it is observed to be true
    * for OpenJDK 1.6. It also can't be guaranteed that the method isn't
    * inadvertently <i>oversizing</i> the returned set.

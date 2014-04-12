@@ -28,10 +28,11 @@ import java.util.Collection;
 final class Collections2 {
 
     /**
-     * Hidden for pure static facotry.
+     * Hidden for pure static factory.
      */
     private Collections2() {
         super();
+        throw new UnsupportedOperationException("Constructor must not be called by reflection!");
     }
 
     /**

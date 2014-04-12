@@ -19,8 +19,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>de.weltraumschaf</groupId>
-            <artifactId>commons-guava</artifactId>
+            <groupId>de.weltraumschaf.commons</groupId>
+            <artifactId>guava</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

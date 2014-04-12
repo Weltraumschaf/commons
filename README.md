@@ -26,7 +26,7 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
             <!-- http://weltraumschaf.github.com/commons/ -->
             <groupId>de.weltraumschaf</groupId>
             <artifactId>commons</artifactId>
-            <version>0.3.0</version>
+            <version>0.3.2</version>
         </dependency>
 
         <!-- ... -->
@@ -103,8 +103,9 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][2] pom.xml:
 
 - Allow literals starting with '-', '\\', and '/' in shell command scanner.
 
-### Version 1.0.0
+### Version 0.4.0
 
+- Add ApplicationException and catch it in InvokableAdapter t ouse exit code.
 - Introduce own packages for character/token stuff useful for lexing/parsing.
 - Introduce new token types: FLOAT, BOOLEAN.
 - Renamed token type NUMBER -> INTEGER.

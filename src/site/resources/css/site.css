@@ -10,10 +10,27 @@
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
 
-/**
- * Library of classes used in several projects.
- *
- * <p>This package is a part of the open-source
- * <a href="https://github.com/Weltraumschaf/commons">Commons</a></p>
- */
-package de.weltraumschaf.commons;
+html,
+body,
+button,
+input,
+select,
+textarea {
+    color: #222;
+    background-color: #F5F5F5;
+}
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+.well, .breadcrumb {
+    background-color: #E1E1E1;
+    border: 1px solid #E3E3E3;
+}

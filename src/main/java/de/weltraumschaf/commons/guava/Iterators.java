@@ -1,0 +1,68 @@
+/*
+ * Copyright (C) 2007 The Guava Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package de.weltraumschaf.commons.guava;
+
+import java.util.Collection;
+import java.util.Iterator;
+
+/**
+ * Minimal set of {@code com.google.common.collect.Iterators}.
+ *
+ * @author Kevin Bourrillion
+ * @author Jared Levy
+ * @since 2.0 (imported from Google Collections Library)
+ */
+final class Iterators {
+
+    /**
+     * Hidden for pure static facotry.
+     */
+    private Iterators() {
+        super();
+    }
+
+    /**
+     * Adds all elements in {@code iterator} to {@code collection}. The iterator will be left exhausted: its
+     * {@code hasNext()} method will return {@code false}.
+     *
+     * @return {@code true} if {@code collection} was modified as a result of this operation
+     */
+    public static <T> boolean addAll(final Collection<T> addTo, final Iterator<? extends T> iterator) {
+        checkNotNull(addTo);
+        checkNotNull(iterator);
+        boolean wasModified = false;
+
+        while (iterator.hasNext()) {
+            wasModified |= addTo.add(iterator.next());
+        }
+
+        return wasModified;
+    }
+
+    /**
+     * Ensures that an object reference passed as a parameter to the calling method is not null.
+     *
+     * @param reference an object reference
+     * @return the non-null reference that was validated
+     * @throws NullPointerException if {@code reference} is null
+     */
+    public static <T> T checkNotNull(final T reference) {
+        if (reference == null) {
+            throw new NullPointerException();
+        }
+        return reference;
+    }
+}

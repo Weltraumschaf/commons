@@ -39,14 +39,14 @@ public interface Invokable {
      * @return Return always same instance until it was
      *        {@link #setIoStreams(de.weltraumschaf.commons.IOStreams) reset}.
      */
-    IOStreams getIoStreams();
+    IO getIoStreams();
 
     /**
      * Set stream object for I/O.
      *
      * @param ioStreams Stream object.
      */
-    void setIoStreams(IOStreams ioStreams);
+    void setIoStreams(IO ioStreams);
 
     /**
      * Exits the invokable.

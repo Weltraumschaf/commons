@@ -14,7 +14,7 @@ package de.weltraumschaf.commons.shell;
 import de.weltraumschaf.commons.token.Token;
 import de.weltraumschaf.commons.characters.CharacterStream;
 import de.weltraumschaf.commons.characters.CharacterHelper;
-import com.google.common.collect.Lists;
+import de.weltraumschaf.commons.guava.Lists;
 import de.weltraumschaf.commons.token.Tokens;
 import java.util.List;
 

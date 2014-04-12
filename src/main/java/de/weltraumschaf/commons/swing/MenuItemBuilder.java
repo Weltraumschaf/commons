@@ -11,8 +11,11 @@
  */
 package de.weltraumschaf.commons.swing;
 
+import de.weltraumschaf.commons.system.OperatingSystem;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
 /**
  * Builder to create a menu item.
@@ -22,6 +25,10 @@ import javax.swing.JMenuItem;
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class MenuItemBuilder {
+    /**
+     * Used for OS specific differences.
+     */
+    private static final OperatingSystem OS = OperatingSystem.determine(System.getProperty("os.name", ""));
 
     /**
      * The built item.
@@ -64,6 +71,25 @@ public final class MenuItemBuilder {
      */
     public MenuItemBuilder addListener(final ActionListener listener) {
         menuItem.addActionListener(listener);
+        return this;
+    }
+
+    /**
+     * Add an accelerator key.
+     *
+     * For Mac OS with mask {@link KeyEvent#META_DOWN_MASK} for all other systems
+     * {@link KeyEvent#CTRL_DOWN_MASK}.
+     *
+     * @param accelerator Accelerator key character.
+     * @return Returns the builder itself.
+     */
+    public MenuItemBuilder setAccelerator(final char accelerator) {
+        if (OperatingSystem.MACOSX == OS) {
+            menuItem.setAccelerator(KeyStroke.getKeyStroke(accelerator, KeyEvent.META_DOWN_MASK));
+        } else {
+            menuItem.setAccelerator(KeyStroke.getKeyStroke(accelerator, KeyEvent.CTRL_DOWN_MASK));
+        }
+
         return this;
     }
 

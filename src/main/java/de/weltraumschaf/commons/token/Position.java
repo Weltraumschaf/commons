@@ -11,7 +11,7 @@
  */
 package de.weltraumschaf.commons.token;
 
-import com.google.common.base.Objects;
+import de.weltraumschaf.commons.guava.Objects;
 
 /**
  * Represents a token position in the source string.

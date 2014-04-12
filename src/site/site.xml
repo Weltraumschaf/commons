@@ -56,6 +56,7 @@
         <menu name="${project.name}">
             <item name="Home" href="index.html"/>
         </menu>
+        <menu ref="modules"/>
         <menu name="Reports" ref="reports"/>
     </body>
 </project>

@@ -104,7 +104,7 @@ public class SoftCache<K, V> {
      *
      * @param f must not be {@code null}
      */
-    public void finder(final Finder f) {
+    public void finder(final Finder<K, V> f) {
         if (null == f) {
             throw new NullPointerException("Parameter 'f' must not be null!");
         }

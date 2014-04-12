@@ -134,6 +134,20 @@ public class DefaultScannerTest {
     }
 
     @Test
+    public void scan_lineWithLiteralStartingWithNumber() throws SyntaxException {
+        final List<Token> tokens = sut.scan("192.168.1.1 127.0.0.1\n");
+
+        assertThat(tokens.size(), is(2));
+        Token<String> token = tokens.get(0);
+        assertThat(token.getType(), is(TokenType.LITERAL));
+        assertThat(token.getValue(), is("192.168.1.1"));
+
+        token = tokens.get(1);
+        assertThat(token.getType(), is(TokenType.LITERAL));
+        assertThat(token.getValue(), is("127.0.0.1"));
+    }
+
+    @Test
     public void scan_lineWithMultipleLiterals() throws SyntaxException {
         final List<Token> tokens = sut.scan("loo l-ar laz_1");
 
@@ -243,9 +257,13 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_lineWithMaliciousNumber() throws SyntaxException {
-        thrown.expect(SyntaxException.class);
-        thrown.expectMessage("Bad character 'f' in number starting with '1234'!");
-        sut.scan("1234foo");
+        List<Token> tokens = sut.scan("1234foo");
+
+        assertThat(tokens.size(), is(1));
+        final Token<String> strToken = tokens.get(0);
+
+        assertThat(strToken.getType(), is(TokenType.LITERAL));
+        assertThat(strToken.getValue(), is("1234foo"));
     }
 
     private enum TestMainType implements MainCommandType {

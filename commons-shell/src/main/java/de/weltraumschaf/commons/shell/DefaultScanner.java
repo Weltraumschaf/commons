@@ -98,7 +98,10 @@ class DefaultScanner implements Scanner {
      * @return Return string type token
      */
     private Token scanLiteral(final CharacterStream characterStream) {
-        final StringBuilder value = new StringBuilder();
+        return scanLiteral(characterStream, new StringBuilder());
+    }
+
+    private Token scanLiteral(final CharacterStream characterStream, final StringBuilder value) {
         value.append(characterStream.current());
 
         while (characterStream.hasNext()) {
@@ -140,8 +143,7 @@ class DefaultScanner implements Scanner {
             }
 
             if (! CharacterHelper.isNum(currentChar)) {
-                throw new SyntaxException(String.format("Bad character '%s' in number starting with '%s'!",
-                                                        currentChar, value.toString()));
+                return scanLiteral(characterStream, value);
             }
 
             value.append(currentChar);

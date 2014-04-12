@@ -12,6 +12,7 @@
 
 package de.weltraumschaf.commons.concurrent;
 
+import de.weltraumschaf.commons.guava.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -128,10 +129,7 @@ class ConcurrentQueue<E> implements Queue<E> {
 
         @Override
         public int hashCode() {
-            int hash = 7;
-            hash = 47 * hash + (this.element != null ? this.element.hashCode() : 0);
-            hash = 47 * hash + (this.next != null ? this.next.hashCode() : 0);
-            return hash;
+            return Objects.hashCode(element, next);
         }
 
         @Override
@@ -140,17 +138,8 @@ class ConcurrentQueue<E> implements Queue<E> {
                 return false;
             }
 
-            final Entry<T> other = (Entry<T>) obj;
-
-            if (this.element != other.element && (this.element == null || !this.element.equals(other.element))) {
-                return false;
-            }
-
-            if (this.next != other.next && (this.next == null || !this.next.equals(other.next))) {
-                return false;
-            }
-
-            return true;
+            final Entry other = (Entry) obj;
+            return Objects.equal(element, other.element) && Objects.equal(next, other.next);
         }
 
         @Override

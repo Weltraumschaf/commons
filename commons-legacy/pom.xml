@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.weltraumschaf</groupId>
+        <artifactId>commons</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>de.weltraumschaf</groupId>
+    <artifactId>commons-legacy</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Commons Legacy</name>
+    <description>
+        The old stuff not yet in an other module.
+    </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.weltraumschaf</groupId>
+            <artifactId>commons-guava</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+</project>

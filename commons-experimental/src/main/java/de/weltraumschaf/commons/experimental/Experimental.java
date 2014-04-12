@@ -10,7 +10,7 @@
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
 
-package de.weltraumschaf.commons;
+package de.weltraumschaf.commons.experimental;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

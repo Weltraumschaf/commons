@@ -17,11 +17,11 @@
         The old stuff not yet in an other module.
     </description>
 
-    <dependencies>
+<!--    <dependencies>
         <dependency>
             <groupId>de.weltraumschaf</groupId>
             <artifactId>commons-guava</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
-    </dependencies>
+    </dependencies>-->
 </project>

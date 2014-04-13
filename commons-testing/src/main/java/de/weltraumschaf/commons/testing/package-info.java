@@ -11,14 +11,10 @@
  */
 
 /**
- * Sub package for experimental API.
+ * Sub package for utilities and helpers for testing.
  *
  * <p>
  * This package is a part of the open-source <a href="https://github.com/Weltraumschaf/commons">Commons</a>
  * </p>
- *
- * <p>
- * This API may change dramatically w/o backward compatibility and maybe vanish completely.
- * </p>
  */
-package de.weltraumschaf.commons.experimental;
+package de.weltraumschaf.commons.testing;

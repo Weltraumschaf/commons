@@ -11,9 +11,15 @@
  */
 
 /**
- * Minimal set of classes from <a href="http://code.google.com/p/guava-libraries/">Google Guava</a>.
+ * Sub package with minimal set of classes from <a href="http://code.google.com/p/guava-libraries/">Google Guava</a>.
  *
+ * <p>
+ * This package is a part of the open-source <a href="https://github.com/Weltraumschaf/commons">Commons</a>
+ * </p>
+ *
+ * <p>
  * If only used a bunch of classes then avoid linking the whole stuff to minimize
  * footprint of final JARs.
+ * </p>
  */
 package de.weltraumschaf.commons.guava;

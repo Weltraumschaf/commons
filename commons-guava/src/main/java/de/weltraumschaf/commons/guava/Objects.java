@@ -182,6 +182,7 @@ public final class Objects {
      * {@link Class#getSimpleName()} is not GWT compatible yet, so we provide our own implementation.
      *
      * @param clazz the {@link Class} of the instance
+     * @return never {@code null}
      */
     private static String simpleName(final Class<?> clazz) {
         String name = clazz.getName();
@@ -230,7 +231,7 @@ public final class Objects {
         /**
          * Whether {@code null} values should be omitted or not.
          */
-        private boolean omitNullValues = false;
+        private boolean omitNullValues;
 
         /**
          * Use {@link Objects#toStringHelper(Object)} to create an instance.

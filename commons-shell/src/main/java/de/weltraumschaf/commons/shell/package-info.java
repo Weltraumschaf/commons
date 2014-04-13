@@ -26,8 +26,8 @@
  *
  * <p>First define main and sub command types.</p>
  *
- * <pre>
- * public enum MyMainType implements MainCommandType {
+ * // CHECKSTYLE:OFF
+ * <pre>{@code public enum MyMainType implements MainCommandType {
  *
  *     HELP("help"),
  *     FOO("foo"),
@@ -64,12 +64,13 @@
  *         return literal;
  *     }
  * }
- * </pre>
+ * }</pre>
+ * // CHECKSTYLE:ON
  *
  * <p>And then define a literal to command map:</p>
  *
- * <pre>
- * public class MyLiteralCommandMap extends LiteralCommandMap {
+ * // CHECKSTYLE:OFF
+ * <pre>{@code public class MyLiteralCommandMap extends LiteralCommandMap {
  *
  *     public MyLiteralCommandMap() {
  *         super(MySubType.NONE); // Default for main commands w/o sub commands.
@@ -92,12 +93,13 @@
  *         }
  *     }
  * }
- * </pre>
+ * }</pre>
+ * // CHECKSTYLE:ON
  *
  * <p>Now you can implement a simple REPL:</p>
  *
- * <pre>
- * Parser parser = Parsers.newParser(new MyLiteralCommandMap());
+ * // CHECKSTYLE:OFF
+ * <pre>{@code Parser parser = Parsers.newParser(new MyLiteralCommandMap());
  * BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
  *
  * while (true) {
@@ -117,7 +119,8 @@
  * }
  *
  * input.close();
- * </pre>
+ * }</pre>
+ * // CHECKSTYLE:ON
  *
  * <p>If you want to verify the parsed commands, e.g. check if a command has a proper subcommand or arguments
  * you must implement {@link de.weltraumschaf.commons.shell.CommandVerifier} and pass it to the

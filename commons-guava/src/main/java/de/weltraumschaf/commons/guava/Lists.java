@@ -49,6 +49,17 @@ public final class Lists {
     }
 
     /**
+     * Used to avoid http://bugs.sun.com/view_bug.do?bug_id=6558557 problem.
+     *
+     * @param <T> type of elements
+     * @param iterable iterable to cast
+     * @return the iterable casted to collection
+     */
+    private static <T> Collection<T> cast(final Iterable<T> iterable) {
+        return (Collection<T>) iterable;
+    }
+
+    /**
      * Creates a <em>mutable</em> {@link java.util.ArrayList} instance containing the given elements.
      *
      * @param <E> type of elements
@@ -62,7 +73,7 @@ public final class Lists {
 
         // Let ArrayList's sizing logic work, if possible
         return (elements instanceof Collection)
-                ? new ArrayList<E>(Collections2.cast(elements))
+                ? new ArrayList<E>(cast(elements))
                 : newArrayList(elements.iterator());
     }
 

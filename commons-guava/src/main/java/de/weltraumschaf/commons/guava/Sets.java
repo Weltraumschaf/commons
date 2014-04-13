@@ -30,11 +30,38 @@ import java.util.Set;
 public final class Sets {
 
     /**
+     * Capacity ratio.
+     */
+    private static final int THIRD = 3;
+
+    /**
      * Hidden for pure static factory.
      */
     private Sets() {
         super();
         throw new UnsupportedOperationException("Constructor must not be called by reflection!");
+    }
+
+    /**
+     * Returns a capacity that is sufficient to keep the map from being resized as long as it grows no larger than
+     * expectedSize and the load factor is >= its default (0.75).
+     *
+     * @param expectedSize must not be negative
+     * @return not negative
+     */
+    private static int capacity(final int expectedSize) {
+        if (expectedSize < THIRD) {
+            if (!(expectedSize >= 0)) {
+                throw new IllegalArgumentException();
+            }
+            return expectedSize + 1;
+        }
+
+        if (expectedSize < 1 << (Integer.SIZE - 2)) {
+            return expectedSize + expectedSize / THIRD;
+        }
+
+        return Integer.MAX_VALUE; // any large value
     }
 
     /**
@@ -59,13 +86,11 @@ public final class Sets {
      * @param <E> type of elements
      * @param expectedSize the number of elements you expect to add to the returned set
      * @return a new, empty {@code HashSet} with enough capacity to hold {@code
-     *         expectedSize} elements without resizing
-     * CHECKSTYLE:OFF
-     * @throws IllegalArgumentException if {@code expectedSize} is negative
-     * CHECKSTYLE:ON
+     *         expectedSize} elements without resizing CHECKSTYLE:OFF
+     * @throws IllegalArgumentException if {@code expectedSize} is negative CHECKSTYLE:ON
      */
     public static <E> Set<E> newHashSetWithExpectedSize(final int expectedSize) {
-        return new HashSet<E>(Maps.capacity(expectedSize));
+        return new HashSet<E>(capacity(expectedSize));
     }
 
 }

@@ -29,40 +29,12 @@ import java.util.Map;
  */
 public final class Maps {
 
-
-    /**
-     * Capacity ratio.
-     */
-    private static final int THIRD = 3;
-
     /**
      * Hidden for pure static factory.
      */
     private Maps() {
         super();
         throw new UnsupportedOperationException("Constructor must not be called by reflection!");
-    }
-
-    /**
-     * Returns a capacity that is sufficient to keep the map from being resized as long as it grows no larger than
-     * expectedSize and the load factor is >= its default (0.75).
-     *
-     * @param expectedSize must not be negative
-     * @return not negative
-     */
-    static int capacity(final int expectedSize) {
-        if (expectedSize < THIRD) {
-            if (!(expectedSize >= 0)) {
-                throw new IllegalArgumentException();
-            }
-            return expectedSize + 1;
-        }
-
-        if (expectedSize < 1 << (Integer.SIZE - 2)) {
-            return expectedSize + expectedSize / THIRD;
-        }
-
-        return Integer.MAX_VALUE; // any large value
     }
 
     /**

@@ -21,3 +21,7 @@ dependency-reduced-pom.xml
 .idea/
 *.iml
 .settings
+
+# NetBeans
+
+nb-configuration.xml

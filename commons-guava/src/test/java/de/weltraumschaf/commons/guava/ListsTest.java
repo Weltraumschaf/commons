@@ -13,7 +13,9 @@
 package de.weltraumschaf.commons.guava;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -47,8 +49,38 @@ public class ListsTest {
         assertThat(l3, is(not(sameInstance(l2))));
     }
 
-    @Test
-    public void newArrayList_Iterable() {
+    @Test(expected = NullPointerException.class)
+    public void newArrayList_Iterable_nullInput() {
+        Lists.newArrayList((Iterable) null);
+    }
+
+    public void newArrayList_Iterable_collectionInput() {
+        final List<String> input = Arrays.asList("foo", "bar", "baz");
+
+        final List<String> l1 = Lists.newArrayList(input);
+        assertThat(l1, is(not(nullValue())));
+        assertThat(l1, is(instanceOf(ArrayList.class)));
+        assertThat(l1, is(equalTo(input)));
+        assertThat(l1, is(not(sameInstance(input))));
+
+        final List<String> l2 = Lists.newArrayList(input);
+        assertThat(l2, is(not(nullValue())));
+        assertThat(l2, is(instanceOf(ArrayList.class)));
+        assertThat(l2, is(not(sameInstance(l1))));
+        assertThat(l2, is(equalTo(input)));
+        assertThat(l2, is(not(sameInstance(input))));
+
+        final List<String> l3 = Lists.newArrayList(input);
+        assertThat(l3, is(not(nullValue())));
+        assertThat(l3, is(instanceOf(ArrayList.class)));
+        assertThat(l3, is(not(sameInstance(l1))));
+        assertThat(l3, is(not(sameInstance(l2))));
+        assertThat(l3, is(equalTo(input)));
+        assertThat(l3, is(not(sameInstance(input))));
+    }
+
+    public void newArrayList_Iterable_iterableInput() {
+
     }
 
     @Test

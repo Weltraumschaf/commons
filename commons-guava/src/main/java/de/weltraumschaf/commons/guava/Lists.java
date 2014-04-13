@@ -18,6 +18,7 @@ package de.weltraumschaf.commons.guava;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Minimal set of {@code com.google.common.collect.Lists}.
@@ -43,7 +44,7 @@ public final class Lists {
      * @param <E> type of elements
      * @return a new, empty {@code ArrayList}
      */
-    public static <E> ArrayList<E> newArrayList() {
+    public static <E> List<E> newArrayList() {
         return new ArrayList<E>();
     }
 
@@ -54,7 +55,7 @@ public final class Lists {
      * @param elements the elements that the list should contain, in order
      * @return a new {@code ArrayList} containing those elements
      */
-    public static <E> ArrayList<E> newArrayList(final Iterable<? extends E> elements) {
+    public static <E> List<E> newArrayList(final Iterable<? extends E> elements) {
         if (elements == null) {
             throw new NullPointerException();
         }
@@ -72,8 +73,8 @@ public final class Lists {
      * @param elements the elements that the list should contain, in order
      * @return a new {@code ArrayList} containing those elements
      */
-    public static <E> ArrayList<E> newArrayList(final Iterator<? extends E> elements) {
-        final ArrayList<E> list = newArrayList();
+    public static <E> List<E> newArrayList(final Iterator<? extends E> elements) {
+        final List<E> list = newArrayList();
         Iterators.addAll(list, elements);
         return list;
     }

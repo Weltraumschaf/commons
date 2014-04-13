@@ -9,8 +9,9 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-package de.weltraumschaf.commons.application;
+package de.weltraumschaf.commons.testing;
 
+import de.weltraumschaf.commons.testing.CapturingOutputStream;
 import java.io.PrintStream;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.After;

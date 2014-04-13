@@ -9,7 +9,7 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-package de.weltraumschaf.commons.application;
+package de.weltraumschaf.commons.testing;
 
 import java.io.IOException;
 import java.io.OutputStream;

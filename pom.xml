@@ -104,12 +104,13 @@
 
     <modules>
         <module>commons-application</module>
+        <module>commons-concurrent</module>
         <module>commons-experimental</module>
         <module>commons-guava</module>
         <module>commons-shell</module>
         <module>commons-swing</module>
         <module>commons-system</module>
-        <module>commons-concurrent</module>
+        <module>commons-testing</module>
     </modules>
 
     <dependencies>

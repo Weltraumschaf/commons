@@ -14,15 +14,17 @@ package de.weltraumschaf.commons.characters;
 /**
  * Access a string as stream of characters.
  *
+ * <p>
  * Example:
- * <code>
- * CharacterStream characterStream = new CharacterStream("...");
+ * <pre>
+ * {@code final CharacterStream characterStream = new CharacterStream("...");
  *
  * while (characterStream.hasNext()) {
  *     final char currentChar = characterStream.next();
  *     // Do something with the current char.
  * }
- * </code>
+ * }</pre>
+ * </p>
  *
  * TODO: Implement line and column.
  *
@@ -94,7 +96,9 @@ public class CharacterStream {
      * Look ahead one character w/o advancing the internal pointer for the current character.
      *
      * @return the peeked character.
+     * // CHECKSTYLE:OFF
      * @throws IndexOutOfBoundsException if there are no more character to peek
+     * // CHECKSTYLE:ON
      */
     public char peek() {
         if (!hasNext()) {

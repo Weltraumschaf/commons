@@ -38,8 +38,9 @@ public final class Lists {
     }
 
     /**
-     * Creates a <i>mutable</i>, empty {@code ArrayList} instance.
+     * Creates a <em>mutable</em>, empty {@link java.util.ArrayList} instance.
      *
+     * @param <E> type of elements
      * @return a new, empty {@code ArrayList}
      */
     public static <E> ArrayList<E> newArrayList() {
@@ -47,8 +48,9 @@ public final class Lists {
     }
 
     /**
-     * Creates a <i>mutable</i> {@code ArrayList} instance containing the given elements.
+     * Creates a <em>mutable</em> {@link java.util.ArrayList} instance containing the given elements.
      *
+     * @param <E> type of elements
      * @param elements the elements that the list should contain, in order
      * @return a new {@code ArrayList} containing those elements
      */
@@ -64,8 +66,9 @@ public final class Lists {
     }
 
     /**
-     * Creates a <i>mutable</i> {@code ArrayList} instance containing the given elements.
+     * Creates a <em>mutable</em> {@link java.util.ArrayList} instance containing the given elements.
      *
+     * @param <E> type of elements
      * @param elements the elements that the list should contain, in order
      * @return a new {@code ArrayList} containing those elements
      */

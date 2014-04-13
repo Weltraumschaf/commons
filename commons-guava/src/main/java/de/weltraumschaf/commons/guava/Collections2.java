@@ -37,6 +37,10 @@ final class Collections2 {
 
     /**
      * Used to avoid http://bugs.sun.com/view_bug.do?bug_id=6558557
+     *
+     * @param <T> type of elements
+     * @param iterable iterable to cast
+     * @return the iterable casted to collection
      */
     static <T> Collection<T> cast(final Iterable<T> iterable) {
         return (Collection<T>) iterable;

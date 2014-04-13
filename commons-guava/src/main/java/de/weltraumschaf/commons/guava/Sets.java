@@ -37,31 +37,32 @@ public final class Sets {
     }
 
     /**
-   * Creates a <em>mutable</em> {@code HashSet} instance containing the given
-   * elements in unspecified order.
-   *
-   * @param elements the elements that the set should contain
-   * @return a new {@code HashSet} containing those elements (minus duplicates)
-   */
-  public static <E> HashSet<E> newHashSet(E... elements) {
-    HashSet<E> set = newHashSetWithExpectedSize(elements.length);
-    Collections.addAll(set, elements);
-    return set;
-  }
+     * Creates a <em>mutable</em> {@code HashSet} instance containing the given elements in unspecified order.
+     *
+     * @param <E> type of elements
+     * @param elements the elements that the set should contain
+     * @return a new {@code HashSet} containing those elements (minus duplicates)
+     */
+    public static <E> HashSet<E> newHashSet(E... elements) {
+        final HashSet<E> set = newHashSetWithExpectedSize(elements.length);
+        Collections.addAll(set, elements);
+        return set;
+    }
 
     /**
-   * Creates a {@code HashSet} instance, with a high enough "initial capacity"
-   * that it <em>should</em> hold {@code expectedSize} elements without growth.
-   * This behavior cannot be broadly guaranteed, but it is observed to be true
-   * for OpenJDK 1.6. It also can't be guaranteed that the method isn't
-   * inadvertently <i>oversizing</i> the returned set.
-   *
-   * @param expectedSize the number of elements you expect to add to the
-   *        returned set
-   * @return a new, empty {@code HashSet} with enough capacity to hold {@code
-   *         expectedSize} elements without resizing
-   * @throws IllegalArgumentException if {@code expectedSize} is negative
-   */
+     * Creates a {@code HashSet} instance, with a high enough "initial capacity" that it <em>should</em> hold
+     * {@code expectedSize} elements without growth. This behavior cannot be broadly guaranteed, but it is observed to
+     * be true for OpenJDK 1.6. It also can't be guaranteed that the method isn't inadvertently <i>oversizing</i> the
+     * returned set.
+     *
+     * @param <E> type of elements
+     * @param expectedSize the number of elements you expect to add to the returned set
+     * @return a new, empty {@code HashSet} with enough capacity to hold {@code
+     *         expectedSize} elements without resizing
+     * CHECKSTYLE:OFF
+     * @throws IllegalArgumentException if {@code expectedSize} is negative
+     * CHECKSTYLE:ON
+     */
     public static <E> HashSet<E> newHashSetWithExpectedSize(int expectedSize) {
         return new HashSet<E>(Maps.capacity(expectedSize));
     }

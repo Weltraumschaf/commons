@@ -40,6 +40,9 @@ public final class Maps {
     /**
      * Returns a capacity that is sufficient to keep the map from being resized as long as it grows no larger than
      * expectedSize and the load factor is >= its default (0.75).
+     *
+     * @param expectedSize must not be negative
+     * @return not negative
      */
     static int capacity(final int expectedSize) {
         if (expectedSize < 3) {
@@ -59,6 +62,8 @@ public final class Maps {
     /**
      * Creates a <i>mutable</i>, empty {@code HashMap} instance.
      *
+     * @param <K> type of key
+     * @param <V> type of value
      * @return a new, empty {@code HashMap}
      */
     public static <K, V> HashMap<K, V> newHashMap() {
@@ -67,6 +72,9 @@ public final class Maps {
 
     /**
      * Creates a <i>mutable</i> {@code HashMap} instance with the same mappings as the specified map.
+     *
+     * @param <K> type of key
+     * @param <V> type of value
      * @param map the mappings to be placed in the new map
      * @return a new {@code HashMap} initialized with the mappings from {@code
      *         map}

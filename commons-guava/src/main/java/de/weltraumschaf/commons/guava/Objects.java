@@ -50,7 +50,10 @@ public final class Objects {
      *
      * <p>
      * This assumes that any non-null objects passed to this function conform to the {@code equals()} contract.
-     * </p>
+     *
+     * @param a first object to compare
+     * @param b second object to compare
+     * @return {@code true} if a and be are equal, else {@code false}
      */
     public static boolean equal(final Object a, final Object b) {
         return a == b || (a != null && a.equals(b));
@@ -71,9 +74,12 @@ public final class Objects {
      *</p>
      *
      * <p>
-     * <strong>Warning</strong>: When a single object is supplied, the returned hash code does not equal the hash code of that
-     * object.
+     * <strong>Warning</strong>: When a single object is supplied, the returned hash code does not equal the hash code
+     * of that object.
      * </p>
+     *
+     * @param objects objects to hash
+     * @return the has code
      */
     public static int hashCode(final Object... objects) {
         return Arrays.hashCode(objects);
@@ -118,8 +124,9 @@ public final class Objects {
      * Note that in GWT, class names are often obfuscated.
      * </p>
      *
-     * @param self the object to generate the string for (typically {@code this}), used only for its class name
      * @since 2.0
+     * @param self the object to generate the string for (typically {@code this}), used only for its class name
+     * @return never {@code null}, always new instance
      */
     public static ToStringHelper toStringHelper(final Object self) {
         return new ToStringHelper(simpleName(self.getClass()));
@@ -132,9 +139,10 @@ public final class Objects {
      * <p>
      * Note that in GWT, class names are often obfuscated.
      * </p>
-     * 
-     * @param clazz the {@link Class} of the instance
+     *
      * @since 7.0 (source-compatible since 2.0)
+     * @param clazz the {@link Class} of the instance
+     * @return never {@code null}, always new instance
      */
     public static ToStringHelper toStringHelper(final Class<?> clazz) {
         return new ToStringHelper(simpleName(clazz));
@@ -144,8 +152,9 @@ public final class Objects {
      * Creates an instance of {@link ToStringHelper} in the same manner as {@link Objects#toStringHelper(Object)}, but
      * using {@code className} instead of using an instance's {@link Object#getClass()}.
      *
-     * @param className the name of the instance type
      * @since 7.0 (source-compatible since 2.0)
+     * @param className the name of the instance type
+     * @return never {@code null}, always new instance
      */
     public static ToStringHelper toStringHelper(final String className) {
         return new ToStringHelper(className);
@@ -154,6 +163,7 @@ public final class Objects {
     /**
      * Ensures that an object reference passed as a parameter to the calling method is not null.
      *
+     * @param <T> type of reference
      * @param reference an object reference
      * @return the non-null reference that was validated
      * @throws NullPointerException if {@code reference} is null
@@ -167,6 +177,8 @@ public final class Objects {
 
     /**
      * {@link Class#getSimpleName()} is not GWT compatible yet, so we provide our own implementation.
+     *
+     * @param clazz the {@link Class} of the instance
      */
     private static String simpleName(final Class<?> clazz) {
         String name = clazz.getName();
@@ -195,9 +207,21 @@ public final class Objects {
      */
     public static final class ToStringHelper {
 
+        /**
+         * Name of rendered class.
+         */
         private final String className;
-        private ValueHolder holderHead = new ValueHolder();
+        /**
+         * Holds the first member.
+         */
+        private final ValueHolder holderHead = new ValueHolder();
+        /**
+         * Holds the last member.
+         */
         private ValueHolder holderTail = holderHead;
+        /**
+         * Whether {@code null} values should be omitted or not.
+         */
         private boolean omitNullValues = false;
 
         /**
@@ -208,10 +232,12 @@ public final class Objects {
         }
 
         /**
-         * Configures the {@link ToStringHelper} so {@link #toString()} will ignore properties with null value. The
-         * order of calling this method, relative to the {@code add()}/{@code addValue()} methods, is not significant.
+         * Configures the {@link ToStringHelper} so {@link #toString()} will ignore properties with null value.
+         *
+         * The order of calling this method, relative to the {@code add()}/{@code addValue()} methods, is not significant.
          *
          * @since 12.0
+         * @return self for method chaining
          */
         public ToStringHelper omitNullValues() {
             omitNullValues = true;
@@ -219,9 +245,14 @@ public final class Objects {
         }
 
         /**
-         * Adds a name/value pair to the formatted output in {@code name=value} format. If {@code value} is
-         * {@code null}, the string {@code "null"} is used, unless {@link #omitNullValues()} is called, in which case
-         * this name/value pair will not be added.
+         * Adds a name/value pair to the formatted output in {@code name=value} format.
+         *
+         * If {@code value} is {@code null}, the string {@code "null"} is used, unless {@link #omitNullValues()} is
+         * called, in which case this name/value pair will not be added.
+         *
+         * @param name name of property
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper add(final String name, final Object value) {
             return addHolder(name, value);
@@ -231,6 +262,9 @@ public final class Objects {
          * Adds a name/value pair to the formatted output in {@code name=value} format.
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param name name of property
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper add(final String name, final boolean value) {
             return addHolder(name, String.valueOf(value));
@@ -240,6 +274,9 @@ public final class Objects {
          * Adds a name/value pair to the formatted output in {@code name=value} format.
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param name name of property
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper add(final String name, final char value) {
             return addHolder(name, String.valueOf(value));
@@ -249,6 +286,9 @@ public final class Objects {
          * Adds a name/value pair to the formatted output in {@code name=value} format.
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param name name of property
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper add(final String name, final double value) {
             return addHolder(name, String.valueOf(value));
@@ -258,6 +298,9 @@ public final class Objects {
          * Adds a name/value pair to the formatted output in {@code name=value} format.
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param name name of property
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper add(final String name, final float value) {
             return addHolder(name, String.valueOf(value));
@@ -267,6 +310,9 @@ public final class Objects {
          * Adds a name/value pair to the formatted output in {@code name=value} format.
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param name name of property
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper add(final String name, final int value) {
             return addHolder(name, String.valueOf(value));
@@ -276,6 +322,9 @@ public final class Objects {
          * Adds a name/value pair to the formatted output in {@code name=value} format.
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param name name of property
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper add(final String name, final long value) {
             return addHolder(name, String.valueOf(value));
@@ -286,6 +335,10 @@ public final class Objects {
          *
          * <p>
          * It is strongly encouraged to use {@link #add(String, Object)} instead and give value a readable name.
+         * </p>
+         *
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper addValue(final Object value) {
             return addHolder(value);
@@ -296,8 +349,11 @@ public final class Objects {
          *
          * <p>
          * It is strongly encouraged to use {@link #add(String, boolean)} instead and give value a readable name.
+         * </p>
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper addValue(final boolean value) {
             return addHolder(String.valueOf(value));
@@ -308,8 +364,11 @@ public final class Objects {
          *
          * <p>
          * It is strongly encouraged to use {@link #add(String, char)} instead and give value a readable name.
+         * </p>
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper addValue(final char value) {
             return addHolder(String.valueOf(value));
@@ -320,8 +379,11 @@ public final class Objects {
          *
          * <p>
          * It is strongly encouraged to use {@link #add(String, double)} instead and give value a readable name.
+         * </p>
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper addValue(final double value) {
             return addHolder(String.valueOf(value));
@@ -332,8 +394,11 @@ public final class Objects {
          *
          * <p>
          * It is strongly encouraged to use {@link #add(String, float)} instead and give value a readable name.
+         * </p>
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper addValue(final float value) {
             return addHolder(String.valueOf(value));
@@ -344,8 +409,11 @@ public final class Objects {
          *
          * <p>
          * It is strongly encouraged to use {@link #add(String, int)} instead and give value a readable name.
+         * </p>
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper addValue(final int value) {
             return addHolder(String.valueOf(value));
@@ -356,22 +424,27 @@ public final class Objects {
          *
          * <p>
          * It is strongly encouraged to use {@link #add(String, long)} instead and give value a readable name.
+         * </p>
          *
          * @since 11.0 (source-compatible since 2.0)
+         * @param value value of property
+         * @return self for method chaining
          */
         public ToStringHelper addValue(final long value) {
             return addHolder(String.valueOf(value));
         }
 
         /**
-         * Returns a string in the format specified by {@link
-         * Objects#toStringHelper(Object)}.
+         * Returns a string in the format specified by {@link Objects#toStringHelper(Object)}.
          *
          * <p>
          * After calling this method, you can keep adding more properties to later call toString() again and get a more
          * complete representation of the same object; but properties cannot be removed, so this only allows limited
          * reuse of the helper instance. The helper allows duplication of properties (multiple name/value pairs with the
          * same name can be added).
+         * </p>
+         *
+         * @return never {@code null}
          */
         @Override
         public String toString() {
@@ -380,6 +453,7 @@ public final class Objects {
             String nextSeparator = "";
             final StringBuilder builder = new StringBuilder(32).append(className)
                     .append('{');
+
             for (ValueHolder valueHolder = holderHead.next; valueHolder != null;
                     valueHolder = valueHolder.next) {
                 if (!omitNullValuesSnapshot || valueHolder.value != null) {
@@ -389,24 +463,44 @@ public final class Objects {
                     if (valueHolder.name != null) {
                         builder.append(valueHolder.name).append('=');
                     }
+
                     builder.append(valueHolder.value);
                 }
             }
+
             return builder.append('}').toString();
         }
 
+        /**
+         * Links a new {@link ValueHolder} to the tail of the values linked list and returns it.
+         *
+         * @return never {@code null}, always new instance
+         */
         private ValueHolder addHolder() {
             final ValueHolder valueHolder = new ValueHolder();
             holderTail = holderTail.next = valueHolder;
             return valueHolder;
         }
 
+        /**
+         * Adds an unnamed value to the formatted output.
+         *
+         * @param value value of property
+         * @return self for method chaining
+         */
         private ToStringHelper addHolder(final Object value) {
             final ValueHolder valueHolder = addHolder();
             valueHolder.value = value;
             return this;
         }
 
+        /**
+         * Adds an named value to the formatted output.
+         *
+         * @param name name of property
+         * @param value value of property
+         * @return self for method chaining
+         */
         private ToStringHelper addHolder(final String name, final Object value) {
             final ValueHolder valueHolder = addHolder();
             valueHolder.value = value;
@@ -414,10 +508,21 @@ public final class Objects {
             return this;
         }
 
+        /**
+         * Value class to hold properties.
+         */
         private static final class ValueHolder {
-
+            /**
+             * Name of property.
+             */
             String name;
+            /**
+             * Value of property.
+             */
             Object value;
+            /**
+             * Next property.
+             */
             ValueHolder next;
         }
     }

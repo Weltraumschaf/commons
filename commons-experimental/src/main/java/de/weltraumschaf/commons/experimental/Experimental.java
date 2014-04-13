@@ -23,7 +23,7 @@ import java.lang.annotation.Target;
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 @Retention(RetentionPolicy.SOURCE)
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target({ElementType.TYPE, ElementType.METHOD })
 public @interface Experimental {
 
 }

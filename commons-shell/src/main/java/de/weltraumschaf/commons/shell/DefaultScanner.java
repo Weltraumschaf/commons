@@ -101,6 +101,13 @@ class DefaultScanner implements Scanner {
         return scanLiteral(characterStream, new StringBuilder());
     }
 
+    /**
+     * Recognize alpha numeric string tokens until next white space character.
+     *
+     * @param characterStream input line to scan
+     * @param value collects the token string, must not be {@code null}
+     * @return Return string type token
+     */
     private Token scanLiteral(final CharacterStream characterStream, final StringBuilder value) {
         value.append(characterStream.current());
 

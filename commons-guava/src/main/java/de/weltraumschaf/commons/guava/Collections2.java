@@ -36,7 +36,7 @@ final class Collections2 {
     }
 
     /**
-     * Used to avoid http://bugs.sun.com/view_bug.do?bug_id=6558557
+     * Used to avoid http://bugs.sun.com/view_bug.do?bug_id=6558557 problem.
      *
      * @param <T> type of elements
      * @param iterable iterable to cast

@@ -17,6 +17,7 @@ package de.weltraumschaf.commons.guava;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Minimal set of {@code com.google.common.collect.Sets}.
@@ -43,8 +44,8 @@ public final class Sets {
      * @param elements the elements that the set should contain
      * @return a new {@code HashSet} containing those elements (minus duplicates)
      */
-    public static <E> HashSet<E> newHashSet(E... elements) {
-        final HashSet<E> set = newHashSetWithExpectedSize(elements.length);
+    public static <E> Set<E> newHashSet(final E... elements) {
+        final Set<E> set = newHashSetWithExpectedSize(elements.length);
         Collections.addAll(set, elements);
         return set;
     }
@@ -63,7 +64,7 @@ public final class Sets {
      * @throws IllegalArgumentException if {@code expectedSize} is negative
      * CHECKSTYLE:ON
      */
-    public static <E> HashSet<E> newHashSetWithExpectedSize(int expectedSize) {
+    public static <E> Set<E> newHashSetWithExpectedSize(final int expectedSize) {
         return new HashSet<E>(Maps.capacity(expectedSize));
     }
 

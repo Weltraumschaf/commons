@@ -29,6 +29,12 @@ import java.util.Map;
  */
 public final class Maps {
 
+
+    /**
+     * Capacity ratio.
+     */
+    private static final int THIRD = 3;
+
     /**
      * Hidden for pure static factory.
      */
@@ -45,7 +51,7 @@ public final class Maps {
      * @return not negative
      */
     static int capacity(final int expectedSize) {
-        if (expectedSize < 3) {
+        if (expectedSize < THIRD) {
             if (!(expectedSize >= 0)) {
                 throw new IllegalArgumentException();
             }
@@ -53,7 +59,7 @@ public final class Maps {
         }
 
         if (expectedSize < 1 << (Integer.SIZE - 2)) {
-            return expectedSize + expectedSize / 3;
+            return expectedSize + expectedSize / THIRD;
         }
 
         return Integer.MAX_VALUE; // any large value
@@ -66,7 +72,7 @@ public final class Maps {
      * @param <V> type of value
      * @return a new, empty {@code HashMap}
      */
-    public static <K, V> HashMap<K, V> newHashMap() {
+    public static <K, V> Map<K, V> newHashMap() {
         return new HashMap<K, V>();
     }
 
@@ -79,7 +85,7 @@ public final class Maps {
      * @return a new {@code HashMap} initialized with the mappings from {@code
      *         map}
      */
-    public static <K, V> HashMap<K, V> newHashMap(final Map<? extends K, ? extends V> map) {
+    public static <K, V> Map<K, V> newHashMap(final Map<? extends K, ? extends V> map) {
         return new HashMap<K, V>(map);
     }
 

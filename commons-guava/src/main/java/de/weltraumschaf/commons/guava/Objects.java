@@ -166,12 +166,15 @@ public final class Objects {
      * @param <T> type of reference
      * @param reference an object reference
      * @return the non-null reference that was validated
+     * CHECKSTYLE:OFF
      * @throws NullPointerException if {@code reference} is null
+     * CHECKSTYLE:ON
      */
     public static <T> T checkNotNull(final T reference) {
         if (reference == null) {
             throw new NullPointerException();
         }
+
         return reference;
     }
 
@@ -208,6 +211,11 @@ public final class Objects {
     public static final class ToStringHelper {
 
         /**
+         * Default size for to string buffer.
+         */
+        private static final int DEFAULT_BUFFER_SIZE = 32;
+
+        /**
          * Name of rendered class.
          */
         private final String className;
@@ -226,15 +234,18 @@ public final class Objects {
 
         /**
          * Use {@link Objects#toStringHelper(Object)} to create an instance.
+         *
+         * @param className must not be {@code null}
          */
-        private ToStringHelper(String className) {
+        private ToStringHelper(final String className) {
             this.className = checkNotNull(className);
         }
 
         /**
          * Configures the {@link ToStringHelper} so {@link #toString()} will ignore properties with null value.
          *
-         * The order of calling this method, relative to the {@code add()}/{@code addValue()} methods, is not significant.
+         * The order of calling this method, relative to the {@code add()}/{@code addValue()} methods,
+         * is not significant.
          *
          * @since 12.0
          * @return self for method chaining
@@ -451,7 +462,7 @@ public final class Objects {
             // create a copy to keep it consistent in case value changes
             final boolean omitNullValuesSnapshot = omitNullValues;
             String nextSeparator = "";
-            final StringBuilder builder = new StringBuilder(32).append(className)
+            final StringBuilder builder = new StringBuilder(DEFAULT_BUFFER_SIZE).append(className)
                     .append('{');
 
             for (ValueHolder valueHolder = holderHead.next; valueHolder != null;
@@ -478,7 +489,8 @@ public final class Objects {
          */
         private ValueHolder addHolder() {
             final ValueHolder valueHolder = new ValueHolder();
-            holderTail = holderTail.next = valueHolder;
+            holderTail.next = valueHolder;
+            holderTail = valueHolder;
             return valueHolder;
         }
 

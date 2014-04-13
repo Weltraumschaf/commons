@@ -79,7 +79,7 @@
 
     <ciManagement>
         <system>jenkins</system>
-        <url>http://www.weltraumschaf.de:8080/job/Commons/</url>
+        <url>https://ci.weltraumschaf.de/job/Commons%20Master/</url>
     </ciManagement>
 
     <properties>

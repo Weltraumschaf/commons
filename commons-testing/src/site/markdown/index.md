@@ -53,3 +53,7 @@ captured string.
             System.err.print("foobar");
         }
     }
+
+For more information about JUnit rules see [the documentation][junit-rules].
+
+[junit-rules]: https://github.com/junit-team/junit/wiki/Rules

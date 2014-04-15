@@ -5,7 +5,6 @@
 
     <body>
         <menu ref="parent"/>
-        <menu ref="modules"/>
         <menu ref="reports"/>
     </body>
 </project>

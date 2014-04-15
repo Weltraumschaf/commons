@@ -31,7 +31,7 @@ import java.util.Locale;
  *
  * // ... executes to code which calls System.out()
  *
- * String output = out.getCapturedOutput();
+ * final String output = out.getCapturedOutput();
  * }</pre>
  *
  * <p>
@@ -39,6 +39,7 @@ import java.util.Locale;
  * if you want to reset the buffer you must create a new instance.
  * </p>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class CapturingPrintStream extends PrintStream {

@@ -3,11 +3,14 @@
     <!--
       TIPS:
 
-      - use "mvn versions:display-dependency-updates" to see what dependencies
+      - Use "mvn versions:display-dependency-updates" to see what dependencies
         have updates available.
 
-      - use "mvn versions:display-plugin-updates" to see whan plugins have
+      - Use "mvn versions:display-plugin-updates" to see whan plugins have
         updates available.
+
+      - use "mvn clean install site site:stage -DstagingDirectory=$dir%"
+        to stage the site with modules to a given direcotry.
     -->
     <modelVersion>4.0.0</modelVersion>
 

@@ -53,7 +53,7 @@ public class ListsTest {
 
     @Test(expected = NullPointerException.class)
     public void newArrayList_Iterable_nullInput() {
-        Lists.newArrayList((Iterable) null);
+        Lists.newArrayList((Iterable<Object>) null);
     }
 
     public void newArrayList_Iterable_collectionInput() {

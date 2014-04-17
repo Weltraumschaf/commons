@@ -71,6 +71,7 @@ public final class Sets {
      * @param elements the elements that the set should contain
      * @return a new {@code HashSet} containing those elements (minus duplicates)
      */
+    @SuppressWarnings("unchecked")
     public static <E> Set<E> newHashSet(final E... elements) {
         final Set<E> set = newHashSetWithExpectedSize(elements.length);
         Collections.addAll(set, elements);

@@ -12,10 +12,7 @@
 
 package de.weltraumschaf.commons.guava;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -24,6 +21,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -32,6 +30,11 @@ import org.junit.Test;
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class MapsTest {
+
+    @Test(expected = UnsupportedOperationException.class)
+    @Ignore("TODO Add private constructor test.")
+    public void constructorThrowsExcpetion() {
+    }
 
     @Test
     public void newHashMap() {

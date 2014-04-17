@@ -24,6 +24,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -32,6 +33,11 @@ import org.junit.Test;
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class ListsTest {
+
+    @Test(expected = UnsupportedOperationException.class)
+    @Ignore("TODO Add private constructor test.")
+    public void constructorThrowsExcpetion() {
+    }
 
     @Test
     public void newArrayList() {

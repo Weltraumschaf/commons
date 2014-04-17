@@ -49,11 +49,12 @@ public final class Sets {
      * @param expectedSize must not be negative
      * @return not negative
      */
-    private static int capacity(final int expectedSize) {
+    static int capacity(final int expectedSize) {
         if (expectedSize < THIRD) {
             if (!(expectedSize >= 0)) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Parameter 'expectedSize' must not be negative!");
             }
+
             return expectedSize + 1;
         }
 

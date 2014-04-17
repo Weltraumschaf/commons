@@ -75,9 +75,36 @@ public class SetsTest {
         assertThat(l3, is(not(sameInstance(l2))));
     }
 
-    @Test
-    @Ignore("TODO: Implement test for Sets#capacity()")
-    public void capacity() {
+    @Test(expected = IllegalArgumentException.class)
+    public void capacity_negative() {
+        Sets.capacity(-1);
+    }
 
+    @Test
+    public void capacity(){
+        assertThat(Sets.capacity(0), is(1));
+        assertThat(Sets.capacity(1), is(2));
+        assertThat(Sets.capacity(2), is(3));
+        assertThat(Sets.capacity(3), is(4));
+        assertThat(Sets.capacity(4), is(5));
+        assertThat(Sets.capacity(5), is(6));
+        assertThat(Sets.capacity(6), is(8));
+        assertThat(Sets.capacity(7), is(9));
+        assertThat(Sets.capacity(8), is(10));
+        assertThat(Sets.capacity(9), is(12));
+        assertThat(Sets.capacity(10), is(13));
+        assertThat(Sets.capacity(11), is(14));
+        assertThat(Sets.capacity(12), is(16));
+        assertThat(Sets.capacity(13), is(17));
+        assertThat(Sets.capacity(14), is(18));
+        assertThat(Sets.capacity(15), is(20));
+        assertThat(Sets.capacity(20), is(26));
+        assertThat(Sets.capacity(23), is(30));
+        assertThat(Sets.capacity(30), is(40));
+        assertThat(Sets.capacity(40), is(53));
+        assertThat(Sets.capacity(42), is(56));
+        assertThat(Sets.capacity(50), is(66));
+        assertThat(Sets.capacity(1000), is(1333));
+        assertThat(Sets.capacity(1024), is(1365));
     }
 }

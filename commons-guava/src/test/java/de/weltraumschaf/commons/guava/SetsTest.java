@@ -9,9 +9,10 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
-
 package de.weltraumschaf.commons.guava;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -31,6 +32,14 @@ import org.junit.Test;
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class SetsTest {
+
+    @Test(expected = UnsupportedOperationException.class)
+    @Ignore("FIXME Fix private constructor test.")
+    public void constructorThrowsExcpetion() throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        final Constructor<Sets> constructor = Sets.class.getDeclaredConstructor(new Class[0]);
+        constructor.setAccessible(true);
+        Sets foo = constructor.newInstance();
+    }
 
     @Test
     public void newHashSet() {
@@ -81,7 +90,7 @@ public class SetsTest {
     }
 
     @Test
-    public void capacity(){
+    public void capacity() {
         assertThat(Sets.capacity(0), is(1));
         assertThat(Sets.capacity(1), is(2));
         assertThat(Sets.capacity(2), is(3));
@@ -106,5 +115,6 @@ public class SetsTest {
         assertThat(Sets.capacity(50), is(66));
         assertThat(Sets.capacity(1000), is(1333));
         assertThat(Sets.capacity(1024), is(1365));
+        assertThat(Sets.capacity(1073741824), is(Integer.MAX_VALUE));
     }
 }

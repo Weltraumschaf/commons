@@ -72,9 +72,11 @@ public final class Lists {
         }
 
         // Let ArrayList's sizing logic work, if possible
-        return (elements instanceof Collection)
-                ? new ArrayList<E>(cast(elements))
-                : newArrayList(elements.iterator());
+        if (elements instanceof Collection) {
+            return new ArrayList<E>(cast(elements));
+        } else {
+            return newArrayList(elements.iterator());
+        }
     }
 
     /**

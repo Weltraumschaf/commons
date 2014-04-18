@@ -661,11 +661,6 @@
 
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <configLocation>checkstyle-configuration.xml</configLocation>
-                    <logViolationsToConsole>true</logViolationsToConsole>
-                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
-                </configuration>
             </plugin>
 
             <plugin>

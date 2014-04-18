@@ -62,7 +62,7 @@ class ConcurrentQueue<E> implements Queue<E> {
                     final Entry<E> currentHead = head.get();
                     currentHead.next = node;
 
-                    if (tail.compareAndSet(currentTail, node) && head.compareAndSet(currentHead, currentHead)) {
+                    if (tail.compareAndSet(null, node) && head.compareAndSet(currentHead, currentHead)) {
                         break;
                     }
                 } else {

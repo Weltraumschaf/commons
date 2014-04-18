@@ -13,6 +13,7 @@
 package de.weltraumschaf.commons.testing;
 
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 import org.junit.Test;
 import static org.junit.Assert.assertThat;
@@ -30,6 +31,10 @@ public class CapturingPrintStreamTest {
 
     private final CapturingPrintStream sut = new CapturingPrintStream();
     private PrintStream delegate;
+
+    public CapturingPrintStreamTest() throws UnsupportedEncodingException {
+        super();
+    }
 
     @Before
     public void prepareDelegateSpy() {

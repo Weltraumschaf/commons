@@ -12,6 +12,8 @@
 package de.weltraumschaf.commons.testing;
 
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.CoreMatchers.allOf;
@@ -71,11 +73,11 @@ public final class CapturedOutput implements TestRule {
     /**
      * Captures the data written to STDOUT.
      */
-    private final CapturingPrintStream out = new CapturingPrintStream();
+    private final CapturingPrintStream out;
     /**
      * Captures the data written to STDERR.
      */
-    private final CapturingPrintStream err = new CapturingPrintStream();
+    private final CapturingPrintStream err;
     /**
      * Holds the original STDOUT from before test method.
      */
@@ -84,6 +86,26 @@ public final class CapturedOutput implements TestRule {
      * Holds the original STDERR from before test method.
      */
     private PrintStream errBackup;
+
+    /**
+     * Creates a capturing rule with platform encoding.
+     *
+     * @throws UnsupportedEncodingException if the platform encoding is not supported
+     */
+    public CapturedOutput() throws UnsupportedEncodingException {
+        this(Charset.defaultCharset().name());
+    }
+
+    /**
+     * Dedicated constructor.
+     *
+     * @param encoding must not be {@code null} or empty
+     * @throws UnsupportedEncodingException if the platform encoding is not supported
+     */
+    public CapturedOutput(final String encoding) throws UnsupportedEncodingException {
+        out = new CapturingPrintStream(encoding);
+        err = new CapturingPrintStream(encoding);
+    }
 
     /**
      * Adds to the list of requirements for any output printed to STDOUT that it should <em>contain</em> string

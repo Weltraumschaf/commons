@@ -16,13 +16,14 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Locale;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 /**
  * Captures the written bytes instead of printing them to any output stream.
  *
  * <p>
- * This type of object is useful in tests to capture output written to {@link System#out}
- * or {@link System#err}:
+ * This type of object is useful in tests to capture output written to {@link System#out} or {@link System#err}:
  * </p>
  *
  * <pre>{@code
@@ -35,8 +36,8 @@ import java.util.Locale;
  * }</pre>
  *
  * <p>
- * This capturing output streams buffers everything written to {@link OutputStream#write(int)},
- * if you want to reset the buffer you must create a new instance.
+ * This capturing output streams buffers everything written to {@link OutputStream#write(int)}, if you want to reset the
+ * buffer you must create a new instance.
  * </p>
  *
  * @since 1.0.0
@@ -51,7 +52,36 @@ public final class CapturingPrintStream extends PrintStream {
     /**
      * used to do the real work.
      */
-    private PrintStream delegate = new PrintStream(capturedOutput);
+    private PrintStream delegate;
+
+    /**
+     * Creates the print stream with platform encoding.
+     *
+     * @throws UnsupportedEncodingException if the platform encoding is not supported
+     */
+    public CapturingPrintStream() throws UnsupportedEncodingException {
+        this(Charset.defaultCharset().name());
+    }
+
+    /**
+     * Dedicated constructor.
+     *
+     * <p>
+     * Initializes parents output stream with a dummy stream.
+     * </p>
+     *
+     * @param encoding must not be {@code null} or empty
+     * @throws UnsupportedEncodingException if the platform encoding is not supported
+     */
+    public CapturingPrintStream(final String encoding) throws UnsupportedEncodingException {
+        super(new OutputStream() {
+            @Override
+            public void write(int b) throws IOException {
+                // We ignore everything here.
+            }
+        }, true, encoding);
+        delegate = new PrintStream(capturedOutput, true, encoding);
+    }
 
     /**
      * Only for testing.
@@ -62,28 +92,17 @@ public final class CapturingPrintStream extends PrintStream {
         return delegate;
     }
 
+    /**
+     * Injection point for testing.
+     *
+     * @param delegate must not be {@code null}
+     */
     void setDelegate(final PrintStream delegate) {
         if (null == delegate) {
             throw new NullPointerException("Parameter 'delegate' must not be null!");
         }
 
         this.delegate = delegate;
-    }
-
-    /**
-     * Dedicated constructor.
-     *
-     * <p>
-     * Initializes parents output stream with a dummy stream.
-     * </p>
-     */
-    public CapturingPrintStream() {
-        super(new OutputStream() {
-            @Override
-            public void write(int b) throws IOException {
-                // We ignore everything here.
-            }
-        });
     }
 
     /**

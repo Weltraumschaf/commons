@@ -12,6 +12,7 @@
 
 package de.weltraumschaf.commons.testing;
 
+import java.io.UnsupportedEncodingException;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
@@ -27,6 +28,10 @@ public class CapturedOutputTest {
 
     @Rule
     public final CapturedOutput sut = new CapturedOutput();
+
+    public CapturedOutputTest() throws UnsupportedEncodingException {
+        super();
+    }
 
     @Test
     public void captureOut() {

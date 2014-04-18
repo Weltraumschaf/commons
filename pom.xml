@@ -120,6 +120,12 @@
 
     <dependencies>
         <dependency>
+            <!-- http://findbugs.sourceforge.net/manual/annotations.html -->
+            <groupId>net.sourceforge.findbugs</groupId>
+            <artifactId>annotations</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
             <!-- http://www.junit.org/ -->
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -151,13 +157,6 @@
                     <artifactId>hamcrest-core</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <!-- http://findbugs.sourceforge.net/manual/annotations.html -->
-            <groupId>net.sourceforge.findbugs</groupId>
-            <artifactId>annotations</artifactId>
-            <version>1.3.2</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.googlecode.multithreadedtc</groupId>

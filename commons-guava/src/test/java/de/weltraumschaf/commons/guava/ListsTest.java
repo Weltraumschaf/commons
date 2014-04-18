@@ -12,6 +12,8 @@
 
 package de.weltraumschaf.commons.guava;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,8 +21,9 @@ import java.util.Iterator;
 import java.util.List;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Tests for {@link Lists}.
@@ -29,9 +32,21 @@ import org.junit.Test;
  */
 public class ListsTest {
 
-    @Test(expected = UnsupportedOperationException.class)
-    @Ignore("TODO Add private constructor test.")
-    public void constructorThrowsExcpetion() {
+    @Rule
+    //CHECKSTYLE:OFF
+    public final ExpectedException thrown = ExpectedException.none();
+    //CHECKSTYLE:ON
+
+    @Test
+    public void invokeConstructorByReflectionThrowsException() throws Exception {
+        assertThat(Lists.class.getDeclaredConstructors().length, is(1));
+
+        final Constructor<Lists> ctor = Lists.class.getDeclaredConstructor();
+        ctor.setAccessible(true);
+
+        thrown.expect(either(instanceOf(UnsupportedOperationException.class))
+                .or(instanceOf(InvocationTargetException.class)));
+        ctor.newInstance();
     }
 
     @Test

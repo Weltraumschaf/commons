@@ -18,8 +18,9 @@ import java.util.Set;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
-import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Tests for {@link Sets}.
@@ -28,12 +29,21 @@ import org.junit.Test;
  */
 public class SetsTest {
 
-    @Test(expected = UnsupportedOperationException.class)
-    @Ignore("FIXME Fix private constructor test.")
-    public void constructorThrowsExcpetion() throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        final Constructor<Sets> constructor = Sets.class.getDeclaredConstructor(new Class[0]);
-        constructor.setAccessible(true);
-        constructor.newInstance();
+    @Rule
+    //CHECKSTYLE:OFF
+    public final ExpectedException thrown = ExpectedException.none();
+    //CHECKSTYLE:ON
+
+    @Test
+    public void invokeConstructorByReflectionThrowsException() throws Exception {
+        assertThat(Sets.class.getDeclaredConstructors().length, is(1));
+
+        final Constructor<Sets> ctor = Sets.class.getDeclaredConstructor();
+        ctor.setAccessible(true);
+
+        thrown.expect(either(instanceOf(UnsupportedOperationException.class))
+                .or(instanceOf(InvocationTargetException.class)));
+        ctor.newInstance();
     }
 
     @Test

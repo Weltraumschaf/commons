@@ -31,6 +31,6 @@ public interface Scanner {
      * @throws IllegalArgumentException, if line is null.
      * // CHECKSTYLE:ON
      */
-    List<Token> scan(final String line) throws SyntaxException;
+    List<Token<?>> scan(final String line) throws SyntaxException;
 
 }

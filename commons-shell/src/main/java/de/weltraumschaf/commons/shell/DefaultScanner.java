@@ -56,12 +56,12 @@ class DefaultScanner implements Scanner {
      * // CHECKSTYLE:ON
      */
     @Override
-    public List<Token> scan(final String line) throws SyntaxException {
+    public List<Token<?>> scan(final String line) throws SyntaxException {
         if (null == line) {
             throw new IllegalArgumentException("Line must not be null!");
         }
 
-        final List<Token> tokens = Lists.newArrayList();
+        final List<Token<?>> tokens = Lists.newArrayList();
 
         if (! line.isEmpty()) {
             scan(tokens, new CharacterStream(line));
@@ -77,7 +77,7 @@ class DefaultScanner implements Scanner {
      * @param characterStream input line to scan
      * @throws SyntaxException if, syntax error occurred
      */
-    private void scan(final List<Token> tokens, final CharacterStream characterStream) throws SyntaxException {
+    private void scan(final List<Token<?>> tokens, final CharacterStream characterStream) throws SyntaxException {
         while (characterStream.hasNext()) {
             final char currentChar = characterStream.next();
 

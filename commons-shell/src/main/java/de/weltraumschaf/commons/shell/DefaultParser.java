@@ -79,32 +79,37 @@ class DefaultParser implements Parser {
      */
     @Override
     public ShellCommand parse(final String input) throws SyntaxException {
-        final List<Token> tokens = scanner.scan(input);
-        final Token commandtoken = tokens.get(0);
+        final List<Token<?>> tokens = scanner.scan(input);
+        final Token<?> commandtoken = tokens.get(0);
 
         if (TokenType.KEYWORD != commandtoken.getType()) {
             throw new SyntaxException("Command expected as first input!");
         }
 
-        final MainCommandType command = commandMap.determineCommand(commandtoken);
+        @SuppressWarnings("unchecked")
+        final MainCommandType command = commandMap.determineCommand((Token<String>) commandtoken);
         SubCommandType subCommand = commandMap.getDefaultSubCommand();
         int argumentBegin = 1;
 
         if (tokens.size() > 1) {
-            final Token secondToken = tokens.get(1);
+            final Token<?> secondToken = tokens.get(1);
 
             if (secondToken.getType() == TokenType.KEYWORD) {
-                if (! commandMap.isSubCommand(secondToken)) {
+                @SuppressWarnings("unchecked")
+                final Token<String> keyword = (Token<String>) secondToken;
+
+                if (! commandMap.isSubCommand(keyword)) {
                     throw new SyntaxException(
                             String.format("Command '%s' followed by bad keyword '%s' as sub command!",
                                           commandtoken.getValue(), secondToken.getValue()));
                 }
+
                 ++argumentBegin;
-                subCommand = commandMap.determineSubCommand(secondToken);
+                subCommand = commandMap.determineSubCommand(keyword);
             }
         }
 
-        List<Token> arguments;
+        List<Token<?>> arguments;
 
         if (tokens.size() > argumentBegin) {
             arguments = tokens.subList(argumentBegin, tokens.size());

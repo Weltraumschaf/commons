@@ -22,13 +22,15 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
+ * Tests for {@link DefaultParser}.
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class DefaultParserTest {
 
     // CHECKSTYLE:OFF
-    @Rule public ExpectedException thrown = ExpectedException.none();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
     // CHECKSTYLE:ON
     private final Parser sut = Parsers.newParser(new LiteralCommandMapStub());
 
@@ -65,21 +67,25 @@ public class DefaultParserTest {
         sut.parse("foobar");
     }
 
-    @Test @Ignore("Not used yet!")
+    @Test
+    @Ignore("Not used yet!")
     public void parse_comandWithOneArgument() {
     }
 
-    @Test @Ignore("Not used yet!")
+    @Test
+    @Ignore("Not used yet!")
     public void parse_comandWithTwoArgument() {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void parse_comandWithSubcommandAndOneArgument() throws SyntaxException {
         ShellCommand c = sut.parse("foo add 1234");
         assertThat((TestMainType) c.getCommand(), is(TestMainType.FOO));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.ADD));
         assertThat(c.getArguments().size(), is(1));
-        Token<Integer> t = c.getArguments().get(0);
+
+        Token<Integer> t = (Token<Integer>) c.getArguments().get(0);
         assertThat(t.getType(), is(TokenType.INTEGER));
         assertThat(t.getValue(), is(1234));
 
@@ -87,7 +93,8 @@ public class DefaultParserTest {
         assertThat((TestMainType) c.getCommand(), is(TestMainType.BAR));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.DEL));
         assertThat(c.getArguments().size(), is(1));
-        t = c.getArguments().get(0);
+
+        t = (Token<Integer>) c.getArguments().get(0);
         assertThat(t.getType(), is(TokenType.INTEGER));
         assertThat(t.getValue(), is(5678));
 
@@ -95,12 +102,14 @@ public class DefaultParserTest {
         assertThat((TestMainType) c.getCommand(), is(TestMainType.BAZ));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.INFO));
         assertThat(c.getArguments().size(), is(1));
-        t = c.getArguments().get(0);
+
+        t = (Token<Integer>) c.getArguments().get(0);
         assertThat(t.getType(), is(TokenType.INTEGER));
         assertThat(t.getValue(), is(5678));
     }
 
     private enum TestMainType implements MainCommandType {
+
         FOO("foo"), BAR("bar"), BAZ("baz");
 
         private final String literal;
@@ -117,6 +126,7 @@ public class DefaultParserTest {
     }
 
     private enum TestSubType implements SubCommandType {
+
         ADD("add"), DEL("del"), INFO("info"), NONE();
 
         private final String literal;

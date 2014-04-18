@@ -53,6 +53,7 @@ public final class CapturingPrintStream extends PrintStream {
      * used to do the real work.
      */
     private PrintStream delegate;
+    private final String encoding;
 
     /**
      * Creates the print stream with platform encoding.
@@ -81,6 +82,7 @@ public final class CapturingPrintStream extends PrintStream {
             }
         }, true, encoding);
         delegate = new PrintStream(capturedOutput, true, encoding);
+        this.encoding = encoding;
     }
 
     /**
@@ -109,9 +111,10 @@ public final class CapturingPrintStream extends PrintStream {
      * Returns the whole string of everything written to this stream.
      *
      * @return never {@code null}
+     * @throws UnsupportedEncodingException if the platform encoding is not supported
      */
-    public String getCapturedOutput() {
-        return capturedOutput.toString();
+    public String getCapturedOutput() throws UnsupportedEncodingException {
+        return capturedOutput.toString(encoding);
     }
 
     /**

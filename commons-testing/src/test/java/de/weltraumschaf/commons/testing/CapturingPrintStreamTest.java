@@ -43,14 +43,14 @@ public class CapturingPrintStreamTest {
     }
 
     @Test
-    public void getCapturedOutput() {
+    public void getCapturedOutput() throws UnsupportedEncodingException {
         assertThat(sut.getCapturedOutput(), is(equalTo("")));
         sut.print("foobar");
         assertThat(sut.getCapturedOutput(), is(equalTo("foobar")));
     }
 
     @Test
-    public void reset() {
+    public void reset() throws UnsupportedEncodingException {
         sut.print("foobar");
         assertThat(sut.getCapturedOutput(), is(equalTo("foobar")));
         sut.reset();

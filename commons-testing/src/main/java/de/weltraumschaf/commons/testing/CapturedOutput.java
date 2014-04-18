@@ -175,8 +175,10 @@ public final class CapturedOutput implements TestRule {
 
     /**
      * Applies matchers on captured error output if there are any matchers.
+     *
+     * @throws UnsupportedEncodingException if the platform encoding is not supported
      */
-    private void assertCapturedErr() {
+    private void assertCapturedErr() throws UnsupportedEncodingException {
         if (errMatcherBuilder.expectsSomething()) {
             assertThat(err.getCapturedOutput(), errMatcherBuilder.build());
         }
@@ -184,8 +186,10 @@ public final class CapturedOutput implements TestRule {
 
     /**
      * Applies matchers on captured standard output if there are any matchers.
+     *
+     * @throws UnsupportedEncodingException if the platform encoding is not supported
      */
-    private void assertCapturedOut() {
+    private void assertCapturedOut() throws UnsupportedEncodingException {
         if (outMatcherBuilder.expectsSomething()) {
             assertThat(out.getCapturedOutput(), outMatcherBuilder.build());
         }

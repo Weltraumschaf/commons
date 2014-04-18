@@ -100,7 +100,7 @@ public final class BrowserLauncher {
             // Find out the location of the x-www-browser link from path.
             final Process process = execCommand("which", GNU_X_WWW_BROWSER_CMD);
             final BufferedInputStream ins = new BufferedInputStream(process.getInputStream());
-            @SuppressWarnings("DM_DEFAULT_ENCODING")
+            @SuppressWarnings({"DM_DEFAULT_ENCODING"})
             final BufferedReader bufreader = new BufferedReader(new InputStreamReader(ins));
             final String defaultLinkPath = bufreader.readLine();
             ins.close();

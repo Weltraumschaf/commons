@@ -23,5 +23,6 @@ dependency-reduced-pom.xml
 .settings
 
 # NetBeans
-
 nb-configuration.xml
+
+staged-site/

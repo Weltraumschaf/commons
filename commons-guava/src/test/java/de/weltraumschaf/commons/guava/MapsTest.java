@@ -14,12 +14,7 @@ package de.weltraumschaf.commons.guava;
 
 import java.util.HashMap;
 import java.util.Map;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import org.junit.Ignore;
 import org.junit.Test;

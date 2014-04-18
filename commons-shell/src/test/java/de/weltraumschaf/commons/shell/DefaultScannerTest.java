@@ -140,11 +140,11 @@ public class DefaultScannerTest {
         assertThat(tokens.size(), is(2));
         Token<String> token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("192.168.1.1"));
+        assertThat(token.getValue(), is("192.168.1.1")); // NOPMD Only want to test parsing of an ip.
 
         token = tokens.get(1);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("127.0.0.1"));
+        assertThat(token.getValue(), is("127.0.0.1")); // NOPMD Only want to test parsing of an ip.
     }
 
     @Test

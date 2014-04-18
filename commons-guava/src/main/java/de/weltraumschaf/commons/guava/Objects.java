@@ -56,7 +56,7 @@ public final class Objects {
      * @return {@code true} if a and be are equal, else {@code false}
      */
     public static boolean equal(final Object a, final Object b) {
-        return a == b || (a != null && a.equals(b));
+        return a == b || a != null && a.equals(b);
     }
 
     /**

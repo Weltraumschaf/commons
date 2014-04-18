@@ -19,9 +19,7 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.*;
 import org.junit.Before;
 import org.junit.Ignore;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * Tests for {@link CapturingPrintStream}.

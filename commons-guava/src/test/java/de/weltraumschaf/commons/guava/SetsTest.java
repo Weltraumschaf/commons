@@ -15,12 +15,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.junit.Assert.assertThat;
 import org.junit.Ignore;
@@ -38,7 +33,7 @@ public class SetsTest {
     public void constructorThrowsExcpetion() throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
         final Constructor<Sets> constructor = Sets.class.getDeclaredConstructor(new Class[0]);
         constructor.setAccessible(true);
-        Sets foo = constructor.newInstance();
+        constructor.newInstance();
     }
 
     @Test

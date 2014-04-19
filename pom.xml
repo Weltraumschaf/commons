@@ -277,6 +277,14 @@
                             <version>1.0.0</version>
                         </dependency>
                     </dependencies>
+                    <configuration>
+                        <configLocation>de/weltraumschaf/javabuildtools/checkstyle-ruleset.xml</configLocation>
+                        <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+                        <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+                        <logViolationsToConsole>true</logViolationsToConsole>
+                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                        <linkXRef>false</linkXRef>
+                    </configuration>
                 </plugin>
 
                 <plugin>
@@ -601,14 +609,6 @@
 
                         <plugin>
                             <artifactId>maven-checkstyle-plugin</artifactId>
-                            <configuration>
-                                <configLocation>de/weltraumschaf/java-build-tools/checkstyle-ruleset.xml</configLocation>
-                                <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
-                                <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
-                                <logViolationsToConsole>true</logViolationsToConsole>
-                                <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                                <linkXRef>false</linkXRef>
-                            </configuration>
                         </plugin>
 
                         <plugin>
@@ -664,14 +664,6 @@
 
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <configuration>
-                    <configLocation>de/weltraumschaf/java-build-tools/checkstyle-ruleset.xml</configLocation>
-                    <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
-                    <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
-                    <logViolationsToConsole>true</logViolationsToConsole>
-                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                    <linkXRef>false</linkXRef>
-                </configuration>
             </plugin>
 
             <plugin>

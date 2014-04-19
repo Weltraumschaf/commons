@@ -127,6 +127,7 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][maven] pom.xml:
 - Add concurrent package.
 - Introduce modules.
 - Move application stuff under new package name `aplication`.
+- Add capturing output rule for [JUnit][junit].
 
 ## File Signatures
 

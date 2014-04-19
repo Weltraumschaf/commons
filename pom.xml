@@ -279,7 +279,7 @@
                     </dependencies>
                     <configuration>
                         <configLocation>de/weltraumschaf/java-build-tools/checkstyle-ruleset.xml</configLocation>
-                        <suppressionsLocation>de/weltraumschaf/java-build-tools/checkstyle-suppressions.xml</suppressionsLocation>
+                        <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
                         <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
                         <logViolationsToConsole>true</logViolationsToConsole>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>

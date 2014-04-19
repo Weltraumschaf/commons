@@ -95,8 +95,6 @@
         <maven.pmd.pmd-excludes>${project.basedir}/src/main/config/exclude-pmd.properties</maven.pmd.pmd-excludes>
         <maven.findbugs.excludefilterfile>${project.basedir}/src/main/config/findbugs-exclude.xml</maven.findbugs.excludefilterfile>
         <maven.findbugs.includefilterfile>${project.basedir}/src/main/config/findbugs-include.xml</maven.findbugs.includefilterfile>
-        <maven.checkstyle.ruleset>${project.basedir}/src/main/config/checkstyle-ruleset.xml</maven.checkstyle.ruleset>
-        <maven.checkstyle.suppressions>${project.basedir}/src/main/config/checkstyle-suppressions.xml</maven.checkstyle.suppressions>
         <maven.version>3.0.3</maven.version>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
@@ -272,9 +270,16 @@
                 <plugin>
                     <artifactId>maven-checkstyle-plugin</artifactId>
                     <version>2.12</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>de.weltraumschaf</groupId>
+                            <artifactId>java-build-tools</artifactId>
+                            <version>1.0.0</version>
+                        </dependency>
+                    </dependencies>
                     <configuration>
-                        <configLocation>${maven.checkstyle.ruleset}</configLocation>
-                        <suppressionsLocation>${maven.checkstyle.suppressions}</suppressionsLocation>
+                        <configLocation>de/weltraumschaf/java-build-tools/checkstyle-ruleset.xml</configLocation>
+                        <suppressionsLocation>de/weltraumschaf/java-build-tools/checkstyle-suppressions.xml</suppressionsLocation>
                         <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
                         <logViolationsToConsole>true</logViolationsToConsole>
                         <includeTestSourceDirectory>true</includeTestSourceDirectory>
@@ -603,7 +608,6 @@
                         </plugin>
 
                         <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-checkstyle-plugin</artifactId>
                         </plugin>
 

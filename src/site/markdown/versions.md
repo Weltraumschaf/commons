@@ -84,3 +84,5 @@
 - Move application stuff under new package name <code>aplication</code>.
 - Add capturing output rule for [JUnit][junit].
 - Add validate module.
+
+[junit]:    http://www.junit.org/

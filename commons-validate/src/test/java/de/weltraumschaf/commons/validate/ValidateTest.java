@@ -14,7 +14,6 @@ package de.weltraumschaf.commons.validate;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.sameInstance;
-import org.hamcrest.Matchers;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.Rule;
@@ -39,7 +38,6 @@ public class ValidateTest {
     @Test
     public void notNull_nullReferenceThrowsException_notNullName() {
         thrown.expect(NullPointerException.class);
-        thrown.expect(NullPointerException.class);
         thrown.expectMessage("Parameter 'foo' must not be null!");
         Validate.notNull(null, "foo");
     }
@@ -55,5 +53,50 @@ public class ValidateTest {
         final Object o = new Object();
         assertThat(Validate.notNull(o), is(sameInstance(o)));
         assertThat(Validate.notNull(o, null), is(sameInstance(o)));
+    }
+
+    @Test
+    public void notEmpty_nullReferenceThrowsException_nullName() {
+        thrown.expect(NullPointerException.class);
+        Validate.notEmpty(null, null);
+    }
+
+    @Test
+    public void notEmpty_emptyReferenceThrowsException_nullName() {
+        thrown.expect(IllegalArgumentException.class);
+        Validate.notEmpty("", null);
+    }
+
+    @Test
+    public void notEmpty_nullReferenceThrowsException_notNullName() {
+        thrown.expect(NullPointerException.class);
+        thrown.expectMessage("Parameter 'foo' must not be null!");
+        Validate.notEmpty(null, "foo");
+    }
+
+    @Test
+    public void notEmpty_emptyReferenceThrowsException_notNullName() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' must not be empty!");
+        Validate.notEmpty("", "foo");
+    }
+
+    @Test
+    public void notEmpty_nullReferenceThrowsException() {
+        thrown.expect(NullPointerException.class);
+        Validate.notEmpty(null);
+    }
+
+    @Test
+    public void notEmpty_emptyReferenceThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        Validate.notEmpty("");
+    }
+
+    @Test
+    public void notEmpty_notEmptyReferenceReturnsIt() {
+        final String str = "foobar";
+        assertThat(Validate.notEmpty(str), is(sameInstance(str)));
+        assertThat(Validate.notEmpty(str, null), is(sameInstance(str)));
     }
 }

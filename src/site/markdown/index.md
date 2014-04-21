@@ -33,15 +33,16 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][maven] pom.xml:
 
     <dependencies>
     
-### Available modules are
+Available modules (artifact id) are:
 
-- `commons-application`
-- `commons-concurrent`
-- `commons-experimental`
-- `commons-guava`
-- `commons-shell`
-- `commons-swing`
-- `commons-system`
+- `application`
+- `concurrent`
+- `experimental`
+- `guava`
+- `shell`
+- `swing`
+- `system`
+- `validate`
 
 ## Versions
 

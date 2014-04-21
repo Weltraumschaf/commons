@@ -27,7 +27,7 @@ import java.io.UnsupportedEncodingException;
  * necessary to the systems IO only at the main applications entry point:
  * </p>
  *
- * <pre>{@cod
+ * <pre>{@code 
  * public void main(final String[] args) {
  *      final IOStreams io = new IOStreams(System.in, System.out, System.err);
  *

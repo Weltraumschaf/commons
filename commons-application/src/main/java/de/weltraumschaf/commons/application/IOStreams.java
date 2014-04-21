@@ -27,7 +27,7 @@ import java.io.UnsupportedEncodingException;
  * necessary to the systems IO only at the main applications entry point:
  * </p>
  *
- * <pre>{@code 
+ * <pre>{@code
  * public void main(final String[] args) {
  *      final IOStreams io = new IOStreams(System.in, System.out, System.err);
  *
@@ -142,11 +142,12 @@ public final class IOStreams implements IO {
      * Also the {@link System#out}, and {@link System#err} are changed with a copy of the original
      * print stream with the encoding.
      *
-     * @param encoding Character encoding.
-     * @return Return always new instance.
-     * @throws UnsupportedEncodingException If system does not support passed encoding.
+     * @param encoding must not be {@code null} or empty
+     * @return return always new instance
+     * @throws UnsupportedEncodingException if system does not support passed encoding
      */
     public static IOStreams newDefault(final String encoding) throws UnsupportedEncodingException {
+        Validate.notEmpty(encoding, "encoding");
         final PrintStream out = new PrintStream(System.out, true, encoding);
         final PrintStream err = new PrintStream(System.err, true, encoding);
         System.setOut(out);

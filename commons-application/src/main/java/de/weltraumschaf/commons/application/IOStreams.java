@@ -11,6 +11,7 @@
  */
 package de.weltraumschaf.commons.application;
 
+import de.weltraumschaf.commons.validate.Validate;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
@@ -83,15 +84,15 @@ public final class IOStreams implements IO {
     /**
      * Initializes the streams.
      *
-     * @param stdin Input stream.
-     * @param stdout Output stream.
-     * @param stderr Error stream.
+     * @param stdin must not be {@code null}
+     * @param stdout must not be {@code null}
+     * @param stderr must not be {@code null}
      */
     public IOStreams(final InputStream stdin, final PrintStream stdout, final PrintStream stderr) {
         super();
-        this.stdin  = stdin; // TODO Null check.
-        this.stdout = stdout; // TODO Null check.
-        this.stderr = stderr; // TODO Null check.
+        this.stdin  = Validate.notNull(stdin, "stdin");
+        this.stdout = Validate.notNull(stdout, "stdout");
+        this.stderr = Validate.notNull(stderr, "stderr");
     }
 
     /**
@@ -156,11 +157,11 @@ public final class IOStreams implements IO {
     /**
      * Prints exception stack trace.
      *
-     * @param ex Exception to print.
+     * @param ex must not be {@code null}
      */
     @Override
-    public void printStackTrace(final Throwable ex) { // TODO Null check.
-        ex.printStackTrace(getStderr());
+    public void printStackTrace(final Throwable ex) {
+        Validate.notNull(ex, "ex").printStackTrace(getStderr());
     }
 
     /**

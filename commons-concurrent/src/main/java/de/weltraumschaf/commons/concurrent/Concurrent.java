@@ -25,6 +25,7 @@ public final class Concurrent {
      */
     private Concurrent() {
         super();
+        throw new UnsupportedOperationException("Must not be called!");
     }
 
     /**

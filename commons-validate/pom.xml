@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>de.weltraumschaf.commons</groupId>
-    <artifactId>experimental</artifactId>
+    <artifactId>validate</artifactId>
     <packaging>jar</packaging>
 
     <name>Commons Validate</name>

@@ -34,7 +34,7 @@ public final class Concurrent {
      * @param <E> type of stack entries
      * @return new instance
      */
-    public static <E> Stack<E> createStack() {
+    public static <E> Stack<E> newStack() {
         return new ConcurrentStack<E>();
     }
 
@@ -44,7 +44,7 @@ public final class Concurrent {
      * @param <E> type of queue entries
      * @return new instance
      */
-    public static <E> Queue<E> createQueue() {
+    public static <E> Queue<E> newQueue() {
         return new ConcurrentQueue<E>();
     }
 

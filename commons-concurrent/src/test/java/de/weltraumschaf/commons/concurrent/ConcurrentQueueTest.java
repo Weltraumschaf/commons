@@ -25,13 +25,13 @@ import org.junit.Test;
  */
 public class ConcurrentQueueTest extends MultithreadedTestCase {
 
-    private Queue<Integer> sut = Concurrent.createQueue(); // Prevent NPE for normal tests.
+    private Queue<Integer> sut = Concurrent.newQueue(); // Prevent NPE for normal tests.
 
     // Concurrent tests.
 
     @Override
     public void initialize() {
-        sut = Concurrent.createQueue();
+        sut = Concurrent.newQueue();
     }
 
     public void thread1() {

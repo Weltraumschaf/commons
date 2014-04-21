@@ -24,13 +24,13 @@ import static org.hamcrest.CoreMatchers.*;
  */
 public class ConcurrentStackTest extends MultithreadedTestCase {
 
-    private Stack<Integer> sut = Concurrent.createStack(); // Prevent NPE for normal tests.
+    private Stack<Integer> sut = Concurrent.newStack(); // Prevent NPE for normal tests.
 
     // Concurrent tests.
 
     @Override
     public void initialize() {
-        sut = Concurrent.createStack();
+        sut = Concurrent.newStack();
     }
 
     public void thread1() {

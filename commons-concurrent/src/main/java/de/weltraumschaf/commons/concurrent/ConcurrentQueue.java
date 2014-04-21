@@ -26,6 +26,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * null    next->        next->        next->        next->     null
  * </pre>
  *
+ * @since 1.0.0
  * @param <E> type of stack entries
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */

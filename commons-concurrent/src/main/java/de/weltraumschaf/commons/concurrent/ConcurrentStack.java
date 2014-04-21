@@ -19,6 +19,7 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * Implemented with a linked list.
  *
+ * @since 1.0.0
  * @param <E> type of stack entries
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */

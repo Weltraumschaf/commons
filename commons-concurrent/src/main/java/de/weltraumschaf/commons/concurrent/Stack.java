@@ -15,6 +15,7 @@ package de.weltraumschaf.commons.concurrent;
 /**
  * Interface for a stack (LIFO).
  *
+ * @since 1.0.0
  * @param <E> type of stack entries
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */

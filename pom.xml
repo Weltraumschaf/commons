@@ -499,7 +499,7 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-
+            
             <plugin>
                 <artifactId>maven-site-plugin</artifactId>
                 <dependencies>
@@ -516,6 +516,7 @@
                             <configuration>
                                 <aggregate>true</aggregate>
                                 <linkJavadoc>true</linkJavadoc>
+                                <javadocDir>${project.reporting.outputDirectory}/apidocs</javadocDir>
                             </configuration>
                             <reportSets>
                                 <reportSet>

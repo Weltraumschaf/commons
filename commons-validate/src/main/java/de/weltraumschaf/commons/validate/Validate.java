@@ -35,15 +35,15 @@ public final class Validate {
      * be thrown with the {@code name} as hint in the exception message.:
      * </p>
      * <pre>{@code
-     * void someMethod(final String input) {
-     *     final Strign validInput = Validate.notNull(input, "input");
+     * void someMethod(final Object input) {
+     *     final Object validInput = Validate.notNull(input, "input");
      *     // ...
      * }
      * }</pre>
      *
      * <p>
      * The second parameter {@code name} may be omitted. Then a {@link NullPointerException} without any message
-     * will be thrown. For this purpose you can call the convenience method {@link #notEmpty(java.lang.String)}.
+     * will be thrown. For this purpose you can call the convenience method {@link #notEmpty(java.lang.Object)}.
      * </p>
      *
      * @param <T> type of reference
@@ -75,6 +75,32 @@ public final class Validate {
         return notNull(reference, null);
     }
 
+    /**
+     * Validates that a given string reference is not {@code null} or empty.
+     *
+     * <p>
+     * This example validates that {@code input} is not null. If it is {@code null} a {@link NullPointerException} will
+     * be thrown with the {@code name} as hint in the exception message. Also it validates that {@code input} is not
+     * empty by calling {@link String#isEmpty()}. If the string is empty an {@link IllegalArgumentException} will be
+     * thrown:
+     * </p>
+     * <pre>{@code
+     * void someMethod(final String input) {
+     *     final Strign validInput = Validate.notEmpty(input, "input");
+     *     // ...
+     * }
+     * }</pre>
+     *
+     * <p>
+     * The second parameter {@code name} may be omitted. Then a {@link NullPointerException} or
+     * {@link IllegalArgumentException} without any message will be thrown. For this purpose you can call the
+     * convenience method {@link #notEmpty(java.lang.String)}.
+     * </p>
+     *
+     * @param reference validated reference
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
     public static String notEmpty(final String reference, final String name) {
         notNull(reference, name);
 
@@ -89,6 +115,12 @@ public final class Validate {
         return reference;
     }
 
+    /**
+     * Convenience message for {@link #notEmpty(java.lang.Object)} with {@code null} as second parameter.
+     *
+     * @param reference validated reference
+     * @return the reference, if it is valid
+     */
     public static String notEmpty(final String reference) {
         return notEmpty(reference, null);
     }

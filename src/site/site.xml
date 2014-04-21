@@ -55,6 +55,7 @@
         </breadcrumbs>
         <menu name="${project.name}">
             <item name="Home" href="index.html"/>
+            <item name="Versions" href="versions.html"/>            
         </menu>
         <menu ref="modules"/>
         <menu name="Reports" ref="reports"/>

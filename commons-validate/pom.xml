@@ -12,7 +12,7 @@
     <artifactId>experimental</artifactId>
     <packaging>jar</packaging>
 
-    <name>Commons Experimental</name>
+    <name>Commons Validate</name>
     <description>
         TBD
     </description>

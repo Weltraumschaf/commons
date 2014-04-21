@@ -19,7 +19,8 @@ import java.util.Properties;
  * Reads the current version from a property file.
  *
  * <p>
- * The property files only defines one property:
+ * The property files only defines one property. Import is to switch resource filtering on in your POM
+ * for that properties file.
  * </p>
  * <pre>
  *  version=1.0.0

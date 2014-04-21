@@ -64,7 +64,7 @@ public interface Invokable {
     void exit(int status);
 
     /**
-     * Set an {@coe exiter} to handle exit calls.
+     * Set an {@code exiter} to handle exit calls.
      *
      * @param exiter Object which handles exit calls.
      */

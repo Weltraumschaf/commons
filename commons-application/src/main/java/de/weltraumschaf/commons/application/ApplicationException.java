@@ -16,8 +16,11 @@ import de.weltraumschaf.commons.system.ExitCode;
 /**
  * Used to signal abnormal exceptional application states.
  *
+ * <p>
  * If an exception if this type is thrown should cause program termination with the exit code.
+ * </p>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class ApplicationException extends Exception {
@@ -38,7 +41,7 @@ public class ApplicationException extends Exception {
         super(message, cause);
 
         if (null == exitCode) {
-            throw new NullPointerException("Parameter exitCode must not be null!");
+            throw new NullPointerException("Parameter 'exitCode' must not be null!");
         }
 
         this.exitCode = exitCode;

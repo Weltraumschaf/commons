@@ -21,8 +21,8 @@ import java.util.logging.Logger;
  * Holds {@link Runnable callbacks} to execute them in any order.
  *
  * Example:
- * <code>
- * ShutDownHook hook = new ShutDownHook();
+ * <pre>{@code
+ * final ShutDownHook hook = new ShutDownHook();
  * hook.register(new Runnable() {
  *
  *      &#064;Override
@@ -31,7 +31,9 @@ import java.util.logging.Logger;
  *      }
  *
  * });
- * </code>
+ * }</pre>
+ *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class ShutDownHook extends Thread {

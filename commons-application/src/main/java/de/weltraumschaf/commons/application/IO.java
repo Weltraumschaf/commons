@@ -15,7 +15,9 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 /**
+ * Implementations provide an aggregate object which contains STDIN, STDOUT and STDERR streams.
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public interface IO {

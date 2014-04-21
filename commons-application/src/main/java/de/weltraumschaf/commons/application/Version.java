@@ -15,86 +15,39 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-// CHECKSTYLE:OFF
 /**
  * Reads the current version from a property file.
  *
+ * <p>
  * The property files only defines one property:
+ * </p>
  * <pre>
  *  version=1.0.0
  * </pre>
  *
+ * <p>
  * This property file may be processed by a Maven filter to provide the verison from
  * the pom.xml:
+ * </p>
  * <pre>
  *  version=${pom.version}
  * </pre>
  *
+ * <p>
  * If you save the file in <kbd>src/main/resources/foo/bar/version.properties</kbd>
  * you can use the version this way:
+ * </p>
  *
- * <code>
+ * <pre>{@code
  * Version version = new Version("/foo/bar/version.properties");
  * version.load()
  * System.out.println(version.getVersion);
- * </code>
+ * }</pre>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-// CHECKSTYLE:ON
 public final class Version {
-
-    /**
-     * Available properties in the file.
-     */
-    enum PropertyNames {
-
-        /**
-         * Version property.
-         */
-        VERSION("version", "n/a");
-
-        /**
-         * Property name.
-         */
-        private final String name;
-
-        /**
-         * Default value.
-         */
-        private final String defaultValue;
-
-        /**
-         * Initializes the enum with the property name.
-         *
-         * @param name The property name.
-         * @param defaultValue Fall back value.
-         */
-        PropertyNames(final String name, final String defaultValue) {
-            this.name = name;
-            this.defaultValue = defaultValue;
-        }
-
-        /**
-         * Returns the property name.
-         *
-         * @return String containing the property name.
-         */
-        @Override
-        public String toString() {
-            return name;
-        }
-
-        /**
-         * Get the fallback value.
-         *
-         * @return Return default value string.
-         */
-        public String getDefaultValue() {
-            return defaultValue;
-        }
-
-    }
 
     /**
      * Location of property file.
@@ -174,4 +127,55 @@ public final class Version {
         return getVersion();
     }
 
+    /**
+     * Available properties in the file.
+     */
+    enum PropertyNames {
+
+        /**
+         * Version property.
+         */
+        VERSION("version", "n/a");
+
+        /**
+         * Property name.
+         */
+        private final String name;
+
+        /**
+         * Default value.
+         */
+        private final String defaultValue;
+
+        /**
+         * Initializes the enum with the property name.
+         *
+         * @param name The property name.
+         * @param defaultValue Fall back value.
+         */
+        PropertyNames(final String name, final String defaultValue) {
+            this.name = name;
+            this.defaultValue = defaultValue;
+        }
+
+        /**
+         * Returns the property name.
+         *
+         * @return String containing the property name.
+         */
+        @Override
+        public String toString() {
+            return name;
+        }
+
+        /**
+         * Get the fallback value.
+         *
+         * @return Return default value string.
+         */
+        public String getDefaultValue() {
+            return defaultValue;
+        }
+
+    }
 }

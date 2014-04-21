@@ -21,10 +21,14 @@ import java.util.logging.Logger;
 /**
  * Abstract base implementation of an command line invokable.
  *
+ * <p>
  * Extend this class in your client code.
+ *</p>
  *
+ * <p>
  * Example:
- * <code>
+ * </p>
+ * <pre>{@code
  *
  * public class MyApp extends InvokableAdapter {
  *
@@ -38,8 +42,9 @@ import java.util.logging.Logger;
  *      }
  *
  * }
- * </code>
+ * }</pre>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public abstract class InvokableAdapter implements Invokable {

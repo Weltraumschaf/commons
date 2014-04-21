@@ -18,37 +18,44 @@ import java.io.UnsupportedEncodingException;
 /**
  * Immutable aggregate object which contains STDIN, STDOUT and STDERR streams.
  *
+ * <p>
  * It is not good practice to clutter production code with calls to
  * {@link System#out}, {@link System#err}, and {@link System#in}. But on the
  * other hand most applications must do I/O to the user. This aggregate object
  * contains I/O streams to pass around as injected dependency. It is only
  * necessary to the systems IO only at the main applications entry point:
+ * </p>
  *
- * <code>
+ * <pre>{@cod
  * public void main(final String[] args) {
- *      IOStreams io = new IOStreams(System.in, System.out, System.err);
+ *      final IOStreams io = new IOStreams(System.in, System.out, System.err);
  *
  *      // Pass around the io object to your client code.
  *
  *      System.exit(0);
  * }
- * </code>
+ * }</pre>
  *
+ * <p>
  * In the test code it will be easy to replace the I/O with mocks:
+ * </p>
  *
- * <code>
+ * <pre>{@code
  * &#064;Test public void someTestWithIO() {
- *      IOStreams io = new IOStreams(mock(InputStream.class),
+ *      final IOStreams io = new IOStreams(mock(InputStream.class),
  *                                   mock(PrintStream.class),
  *                                   mock(PrintStream.class));
  *
  *      // Pass around the io object to your client code and assert something.
  * }
- * </code>
+ * }</pre>
  *
+ * <p>
  * As a convenience method for creating an I/O streams object with the default I/O streams
  * of {@link System} you can use {@link IOStreams#newDefault()}.
+ * </p>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class IOStreams implements IO {
@@ -81,9 +88,10 @@ public final class IOStreams implements IO {
      * @param stderr Error stream.
      */
     public IOStreams(final InputStream stdin, final PrintStream stdout, final PrintStream stderr) {
-        this.stdin  = stdin;
-        this.stdout = stdout;
-        this.stderr = stderr;
+        super();
+        this.stdin  = stdin; // TODO Null check.
+        this.stdout = stdout; // TODO Null check.
+        this.stderr = stderr; // TODO Null check.
     }
 
     /**
@@ -151,7 +159,7 @@ public final class IOStreams implements IO {
      * @param ex Exception to print.
      */
     @Override
-    public void printStackTrace(Throwable ex) {
+    public void printStackTrace(final Throwable ex) { // TODO Null check.
         ex.printStackTrace(getStderr());
     }
 

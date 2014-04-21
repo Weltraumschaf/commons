@@ -35,14 +35,14 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][maven] pom.xml:
     
 Available modules (artifact id) are:
 
-- `application`
-- `concurrent`
-- `experimental`
-- `guava`
-- `shell`
-- `swing`
-- `system`
-- `validate`
+- [application](application/)
+- [concurrent](concurrent/)
+- [experimental](experimental/)
+- [guava](guava/)
+- [shell](shell/)
+- [swing](swing/)
+- [system](system/)
+- [validate](validate/)
 
 ## File Signatures
 

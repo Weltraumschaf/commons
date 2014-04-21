@@ -7,4 +7,4 @@ is designed to be very small and only provides validate methods.
 See [Validate][validate] class for examples.
 
 [commons-lang]: https://commons.apache.org/proper/commons-lang/
-[validate]:     validate/apidocs/de/weltraumschaf/commons/validate/Validate.html
+[validate]:     apidocs/de/weltraumschaf/commons/validate/Validate.html

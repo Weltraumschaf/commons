@@ -19,9 +19,9 @@ can capture that output and inspect it.
 
 So essentially `CapturingPrintStream` is a convenient shorthand for:
 
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    final ByteArrayOutputStream out = new ByteArrayOutputStream();
     System.setOut(new PrintStream(out));    
-    String content = out.toString();
+    final String content = out.toString();
 
 ## JUnit Rules
 

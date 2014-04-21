@@ -12,6 +12,6 @@ Implementations may be obtained by the [factory][Concurrent]:
     final Stack stack = Concurrent.newStack();
     final Queue queue = Concurrent.newQueue();
 
-[Stack]:        concurrent/apidocs/de/weltraumschaf/commons/application/Stack.html
-[Queue]:        concurrent/apidocs/de/weltraumschaf/commons/application/Queue.html
-[Concurrent]:   concurrent/apidocs/de/weltraumschaf/commons/application/Concurrent.html
+[Stack]:        apidocs/de/weltraumschaf/commons/application/Stack.html
+[Queue]:        apidocs/de/weltraumschaf/commons/application/Queue.html
+[Concurrent]:   apidocs/de/weltraumschaf/commons/application/Concurrent.html

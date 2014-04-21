@@ -30,11 +30,11 @@ information.
 [Version] provides the ability to get  the Maven POM version in your application
 code. See [Javadoc][Version] for example code.
 
-[Invokable]:        application/apidocs/de/weltraumschaf/commons/application/Invokable.html
-[InvokableAdapter]: application/apidocs/de/weltraumschaf/commons/application/InvokableAdapter.html
-[IO]:               application/apidocs/de/weltraumschaf/commons/application/IO.html
-[IOStreams]:        application/apidocs/de/weltraumschaf/commons/application/IOStreams.html
-[ShutDownHook]:     application/apidocs/de/weltraumschaf/commons/application/ShutDownHook.html
-[Version]:          application/apidocs/de/weltraumschaf/commons/application/Version.html
+[Invokable]:        apidocs/de/weltraumschaf/commons/application/Invokable.html
+[InvokableAdapter]: apidocs/de/weltraumschaf/commons/application/InvokableAdapter.html
+[IO]:               apidocs/de/weltraumschaf/commons/application/IO.html
+[IOStreams]:        apidocs/de/weltraumschaf/commons/application/IOStreams.html
+[ShutDownHook]:     apidocs/de/weltraumschaf/commons/application/ShutDownHook.html
+[Version]:          apidocs/de/weltraumschaf/commons/application/Version.html
 [maven]:            https://maven.apache.org/
-[system]:           application/apidocs/de/weltraumschaf/system/
+[system]:           ../system/

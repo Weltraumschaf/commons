@@ -84,5 +84,6 @@
 - Move application stuff under new package name <code>aplication</code>.
 - Add capturing output rule for [JUnit][junit].
 - Add validate module.
+- Remove <code>CapturingOutputStream</code> and add <code>CapturingPrintStream</code>.
 
 [junit]:    http://www.junit.org/

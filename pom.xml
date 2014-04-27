@@ -29,33 +29,11 @@
     <description>
         Common Utility Classes for Java.
     </description>
-    <url>http://weltraumschaf.github.com/commons/</url>
-
-    <issueManagement>
-        <system>GitHub</system>
-        <url>https://github.com/Weltraumschaf/commons/issues</url>
-    </issueManagement>
-
-    <scm>
-        <connection>scm:git:git://github.com/Weltraumschaf/commons.git</connection>
-        <developerConnection>scm:git:git@github.com:Weltraumschaf/commons.git</developerConnection>
-        <url>https://github.com/Weltraumschaf/commons.git</url>
-        <tag>0.4.0</tag>
-    </scm>
-
-    <distributionManagement>
-        <site>
-            <id>github-project-site</id>
-            <url>gitsite:git@github.com/Weltraumschaf/commons.git</url>
-        </site>
-    </distributionManagement>
-
-    <ciManagement>
-        <system>jenkins</system>
-        <url>https://ci.weltraumschaf.de/job/Commons%20Master/</url>
-    </ciManagement>
+    <url>http://weltraumschaf.github.com/${github.name}/</url>
 
     <properties>
+        <ci.jobName>Commons%20Master</ci.jobName>
+        <github.name>commons</github.name>
         <maven.pmd.rulesetfiles>${project.basedir}/src/main/config/pmd.xml</maven.pmd.rulesetfiles>
         <maven.pmd.cpd-excludes>${project.basedir}/src/main/config/exclude-cpd.properties</maven.pmd.cpd-excludes>
         <maven.pmd.pmd-excludes>${project.basedir}/src/main/config/exclude-pmd.properties</maven.pmd.pmd-excludes>

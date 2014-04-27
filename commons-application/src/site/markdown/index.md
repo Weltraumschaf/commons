@@ -1,6 +1,6 @@
 # Commons Application
 
-## Invokable
+## Invokable Interface and Classes
 
 If     you    write     command     line     applications    (something     with
 `Object#main(java.langString[]))`  then  you tend  to  always  build up  thesame
@@ -25,7 +25,7 @@ want to exit  the JVM realy in  testing environment. For that purose  there is a
 null  exiter  implementation available.  See  [system  module][system] for  more
 information.
 
-## Version
+## Version Class
 
 [Version] provides the ability to get  the Maven POM version in your application
 code. See [Javadoc][Version] for example code.

@@ -43,7 +43,7 @@ public final class Validate {
      *
      * <p>
      * The second parameter {@code name} may be omitted. Then a {@link NullPointerException} without any message
-     * will be thrown. For this purpose you can call the convenience method {@link #notEmpty(java.lang.Object)}.
+     * will be thrown. For this purpose you can call the convenience method {@link #notNull(java.lang.Object)}.
      * </p>
      *
      * @param <T> type of reference
@@ -116,7 +116,8 @@ public final class Validate {
     }
 
     /**
-     * Convenience message for {@link #notEmpty(java.lang.Object)} with {@code null} as second parameter.
+     * Convenience message for {@link #notEmpty(java.lang.String, java.lang.String)} with {@code null} as second
+     * parameter.
      *
      * @param reference validated reference
      * @return the reference, if it is valid

@@ -1,5 +1,10 @@
 # Commons System
 
+This module provides  helpers/utilities to abstract away system  calls with side
+effects such  as `System.exit()`. Also  system dependnet  this such as  find out
+the operating system or opening the  operatinfgs systems default browser with an
+URI. 
+
 ## BrowserLauncher Class
 
 TBD

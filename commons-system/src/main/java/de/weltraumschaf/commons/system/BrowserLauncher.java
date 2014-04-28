@@ -11,6 +11,7 @@
  */
 package de.weltraumschaf.commons.system;
 
+import de.weltraumschaf.commons.validate.Validate;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,10 +21,12 @@ import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 
 /**
  * This class opens default browser for DemoLauncher class.
- *
+ * <p>
  * Default browser is detected by the operating system.
- *
- * Copied from http://dev.vaadin.com/svn/releases/6.6.4/src/com/vaadin/launcher/
+ * </p>
+ * <p>
+ * Copied from <a href="http://dev.vaadin.com/svn/releases/6.6.4/src/com/vaadin/launcher/">Vaadin browser launcher</a>.
+ * </p>
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
@@ -77,13 +80,47 @@ public final class BrowserLauncher {
     /**
      * Dedicated constructor.
      *
-     * @param os detected operating system
-     * @param runtime runtime for command execution
+     * @param os detected operating system, must not be {@code null}
+     * @param runtime runtime for command execution, must not be {@code null}
      */
     public BrowserLauncher(final OperatingSystem os, final Runtime runtime) {
         super();
-        this.os = os;
-        this.runtime = runtime;
+        this.os = Validate.notNull(os, "os");
+        this.runtime = Validate.notNull(runtime, "runtime");
+    }
+
+    /**
+     * Open browser on specified URL.
+     * <p>
+     * This method throws an {@link IllegalArgumentException} if the OS (given by constructor)
+     * is not supported.
+     * </p>
+     * <p>
+     * This method throws an {@link RuntimeException} if the browser can't be started.
+     * </p>
+     * @param url URL to open, must not be {@code null} or empty
+     */
+    public void openBrowser(final String url) {
+        Validate.notEmpty(url, "url");
+        boolean started = false;
+
+        switch (os) {
+            case LINUX:
+                started = openLinuxBrowser(url);
+                break;
+            case MACOSX:
+                started = openMacBrowser(url);
+                break;
+            case WINDOWS:
+                started = openWindowsBrowser(url);
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported OS. Please go to " + url);
+        }
+
+        if (!started) {
+            throw new RuntimeException("Failed to open browser. Please go to " + url);
+        }
     }
 
     /**
@@ -102,7 +139,7 @@ public final class BrowserLauncher {
             final BufferedInputStream ins = new BufferedInputStream(process.getInputStream());
             @SuppressWarnings(
                 value = "DM_DEFAULT_ENCODING",
-                justification="We readfrom process IO, so hopefully this uses the platform encoding.")
+                justification = "We readfrom process IO, so hopefully this uses the platform encoding.")
             final BufferedReader bufreader = new BufferedReader(new InputStreamReader(ins));
             final String defaultLinkPath = bufreader.readLine();
             ins.close();
@@ -114,7 +151,7 @@ public final class BrowserLauncher {
                 final File file = new File(defaultLinkPath);
                 final String canonical = file.getCanonicalPath();
 
-                if (canonical.indexOf(GNU_KONQUEROR_CMD) != -1) {
+                if (canonical.contains(GNU_KONQUEROR_CMD)) {
                     isDefaultKonqueror = true;
                 }
             }
@@ -193,41 +230,15 @@ public final class BrowserLauncher {
     }
 
     /**
-     * Open browser on specified URL.
+     * Executes external command to open URL.
      *
-     * @param url URL to open.
-     */
-    public void openBrowser(final String url) {
-        boolean started = false;
-
-        switch (os) {
-            case LINUX:
-                started = openLinuxBrowser(url);
-                break;
-            case MACOSX:
-                started = openMacBrowser(url);
-                break;
-            case WINDOWS:
-                started = openWindowsBrowser(url);
-                break;
-            default:
-                throw new RuntimeException("Unsupported OS. Please go to " + url);
-        }
-
-        if (!started) {
-            throw new RuntimeException("Failed to open browser. Please go to " + url);
-        }
-    }
-
-    /**
-     * Executes external command to open url.
-     *
-     * @param cmd external command
-     * @param argument argument string
+     * @param cmd external command, must not be {@code null} or empty
+     * @param argument argument string, must not be {@code null} or empty
      * @return A new {@link java.io.Process} object for managing the subprocess
      * @throws IOException if an I/O error occurs
      */
     private Process execCommand(final String cmd, final String argument) throws IOException {
-        return runtime.exec(String.format("%s %s", cmd, argument));
+        return runtime.exec(
+            String.format("%s %s", Validate.notEmpty(cmd, "cmd"), Validate.notEmpty(argument, "argument")));
     }
 }

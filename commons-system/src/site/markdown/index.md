@@ -5,10 +5,6 @@ effects such  as `System.exit()`. Also  system dependnet  this such as  find out
 the operating system or opening the  operatinfgs systems default browser with an
 URI. 
 
-## BrowserLauncher Class
-
-TBD
-
 ## Exitable Interface and Friends
 
 TBD
@@ -53,3 +49,20 @@ Example:
 
     final String osName = System.getProperty("os.osName", "");
     final OperatingSystem os = OperatingSystem.determine(osName);
+
+## BrowserLauncher Class
+
+This class tries to open a given URL with the operaings system's default browser.
+Supported operating systems are Windows, Linux and Mac OS X.
+
+Example:
+
+    final BrowserLauncher launcher = new BrowserLauncher();
+    launcher.openBrowser("https://www.weltraumschaf.de");
+
+which is a short hand for:
+
+    final String osName = System.getProperty("os.osName", "");
+    final OperatingSystem os = OperatingSystem.determine(osName);
+    final BrowserLauncher launcher = new BrowserLauncher(os);
+    launcher.openBrowser("https://www.weltraumschaf.de");

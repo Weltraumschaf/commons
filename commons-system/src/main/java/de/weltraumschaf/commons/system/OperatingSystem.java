@@ -11,34 +11,48 @@
  */
 package de.weltraumschaf.commons.system;
 
+import de.weltraumschaf.commons.validate.Validate;
+
 /**
  * Defines and determines the operating system the JVM runs on.
  *
+ * <p>
  * Example:
- * <code>
- * OperatingSystem os = OperatingSystem.determine(System.getProperty("os.name", ""));
- * </code>
+ * </p>
+ *
+ * <pre>{@code
+ * final String osName = System.getProperty("os.osName", "");
+ * final OperatingSystem os = OperatingSystem.determine(osName);
+ * code}</pre>
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public enum OperatingSystem {
 
-    /** Microsoft WIndows. */
+    /**
+     * Microsoft Windows.
+     */
     WINDOWS("win"),
-    /** GNU/Linux. */
+    /**
+     * GNU/Linux.
+     */
     LINUX("linux"),
-    /** Mac OS X. */
+    /**
+     * Mac OS X.
+     */
     MACOSX("mac os x"),
-    /** Unknown os. */
+    /**
+     * Unknown OS.
+     */
     UNKNOWN();
 
     /**
-     * OS name.
+     * OS osName.
      */
-    private final String name;
+    private final String osName;
 
     /**
-     * Unknown OS name.
+     * Unknown OS osName.
      */
     private OperatingSystem() {
         this("");
@@ -47,39 +61,39 @@ public enum OperatingSystem {
     /**
      * Dedicated constructor.
      *
-     * @param name the OS name
+     * @param osName must not be {@code null}
      */
-    private OperatingSystem(final String name) {
-        this.name = name;
+    private OperatingSystem(final String osName) {
+        this.osName = Validate.notNull(osName, "osName");
     }
 
     /**
-     * Get the OS name.
+     * Get the OS osName.
      *
-     * @return OS name as string
+     * @return OS osName as string
      */
     public String getName() {
-        return name;
+        return osName;
     }
 
     /**
-     * Inspect the given OS name property and determines the OS.
+     * Inspect the given OS osName property and determines the OS.
      *
-     * @param osNameProperty property e.g. System.getProperty("os.name", "")
+     * @param osNameProperty property e.g. System.getProperty("os.osName", ""), must not be {@code null}
      * @return the best matching OS
      */
     public static OperatingSystem determine(final String osNameProperty) {
-        final String normalizedOsNameProperty = osNameProperty.toLowerCase();
+        final String normalizedOsNameProperty = Validate.notNull(osNameProperty, osNameProperty).toLowerCase();
 
-        if (normalizedOsNameProperty.indexOf("linux") >= 0) {
+        if (normalizedOsNameProperty.contains(LINUX.osName)) {
             return LINUX;
         }
 
-        if (normalizedOsNameProperty.indexOf("mac os x") >= 0) {
+        if (normalizedOsNameProperty.contains(MACOSX.osName)) {
             return MACOSX;
         }
 
-        if (normalizedOsNameProperty.indexOf("win") >= 0) {
+        if (normalizedOsNameProperty.contains(WINDOWS.osName)) {
             return WINDOWS;
         }
 

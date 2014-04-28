@@ -47,7 +47,7 @@ it's name.
 
 Example:
 
-    final String osName = System.getProperty("os.osName", "");
+    final String osName = System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, "");
     final OperatingSystem os = OperatingSystem.determine(osName);
 
 ## BrowserLauncher Class
@@ -62,7 +62,7 @@ Example:
 
 which is a short hand for:
 
-    final String osName = System.getProperty("os.osName", "");
+    final String osName = System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, "");
     final OperatingSystem os = OperatingSystem.determine(osName);
     final BrowserLauncher launcher = new BrowserLauncher(os);
     launcher.openBrowser("https://www.weltraumschaf.de");

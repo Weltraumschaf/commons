@@ -21,7 +21,7 @@ import de.weltraumschaf.commons.validate.Validate;
  * </p>
  *
  * <pre>{@code
- * final String osName = System.getProperty("os.osName", "");
+ * final String osName = System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, "");
  * final OperatingSystem os = OperatingSystem.determine(osName);
  * code}</pre>
  *
@@ -45,6 +45,11 @@ public enum OperatingSystem {
      * Unknown OS.
      */
     UNKNOWN();
+
+    /**
+     * Name to get OS name via {@link System#getProperty(java.lang.String)}.
+     */
+    public static final String OS_SYSTEM_PROPERTY = "os.name";
 
     /**
      * OS osName.

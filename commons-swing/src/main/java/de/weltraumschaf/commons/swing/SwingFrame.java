@@ -13,6 +13,7 @@ package de.weltraumschaf.commons.swing;
 
 import de.weltraumschaf.commons.system.DefaultExiter;
 import de.weltraumschaf.commons.system.Exitable;
+import de.weltraumschaf.commons.system.OperatingSystem;
 import java.awt.BorderLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -117,29 +118,22 @@ public class SwingFrame extends JFrame {
     }
 
     /**
-     * Returns true if the host OS is Mac OS X.
-     *
-     * @return true or false.
-     */
-    public static boolean isMacOs() {
-        return System.getProperty("os.name").equals(MAC_OSX);
-    }
-
-    /**
      * Initializes the look and feel.
      *
      * Uses the system look and feel. If the guest OS is Mac OS x the menu
      * bar is took off the frame.
      */
     protected void initLookAndFeel() {
-        if (isMacOs()) {
+        final OperatingSystem os = OperatingSystem.determine(OperatingSystem.OS_SYSTEM_PROPERTY);
+
+        if (os == OperatingSystem.MACOSX) {
             // take the menu bar off the jframe
             System.setProperty("apple.laf.useScreenMenuBar", "true");
         }
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException ex) {
+        } catch (final ClassNotFoundException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
             LOGGER.log(Level.SEVERE, null, ex);

@@ -10,7 +10,30 @@ TBD
 
 ## ExitCode Interface
 
-TBD
+This  interface provides  the  ability  to implement  own  exit  code enums  for
+exitables  (section  before).  Purpose  is  to provide  exit  code  numbers  (as
+integer) for the exitable  to signal a evaluatable return code  the JVM emits on
+exit.
+
+Example:
+
+    public enum ExitCodeImpl implements ExitCode {
+    
+        OK(0), ERROR(1), FATAL(-1);
+    
+        private final int code;
+    
+        public ExitCodeImpl(final int code) {
+            super();
+            this.code = code;
+        }
+    
+        @Override
+        public int getCode() [
+            return code;
+        }
+    
+    }
 
 ## OperatingSystem Enum
 
@@ -19,7 +42,9 @@ It  provides three  eunum  values  for the  major  systems (`WINDOWS`,  `LINUX`,
 `MACOS`) and one for unrecogniezed systems (`UNKNOWN`).
 
 The enum  provides a static  factory method which  determines the right  OS from
-it's name. Example:
+it's name. 
+
+Example:
 
     final String osName = System.getProperty("os.osName", "");
     final OperatingSystem os = OperatingSystem.determine(osName);

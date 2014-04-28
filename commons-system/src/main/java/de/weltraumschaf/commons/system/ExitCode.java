@@ -14,9 +14,11 @@ package de.weltraumschaf.commons.system;
 /**
  * Defines an exit code.
  *
+ * <p>
  * Usually you will implement this interface from an enum:
+ * </p>
  *
- * <code>
+ * <pre>{@code
  * public enum ExitCodeImpl implements ExitCode {
  *
  *      OK(0), ERROR(1), FATAL(-1);
@@ -33,7 +35,7 @@ package de.weltraumschaf.commons.system;
  *      }
  *
  * }
- * </code>
+ * code}</pre>
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */

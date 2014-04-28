@@ -58,14 +58,6 @@ public class SwingFrameTest {
         verify(sut, times(1)).initPanel();
     }
 
-    @Test public void isMacOs() {
-        if (System.getProperty("os.name").equals(SwingFrame.MAC_OSX)) {
-            assertTrue(SwingFrame.isMacOs());
-        } else {
-            assertFalse(SwingFrame.isMacOs());
-        }
-    }
-
     @Test public void bindAndExitOnWindowClosing() {
         final SwingFrame sut = new SwingFrame("foobar");
         final Exitable exiter = mock(Exitable.class);

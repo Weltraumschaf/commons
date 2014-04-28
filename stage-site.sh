@@ -3,6 +3,8 @@
 CWD=`pwd`
 STAGE="${CWD}/staged-site"
 
+echo "Stage site into ${STAGE} ..."
+
 if [ -d "${STAGE}" ] ; then
   echo "Delete old stage ${STAGE} ..."
   rm -rfv "${STAGE}"

@@ -4,8 +4,8 @@ This module provides concurrent implementations of common data structures.
 
 Provided data structures are:
 
-- [Javadov of Stack][Stack]
-- [Javadov of Queue][Queue]
+- [Javadoc of Stack][Stack]
+- [Javadoc of Queue][Queue]
 
 Implementations may be obtained by the [factory][Concurrent]:
 

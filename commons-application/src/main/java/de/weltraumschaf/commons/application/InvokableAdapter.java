@@ -36,7 +36,7 @@ import java.util.logging.Logger;
  *          InvokableAdapter.main(new MyApp(args));
  *      }
  *
- *      &#064;Override
+ *      @Override
  *      public void execute() throws Exception {
  *          // Your application code here.
  *      }

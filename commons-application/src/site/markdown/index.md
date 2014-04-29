@@ -17,6 +17,32 @@ out IO for testing.
 It also  provides a mechanism  to add [shutdown  hooks][ShutDownHook]: Runnables
 executed if the JVM is stoped by <kbd>ctrl + c</kbd>.
 
+Example:
+
+    public final class MyApp extends InvokableAdapter {
+        
+        public MyApp(final String[] args) {
+            super(args);
+        }
+        
+        public static void main(final String[] args) {
+            InvokableAdapter.main(new MyApp(args));
+        }
+        
+        @Override
+        public void execute() throws Exception {
+            registerShutdownHook(new Runnable() {
+                
+                @Override
+                public void run() {
+                    // Your shutdown code goes here.
+                }
+            });
+            
+            // Your application code here.
+        }
+    }
+
 [ApplicationException][ApplicationException]  are  used  to  signal  application
 abbort   on  abnormal   internal  errors   during  execution.   The  exit   code
 implementation of the  `system` module is responsible  on the `System#exit(int)`

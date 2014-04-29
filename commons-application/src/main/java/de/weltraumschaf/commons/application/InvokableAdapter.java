@@ -23,14 +23,17 @@ import java.util.logging.Logger;
  *
  * <p>
  * Extend this class in your client code.
- *</p>
+ * </p>
  *
  * <p>
  * Example:
  * </p>
  * <pre>{@code
+ *  public final class MyApp extends InvokableAdapter {
  *
- * public class MyApp extends InvokableAdapter {
+ *      public MyApp(final String[] args) {
+ *          super(args);
+ *      }
  *
  *      public static void main(final String[] args) {
  *          InvokableAdapter.main(new MyApp(args));
@@ -38,10 +41,17 @@ import java.util.logging.Logger;
  *
  *      @Override
  *      public void execute() throws Exception {
+ *          registerShutdownHook(new Runnable() {
+ *
+ *              @Override
+ *              public void run() {
+ *                  // Your shutdown code goes here.
+ *              }
+ *          });
+ *
  *          // Your application code here.
  *      }
- *
- * }
+ *  }
  * }</pre>
  *
  * @since 1.0.0
@@ -112,8 +122,8 @@ public abstract class InvokableAdapter implements Invokable {
     }
 
     /**
-     * Inject the I/O streams to the invokable and then calls {@link Invokable#init()} and
-     * then {@link Invokable#execute()}.
+     * Inject the I/O streams to the invokable and then calls {@link Invokable#init()} and then
+     * {@link Invokable#execute()}.
      *
      * This method handles ell thrown {@link Exception} and calls {@link System#exit(int)}.
      *
@@ -125,11 +135,11 @@ public abstract class InvokableAdapter implements Invokable {
     }
 
     /**
-     * Inject the I/O streams to the invokable and then calls {@link Invokable#init()} and
-     * then {@link Invokable#execute()}.
+     * Inject the I/O streams to the invokable and then calls {@link Invokable#init()} and then
+     * {@link Invokable#execute()}.
      *
-     * This method handles ell thrown {@link Exception} and calls {@link System#exit(int)},
-     * and prints stack trace if <code>debug</code> is <tt>true</tt>.
+     * This method handles ell thrown {@link Exception} and calls {@link System#exit(int)}, and prints stack trace if
+     * <code>debug</code> is <tt>true</tt>.
      *
      * @param invokable implementation to invoke
      * @param ioStreams I/O streams

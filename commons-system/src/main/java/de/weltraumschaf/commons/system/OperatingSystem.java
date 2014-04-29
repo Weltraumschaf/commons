@@ -23,7 +23,7 @@ import de.weltraumschaf.commons.validate.Validate;
  * <pre>{@code
  * final String osName = System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, "");
  * final OperatingSystem os = OperatingSystem.determine(osName);
- * code}</pre>
+ * }</pre>
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */

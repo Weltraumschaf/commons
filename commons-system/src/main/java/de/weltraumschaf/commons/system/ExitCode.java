@@ -35,7 +35,7 @@ package de.weltraumschaf.commons.system;
  *      }
  *
  * }
- * code}</pre>
+ * }</pre>
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */

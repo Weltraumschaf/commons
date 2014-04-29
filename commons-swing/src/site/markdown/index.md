@@ -4,7 +4,45 @@ This module provides helpers to minimize the boiler plate to build a Swing UI.
 
 ## SwingFrame Class
 
-TBD
+This class provides boiler plate code to  have a main window with border layout.
+It  is based  on  the [Template  Method][template-method]  pattern. It  provides
+three hook  methods to initialize a  menu bar, a  tool buttons bar and  the main
+panel.
+
+Example:
+
+    public final class MyFrame extends SwingFrame {
+        
+        public MyFrame(final String title) {
+            super(title);
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE); // optional
+            setExitOnCloseWindow(true); // optional
+        }
+        
+        @Override
+        protected void initMenu() {
+            final MenuBarBuilder builder = MenuBarBuilder.builder();
+            // Build and set menu here.
+            setJMenuBar(builder.create());
+        }
+        
+        @Override
+        protected void initToolBar() {
+            final ToolBarBuilder builder = ToolBarBuilder.builder();
+            // Build and set tool bar here.
+            getContentPane().add(builder.create(), BorderLayout.NORTH);
+        }
+        
+        @Override
+        protected void initPanel() {
+            // Initialize main panel here.
+        }
+    }
+
+This you use like this:
+
+    final MyFrame frame = new MyFrame("My Frame");
+    frame.init();
 
 ## Builders
 

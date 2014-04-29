@@ -26,15 +26,42 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Extension of {@link javax.swing.JFrame} with {@link java.awt.BorderLayout} for easier use.
+ * <p>
+ * Example:
+ * </p>
+ * <pre>{@code
+ *  public final class MyFrame extends SwingFrame {
+ *
+ *      public MyFrame(final String title) {
+ *          super(title);
+ *          setDefaultCloseOperation(DISPOSE_ON_CLOSE); // optional
+ *          setExitOnCloseWindow(true); // optional
+ *      }
+ *
+ *      @Override
+ *      protected void initMenu() {
+ *          final MenuBarBuilder builder = MenuBarBuilder.builder();
+ *          // Build and set menu here.
+ *          setJMenuBar(builder.create());
+ *      }
+ *
+ *      @Override
+ *      protected void initToolBar() {
+ *          final ToolBarBuilder builder = ToolBarBuilder.builder();
+ *          // Build and set tool bar here.
+ *          getContentPane().add(builder.create(), BorderLayout.NORTH);
+ *      }
+ *
+ *      @Override
+ *      protected void initPanel() {
+ *          // Initialize main panel here.
+ *      }
+ *  }
+ * }</pre>
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class SwingFrame extends JFrame {
-
-    /**
-     * System property for Mac OS X.
-     */
-    static final String MAC_OSX = "Mac OS X";
 
     /**
      * Logging facility.
@@ -62,8 +89,7 @@ public class SwingFrame extends JFrame {
     private transient Exitable exiter = new DefaultExiter();
 
     /**
-     * Initializes the content pane layout with {@link java.awt.BorderLayout} and add
-     * {@link #panel} to the center.
+     * Initializes the content pane layout with {@link java.awt.BorderLayout} and add {@link #panel} to the center.
      *
      * @param title the title for the frame
      */
@@ -120,10 +146,9 @@ public class SwingFrame extends JFrame {
     /**
      * Initializes the look and feel.
      *
-     * Uses the system look and feel. If the guest OS is Mac OS x the menu
-     * bar is took off the frame.
+     * Uses the system look and feel. If the guest OS is Mac OS x the menu bar is took off the frame.
      */
-    protected void initLookAndFeel() {
+    protected final void initLookAndFeel() {
         final OperatingSystem os = OperatingSystem.determine(OperatingSystem.OS_SYSTEM_PROPERTY);
 
         if (os == OperatingSystem.MACOSX) {
@@ -147,12 +172,11 @@ public class SwingFrame extends JFrame {
     /**
      * Binds on the window closing event and calls the exiter to exit application.
      *
-     * This method add a default window listener which {@link #exiter exits}
-     * on {@link WindowAdapter#windowClosing(java.awt.event.WindowEvent)}.
-     * You may override this method for other behaviour. This method is only
-     * invoked if {@link #setExitOnCloseWindow(boolean)} is set true.
+     * This method add a default window listener which {@link #exiter exits} on
+     * {@link WindowAdapter#windowClosing(java.awt.event.WindowEvent)}. You may override this method for other
+     * behaviour. This method is only invoked if {@link #setExitOnCloseWindow(boolean)} is set true.
      */
-    protected void bindWindowClosing() {
+    protected final void bindWindowClosing() {
         addWindowListener(new WindowAdapter() {
 
             @Override
@@ -184,8 +208,7 @@ public class SwingFrame extends JFrame {
     /**
      * Template method for main UI initialization.
      *
-     * Override this method with your custom code to add components
-     * to {@link #panel}.
+     * Override this method with your custom code to add components to {@link #panel}.
      */
     protected void initPanel() {
         // Empty template method.

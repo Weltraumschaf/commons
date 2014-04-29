@@ -149,7 +149,7 @@ public class SwingFrame extends JFrame {
      *
      * Uses the system look and feel. If the guest OS is Mac OS x the menu bar is took off the frame.
      */
-    protected final void initLookAndFeel() {
+    protected void initLookAndFeel() {
         final OperatingSystem os = OperatingSystem.determine(OperatingSystem.OS_SYSTEM_PROPERTY);
 
         if (os == OperatingSystem.MACOSX) {

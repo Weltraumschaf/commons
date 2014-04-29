@@ -38,21 +38,21 @@ import javax.swing.UnsupportedLookAndFeelException;
  *          setExitOnCloseWindow(true); // optional
  *      }
  *
- *      @Override
+ *      &#064;Override
  *      protected void initMenu() {
  *          final MenuBarBuilder builder = MenuBarBuilder.builder();
  *          // Build and set menu here.
  *          setJMenuBar(builder.create());
  *      }
  *
- *      @Override
+ *      &#064;Override
  *      protected void initToolBar() {
  *          final ToolBarBuilder builder = ToolBarBuilder.builder();
  *          // Build and set tool bar here.
  *          getContentPane().add(builder.create(), BorderLayout.NORTH);
  *      }
  *
- *      @Override
+ *      &#064;Override
  *      protected void initPanel() {
  *          // Initialize main panel here.
  *      }

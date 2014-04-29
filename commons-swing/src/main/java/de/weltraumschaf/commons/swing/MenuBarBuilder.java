@@ -15,10 +15,11 @@ import javax.swing.JMenuBar;
 
 /**
  * This builder offers a internal DSL for creating menu bars.
- *
+ * <p>
  * Example:
- * <code>
- * JMenuBar menubar = builder()
+ * </p>
+ * <pre>{@code
+ * final JMenuBar menubar = MenuBarBuilder.builder()
  *            .menu("File")
  *                .item("Open")
  *                    .addListener(new Listener())
@@ -41,7 +42,7 @@ import javax.swing.JMenuBar;
  *                .end()
  *            .end()
  *        .create();
- * </code>
+ * }</pre>
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */

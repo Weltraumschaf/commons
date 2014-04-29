@@ -18,10 +18,11 @@ import javax.swing.JToolBar;
 
 /**
  * This builder offers a internal DSL for creating tool bars.
- *
+ * <p>
  * Example:
- * <code>
- * JToolBar toolbar = ToolBarBuilder.builder()
+ * </p>
+ * <pre>{@code
+ * final JToolBar toolbar = ToolBarBuilder.builder()
  *            .button("/de/weltraumschaf/swing/folder_16x16.gif")
  *                .toolTipText("Open an existing document.")
  *                .addListener(new Listener())
@@ -35,7 +36,7 @@ import javax.swing.JToolBar;
  *                .addListener(new Listener())
  *            .end()
  *            .create();
- * </code>
+ * }</pre>
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */

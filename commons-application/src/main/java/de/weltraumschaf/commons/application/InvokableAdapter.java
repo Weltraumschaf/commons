@@ -39,11 +39,11 @@ import java.util.logging.Logger;
  *          InvokableAdapter.main(new MyApp(args));
  *      }
  *
- *      @Override
+ *      &#064;Override
  *      public void execute() throws Exception {
  *          registerShutdownHook(new Runnable() {
  *
- *              @Override
+ *              &#064;Override
  *              public void run() {
  *                  // Your shutdown code goes here.
  *              }

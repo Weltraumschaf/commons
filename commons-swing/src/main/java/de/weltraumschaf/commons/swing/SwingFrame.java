@@ -177,7 +177,7 @@ public class SwingFrame extends JFrame {
      * {@link WindowAdapter#windowClosing(java.awt.event.WindowEvent)}. You may override this method for other
      * behaviour. This method is only invoked if {@link #setExitOnCloseWindow(boolean)} is set true.
      */
-    protected final void bindWindowClosing() {
+    protected void bindWindowClosing() {
         addWindowListener(new WindowAdapter() {
 
             @Override

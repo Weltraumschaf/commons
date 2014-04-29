@@ -19,9 +19,11 @@ import javax.swing.KeyStroke;
 
 /**
  * Builder to create a menu item.
- *
+ * <p>
  * You should not use this class directly. Instead use {@link MenuBarBuilder}.
+ * </p>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class MenuItemBuilder {

@@ -16,10 +16,12 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 /**
- * Builder to create a button
- *
+ * Builder to create a tool bar button.
+ * <p>
  * You should not use this class directly. Instead use {@link ToolBarBuilder}.
+ * </p>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class ToolBarButtonBuilder {

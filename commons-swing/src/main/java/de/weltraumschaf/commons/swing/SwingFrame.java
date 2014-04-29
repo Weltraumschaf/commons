@@ -59,6 +59,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  *  }
  * }</pre>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class SwingFrame extends JFrame {

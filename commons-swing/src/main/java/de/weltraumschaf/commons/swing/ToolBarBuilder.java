@@ -38,6 +38,7 @@ import javax.swing.JToolBar;
  *            .create();
  * }</pre>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class ToolBarBuilder {

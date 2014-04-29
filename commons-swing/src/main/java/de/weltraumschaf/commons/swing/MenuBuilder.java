@@ -15,9 +15,11 @@ import javax.swing.JMenu;
 
 /**
  * Builder to create a menu.
- *
+ * <p>
  * You should not use this class directly. Instead use {@link MenuBarBuilder}.
+ * </p>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class MenuBuilder {

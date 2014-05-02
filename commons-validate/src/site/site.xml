@@ -4,7 +4,7 @@
          name="Commons Validate">
 
     <body>
-        <menu ref="parent"/>
+        <menu ref="parent" name="Home"/>
         <menu ref="reports"/>
     </body>
 </project>

@@ -49,15 +49,16 @@
     </bannerLeft>
 
     <body>
-        <breadcrumbs>
+        <links>
             <item name="Weltraumschaf" href="http://www.weltraumschaf.de"/>
             <item name="Continious Integration" href="http://ci.weltraumschaf.de/job/Commons%20Stable/"/>
-        </breadcrumbs>
-        <menu name="${project.name}">
+        </links>
+        
+        <menu name="${project.name}" inherit="top">
             <item name="Home" href="index.html"/>
             <item name="Versions" href="versions.html"/>            
         </menu>
-        <menu ref="modules"/>
-        <menu name="Reports" ref="reports"/>
+        <menu ref="modules" inherit="top"/>
+        <menu name="Reports" ref="reports" inherit="bottom  "/>
     </body>
 </project>

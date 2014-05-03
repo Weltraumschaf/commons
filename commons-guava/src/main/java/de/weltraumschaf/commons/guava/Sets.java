@@ -81,15 +81,21 @@ public final class Sets {
 
     /**
      * Creates a {@code HashSet} instance, with a high enough "initial capacity" that it <em>should</em> hold
-     * {@code expectedSize} elements without growth. This behavior cannot be broadly guaranteed, but it is observed to
+     * {@code expectedSize} elements without growth.
+     *
+     * <p>
+     * This behavior cannot be broadly guaranteed, but it is observed to
      * be true for OpenJDK 1.6. It also can't be guaranteed that the method isn't inadvertently <i>oversizing</i> the
      * returned set.
+     * </p>
      *
      * @param <E> type of elements
      * @param expectedSize the number of elements you expect to add to the returned set
      * @return a new, empty {@code HashSet} with enough capacity to hold {@code
-     *         expectedSize} elements without resizing CHECKSTYLE:OFF
-     * @throws IllegalArgumentException if {@code expectedSize} is negative CHECKSTYLE:ON
+     *         expectedSize} elements without resizing
+     * //CHECKSTYLE:OFF
+     * @throws IllegalArgumentException if {@code expectedSize} is negative
+     * //CHECKSTYLE:ON
      */
     public static <E> Set<E> newHashSetWithExpectedSize(final int expectedSize) {
         return new HashSet<E>(capacity(expectedSize));

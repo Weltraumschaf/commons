@@ -149,7 +149,9 @@ public final class CapturedOutput implements TestRule {
     public Statement apply(final Statement base, final Description description) {
         return new Statement() {
             @Override
+            //CHECKSTYLE: OFF Throwable required by API.
             public void evaluate() throws Throwable {
+            //CHECKSTYLE: ON
                 redirectOutputStreams();
 
                 try {
@@ -264,7 +266,12 @@ public final class CapturedOutput implements TestRule {
             return allOf(castedMatchers());
         }
 
-        @SuppressWarnings({"unchecked", "rawtypes"})
+        /**
+         * Casts list to matchers of super type string.
+         *
+         * @return new instance, not {@code null}
+         */
+        @SuppressWarnings({"unchecked", "rawtypes" })
         private List<Matcher<? super String>> castedMatchers() {
             return new ArrayList<Matcher<? super String>>((List) matchers);
         }

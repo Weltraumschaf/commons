@@ -116,6 +116,18 @@ abstract class BaseToken<T> implements Token {
         return value.toString();
     }
 
+    /**
+     * Throws always an exception.
+     * <p>
+     * Used to signal that one of the {@code as...()} methods was called, but the
+     * value type does not match.
+     * </p>
+     * <p>
+     * This method always throws {@link UnsupportedOperationException}.
+     * </p>
+     *
+     * @param unsupported the unsupported type
+     */
     protected void raiseUnsupportedValueOperationError(final TokenType unsupported) {
         throw new UnsupportedOperationException(String.format(FORMAT, unsupported, getType()));
     }

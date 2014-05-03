@@ -53,7 +53,10 @@ public class ShellCommand {
      * @param subCommand sub command
      * @param arguments command arguments, may be an empty list
      */
-    public ShellCommand(final MainCommandType command, final SubCommandType subCommand, final List<Token<?>> arguments) {
+    public ShellCommand(
+            final MainCommandType command,
+            final SubCommandType subCommand,
+            final List<Token<?>> arguments) {
         super();
         this.command    = command;
         this.subCommand = subCommand;

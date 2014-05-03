@@ -53,6 +53,9 @@ public final class CapturingPrintStream extends PrintStream {
      * used to do the real work.
      */
     private PrintStream delegate;
+    /**
+     * Encoding of the captured bytes.
+     */
     private final String encoding;
 
     /**
@@ -148,7 +151,7 @@ public final class CapturingPrintStream extends PrintStream {
     }
 
     @Override
-    public void write(final byte buf[], final int off, final int len) {
+    public void write(final byte[] buf, final int off, final int len) {
         delegate.write(buf, off, len);
     }
 
@@ -183,7 +186,7 @@ public final class CapturingPrintStream extends PrintStream {
     }
 
     @Override
-    public void print(final char s[]) {
+    public void print(final char[] s) {
         delegate.print(s);
     }
 
@@ -233,7 +236,7 @@ public final class CapturingPrintStream extends PrintStream {
     }
 
     @Override
-    public void println(final char x[]) {
+    public void println(final char[] x) {
         delegate.println(x);
     }
 

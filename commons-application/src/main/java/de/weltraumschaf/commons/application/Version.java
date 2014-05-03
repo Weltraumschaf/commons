@@ -42,7 +42,7 @@ import java.util.Properties;
  * <pre>{@code
  * Version version = new Version("/foo/bar/version.properties");
  * version.load()
- * System.out.println(version.getVersion);
+ * println(version.getVersion);
  * }</pre>
  *
  * @since 1.0.0

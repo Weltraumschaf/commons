@@ -13,57 +13,79 @@
 package de.weltraumschaf.commons.experimental.token;
 
 /**
+ * Defines a token.
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public final class Token {
+public interface Token {
 
-    private TokenType type;
-    private Position position;
-    private String raw;
-    private String value;
-    private ValueType valuetype;
+    /**
+     * Start position of the token.
+     *
+     * @return never {@code null}
+     */
+    Position getPosition();
 
-    public TokenType getType() {
-        return type;
-    }
+    /**
+     * The raw string recognized by the scanner.
+     * <p>
+     * For example a string token {@code "foo"} has the raw value {@code "foo"} in contrast
+     * it's typed {@link #asString() string value} will be {@code foo}.
+     * </p>
+     *
+     * @return never {@code null}
+     */
+    String getRaw();
 
-    public Position getPosition() {
-        return position;
-    }
+    /**
+     * Get the token type class.
+     *
+     * @return never {@code null}
+     */
+    TokenType getType();
 
-    public String asString() {
-        return value;
-    }
+    /**
+     * Get the boolean typed value.
+     * <p>
+     * This method throws {@link UnsupportedOperationException} if the token's {@link #getType() token class}
+     * is not of type {@link TokenType#BOOLEAN}.
+     * </p>
+     *
+     * @return never {@code null}
+     */
+    Boolean asBoolean();
 
-    public Boolean asBoolean() {
-        if (valuetype != ValueType.BOOLEAN) {
-            throw new ValueCastException();
-        }
+    /**
+     * Get the float typed value.
+     * <p>
+     * This method throws {@link UnsupportedOperationException} if the token's {@link #getType() token class}
+     * is not of type {@link TokenType#FLOAT}.
+     * </p>
+     *
+     * @return never {@code null}
+     */
+    Float asFloat();
 
-        return Boolean.parseBoolean(value);
-    }
+    /**
+     * Get the integer typed value.
+     * <p>
+     * This method throws {@link UnsupportedOperationException} if the token's {@link #getType() token class}
+     * is not of type {@link TokenType#INTEGER}.
+     * </p>
+     *
+     * @return never {@code null}
+     */
+    Integer asInteger();
 
-    public Integer asInteger() {
-        if (valuetype != ValueType.INTEGER) {
-            throw new ValueCastException();
-        }
+    /**
+     * Get the string typed value.
+     * <p>
+     * This method never throws {@link UnsupportedOperationException}.
+     * It always calls {@link Object#toString()} on the recognized typed value.
+     * </p>
+     *
+     * @return never {@code null}
+     */
+    String asString();
 
-        return Integer.parseInt(value, 10);
-    }
-
-    public Float asFloat() {
-        if (valuetype != ValueType.FLOAT) {
-            throw new ValueCastException();
-        }
-
-        return Float.parseFloat(value);
-    }
-
-    public final class Position {
-        private int row;
-        private int column;
-    }
-
-    public final class ValueCastException extends RuntimeException {}
 }

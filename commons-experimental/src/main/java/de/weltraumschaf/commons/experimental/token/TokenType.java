@@ -13,10 +13,34 @@
 package de.weltraumschaf.commons.experimental.token;
 
 /**
+ * Defines the token classes.
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public enum TokenType {
 
-    BOOLEAN, INTEGER, FLOAT, KEYWORD, LITERAL, STRING;
+    /**
+     * Token class with a types value of type {@link java.lang.Boolean}.
+     */
+    BOOLEAN,
+    /**
+     * Token class with a types value of type {@link java.lang.Integer}.
+     */
+    INTEGER,
+    /**
+     * Token class with a types value of type {@link java.lang.Float}.
+     */
+    FLOAT,
+    /**
+     * Token class with a types value of type {@link java.lang.String}.
+     */
+    KEYWORD,
+    /**
+     * Token class with a types value of type {@link java.lang.String}.
+     */
+    LITERAL,
+    /**
+     * Token class with a types value of type {@link java.lang.String}.
+     */
+    STRING;
 }

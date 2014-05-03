@@ -10,17 +10,11 @@
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
 
-package de.weltraumschaf.commons.experimental.token;
-
 /**
- *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * New designed tokens.
+ * <p>
+ * This is an attempt to design token classes with strong typed values, but without the need of
+ * unsafe casts warnings.
+ * </p>
  */
-public enum ValueType {
-
-    STRING,
-    FLOAT,
-    INTEGER,
-    BOOLEAN;
-
-}
+package de.weltraumschaf.commons.experimental.token;

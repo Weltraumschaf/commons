@@ -39,14 +39,14 @@ Example:
         }
     }
 
-This you use like this:
+Use the frame that way:
 
     final MyFrame frame = new MyFrame("My Frame");
     frame.init();
 
 ## Builders
 
-This module privide builders to create UI components.
+This module privide [builders][builder] to create UI components.
 
 ### MenuBarBuilder Class
 

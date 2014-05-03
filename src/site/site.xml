@@ -51,7 +51,7 @@
     <body>
         <links>
             <item name="Weltraumschaf" href="http://www.weltraumschaf.de"/>
-            <item name="Continious Integration" href="http://ci.weltraumschaf.de/job/Commons%20Stable/"/>
+            <item name="Continious Integration" href="http://ci.weltraumschaf.de/job/Commons%20Master/"/>
         </links>
         
         <menu name="${project.name}" inherit="top">

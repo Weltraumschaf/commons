@@ -42,8 +42,8 @@ public final class Validate {
      * }</pre>
      *
      * <p>
-     * The second parameter {@code name} may be omitted. Then a {@link NullPointerException} without any message
-     * will be thrown. For this purpose you can call the convenience method {@link #notNull(java.lang.Object)}.
+     * The second parameter {@code name} may be omitted. Then a {@link NullPointerException} without any message will be
+     * thrown. For this purpose you can call the convenience method {@link #notNull(java.lang.Object)}.
      * </p>
      *
      * @param <T> type of reference
@@ -124,5 +124,41 @@ public final class Validate {
      */
     public static String notEmpty(final String reference) {
         return notEmpty(reference, null);
+    }
+
+    /**
+     * Tests that a given integer reference value is greater than the given lower bound.
+     * <p>
+     * The method throws an {@link IllegalArgumentException} if the given reference is less than or equal the given
+     * lower bound value.
+     * </p>
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
+    public static int greaterThan(final int reference, final int lowerBound, final String name) {
+        if (reference <= lowerBound) {
+            if (null == name) {
+                throw new IllegalArgumentException();
+            } else {
+                throw new IllegalArgumentException(
+                        String.format("Parameter '%s' muts be greater than %d (was %d)!", name, lowerBound, reference));
+            }
+        }
+
+        return reference;
+    }
+
+    /**
+     * Convenience method for {@link #greaterThan(int, int, null)}.
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @return the reference, if it is valid
+     */
+    public static int greaterThan(final int reference, final int lowerBound) {
+        return greaterThan(reference, lowerBound, null);
     }
 }

@@ -99,4 +99,23 @@ public class ValidateTest {
         assertThat(Validate.notEmpty(str), is(sameInstance(str)));
         assertThat(Validate.notEmpty(str, null), is(sameInstance(str)));
     }
+
+    @Test
+    public void greaterThan_greaterThanReturnsReference() {
+        assertThat(Validate.greaterThan(5, 4, ""), is(5));
+    }
+
+    @Test
+    public void greaterThan_sameValuesThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' muts be greater than 5 (was 5)!");
+        Validate.greaterThan(5, 5, "foo");
+    }
+
+    @Test
+    public void greaterThan_referenceLessThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' muts be greater than 5 (was 4)!");
+        Validate.greaterThan(4, 5, "foo");
+    }
 }

@@ -27,19 +27,27 @@ The generic form of a parsed line is:
 
     $> tool command [subcommand] [arg1] .. [argN]
 
-## Scanners
+## ShellCommand Foundation
 
 TBD
 
-## Parsers
+## Other Classes
 
 TBD
 
-## CommandType
+### CommandType
 
 TBD
 
-## Characters
+### Scanners
+
+TBD
+
+### Parsers
+
+TBD
+
+### Characters
 
 TBD
 

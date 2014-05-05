@@ -143,6 +143,60 @@ no  sub  command  was  parsed,  then   the  default  (given  in  constructor  to
 [LiteralCommandMap][LiteralCommandMap]) is returnd. It  also provides all parsed
 arguments as typed tokens.
 
+You can  also provide  a command  verifier, which  verifies the  givne commands.
+E.g. it may check if a main command  has an invalid sub command givne or missing
+or invalid arguments. In this example [Hamcrest][hamcrest] ist used:
+
+    public class DhtCommandVerifier implements CommandVerifier {
+        @Override
+        public void verifyCommand(final ShellCommand cmd) throws SyntaxException {
+            switch ((CommandMainType) cmd.getCommand()) {
+                // No argument, no subcommand.
+                case FOO:
+                    assertNoArguments(cmd);
+                    break;
+                case BAR:
+                case BAZ:
+                    assertNoSubCommand(cmd);
+                    assertNoArguments(cmd);
+                    break;
+                default:
+                    // Nothing to do here.
+            }
+        }
+        
+        private void assertNoArguments(final ShellCommand cmd) throws SyntaxException {
+            try {
+                MatcherAssert.assertThat(cmd.getArguments(), is(empty()));
+            } catch (final AssertionError err) {
+                throw new SyntaxException(
+                    String.format(
+                        "Command '%s' does not support arguments!", 
+                        cmd.getCommand()),
+                    err
+                );
+            }
+        }
+        
+        private void assertNoSubCommand(final ShellCommand cmd) throws SyntaxException {
+            try {
+                MatcherAssert.assertThat(
+                    cmd.getSubCommand(), 
+                    is(equalTo((SubCommandType) CommandSubType.NONE)));
+            } catch (final AssertionError err) {
+                throw new SyntaxException(
+                    String.format(
+                        "Command '%s' does not support subcommand '%s'!", 
+                        cmd.getCommand(), 
+                        cmd.getSubCommand()),
+                    err
+                );
+            }
+        }
+    }
+    
+You inject this verifier to the parser:
+    
     final Parser parser = Parsers.newParser(new MyCommandVerifier(), new MyLiteralCommandMap());
 
 ## Other Classes
@@ -171,3 +225,4 @@ TBD
 
 [ShellCommand]:         apidocs/de/weltraumschaf/commons/shell/ShellCommand.html
 [LiteralCommandMap]:    apidocs/de/weltraumschaf/commons/shell/LiteralCommandMap.html
+[hamcrest]:             http://hamcrest.org/

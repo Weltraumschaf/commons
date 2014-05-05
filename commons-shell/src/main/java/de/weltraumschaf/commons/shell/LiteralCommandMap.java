@@ -40,7 +40,7 @@ public abstract class LiteralCommandMap {
     private final SubCommandType defaultSubCommand;
 
     /**
-     * Calls the template methods {@link #initCommandMap(java.util.Map)}
+     * Calls the template methods {@link #initMainCommandMap(java.util.Map)}
      * and {@link #initSubCommandMap(java.util.Map)}.
      *
      * @param defaultSubCommand sub command used for commands w/o sub command, usualy a NONE type
@@ -144,7 +144,7 @@ public abstract class LiteralCommandMap {
      *
      * @param map map to initialize
      */
-    protected abstract void initCommandMap(final Map<String, MainCommandType> map);
+    protected abstract void initMainCommandMap(final Map<String, MainCommandType> map);
 
     /**
      * Initializes the sub command map.
@@ -156,10 +156,10 @@ public abstract class LiteralCommandMap {
     /**
      * Not overideable template method called in constructor.
      *
-     * Invokes first {@link #initCommandMap(java.util.Map)} and second {@link #initSubCommandMap(java.util.Map)}.
+     * Invokes first {@link #initMainCommandMap(java.util.Map)} and second {@link #initSubCommandMap(java.util.Map)}.
      */
     private void init() {
-        initCommandMap(commands);
+        initMainCommandMap(commands);
         initSubCommandMap(subCommands);
     }
 

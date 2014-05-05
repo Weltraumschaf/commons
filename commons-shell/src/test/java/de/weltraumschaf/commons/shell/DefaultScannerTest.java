@@ -312,7 +312,7 @@ public class DefaultScannerTest {
         }
 
         @Override
-        protected void initCommandMap(final Map<String, MainCommandType> map) {
+        protected void initMainCommandMap(final Map<String, MainCommandType> map) {
             for (final MainCommandType t : TestMainType.values()) {
                 map.put(t.toString(), t);
             }

@@ -38,17 +38,17 @@ public class DefaultParserTest {
     public void parse_comand() throws SyntaxException {
         // Move this code to neuron.
         ShellCommand c = sut.parse("foo");
-        assertThat((TestMainType) c.getCommand(), is(TestMainType.FOO));
+        assertThat((TestMainType) c.getMainCommand(), is(TestMainType.FOO));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.NONE));
         assertThat(c.getArguments().size(), is(0));
 
         c = sut.parse("bar");
-        assertThat((TestMainType) c.getCommand(), is(TestMainType.BAR));
+        assertThat((TestMainType) c.getMainCommand(), is(TestMainType.BAR));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.NONE));
         assertThat(c.getArguments().size(), is(0));
 
         c = sut.parse("baz");
-        assertThat((TestMainType) c.getCommand(), is(TestMainType.BAZ));
+        assertThat((TestMainType) c.getMainCommand(), is(TestMainType.BAZ));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.NONE));
         assertThat(c.getArguments().size(), is(0));
     }
@@ -81,7 +81,7 @@ public class DefaultParserTest {
     @SuppressWarnings("unchecked")
     public void parse_comandWithSubcommandAndOneArgument() throws SyntaxException {
         ShellCommand c = sut.parse("foo add 1234");
-        assertThat((TestMainType) c.getCommand(), is(TestMainType.FOO));
+        assertThat((TestMainType) c.getMainCommand(), is(TestMainType.FOO));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.ADD));
         assertThat(c.getArguments().size(), is(1));
 
@@ -90,7 +90,7 @@ public class DefaultParserTest {
         assertThat(t.getValue(), is(1234));
 
         c = sut.parse("bar del 5678");
-        assertThat((TestMainType) c.getCommand(), is(TestMainType.BAR));
+        assertThat((TestMainType) c.getMainCommand(), is(TestMainType.BAR));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.DEL));
         assertThat(c.getArguments().size(), is(1));
 
@@ -99,7 +99,7 @@ public class DefaultParserTest {
         assertThat(t.getValue(), is(5678));
 
         c = sut.parse("baz info 5678");
-        assertThat((TestMainType) c.getCommand(), is(TestMainType.BAZ));
+        assertThat((TestMainType) c.getMainCommand(), is(TestMainType.BAZ));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.INFO));
         assertThat(c.getArguments().size(), is(1));
 
@@ -153,7 +153,7 @@ public class DefaultParserTest {
         }
 
         @Override
-        protected void initCommandMap(final Map<String, MainCommandType> map) {
+        protected void initMainCommandMap(final Map<String, MainCommandType> map) {
             for (final MainCommandType t : TestMainType.values()) {
                 map.put(t.toString(), t);
             }

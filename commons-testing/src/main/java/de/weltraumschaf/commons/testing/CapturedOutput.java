@@ -149,9 +149,10 @@ public final class CapturedOutput implements TestRule {
     public Statement apply(final Statement base, final Description description) {
         return new Statement() {
             @Override
-            //CHECKSTYLE: OFF Throwable required by API.
+            // CHECKSTYLE:OFF
+            // Throwable required by API.
             public void evaluate() throws Throwable {
-            //CHECKSTYLE: ON
+            // CHECKSTYLE:ON
                 redirectOutputStreams();
 
                 try {

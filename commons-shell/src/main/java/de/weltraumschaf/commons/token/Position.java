@@ -12,6 +12,7 @@
 package de.weltraumschaf.commons.token;
 
 import de.weltraumschaf.commons.guava.Objects;
+import de.weltraumschaf.commons.validate.Validate;
 
 /**
  * Represents a token position in the source string.
@@ -53,15 +54,15 @@ public final class Position {
      *
      * File is optional e.g. if string is parsed directly without any file.
      *
-     * @param line Line of occurrence.
-     * @param column Column of occurrence.
-     * @param file Optional file name. Not used for IO, only for informative purpose.
+     * @param line must be greater than 0
+     * @param column must be greater than 0
+     * @param file must not be {@code null}, may be empty
      */
     public Position(final int line, final int column, final String file) {
         super();
-        this.line   = line;
-        this.column = column;
-        this.file   = file;
+        this.line   = Validate.greaterThan(line, 0, "line");
+        this.column = Validate.greaterThan(column, 0, "column");
+        this.file   = Validate.notNull(file, "file");
     }
 
     /**

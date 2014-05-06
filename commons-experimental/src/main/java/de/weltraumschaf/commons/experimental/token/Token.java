@@ -12,6 +12,8 @@
 
 package de.weltraumschaf.commons.experimental.token;
 
+import de.weltraumschaf.commons.token.Position;
+
 /**
  * Defines a token.
  *

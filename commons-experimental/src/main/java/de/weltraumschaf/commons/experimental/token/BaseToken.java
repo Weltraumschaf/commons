@@ -12,6 +12,7 @@
 package de.weltraumschaf.commons.experimental.token;
 
 import de.weltraumschaf.commons.guava.Objects;
+import de.weltraumschaf.commons.token.Position;
 import de.weltraumschaf.commons.validate.Validate;
 
 /**

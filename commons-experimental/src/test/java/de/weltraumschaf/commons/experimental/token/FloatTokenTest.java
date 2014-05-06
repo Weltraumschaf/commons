@@ -13,9 +13,7 @@ package de.weltraumschaf.commons.experimental.token;
 
 import de.weltraumschaf.commons.experimental.token.BaseToken.FloatToken;
 import de.weltraumschaf.commons.token.Position;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
@@ -45,7 +43,7 @@ public class FloatTokenTest {
 
     @Test
     public void asFloat() {
-        assertEquals(3.14f, sut.asFloat(), 0.0001);
+        assertThat((double) sut.asFloat(), is(closeTo(3.14, 0.0001)));
     }
 
     @Test

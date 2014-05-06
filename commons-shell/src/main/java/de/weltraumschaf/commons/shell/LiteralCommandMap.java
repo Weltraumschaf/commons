@@ -20,6 +20,7 @@ import java.util.Map;
  *
  * This class is not thread safe!
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public abstract class LiteralCommandMap {
@@ -27,7 +28,7 @@ public abstract class LiteralCommandMap {
     /**
      * Map the literal command string to corresponding type enum.
      */
-    private final Map<String, MainCommandType> commands = Maps.newHashMap();
+    private final Map<String, MainCommandType> mainCommands = Maps.newHashMap();
 
     /**
      * Map the literal sub command string to corresponding type enum.
@@ -68,7 +69,7 @@ public abstract class LiteralCommandMap {
      * @return true if the token is a command else false
      */
     public final boolean isCommand(final String token) {
-        return commands.containsKey(token);
+        return mainCommands.containsKey(token);
     }
 
     /**
@@ -84,7 +85,7 @@ public abstract class LiteralCommandMap {
      */
     public final MainCommandType determineCommand(final Token<String> t) {
         if (isCommand(t)) {
-            return commands.get(t.getValue());
+            return mainCommands.get(t.getValue());
         }
         throw new IllegalArgumentException(String.format("'%s' is not a command!", t.getValue()));
     }
@@ -139,12 +140,7 @@ public abstract class LiteralCommandMap {
         return defaultSubCommand;
     }
 
-    /**
-     * Initializes the command map.
-     *
-     * @param map map to initialize
-     */
-    protected abstract void initMainCommandMap(final Map<String, MainCommandType> map);
+
     /**
      * Return here the enum type which declares your main commands.
      *
@@ -153,11 +149,41 @@ public abstract class LiteralCommandMap {
     protected abstract Class<? extends MainCommandType> getMainCommandType();
 
     /**
-     * Initializes the sub command map.
-     *
-     * @param map map to initialize
+     * Initializes the command map.
      */
-    protected abstract void initSubCommandMap(final Map<String, SubCommandType> map);
+    private void initMainCommandMap() {
+        final Class<? extends MainCommandType> mainCommandTypes = getMainCommandType();
+
+        if (!mainCommandTypes.isEnum()) {
+            throw new IllegalArgumentException(
+                String.format("Not an java.lang.Enum type returned by %s#getMainCommandType()!", getClass().getName()));
+        }
+
+        for (final MainCommandType t : mainCommandTypes.getEnumConstants()) {
+            mainCommands.put(t.getLiteral(), t);
+        }
+    }
+
+    /**
+     * Initializes the sub command map.
+     */
+    private void initSubCommandMap() {
+        final Class<? extends SubCommandType> subCommandTypes = getSubCommandType();
+
+        if (!subCommandTypes.isEnum()) {
+            throw new IllegalArgumentException(
+                String.format("Not an java.lang.Enum type returned by %s#getSubCommandType()!", getClass().getName()));
+        }
+
+        for (final SubCommandType t : subCommandTypes.getEnumConstants()) {
+            if (t.getLiteral().isEmpty()) {
+                continue; // Ignore to do not recognize empty strings as sub command, e.g. ythe NONE.
+            }
+
+            subCommands.put(t.getLiteral(), t);
+        }
+    }
+
     /**
      * Return here the enum type which declares your sub commands.
      *
@@ -171,8 +197,8 @@ public abstract class LiteralCommandMap {
      * Invokes first {@link #initMainCommandMap(java.util.Map)} and second {@link #initSubCommandMap(java.util.Map)}.
      */
     private void init() {
-        initMainCommandMap(commands);
-        initSubCommandMap(subCommands);
+        initMainCommandMap();
+        initSubCommandMap();
     }
 
 }

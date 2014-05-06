@@ -96,26 +96,17 @@ literal token is what command:
             // Tell which is the default sub command, if no one is parsed
             super(CommandSubType.NONE); 
         }
-
+        
         @Override
-        protected void initMainCommandMap(final Map<String, MainCommandType> map) {
-            // Add all main commands to given map.
-            for (final MyMainCommand t : MyMainCommand.values()) {
-                map.put(t.toString(), t);
-            }
+        protected Class<MyMainCommand> getMainCommandType() {
+            return MyMainCommand.class;
         }
-
+        
         @Override
-        protected void initSubCommandMap(final Map<String, SubCommandType> map) {
-            // Add all sub commands to given map.
-            for (final MySubCommand t : MySubCommand.values()) {
-                if (t.toString().isEmpty()) {
-                    // Ignore NONE to do not recognize empty strings as sub command.
-                    continue; 
-                }
-                map.put(t.toString(), t);
-            }
+        protected Class<MySubCommand> getSubCommandType() {
+            return MySubCommand.class;
         }
+        
     }
 
 Now we can put everything together and parse the input:

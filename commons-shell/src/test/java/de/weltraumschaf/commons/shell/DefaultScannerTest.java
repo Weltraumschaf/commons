@@ -51,7 +51,7 @@ public class DefaultScannerTest {
         final List<CommandType> types = Lists.newArrayList();
 
         for (final MainCommandType t : TestMainType.values()) {
-            input.append(t).append(' ');
+            input.append(t.getLiteral()).append(' ');
             types.add(t);
         }
 
@@ -59,7 +59,8 @@ public class DefaultScannerTest {
             if (t == TestSubType.NONE) {
                 continue;
             }
-            input.append(t).append(' ');
+
+            input.append(t.getLiteral()).append(' ');
             types.add(t);
         }
 
@@ -68,7 +69,7 @@ public class DefaultScannerTest {
 
         for (final Token<?> token : tokens) {
             assertThat(token.getType(), is(TokenType.KEYWORD));
-            assertThat(token.getValue().toString(), is(types.get(tokenId).toString()));
+            assertThat(token.getValue().toString(), is(types.get(tokenId).getLiteral()));
             ++tokenId;
         }
     }
@@ -76,23 +77,23 @@ public class DefaultScannerTest {
     @Test
     @SuppressWarnings("unchecked")
     public void scan_lineWithSingleKeyword() throws SyntaxException {
-        List<Token<?>> tokens = sut.scan(TestMainType.FOO.toString());
+        List<Token<?>> tokens = sut.scan(TestMainType.FOO.getLiteral());
         assertThat(tokens.size(), is(1));
         Token<String> token = (Token<String>) tokens.get(0);
         assertThat(token.getType(), is(TokenType.KEYWORD));
-        assertThat(token.getValue(), is(TestMainType.FOO.toString()));
+        assertThat(token.getValue(), is(TestMainType.FOO.getLiteral()));
 
-        tokens = sut.scan(TestMainType.BAR.toString());
+        tokens = sut.scan(TestMainType.BAR.getLiteral());
         assertThat(tokens.size(), is(1));
         token = (Token<String>) tokens.get(0);
         assertThat(token.getType(), is(TokenType.KEYWORD));
-        assertThat(token.getValue(), is(TestMainType.BAR.toString()));
+        assertThat(token.getValue(), is(TestMainType.BAR.getLiteral()));
 
-        tokens = sut.scan(TestMainType.BAZ.toString());
+        tokens = sut.scan(TestMainType.BAZ.getLiteral());
         assertThat(tokens.size(), is(1));
         token = (Token<String>) tokens.get(0);
         assertThat(token.getType(), is(TokenType.KEYWORD));
-        assertThat(token.getValue(), is(TestMainType.BAZ.toString()));
+        assertThat(token.getValue(), is(TestMainType.BAZ.getLiteral()));
     }
 
     @Test
@@ -314,20 +315,6 @@ public class DefaultScannerTest {
 
         public LiteralCommandMapStub() {
             super(TestSubType.NONE);
-        }
-
-        @Override
-        protected void initMainCommandMap(final Map<String, MainCommandType> map) {
-            for (final MainCommandType t : TestMainType.values()) {
-                map.put(t.toString(), t);
-            }
-        }
-
-        @Override
-        protected void initSubCommandMap(final Map<String, SubCommandType> map) {
-            for (final SubCommandType t : TestSubType.values()) {
-                map.put(t.toString(), t);
-            }
         }
 
         @Override

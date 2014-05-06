@@ -13,7 +13,6 @@ package de.weltraumschaf.commons.shell;
 
 import de.weltraumschaf.commons.token.Token;
 import de.weltraumschaf.commons.token.TokenType;
-import java.util.Map;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
@@ -153,29 +152,14 @@ public class DefaultParserTest {
         }
 
         @Override
-        protected void initMainCommandMap(final Map<String, MainCommandType> map) {
-            for (final MainCommandType t : TestMainType.values()) {
-                map.put(t.toString(), t);
-            }
+        protected Class<TestMainType> getMainCommandType() {
+            return TestMainType.class;
         }
 
         @Override
-        protected void initSubCommandMap(final Map<String, SubCommandType> map) {
-            for (final SubCommandType t : TestSubType.values()) {
-                map.put(t.toString(), t);
-            }
-        }
-
-        @Override
-        protected Class<? extends MainCommandType> getMainCommandType() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-
-        @Override
-        protected Class<? extends SubCommandType> getSubCommandType() {
+        protected Class<TestSubType> getSubCommandType() {
             return TestSubType.class;
         }
-
 
     }
 

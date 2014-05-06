@@ -20,12 +20,16 @@ import java.util.List;
 
 /**
  * Default implementation for scanning the input line from an interactive shell.
- *
+ * <p>
  * The scanner tokenizes:
- * - alpha numeric literals
- * - integer number literals
- * - and single/double quote delimittered string literals
+ * </p>
+ * <ul>
+ * <li>alpha numeric literals</li>
+ * <li>integer number literals</li>
+ * <li>and single/double quote delimited string literals</li>
+ * </ul>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 class DefaultScanner implements Scanner {
@@ -98,7 +102,7 @@ class DefaultScanner implements Scanner {
      * @return Return string type token
      */
     private Token scanLiteral(final CharacterStream characterStream) {
-        return scanLiteral(characterStream, new StringBuilder());
+        return scanLiteralOrKeyword(characterStream, new StringBuilder());
     }
 
     /**
@@ -108,7 +112,7 @@ class DefaultScanner implements Scanner {
      * @param value collects the token string, must not be {@code null}
      * @return Return string type token
      */
-    private Token scanLiteral(final CharacterStream characterStream, final StringBuilder value) {
+    private Token scanLiteralOrKeyword(final CharacterStream characterStream, final StringBuilder value) {
         value.append(characterStream.current());
 
         while (characterStream.hasNext()) {
@@ -150,7 +154,7 @@ class DefaultScanner implements Scanner {
             }
 
             if (! CharacterHelper.isNum(currentChar)) {
-                return scanLiteral(characterStream, value);
+                return scanLiteralOrKeyword(characterStream, value);
             }
 
             value.append(currentChar);

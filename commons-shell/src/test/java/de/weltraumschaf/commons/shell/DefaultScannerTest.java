@@ -295,7 +295,7 @@ public class DefaultScannerTest {
         }
 
         @Override
-        public String toString() {
+        public String getLiteral() {
             return literal;
         }
 
@@ -303,6 +303,11 @@ public class DefaultScannerTest {
 
     private enum TestSubType implements SubCommandType {
         NONE();
+
+        @Override
+        public String getLiteral() {
+            return "";
+        }
     }
 
     private static class LiteralCommandMapStub extends LiteralCommandMap {
@@ -323,6 +328,16 @@ public class DefaultScannerTest {
             for (final SubCommandType t : TestSubType.values()) {
                 map.put(t.toString(), t);
             }
+        }
+
+        @Override
+        protected Class<? extends MainCommandType> getMainCommandType() {
+            return TestMainType.class;
+        }
+
+        @Override
+        protected Class<? extends SubCommandType> getSubCommandType() {
+            return TestSubType.class;
         }
 
     }

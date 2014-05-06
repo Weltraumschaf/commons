@@ -135,7 +135,7 @@ public abstract class LiteralCommandMap {
      *
      * @return the enum type of the "none" sub command
      */
-    public SubCommandType getDefaultSubCommand() {
+    public final SubCommandType getDefaultSubCommand() {
         return defaultSubCommand;
     }
 
@@ -145,6 +145,12 @@ public abstract class LiteralCommandMap {
      * @param map map to initialize
      */
     protected abstract void initMainCommandMap(final Map<String, MainCommandType> map);
+    /**
+     * Return here the enum type which declares your main commands.
+     *
+     * @return never {@code null}
+     */
+    protected abstract Class<? extends MainCommandType> getMainCommandType();
 
     /**
      * Initializes the sub command map.
@@ -152,6 +158,12 @@ public abstract class LiteralCommandMap {
      * @param map map to initialize
      */
     protected abstract void initSubCommandMap(final Map<String, SubCommandType> map);
+    /**
+     * Return here the enum type which declares your sub commands.
+     *
+     * @return never {@code null}
+     */
+    protected abstract Class<? extends SubCommandType> getSubCommandType();
 
     /**
      * Not overideable template method called in constructor.

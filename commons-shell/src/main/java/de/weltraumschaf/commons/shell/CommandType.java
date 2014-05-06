@@ -18,4 +18,11 @@ package de.weltraumschaf.commons.shell;
  */
 public interface CommandType {
 
+    /**
+     * Returns the literal string of the command.
+     *
+     * @return never {@code null}, never empty
+     */
+    String getLiteral();
+
 }

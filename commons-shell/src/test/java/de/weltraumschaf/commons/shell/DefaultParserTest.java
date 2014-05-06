@@ -119,7 +119,7 @@ public class DefaultParserTest {
         }
 
         @Override
-        public String toString() {
+        public String getLiteral() {
             return literal;
         }
 
@@ -140,7 +140,7 @@ public class DefaultParserTest {
         }
 
         @Override
-        public String toString() {
+        public String getLiteral() {
             return literal;
         }
 
@@ -165,6 +165,17 @@ public class DefaultParserTest {
                 map.put(t.toString(), t);
             }
         }
+
+        @Override
+        protected Class<? extends MainCommandType> getMainCommandType() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        protected Class<? extends SubCommandType> getSubCommandType() {
+            return TestSubType.class;
+        }
+
 
     }
 

@@ -24,6 +24,8 @@ import de.weltraumschaf.commons.validate.Validate;
  */
 public final class Position {
 
+    static final Position NULL = new Position(0, 0);
+
     /**
      * File of the source string.
      */
@@ -54,14 +56,14 @@ public final class Position {
      *
      * File is optional e.g. if string is parsed directly without any file.
      *
-     * @param line must be greater than 0
-     * @param column must be greater than 0
+     * @param line must be greater than -1
+     * @param column must be greater than -1
      * @param file must not be {@code null}, may be empty
      */
     public Position(final int line, final int column, final String file) {
         super();
-        this.line   = Validate.greaterThan(line, 0, "line");
-        this.column = Validate.greaterThan(column, 0, "column");
+        this.line   = Validate.greaterThan(line, -1, "line");
+        this.column = Validate.greaterThan(column, -1, "column");
         this.file   = Validate.notNull(file, "file");
     }
 

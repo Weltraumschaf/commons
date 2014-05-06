@@ -21,7 +21,7 @@ public final class Tokens {
     /**
      * Default position.
      */
-    private static final Position NULL_POSITION = new Position(0, 0);
+    private static final Position NULL_POSITION = Position.NULL;
 
     /**
      * Hidden for pure static factory.

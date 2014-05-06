@@ -92,4 +92,20 @@ public final class Lists {
         return list;
     }
 
+    /**
+     * Creates a <em>mutable</em> {@link java.util.ArrayList} instance containing the given elements.
+     *
+     * @param <E> type of elements
+     * @param elements the elements that the list should contain, in order
+     * @return a new {@code ArrayList} containing those elements
+     */
+    public static <E> List<E> newArrayList(final E ... elements) {
+        final List<E> list = newArrayList();
+
+        for (final E element : elements) {
+            list.add(element);
+        }
+
+        return list;
+    }
 }

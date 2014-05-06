@@ -148,6 +148,15 @@ public class ListsTest {
         assertThat(l3, is(not(sameInstance(input))));
     }
 
+    @Test
+    public void newArrayList_VarArgs() {
+        final List<String> sut = Lists.newArrayList("foo", "bar", "baz");
+
+        assertThat(sut.get(0), is(equalTo("foo")));
+        assertThat(sut.get(1), is(equalTo("bar")));
+        assertThat(sut.get(2), is(equalTo("baz")));
+    }
+
     private static final class IterableStub implements Iterable<String> {
 
         private final Collection<String> data;

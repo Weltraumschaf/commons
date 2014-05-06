@@ -12,7 +12,9 @@
 package de.weltraumschaf.commons.experimental.token;
 
 import de.weltraumschaf.commons.token.Position;
-import org.junit.Ignore;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -32,26 +34,31 @@ public class StringTokenTest {
     private final Token sut = Tokens.newStringToken(Position.NULL, "foobar", "foobar");
 
     @Test
-    @Ignore
     public void asBoolean() {
         thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Token is not of type BOOLEAN! But is of type STRING.");
+
+        sut.asBoolean();
     }
 
     @Test
-    @Ignore
     public void asFloat() {
         thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Token is not of type FLOAT! But is of type STRING.");
+
+        sut.asFloat();
     }
 
     @Test
-    @Ignore
     public void asInteger() {
         thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Token is not of type INTEGER! But is of type STRING.");
+
+        sut.asInteger();
     }
 
     @Test
-    @Ignore
     public void asString() {
-
+        assertThat(sut.asString(), is(equalTo("foobar")));
     }
 }

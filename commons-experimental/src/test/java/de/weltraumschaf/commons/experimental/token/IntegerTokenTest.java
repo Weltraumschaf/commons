@@ -11,8 +11,11 @@
  */
 package de.weltraumschaf.commons.experimental.token;
 
+import de.weltraumschaf.commons.experimental.token.BaseToken.IntegerToken;
 import de.weltraumschaf.commons.token.Position;
-import org.junit.Ignore;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -32,26 +35,28 @@ public class IntegerTokenTest {
     private final Token sut = Tokens.newIntegerToken(Position.NULL, "42", 42);
 
     @Test
-    @Ignore
     public void asBoolean() {
         thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Token is not of type BOOLEAN! But is of type INTEGER.");
+
+        sut.asBoolean();
     }
 
     @Test
-    @Ignore
     public void asFloat() {
         thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Token is not of type FLOAT! But is of type INTEGER.");
+
+        sut.asFloat();
     }
 
     @Test
-    @Ignore
     public void asInteger() {
-
+        assertThat(sut.asInteger(), is(42));
     }
 
     @Test
-    @Ignore
     public void asString() {
-
+        assertThat(sut.asString(), is(equalTo("42")));
     }
 }

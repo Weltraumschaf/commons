@@ -13,7 +13,9 @@ package de.weltraumschaf.commons.experimental.token;
 
 import de.weltraumschaf.commons.experimental.token.BaseToken.BooleanToken;
 import de.weltraumschaf.commons.token.Position;
-import org.junit.Ignore;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -33,26 +35,28 @@ public class BooleanTokenTest {
     private final Token sut = Tokens.newBooleanToken(Position.NULL, "true", Boolean.TRUE);
 
     @Test
-    @Ignore
     public void asBoolean() {
-
+        assertThat(sut.asBoolean(), is(true));
     }
 
     @Test
-    @Ignore
     public void asFloat() {
         thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Token is not of type FLOAT! But is of type BOOLEAN.");
+
+        sut.asFloat();
     }
 
     @Test
-    @Ignore
     public void asInteger() {
         thrown.expect(UnsupportedOperationException.class);
+        thrown.expectMessage("Token is not of type INTEGER! But is of type BOOLEAN.");
+
+        sut.asInteger();
     }
 
     @Test
-    @Ignore
     public void asString() {
-
+        assertThat(sut.asString(), is(equalTo("true")));
     }
 }

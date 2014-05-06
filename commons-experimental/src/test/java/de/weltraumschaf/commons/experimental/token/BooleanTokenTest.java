@@ -9,10 +9,13 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
-
 package de.weltraumschaf.commons.experimental.token;
 
+import de.weltraumschaf.commons.experimental.token.BaseToken.BooleanToken;
+import de.weltraumschaf.commons.token.Position;
+import org.junit.Ignore;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
@@ -26,4 +29,30 @@ public class BooleanTokenTest {
     //CHECKSTYLE:OFF
     public final ExpectedException thrown = ExpectedException.none();
     //CHECKSTYLE:ON
+
+    private final Token sut = Tokens.newBooleanToken(Position.NULL, "true", Boolean.TRUE);
+
+    @Test
+    @Ignore
+    public void asBoolean() {
+
+    }
+
+    @Test
+    @Ignore
+    public void asFloat() {
+        thrown.expect(UnsupportedOperationException.class);
+    }
+
+    @Test
+    @Ignore
+    public void asInteger() {
+        thrown.expect(UnsupportedOperationException.class);
+    }
+
+    @Test
+    @Ignore
+    public void asString() {
+
+    }
 }

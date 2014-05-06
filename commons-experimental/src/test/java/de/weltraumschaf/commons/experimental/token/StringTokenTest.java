@@ -11,7 +11,10 @@
  */
 package de.weltraumschaf.commons.experimental.token;
 
+import de.weltraumschaf.commons.token.Position;
+import org.junit.Ignore;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
@@ -25,4 +28,30 @@ public class StringTokenTest {
     //CHECKSTYLE:OFF
     public final ExpectedException thrown = ExpectedException.none();
     //CHECKSTYLE:ON
+
+    private final Token sut = Tokens.newStringToken(Position.NULL, "foobar", "foobar");
+
+    @Test
+    @Ignore
+    public void asBoolean() {
+        thrown.expect(UnsupportedOperationException.class);
+    }
+
+    @Test
+    @Ignore
+    public void asFloat() {
+        thrown.expect(UnsupportedOperationException.class);
+    }
+
+    @Test
+    @Ignore
+    public void asInteger() {
+        thrown.expect(UnsupportedOperationException.class);
+    }
+
+    @Test
+    @Ignore
+    public void asString() {
+
+    }
 }

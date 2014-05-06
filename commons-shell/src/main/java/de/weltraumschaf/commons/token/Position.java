@@ -24,7 +24,10 @@ import de.weltraumschaf.commons.validate.Validate;
  */
 public final class Position {
 
-    static final Position NULL = new Position(0, 0);
+    /**
+     * A position for line 0 and column 0.
+     */
+    public static final Position NULL = new Position(0, 0);
 
     /**
      * File of the source string.

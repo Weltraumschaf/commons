@@ -14,7 +14,8 @@
 
     <name>Commons Experimental</name>
     <description>
-        TBD
+        This modul contains experimental API. Do not use in production code.
+        Everything in this module may change drastically or may be vanish at least.
     </description>
 
     <properties>
@@ -27,6 +28,11 @@
         <dependency>
             <groupId>de.weltraumschaf.commons</groupId>
             <artifactId>guava</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>de.weltraumschaf.commons</groupId>
+            <artifactId>shell</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
         <dependency>

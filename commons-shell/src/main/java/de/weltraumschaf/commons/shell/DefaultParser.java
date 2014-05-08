@@ -14,6 +14,7 @@ package de.weltraumschaf.commons.shell;
 import de.weltraumschaf.commons.guava.Lists;
 import de.weltraumschaf.commons.token.Token;
 import de.weltraumschaf.commons.token.TokenType;
+import de.weltraumschaf.commons.validate.Validate;
 import java.util.List;
 
 /**
@@ -66,23 +67,23 @@ class DefaultParser implements Parser {
     /**
      * Dedicated constructor.
      *
-     * @param scanner to scan input line
-     * @param verifier verifies parsed commands
-     * @param commandMap maps string literals to command keywords
+     * @param scanner must not be {@code null}
+     * @param verifier must not be {@code null}
+     * @param commandMap must not be {@code null}
      */
     public DefaultParser(final Scanner scanner, final CommandVerifier verifier, final LiteralCommandMap commandMap) {
         super();
-        this.scanner = scanner;
-        this.verifier = verifier;
-        this.commandMap = commandMap;
+        this.scanner = Validate.notNull(scanner, "scanner");
+        this.verifier = Validate.notNull(verifier, "verifier");
+        this.commandMap = Validate.notNull(commandMap, "commandMap");
     }
 
     /**
      * Parses given input line.
      *
-     * @param input line to parse
-     * @return recognized shell command
-     * @throws SyntaxException if, the parsed line has syntax errors
+     * @param input must not be {@code null}
+     * @return never {@code null}
+     * @throws SyntaxException if the parsed line has syntax errors
      */
     @Override
     public ShellCommand parse(final String input) throws SyntaxException {
@@ -114,7 +115,7 @@ class DefaultParser implements Parser {
             }
         }
 
-        List<Token> arguments;
+        final List<Token> arguments;
 
         if (tokens.size() > argumentBegin) {
             arguments = tokens.subList(argumentBegin, tokens.size());

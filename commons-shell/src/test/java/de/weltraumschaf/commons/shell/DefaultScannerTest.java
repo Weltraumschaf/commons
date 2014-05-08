@@ -16,6 +16,8 @@ import de.weltraumschaf.commons.token.Token;
 import de.weltraumschaf.commons.token.TokenType;
 import java.util.List;
 import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.closeTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.Test;
@@ -339,6 +341,51 @@ public class DefaultScannerTest {
         token = tokens.get(3);
         assertThat(token.getType(), is(TokenType.BOOLEAN));
         assertThat(token.asBoolean(), is(false));
+    }
+
+    @Test
+    public void scan_floats() throws SyntaxException {
+        final List<Token> tokens = sut.scan("3.14 -3.14");
+
+        assertThat(tokens.size(), is(2));
+        Token token = tokens.get(0);
+
+        assertThat(token.getType(), is(TokenType.FLOAT));
+        assertThat((double) token.asFloat(), is(closeTo(3.14, 0.0001)));
+
+        token = tokens.get(1);
+        assertThat(token.getType(), is(TokenType.FLOAT));
+        assertThat((double) token.asFloat(), is(closeTo(-3.14, 0.0001)));
+    }
+
+    @Test
+    public void scan_floatsWithExponent() throws SyntaxException {
+        final List<Token> tokens = sut.scan("3.14e3 -3.14E3");
+
+        assertThat(tokens.size(), is(2));
+        Token token = tokens.get(0);
+
+        assertThat(token.getType(), is(TokenType.FLOAT));
+        assertThat((double) token.asFloat(), is(closeTo(3140.0, 0.0001)));
+
+        token = tokens.get(1);
+        assertThat(token.getType(), is(TokenType.FLOAT));
+        assertThat((double) token.asFloat(), is(closeTo(-3140.0, 0.0001)));
+    }
+
+    @Test
+    public void scan_floatsWithNegativeExponent() throws SyntaxException {
+        final List<Token> tokens = sut.scan("3.14e-3 -3.14E-3");
+
+        assertThat(tokens.size(), is(2));
+        Token token = tokens.get(0);
+
+        assertThat(token.getType(), is(TokenType.FLOAT));
+        assertThat((double) token.asFloat(), is(closeTo(0.00314, 0.0001)));
+
+        token = tokens.get(1);
+        assertThat(token.getType(), is(TokenType.FLOAT));
+        assertThat((double) token.asFloat(), is(closeTo(-0.00314, 0.0001)));
     }
 
     private enum TestMainType implements MainCommandType {

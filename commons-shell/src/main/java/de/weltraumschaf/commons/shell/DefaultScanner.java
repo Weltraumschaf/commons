@@ -57,10 +57,8 @@ class DefaultScanner implements Scanner {
      *
      * @param line line to scan.
      * @return List of recognized, never null
-     * @throws SyntaxException if syntax error occurred.
-     * // CHECKSTYLE:OFF
-     * @throws IllegalArgumentException, if line is null.
-     * // CHECKSTYLE:ON
+     * @throws SyntaxException if syntax error occurred. // CHECKSTYLE:OFF
+     * @throws IllegalArgumentException, if line is null. // CHECKSTYLE:ON
      */
     @Override
     public List<Token> scan(final String line) throws SyntaxException {
@@ -70,7 +68,7 @@ class DefaultScanner implements Scanner {
 
         final List<Token> tokens = Lists.newArrayList();
 
-        if (! line.isEmpty()) {
+        if (!line.isEmpty()) {
             scan(tokens, new CharacterStream(line));
         }
 
@@ -82,7 +80,7 @@ class DefaultScanner implements Scanner {
      *
      * @param tokens list to which recognized tokens will be add
      * @param characterStream input line to scan
-     * @throws SyntaxException if, syntax error occurred
+     * @throws SyntaxException if string is not correct encapsulated by quotes
      */
     private void scan(final List<Token> tokens, final CharacterStream characterStream) throws SyntaxException {
         while (characterStream.hasNext()) {
@@ -142,15 +140,17 @@ class DefaultScanner implements Scanner {
     }
 
     /**
-     * Recognize numeric integer tokens until next white space character.
+     * Recognize numeric tokens until next white space character.
+     * <p>
+     * If this method recognizes a dot it will try to scan a float.
+     * If any not number character is detected it will treat the token as a literal/keyword.
+     * </p>
      *
      * @param characterStream input line to scan
-     * @return integer type token
-     * @throws SyntaxException if, non numeric character occurred
+     * @return integer or float or literal or keyword type token
      */
-    private Token scanNumber(final CharacterStream characterStream) throws SyntaxException {
+    private Token scanNumber(final CharacterStream characterStream) {
         final StringBuilder value = new StringBuilder();
-
         value.append(characterStream.current());
 
         while (characterStream.hasNext()) {
@@ -160,14 +160,50 @@ class DefaultScanner implements Scanner {
                 break;
             }
 
-            if (! CharacterHelper.isNum(currentChar)) {
+            if ('.' == currentChar) {
+                return scanFloat(characterStream, value);
+            }
+
+            if (!CharacterHelper.isNum(currentChar)) {
                 return scanLiteralOrKeyword(characterStream, value);
             }
 
             value.append(currentChar);
         }
 
-        return Tokens.newIntegerToken(Position.NULL, value.toString(), Integer.valueOf(value.toString()));
+        final String literal = value.toString();
+        return Tokens.newIntegerToken(Position.NULL, literal, Integer.valueOf(literal));
+    }
+
+    /**
+     * Recognize float tokens until next white space character.
+     * <p>
+     * If any not number character is detected it will treat the token as a literal/keyword.
+     * </p>
+     *
+     * @param characterStream input line to scan
+     * @param value accumulates the token literal string
+     * @return float or literal or keyword type token
+     */
+    private Token scanFloat(final CharacterStream characterStream, final StringBuilder value) {
+        value.append(characterStream.current());
+
+        while (characterStream.hasNext()) {
+            final char currentChar = characterStream.next();
+
+            if (CharacterHelper.isWhiteSpace(currentChar)) {
+                break;
+            }
+
+            if (!CharacterHelper.isNum(currentChar) && !isAllowedInFloat(currentChar)) {
+                return scanLiteralOrKeyword(characterStream, value);
+            }
+
+            value.append(currentChar);
+        }
+
+        final String literal = value.toString();
+        return Tokens.newFloatToken(Position.NULL, literal, Float.valueOf(literal));
     }
 
     /**
@@ -177,7 +213,7 @@ class DefaultScanner implements Scanner {
      *
      * @param characterStream input line to scan
      * @return integer type token
-     * @throws SyntaxException if, string is not terminated by quote character
+     * @throws SyntaxException if string is not correct encapsulated by quotes
      */
     private Token scanString(final CharacterStream characterStream) throws SyntaxException {
         final StringBuilder value = new StringBuilder();
@@ -201,7 +237,7 @@ class DefaultScanner implements Scanner {
             value.append(currentChar);
         }
 
-        if (! terminated) {
+        if (!terminated) {
             throw new SyntaxException(String.format("Unterminated string '%s'!", value.toString()));
         }
 
@@ -221,4 +257,7 @@ class DefaultScanner implements Scanner {
         return commandMap.isCommand(token) || commandMap.isSubCommand(token);
     }
 
+    private boolean isAllowedInFloat(final char c) {
+        return CharacterHelper.isSign(c) || 'e' == c || 'E' == c;
+    }
 }

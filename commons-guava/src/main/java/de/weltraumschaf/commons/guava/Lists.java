@@ -99,6 +99,7 @@ public final class Lists {
      * @param elements the elements that the list should contain, in order
      * @return a new {@code ArrayList} containing those elements
      */
+    @SafeVarargs
     public static <E> List<E> newArrayList(final E ... elements) {
         final List<E> list = newArrayList();
 

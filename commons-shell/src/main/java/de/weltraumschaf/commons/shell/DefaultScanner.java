@@ -17,6 +17,7 @@ import de.weltraumschaf.commons.characters.CharacterHelper;
 import de.weltraumschaf.commons.guava.Lists;
 import de.weltraumschaf.commons.token.Position;
 import de.weltraumschaf.commons.token.Tokens;
+import de.weltraumschaf.commons.validate.Validate;
 import java.util.List;
 
 /**
@@ -55,23 +56,20 @@ class DefaultScanner implements Scanner {
     /**
      * Scans give line and returns list of recognized tokens.
      *
-     * @param line line to scan.
-     * @return List of recognized, never null
-     * @throws SyntaxException if syntax error occurred. // CHECKSTYLE:OFF
-     * @throws IllegalArgumentException, if line is null. // CHECKSTYLE:ON
+     * @param line must not be {@code null}
+     * @return never {@code null}, maybe empty
+     * @throws SyntaxException if syntax error occurred
      */
     @Override
     public List<Token> scan(final String line) throws SyntaxException {
-        if (null == line) {
-            throw new IllegalArgumentException("Line must not be null!");
-        }
-
+        Validate.notNull(line, "line");
         final List<Token> tokens = Lists.newArrayList();
 
-        if (!line.isEmpty()) {
-            scan(tokens, new CharacterStream(line));
+        if (line.isEmpty()) {
+            return tokens;
         }
 
+        scan(tokens, new CharacterStream(line));
         return tokens;
     }
 

@@ -15,7 +15,6 @@ import de.weltraumschaf.commons.guava.Lists;
 import de.weltraumschaf.commons.token.Token;
 import de.weltraumschaf.commons.token.TokenType;
 import java.util.List;
-import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -30,13 +29,13 @@ import org.junit.rules.ExpectedException;
  */
 public class DefaultScannerTest {
 
-    // CHECKSTYLE:OFF
     @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    // CHECKSTYLE:OFF
+    public final ExpectedException thrown = ExpectedException.none();
     // CHECKSTYLE:ON
     private final Scanner sut = Scanners.newScanner(new LiteralCommandMapStub());
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = NullPointerException.class)
     public void scan_nullArgument() throws SyntaxException {
         sut.scan(null);
     }

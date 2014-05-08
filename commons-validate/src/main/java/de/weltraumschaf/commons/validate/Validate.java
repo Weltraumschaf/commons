@@ -152,7 +152,7 @@ public final class Validate {
     }
 
     /**
-     * Convenience method for {@link #greaterThan(int, int, null)}.
+     * Convenience method for {@link #greaterThan(int, int, java.lang.String)} with {@code null} as name.
      *
      * @param reference validated reference
      * @param lowerBound bound to test against

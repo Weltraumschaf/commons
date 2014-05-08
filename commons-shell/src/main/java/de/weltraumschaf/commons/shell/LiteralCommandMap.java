@@ -194,8 +194,6 @@ public abstract class LiteralCommandMap {
 
     /**
      * Not overideable template method called in constructor.
-     *
-     * Invokes first {@link #initMainCommandMap(} and second {@link #initSubCommandMap()}.
      */
     private void init() {
         initMainCommandMap();

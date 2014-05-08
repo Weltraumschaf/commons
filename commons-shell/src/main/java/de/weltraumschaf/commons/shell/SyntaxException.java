@@ -17,7 +17,7 @@ package de.weltraumschaf.commons.shell;
  * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public class SyntaxException extends Exception {
+public final class SyntaxException extends Exception {
 
     /**
      * Default exception message.

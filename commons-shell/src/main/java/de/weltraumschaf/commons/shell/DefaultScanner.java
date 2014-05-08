@@ -26,7 +26,9 @@ import java.util.List;
  * </p>
  * <ul>
  * <li>alpha numeric literals</li>
- * <li>integer number literals</li>
+ * <li>(signed) integer number literals</li>
+ * <li>(signed) float number literals</li>
+ * <li>boolean literals (true/false)</li>
  * <li>and single/double quote delimited string literals</li>
  * </ul>
  *
@@ -55,7 +57,7 @@ class DefaultScanner implements Scanner {
      *
      * @param line line to scan.
      * @return List of recognized, never null
-     * @throws SyntaxException if, syntax error occurred.
+     * @throws SyntaxException if syntax error occurred.
      * // CHECKSTYLE:OFF
      * @throws IllegalArgumentException, if line is null.
      * // CHECKSTYLE:ON
@@ -86,10 +88,12 @@ class DefaultScanner implements Scanner {
         while (characterStream.hasNext()) {
             final char currentChar = characterStream.next();
 
-            if (CharacterHelper.isAlpha(currentChar) || CharacterHelper.isSpecialChar(currentChar)) {
-                tokens.add(scanLiteral(characterStream));
+            if (CharacterHelper.isSign(currentChar) && CharacterHelper.isNum(characterStream.peek())) {
+                tokens.add(scanNumber(characterStream));
             } else if (CharacterHelper.isNum(currentChar)) {
                 tokens.add(scanNumber(characterStream));
+            } else if (CharacterHelper.isAlpha(currentChar) || CharacterHelper.isSpecialChar(currentChar)) {
+                tokens.add(scanLiteral(characterStream));
             } else if (CharacterHelper.isQuote(currentChar)) {
                 tokens.add(scanString(characterStream));
             }

@@ -137,7 +137,7 @@ public class DefaultScannerTest {
     }
 
     @Test
-    public void scan_lineWithLiteralStartingWithNumber() throws SyntaxException {
+    public void scan_lineWithLiteralStartingWithInteger() throws SyntaxException {
         final List<Token> tokens = sut.scan("192.168.1.1 127.0.0.1\n");
 
         assertThat(tokens.size(), is(2));
@@ -194,7 +194,7 @@ public class DefaultScannerTest {
     }
 
     @Test
-    public void scan_lineWithSingleNumber() throws SyntaxException {
+    public void scan_lineWithSingleIntegerWithoutSign() throws SyntaxException {
         final List<Token> tokens = sut.scan("1234");
         assertThat(tokens.size(), is(1));
 
@@ -204,8 +204,28 @@ public class DefaultScannerTest {
     }
 
     @Test
-    public void scan_lineWithMultipleNumbers() throws SyntaxException {
-        final List<Token> tokens = sut.scan("1234 5678 90");
+    public void scan_lineWithSingleIntegerWithoutPositiveSign() throws SyntaxException {
+        final List<Token> tokens = sut.scan("+1234");
+        assertThat(tokens.size(), is(1));
+
+        final Token token = tokens.get(0);
+        assertThat(token.getType(), is(TokenType.INTEGER));
+        assertThat(token.asInteger(), is(1234));
+    }
+
+    @Test
+    public void scan_lineWithSingleIntegerWithoutNegativeSign() throws SyntaxException {
+        final List<Token> tokens = sut.scan("-1234");
+        assertThat(tokens.size(), is(1));
+
+        final Token token = tokens.get(0);
+        assertThat(token.getType(), is(TokenType.INTEGER));
+        assertThat(token.asInteger(), is(-1234));
+    }
+
+    @Test
+    public void scan_lineWithMultipleIntegers() throws SyntaxException {
+        final List<Token> tokens = sut.scan("1234 +5678 -90");
         assertThat(tokens.size(), is(3));
 
         Token token = tokens.get(0);
@@ -218,14 +238,14 @@ public class DefaultScannerTest {
 
         token = tokens.get(2);
         assertThat(token.getType(), is(TokenType.INTEGER));
-        assertThat(token.asInteger(), is(90));
+        assertThat(token.asInteger(), is(-90));
     }
 
     @Test
-    public void scan_lineWithLiteralKeywordAndNumbers() throws SyntaxException {
+    public void scan_lineWithLiteralKeywordAndIntegers() throws SyntaxException {
         Token intToken;
         Token strToken;
-        List<Token> tokens = sut.scan("loo 1234 5678 bar");
+        List<Token> tokens = sut.scan("loo 1234 -5678 bar");
 
         assertThat(tokens.size(), is(4));
         strToken = tokens.get(0);
@@ -238,18 +258,18 @@ public class DefaultScannerTest {
 
         intToken = tokens.get(2);
         assertThat(intToken.getType(), is(TokenType.INTEGER));
-        assertThat(intToken.asInteger(), is(5678));
+        assertThat(intToken.asInteger(), is(-5678));
 
         strToken = tokens.get(3);
         assertThat(strToken.getType(), is(TokenType.KEYWORD));
         assertThat(strToken.asString(), is("bar"));
 
-        tokens = sut.scan("1234 loo bar 5678");
+        tokens = sut.scan("-1234 loo bar 5678");
         assertThat(tokens.size(), is(4));
 
         intToken = tokens.get(0);
         assertThat(intToken.getType(), is(TokenType.INTEGER));
-        assertThat(intToken.asInteger(), is(1234));
+        assertThat(intToken.asInteger(), is(-1234));
 
         strToken = tokens.get(1);
         assertThat(strToken.getType(), is(TokenType.LITERAL));
@@ -266,7 +286,7 @@ public class DefaultScannerTest {
     }
 
     @Test
-    public void scan_lineWithMaliciousNumber() throws SyntaxException {
+    public void scan_lineWithMaliciousInteger() throws SyntaxException {
         final List<Token> tokens = sut.scan("1234foo");
 
         assertThat(tokens.size(), is(1));

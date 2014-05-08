@@ -31,93 +31,93 @@ public class CharacterHelperTest {
 
     @Test
     public void isAlpha() {
-        for (int i = 0; i < LOW_ALPHA.length; ++i) {
-            assertTrue(CharacterHelper.isAlpha(LOW_ALPHA[i]));
+        for (final char c : LOW_ALPHA) {
+            assertTrue(CharacterHelper.isAlpha(c));
         }
 
-        for (int i = 0; i < UP_ALPHA.length; ++i) {
-            assertTrue(CharacterHelper.isAlpha(UP_ALPHA[i]));
+        for (final char c : UP_ALPHA) {
+            assertTrue(CharacterHelper.isAlpha(c));
         }
 
-        for (int i = 0; i < NUMS.length; ++i) {
-            assertFalse(CharacterHelper.isAlpha(NUMS[i]));
+        for (final char c : NUMS) {
+            assertFalse(CharacterHelper.isAlpha(c));
         }
 
-        for (int i = 0; i < WHITE_SPACES.length; ++i) {
-            assertFalse(CharacterHelper.isAlpha(WHITE_SPACES[i]));
+        for (final char c : WHITE_SPACES) {
+            assertFalse(CharacterHelper.isAlpha(c));
         }
 
-        for (int i = 0; i < OPERATORS.length; ++i) {
-            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        for (final char c : OPERATORS) {
+            assertFalse(CharacterHelper.isDoubleQuote(c));
         }
     }
 
     @Test
     public void isNum() {
-        for (int i = 0; i < NUMS.length; ++i) {
-            assertTrue(CharacterHelper.isNum(NUMS[i]));
+        for (final char c : NUMS) {
+            assertTrue(CharacterHelper.isNum(c));
         }
 
-        for (int i = 0; i < LOW_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isNum(LOW_ALPHA[i]));
+        for (final char c : LOW_ALPHA) {
+            assertFalse(CharacterHelper.isNum(c));
         }
 
-        for (int i = 0; i < UP_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isNum(UP_ALPHA[i]));
+        for (final char c : UP_ALPHA) {
+            assertFalse(CharacterHelper.isNum(c));
         }
 
-        for (int i = 0; i < WHITE_SPACES.length; ++i) {
-            assertFalse(CharacterHelper.isNum(WHITE_SPACES[i]));
+        for (final char c : WHITE_SPACES) {
+            assertFalse(CharacterHelper.isNum(c));
         }
 
-        for (int i = 0; i < OPERATORS.length; ++i) {
-            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        for (final char c : OPERATORS) {
+            assertFalse(CharacterHelper.isDoubleQuote(c));
         }
     }
 
     @Test
     public void isAlphaNum() {
-        for (int i = 0; i < NUMS.length; ++i) {
-            assertTrue(CharacterHelper.isAlphaNum(NUMS[i]));
+        for (final char c : NUMS) {
+            assertTrue(CharacterHelper.isAlphaNum(c));
         }
 
-        for (int i = 0; i < LOW_ALPHA.length; ++i) {
-            assertTrue(CharacterHelper.isAlphaNum(LOW_ALPHA[i]));
+        for (final char c : LOW_ALPHA) {
+            assertTrue(CharacterHelper.isAlphaNum(c));
         }
 
-        for (int i = 0; i < UP_ALPHA.length; ++i) {
-            assertTrue(CharacterHelper.isAlphaNum(UP_ALPHA[i]));
+        for (final char c : UP_ALPHA) {
+            assertTrue(CharacterHelper.isAlphaNum(c));
         }
 
-        for (int i = 0; i < WHITE_SPACES.length; ++i) {
-            assertFalse(CharacterHelper.isAlphaNum(WHITE_SPACES[i]));
+        for (final char c : WHITE_SPACES) {
+            assertFalse(CharacterHelper.isAlphaNum(c));
         }
 
-        for (int i = 0; i < OPERATORS.length; ++i) {
-            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        for (final char c : OPERATORS) {
+            assertFalse(CharacterHelper.isDoubleQuote(c));
         }
     }
 
     @Test
     public void isWhiteSpace() {
-        for (int i = 0; i < WHITE_SPACES.length; ++i) {
-            assertTrue(CharacterHelper.isWhiteSpace(WHITE_SPACES[i]));
+        for (final char c : WHITE_SPACES) {
+            assertTrue(CharacterHelper.isWhiteSpace(c));
         }
 
-        for (int i = 0; i < NUMS.length; ++i) {
-            assertFalse(CharacterHelper.isWhiteSpace(NUMS[i]));
+        for (final char c : NUMS) {
+            assertFalse(CharacterHelper.isWhiteSpace(c));
         }
 
-        for (int i = 0; i < LOW_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isWhiteSpace(LOW_ALPHA[i]));
+        for (final char c : LOW_ALPHA) {
+            assertFalse(CharacterHelper.isWhiteSpace(c));
         }
 
-        for (int i = 0; i < UP_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isWhiteSpace(UP_ALPHA[i]));
+        for (final char c : UP_ALPHA) {
+            assertFalse(CharacterHelper.isWhiteSpace(c));
         }
 
-        for (int i = 0; i < OPERATORS.length; ++i) {
-            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        for (final char c : OPERATORS) {
+            assertFalse(CharacterHelper.isDoubleQuote(c));
         }
     }
 
@@ -141,24 +141,24 @@ public class CharacterHelperTest {
         assertTrue(CharacterHelper.isQuote('"'));
         assertTrue(CharacterHelper.isQuote('\''));
 
-        for (int i = 0; i < WHITE_SPACES.length; ++i) {
-            assertFalse(CharacterHelper.isQuote(WHITE_SPACES[i]));
+        for (final char c : WHITE_SPACES) {
+            assertFalse(CharacterHelper.isQuote(c));
         }
 
-        for (int i = 0; i < NUMS.length; ++i) {
-            assertFalse(CharacterHelper.isQuote(NUMS[i]));
+        for (final char c : NUMS) {
+            assertFalse(CharacterHelper.isQuote(c));
         }
 
-        for (int i = 0; i < LOW_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isQuote(LOW_ALPHA[i]));
+        for (final char c : LOW_ALPHA) {
+            assertFalse(CharacterHelper.isQuote(c));
         }
 
-        for (int i = 0; i < UP_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isQuote(UP_ALPHA[i]));
+        for (final char c : UP_ALPHA) {
+            assertFalse(CharacterHelper.isQuote(c));
         }
 
-        for (int i = 0; i < OPERATORS.length; ++i) {
-            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        for (final char c : OPERATORS) {
+            assertFalse(CharacterHelper.isDoubleQuote(c));
         }
     }
 
@@ -166,24 +166,24 @@ public class CharacterHelperTest {
     public void isSingleQuote() {
         assertTrue(CharacterHelper.isSingleQuote('\''));
 
-        for (int i = 0; i < WHITE_SPACES.length; ++i) {
-            assertFalse(CharacterHelper.isSingleQuote(WHITE_SPACES[i]));
+        for (final char c : WHITE_SPACES) {
+            assertFalse(CharacterHelper.isSingleQuote(c));
         }
 
-        for (int i = 0; i < NUMS.length; ++i) {
-            assertFalse(CharacterHelper.isSingleQuote(NUMS[i]));
+        for (final char c : NUMS) {
+            assertFalse(CharacterHelper.isSingleQuote(c));
         }
 
-        for (int i = 0; i < LOW_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isSingleQuote(LOW_ALPHA[i]));
+        for (final char c :LOW_ALPHA) {
+            assertFalse(CharacterHelper.isSingleQuote(c));
         }
 
-        for (int i = 0; i < UP_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isSingleQuote(UP_ALPHA[i]));
+        for (final char c : UP_ALPHA) {
+            assertFalse(CharacterHelper.isSingleQuote(c));
         }
 
-        for (int i = 0; i < OPERATORS.length; ++i) {
-            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        for (final char c : OPERATORS) {
+            assertFalse(CharacterHelper.isDoubleQuote(c));
         }
     }
 
@@ -191,24 +191,24 @@ public class CharacterHelperTest {
     public void isDoubleQuote() {
         assertTrue(CharacterHelper.isDoubleQuote('"'));
 
-        for (int i = 0; i < WHITE_SPACES.length; ++i) {
-            assertFalse(CharacterHelper.isDoubleQuote(WHITE_SPACES[i]));
+        for (final char c : WHITE_SPACES) {
+            assertFalse(CharacterHelper.isDoubleQuote(c));
         }
 
-        for (int i = 0; i < NUMS.length; ++i) {
-            assertFalse(CharacterHelper.isDoubleQuote(NUMS[i]));
+        for (final char c : NUMS) {
+            assertFalse(CharacterHelper.isDoubleQuote(c));
         }
 
-        for (int i = 0; i < LOW_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isDoubleQuote(LOW_ALPHA[i]));
+        for (final char c : LOW_ALPHA) {
+            assertFalse(CharacterHelper.isDoubleQuote(c));
         }
 
-        for (int i = 0; i < UP_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isDoubleQuote(UP_ALPHA[i]));
+        for (final char c : UP_ALPHA) {
+            assertFalse(CharacterHelper.isDoubleQuote(c));
         }
 
-        for (int i = 0; i < OPERATORS.length; ++i) {
-            assertFalse(CharacterHelper.isDoubleQuote(OPERATORS[i]));
+        for (final char c : OPERATORS) {
+            assertFalse(CharacterHelper.isDoubleQuote(c));
         }
     }
 
@@ -221,24 +221,53 @@ public class CharacterHelperTest {
 
     @Test
     public void isOperator() {
-        for (int i = 0; i < OPERATORS.length; ++i) {
-            assertTrue(CharacterHelper.isOperator(OPERATORS[i]));
+        for (final char c : OPERATORS) {
+            assertTrue(CharacterHelper.isOperator(c));
         }
 
-        for (int i = 0; i < LOW_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isOperator(LOW_ALPHA[i]));
+        for (final char c : LOW_ALPHA) {
+            assertFalse(CharacterHelper.isOperator(c));
         }
 
-        for (int i = 0; i < UP_ALPHA.length; ++i) {
-            assertFalse(CharacterHelper.isOperator(UP_ALPHA[i]));
+        for (final char c : UP_ALPHA) {
+            assertFalse(CharacterHelper.isOperator(c));
         }
 
-        for (int i = 0; i < NUMS.length; ++i) {
-            assertFalse(CharacterHelper.isOperator(NUMS[i]));
+        for (final char c : NUMS) {
+            assertFalse(CharacterHelper.isOperator(c));
         }
 
-        for (int i = 0; i < WHITE_SPACES.length; ++i) {
-            assertFalse(CharacterHelper.isOperator(WHITE_SPACES[i]));
+        for (final char c : WHITE_SPACES) {
+            assertFalse(CharacterHelper.isOperator(c));
+        }
+    }
+
+    @Test
+    public void isSign() {
+        assertTrue(CharacterHelper.isSign('+'));
+        assertTrue(CharacterHelper.isSign('-'));
+
+        for (final char c : OPERATORS) {
+            if (c == '+' || c == '-') {
+                continue;
+            }
+            assertFalse(CharacterHelper.isSign(c));
+        }
+
+        for (final char c : LOW_ALPHA) {
+            assertFalse(CharacterHelper.isSign(c));
+        }
+
+        for (final char c : UP_ALPHA) {
+            assertFalse(CharacterHelper.isSign(c));
+        }
+
+        for (final char c : NUMS) {
+            assertFalse(CharacterHelper.isSign(c));
+        }
+
+        for (final char c : WHITE_SPACES) {
+            assertFalse(CharacterHelper.isSign(c));
         }
     }
 }

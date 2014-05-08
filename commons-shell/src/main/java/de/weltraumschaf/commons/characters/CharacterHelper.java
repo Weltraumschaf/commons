@@ -31,12 +31,17 @@ public final class CharacterHelper {
      */
     private static final Set<Character> OPERATORS = Sets.newHashSet('+', '-', '*', '/', '%', '&',
         '|', '^', '<', '>', '=', ':', '?', '(', ')', '{', '}', '[', ']', '!', '~', '@', '#', '$');
+    /**
+     * Number sign characters.
+     */
+    private static final Set<Character> SIGN_CHARS = Sets.newHashSet('+', '-');
 
     /**
      * Private constructor for pure static utility class.
      */
     private CharacterHelper() {
         super();
+        throw new UnsupportedOperationException("Don't call via reflection!");
     }
 
     /**
@@ -47,7 +52,7 @@ public final class CharacterHelper {
      * @param character character to check
      * @param start including range
      * @param end including range
-     * @return true if character is in range, unless false
+     * @return {@code true} if character is in range, unless {@code false}
      */
     public static boolean isCharInRange(final char character, final char start, final char end) {
         if (end < start) {
@@ -61,7 +66,7 @@ public final class CharacterHelper {
      * Checks whether a character is a letter [a-zA-Z].
      *
      * @param character a single character
-     * @return true if character is a letter, unless false
+     * @return {@code true} if character is a letter, unless {@code false}
      */
     public static boolean isAlpha(final char character) {
         return isCharInRange(character, 'a', 'z') || isCharInRange(character, 'A', 'Z');
@@ -72,7 +77,7 @@ public final class CharacterHelper {
      *
      * @param character a single character
      *
-     * @return true if character is a number, unless false
+     * @return {@code true} if character is a number, unless {@code false}
      */
     public static boolean isNum(final char character) {
         return isCharInRange(character, '0', '9');
@@ -83,7 +88,7 @@ public final class CharacterHelper {
      *
      * @param character a single character
      *
-     * @return true if character is a letter or number, unless false
+     * @return {@code true} if character is a letter or number, unless {@code false}
      */
     public static boolean isAlphaNum(final char character) {
         return isAlpha(character) || isNum(character);
@@ -95,7 +100,7 @@ public final class CharacterHelper {
      * White spaces are \t, \n, \r, and ' '.
      *
      * @param character a single character
-     * @return true if character is a whitespace character, unless false
+     * @return {@code true} if character is a whitespace character, unless {@code false}
      */
     public static boolean isWhiteSpace(final char character) {
         return ' ' == character || '\t' == character || '\n' == character || '\r' == character;
@@ -107,7 +112,7 @@ public final class CharacterHelper {
      * Quotes are ' and ".
      *
      * @param character a single character
-     * @return true if character is a quote character, unless false
+     * @return {@code true} if character is a quote character, unless {@code false}
      */
     public static boolean isQuote(final char character) {
         return isSingleQuote(character) || isDoubleQuote(character);
@@ -119,7 +124,7 @@ public final class CharacterHelper {
      * A single quotes is '.
      *
      * @param character a single character
-     * @return true if character is a single quote character, unless false
+     * @return {@code true} if character is a single quote character, unless {@code false}
      */
     public static boolean isSingleQuote(final char character) {
         return '\'' == character;
@@ -131,7 +136,7 @@ public final class CharacterHelper {
      * A single quotes is ".
      *
      * @param character a single character
-     * @return true if character is a double quote character, unless false
+     * @return {@code true} if character is a double quote character, unless {@code false}
      */
     public static boolean isDoubleQuote(final char character) {
         return '"' == character;
@@ -143,7 +148,7 @@ public final class CharacterHelper {
      * See {@link #SPECIAL_CHARS} for all allowed special characters.
      *
      * @param character a single character
-     * @return true if character is a special character, unless false
+     * @return {@code true} if character is a special character, unless {@code false}
      */
     public static boolean isSpecialChar(final char character) {
         return SPECIAL_CHARS.contains(character);
@@ -155,9 +160,22 @@ public final class CharacterHelper {
      * See {@link #OPERATORS} for all allowed operator characters.
      *
      * @param character a single character
-     * @return true if character is a operator character, unless false
+     * @return {@code true} if character is a operator character, unless {@code false}
      */
     public static boolean isOperator(final char character) {
         return OPERATORS.contains(character);
     }
+
+    /**
+     * Checks whether a character is a sign character.
+     *
+     * See {@link #SIGN_CHARS} for all allowed operator characters.
+     *
+     * @param character a single character
+     * @return {@code true} if character is a operator character, unless {@code false}
+     */
+    public static boolean isSign(final char character) {
+        return SIGN_CHARS.contains(character);
+    }
+
 }

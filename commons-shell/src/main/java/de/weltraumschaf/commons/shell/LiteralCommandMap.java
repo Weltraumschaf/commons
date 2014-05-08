@@ -13,6 +13,7 @@ package de.weltraumschaf.commons.shell;
 
 import de.weltraumschaf.commons.guava.Maps;
 import de.weltraumschaf.commons.token.Token;
+import de.weltraumschaf.commons.validate.Validate;
 import java.util.Map;
 
 /**
@@ -41,14 +42,14 @@ public abstract class LiteralCommandMap {
     private final SubCommandType defaultSubCommand;
 
     /**
-     * Calls the template methods {@link #initMainCommandMap(java.util.Map)}
-     * and {@link #initSubCommandMap(java.util.Map)}.
+     * Dedicated constructor.
      *
-     * @param defaultSubCommand sub command used for commands w/o sub command, usualy a NONE type
+     * @param defaultSubCommand sub command used for commands w/o sub command,
+     *                          usually a NONE type, must not be {@code null}
      */
     public LiteralCommandMap(final SubCommandType defaultSubCommand) {
         super();
-        this.defaultSubCommand = defaultSubCommand;
+        this.defaultSubCommand = Validate.notNull(defaultSubCommand, "defaultSubCommand");
         init();
     }
 
@@ -194,7 +195,7 @@ public abstract class LiteralCommandMap {
     /**
      * Not overideable template method called in constructor.
      *
-     * Invokes first {@link #initMainCommandMap(java.util.Map)} and second {@link #initSubCommandMap(java.util.Map)}.
+     * Invokes first {@link #initMainCommandMap(} and second {@link #initSubCommandMap()}.
      */
     private void init() {
         initMainCommandMap();

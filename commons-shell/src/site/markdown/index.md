@@ -41,8 +41,8 @@ possible to provide a base class with the typical functionality.
         
         private final String literal;
         
-        private CommandMainType(final String name) {
-            this.literal = name;
+        private CommandMainType(final String literal) {
+            this.literal = literal;
         }
         
         @Override
@@ -138,7 +138,7 @@ You can  also provide  a command  verifier, which  verifies the  givne commands.
 E.g. it may check if a main command  has an invalid sub command givne or missing
 or invalid arguments. In this example [Hamcrest][hamcrest] ist used:
 
-    public class DhtCommandVerifier implements CommandVerifier {
+    public class MyCommandVerifier implements CommandVerifier {
         @Override
         public void verifyCommand(final ShellCommand cmd) throws SyntaxException {
             switch ((CommandMainType) cmd.getCommand()) {
@@ -192,28 +192,10 @@ You inject this verifier to the parser:
 
 ## Other Classes
 
-TBD
-
-### CommandType
-
-TBD
-
-### Scanners
-
-TBD
-
-### Parsers
-
-TBD
-
-### Characters
-
-TBD
-
-## Tokens
-
-TBD
+There are  some other classes  for scanning and parsing  the CLI input.  See the
+[JavaDoc][javadoc] for more information.
 
 [ShellCommand]:         apidocs/de/weltraumschaf/commons/shell/ShellCommand.html
 [LiteralCommandMap]:    apidocs/de/weltraumschaf/commons/shell/LiteralCommandMap.html
 [hamcrest]:             http://hamcrest.org/
+[javadoc]:              apidocs/index.html

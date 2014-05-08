@@ -25,9 +25,13 @@ import java.util.List;
  * imputline  = command { argument } .
  * command    = keyword [ keyword ] .
  * keyword    = character { character } .
- * argument   = literal | number | string .
+ * argument   = literal | number | string | boolean.
  * literal    = alphanum { alphanum } .
- * number     = digit { digit } .
+ * number     = integer | float .
+ * integer    = [ sign ] digit { digit } .
+ * float      = [ sign ] digit { digit } '.' digit { digit } [ exponent ] .
+ * exponent   = ( 'e' | 'E' ) [ sign ] digit { digit } .
+ * boolean    = 'true' | 'false' .
  * string     = '\'' alphanum { whitespace | alphanum } '\''
               | '"' alphanum { whitespace | alphanum } '"' .
  * alphanum   = character
@@ -35,6 +39,7 @@ import java.util.List;
  * character  = 'a' .. 'z'
  *            | 'A' .. 'Z' .
  * digit      = '0' .. '9' .
+ * sign       = '-' | '+' .
  * whitespace = ' ' .
  * </pre>
  *

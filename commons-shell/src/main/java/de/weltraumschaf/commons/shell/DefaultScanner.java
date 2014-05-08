@@ -132,7 +132,9 @@ class DefaultScanner implements Scanner {
 
         final String tokenString = value.toString();
 
-        if (isKeyword(tokenString)) {
+        if ("true".equals(tokenString) || "false".equals(tokenString)) {
+            return Tokens.newBooleanToken(Position.NULL, tokenString, Boolean.parseBoolean(tokenString));
+        } else if (isKeyword(tokenString)) {
             return Tokens.newKeywordToken(Position.NULL, tokenString, tokenString);
         } else {
             return Tokens.newLiteralToken(Position.NULL, tokenString, tokenString);

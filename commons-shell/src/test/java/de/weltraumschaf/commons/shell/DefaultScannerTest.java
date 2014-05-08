@@ -296,6 +296,51 @@ public class DefaultScannerTest {
         assertThat(strToken.asString(), is("1234foo"));
     }
 
+    @Test
+    public void scan_booleanTrue() throws SyntaxException {
+        final List<Token> tokens = sut.scan("true");
+
+        assertThat(tokens.size(), is(1));
+        final Token token = tokens.get(0);
+
+        assertThat(token.getType(), is(TokenType.BOOLEAN));
+        assertThat(token.asBoolean(), is(true));
+    }
+
+    @Test
+    public void scan_booleanFalse() throws SyntaxException {
+        final List<Token> tokens = sut.scan("false");
+
+        assertThat(tokens.size(), is(1));
+        final Token token = tokens.get(0);
+
+        assertThat(token.getType(), is(TokenType.BOOLEAN));
+        assertThat(token.asBoolean(), is(false));
+    }
+
+    @Test
+    public void scan_lineWithMultipleBooleans() throws SyntaxException {
+        final List<Token> tokens = sut.scan("false true true false");
+
+        assertThat(tokens.size(), is(4));
+        Token token = tokens.get(0);
+
+        assertThat(token.getType(), is(TokenType.BOOLEAN));
+        assertThat(token.asBoolean(), is(false));
+
+        token = tokens.get(1);
+        assertThat(token.getType(), is(TokenType.BOOLEAN));
+        assertThat(token.asBoolean(), is(true));
+
+        token = tokens.get(2);
+        assertThat(token.getType(), is(TokenType.BOOLEAN));
+        assertThat(token.asBoolean(), is(true));
+
+        token = tokens.get(3);
+        assertThat(token.getType(), is(TokenType.BOOLEAN));
+        assertThat(token.asBoolean(), is(false));
+    }
+
     private enum TestMainType implements MainCommandType {
 
         FOO("foo"), BAR("bar"), BAZ("baz");

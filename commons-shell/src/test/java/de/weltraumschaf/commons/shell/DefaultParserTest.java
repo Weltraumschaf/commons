@@ -77,34 +77,33 @@ public class DefaultParserTest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void parse_comandWithSubcommandAndOneArgument() throws SyntaxException {
         ShellCommand c = sut.parse("foo add 1234");
         assertThat((TestMainType) c.getMainCommand(), is(TestMainType.FOO));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.ADD));
         assertThat(c.getArguments().size(), is(1));
 
-        Token<Integer> t = (Token<Integer>) c.getArguments().get(0);
+        Token t =  c.getArguments().get(0);
         assertThat(t.getType(), is(TokenType.INTEGER));
-        assertThat(t.getValue(), is(1234));
+        assertThat(t.asInteger(), is(1234));
 
         c = sut.parse("bar del 5678");
         assertThat((TestMainType) c.getMainCommand(), is(TestMainType.BAR));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.DEL));
         assertThat(c.getArguments().size(), is(1));
 
-        t = (Token<Integer>) c.getArguments().get(0);
+        t =  c.getArguments().get(0);
         assertThat(t.getType(), is(TokenType.INTEGER));
-        assertThat(t.getValue(), is(5678));
+        assertThat(t.asInteger(), is(5678));
 
         c = sut.parse("baz info 5678");
         assertThat((TestMainType) c.getMainCommand(), is(TestMainType.BAZ));
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.INFO));
         assertThat(c.getArguments().size(), is(1));
 
-        t = (Token<Integer>) c.getArguments().get(0);
+        t =  c.getArguments().get(0);
         assertThat(t.getType(), is(TokenType.INTEGER));
-        assertThat(t.getValue(), is(5678));
+        assertThat(t.asInteger(), is(5678));
     }
 
     private enum TestMainType implements MainCommandType {

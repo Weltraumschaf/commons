@@ -20,10 +20,12 @@ import java.util.List;
 
 /**
  * Describes a parsed mainCommand of the interactive shell.
- *
+ * <p>
  * Commands consist always of a mainCommand and may have a subcommand.
- This type is immutable.
+ * This type is immutable.
+ * </p>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class ShellCommand {
@@ -46,7 +48,7 @@ public class ShellCommand {
      *
      * If the mainCommand has no arguments this will be an empty list.
      */
-    private final List<Token<?>> arguments;
+    private final List<Token> arguments;
 
     /**
      * Dedicated constructor.
@@ -58,7 +60,7 @@ public class ShellCommand {
     public ShellCommand(
             final MainCommandType mainCommand,
             final SubCommandType subCommand,
-            final List<Token<?>> arguments) {
+            final List<Token> arguments) {
         super();
         this.mainCommand = Validate.notNull(mainCommand, "mainCommand");
         this.subCommand = Validate.notNull(subCommand, "subCommand");
@@ -93,7 +95,7 @@ public class ShellCommand {
      *
      * @return Returns a defense copy.
      */
-    public List<Token<?>> getArguments() {
+    public List<Token> getArguments() {
         return Collections.unmodifiableList(arguments);
     }
 

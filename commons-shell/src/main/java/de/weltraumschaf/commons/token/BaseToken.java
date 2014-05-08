@@ -9,15 +9,15 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
-package de.weltraumschaf.commons.experimental.token;
+package de.weltraumschaf.commons.token;
 
 import de.weltraumschaf.commons.guava.Objects;
-import de.weltraumschaf.commons.token.Position;
 import de.weltraumschaf.commons.validate.Validate;
 
 /**
  * Base token implementation with generic value.
  *
+ * @since 1.0.0
  * @param <T> type of the recognized value
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
@@ -120,8 +120,7 @@ abstract class BaseToken<T> implements Token {
     /**
      * Throws always an exception.
      * <p>
-     * Used to signal that one of the {@code as...()} methods was called, but the
-     * value type does not match.
+     * Used to signal that one of the {@code as...()} methods was called, but the value type does not match.
      * </p>
      * <p>
      * This method always throws {@link UnsupportedOperationException}.

@@ -15,7 +15,6 @@ import de.weltraumschaf.commons.guava.Lists;
 import de.weltraumschaf.commons.token.Token;
 import de.weltraumschaf.commons.token.TokenType;
 import java.util.List;
-import java.util.Map;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import org.junit.Rule;
@@ -30,7 +29,8 @@ import org.junit.rules.ExpectedException;
 public class DefaultScannerTest {
 
     // CHECKSTYLE:OFF
-    @Rule public ExpectedException thrown = ExpectedException.none();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
     // CHECKSTYLE:ON
     private final Scanner sut = Scanners.newScanner(new LiteralCommandMapStub());
 
@@ -41,7 +41,7 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_emptyLine() throws SyntaxException {
-        final List<Token<?>> tokens = sut.scan("");
+        final List<Token> tokens = sut.scan("");
         assertThat(tokens.size(), is(0));
     }
 
@@ -64,53 +64,51 @@ public class DefaultScannerTest {
             types.add(t);
         }
 
-        final List<Token<?>> tokens = sut.scan(input.toString());
+        final List<Token> tokens = sut.scan(input.toString());
         int tokenId = 0;
 
-        for (final Token<?> token : tokens) {
+        for (final Token token : tokens) {
             assertThat(token.getType(), is(TokenType.KEYWORD));
-            assertThat(token.getValue().toString(), is(types.get(tokenId).getLiteral()));
+            assertThat(token.asString(), is(types.get(tokenId).getLiteral()));
             ++tokenId;
         }
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void scan_lineWithSingleKeyword() throws SyntaxException {
-        List<Token<?>> tokens = sut.scan(TestMainType.FOO.getLiteral());
+        List<Token> tokens = sut.scan(TestMainType.FOO.getLiteral());
         assertThat(tokens.size(), is(1));
-        Token<String> token = (Token<String>) tokens.get(0);
+        Token token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.KEYWORD));
-        assertThat(token.getValue(), is(TestMainType.FOO.getLiteral()));
+        assertThat(token.asString(), is(TestMainType.FOO.getLiteral()));
 
         tokens = sut.scan(TestMainType.BAR.getLiteral());
         assertThat(tokens.size(), is(1));
-        token = (Token<String>) tokens.get(0);
+        token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.KEYWORD));
-        assertThat(token.getValue(), is(TestMainType.BAR.getLiteral()));
+        assertThat(token.asString(), is(TestMainType.BAR.getLiteral()));
 
         tokens = sut.scan(TestMainType.BAZ.getLiteral());
         assertThat(tokens.size(), is(1));
-        token = (Token<String>) tokens.get(0);
+        token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.KEYWORD));
-        assertThat(token.getValue(), is(TestMainType.BAZ.getLiteral()));
+        assertThat(token.asString(), is(TestMainType.BAZ.getLiteral()));
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void scan_lineWithSingleString() throws SyntaxException {
-        List<Token<?>> tokens = sut.scan("'foo'\n");
+        List<Token> tokens = sut.scan("'foo'\n");
 
         assertThat(tokens.size(), is(1));
-        Token<String> token = (Token<String>) tokens.get(0);
+        Token token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.STRING));
-        assertThat(token.getValue(), is("foo"));
+        assertThat(token.asString(), is("foo"));
 
         tokens = sut.scan("\"bar\"");
         assertThat(tokens.size(), is(1));
-        token = (Token<String>) tokens.get(0);
+        token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.STRING));
-        assertThat(token.getValue(), is("bar"));
+        assertThat(token.asString(), is("bar"));
     }
 
     @Test
@@ -121,172 +119,165 @@ public class DefaultScannerTest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void scan_lineWithMultipleStrings() throws SyntaxException {
-        final List<Token<?>> tokens = sut.scan("'foo' 'bar' 'baz'\n");
+        final List<Token> tokens = sut.scan("'foo' 'bar' 'baz'\n");
 
         assertThat(tokens.size(), is(3));
-        Token<String> token = (Token<String>) tokens.get(0);
+        Token token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.STRING));
-        assertThat(token.getValue(), is("foo"));
+        assertThat(token.asString(), is("foo"));
 
-        token = (Token<String>) tokens.get(1);
+        token = tokens.get(1);
         assertThat(token.getType(), is(TokenType.STRING));
-        assertThat(token.getValue(), is("bar"));
+        assertThat(token.asString(), is("bar"));
 
-        token = (Token<String>) tokens.get(2);
+        token = tokens.get(2);
         assertThat(token.getType(), is(TokenType.STRING));
-        assertThat(token.getValue(), is("baz"));
+        assertThat(token.asString(), is("baz"));
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void scan_lineWithLiteralStartingWithNumber() throws SyntaxException {
-        final List<Token<?>> tokens = sut.scan("192.168.1.1 127.0.0.1\n");
+        final List<Token> tokens = sut.scan("192.168.1.1 127.0.0.1\n");
 
         assertThat(tokens.size(), is(2));
-        Token<String> token = (Token<String>) tokens.get(0);
+        Token token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("192.168.1.1")); // NOPMD Only want to test parsing of an ip.
+        assertThat(token.asString(), is("192.168.1.1")); // NOPMD Only want to test parsing of an ip.
 
-        token = (Token<String>) tokens.get(1);
+        token = tokens.get(1);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("127.0.0.1")); // NOPMD Only want to test parsing of an ip.
+        assertThat(token.asString(), is("127.0.0.1")); // NOPMD Only want to test parsing of an ip.
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void scan_lineWithMultipleLiterals() throws SyntaxException {
-        final List<Token<?>> tokens = sut.scan("loo l-ar laz_1");
+        final List<Token> tokens = sut.scan("loo l-ar laz_1");
 
         assertThat(tokens.size(), is(3));
 
-        Token<String> token = (Token<String>) tokens.get(0);
+        Token token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("loo"));
+        assertThat(token.asString(), is("loo"));
 
-        token = (Token<String>) tokens.get(1);
+        token = tokens.get(1);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("l-ar"));
+        assertThat(token.asString(), is("l-ar"));
 
-        token = (Token<String>) tokens.get(2);
+        token = tokens.get(2);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("laz_1"));
+        assertThat(token.asString(), is("laz_1"));
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void scan_literalsStartWithSpecialCharacters() throws SyntaxException {
-        List<Token<?>> tokens = sut.scan("/foo/bar/baz");
+        List<Token> tokens = sut.scan("/foo/bar/baz");
         assertThat(tokens.size(), is(1));
-        Token<String> token = (Token<String>) tokens.get(0);
+        Token token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("/foo/bar/baz"));
+        assertThat(token.asString(), is("/foo/bar/baz"));
 
         tokens = sut.scan("--foo-bar-baz");
         assertThat(tokens.size(), is(1));
-        token = (Token<String>) tokens.get(0);
+        token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("--foo-bar-baz"));
+        assertThat(token.asString(), is("--foo-bar-baz"));
 
         tokens = sut.scan("/foo/bar/baz --foo-bar-baz");
         assertThat(tokens.size(), is(2));
-        token = (Token<String>) tokens.get(0);
+        token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("/foo/bar/baz"));
-        token = (Token<String>) tokens.get(1);
+        assertThat(token.asString(), is("/foo/bar/baz"));
+        token = tokens.get(1);
         assertThat(token.getType(), is(TokenType.LITERAL));
-        assertThat(token.getValue(), is("--foo-bar-baz"));
+        assertThat(token.asString(), is("--foo-bar-baz"));
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void scan_lineWithSingleNumber() throws SyntaxException {
-        final List<Token<?>> tokens = sut.scan("1234");
+        final List<Token> tokens = sut.scan("1234");
         assertThat(tokens.size(), is(1));
 
-        final Token<Integer> token = (Token<Integer>) tokens.get(0);
+        final Token token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.INTEGER));
-        assertThat(token.getValue(), is(1234));
+        assertThat(token.asInteger(), is(1234));
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void scan_lineWithMultipleNumbers() throws SyntaxException {
-        final List<Token<?>> tokens = sut.scan("1234 5678 90");
+        final List<Token> tokens = sut.scan("1234 5678 90");
         assertThat(tokens.size(), is(3));
 
-        Token<Integer> token = (Token<Integer>) tokens.get(0);
+        Token token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.INTEGER));
-        assertThat(token.getValue(), is(1234));
+        assertThat(token.asInteger(), is(1234));
 
-        token = (Token<Integer>) tokens.get(1);
+        token = tokens.get(1);
         assertThat(token.getType(), is(TokenType.INTEGER));
-        assertThat(token.getValue(), is(5678));
+        assertThat(token.asInteger(), is(5678));
 
-        token = (Token<Integer>) tokens.get(2);
+        token = tokens.get(2);
         assertThat(token.getType(), is(TokenType.INTEGER));
-        assertThat(token.getValue(), is(90));
+        assertThat(token.asInteger(), is(90));
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void scan_lineWithLiteralKeywordAndNumbers() throws SyntaxException {
-        Token<Integer> intToken;
-        Token<String> strToken;
-        List<Token<?>> tokens = sut.scan("loo 1234 5678 bar");
+        Token intToken;
+        Token strToken;
+        List<Token> tokens = sut.scan("loo 1234 5678 bar");
 
         assertThat(tokens.size(), is(4));
-        strToken = (Token<String>) tokens.get(0);
+        strToken = tokens.get(0);
         assertThat(strToken.getType(), is(TokenType.LITERAL));
-        assertThat(strToken.getValue(), is("loo"));
+        assertThat(strToken.asString(), is("loo"));
 
-        intToken = (Token<Integer>) tokens.get(1);
+        intToken = tokens.get(1);
         assertThat(intToken.getType(), is(TokenType.INTEGER));
-        assertThat(intToken.getValue(), is(1234));
+        assertThat(intToken.asInteger(), is(1234));
 
-        intToken = (Token<Integer>) tokens.get(2);
+        intToken = tokens.get(2);
         assertThat(intToken.getType(), is(TokenType.INTEGER));
-        assertThat(intToken.getValue(), is(5678));
+        assertThat(intToken.asInteger(), is(5678));
 
-        strToken = (Token<String>) tokens.get(3);
+        strToken = tokens.get(3);
         assertThat(strToken.getType(), is(TokenType.KEYWORD));
-        assertThat(strToken.getValue(), is("bar"));
+        assertThat(strToken.asString(), is("bar"));
 
         tokens = sut.scan("1234 loo bar 5678");
         assertThat(tokens.size(), is(4));
 
-        intToken = (Token<Integer>) tokens.get(0);
+        intToken = tokens.get(0);
         assertThat(intToken.getType(), is(TokenType.INTEGER));
-        assertThat(intToken.getValue(), is(1234));
+        assertThat(intToken.asInteger(), is(1234));
 
-        strToken = (Token<String>) tokens.get(1);
+        strToken = tokens.get(1);
         assertThat(strToken.getType(), is(TokenType.LITERAL));
-        assertThat(strToken.getValue(), is("loo"));
+        assertThat(strToken.asString(), is("loo"));
 
-        strToken = (Token<String>) tokens.get(2);
+        strToken = tokens.get(2);
         assertThat(strToken.getType(), is(TokenType.KEYWORD));
-        assertThat(strToken.getValue(), is("bar"));
+        assertThat(strToken.asString(), is("bar"));
 
-        intToken = (Token<Integer>) tokens.get(3);
+        intToken = tokens.get(3);
         assertThat(intToken.getType(), is(TokenType.INTEGER));
-        assertThat(intToken.getValue(), is(5678));
+        assertThat(intToken.asInteger(), is(5678));
 
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     public void scan_lineWithMaliciousNumber() throws SyntaxException {
-        final List<Token<?>> tokens = sut.scan("1234foo");
+        final List<Token> tokens = sut.scan("1234foo");
 
         assertThat(tokens.size(), is(1));
-        final Token<String> strToken = (Token<String>) tokens.get(0);
+        final Token strToken = tokens.get(0);
 
         assertThat(strToken.getType(), is(TokenType.LITERAL));
-        assertThat(strToken.getValue(), is("1234foo"));
+        assertThat(strToken.asString(), is("1234foo"));
     }
 
     private enum TestMainType implements MainCommandType {
+
         FOO("foo"), BAR("bar"), BAZ("baz");
 
         private final String literal;
@@ -303,6 +294,7 @@ public class DefaultScannerTest {
     }
 
     private enum TestSubType implements SubCommandType {
+
         NONE();
 
         @Override

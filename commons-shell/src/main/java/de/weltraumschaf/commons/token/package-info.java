@@ -11,6 +11,9 @@
  */
 
 /**
- * Classes which helps with lexical analysis.
+ * New designed tokens.
+ * <p>
+ * This is an attempt to design token classes with strong typed values, but without the need of unsafe casts warnings.
+ * </p>
  */
 package de.weltraumschaf.commons.token;

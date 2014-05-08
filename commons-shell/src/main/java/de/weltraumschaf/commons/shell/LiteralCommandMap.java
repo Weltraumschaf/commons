@@ -58,8 +58,8 @@ public abstract class LiteralCommandMap {
      * @param token token to check
      * @return true if the token is a command else false
      */
-    public final boolean isCommand(final Token<String> token) {
-        return isCommand(token.getValue());
+    public final boolean isCommand(final Token token) {
+        return isCommand(token.asString());
     }
 
     /**
@@ -83,11 +83,11 @@ public abstract class LiteralCommandMap {
      * @throws IllegalArgumentException if, token is not a main command
      * // CHECKSTYLE:ON
      */
-    public final MainCommandType determineCommand(final Token<String> t) {
+    public final MainCommandType determineCommand(final Token t) {
         if (isCommand(t)) {
-            return mainCommands.get(t.getValue());
+            return mainCommands.get(t.asString());
         }
-        throw new IllegalArgumentException(String.format("'%s' is not a command!", t.getValue()));
+        throw new IllegalArgumentException(String.format("'%s' is not a command!", t.asString()));
     }
 
     /**
@@ -96,8 +96,8 @@ public abstract class LiteralCommandMap {
      * @param token token to check
      * @return true if the token is a sub command else false
      */
-    public final boolean isSubCommand(final Token<String> token) {
-        return isSubCommand(token.getValue());
+    public final boolean isSubCommand(final Token token) {
+        return isSubCommand(token.asString());
     }
 
     /**
@@ -121,11 +121,11 @@ public abstract class LiteralCommandMap {
      * @throws IllegalArgumentException if, token is not a sub command
      * // CHECKSTYLE:ON
      */
-    public final SubCommandType determineSubCommand(final Token<String> t) {
+    public final SubCommandType determineSubCommand(final Token t) {
         if (isSubCommand(t)) {
-            return subCommands.get(t.getValue());
+            return subCommands.get(t.asString());
         }
-        throw new IllegalArgumentException(String.format("'%s' is not a sub command!", t.getValue()));
+        throw new IllegalArgumentException(String.format("'%s' is not a sub command!", t.asString()));
     }
 
     /**

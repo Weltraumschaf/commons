@@ -9,8 +9,10 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
-package de.weltraumschaf.commons.experimental.token;
+package de.weltraumschaf.commons.token;
 
+import de.weltraumschaf.commons.token.TokenType;
+import de.weltraumschaf.commons.token.BaseToken;
 import de.weltraumschaf.commons.token.Position;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;

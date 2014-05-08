@@ -13,10 +13,12 @@ package de.weltraumschaf.commons.token;
 
 /**
  * Represents a null value.
- *
+ * <p>
  * Used instead of {@code null} to prevent null pointer exceptions.
  * Implemented as singleton w/o any state.
+ * </p>
  *
+ * @since 1.0.0
  * @author "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
 public final class Null {

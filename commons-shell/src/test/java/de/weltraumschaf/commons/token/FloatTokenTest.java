@@ -9,56 +9,55 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
-package de.weltraumschaf.commons.experimental.token;
+package de.weltraumschaf.commons.token;
 
+import de.weltraumschaf.commons.token.Tokens;
+import de.weltraumschaf.commons.token.Token;
+import de.weltraumschaf.commons.token.BaseToken.FloatToken;
 import de.weltraumschaf.commons.token.Position;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
- * Tests for {@link StringToken}.
+ * Tests for {@link FloatToken}.
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public class StringTokenTest {
+public class FloatTokenTest {
 
     @Rule
     //CHECKSTYLE:OFF
     public final ExpectedException thrown = ExpectedException.none();
     //CHECKSTYLE:ON
 
-    private final Token sut = Tokens.newStringToken(Position.NULL, "foobar", "foobar");
+    private final Token sut = Tokens.newFloatToken(Position.NULL, "3.14", 3.14f);
 
     @Test
     public void asBoolean() {
         thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type BOOLEAN! But is of type STRING.");
+        thrown.expectMessage("Token is not of type BOOLEAN! But is of type FLOAT.");
 
         sut.asBoolean();
     }
 
     @Test
     public void asFloat() {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type FLOAT! But is of type STRING.");
-
-        sut.asFloat();
+        assertThat((double) sut.asFloat(), is(closeTo(3.14, 0.0001)));
     }
 
     @Test
     public void asInteger() {
         thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type INTEGER! But is of type STRING.");
+        thrown.expectMessage("Token is not of type INTEGER! But is of type FLOAT.");
 
         sut.asInteger();
     }
 
     @Test
     public void asString() {
-        assertThat(sut.asString(), is(equalTo("foobar")));
+        assertThat(sut.asString(), is(equalTo("3.14")));
     }
 }

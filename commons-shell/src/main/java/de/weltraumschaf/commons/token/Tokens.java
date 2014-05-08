@@ -1,258 +1,101 @@
 /*
- * LICENSE
+ *  LICENSE
  *
  * "THE BEER-WARE LICENSE" (Revision 43):
- * "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com> wrote this file.
+ * "Sven Strittmatter" <weltraumschaf@googlemail.com> wrote this file.
  * As long as you retain this notice you can do whatever you want with
  * this stuff. If we meet some day, and you think this stuff is worth it,
  * you can buy me a non alcohol-free beer in return.
  *
- * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
+ * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
 package de.weltraumschaf.commons.token;
 
 /**
  * Factory to create tokens.
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class Tokens {
-
-    /**
-     * Default position.
-     */
-    private static final Position NULL_POSITION = Position.NULL;
 
     /**
      * Hidden for pure static factory.
      */
     private Tokens() {
         super();
+        throw new UnsupportedOperationException("Don't call from reflection!");
     }
 
     /**
-     * Creates a comment token.
+     * Creates a new {@link TokenType#BOOLEAN boolean} token.
      *
-     * @param value operator string
-     * @return new instance
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
      */
-    public static Token<String> newOperatorToken(final String value) {
-        return newOperatorToken(value, NULL_POSITION);
+    public static Token newBooleanToken(final Position position, final String raw, final Boolean value) {
+        return new BaseToken.BooleanToken(position, raw, value);
     }
 
     /**
-     * Creates a comment token.
+     * Creates a new {@link TokenType#INTEGER integer} token.
      *
-     * @param value operator string
-     * @param pos source position of token
-     * @return new instance
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
      */
-    public static Token<String> newOperatorToken(final String value, final Position pos) {
-        return new Token<String>(TokenType.OPERATOR, value, pos);
+    public static Token newIntegerToken(final Position position, final String raw, final Integer value) {
+        return new BaseToken.IntegerToken(position, raw, value);
     }
 
     /**
-     * Creates a end of file token.
+     * Creates a new {@link TokenType#FLOAT float} token.
      *
-     * @return {@link Null} as a placeholder
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
      */
-    public static Token<Null> newEndOfFileToken() {
-        return newEndOfFileToken(NULL_POSITION);
+    public static Token newFloatToken(final Position position, final String raw, final Float value) {
+        return new BaseToken.FloatToken(position, raw, value);
     }
 
     /**
-     * Creates a end of file token.
+     * Creates a new {@link TokenType#STRING string} token.
      *
-     * @param pos source position of token
-     * @return {@link Null} as a placeholder
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
      */
-    public static Token<Null> newEndOfFileToken(final Position pos) {
-        return new Token<Null>(TokenType.EOF, Null.getInstance(), pos);
+    public static Token newStringToken(final Position position, final String raw, final String value) {
+        return new BaseToken.StringToken(position, raw, value);
     }
 
     /**
-     * Creates a command keyword token.
+     * Creates a new {@link TokenType#KEYWORD keyword} token.
      *
-     * @param value token value
-     * @return new instance
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
      */
-    public static Token<String> newKeywordToken(final String value) {
-        return newKeywordToken(value, NULL_POSITION);
+    public static Token newKeywordToken(final Position position, final String raw, final String value) {
+        return new BaseToken.KeywordToken(position, raw, value);
     }
 
     /**
-     * Creates a command keyword token.
+     * Creates a new {@link TokenType#LITERAL literal} token.
      *
-     * @param value token value
-     * @param pos source position of token
-     * @return new instance
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
      */
-    public static Token<String> newKeywordToken(final String value, final Position pos) {
-        return new Token<String>(TokenType.KEYWORD, value, pos);
+    public static Token newLiteralToken(final Position position, final String raw, final String value) {
+        return new BaseToken.LiteralToken(position, raw, value);
     }
-
-    /**
-     * Creates a number token.
-     *
-     * @param value token value
-     * @return new instance
-     */
-    public static Token<Integer> newIntegerToken(final Integer value) {
-        return newIntegerToken(value, NULL_POSITION);
-    }
-
-    /**
-     * Creates a number token.
-     *
-     * @param value token value
-     * @param pos source position of token
-     * @return new instance
-     */
-    public static Token<Integer> newIntegerToken(final Integer value, final Position pos) {
-        return new Token<Integer>(TokenType.INTEGER, value, pos);
-    }
-
-    /**
-     * Creates a float token.
-     *
-     * @param value token value
-     * @return new instance
-     */
-    public static Token<Float> newFloatToken(final Float value) {
-        return newFloatToken(value, NULL_POSITION);
-    }
-
-    /**
-     * Creates a float token.
-     *
-     * @param value token value
-     * @param pos source position of token
-     * @return new instance
-     */
-    public static Token<Float> newFloatToken(final Float value, final Position pos) {
-        return new Token<Float>(TokenType.FLOAT, value, pos);
-    }
-
-    /**
-     * Creates a comment token.
-     *
-     * @param value comment string
-     * @return new instance
-     */
-    public static Token<String> newCommentToken(final String value) {
-        return newCommentToken(value, NULL_POSITION);
-    }
-
-    /**
-     * Creates a comment token.
-     *
-     * @param value comment string
-     * @param pos source position of token
-     * @return new instance
-     */
-    public static Token<String> newCommentToken(final String value, final Position pos) {
-        return new Token<String>(TokenType.COMMENT, value, pos);
-    }
-
-    /**
-     * Creates a end of line token.
-     *
-     * @return {@link Null} as a placeholder
-     */
-    public static Token<Null> newEndOfLineToken() {
-        return newEndOfLineToken(NULL_POSITION);
-    }
-
-    /**
-     * Creates a end of line token.
-     *
-     * @param pos source position of token
-     * @return {@link Null} as a placeholder
-     */
-    public static Token<Null> newEndOfLineToken(final Position pos) {
-        return new Token<Null>(TokenType.EOL, Null.getInstance(), pos);
-    }
-
-    /**
-     * Creates a boolean token.
-     *
-     * @param value token value
-     * @return new instance
-     */
-    public static Token<Boolean> newBooleanToken(final Boolean value) {
-        return newBooleanToken(value, NULL_POSITION);
-    }
-
-    /**
-     * Creates a boolean token.
-     *
-     * @param value token value
-     * @param pos source position of token
-     * @return new instance
-     */
-    public static Token<Boolean> newBooleanToken(final Boolean value, final Position pos) {
-        return new Token<Boolean>(TokenType.BOOLEAN, value, pos);
-    }
-
-    /**
-     * Creates a null token.
-     *
-     * @return new instance
-     */
-    public static Token<Null> newNullToken() {
-        return newNullToken(NULL_POSITION);
-    }
-
-    /**
-     * Creates a null token.
-     *
-     * @param pos source position of token
-     * @return new instance
-     */
-    public static Token<Null> newNullToken(final Position pos) {
-        return new Token<Null>(TokenType.NULL, Null.getInstance(), pos);
-    }
-
-    /**
-     * Creates a literal token.
-     *
-     * @param value token value
-     * @return new instance
-     */
-    public static Token<String> newLiteralToken(final String value) {
-        return new Token<String>(TokenType.LITERAL, value, NULL_POSITION);
-    }
-
-    /**
-     * Creates a literal token.
-     *
-     * @param value token value
-     * @param pos source position of token
-     * @return new instance
-     */
-    public static Token<String> newLiteralToken(final String value, final Position pos) {
-        return new Token<String>(TokenType.LITERAL, value, pos);
-    }
-
-    /**
-     * Creates a string token.
-     *
-     * @param value token value
-     * @return new instance
-     */
-    public static Token<String> newStringToken(final String value) {
-        return newStringToken(value, NULL_POSITION);
-    }
-
-    /**
-     * Creates a string token.
-     *
-     * @param value token value
-     * @param pos source position of token
-     * @return new instance
-     */
-    public static Token<String> newStringToken(final String value, final Position pos) {
-        return new Token<String>(TokenType.STRING, value, pos);
-    }
-
 }

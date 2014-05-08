@@ -9,8 +9,11 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
-package de.weltraumschaf.commons.experimental.token;
+package de.weltraumschaf.commons.token;
 
+import de.weltraumschaf.commons.token.Tokens;
+import de.weltraumschaf.commons.token.Token;
+import de.weltraumschaf.commons.token.BaseToken.BooleanToken;
 import de.weltraumschaf.commons.token.Position;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -20,31 +23,28 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 /**
- * Tests for {@link KeywordToken}.
+ * Tests for {@link BooleanToken}.
  *
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public class KeywordTokenTest {
+public class BooleanTokenTest {
 
     @Rule
     //CHECKSTYLE:OFF
     public final ExpectedException thrown = ExpectedException.none();
     //CHECKSTYLE:ON
 
-    private final Token sut = Tokens.newKeywordToken(Position.NULL, "foobar", "foobar");
+    private final Token sut = Tokens.newBooleanToken(Position.NULL, "true", Boolean.TRUE);
 
     @Test
     public void asBoolean() {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type BOOLEAN! But is of type KEYWORD.");
-
-        sut.asBoolean();
+        assertThat(sut.asBoolean(), is(true));
     }
 
     @Test
     public void asFloat() {
         thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type FLOAT! But is of type KEYWORD.");
+        thrown.expectMessage("Token is not of type FLOAT! But is of type BOOLEAN.");
 
         sut.asFloat();
     }
@@ -52,13 +52,13 @@ public class KeywordTokenTest {
     @Test
     public void asInteger() {
         thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type INTEGER! But is of type KEYWORD.");
+        thrown.expectMessage("Token is not of type INTEGER! But is of type BOOLEAN.");
 
         sut.asInteger();
     }
 
     @Test
     public void asString() {
-        assertThat(sut.asString(), is(equalTo("foobar")));
+        assertThat(sut.asString(), is(equalTo("true")));
     }
 }

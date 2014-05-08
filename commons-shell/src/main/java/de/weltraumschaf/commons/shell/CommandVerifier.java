@@ -13,13 +13,18 @@ package de.weltraumschaf.commons.shell;
 
 /**
  * Implementors verifies the passed command.
- *
+ * <p>
  * Verification means:
- * - Check if a main command has a legal sub command.
- * - Check if a command has legal arguments.
- *
+ * </p>
+ * <ul>
+ * <li>Check if a main command has a legal sub command.</li>
+ * <li>Check if a command has legal arguments.</li>
+ * </ul>
+ * <p>
  * If a check fails throw {@link SyntaxException}.
+ * </p>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public interface CommandVerifier {

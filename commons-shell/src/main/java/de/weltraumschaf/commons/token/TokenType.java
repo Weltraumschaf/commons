@@ -1,86 +1,47 @@
 /*
- * LICENSE
+ *  LICENSE
  *
  * "THE BEER-WARE LICENSE" (Revision 43):
- * "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com> wrote this file.
+ * "Sven Strittmatter" <weltraumschaf@googlemail.com> wrote this file.
  * As long as you retain this notice you can do whatever you want with
  * this stuff. If we meet some day, and you think this stuff is worth it,
  * you can buy me a non alcohol-free beer in return.
  *
- * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
+ * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
+
 package de.weltraumschaf.commons.token;
 
 /**
- * Type of tokens scanned from interactive shell.
+ * Defines the token classes.
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public enum TokenType {
 
     /**
-     * A command or subcommand literal.
-     *
-     * Any literal starting with a alphabetical character: keyword = literal .
-     */
-    KEYWORD,
-    /**
-     * Defines a quote delimited string.
-     *
-     * Any characters between matching quotes:
-     * <pre>
-     * string = ''' any-character { any-character } '''
-     *        | '"' any-character { any-character } '"' .
-     * </pre>
-     */
-    STRING,
-    /**
-     * Defines literal string token type.
-     *
-     * Any literal starting with a alphabetical character:
-     * <pre>
-     * literal = a..Z { a..Z | 0..9] } .
-     * </pre>
-     */
-    LITERAL,
-    /**
-     * Defines integer token type.
-     *
-     * Any literal only containing digits: number = 0..9 { 0..9 } .
-     */
-    INTEGER,
-    /**
-     * Defines floating point number token type.
-     *
-     * Any literal numbers and .
-     * <pre>
-     * float = [ 0..9 ] '.' { 0..9 } .
-     * </pre>
-     */
-    FLOAT,
-    /**
-     * Defines boolean token type.
+     * Token class with a types value of type {@link java.lang.Boolean}.
      */
     BOOLEAN,
     /**
-     * End of line token.
+     * Token class with a types value of type {@link java.lang.Integer}.
      */
-    EOL,
+    INTEGER,
     /**
-     * End of file token.
+     * Token class with a types value of type {@link java.lang.Float}.
      */
-    EOF,
+    FLOAT,
     /**
-     * Comment token.
+     * Token class with a types value of type {@link java.lang.String}.
      */
-    COMMENT,
+    KEYWORD,
     /**
-     * Operator token.
+     * Token class with a types value of type {@link java.lang.String}.
      */
-    OPERATOR,
+    LITERAL,
     /**
-     * Null token.
+     * Token class with a types value of type {@link java.lang.String}.
      */
-    NULL;
-
+    STRING;
 }

@@ -14,6 +14,7 @@ package de.weltraumschaf.commons.shell;
 /**
  * Factory to create scanners.
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class Scanners {

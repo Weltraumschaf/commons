@@ -18,8 +18,9 @@ import java.util.List;
 
 /**
  * Default parses implementation.
- *
+ * <p>
  * Parsed grammar:
+ * </p>
  * <pre>
  * imputline  = command { argument } .
  * command    = keyword [ keyword ] .
@@ -37,6 +38,7 @@ import java.util.List;
  * whitespace = ' ' .
  * </pre>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 class DefaultParser implements Parser {
@@ -79,29 +81,27 @@ class DefaultParser implements Parser {
      */
     @Override
     public ShellCommand parse(final String input) throws SyntaxException {
-        final List<Token<?>> tokens = scanner.scan(input);
-        final Token<?> commandtoken = tokens.get(0);
+        final List<Token> tokens = scanner.scan(input);
+        final Token commandtoken = tokens.get(0);
 
         if (TokenType.KEYWORD != commandtoken.getType()) {
             throw new SyntaxException("Command expected as first input!");
         }
 
-        @SuppressWarnings("unchecked")
-        final MainCommandType command = commandMap.determineCommand((Token<String>) commandtoken);
+        final MainCommandType command = commandMap.determineCommand(commandtoken);
         SubCommandType subCommand = commandMap.getDefaultSubCommand();
         int argumentBegin = 1;
 
         if (tokens.size() > 1) {
-            final Token<?> secondToken = tokens.get(1);
+            final Token secondToken = tokens.get(1);
 
             if (secondToken.getType() == TokenType.KEYWORD) {
-                @SuppressWarnings("unchecked")
-                final Token<String> keyword = (Token<String>) secondToken;
+                final Token keyword = secondToken;
 
                 if (! commandMap.isSubCommand(keyword)) {
                     throw new SyntaxException(
                             String.format("Command '%s' followed by bad keyword '%s' as sub command!",
-                                          commandtoken.getValue(), secondToken.getValue()));
+                                          commandtoken.asString(), secondToken.asString()));
                 }
 
                 ++argumentBegin;
@@ -109,7 +109,7 @@ class DefaultParser implements Parser {
             }
         }
 
-        List<Token<?>> arguments;
+        List<Token> arguments;
 
         if (tokens.size() > argumentBegin) {
             arguments = tokens.subList(argumentBegin, tokens.size());

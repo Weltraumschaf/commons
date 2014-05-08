@@ -14,6 +14,7 @@ package de.weltraumschaf.commons.shell;
 /**
  * Marker interface for shell main command types.
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public interface MainCommandType extends CommandType {

@@ -15,6 +15,7 @@ import de.weltraumschaf.commons.token.Token;
 import de.weltraumschaf.commons.characters.CharacterStream;
 import de.weltraumschaf.commons.characters.CharacterHelper;
 import de.weltraumschaf.commons.guava.Lists;
+import de.weltraumschaf.commons.token.Position;
 import de.weltraumschaf.commons.token.Tokens;
 import java.util.List;
 
@@ -60,12 +61,12 @@ class DefaultScanner implements Scanner {
      * // CHECKSTYLE:ON
      */
     @Override
-    public List<Token<?>> scan(final String line) throws SyntaxException {
+    public List<Token> scan(final String line) throws SyntaxException {
         if (null == line) {
             throw new IllegalArgumentException("Line must not be null!");
         }
 
-        final List<Token<?>> tokens = Lists.newArrayList();
+        final List<Token> tokens = Lists.newArrayList();
 
         if (! line.isEmpty()) {
             scan(tokens, new CharacterStream(line));
@@ -81,7 +82,7 @@ class DefaultScanner implements Scanner {
      * @param characterStream input line to scan
      * @throws SyntaxException if, syntax error occurred
      */
-    private void scan(final List<Token<?>> tokens, final CharacterStream characterStream) throws SyntaxException {
+    private void scan(final List<Token> tokens, final CharacterStream characterStream) throws SyntaxException {
         while (characterStream.hasNext()) {
             final char currentChar = characterStream.next();
 
@@ -128,9 +129,9 @@ class DefaultScanner implements Scanner {
         final String tokenString = value.toString();
 
         if (isKeyword(tokenString)) {
-            return Tokens.newKeywordToken(tokenString);
+            return Tokens.newKeywordToken(Position.NULL, tokenString, tokenString);
         } else {
-            return Tokens.newLiteralToken(tokenString);
+            return Tokens.newLiteralToken(Position.NULL, tokenString, tokenString);
         }
     }
 
@@ -160,7 +161,7 @@ class DefaultScanner implements Scanner {
             value.append(currentChar);
         }
 
-        return Tokens.newIntegerToken(Integer.valueOf(value.toString()));
+        return Tokens.newIntegerToken(Position.NULL, value.toString(), Integer.valueOf(value.toString()));
     }
 
     /**
@@ -198,7 +199,7 @@ class DefaultScanner implements Scanner {
             throw new SyntaxException(String.format("Unterminated string '%s'!", value.toString()));
         }
 
-        return Tokens.newStringToken(value.toString());
+        return Tokens.newStringToken(Position.NULL, value.toString(), value.toString());
     }
 
     /**

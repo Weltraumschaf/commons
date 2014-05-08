@@ -17,6 +17,7 @@ import java.util.List;
 /**
  * Scans the input line from an interactive shell.
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public interface Scanner {
@@ -31,6 +32,6 @@ public interface Scanner {
      * @throws IllegalArgumentException, if line is null.
      * // CHECKSTYLE:ON
      */
-    List<Token<?>> scan(final String line) throws SyntaxException;
+    List<Token> scan(final String line) throws SyntaxException;
 
 }

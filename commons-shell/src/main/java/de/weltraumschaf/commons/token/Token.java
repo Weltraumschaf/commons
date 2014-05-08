@@ -1,88 +1,92 @@
 /*
- * LICENSE
+ *  LICENSE
  *
  * "THE BEER-WARE LICENSE" (Revision 43):
- * "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com> wrote this file.
+ * "Sven Strittmatter" <weltraumschaf@googlemail.com> wrote this file.
  * As long as you retain this notice you can do whatever you want with
  * this stuff. If we meet some day, and you think this stuff is worth it,
  * you can buy me a non alcohol-free beer in return.
  *
- * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
+ * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
+
 package de.weltraumschaf.commons.token;
 
-import de.weltraumschaf.commons.guava.Objects;
-
 /**
- * Represent a token scanned from interactive shell input.
+ * Defines a token.
  *
- * @param <T> Type of the token value.
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public final class Token<T> {
+public interface Token {
 
     /**
-     * Type of token.
-     */
-    private final TokenType type;
-
-    /**
-     * Value of the token.
-     */
-    private final T value;
-
-    /**
-     * Position of the token in the source.
-     */
-    private final Position position;
-
-    /**
-     * Hide constructor to force usage of factory methods.
+     * Start position of the token.
      *
-     * @param type Token type.
-     * @param value Token value.
-     * @param pos source position of token
+     * @return never {@code null}
      */
-    Token(final TokenType type, final T value, final Position pos) {
-        super();
-        this.type = type;
-        this.value = value;
-        this.position = pos;
-    }
+    Position getPosition();
 
     /**
-     * Get the tokens type.
+     * The raw string recognized by the scanner.
+     * <p>
+     * For example a string token {@code "foo"} has the raw value {@code "foo"} in contrast
+     * it's typed {@link #asString() string value} will be {@code foo}.
+     * </p>
      *
-     * @return type enum
+     * @return never {@code null}
      */
-    public TokenType getType() {
-        return type;
-    }
+    String getRaw();
 
     /**
-     * Get the tokens value.
+     * Get the token type class.
      *
-     * @return token value.
+     * @return never {@code null}
      */
-    public T getValue() {
-        return value;
-    }
+    TokenType getType();
 
     /**
-     * Get the token position.
+     * Get the boolean typed value.
+     * <p>
+     * This method throws {@link UnsupportedOperationException} if the token's {@link #getType() token class}
+     * is not of type {@link TokenType#BOOLEAN}.
+     * </p>
      *
-     * @return position instance
+     * @return never {@code null}
      */
-    public Position getPosition() {
-        return position;
-    }
+    Boolean asBoolean();
 
-    @Override
-    public String toString() {
-        return Objects.toStringHelper(this)
-                      .add("type", type)
-                      .add("value", value)
-                      .toString();
-    }
+    /**
+     * Get the float typed value.
+     * <p>
+     * This method throws {@link UnsupportedOperationException} if the token's {@link #getType() token class}
+     * is not of type {@link TokenType#FLOAT}.
+     * </p>
+     *
+     * @return never {@code null}
+     */
+    Float asFloat();
+
+    /**
+     * Get the integer typed value.
+     * <p>
+     * This method throws {@link UnsupportedOperationException} if the token's {@link #getType() token class}
+     * is not of type {@link TokenType#INTEGER}.
+     * </p>
+     *
+     * @return never {@code null}
+     */
+    Integer asInteger();
+
+    /**
+     * Get the string typed value.
+     * <p>
+     * This method never throws {@link UnsupportedOperationException}.
+     * It always calls {@link Object#toString()} on the recognized typed value.
+     * </p>
+     *
+     * @return never {@code null}
+     */
+    String asString();
 
 }

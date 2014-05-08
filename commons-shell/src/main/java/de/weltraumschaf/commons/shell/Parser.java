@@ -14,6 +14,7 @@ package de.weltraumschaf.commons.shell;
 /**
  * Parses input line from interactive shell.
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public interface Parser {

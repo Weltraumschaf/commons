@@ -16,10 +16,12 @@ import de.weltraumschaf.commons.validate.Validate;
 
 /**
  * Represents a token position in the source string.
- *
+ * <p>
  * The position contains the line, column and filename where the
  * token occurred. The file name is optional.
+ * </p>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class Position {

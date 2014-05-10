@@ -180,26 +180,60 @@ public class BrowserLauncherTest {
     }
 
     @Test
-    @Ignore
-    public void openUrl_xWwwBrowser() throws IOException {
+    public void openUrl_linux_xWwwBrowser() throws IOException {
+        final BrowserLauncher.Executor executor = mock(BrowserLauncher.Executor.class);
+        final BrowserLauncher sut = new BrowserLauncher(OperatingSystem.LINUX, executor);
 
+        sut.openBrowser("http://www.weltramschaf.de");
+
+        verify(executor).exec("x-www-browser http://www.weltramschaf.de");
     }
 
     @Test
-    @Ignore
-    public void openUrl_firefox() throws IOException {
+    public void openUrl_linux_firefox() throws IOException {
+        final BrowserLauncher.Executor executor = mock(BrowserLauncher.Executor.class);
+        final BrowserLauncher sut = new BrowserLauncher(OperatingSystem.LINUX, executor);
 
+        when(executor.exec("x-www-browser http://www.weltramschaf.de")).thenThrow(new IOException());
+        sut.openBrowser("http://www.weltramschaf.de");
+
+        verify(executor).exec("firefox http://www.weltramschaf.de");
     }
 
     @Test
-    @Ignore
-    public void openUrl_mozilla() throws IOException {
+    public void openUrl_linux_mozilla() throws IOException {
+        final BrowserLauncher.Executor executor = mock(BrowserLauncher.Executor.class);
+        final BrowserLauncher sut = new BrowserLauncher(OperatingSystem.LINUX, executor);
 
+        when(executor.exec("x-www-browser http://www.weltramschaf.de")).thenThrow(new IOException());
+        when(executor.exec("firefox http://www.weltramschaf.de")).thenThrow(new IOException());
+        sut.openBrowser("http://www.weltramschaf.de");
+
+        verify(executor).exec("mozilla http://www.weltramschaf.de");
     }
 
     @Test
-    @Ignore
-    public void openUrl_konqueror() throws IOException {
+    public void openUrl_linux_konqueror() throws IOException {
+        final BrowserLauncher.Executor executor = mock(BrowserLauncher.Executor.class);
+        final BrowserLauncher sut = new BrowserLauncher(OperatingSystem.LINUX, executor);
 
+        when(executor.exec("x-www-browser http://www.weltramschaf.de")).thenThrow(new IOException());
+        when(executor.exec("firefox http://www.weltramschaf.de")).thenThrow(new IOException());
+        when(executor.exec("mozilla http://www.weltramschaf.de")).thenThrow(new IOException());
+        sut.openBrowser("http://www.weltramschaf.de");
+
+        verify(executor).exec("konqueror http://www.weltramschaf.de");
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void openUrl_linux_noBrowser() throws IOException {
+        final BrowserLauncher.Executor executor = mock(BrowserLauncher.Executor.class);
+        final BrowserLauncher sut = new BrowserLauncher(OperatingSystem.LINUX, executor);
+
+        when(executor.exec("x-www-browser http://www.weltramschaf.de")).thenThrow(new IOException());
+        when(executor.exec("firefox http://www.weltramschaf.de")).thenThrow(new IOException());
+        when(executor.exec("mozilla http://www.weltramschaf.de")).thenThrow(new IOException());
+        when(executor.exec("konqueror http://www.weltramschaf.de")).thenThrow(new IOException());
+        sut.openBrowser("http://www.weltramschaf.de");
     }
 }

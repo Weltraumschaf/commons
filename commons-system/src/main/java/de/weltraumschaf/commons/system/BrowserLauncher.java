@@ -45,7 +45,9 @@ public final class BrowserLauncher {
      * Default constructor.
      */
     public BrowserLauncher() {
-        this(OperatingSystem.determine(System.getProperty("os.name", "")), Runtime.getRuntime());
+        this(OperatingSystem.determine(
+                System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, "")),
+            Runtime.getRuntime());
     }
 
     /**

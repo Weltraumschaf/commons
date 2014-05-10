@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20140510" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Commons Shell - Commons Shell</title>
+    <title>Commons Experimental - Commons Experimental</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -170,7 +170,7 @@
             </li>
               </ul>
         </li>
-                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                      
       <li>
     
                           <a href="project-reports.html" title="Project Reports">
@@ -197,192 +197,8 @@
                         
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Commons Shell</h1>
-<p>This module gives you helper classes to parse lines from input to determine commands and their arguments. Imagine you write a CLI application which provides sub commands such as maven. Maven provides various &#x201c;sub commands&#x201d; like <tt>mvn clean</tt> or <tt>mvn install</tt> etc. In this examples <tt>clean</tt> and <tt>install</tt> are sub commands.</p>
-<p>Consider your tool is in a shell script named <tt>mytool</tt> and it provides main commands like <tt>foo</tt>, <tt>bar</tt>, and <tt>baz</tt>. Then you expect a CLI interface like:</p>
-
-<div class="source">
-<pre>$&gt; mytool foo
-$&gt; mytool bar
-$&gt; mytool baz
-</pre></div>
-<p>The API also provides optional sub commands. Consider the main command <tt>foo</tt> provides the sub commands <tt>bla</tt> and <tt>blub</tt>. Then you expect a CLI interface like:</p>
-
-<div class="source">
-<pre>$&gt; mytool foo
-$&gt; mytool foo bla
-$&gt; mytool foo blub
-$&gt; mytool bar
-$&gt; mytool baz
-</pre></div>
-<p>The generic form of a parsed line is:</p>
-
-<div class="source">
-<pre>$&gt; tool main-command [sub-command] [arg1] .. [argN]
-</pre></div>
-<p>Better than thousand words is an example:</p>
-<p>First you need to define two enums. One for the main commads and one for the sub commands. At least you should define one sub command: The NONE it will be used for main commands without any sub command. Because enums are used it is not possible to provide a base class with the typical functionality.</p>
-
-<div class="source">
-<pre>public enum MyMainCommand implements MainCommandType {
-    FOO(&quot;foo&quot;),
-    BAR(&quot;bar&quot;),
-    BAZ(&quot;baz&quot;);
-
-    private final String literal;
-
-    private CommandMainType(final String literal) {
-        this.literal = literal;
-    }
-
-    @Override
-    public String toString() {
-        return literal;
-    }
-}
-</pre></div>
-<p>This is the minimal sub command enum, if any main command has no sub command:</p>
-
-<div class="source">
-<pre>public enum MySubCommand implements SubCommandType {
-        NONE(&quot;&quot;);
-
-        private final String literal;
-
-        private CommandSubType(final String literal) {
-            this.literal = literal;
-        }
-
-        @Override
-        public String toString() {
-            return literal;
-        }
-}
-</pre></div>
-<p>For our example we need to more enums:</p>
-
-<div class="source">
-<pre>public enum MySubCommand implements SubCommandType {
-    NONE(&quot;&quot;),
-    FOO_BLA(&quot;bla&quot;),
-    FOO_BLUB(&quot;blub&quot;);
-
-    private final String literal;
-
-    private CommandSubType(final String literal) {
-        this.literal = literal;
-    }
-
-    @Override
-    public String toString() {
-        return literal;
-    }
-}
-</pre></div>
-<p>Next we need a literal string to command enum map. So the parser knows which literal token is what command:</p>
-
-<div class="source">
-<pre>public class MyLiteralCommandMap extends LiteralCommandMap {
-
-    public DhtLiteralCommandMap() {
-        // Tell which is the default sub command, if no one is parsed
-        super(CommandSubType.NONE); 
-    }
-
-    @Override
-    protected Class&lt;MyMainCommand&gt; getMainCommandType() {
-        return MyMainCommand.class;
-    }
-
-    @Override
-    protected Class&lt;MySubCommand&gt; getSubCommandType() {
-        return MySubCommand.class;
-    }
-
-}
-</pre></div>
-<p>Now we can put everything together and parse the input:</p>
-
-<div class="source">
-<pre>final Parser parser = Parsers.newParser(new MyLiteralCommandMap());
-final String inputLine = ...; // Read the input line.
-final ShellCommand cmd = parser.parse(inputLine);
-</pre></div>
-<p>Now we can determine which cummands were parsed:</p>
-
-<div class="source">
-<pre>switch ((MyMainCommand)cmd.getMainCommand()) {
-    case FOO:
-        // ...
-        break;
-    case BAR:
-        // ...
-        break;
-    case BAZ:
-        // ...
-        break;
-}
-</pre></div>
-<p>The class <a href="apidocs/de/weltraumschaf/commons/shell/ShellCommand.html">ShellCommand</a> also provides the parsed sub command. If no sub command was parsed, then the default (given in constructor to <a href="apidocs/de/weltraumschaf/commons/shell/LiteralCommandMap.html">LiteralCommandMap</a>) is returnd. It also provides all parsed arguments as typed tokens.</p>
-<p>You can also provide a command verifier, which verifies the givne commands. E.g. it may check if a main command has an invalid sub command givne or missing or invalid arguments. In this example <a class="externalLink" href="http://hamcrest.org/">Hamcrest</a> ist used:</p>
-
-<div class="source">
-<pre>public class MyCommandVerifier implements CommandVerifier {
-    @Override
-    public void verifyCommand(final ShellCommand cmd) throws SyntaxException {
-        switch ((CommandMainType) cmd.getCommand()) {
-            // No argument, no subcommand.
-            case FOO:
-                assertNoArguments(cmd);
-                break;
-            case BAR:
-            case BAZ:
-                assertNoSubCommand(cmd);
-                assertNoArguments(cmd);
-                break;
-            default:
-                // Nothing to do here.
-        }
-    }
-
-    private void assertNoArguments(final ShellCommand cmd) throws SyntaxException {
-        try {
-            MatcherAssert.assertThat(cmd.getArguments(), is(empty()));
-        } catch (final AssertionError err) {
-            throw new SyntaxException(
-                String.format(
-                    &quot;Command '%s' does not support arguments!&quot;, 
-                    cmd.getCommand()),
-                err
-            );
-        }
-    }
-
-    private void assertNoSubCommand(final ShellCommand cmd) throws SyntaxException {
-        try {
-            MatcherAssert.assertThat(
-                cmd.getSubCommand(), 
-                is(equalTo((SubCommandType) CommandSubType.NONE)));
-        } catch (final AssertionError err) {
-            throw new SyntaxException(
-                String.format(
-                    &quot;Command '%s' does not support subcommand '%s'!&quot;, 
-                    cmd.getCommand(), 
-                    cmd.getSubCommand()),
-                err
-            );
-        }
-    }
-}
-</pre></div>
-<p>You inject this verifier to the parser:</p>
-
-<div class="source">
-<pre>final Parser parser = Parsers.newParser(new MyCommandVerifier(), new MyLiteralCommandMap());
-</pre></div>
-<div class="section">
-<h2>Other Classes<a name="Other_Classes"></a></h2>
-<p>There are some other classes for scanning and parsing the CLI input. See the <a href="apidocs/index.html">JavaDoc</a> for more information.</p></div>
+            <h1>Commons Experimental</h1>
+<p>In this submodule new ideas will be born. Everything in this module under it&#x2019;s package namespace is considered experimental, alpha and unstable. The API may change dramatically. Also it is possible that whole classes/methods may disapear if I think they are not worth to make them available in this library.</p>
                   </div>
             </div>
           </div>

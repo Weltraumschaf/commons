@@ -98,6 +98,7 @@ public final class BrowserLauncher {
      *
      * @param url URL to open.
      * @return {@code true} if started
+     * @throws IOException if no browser can be opened
      */
     private Process openLinuxBrowser(final String url) throws IOException {
         // Try x-www-browser, which is symlink to the default browser,
@@ -170,6 +171,7 @@ public final class BrowserLauncher {
      *
      * @param url URL to open.
      * @return {@code true} if started
+     * @throws IOException if browser can not be opened
      */
     private Process openMacBrowser(final String url) throws IOException {
         return execCommand(CliCommands.MAC_OS, url);
@@ -180,6 +182,7 @@ public final class BrowserLauncher {
      *
      * @param url URL to open.
      * @return {@code true} if started
+     * @throws IOException if browser can not be opened
      */
     private Process openWindowsBrowser(final String url) throws IOException {
         return execCommand(CliCommands.WINDOWS, url);
@@ -287,12 +290,17 @@ public final class BrowserLauncher {
             this.command = Validate.notEmpty(command);
         }
 
+        /**
+         * Returns the bare command.
+         *
+         * @return never {@code null} or empty
+         */
         String getCommand() {
             return command;
         }
 
         /**
-         * Returns the command appended with the argumet string with a space before.
+         * Returns the command appended with the argument string with a space before.
          *
          * @param arguments must not be {@code null} or empty
          * @return never {@code null} or empty

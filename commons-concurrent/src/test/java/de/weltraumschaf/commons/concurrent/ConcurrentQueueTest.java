@@ -11,7 +11,10 @@
  */
 package de.weltraumschaf.commons.concurrent;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,32 +34,116 @@ public class ConcurrentQueueTest {
     }
 
     @Test
-    @Ignore
     public void add() {
+        sut.add("foo");
+        assertThat(sut.isEmpty(), is(false));
 
+        sut.add("bar");
+        assertThat(sut.isEmpty(), is(false));
     }
 
     @Test
-    @Ignore
     public void get() {
+        assertThat(sut.get(), is(nullValue()));
 
+        sut.add("foo");
+        assertThat(sut.get(), is(equalTo("foo")));
+        assertThat(sut.isEmpty(), is(true));
+
+        assertThat(sut.get(), is(nullValue()));
+
+        sut.add("foo");
+        sut.add("bar");
+        sut.add("baz");
+
+        assertThat(sut.get(), is(equalTo("foo")));
+        assertThat(sut.isEmpty(), is(false));
+
+        assertThat(sut.get(), is(equalTo("bar")));
+        assertThat(sut.isEmpty(), is(false));
+
+        assertThat(sut.get(), is(equalTo("baz")));
+        assertThat(sut.isEmpty(), is(true));
+        assertThat(sut.get(), is(nullValue()));
     }
 
     @Test
-    @Ignore
     public void testHashCode() {
+        assertThat(sut.hashCode(), is(sut.hashCode()));
 
+        final Queue<String> otherSut = Concurrent.newQueue();
+
+        sut.add("foo");
+        assertThat(sut.hashCode(), is(sut.hashCode()));
+        assertThat(sut.hashCode(), is(not(otherSut.hashCode())));
+
+        sut.add("bar");
+        assertThat(sut.hashCode(), is(sut.hashCode()));
+        assertThat(sut.hashCode(), is(not(otherSut.hashCode())));
+
+        otherSut.add("foo");
+        assertThat(sut.hashCode(), is(sut.hashCode()));
+        assertThat(sut.hashCode(), is(not(otherSut.hashCode())));
+
+        otherSut.add("bar");
+        assertThat(sut.hashCode(), is(sut.hashCode()));
+        assertThat(sut.hashCode(), is(otherSut.hashCode()));
+
+        otherSut.get();
+        otherSut.get();
+        // reverse order
+        otherSut.add("bar");
+        otherSut.add("foo");
+        assertThat(sut.hashCode(), is(otherSut.hashCode()));
     }
 
     @Test
-    @Ignore
     public void testEquals() {
+        assertThat(sut.equals(sut), is(true));
 
+        final Queue<String> otherSut = Concurrent.newQueue();
+        assertThat(sut.equals(otherSut), is(true));
+        assertThat(otherSut.equals(sut), is(true));
+
+        sut.add("foo");
+        assertThat(sut.equals(otherSut), is(false));
+        assertThat(otherSut.equals(sut), is(false));
+
+        sut.add("bar");
+        assertThat(sut.equals(otherSut), is(false));
+        assertThat(otherSut.equals(sut), is(false));
+
+        otherSut.add("foo");
+        assertThat(sut.equals(otherSut), is(false));
+        assertThat(otherSut.equals(sut), is(false));
+
+        otherSut.add("bar");
+        assertThat(sut.equals(otherSut), is(true));
+        assertThat(otherSut.equals(sut), is(true));
+
+        otherSut.get();
+        otherSut.get();
+        // reverse order
+        otherSut.add("bar");
+        otherSut.add("foo");
+        assertThat(sut.equals(otherSut), is(false));
+        assertThat(otherSut.equals(sut), is(false));
+
+        assertThat(sut.equals(null), is(false));
+        assertThat(sut.equals(""), is(false));
     }
 
     @Test
-    @Ignore
     public void testToString() {
+        assertThat(sut.toString(), is(equalTo("ConcurrentQueue[]")));
 
+        sut.add("foo");
+        assertThat(sut.toString(), is(equalTo("ConcurrentQueue[foo]")));
+
+        sut.add("bar");
+        assertThat(sut.toString(), is(equalTo("ConcurrentQueue[foo, bar]")));
+
+        sut.add("baz");
+        assertThat(sut.toString(), is(equalTo("ConcurrentQueue[foo, bar, baz]")));
     }
 }

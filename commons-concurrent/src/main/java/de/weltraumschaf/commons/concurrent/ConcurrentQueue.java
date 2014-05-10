@@ -88,11 +88,11 @@ final class ConcurrentQueue<E> implements Queue<E> {
 
             if (null == currentHead.next) {
                 if (head.compareAndSet(currentHead, currentHead.next) && tail.compareAndSet(tail.get(), null)) {
-                    return currentHead.element;
+                    return currentHead.value;
                 }
             } else {
                 if (head.compareAndSet(currentHead, currentHead.next)) {
-                    return currentHead.element;
+                    return currentHead.value;
                 }
             }
         }
@@ -101,17 +101,44 @@ final class ConcurrentQueue<E> implements Queue<E> {
 
     @Override
     public int hashCode() {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        final Entry<E> currentTop = head.get();
+
+        if (null == currentTop) {
+            return 0;
+        }
+
+        return currentTop.hashCode();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        throw new UnsupportedOperationException("Not implemented yet!");
+    public boolean equals(final Object obj) {
+        if (!(obj instanceof ConcurrentQueue)) {
+            return false;
+        }
+
+        final ConcurrentQueue other = (ConcurrentQueue) obj;
+        return Objects.equal(head.get(), other.head.get()) && Objects.equal(tail.get(), other.tail.get());
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        final StringBuilder buffer = new StringBuilder();
+        buffer.append(getClass().getSimpleName()).append('[');
+
+        Entry<E> element = head.get();
+        boolean first = true;
+
+        while (null != element) {
+            if (!first) {
+                buffer.append(", ");
+            }
+
+            buffer.append(element.value);
+            element = element.next;
+            first = false;
+        }
+
+        return buffer.append(']').toString();
     }
 
     /**
@@ -126,7 +153,7 @@ final class ConcurrentQueue<E> implements Queue<E> {
         /**
          * Entry element.
          */
-        private final T element;
+        private final T value;
         /**
          * Link to next entry, maybe {@code null}.
          */
@@ -139,12 +166,12 @@ final class ConcurrentQueue<E> implements Queue<E> {
          */
         Entry(final T element) {
             super();
-            this.element = element;
+            this.value = element;
         }
 
         @Override
         public int hashCode() {
-            return Objects.hashCode(element, next);
+            return Objects.hashCode(value, next);
         }
 
         @Override
@@ -154,7 +181,7 @@ final class ConcurrentQueue<E> implements Queue<E> {
             }
 
             final Entry other = (Entry) obj;
-            return Objects.equal(element, other.element) && Objects.equal(next, other.next);
+            return Objects.equal(value, other.value) && Objects.equal(next, other.next);
         }
 
         @Override
@@ -162,7 +189,7 @@ final class ConcurrentQueue<E> implements Queue<E> {
             final String nextHashcode = (null == next)
                     ? "null"
                     : Integer.toHexString(next.hashCode());
-            return String.format("%s (%s -> %s)", element, Integer.toHexString(hashCode()), nextHashcode);
+            return String.format("%s (%s -> %s)", value, Integer.toHexString(hashCode()), nextHashcode);
         }
 
     }

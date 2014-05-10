@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ApplicationException.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Application</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.application</a> &gt; <span class="el_source">ApplicationException.java</span></div><h1>ApplicationException.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.application;
+
+import de.weltraumschaf.commons.system.ExitCode;
+
+/**
+ * Used to signal abnormal exceptional application states.
+ *
+ * &lt;p&gt;
+ * If an exception if this type is thrown should cause program termination with the exit code.
+ * &lt;/p&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public class ApplicationException extends Exception {
+
+    /**
+     * Exit code used to return to JVM.
+     */
+    private final ExitCode exitCode;
+
+    /**
+     * Dedicated constructor.
+     *
+     * @param exitCode must not be {@code null}
+     * @param message passed to {@link RuntimeException#RuntimeException(java.lang.String, java.lang.Throwable)}
+     * @param cause passed to {@link RuntimeException#RuntimeException(java.lang.String, java.lang.Throwable)}
+     */
+    public ApplicationException(final ExitCode exitCode, final String message, final Throwable cause) {
+<span class="nc" id="L41">        super(message, cause);</span>
+
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (null == exitCode) {</span>
+<span class="nc" id="L44">            throw new NullPointerException(&quot;Parameter 'exitCode' must not be null!&quot;);</span>
+        }
+
+<span class="nc" id="L47">        this.exitCode = exitCode;</span>
+<span class="nc" id="L48">    }</span>
+
+    /**
+     * Get program exit code.
+     *
+     * @return never {@code null}
+     */
+    public ExitCode getExitCode() {
+<span class="nc" id="L56">        return exitCode;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

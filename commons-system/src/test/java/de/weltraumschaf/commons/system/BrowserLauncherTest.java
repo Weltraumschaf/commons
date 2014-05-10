@@ -38,12 +38,26 @@ public class BrowserLauncherTest {
     @Test
     public void CliCommands_getCommand_windows() {
         assertThat(
+                BrowserLauncher.CliCommands.WINDOWS.getCommand(),
+                is(equalTo("cmd /c start")));
+    }
+
+    @Test
+    public void CliCommands_getCommand_windowsWithArguments() {
+        assertThat(
                 BrowserLauncher.CliCommands.WINDOWS.getCommand("foobar"),
                 is(equalTo("cmd /c start foobar")));
     }
 
     @Test
     public void CliCommands_getCommand_macOsX() {
+        assertThat(
+                BrowserLauncher.CliCommands.MAC_OS.getCommand(),
+                is(equalTo("open")));
+    }
+
+    @Test
+    public void CliCommands_getCommand_macOsXwithArguments() {
         assertThat(
                 BrowserLauncher.CliCommands.MAC_OS.getCommand("foobar"),
                 is(equalTo("open foobar")));
@@ -52,12 +66,26 @@ public class BrowserLauncherTest {
     @Test
     public void CliCommands_getCommand_GNU_X_wwwBrowser() {
         assertThat(
+                BrowserLauncher.CliCommands.GNU_X_WWW_BROWSER.getCommand(),
+                is(equalTo("x-www-browser")));
+    }
+
+    @Test
+    public void CliCommands_getCommand_GNU_X_wwwBrowserWithArgumnes() {
+        assertThat(
                 BrowserLauncher.CliCommands.GNU_X_WWW_BROWSER.getCommand("foobar"),
                 is(equalTo("x-www-browser foobar")));
     }
 
     @Test
     public void CliCommands_getCommand_GNUR_firefox() {
+        assertThat(
+                BrowserLauncher.CliCommands.GNU_FIREFOX.getCommand(),
+                is(equalTo("firefox")));
+    }
+
+    @Test
+    public void CliCommands_getCommand_GNUR_firefoxWithArgumnes() {
         assertThat(
                 BrowserLauncher.CliCommands.GNU_FIREFOX.getCommand("foobar"),
                 is(equalTo("firefox foobar")));
@@ -66,12 +94,26 @@ public class BrowserLauncherTest {
     @Test
     public void CliCommands_getCommand_GNU_mozilla() {
         assertThat(
+                BrowserLauncher.CliCommands.GNU_MOZILLA.getCommand(),
+                is(equalTo("mozilla")));
+    }
+
+    @Test
+    public void CliCommands_getCommand_GNU_mozillaWithArgumnes() {
+        assertThat(
                 BrowserLauncher.CliCommands.GNU_MOZILLA.getCommand("foobar"),
                 is(equalTo("mozilla foobar")));
     }
 
     @Test
     public void CliCommands_getCommand_GNU_konqueror() {
+        assertThat(
+                BrowserLauncher.CliCommands.GNU_KONQUEROR.getCommand(),
+                is(equalTo("konqueror")));
+    }
+
+    @Test
+    public void CliCommands_getCommand_GNU_konquerorWithArgumnes() {
         assertThat(
                 BrowserLauncher.CliCommands.GNU_KONQUEROR.getCommand("foobar"),
                 is(equalTo("konqueror foobar")));
@@ -80,7 +122,14 @@ public class BrowserLauncherTest {
     @Test
     public void CliCommands_getCommand_UNIX_which() {
         assertThat(
-                BrowserLauncher.CliCommands.GNU_KONQUEROR.getCommand("foobar"),
+                BrowserLauncher.CliCommands.UNIX_WHICH.getCommand(),
+                is(equalTo("which")));
+    }
+
+    @Test
+    public void CliCommands_getCommand_UNIX_whichWithArgumnes() {
+        assertThat(
+                BrowserLauncher.CliCommands.UNIX_WHICH.getCommand("foobar"),
                 is(equalTo("which foobar")));
     }
 

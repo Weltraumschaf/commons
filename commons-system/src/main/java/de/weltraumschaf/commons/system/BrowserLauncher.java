@@ -33,35 +33,6 @@ import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 public final class BrowserLauncher {
 
     /**
-     * Windows command to open an URL.
-     */
-    private static final String WINDOWS_CMD = "cmd /c start";
-
-    /**
-     * Mac OS command to open an URL.
-     */
-    private static final String MAC_OS_CMD = "open";
-
-    /**
-     * Default Linux command to open an URL.
-     */
-    private static final String GNU_X_WWW_BROWSER_CMD = "x-www-browser";
-
-    /**
-     * Firefox Linux command to open an URL.
-     */
-    private static final String GNU_FIREFOX_CMD = "firefox";
-
-    /**
-     * Mozilla Linux command to open an URL.
-     */
-    private static final String GNU_MOZILLA_CMD = "mozilla";
-    /**
-     * Konqueror Linux command to open an URL.
-     */
-    private static final String GNU_KONQUEROR_CMD = "konqueror";
-
-    /**
      * Determined operating system.
      */
     private final OperatingSystem os;
@@ -102,24 +73,23 @@ public final class BrowserLauncher {
      */
     public void openBrowser(final String url) {
         Validate.notEmpty(url, "url");
-        boolean started = false;
 
-        switch (os) {
-            case LINUX:
-                started = openLinuxBrowser(url);
-                break;
-            case MACOSX:
-                started = openMacBrowser(url);
-                break;
-            case WINDOWS:
-                started = openWindowsBrowser(url);
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported OS. Please go to " + url);
-        }
-
-        if (!started) {
-            throw new RuntimeException("Failed to open browser. Please go to " + url);
+        try {
+            switch (os) {
+                case LINUX:
+                    openLinuxBrowser(url);
+                    break;
+                case MACOSX:
+                    openMacBrowser(url);
+                    break;
+                case WINDOWS:
+                    openWindowsBrowser(url);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Unsupported OS. Please open URL by hand: " + url);
+            }
+        } catch (final IOException ex) {
+            throw new RuntimeException("Failed to open browser. Please go to " + url, ex);
         }
     }
 
@@ -129,13 +99,13 @@ public final class BrowserLauncher {
      * @param url URL to open.
      * @return {@code true} if started
      */
-    private boolean openLinuxBrowser(final String url) {
+    private Process openLinuxBrowser(final String url) throws IOException {
         // See if the default browser is Konqueror by resolving the symlink.
         boolean isDefaultKonqueror = false;
 
         try {
             // Find out the location of the x-www-browser link from path.
-            final Process process = execCommand(CliCommands.UNIX_WHICH, GNU_X_WWW_BROWSER_CMD);
+            final Process process = execCommand(CliCommands.UNIX_WHICH, CliCommands.GNU_X_WWW_BROWSER.getCommand());
             final BufferedInputStream ins = new BufferedInputStream(process.getInputStream());
             @SuppressWarnings(
                     value = "DM_DEFAULT_ENCODING",
@@ -151,7 +121,7 @@ public final class BrowserLauncher {
                 final File file = new File(defaultLinkPath);
                 final String canonical = file.getCanonicalPath();
 
-                if (canonical.contains(GNU_KONQUEROR_CMD)) {
+                if (canonical.contains(CliCommands.GNU_KONQUEROR.getCommand())) {
                     isDefaultKonqueror = true;
                 }
             }
@@ -163,38 +133,30 @@ public final class BrowserLauncher {
         // except if we found that it is Konqueror.
         if (!isDefaultKonqueror) {
             try {
-                execCommand(CliCommands.GNU_X_WWW_BROWSER, url);
-                return true;
+                return execCommand(CliCommands.GNU_X_WWW_BROWSER, url);
             } catch (final IOException ex) { // NOPMD
                 // Try the next one.
             }
         }
 
-        // Try firefox
         try {
-            execCommand(CliCommands.GNU_FIREFOX, url);
-            return true;
+            return execCommand(CliCommands.GNU_FIREFOX, url);
         } catch (final IOException ex) { // NOPMD
             // Try the next one.
         }
 
-        // Try mozilla
         try {
-            execCommand(CliCommands.GNU_MOZILLA, url);
-            return true;
+            return execCommand(CliCommands.GNU_MOZILLA, url);
+        } catch (final IOException ex) { // NOPMD
+            // Try the next one.
+        }
+        try {
+            return execCommand(CliCommands.GNU_KONQUEROR, url);
         } catch (final IOException ex) { // NOPMD
             // Try the next one.
         }
 
-        // Try konqueror
-        try {
-            execCommand(CliCommands.GNU_KONQUEROR, url);
-            return true;
-        } catch (final IOException ex) { // NOPMD
-            // Try the next one.
-        }
-
-        return false;
+        throw new IOException();
     }
 
     /**
@@ -203,14 +165,8 @@ public final class BrowserLauncher {
      * @param url URL to open.
      * @return {@code true} if started
      */
-    private boolean openMacBrowser(final String url) {
-        try {
-            execCommand(CliCommands.MAC_OS, url);
-        } catch (final IOException e) {
-            return false;
-        }
-
-        return true;
+    private Process openMacBrowser(final String url) throws IOException {
+        return execCommand(CliCommands.MAC_OS, url);
     }
 
     /**
@@ -219,14 +175,8 @@ public final class BrowserLauncher {
      * @param url URL to open.
      * @return {@code true} if started
      */
-    private boolean openWindowsBrowser(final String url) {
-        try {
-            execCommand(CliCommands.WINDOWS, url);
-        } catch (final IOException e) {
-            return false;
-        }
-
-        return true;
+    private Process openWindowsBrowser(final String url) throws IOException {
+        return execCommand(CliCommands.WINDOWS, url);
     }
 
     /**
@@ -291,31 +241,31 @@ public final class BrowserLauncher {
         /**
          * Windows command to open an URL.
          */
-        WINDOWS("cmd /c start %s"),
+        WINDOWS("cmd /c start"),
         /**
          * Mac OS command to open an URL.
          */
-        MAC_OS("open %s"),
+        MAC_OS("open"),
         /**
          * Default Linux command to open an URL.
          */
-        GNU_X_WWW_BROWSER("x-www-browser %s"),
+        GNU_X_WWW_BROWSER("x-www-browser"),
         /**
          * Firefox Linux command to open an URL.
          */
-        GNU_FIREFOX("firefox %s"),
+        GNU_FIREFOX("firefox"),
         /**
          * Mozilla Linux command to open an URL.
          */
-        GNU_MOZILLA("mozilla %s"),
+        GNU_MOZILLA("mozilla"),
         /**
          * Konqueror Linux command to open an URL.
          */
-        GNU_KONQUEROR("konqueror %s"),
+        GNU_KONQUEROR("konqueror"),
         /**
          * Command to find a binary on UNIX systems.
          */
-        UNIX_WHICH("which %s");
+        UNIX_WHICH("which");
 
         /**
          * Holds the command format string.
@@ -331,6 +281,10 @@ public final class BrowserLauncher {
             this.command = Validate.notEmpty(command);
         }
 
+        String getCommand() {
+            return command;
+        }
+
         /**
          * Returns the command appended with the argumet string with a space before.
          *
@@ -338,7 +292,7 @@ public final class BrowserLauncher {
          * @return never {@code null} or empty
          */
         String getCommand(final String arguments) {
-            return String.format(command, Validate.notEmpty(arguments));
+            return String.format("%s %s", command, Validate.notEmpty(arguments));
         }
 
     }

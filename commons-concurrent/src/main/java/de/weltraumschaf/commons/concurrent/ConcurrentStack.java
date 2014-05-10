@@ -21,8 +21,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * </p>
  *
  * <pre>
- * get()                                                     add()
- * HEAD    Node_0        Node_1        Node_2        Node_3     TAIL
+ * TOP     Node_0        Node_1        Node_2        Node_3     Node_4
  * null    next->        next->        next->        next->     null
  * </pre>
  *

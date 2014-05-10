@@ -51,13 +51,13 @@
     <body>
         <links>
             <item name="Weltraumschaf" href="http://www.weltraumschaf.de"/>
-            <item name="Continious Integration" href="http://ci.weltraumschaf.de/job/Commons%20Master/"/>
+            <item name="Continious Integration" href="http://ci.weltraumschaf.de/job/Commons/"/>
         </links>
-        
+
         <menu name="${project.name}" inherit="top">
             <item name="Home" href="index.html"/>
-            <item name="History" href="history.html"/>            
-            <item name="Versions" href="versions.html"/>            
+            <item name="History" href="history.html"/>
+            <item name="Versions" href="versions.html"/>
         </menu>
         <menu ref="modules" inherit="top"/>
         <menu name="Reports" ref="reports" inherit="bottom  "/>

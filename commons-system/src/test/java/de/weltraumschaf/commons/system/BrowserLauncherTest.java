@@ -14,6 +14,7 @@ package de.weltraumschaf.commons.system;
 import java.io.IOException;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -176,5 +177,29 @@ public class BrowserLauncherTest {
         sut.openBrowser("http://www.weltramschaf.de");
 
         verify(executor).exec("open http://www.weltramschaf.de");
+    }
+
+    @Test
+    @Ignore
+    public void openUrl_xWwwBrowser() throws IOException {
+
+    }
+
+    @Test
+    @Ignore
+    public void openUrl_firefox() throws IOException {
+
+    }
+
+    @Test
+    @Ignore
+    public void openUrl_mozilla() throws IOException {
+
+    }
+
+    @Test
+    @Ignore
+    public void openUrl_konqueror() throws IOException {
+
     }
 }

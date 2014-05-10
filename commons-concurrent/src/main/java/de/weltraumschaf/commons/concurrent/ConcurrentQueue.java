@@ -16,8 +16,9 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Queue implemented with compare-and-set algorithm from Brian Goetz.
- *
+ * <p>
  * Implemented with a linked list.
+ * </p>
  *
  * <pre>
  * get()                                                     add()
@@ -26,10 +27,10 @@ import java.util.concurrent.atomic.AtomicReference;
  * </pre>
  *
  * @since 1.0.0
- * @param <E> type of stack entries
+ * @param <E> type of queue entries
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-class ConcurrentQueue<E> implements Queue<E> {
+final class ConcurrentQueue<E> implements Queue<E> {
 
     /**
      * References the head of the linked list.

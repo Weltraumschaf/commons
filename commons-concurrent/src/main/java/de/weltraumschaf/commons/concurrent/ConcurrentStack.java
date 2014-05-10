@@ -16,14 +16,21 @@ import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Stack implemented with compare-and-set algorithm from Brian Goetz.
- *
+ * <p>
  * Implemented with a linked list.
+ * </p>
+ *
+ * <pre>
+ * get()                                                     add()
+ * HEAD    Node_0        Node_1        Node_2        Node_3     TAIL
+ * null    next->        next->        next->        next->     null
+ * </pre>
  *
  * @since 1.0.0
  * @param <E> type of stack entries
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-class ConcurrentStack<E> implements Stack<E> {
+final class ConcurrentStack<E> implements Stack<E> {
 
     /**
      * References the top of the stack.

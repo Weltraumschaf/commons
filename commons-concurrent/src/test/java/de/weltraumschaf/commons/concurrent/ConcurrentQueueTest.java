@@ -11,6 +11,8 @@
  */
 package de.weltraumschaf.commons.concurrent;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -21,10 +23,11 @@ import org.junit.Test;
  */
 public class ConcurrentQueueTest {
 
-    @Test
-    @Ignore
-    public void isEmpty() {
+    private final Queue<String> sut = Concurrent.newQueue();
 
+    @Test
+    public void isEmpty() {
+        assertThat(sut.isEmpty(), is(true));
     }
 
     @Test

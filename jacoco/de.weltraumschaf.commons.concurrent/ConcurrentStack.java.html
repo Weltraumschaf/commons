@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ConcurrentStack.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Concurrent</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.concurrent</a> &gt; <span class="el_source">ConcurrentStack.java</span></div><h1>ConcurrentStack.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+
+package de.weltraumschaf.commons.concurrent;
+
+import java.util.concurrent.atomic.AtomicReference;
+
+/**
+ * Stack implemented with compare-and-set algorithm from Brian Goetz.
+ *
+ * Implemented with a linked list.
+ *
+ * @since 1.0.0
+ * @param &lt;E&gt; type of stack entries
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+<span class="fc" id="L26">class ConcurrentStack&lt;E&gt; implements Stack&lt;E&gt; {</span>
+
+    /**
+     * References the top of the stack.
+     */
+<span class="fc" id="L31">    private final AtomicReference&lt;Entry&lt;E&gt;&gt; top = new AtomicReference&lt;Entry&lt;E&gt;&gt;();</span>
+
+    @Override
+    public boolean isEmpty() {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        return null == top.get();</span>
+    }
+
+    @Override
+    public E peek() {
+<span class="nc" id="L40">        final Entry&lt;E&gt; currentTop = top.get();</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        return null == currentTop</span>
+            ? null
+            : currentTop.element;
+    }
+
+    @Override
+    public E pop() {
+        Entry&lt;E&gt; currentTop;
+
+        while (true) {
+<span class="fc" id="L51">            currentTop = top.get();</span>
+
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (null == currentTop) {</span>
+<span class="fc" id="L54">                return null;</span>
+            }
+
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">            if (top.compareAndSet(currentTop, currentTop.next)) {</span>
+<span class="fc" id="L58">                return currentTop.element;</span>
+            }
+        }
+    }
+
+    @Override
+    public void push(final E element) {
+        while (true) {
+<span class="fc" id="L66">            final Entry&lt;E&gt; currentTop = top.get();</span>
+
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">            if (top.compareAndSet(currentTop, new Entry&lt;E&gt;(element, currentTop))) {</span>
+<span class="fc" id="L69">                break;</span>
+            }
+<span class="nc" id="L71">        }</span>
+<span class="fc" id="L72">    }</span>
+
+    /**
+     * Linked list entry.
+     *
+     * Not used outside the class.
+     *
+     * @param &lt;T&gt; type of entry object
+     */
+<span class="fc" id="L81">    private static class Entry&lt;T&gt; {</span>
+        /**
+         * Entry element.
+         */
+        private final T element;
+        /**
+         * Link to next entry, maybe {@code null}.
+         */
+        private final Entry&lt;T&gt; next;
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param element entry element
+         * @param next next element
+         */
+        Entry(final T element, final Entry&lt;T&gt; next) {
+<span class="fc" id="L98">            super();</span>
+<span class="fc" id="L99">            this.element = element;</span>
+<span class="fc" id="L100">            this.next = next;</span>
+<span class="fc" id="L101">        }</span>
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Concurrent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Concurrent</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.concurrent</a> &gt; <span class="el_source">Concurrent.java</span></div><h1>Concurrent.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+
+package de.weltraumschaf.commons.concurrent;
+
+/**
+ * Factory to create implementations.
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class Concurrent {
+
+    /**
+     * Hidden for utility class.
+     */
+    private Concurrent() {
+<span class="nc" id="L27">        super();</span>
+<span class="nc" id="L28">        throw new UnsupportedOperationException(&quot;Must not be called!&quot;);</span>
+    }
+
+    /**
+     * Create a stack.
+     *
+     * @param &lt;E&gt; type of stack entries
+     * @return new instance
+     */
+    public static &lt;E&gt; Stack&lt;E&gt; newStack() {
+<span class="fc" id="L38">        return new ConcurrentStack&lt;E&gt;();</span>
+    }
+
+    /**
+     * Create a queue.
+     *
+     * @param &lt;E&gt; type of queue entries
+     * @return new instance
+     */
+    public static &lt;E&gt; Queue&lt;E&gt; newQueue() {
+<span class="fc" id="L48">        return new ConcurrentQueue&lt;E&gt;();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

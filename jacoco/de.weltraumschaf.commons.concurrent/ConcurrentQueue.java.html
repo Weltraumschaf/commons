@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ConcurrentQueue.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Concurrent</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.concurrent</a> &gt; <span class="el_source">ConcurrentQueue.java</span></div><h1>ConcurrentQueue.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+
+package de.weltraumschaf.commons.concurrent;
+
+import de.weltraumschaf.commons.guava.Objects;
+import java.util.concurrent.atomic.AtomicReference;
+
+/**
+ * Queue implemented with compare-and-set algorithm from Brian Goetz.
+ *
+ * Implemented with a linked list.
+ *
+ * &lt;pre&gt;
+ * get()                                                     add()
+ * HEAD    Node_0        Node_1        Node_2        Node_3     TAIL
+ * null    next-&gt;        next-&gt;        next-&gt;        next-&gt;     null
+ * &lt;/pre&gt;
+ *
+ * @since 1.0.0
+ * @param &lt;E&gt; type of stack entries
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+<span class="fc" id="L33">class ConcurrentQueue&lt;E&gt; implements Queue&lt;E&gt; {</span>
+
+    /**
+     * References the head of the linked list.
+     */
+<span class="fc" id="L38">    private final AtomicReference&lt;Entry&lt;E&gt;&gt; head = new AtomicReference&lt;Entry&lt;E&gt;&gt;();</span>
+    /**
+     * References the tail of the linked list.
+     */
+<span class="fc" id="L42">    private final AtomicReference&lt;Entry&lt;E&gt;&gt; tail = new AtomicReference&lt;Entry&lt;E&gt;&gt;();</span>
+
+    @Override
+    public boolean isEmpty() {
+<span class="pc bpc" id="L46" title="1 of 4 branches missed.">        return null == head.get() &amp;&amp; null == tail.get();</span>
+    }
+
+    @Override
+    public void add(E element) {
+<span class="fc" id="L51">        final Entry&lt;E&gt; node = new Entry&lt;E&gt;(element);</span>
+
+        while (true) {
+<span class="fc bfc" id="L54" title="All 2 branches covered.">            if (null == head.get()) {</span>
+                // First element.
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">                if (head.compareAndSet(null, node)) {</span>
+<span class="fc" id="L57">                    break;</span>
+                }
+            } else {
+<span class="fc" id="L60">                final Entry&lt;E&gt; currentTail = tail.get();</span>
+
+<span class="fc bfc" id="L62" title="All 2 branches covered.">                if (null == currentTail) {</span>
+<span class="fc" id="L63">                    final Entry&lt;E&gt; currentHead = head.get();</span>
+<span class="fc" id="L64">                    currentHead.next = node;</span>
+
+<span class="pc bpc" id="L66" title="2 of 4 branches missed.">                    if (tail.compareAndSet(null, node) &amp;&amp; head.compareAndSet(currentHead, currentHead)) {</span>
+<span class="fc" id="L67">                        break;</span>
+                    }
+<span class="nc" id="L69">                } else {</span>
+<span class="fc" id="L70">                    currentTail.next = node;</span>
+
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">                    if (tail.compareAndSet(currentTail, node)) {</span>
+<span class="fc" id="L73">                        break;</span>
+                    }
+                }
+
+
+<span class="nc" id="L78">            }</span>
+        }
+<span class="fc" id="L80">    }</span>
+
+    @Override
+    public E get() {
+        while (true) {
+<span class="fc" id="L85">            final Entry&lt;E&gt; currentHead = head.get();</span>
+
+<span class="fc bfc" id="L87" title="All 2 branches covered.">            if (null == currentHead) {</span>
+<span class="fc" id="L88">                return null;</span>
+            }
+
+<span class="fc bfc" id="L91" title="All 2 branches covered.">            if (null == currentHead.next) {</span>
+<span class="pc bpc" id="L92" title="2 of 4 branches missed.">                if (head.compareAndSet(currentHead, currentHead.next) &amp;&amp; tail.compareAndSet(tail.get(), null)) {</span>
+<span class="fc" id="L93">                    return currentHead.element;</span>
+                }
+            } else {
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">                if (head.compareAndSet(currentHead, currentHead.next)) {</span>
+<span class="fc" id="L97">                    return currentHead.element;</span>
+                }
+            }
+<span class="nc" id="L100">        }</span>
+
+    }
+
+    /**
+     * Linked list entry.
+     *
+     * Not used outside the class.
+     *
+     * @param &lt;T&gt; type of entry object
+     */
+<span class="fc" id="L111">    private static class Entry&lt;T&gt; {</span>
+        /**
+         * Entry element.
+         */
+        private final T element;
+        /**
+         * Link to next entry, maybe {@code null}.
+         */
+        private Entry&lt;T&gt; next;
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param element entry element
+         */
+        Entry(final T element) {
+<span class="fc" id="L127">            super();</span>
+<span class="fc" id="L128">            this.element = element;</span>
+<span class="fc" id="L129">        }</span>
+
+        @Override
+        public int hashCode() {
+<span class="nc" id="L133">            return Objects.hashCode(element, next);</span>
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            if (!(obj instanceof Entry)) {</span>
+<span class="nc" id="L139">                return false;</span>
+            }
+
+<span class="nc" id="L142">            final Entry other = (Entry) obj;</span>
+<span class="nc bnc" id="L143" title="All 4 branches missed.">            return Objects.equal(element, other.element) &amp;&amp; Objects.equal(next, other.next);</span>
+        }
+
+        @Override
+        public String toString() {
+<span class="nc bnc" id="L148" title="All 2 branches missed.">            final String nextHashcode = (null == next)</span>
+                    ? &quot;null&quot;
+                    : Integer.toHexString(next.hashCode());
+<span class="nc" id="L151">            return String.format(&quot;%s (%s -&gt; %s)&quot;, element, Integer.toHexString(hashCode()), nextHashcode);</span>
+        }
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

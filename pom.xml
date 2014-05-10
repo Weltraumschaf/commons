@@ -45,10 +45,16 @@
         <maven>${maven.version}</maven>
     </prerequisites>
 
+    <scm>
+        <connection>scm:git:git://github.com/Weltraumschaf/commons.git</connection>
+        <developerConnection>scm:git:git@github.com:Weltraumschaf/commons.git</developerConnection>
+        <url>https://github.com/Weltraumschaf/commons.git</url>
+    </scm>
+
     <distributionManagement>
         <site>
             <id>github-project-site</id>
-            <url>gitsite:git@github.com/Weltraumschaf/${github.name}.git</url>
+            <url>gitsite:git@github.com/Weltraumschaf/commons.git</url>
         </site>
     </distributionManagement>
 

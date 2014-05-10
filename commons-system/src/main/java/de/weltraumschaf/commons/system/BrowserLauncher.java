@@ -92,12 +92,12 @@ public final class BrowserLauncher {
     /**
      * Open browser on specified URL.
      * <p>
-     * This method throws an {@link IllegalArgumentException} if the OS (given by constructor)
-     * is not supported.
+     * This method throws an {@link IllegalArgumentException} if the OS (given by constructor) is not supported.
      * </p>
      * <p>
      * This method throws an {@link RuntimeException} if the browser can't be started.
      * </p>
+     *
      * @param url URL to open, must not be {@code null} or empty
      */
     public void openBrowser(final String url) {
@@ -138,8 +138,8 @@ public final class BrowserLauncher {
             final Process process = execCommand("which", GNU_X_WWW_BROWSER_CMD);
             final BufferedInputStream ins = new BufferedInputStream(process.getInputStream());
             @SuppressWarnings(
-                value = "DM_DEFAULT_ENCODING",
-                justification = "We readfrom process IO, so hopefully this uses the platform encoding.")
+                    value = "DM_DEFAULT_ENCODING",
+                    justification = "We readfrom process IO, so hopefully this uses the platform encoding.")
             final BufferedReader bufreader = new BufferedReader(new InputStreamReader(ins));
             final String defaultLinkPath = bufreader.readLine();
             ins.close();
@@ -161,7 +161,7 @@ public final class BrowserLauncher {
 
         // Try x-www-browser, which is symlink to the default browser,
         // except if we found that it is Konqueror.
-        if (! isDefaultKonqueror) {
+        if (!isDefaultKonqueror) {
             try {
                 execCommand(GNU_X_WWW_BROWSER_CMD, url);
                 return true;
@@ -239,6 +239,86 @@ public final class BrowserLauncher {
      */
     private Process execCommand(final String cmd, final String argument) throws IOException {
         return runtime.exec(
-            String.format("%s %s", Validate.notEmpty(cmd, "cmd"), Validate.notEmpty(argument, "argument")));
+                String.format("%s %s", Validate.notEmpty(cmd, "cmd"), Validate.notEmpty(argument, "argument")));
+    }
+
+    interface Executor {
+
+        public Process exec(String command) throws IOException;
+    }
+
+    private static final class DefaultExecutor implements Executor {
+
+        /**
+         * To executes external commands.
+         */
+        private final Runtime runtime;
+
+        public DefaultExecutor(final Runtime runtime) {
+            super();
+            this.runtime = Validate.notNull(runtime);
+        }
+
+        @Override
+        public Process exec(final String command) throws IOException {
+            return runtime.exec(command);
+        }
+
+    }
+
+    /**
+     * Collects browser open commands for the CLI of various operating systems and browsers.
+     */
+    static enum BrowserCommands {
+
+        /**
+         * Windows command to open an URL.
+         */
+        WINDOWS("cmd /c start %s"),
+        /**
+         * Mac OS command to open an URL.
+         */
+        MAC_OS("open %s"),
+        /**
+         * Default Linux command to open an URL.
+         */
+        GNU_X_WWW_BROWSER("x-www-browser %s"),
+        /**
+         * Firefox Linux command to open an URL.
+         */
+        GNU_FIREFOX("firefox %s"),
+        /**
+         * Mozilla Linux command to open an URL.
+         */
+        GNU_MOZILLA("mozilla %s"),
+        /**
+         * Konqueror Linux command to open an URL.
+         */
+        GNU_KONQUEROR("konqueror %s");
+
+        /**
+         * Holds the command format string.
+         */
+        private final String command;
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param command must not be {@code null} or empty
+         */
+        BrowserCommands(final String command) {
+            this.command = Validate.notEmpty(command);
+        }
+
+        /**
+         * Returns the command appended with the argumet string with a space before.
+         *
+         * @param arguments must not be {@code null} or empty
+         * @return never {@code null} or empty
+         */
+        String getCommand(final String arguments) {
+            return String.format(command, Validate.notEmpty(arguments));
+        }
+
     }
 }

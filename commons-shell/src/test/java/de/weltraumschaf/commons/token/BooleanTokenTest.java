@@ -11,10 +11,6 @@
  */
 package de.weltraumschaf.commons.token;
 
-import de.weltraumschaf.commons.token.Tokens;
-import de.weltraumschaf.commons.token.Token;
-import de.weltraumschaf.commons.token.BaseToken.BooleanToken;
-import de.weltraumschaf.commons.token.Position;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;

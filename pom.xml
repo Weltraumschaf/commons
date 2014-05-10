@@ -296,10 +296,6 @@
                         </plugin>
 
                         <plugin>
-                            <artifactId>maven-checkstyle-plugin</artifactId>
-                        </plugin>
-
-                        <plugin>
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>javancss-maven-plugin</artifactId>
                         </plugin>

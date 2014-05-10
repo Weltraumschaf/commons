@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SwingFrame.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Swing</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.swing</a> &gt; <span class="el_source">SwingFrame.java</span></div><h1>SwingFrame.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.swing;
+
+import de.weltraumschaf.commons.system.DefaultExiter;
+import de.weltraumschaf.commons.system.Exitable;
+import de.weltraumschaf.commons.system.OperatingSystem;
+import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+/**
+ * Extension of {@link javax.swing.JFrame} with {@link java.awt.BorderLayout} for easier use.
+ * &lt;p&gt;
+ * Example:
+ * &lt;/p&gt;
+ * &lt;pre&gt;{@code
+ *  public final class MyFrame extends SwingFrame {
+ *
+ *      public MyFrame(final String title) {
+ *          super(title);
+ *          setDefaultCloseOperation(DISPOSE_ON_CLOSE); // optional
+ *          setExitOnCloseWindow(true); // optional
+ *      }
+ *
+ *      &amp;#064;Override
+ *      protected void initMenu() {
+ *          final MenuBarBuilder builder = MenuBarBuilder.builder();
+ *          // Build and set menu here.
+ *          setJMenuBar(builder.create());
+ *      }
+ *
+ *      &amp;#064;Override
+ *      protected void initToolBar() {
+ *          final ToolBarBuilder builder = ToolBarBuilder.builder();
+ *          // Build and set tool bar here.
+ *          getContentPane().add(builder.create(), BorderLayout.NORTH);
+ *      }
+ *
+ *      &amp;#064;Override
+ *      protected void initPanel() {
+ *          // Initialize main panel here.
+ *      }
+ *  }
+ * }&lt;/pre&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public class SwingFrame extends JFrame {
+
+    /**
+     * Logging facility.
+     */
+<span class="fc" id="L70">    private static final Logger LOGGER = Logger.getLogger(SwingFrame.class.getName());</span>
+
+    /**
+     * Id for serialization.
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Centered panel for the main UI in a bordered layout.
+     */
+<span class="fc" id="L80">    protected final JPanel panel = new JPanel();</span>
+
+    /**
+     * Whether to exit the whole application on closing window.
+     */
+    private boolean exitOnCloseWindow;
+
+    /**
+     * Abstraction for {@link System#exit(int)}.
+     */
+<span class="fc" id="L90">    private transient Exitable exiter = new DefaultExiter();</span>
+
+    /**
+     * Initializes the content pane layout with {@link java.awt.BorderLayout} and add {@link #panel} to the center.
+     *
+     * @param title the title for the frame
+     */
+    public SwingFrame(final String title) {
+<span class="fc" id="L98">        super(title);</span>
+<span class="fc" id="L99">        getContentPane().setLayout(new BorderLayout());</span>
+<span class="fc" id="L100">        getContentPane().add(panel, BorderLayout.CENTER);</span>
+<span class="fc" id="L101">    }</span>
+
+    /**
+     * Call this method to initializes the frame before displaying it.
+     */
+    public final void init() {
+<span class="fc" id="L107">        initLookAndFeel();</span>
+
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        if (exitOnCloseWindow) {</span>
+<span class="fc" id="L110">            bindWindowClosing();</span>
+        }
+
+<span class="fc" id="L113">        initMenu();</span>
+<span class="fc" id="L114">        initToolBar();</span>
+<span class="fc" id="L115">        initPanel();</span>
+<span class="fc" id="L116">    }</span>
+
+    /**
+     * Whether to exit application on closing the window.
+     *
+     * By default {@link #exitOnCloseWindow} is false.
+     *
+     * @param exitOnCloseWindow True or false.
+     */
+    public final void setExitOnCloseWindow(boolean exitOnCloseWindow) {
+<span class="fc" id="L126">        this.exitOnCloseWindow = exitOnCloseWindow;</span>
+<span class="fc" id="L127">    }</span>
+
+    /**
+     * Set an exiter to handle exit calls.
+     *
+     * @param exiter Object which handles exit calls.
+     */
+    public final void setExiter(final Exitable exiter) {
+<span class="fc" id="L135">        this.exiter = exiter;</span>
+<span class="fc" id="L136">    }</span>
+
+    /**
+     * Get the main panel of the frame to add components.
+     *
+     * @return Returns reference of {@link #panel}.
+     */
+    public final JPanel getPanel() {
+<span class="fc" id="L144">        return panel;</span>
+    }
+
+    /**
+     * Initializes the look and feel.
+     *
+     * Uses the system look and feel. If the guest OS is Mac OS x the menu bar is took off the frame.
+     */
+    protected void initLookAndFeel() {
+<span class="fc" id="L153">        final OperatingSystem os = OperatingSystem.determine(OperatingSystem.OS_SYSTEM_PROPERTY);</span>
+
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        if (os == OperatingSystem.MACOSX) {</span>
+            // take the menu bar off the jframe
+<span class="nc" id="L157">            System.setProperty(&quot;apple.laf.useScreenMenuBar&quot;, &quot;true&quot;);</span>
+        }
+
+        try {
+<span class="fc" id="L161">            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());</span>
+<span class="nc" id="L162">        } catch (final ClassNotFoundException ex) {</span>
+<span class="nc" id="L163">            LOGGER.log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L164">        } catch (InstantiationException ex) {</span>
+<span class="nc" id="L165">            LOGGER.log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L166">        } catch (IllegalAccessException ex) {</span>
+<span class="nc" id="L167">            LOGGER.log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L168">        } catch (UnsupportedLookAndFeelException ex) {</span>
+<span class="nc" id="L169">            LOGGER.log(Level.SEVERE, null, ex);</span>
+<span class="pc" id="L170">        }</span>
+<span class="fc" id="L171">    }</span>
+
+    /**
+     * Binds on the window closing event and calls the exiter to exit application.
+     *
+     * This method add a default window listener which {@link #exiter exits} on
+     * {@link WindowAdapter#windowClosing(java.awt.event.WindowEvent)}. You may override this method for other
+     * behaviour. This method is only invoked if {@link #setExitOnCloseWindow(boolean)} is set true.
+     */
+    protected void bindWindowClosing() {
+<span class="fc" id="L181">        addWindowListener(new WindowAdapter() {</span>
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+<span class="fc" id="L185">                exiter.exit(0);</span>
+<span class="fc" id="L186">            }</span>
+
+        });
+<span class="fc" id="L189">    }</span>
+
+    /**
+     * Template method for menu initialization.
+     *
+     * Override this method with your custom code, if you need a menu.
+     */
+    protected void initMenu() {
+        // Empty template method.
+<span class="fc" id="L198">    }</span>
+
+    /**
+     * Template method for tool bar initialization.
+     *
+     * Override this method with your custom code, if you need a tool bar.
+     */
+    protected void initToolBar() {
+        // Empty template method.
+<span class="fc" id="L207">    }</span>
+
+    /**
+     * Template method for main UI initialization.
+     *
+     * Override this method with your custom code to add components to {@link #panel}.
+     */
+    protected void initPanel() {
+        // Empty template method.
+<span class="fc" id="L216">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

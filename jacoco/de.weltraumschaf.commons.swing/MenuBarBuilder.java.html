@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MenuBarBuilder.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Swing</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.swing</a> &gt; <span class="el_source">MenuBarBuilder.java</span></div><h1>MenuBarBuilder.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.swing;
+
+import javax.swing.JMenuBar;
+
+/**
+ * This builder offers a internal DSL for creating menu bars.
+ * &lt;p&gt;
+ * Example:
+ * &lt;/p&gt;
+ * &lt;pre&gt;{@code
+ * final JMenuBar menubar = MenuBarBuilder.builder()
+ *            .menu(&quot;File&quot;)
+ *                .item(&quot;Open&quot;)
+ *                    .addListener(new Listener())
+ *                .end()
+ *                .separator()
+ *                .item(&quot;Save&quot;)
+ *                    .addListener(new Listener())
+ *                .end()
+ *            .end()
+ *            .menu(&quot;Edit&quot;)
+ *                .item(&quot;foo&quot;)
+ *                .end()
+ *            .end()
+ *            .menu(&quot;View&quot;)
+ *                .item(&quot;bar&quot;)
+ *                .end()
+ *            .end()
+ *            .menu(&quot;Window&quot;)
+ *                .item(&quot;baz&quot;)
+ *                .end()
+ *            .end()
+ *        .create();
+ * }&lt;/pre&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class MenuBarBuilder {
+
+    /**
+     * The built menu bar.
+     */
+<span class="fc" id="L55">    private final JMenuBar menuBar = new JMenuBar();</span>
+
+    /**
+     * Use {@link #builder()} instead.
+     */
+    private MenuBarBuilder() {
+<span class="fc" id="L61">        super();</span>
+<span class="fc" id="L62">    }</span>
+
+    /**
+     * Creates a new builder instance.
+     *
+     * @return Always a new instance.
+     */
+    public static MenuBarBuilder builder() {
+<span class="fc" id="L70">        return new MenuBarBuilder();</span>
+    }
+
+    /**
+     * Returns the built menu bar.
+     *
+     * @return Returns always the same instance per builder.
+     */
+    public JMenuBar create() {
+<span class="fc" id="L79">        return menuBar;</span>
+    }
+
+    /**
+     * Creates a menu entry in menu bar.
+     *
+     * @param name Name of the menu.
+     * @return A menu builder.
+     */
+    public MenuBuilder menu(final String name) {
+<span class="fc" id="L89">        final MenuBuilder builder = new MenuBuilder(name, this);</span>
+<span class="fc" id="L90">        menuBar.add(builder.getMenu());</span>
+<span class="fc" id="L91">        return builder;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

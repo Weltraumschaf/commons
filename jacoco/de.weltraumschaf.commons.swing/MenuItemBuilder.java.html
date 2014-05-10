@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>MenuItemBuilder.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Swing</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.swing</a> &gt; <span class="el_source">MenuItemBuilder.java</span></div><h1>MenuItemBuilder.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.swing;
+
+import de.weltraumschaf.commons.system.OperatingSystem;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
+
+/**
+ * Builder to create a menu item.
+ * &lt;p&gt;
+ * You should not use this class directly. Instead use {@link MenuBarBuilder}.
+ * &lt;/p&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class MenuItemBuilder {
+    /**
+     * Used for OS specific differences.
+     */
+<span class="fc" id="L33">    private static final OperatingSystem OS = OperatingSystem.determine(System.getProperty(&quot;os.name&quot;, &quot;&quot;));</span>
+
+    /**
+     * The built item.
+     */
+    private final JMenuItem menuItem;
+
+    /**
+     * The menu builder which creates the menu to which item will belong.
+     */
+    private final MenuBuilder parent;
+
+    /**
+     * Package private constructor.
+     *
+     * This sub builder is constructed by the {@link MenuBuilder}.
+     *
+     * @param name Name of the item.
+     * @param parent Constructing menu builder.
+     */
+    MenuItemBuilder(final String name, final MenuBuilder parent) {
+<span class="fc" id="L54">        super();</span>
+<span class="fc" id="L55">        this.menuItem = new JMenuItem(name);</span>
+<span class="fc" id="L56">        this.parent   = parent;</span>
+<span class="fc" id="L57">    }</span>
+
+    /**
+     * Get the built item.
+     *
+     * @return Always return the same instance per builder.
+     */
+    JMenuItem getMenuItem() {
+<span class="fc" id="L65">        return menuItem;</span>
+    }
+
+    /**
+     * Add a listener to the item.
+     *
+     * @param listener Action listener to handle events.
+     * @return Returns the builder itself.
+     */
+    public MenuItemBuilder addListener(final ActionListener listener) {
+<span class="fc" id="L75">        menuItem.addActionListener(listener);</span>
+<span class="fc" id="L76">        return this;</span>
+    }
+
+    /**
+     * Add an accelerator key.
+     *
+     * For Mac OS with mask {@link KeyEvent#META_DOWN_MASK} for all other systems
+     * {@link KeyEvent#CTRL_DOWN_MASK}.
+     *
+     * @param accelerator Accelerator key character.
+     * @return Returns the builder itself.
+     */
+    public MenuItemBuilder setAccelerator(final char accelerator) {
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (OperatingSystem.MACOSX == OS) {</span>
+<span class="nc" id="L90">            menuItem.setAccelerator(KeyStroke.getKeyStroke(accelerator, KeyEvent.META_DOWN_MASK));</span>
+        } else {
+<span class="nc" id="L92">            menuItem.setAccelerator(KeyStroke.getKeyStroke(accelerator, KeyEvent.CTRL_DOWN_MASK));</span>
+        }
+
+<span class="nc" id="L95">        return this;</span>
+    }
+
+    /**
+     * Call if ready with building the menu item.
+     *
+     * @return The parent menu builder.
+     */
+    public MenuBuilder end() {
+<span class="fc" id="L104">        return parent;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

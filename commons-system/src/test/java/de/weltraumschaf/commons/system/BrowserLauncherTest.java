@@ -157,4 +157,24 @@ public class BrowserLauncherTest {
 
         verify(runtime).exec(command);
     }
+
+    @Test
+    public void openUrl_windows() throws IOException {
+        final BrowserLauncher.Executor executor = mock(BrowserLauncher.Executor.class);
+        final BrowserLauncher sut = new BrowserLauncher(OperatingSystem.WINDOWS, executor);
+
+        sut.openBrowser("http://www.weltramschaf.de");
+
+        verify(executor).exec("cmd /c start http://www.weltramschaf.de");
+    }
+
+    @Test
+    public void openUrl_macOsX() throws IOException {
+        final BrowserLauncher.Executor executor = mock(BrowserLauncher.Executor.class);
+        final BrowserLauncher sut = new BrowserLauncher(OperatingSystem.MACOSX, executor);
+
+        sut.openBrowser("http://www.weltramschaf.de");
+
+        verify(executor).exec("open http://www.weltramschaf.de");
+    }
 }

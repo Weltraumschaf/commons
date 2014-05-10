@@ -33,21 +33,43 @@ import edu.umd.cs.findbugs.annotations.SuppressWarnings;
 public final class BrowserLauncher {
 
     /**
+     * Default executor.
+     */
+    private static final Executor DEFAULT_EXECUTOR = new DefaultExecutor(Runtime.getRuntime());
+
+    /**
      * Determined operating system.
      */
     private final OperatingSystem os;
     /**
      * To executes external commands.
      */
-    private final Runtime runtime;
+    private final Executor executor;
 
     /**
      * Default constructor.
+     * <p>
+     * Try to determine operating system by itself via system property.
+     * </p>
      */
     public BrowserLauncher() {
-        this(OperatingSystem.determine(
-                System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, "")),
-            Runtime.getRuntime());
+        this(OperatingSystem.determine(System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, "")));
+    }
+
+    /**
+     * Create launcher for particular operating system.
+     * <p>
+     * You can determine the OS e.g. this way:
+     * </p>
+     * <pre>{@code
+     *  final BrowserLauncher launcher new BrowserLauncher(
+     *      OperatingSystem.determine(System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, "")));
+     * }</pre>
+     *
+     * @param os detected operating system, must not be {@code null}
+     */
+    public BrowserLauncher(final OperatingSystem os) {
+        this(os, DEFAULT_EXECUTOR);
     }
 
     /**
@@ -56,10 +78,10 @@ public final class BrowserLauncher {
      * @param os detected operating system, must not be {@code null}
      * @param runtime runtime for command execution, must not be {@code null}
      */
-    public BrowserLauncher(final OperatingSystem os, final Runtime runtime) {
+    public BrowserLauncher(final OperatingSystem os, final Executor runtime) {
         super();
         this.os = Validate.notNull(os, "os");
-        this.runtime = Validate.notNull(runtime, "runtime");
+        this.executor = Validate.notNull(runtime, "runtime");
     }
 
     /**
@@ -199,13 +221,13 @@ public final class BrowserLauncher {
      * @throws IOException if an I/O error occurs
      */
     private Process execCommand(final CliCommands cmd, final String argument) throws IOException {
-        return runtime.exec(cmd.getCommand(argument));
+        return executor.exec(cmd.getCommand(argument));
     }
 
     /**
      * Abstracts process execution.
      */
-    interface Executor {
+    public interface Executor {
 
         /**
          * Executes given string command as new process.

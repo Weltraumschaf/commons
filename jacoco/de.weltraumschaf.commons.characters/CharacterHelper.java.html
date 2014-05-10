@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CharacterHelper.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Shell</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.characters</a> &gt; <span class="el_source">CharacterHelper.java</span></div><h1>CharacterHelper.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.characters;
+
+
+import de.weltraumschaf.commons.guava.Sets;
+import java.util.Set;
+
+/**
+ * Helper class to verify if a given character belong to a specified group or range of characters.
+ *
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class CharacterHelper {
+
+    /**
+     * Special characters allowed in literals.
+     */
+<span class="fc" id="L28">    private static final Set&lt;Character&gt; SPECIAL_CHARS = Sets.newHashSet('/', '\\', '-');</span>
+    /**
+     * Operator characters.
+     */
+<span class="fc" id="L32">    private static final Set&lt;Character&gt; OPERATORS = Sets.newHashSet('+', '-', '*', '/', '%', '&amp;',</span>
+        '|', '^', '&lt;', '&gt;', '=', ':', '?', '(', ')', '{', '}', '[', ']', '!', '~', '@', '#', '$');
+    /**
+     * Number sign characters.
+     */
+<span class="fc" id="L37">    private static final Set&lt;Character&gt; SIGN_CHARS = Sets.newHashSet('+', '-');</span>
+
+    /**
+     * Private constructor for pure static utility class.
+     */
+    private CharacterHelper() {
+<span class="nc" id="L43">        super();</span>
+<span class="nc" id="L44">        throw new UnsupportedOperationException(&quot;Don't call via reflection!&quot;);</span>
+    }
+
+    /**
+     * Checks whether a character is inside a given character range (included).
+     *
+     * Throws IllegalArgumentException if end is less than start.
+     *
+     * @param character character to check
+     * @param start including range
+     * @param end including range
+     * @return {@code true} if character is in range, unless {@code false}
+     */
+    public static boolean isCharInRange(final char character, final char start, final char end) {
+<span class="fc bfc" id="L58" title="All 2 branches covered.">        if (end &lt; start) {</span>
+<span class="fc" id="L59">            throw new IllegalArgumentException(&quot;End must be greater or equal than start!&quot;);</span>
+        }
+
+<span class="fc bfc" id="L62" title="All 4 branches covered.">        return start &lt;= character &amp;&amp; character &lt;= end;</span>
+    }
+
+    /**
+     * Checks whether a character is a letter [a-zA-Z].
+     *
+     * @param character a single character
+     * @return {@code true} if character is a letter, unless {@code false}
+     */
+    public static boolean isAlpha(final char character) {
+<span class="fc bfc" id="L72" title="All 4 branches covered.">        return isCharInRange(character, 'a', 'z') || isCharInRange(character, 'A', 'Z');</span>
+    }
+
+    /**
+     * Checks whether a character is a number [0-9].
+     *
+     * @param character a single character
+     *
+     * @return {@code true} if character is a number, unless {@code false}
+     */
+    public static boolean isNum(final char character) {
+<span class="fc" id="L83">        return isCharInRange(character, '0', '9');</span>
+    }
+
+    /**
+     * Checks whether a character is a number or alpha [0-9a-zA-Z].
+     *
+     * @param character a single character
+     *
+     * @return {@code true} if character is a letter or number, unless {@code false}
+     */
+    public static boolean isAlphaNum(final char character) {
+<span class="fc bfc" id="L94" title="All 4 branches covered.">        return isAlpha(character) || isNum(character);</span>
+    }
+
+    /**
+     * Checks whether a character is a whitespace.
+     *
+     * White spaces are \t, \n, \r, and ' '.
+     *
+     * @param character a single character
+     * @return {@code true} if character is a whitespace character, unless {@code false}
+     */
+    public static boolean isWhiteSpace(final char character) {
+<span class="fc bfc" id="L106" title="All 8 branches covered.">        return ' ' == character || '\t' == character || '\n' == character || '\r' == character;</span>
+    }
+
+    /**
+     * Checks whether a character is a quote character.
+     *
+     * Quotes are ' and &quot;.
+     *
+     * @param character a single character
+     * @return {@code true} if character is a quote character, unless {@code false}
+     */
+    public static boolean isQuote(final char character) {
+<span class="fc bfc" id="L118" title="All 4 branches covered.">        return isSingleQuote(character) || isDoubleQuote(character);</span>
+    }
+
+    /**
+     * Checks whether a character is a single quote character.
+     *
+     * A single quotes is '.
+     *
+     * @param character a single character
+     * @return {@code true} if character is a single quote character, unless {@code false}
+     */
+    public static boolean isSingleQuote(final char character) {
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        return '\'' == character;</span>
+    }
+
+    /**
+     * Checks whether a character is a double quote character.
+     *
+     * A single quotes is &quot;.
+     *
+     * @param character a single character
+     * @return {@code true} if character is a double quote character, unless {@code false}
+     */
+    public static boolean isDoubleQuote(final char character) {
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        return '&quot;' == character;</span>
+    }
+
+    /**
+     * Checks whether a character is a special character.
+     *
+     * See {@link #SPECIAL_CHARS} for all allowed special characters.
+     *
+     * @param character a single character
+     * @return {@code true} if character is a special character, unless {@code false}
+     */
+    public static boolean isSpecialChar(final char character) {
+<span class="fc" id="L154">        return SPECIAL_CHARS.contains(character);</span>
+    }
+
+    /**
+     * Checks whether a character is a operator character.
+     *
+     * See {@link #OPERATORS} for all allowed operator characters.
+     *
+     * @param character a single character
+     * @return {@code true} if character is a operator character, unless {@code false}
+     */
+    public static boolean isOperator(final char character) {
+<span class="fc" id="L166">        return OPERATORS.contains(character);</span>
+    }
+
+    /**
+     * Checks whether a character is a sign character.
+     *
+     * See {@link #SIGN_CHARS} for all allowed operator characters.
+     *
+     * @param character a single character
+     * @return {@code true} if character is a operator character, unless {@code false}
+     */
+    public static boolean isSign(final char character) {
+<span class="fc" id="L178">        return SIGN_CHARS.contains(character);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

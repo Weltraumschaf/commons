@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ShellCommand.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Shell</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.shell</a> &gt; <span class="el_source">ShellCommand.java</span></div><h1>ShellCommand.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.shell;
+
+import de.weltraumschaf.commons.token.Token;
+import de.weltraumschaf.commons.guava.Lists;
+import de.weltraumschaf.commons.guava.Objects;
+import de.weltraumschaf.commons.validate.Validate;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * Describes a parsed mainCommand of the interactive shell.
+ * &lt;p&gt;
+ * Commands consist always of a mainCommand and may have a subcommand.
+ * This type is immutable.
+ * &lt;/p&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public class ShellCommand {
+
+    /**
+     * Obligatory main command.
+     */
+    private final MainCommandType mainCommand;
+
+    /**
+     * Optional sub mainCommand.
+     *
+     * If the shell mainCommand does not support sub commands this will be the value of
+ {@link LiteralCommandMap#getDefaultSubCommand()}.
+     */
+    private final SubCommandType subCommand;
+
+    /**
+     * Optional arguments.
+     *
+     * If the mainCommand has no arguments this will be an empty list.
+     */
+    private final List&lt;Token&gt; arguments;
+
+    /**
+     * Dedicated constructor.
+     *
+     * @param mainCommand must not be {@code null}
+     * @param subCommand must not be {@code null}
+     * @param arguments must not be {@code null}, may be an empty list
+     */
+    public ShellCommand(
+            final MainCommandType mainCommand,
+            final SubCommandType subCommand,
+            final List&lt;Token&gt; arguments) {
+<span class="fc" id="L64">        super();</span>
+<span class="fc" id="L65">        this.mainCommand = Validate.notNull(mainCommand, &quot;mainCommand&quot;);</span>
+<span class="fc" id="L66">        this.subCommand = Validate.notNull(subCommand, &quot;subCommand&quot;);</span>
+<span class="fc" id="L67">        this.arguments  = Lists.newArrayList(Validate.notNull(arguments, &quot;arguments&quot;)); // Defense copy</span>
+<span class="fc" id="L68">    }</span>
+
+    /**
+     * Get mainCommand main type.
+     *
+     * @return main type of mainCommand
+     */
+    public MainCommandType getMainCommand() {
+<span class="fc" id="L76">        return mainCommand;</span>
+    }
+
+    /**
+     * Get optional mainCommand sub type.
+     *
+     * If the main type does not support any sub type the same value as {@link LiteralCommandMap#getDefaultSubCommand()}
+     * will be returned.
+     *
+     * @return sub type of mainCommand
+     */
+    public SubCommandType getSubCommand() {
+<span class="fc" id="L88">        return subCommand;</span>
+    }
+
+    /**
+     * Get arguments.
+     *
+     * This method will always return a list. If no arguments are present an empty list will be returned.
+     *
+     * @return Returns a defense copy.
+     */
+    public List&lt;Token&gt; getArguments() {
+<span class="fc" id="L99">        return Collections.unmodifiableList(arguments);</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L104">        return Objects.toStringHelper(this)</span>
+                      .add(&quot;mainCommand&quot;, mainCommand)
+                      .add(&quot;subCommand&quot;, subCommand)
+                      .add(&quot;arguments&quot;, arguments)
+                      .toString();
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

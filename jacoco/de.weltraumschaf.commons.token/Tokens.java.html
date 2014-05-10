@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Tokens.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Shell</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.token</a> &gt; <span class="el_source">Tokens.java</span></div><h1>Tokens.java</h1><pre class="source lang-java linenums">/*
+ *  LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt;
+ */
+package de.weltraumschaf.commons.token;
+
+/**
+ * Factory to create tokens.
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class Tokens {
+
+    /**
+     * Hidden for pure static factory.
+     */
+    private Tokens() {
+<span class="nc" id="L26">        super();</span>
+<span class="nc" id="L27">        throw new UnsupportedOperationException(&quot;Don't call from reflection!&quot;);</span>
+    }
+
+    /**
+     * Creates a new {@link TokenType#BOOLEAN boolean} token.
+     *
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
+     */
+    public static Token newBooleanToken(final Position position, final String raw, final Boolean value) {
+<span class="fc" id="L39">        return new BaseToken.BooleanToken(position, raw, value);</span>
+    }
+
+    /**
+     * Creates a new {@link TokenType#INTEGER integer} token.
+     *
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
+     */
+    public static Token newIntegerToken(final Position position, final String raw, final Integer value) {
+<span class="fc" id="L51">        return new BaseToken.IntegerToken(position, raw, value);</span>
+    }
+
+    /**
+     * Creates a new {@link TokenType#FLOAT float} token.
+     *
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
+     */
+    public static Token newFloatToken(final Position position, final String raw, final Float value) {
+<span class="fc" id="L63">        return new BaseToken.FloatToken(position, raw, value);</span>
+    }
+
+    /**
+     * Creates a new {@link TokenType#STRING string} token.
+     *
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
+     */
+    public static Token newStringToken(final Position position, final String raw, final String value) {
+<span class="fc" id="L75">        return new BaseToken.StringToken(position, raw, value);</span>
+    }
+
+    /**
+     * Creates a new {@link TokenType#KEYWORD keyword} token.
+     *
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
+     */
+    public static Token newKeywordToken(final Position position, final String raw, final String value) {
+<span class="fc" id="L87">        return new BaseToken.KeywordToken(position, raw, value);</span>
+    }
+
+    /**
+     * Creates a new {@link TokenType#LITERAL literal} token.
+     *
+     * @param position start position of token, must not be {@code null}
+     * @param raw raw value of the token, must not be {@code null}
+     * @param value typed value of the token, must not be {@code null}
+     * @return always new instance, never {@code null}
+     */
+    public static Token newLiteralToken(final Position position, final String raw, final String value) {
+<span class="fc" id="L99">        return new BaseToken.LiteralToken(position, raw, value);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

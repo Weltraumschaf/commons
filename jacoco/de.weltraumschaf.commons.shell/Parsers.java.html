@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Parsers.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Shell</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.shell</a> &gt; <span class="el_source">Parsers.java</span></div><h1>Parsers.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.shell;
+
+/**
+ * Factory to create parsers.
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class Parsers {
+
+    /**
+     * Hide constructor for factories sake.
+     */
+    private Parsers() {
+<span class="nc" id="L26">        super();</span>
+<span class="nc" id="L27">    }</span>
+
+    /**
+     * Creates a new parser with default scanner implementation and {@link NullCommandVerifier}.
+     *
+     * @param m map key word literals to command types
+     * @return new instance
+     */
+    public static Parser newParser(final LiteralCommandMap m) {
+<span class="fc" id="L36">        return newParser(Scanners.newScanner(m), m);</span>
+    }
+
+    /**
+     * Create new parser with custom scanner and {@link NullCommandVerifier}.
+     *
+     * @param s used to tokenize input
+     * @param m map key word literals to command types
+     * @return new instance
+     */
+    public static Parser newParser(final Scanner s, final LiteralCommandMap m) {
+<span class="fc" id="L47">        return newParser(Scanners.newScanner(m), new NullCommandVerifier(), m);</span>
+    }
+
+    /**
+     * Creates parser with {@link DefaultScanner}.
+     *
+     * @param v verifies parsed commands
+     * @param m map key word literals to command types
+     * @return new instance
+     */
+    public static Parser newParser(final CommandVerifier v, final LiteralCommandMap m) {
+<span class="nc" id="L58">        return newParser(Scanners.newScanner(m), v, m);</span>
+    }
+
+    /**
+     * Creates parser.
+     *
+     * @param s used to tokenize input
+     * @param v verifies parsed commands
+     * @param m map key word literals to command types
+     * @return new instance
+     */
+    public static Parser newParser(final Scanner s, final CommandVerifier v, final LiteralCommandMap m) {
+<span class="fc" id="L70">        return new DefaultParser(s, v, m);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CharacterStream.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Shell</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.characters</a> &gt; <span class="el_source">CharacterStream.java</span></div><h1>CharacterStream.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.characters;
+
+/**
+ * Access a string as stream of characters.
+ *
+ * &lt;p&gt;
+ * Example:
+ * &lt;pre&gt;
+ * {@code final CharacterStream characterStream = new CharacterStream(&quot;...&quot;);
+ *
+ * while (characterStream.hasNext()) {
+ *     final char currentChar = characterStream.next();
+ *     // Do something with the current char.
+ * }
+ * }&lt;/pre&gt;
+ * &lt;/p&gt;
+ *
+ * TODO: Implement line and column.
+ *
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public class CharacterStream {
+
+    /**
+     * Accessed string.
+     */
+    private final String input;
+
+    /**
+     * Current character position.
+     */
+<span class="fc" id="L43">    private int index = -1;</span>
+
+    /**
+     * Initializes stream with string.
+     *
+     * @param input Streamed string.
+     */
+<span class="fc" id="L50">    public CharacterStream(final String input) {</span>
+<span class="fc" id="L51">        this.input = input;</span>
+<span class="fc" id="L52">    }</span>
+
+    /**
+     * Returns next character.
+     *
+     * @return next character
+     * // CHECKSTYLE:OFF
+     * @throws IndexOutOfBoundsException if, there are no more characters.
+     * // CHECKSTYLE:ON
+     */
+    public char next() {
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (!hasNext()) {</span>
+<span class="fc" id="L64">            throw new IndexOutOfBoundsException(&quot;No more next characters!&quot;);</span>
+        }
+
+<span class="fc" id="L67">        ++index;</span>
+<span class="fc" id="L68">        return current();</span>
+    }
+
+    /**
+     * True if there are more characters.
+     *
+     * @return True if there are no more characters.
+     */
+    public boolean hasNext() {
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        return index &lt; input.length() - 1;</span>
+    }
+
+    /**
+     * Returns the current character.
+     *
+     * If {@link #next()} not yet called, it is called implicitly.
+     *
+     * @return The current character.
+     */
+    public char current() {
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (-1 == index) {</span>
+<span class="fc" id="L89">            next();</span>
+        }
+
+<span class="fc" id="L92">        return input.charAt(index);</span>
+    }
+
+    /**
+     * Look ahead one character w/o advancing the internal pointer for the current character.
+     *
+     * @return the peeked character.
+     * // CHECKSTYLE:OFF
+     * @throws IndexOutOfBoundsException if there are no more character to peek
+     * // CHECKSTYLE:ON
+     */
+    public char peek() {
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">        if (!hasNext()) {</span>
+<span class="nc" id="L105">            throw new IndexOutOfBoundsException(&quot;No more next characters!&quot;);</span>
+        }
+
+<span class="fc" id="L108">        final char peekedCharacter = next();</span>
+<span class="fc" id="L109">        --index;</span>
+<span class="fc" id="L110">        return peekedCharacter;</span>
+    }
+
+    /**
+     * Get the current index position.
+     *
+     * @return initial value is -1, after first call of next 0 up to input length - 1
+     */
+    public int getIndex() {
+<span class="nc" id="L119">        return index;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

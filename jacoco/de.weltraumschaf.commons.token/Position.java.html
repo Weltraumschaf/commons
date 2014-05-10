@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Position.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Shell</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.token</a> &gt; <span class="el_source">Position.java</span></div><h1>Position.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.token;
+
+import de.weltraumschaf.commons.guava.Objects;
+import de.weltraumschaf.commons.validate.Validate;
+
+/**
+ * Represents a token position in the source string.
+ * &lt;p&gt;
+ * The position contains the line, column and filename where the
+ * token occurred. The file name is optional.
+ * &lt;/p&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class Position {
+
+    /**
+     * A position for line 0 and column 0.
+     */
+<span class="fc" id="L32">    public static final Position NULL = new Position(0, 0);</span>
+
+    /**
+     * File of the source string.
+     */
+    private final String file;
+
+    /**
+     * Line of occurrence.
+     */
+    private final int line;
+
+    /**
+     * Column of occurrence.
+     */
+    private final int column;
+
+    /**
+     * Initializes without file.
+     *
+     * @param line Line of occurrence.
+     * @param column Column of occurrence.
+     */
+    public Position(final int line, final int column) {
+<span class="fc" id="L56">        this(line, column, &quot;&quot;);</span>
+<span class="fc" id="L57">    }</span>
+
+    /**
+     * Dedicated constructor initializes immutable object.
+     *
+     * File is optional e.g. if string is parsed directly without any file.
+     *
+     * @param line must be greater than -1
+     * @param column must be greater than -1
+     * @param file must not be {@code null}, may be empty
+     */
+    public Position(final int line, final int column, final String file) {
+<span class="fc" id="L69">        super();</span>
+<span class="fc" id="L70">        this.line   = Validate.greaterThan(line, -1, &quot;line&quot;);</span>
+<span class="fc" id="L71">        this.column = Validate.greaterThan(column, -1, &quot;column&quot;);</span>
+<span class="fc" id="L72">        this.file   = Validate.notNull(file, &quot;file&quot;);</span>
+<span class="fc" id="L73">    }</span>
+
+    /**
+     * Returns the file name of the source.
+     *
+     * May be null.
+     *
+     * @return Filename as string.
+     */
+    public String getFile() {
+<span class="fc" id="L83">        return file;</span>
+    }
+
+    /**
+     * Returns line of occurrence in source.
+     *
+     * @return Line position.
+     */
+    public int getLine() {
+<span class="fc" id="L92">        return line;</span>
+    }
+
+    /**
+     * Returns column of occurrence in source.
+     *
+     * @return Column position.
+     */
+    public int getColumn() {
+<span class="fc" id="L101">        return column;</span>
+    }
+
+    /**
+     * Returns human readable string representation.
+     *
+     * @return String representation.
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L111">        final StringBuilder str = new StringBuilder();</span>
+
+<span class="fc bfc" id="L113" title="All 2 branches covered.">        if (!getFile().isEmpty()) {</span>
+<span class="fc" id="L114">            str.append(getFile()).append(' ');</span>
+        }
+
+<span class="fc" id="L117">        str.append(String.format(&quot;(%s, %s)&quot;, getLine(), getColumn()));</span>
+<span class="fc" id="L118">        return str.toString();</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L123">        return Objects.hashCode(line, column, file);</span>
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        if (! (obj instanceof Position)) {</span>
+<span class="nc" id="L129">            return false;</span>
+        }
+
+<span class="fc" id="L132">        final Position other = (Position) obj;</span>
+<span class="pc bpc" id="L133" title="2 of 6 branches missed.">        return Objects.equal(line, other.line)</span>
+                &amp;&amp; Objects.equal(column, other.column)
+                &amp;&amp; Objects.equal(file, other.file);
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

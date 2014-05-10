@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BaseToken.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Shell</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.token</a> &gt; <span class="el_source">BaseToken.java</span></div><h1>BaseToken.java</h1><pre class="source lang-java linenums">/*
+ *  LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt;
+ */
+package de.weltraumschaf.commons.token;
+
+import de.weltraumschaf.commons.guava.Objects;
+import de.weltraumschaf.commons.validate.Validate;
+
+/**
+ * Base token implementation with generic value.
+ *
+ * @since 1.0.0
+ * @param &lt;T&gt; type of the recognized value
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+abstract class BaseToken&lt;T&gt; implements Token {
+
+    /**
+     * Format string for unsupported value methods.
+     */
+    private static final String FORMAT = &quot;Token is not of type %s! But is of type %s.&quot;;
+    /**
+     * Token class type.
+     */
+    private final TokenType type;
+    /**
+     * Start position of token.
+     */
+    private final Position position;
+    /**
+     * Raw scanned lexeme.
+     */
+    private final String raw;
+    /**
+     * Recognized typed token value.
+     */
+    private final T value;
+
+    /**
+     * Dedicated constructor .
+     *
+     * @param type must not be {@code null}
+     * @param position must not be {@code null}
+     * @param raw must not be {@code null}
+     * @param value must not be {@code null}
+     */
+    public BaseToken(final TokenType type, final Position position, final String raw, final T value) {
+<span class="fc" id="L56">        super();</span>
+<span class="fc" id="L57">        this.type = Validate.notNull(type, &quot;type&quot;);</span>
+<span class="fc" id="L58">        this.position = Validate.notNull(position, &quot;position&quot;);</span>
+<span class="fc" id="L59">        this.raw = Validate.notNull(raw, &quot;raw&quot;);</span>
+<span class="fc" id="L60">        this.value = Validate.notNull(value, &quot;value&quot;);</span>
+<span class="fc" id="L61">    }</span>
+
+    @Override
+    public TokenType getType() {
+<span class="fc" id="L65">        return type;</span>
+    }
+
+    @Override
+    public Position getPosition() {
+<span class="fc" id="L70">        return position;</span>
+    }
+
+    @Override
+    public String getRaw() {
+<span class="fc" id="L75">        return raw;</span>
+    }
+
+    /**
+     * Get the typed value.
+     *
+     * @return must not be {@code null}
+     */
+    T getValue() {
+<span class="fc" id="L84">        return value;</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="nc" id="L89">        return Objects.hashCode(type, position, raw, value);</span>
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (!(obj instanceof BaseToken)) {</span>
+<span class="nc" id="L95">            return false;</span>
+        }
+
+<span class="nc" id="L98">        final BaseToken&lt;?&gt; other = (BaseToken&lt;?&gt;) obj;</span>
+<span class="nc bnc" id="L99" title="All 8 branches missed.">        return Objects.equal(type, other.type)</span>
+                &amp;&amp; Objects.equal(position, other.position)
+                &amp;&amp; Objects.equal(raw, other.raw)
+                &amp;&amp; Objects.equal(value, other.value);
+    }
+
+    @Override
+    public String toString() {
+<span class="nc" id="L107">        return Objects.toStringHelper(this)</span>
+                .add(&quot;type&quot;, type)
+                .add(&quot;position&quot;, position)
+                .add(&quot;raw&quot;, raw)
+                .add(&quot;value&quot;, value)
+                .toString();
+    }
+
+    @Override
+    public String asString() {
+<span class="fc" id="L117">        return value.toString();</span>
+    }
+
+    /**
+     * Throws always an exception.
+     * &lt;p&gt;
+     * Used to signal that one of the {@code as...()} methods was called, but the value type does not match.
+     * &lt;/p&gt;
+     * &lt;p&gt;
+     * This method always throws {@link UnsupportedOperationException}.
+     * &lt;/p&gt;
+     *
+     * @param unsupported the unsupported type
+     */
+    protected void raiseUnsupportedValueOperationError(final TokenType unsupported) {
+<span class="fc" id="L132">        throw new UnsupportedOperationException(String.format(FORMAT, unsupported, getType()));</span>
+    }
+
+    /**
+     * Concrete implementation of boolean token.
+     */
+    static final class BooleanToken extends BaseToken&lt;Boolean&gt; {
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param position must not be {@code null}
+         * @param raw must not be {@code null}
+         * @param value must not be {@code null}
+         */
+        public BooleanToken(final Position position, final String raw, final Boolean value) {
+<span class="fc" id="L148">            super(TokenType.BOOLEAN, position, raw, value);</span>
+<span class="fc" id="L149">        }</span>
+
+        @Override
+        public Boolean asBoolean() {
+<span class="fc" id="L153">            return getValue();</span>
+        }
+
+        @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = &quot;NP_BOOLEAN_RETURN_NULL&quot;,
+                justification = &quot;Return never reached, because exception thrown before.&quot;)
+        public Float asFloat() {
+<span class="nc" id="L161">            raiseUnsupportedValueOperationError(TokenType.FLOAT);</span>
+<span class="nc" id="L162">            return null;</span>
+        }
+
+        @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = &quot;NP_BOOLEAN_RETURN_NULL&quot;,
+                justification = &quot;Return never reached, because exception thrown before.&quot;)
+        public Integer asInteger() {
+<span class="nc" id="L170">            raiseUnsupportedValueOperationError(TokenType.INTEGER);</span>
+<span class="nc" id="L171">            return null;</span>
+        }
+
+    }
+
+    /**
+     * Concrete implementation of boolean token.
+     */
+    static final class IntegerToken extends BaseToken&lt;Integer&gt; {
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param position must not be {@code null}
+         * @param raw must not be {@code null}
+         * @param value must not be {@code null}
+         */
+        public IntegerToken(final Position position, final String raw, final Integer value) {
+<span class="fc" id="L189">            super(TokenType.INTEGER, position, raw, value);</span>
+<span class="fc" id="L190">        }</span>
+
+        @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = &quot;NP_BOOLEAN_RETURN_NULL&quot;,
+                justification = &quot;Return never reached, because exception thrown before.&quot;)
+        public Boolean asBoolean() {
+<span class="nc" id="L197">            raiseUnsupportedValueOperationError(TokenType.BOOLEAN);</span>
+<span class="nc" id="L198">            return null;</span>
+        }
+
+        @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = &quot;NP_BOOLEAN_RETURN_NULL&quot;,
+                justification = &quot;Return never reached, because exception thrown before.&quot;)
+        public Float asFloat() {
+<span class="nc" id="L206">            raiseUnsupportedValueOperationError(TokenType.FLOAT);</span>
+<span class="nc" id="L207">            return null;</span>
+        }
+
+        @Override
+        public Integer asInteger() {
+<span class="fc" id="L212">            return getValue();</span>
+        }
+
+    }
+
+    /**
+     * Concrete implementation of boolean token.
+     */
+    static final class FloatToken extends BaseToken&lt;Float&gt; {
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param position must not be {@code null}
+         * @param raw must not be {@code null}
+         * @param value must not be {@code null}
+         */
+        public FloatToken(final Position position, final String raw, final Float value) {
+<span class="fc" id="L230">            super(TokenType.FLOAT, position, raw, value);</span>
+<span class="fc" id="L231">        }</span>
+
+        @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = &quot;NP_BOOLEAN_RETURN_NULL&quot;,
+                justification = &quot;Return never reached, because exception thrown before.&quot;)
+        public Boolean asBoolean() {
+<span class="nc" id="L238">            raiseUnsupportedValueOperationError(TokenType.BOOLEAN);</span>
+<span class="nc" id="L239">            return null;</span>
+        }
+
+        @Override
+        public Float asFloat() {
+<span class="fc" id="L244">            return getValue();</span>
+        }
+
+        @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = &quot;NP_BOOLEAN_RETURN_NULL&quot;,
+                justification = &quot;Return never reached, because exception thrown before.&quot;)
+        public Integer asInteger() {
+<span class="nc" id="L252">            raiseUnsupportedValueOperationError(TokenType.INTEGER);</span>
+<span class="nc" id="L253">            return null;</span>
+        }
+
+    }
+
+    /**
+     * Concrete implementation of boolean token.
+     */
+    static class StringToken extends BaseToken&lt;String&gt; {
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param position must not be {@code null}
+         * @param raw must not be {@code null}
+         * @param value must not be {@code null}
+         */
+        public StringToken(final Position position, final String raw, final String value) {
+<span class="fc" id="L271">            this(TokenType.STRING, position, raw, value);</span>
+<span class="fc" id="L272">        }</span>
+
+        /**
+         * Constructor for sub classes.
+         *
+         * @param type must not be {@code null}
+         * @param position must not be {@code null}
+         * @param raw must not be {@code null}
+         * @param value must not be {@code null}
+         */
+        private StringToken(final TokenType type, final Position position, final String raw, final String value) {
+<span class="fc" id="L283">            super(type, position, raw, value);</span>
+<span class="fc" id="L284">        }</span>
+
+        @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = &quot;NP_BOOLEAN_RETURN_NULL&quot;,
+                justification = &quot;Return never reached, because exception thrown before.&quot;)
+        public Boolean asBoolean() {
+<span class="nc" id="L291">            raiseUnsupportedValueOperationError(TokenType.BOOLEAN);</span>
+<span class="nc" id="L292">            return null;</span>
+        }
+
+        @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = &quot;NP_BOOLEAN_RETURN_NULL&quot;,
+                justification = &quot;Return never reached, because exception thrown before.&quot;)
+        public Float asFloat() {
+<span class="nc" id="L300">            raiseUnsupportedValueOperationError(TokenType.FLOAT);</span>
+<span class="nc" id="L301">            return null;</span>
+        }
+
+        @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = &quot;NP_BOOLEAN_RETURN_NULL&quot;,
+                justification = &quot;Return never reached, because exception thrown before.&quot;)
+        public Integer asInteger() {
+<span class="nc" id="L309">            raiseUnsupportedValueOperationError(TokenType.INTEGER);</span>
+<span class="nc" id="L310">            return null;</span>
+        }
+
+    }
+
+    /**
+     * Concrete implementation of boolean token.
+     */
+    static final class KeywordToken extends StringToken {
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param position must not be {@code null}
+         * @param raw must not be {@code null}
+         * @param value must not be {@code null}
+         */
+        public KeywordToken(final Position position, final String raw, final String value) {
+<span class="fc" id="L328">            super(TokenType.KEYWORD, position, raw, value);</span>
+<span class="fc" id="L329">        }</span>
+    }
+
+    /**
+     * Concrete implementation of boolean token.
+     */
+    static final class LiteralToken extends StringToken {
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param position must not be {@code null}
+         * @param raw must not be {@code null}
+         * @param value must not be {@code null}
+         */
+        public LiteralToken(final Position position, final String raw, final String value) {
+<span class="fc" id="L345">            super(TokenType.LITERAL, position, raw, value);</span>
+<span class="fc" id="L346">        }</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

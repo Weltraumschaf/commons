@@ -1,6 +1,22 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Commons Concurrent,de.weltraumschaf.commons.concurrent,ConcurrentStack,14,54,4,6,3,13,4,6,1,4
-Commons Concurrent,de.weltraumschaf.commons.concurrent,ConcurrentQueue,3,128,8,18,3,27,8,9,0,4
-Commons Concurrent,de.weltraumschaf.commons.concurrent,Concurrent,7,8,0,0,2,2,1,2,1,2
-Commons Concurrent,de.weltraumschaf.commons.concurrent,ConcurrentStack.Entry,0,9,0,0,0,4,0,1,0,1
-Commons Concurrent,de.weltraumschaf.commons.concurrent,ConcurrentQueue.Entry,69,6,8,0,7,3,7,1,3,1
+Commons Shell,de.weltraumschaf.commons.shell,NullCommandVerifier,0,4,0,0,0,2,0,2,0,2
+Commons Shell,de.weltraumschaf.commons.shell,DefaultScanner,0,310,1,59,0,76,1,39,0,10
+Commons Shell,de.weltraumschaf.commons.shell,SyntaxException,9,10,0,0,4,4,2,2,2,2
+Commons Shell,de.weltraumschaf.commons.shell,ShellCommand,16,32,0,0,1,8,1,4,1,4
+Commons Shell,de.weltraumschaf.commons.shell,LiteralCommandMap,54,136,4,10,4,30,4,14,0,11
+Commons Shell,de.weltraumschaf.commons.shell,Scanners,3,5,0,0,2,1,1,1,1,1
+Commons Shell,de.weltraumschaf.commons.shell,Parsers,9,20,0,0,3,3,2,3,2,3
+Commons Shell,de.weltraumschaf.commons.shell,DefaultParser,18,103,2,8,1,25,2,5,0,2
+Commons Shell,de.weltraumschaf.commons.characters,CharacterHelper,7,260,0,30,2,16,1,27,1,12
+Commons Shell,de.weltraumschaf.commons.characters,CharacterStream,8,65,1,7,2,16,2,8,1,5
+Commons Shell,de.weltraumschaf.commons.token,BaseToken.BooleanToken,10,11,0,0,4,3,2,2,2,2
+Commons Shell,de.weltraumschaf.commons.token,BaseToken.LiteralToken,0,8,0,0,0,2,0,1,0,1
+Commons Shell,de.weltraumschaf.commons.token,Null,10,0,0,0,4,0,3,0,3,0
+Commons Shell,de.weltraumschaf.commons.token,BaseToken.IntegerToken,10,11,0,0,4,3,2,2,2,2
+Commons Shell,de.weltraumschaf.commons.token,BaseToken.FloatToken,10,11,0,0,4,3,2,2,2,2
+Commons Shell,de.weltraumschaf.commons.token,Position,2,133,3,7,1,20,3,11,0,9
+Commons Shell,de.weltraumschaf.commons.token,BaseToken.StringToken,15,14,0,0,6,4,3,2,3,2
+Commons Shell,de.weltraumschaf.commons.token,BaseToken.KeywordToken,0,8,0,0,0,2,0,1,0,1
+Commons Shell,de.weltraumschaf.commons.token,BaseToken,80,59,10,0,6,12,8,7,3,7
+Commons Shell,de.weltraumschaf.commons.token,Tokens,7,42,0,0,2,6,1,6,1,6
+Commons Shell,de.weltraumschaf.commons.token,TokenType,9,69,0,0,0,7,2,2,2,2

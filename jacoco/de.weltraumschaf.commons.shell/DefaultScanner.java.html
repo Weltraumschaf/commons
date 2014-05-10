@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultScanner.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Shell</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.shell</a> &gt; <span class="el_source">DefaultScanner.java</span></div><h1>DefaultScanner.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.shell;
+
+import de.weltraumschaf.commons.token.Token;
+import de.weltraumschaf.commons.characters.CharacterStream;
+import de.weltraumschaf.commons.characters.CharacterHelper;
+import de.weltraumschaf.commons.guava.Lists;
+import de.weltraumschaf.commons.token.Position;
+import de.weltraumschaf.commons.token.Tokens;
+import de.weltraumschaf.commons.validate.Validate;
+import java.util.List;
+
+/**
+ * Default implementation for scanning the input line from an interactive shell.
+ * &lt;p&gt;
+ * The scanner tokenizes:
+ * &lt;/p&gt;
+ * &lt;ul&gt;
+ * &lt;li&gt;alpha numeric literals&lt;/li&gt;
+ * &lt;li&gt;(signed) integer number literals&lt;/li&gt;
+ * &lt;li&gt;(signed) float number literals&lt;/li&gt;
+ * &lt;li&gt;boolean literals (true/false)&lt;/li&gt;
+ * &lt;li&gt;and single/double quote delimited string literals&lt;/li&gt;
+ * &lt;/ul&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+class DefaultScanner implements Scanner {
+
+    /**
+     * Maps command literal strings to command types.
+     */
+    private final LiteralCommandMap commandMap;
+
+    /**
+     * Dedicated constructor.
+     *
+     * @param commandMap map key word literals to command types
+     */
+    public DefaultScanner(final LiteralCommandMap commandMap) {
+<span class="fc" id="L52">        super();</span>
+<span class="fc" id="L53">        this.commandMap = commandMap;</span>
+<span class="fc" id="L54">    }</span>
+
+    /**
+     * Scans give line and returns list of recognized tokens.
+     *
+     * @param line must not be {@code null}
+     * @return never {@code null}, maybe empty
+     * @throws SyntaxException if syntax error occurred
+     */
+    @Override
+    public List&lt;Token&gt; scan(final String line) throws SyntaxException {
+<span class="fc" id="L65">        Validate.notNull(line, &quot;line&quot;);</span>
+<span class="fc" id="L66">        final List&lt;Token&gt; tokens = Lists.newArrayList();</span>
+
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (line.isEmpty()) {</span>
+<span class="fc" id="L69">            return tokens;</span>
+        }
+
+<span class="fc" id="L72">        scan(tokens, new CharacterStream(line));</span>
+<span class="fc" id="L73">        return tokens;</span>
+    }
+
+    /**
+     * Loops over all characters of stream.
+     *
+     * @param tokens list to which recognized tokens will be add
+     * @param characterStream input line to scan
+     * @throws SyntaxException if string is not correct encapsulated by quotes
+     */
+    private void scan(final List&lt;Token&gt; tokens, final CharacterStream characterStream) throws SyntaxException {
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        while (characterStream.hasNext()) {</span>
+<span class="fc" id="L85">            final char currentChar = characterStream.next();</span>
+
+<span class="fc bfc" id="L87" title="All 4 branches covered.">            if (CharacterHelper.isSign(currentChar) &amp;&amp; CharacterHelper.isNum(characterStream.peek())) {</span>
+<span class="fc" id="L88">                tokens.add(scanNumber(characterStream));</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">            } else if (CharacterHelper.isNum(currentChar)) {</span>
+<span class="fc" id="L90">                tokens.add(scanNumber(characterStream));</span>
+<span class="fc bfc" id="L91" title="All 4 branches covered.">            } else if (CharacterHelper.isAlpha(currentChar) || CharacterHelper.isSpecialChar(currentChar)) {</span>
+<span class="fc" id="L92">                tokens.add(scanLiteral(characterStream));</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">            } else if (CharacterHelper.isQuote(currentChar)) {</span>
+<span class="fc" id="L94">                tokens.add(scanString(characterStream));</span>
+            }
+<span class="fc" id="L96">        }</span>
+<span class="fc" id="L97">    }</span>
+
+    /**
+     * Recognize alpha numeric string tokens until next white space character.
+     *
+     * @param characterStream input line to scan
+     * @return Return string type token
+     */
+    private Token scanLiteral(final CharacterStream characterStream) {
+<span class="fc" id="L106">        return scanLiteralOrKeyword(characterStream, new StringBuilder());</span>
+    }
+
+    /**
+     * Recognize alpha numeric string tokens until next white space character.
+     *
+     * @param characterStream input line to scan
+     * @param value collects the token string, must not be {@code null}
+     * @return Return string type token
+     */
+    private Token scanLiteralOrKeyword(final CharacterStream characterStream, final StringBuilder value) {
+<span class="fc" id="L117">        value.append(characterStream.current());</span>
+
+<span class="fc bfc" id="L119" title="All 2 branches covered.">        while (characterStream.hasNext()) {</span>
+<span class="fc" id="L120">            final char currentChar = characterStream.next();</span>
+
+<span class="fc bfc" id="L122" title="All 2 branches covered.">            if (CharacterHelper.isWhiteSpace(currentChar)) {</span>
+<span class="fc" id="L123">                break;</span>
+            }
+
+<span class="fc" id="L126">            value.append(currentChar);</span>
+<span class="fc" id="L127">        }</span>
+
+<span class="fc" id="L129">        final String tokenString = value.toString();</span>
+
+<span class="fc bfc" id="L131" title="All 4 branches covered.">        if (&quot;true&quot;.equals(tokenString) || &quot;false&quot;.equals(tokenString)) {</span>
+<span class="fc" id="L132">            return Tokens.newBooleanToken(Position.NULL, tokenString, Boolean.parseBoolean(tokenString));</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        } else if (isKeyword(tokenString)) {</span>
+<span class="fc" id="L134">            return Tokens.newKeywordToken(Position.NULL, tokenString, tokenString);</span>
+        } else {
+<span class="fc" id="L136">            return Tokens.newLiteralToken(Position.NULL, tokenString, tokenString);</span>
+        }
+    }
+
+    /**
+     * Recognize numeric tokens until next white space character.
+     * &lt;p&gt;
+     * If this method recognizes a dot it will try to scan a float.
+     * If any not number character is detected it will treat the token as a literal/keyword.
+     * &lt;/p&gt;
+     *
+     * @param characterStream input line to scan
+     * @return integer or float or literal or keyword type token
+     */
+    private Token scanNumber(final CharacterStream characterStream) {
+<span class="fc" id="L151">        final StringBuilder value = new StringBuilder();</span>
+<span class="fc" id="L152">        value.append(characterStream.current());</span>
+
+<span class="fc bfc" id="L154" title="All 2 branches covered.">        while (characterStream.hasNext()) {</span>
+<span class="fc" id="L155">            final char currentChar = characterStream.next();</span>
+
+<span class="fc bfc" id="L157" title="All 2 branches covered.">            if (CharacterHelper.isWhiteSpace(currentChar)) {</span>
+<span class="fc" id="L158">                break;</span>
+            }
+
+<span class="fc bfc" id="L161" title="All 2 branches covered.">            if ('.' == currentChar) {</span>
+<span class="fc" id="L162">                return scanFloat(characterStream, value);</span>
+            }
+
+<span class="fc bfc" id="L165" title="All 2 branches covered.">            if (!CharacterHelper.isNum(currentChar)) {</span>
+<span class="fc" id="L166">                return scanLiteralOrKeyword(characterStream, value);</span>
+            }
+
+<span class="fc" id="L169">            value.append(currentChar);</span>
+<span class="fc" id="L170">        }</span>
+
+<span class="fc" id="L172">        final String literal = value.toString();</span>
+<span class="fc" id="L173">        return Tokens.newIntegerToken(Position.NULL, literal, Integer.valueOf(literal));</span>
+    }
+
+    /**
+     * Recognize float tokens until next white space character.
+     * &lt;p&gt;
+     * If any not number character is detected it will treat the token as a literal/keyword.
+     * &lt;/p&gt;
+     *
+     * @param characterStream input line to scan
+     * @param value accumulates the token literal string
+     * @return float or literal or keyword type token
+     */
+    private Token scanFloat(final CharacterStream characterStream, final StringBuilder value) {
+<span class="fc" id="L187">        value.append(characterStream.current());</span>
+
+<span class="fc bfc" id="L189" title="All 2 branches covered.">        while (characterStream.hasNext()) {</span>
+<span class="fc" id="L190">            final char currentChar = characterStream.next();</span>
+
+<span class="fc bfc" id="L192" title="All 2 branches covered.">            if (CharacterHelper.isWhiteSpace(currentChar)) {</span>
+<span class="fc" id="L193">                break;</span>
+            }
+
+<span class="fc bfc" id="L196" title="All 4 branches covered.">            if (!CharacterHelper.isNum(currentChar) &amp;&amp; !isAllowedInFloat(currentChar)) {</span>
+<span class="fc" id="L197">                return scanLiteralOrKeyword(characterStream, value);</span>
+            }
+
+<span class="fc" id="L200">            value.append(currentChar);</span>
+<span class="fc" id="L201">        }</span>
+
+<span class="fc" id="L203">        final String literal = value.toString();</span>
+<span class="fc" id="L204">        return Tokens.newFloatToken(Position.NULL, literal, Float.valueOf(literal));</span>
+    }
+
+    /**
+     * Scan string tokens.
+     *
+     * String tokens are everything encapsulated in single or double quotes.
+     *
+     * @param characterStream input line to scan
+     * @return integer type token
+     * @throws SyntaxException if string is not correct encapsulated by quotes
+     */
+    private Token scanString(final CharacterStream characterStream) throws SyntaxException {
+<span class="fc" id="L217">        final StringBuilder value = new StringBuilder();</span>
+<span class="fc" id="L218">        final char startQuote = characterStream.current();</span>
+<span class="fc" id="L219">        boolean terminated = false;</span>
+
+<span class="fc bfc" id="L221" title="All 2 branches covered.">        while (characterStream.hasNext()) {</span>
+<span class="fc" id="L222">            final char currentChar = characterStream.next();</span>
+
+<span class="fc bfc" id="L224" title="All 2 branches covered.">            if (currentChar == startQuote) {</span>
+<span class="fc" id="L225">                terminated = true;</span>
+
+<span class="fc bfc" id="L227" title="All 2 branches covered.">                if (characterStream.hasNext()) {</span>
+                    // Skip closing quote, if there are more characters.
+<span class="fc" id="L229">                    characterStream.next();</span>
+                }
+
+                break;
+            }
+
+<span class="fc" id="L235">            value.append(currentChar);</span>
+<span class="fc" id="L236">        }</span>
+
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        if (!terminated) {</span>
+<span class="fc" id="L239">            throw new SyntaxException(String.format(&quot;Unterminated string '%s'!&quot;, value.toString()));</span>
+        }
+
+<span class="fc" id="L242">        return Tokens.newStringToken(Position.NULL, value.toString(), value.toString());</span>
+    }
+
+    /**
+     * Determines if a token string is a keyword.
+     *
+     * Checks the string against {@link LiteralCommandMap#isCommand(java.lang.String)} and
+     * {@link LiteralCommandMap#isSubCommand(java.lang.String)}.
+     *
+     * @param token string to check
+     * @return true if given string is a keyword else false
+     */
+    private boolean isKeyword(String token) {
+<span class="fc bfc" id="L255" title="All 4 branches covered.">        return commandMap.isCommand(token) || commandMap.isSubCommand(token);</span>
+    }
+
+    /**
+     * Whether an character is allowed in float literals.
+     * &lt;p&gt;
+     * Allowed are signs (+|-) and the exponential characters (E|e).
+     * &lt;/p&gt;
+     *
+     * @param c any character
+     * @return {@code true} if c is allowed, else {@code false}
+     */
+    private boolean isAllowedInFloat(final char c) {
+<span class="fc bfc" id="L268" title="All 6 branches covered.">        return CharacterHelper.isSign(c) || 'e' == c || 'E' == c;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

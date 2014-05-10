@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DefaultParser.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Shell</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.shell</a> &gt; <span class="el_source">DefaultParser.java</span></div><h1>DefaultParser.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.shell;
+
+import de.weltraumschaf.commons.guava.Lists;
+import de.weltraumschaf.commons.token.Token;
+import de.weltraumschaf.commons.token.TokenType;
+import de.weltraumschaf.commons.validate.Validate;
+import java.util.List;
+
+/**
+ * Default parses implementation.
+ * &lt;p&gt;
+ * Parsed grammar:
+ * &lt;/p&gt;
+ * &lt;pre&gt;
+ * imputline  = command { argument } .
+ * command    = keyword [ keyword ] .
+ * keyword    = character { character } .
+ * argument   = literal | number | string | boolean.
+ * literal    = alphanum { alphanum } .
+ * number     = integer | float .
+ * integer    = [ sign ] digit { digit } .
+ * float      = [ sign ] digit { digit } '.' digit { digit } [ exponent ] .
+ * exponent   = ( 'e' | 'E' ) [ sign ] digit { digit } .
+ * boolean    = 'true' | 'false' .
+ * string     = '\'' alphanum { whitespace | alphanum } '\''
+              | '&quot;' alphanum { whitespace | alphanum } '&quot;' .
+ * alphanum   = character
+ *            | digit .
+ * character  = 'a' .. 'z'
+ *            | 'A' .. 'Z' .
+ * digit      = '0' .. '9' .
+ * sign       = '-' | '+' .
+ * whitespace = ' ' .
+ * &lt;/pre&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+class DefaultParser implements Parser {
+
+    /**
+     * Tokenize the input line.
+     */
+    private final Scanner scanner;
+
+    /**
+     * Verifies the parsed commands.
+     */
+    private final CommandVerifier verifier;
+
+    /**
+     * Map used to determine command keywords.
+     */
+    private final LiteralCommandMap commandMap;
+
+    /**
+     * Dedicated constructor.
+     *
+     * @param scanner must not be {@code null}
+     * @param verifier must not be {@code null}
+     * @param commandMap must not be {@code null}
+     */
+    public DefaultParser(final Scanner scanner, final CommandVerifier verifier, final LiteralCommandMap commandMap) {
+<span class="fc" id="L75">        super();</span>
+<span class="fc" id="L76">        this.scanner = Validate.notNull(scanner, &quot;scanner&quot;);</span>
+<span class="fc" id="L77">        this.verifier = Validate.notNull(verifier, &quot;verifier&quot;);</span>
+<span class="fc" id="L78">        this.commandMap = Validate.notNull(commandMap, &quot;commandMap&quot;);</span>
+<span class="fc" id="L79">    }</span>
+
+    /**
+     * Parses given input line.
+     *
+     * @param input must not be {@code null}
+     * @return never {@code null}
+     * @throws SyntaxException if the parsed line has syntax errors
+     */
+    @Override
+    public ShellCommand parse(final String input) throws SyntaxException {
+<span class="fc" id="L90">        final List&lt;Token&gt; tokens = scanner.scan(input);</span>
+<span class="fc" id="L91">        final Token commandtoken = tokens.get(0);</span>
+
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (TokenType.KEYWORD != commandtoken.getType()) {</span>
+<span class="fc" id="L94">            throw new SyntaxException(&quot;Command expected as first input!&quot;);</span>
+        }
+
+<span class="fc" id="L97">        final MainCommandType command = commandMap.determineCommand(commandtoken);</span>
+<span class="fc" id="L98">        SubCommandType subCommand = commandMap.getDefaultSubCommand();</span>
+<span class="fc" id="L99">        int argumentBegin = 1;</span>
+
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        if (tokens.size() &gt; 1) {</span>
+<span class="fc" id="L102">            final Token secondToken = tokens.get(1);</span>
+
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">            if (secondToken.getType() == TokenType.KEYWORD) {</span>
+<span class="fc" id="L105">                final Token keyword = secondToken;</span>
+
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">                if (! commandMap.isSubCommand(keyword)) {</span>
+<span class="nc" id="L108">                    throw new SyntaxException(</span>
+                            String.format(&quot;Command '%s' followed by bad keyword '%s' as sub command!&quot;,
+                                          commandtoken.asString(), secondToken.asString()));
+                }
+
+<span class="fc" id="L113">                ++argumentBegin;</span>
+<span class="fc" id="L114">                subCommand = commandMap.determineSubCommand(keyword);</span>
+            }
+        }
+
+        final List&lt;Token&gt; arguments;
+
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        if (tokens.size() &gt; argumentBegin) {</span>
+<span class="fc" id="L121">            arguments = tokens.subList(argumentBegin, tokens.size());</span>
+        } else {
+<span class="fc" id="L123">            arguments = Lists.newArrayList();</span>
+        }
+
+<span class="fc" id="L126">        final ShellCommand cmd = new ShellCommand(command, subCommand, arguments);</span>
+<span class="fc" id="L127">        verifier.verifyCommand(cmd);</span>
+<span class="fc" id="L128">        return cmd;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

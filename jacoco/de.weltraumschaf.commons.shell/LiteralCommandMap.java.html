@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LiteralCommandMap.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Shell</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.shell</a> &gt; <span class="el_source">LiteralCommandMap.java</span></div><h1>LiteralCommandMap.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.shell;
+
+import de.weltraumschaf.commons.guava.Maps;
+import de.weltraumschaf.commons.token.Token;
+import de.weltraumschaf.commons.validate.Validate;
+import java.util.Map;
+
+/**
+ * Maps the literal string of an command to its enum type.
+ *
+ * This class is not thread safe!
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public abstract class LiteralCommandMap {
+
+    /**
+     * Map the literal command string to corresponding type enum.
+     */
+<span class="fc" id="L32">    private final Map&lt;String, MainCommandType&gt; mainCommands = Maps.newHashMap();</span>
+
+    /**
+     * Map the literal sub command string to corresponding type enum.
+     */
+<span class="fc" id="L37">    private final Map&lt;String, SubCommandType&gt; subCommands = Maps.newHashMap();</span>
+
+    /**
+     * Default sub command for commands w/o sub commands.
+     */
+    private final SubCommandType defaultSubCommand;
+
+    /**
+     * Dedicated constructor.
+     *
+     * @param defaultSubCommand sub command used for commands w/o sub command,
+     *                          usually a NONE type, must not be {@code null}
+     */
+    public LiteralCommandMap(final SubCommandType defaultSubCommand) {
+<span class="fc" id="L51">        super();</span>
+<span class="fc" id="L52">        this.defaultSubCommand = Validate.notNull(defaultSubCommand, &quot;defaultSubCommand&quot;);</span>
+<span class="fc" id="L53">        init();</span>
+<span class="fc" id="L54">    }</span>
+
+    /**
+     * Determines if the string literal value of the token is a main command.
+     *
+     * @param token token to check
+     * @return true if the token is a command else false
+     */
+    public final boolean isCommand(final Token token) {
+<span class="fc" id="L63">        return isCommand(token.asString());</span>
+    }
+
+    /**
+     * Determines if the string literal value is a main command.
+     *
+     * @param token token string to check
+     * @return true if the token is a command else false
+     */
+    public final boolean isCommand(final String token) {
+<span class="fc" id="L73">        return mainCommands.containsKey(token);</span>
+    }
+
+    /**
+     * Determines the appropriate main command type for given string token.
+     *
+     * Determining a non command token string will result in an exception.
+     *
+     * @param t token to check
+     * @return command main type
+     * // CHECKSTYLE:OFF
+     * @throws IllegalArgumentException if, token is not a main command
+     * // CHECKSTYLE:ON
+     */
+    public final MainCommandType determineCommand(final Token t) {
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (isCommand(t)) {</span>
+<span class="fc" id="L89">            return mainCommands.get(t.asString());</span>
+        }
+<span class="nc" id="L91">        throw new IllegalArgumentException(String.format(&quot;'%s' is not a command!&quot;, t.asString()));</span>
+    }
+
+    /**
+     * Determines if the string literal value of the token is a sub command.
+     *
+     * @param token token to check
+     * @return true if the token is a sub command else false
+     */
+    public final boolean isSubCommand(final Token token) {
+<span class="fc" id="L101">        return isSubCommand(token.asString());</span>
+    }
+
+    /**
+     * Determines if the string literal value is a sub command.
+     *
+     * @param token token string to check
+     * @return true if the token is a sub command else false
+     */
+    public final boolean isSubCommand(final String token) {
+<span class="fc" id="L111">        return subCommands.containsKey(token);</span>
+    }
+
+    /**
+     * Determines the appropriate sub command type for given string token.
+     *
+     * Determining a non sub command token string will result in an exception.
+     *
+     * @param t token to check
+     * @return command sub type
+     * // CHECKSTYLE:OFF
+     * @throws IllegalArgumentException if, token is not a sub command
+     * // CHECKSTYLE:ON
+     */
+    public final SubCommandType determineSubCommand(final Token t) {
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        if (isSubCommand(t)) {</span>
+<span class="fc" id="L127">            return subCommands.get(t.asString());</span>
+        }
+<span class="nc" id="L129">        throw new IllegalArgumentException(String.format(&quot;'%s' is not a sub command!&quot;, t.asString()));</span>
+    }
+
+    /**
+     * Get the default sub command for commands w/o sub commands.
+     *
+     * Usually your sub command enum should specify a special type for a non
+     * sub command.
+     *
+     * @return the enum type of the &quot;none&quot; sub command
+     */
+    public final SubCommandType getDefaultSubCommand() {
+<span class="fc" id="L141">        return defaultSubCommand;</span>
+    }
+
+
+    /**
+     * Return here the enum type which declares your main commands.
+     *
+     * @return never {@code null}
+     */
+    protected abstract Class&lt;? extends MainCommandType&gt; getMainCommandType();
+
+    /**
+     * Initializes the command map.
+     */
+    private void initMainCommandMap() {
+<span class="fc" id="L156">        final Class&lt;? extends MainCommandType&gt; mainCommandTypes = getMainCommandType();</span>
+
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">        if (!mainCommandTypes.isEnum()) {</span>
+<span class="nc" id="L159">            throw new IllegalArgumentException(</span>
+                String.format(&quot;Not an java.lang.Enum type returned by %s#getMainCommandType()!&quot;, getClass().getName()));
+        }
+
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        for (final MainCommandType t : mainCommandTypes.getEnumConstants()) {</span>
+<span class="fc" id="L164">            mainCommands.put(t.getLiteral(), t);</span>
+        }
+<span class="fc" id="L166">    }</span>
+
+    /**
+     * Initializes the sub command map.
+     */
+    private void initSubCommandMap() {
+<span class="fc" id="L172">        final Class&lt;? extends SubCommandType&gt; subCommandTypes = getSubCommandType();</span>
+
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">        if (!subCommandTypes.isEnum()) {</span>
+<span class="nc" id="L175">            throw new IllegalArgumentException(</span>
+                String.format(&quot;Not an java.lang.Enum type returned by %s#getSubCommandType()!&quot;, getClass().getName()));
+        }
+
+<span class="fc bfc" id="L179" title="All 2 branches covered.">        for (final SubCommandType t : subCommandTypes.getEnumConstants()) {</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">            if (t.getLiteral().isEmpty()) {</span>
+<span class="fc" id="L181">                continue; // Ignore to do not recognize empty strings as sub command, e.g. ythe NONE.</span>
+            }
+
+<span class="fc" id="L184">            subCommands.put(t.getLiteral(), t);</span>
+        }
+<span class="fc" id="L186">    }</span>
+
+    /**
+     * Return here the enum type which declares your sub commands.
+     *
+     * @return never {@code null}
+     */
+    protected abstract Class&lt;? extends SubCommandType&gt; getSubCommandType();
+
+    /**
+     * Not overideable template method called in constructor.
+     */
+    private void init() {
+<span class="fc" id="L199">        initMainCommandMap();</span>
+<span class="fc" id="L200">        initSubCommandMap();</span>
+<span class="fc" id="L201">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

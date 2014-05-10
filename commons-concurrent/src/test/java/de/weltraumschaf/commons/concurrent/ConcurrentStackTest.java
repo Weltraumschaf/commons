@@ -24,7 +24,40 @@ public class ConcurrentStackTest {
 
     @Test
     @Ignore
-    public void implementSomeTests() {
+    public void isEmpty() {
+
+    }
+    @Test
+    @Ignore
+    public void peek() {
+
+    }
+    @Test
+    @Ignore
+    public void pop() {
+
+    }
+    @Test
+    @Ignore
+    public void push() {
+
+    }
+
+    @Test
+    @Ignore
+    public void testHashCode() {
+
+    }
+
+    @Test
+    @Ignore
+    public void testEquals() {
+
+    }
+
+    @Test
+    @Ignore
+    public void testToString() {
 
     }
 }

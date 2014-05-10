@@ -9,7 +9,6 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-
 package de.weltraumschaf.commons.concurrent;
 
 import de.weltraumschaf.commons.guava.Objects;
@@ -74,7 +73,6 @@ class ConcurrentQueue<E> implements Queue<E> {
                     }
                 }
 
-
             }
         }
     }
@@ -101,6 +99,21 @@ class ConcurrentQueue<E> implements Queue<E> {
 
     }
 
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
     /**
      * Linked list entry.
      *
@@ -108,7 +121,8 @@ class ConcurrentQueue<E> implements Queue<E> {
      *
      * @param <T> type of entry object
      */
-    private static class Entry<T> {
+    private static final class Entry<T> {
+
         /**
          * Entry element.
          */

@@ -12,6 +12,7 @@
 
 package de.weltraumschaf.commons.concurrent;
 
+import de.weltraumschaf.commons.guava.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -71,6 +72,21 @@ class ConcurrentStack<E> implements Stack<E> {
         }
     }
 
+    @Override
+    public int hashCode() {
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        throw  new UnsupportedOperationException("Not implemented yet!");
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("Not implemented yet!");
+    }
+
     /**
      * Linked list entry.
      *
@@ -78,7 +94,7 @@ class ConcurrentStack<E> implements Stack<E> {
      *
      * @param <T> type of entry object
      */
-    private static class Entry<T> {
+    private static final class Entry<T> {
         /**
          * Entry element.
          */
@@ -98,6 +114,29 @@ class ConcurrentStack<E> implements Stack<E> {
             super();
             this.element = element;
             this.next = next;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(element, next);
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof Entry)) {
+                return false;
+            }
+
+            final Entry other = (Entry) obj;
+            return Objects.equal(element, other.element) && Objects.equal(next, other.next);
+        }
+
+        @Override
+        public String toString() {
+            final String nextHashcode = (null == next)
+                    ? "null"
+                    : Integer.toHexString(next.hashCode());
+            return String.format("%s (%s -> %s)", element, Integer.toHexString(hashCode()), nextHashcode);
         }
 
     }

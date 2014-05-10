@@ -9,7 +9,6 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
-
 package de.weltraumschaf.commons.concurrent;
 
 import org.junit.Ignore;
@@ -24,7 +23,37 @@ public class ConcurrentQueueTest {
 
     @Test
     @Ignore
-    public void implementSomeTests() {
+    public void isEmpty() {
+
+    }
+
+    @Test
+    @Ignore
+    public void add() {
+
+    }
+
+    @Test
+    @Ignore
+    public void get() {
+
+    }
+
+    @Test
+    @Ignore
+    public void testHashCode() {
+
+    }
+
+    @Test
+    @Ignore
+    public void testEquals() {
+
+    }
+
+    @Test
+    @Ignore
+    public void testToString() {
 
     }
 }

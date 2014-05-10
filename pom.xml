@@ -22,7 +22,7 @@
 
     <groupId>de.weltraumschaf.commons</groupId>
     <artifactId>reactor</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-alpha</version>
     <packaging>pom</packaging>
 
     <name>Commons</name>
@@ -382,4 +382,8 @@
         </plugins>
     </build>
 
+
+  <scm>
+    <tag>1.0.0-alpha</tag>
+  </scm>
 </project>

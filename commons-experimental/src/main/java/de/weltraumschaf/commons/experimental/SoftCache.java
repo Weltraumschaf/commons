@@ -11,6 +11,7 @@
  */
 package de.weltraumschaf.commons.experimental;
 
+import de.weltraumschaf.commons.validate.Validate;
 import java.lang.ref.SoftReference;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -53,6 +54,10 @@ public class SoftCache<K, V> {
 
         if (null == reference || null == reference.get()) {
             final V value = finder.find(key);
+
+            if (null == value) {
+                throw new NullPointerException(String.format("No value fond for key '%s'!", key));
+            }
             add(key, value);
             return value;
         }
@@ -67,14 +72,8 @@ public class SoftCache<K, V> {
      * @param value must not be {@code null}
      */
     public void add(final K key, final V value) {
-        if (null == key) {
-            throw new NullPointerException("Parameter 'key' must not be null!");
-        }
-
-        if (null == value) {
-            throw new NullPointerException("Parameter 'value' must not be null!");
-        }
-
+        Validate.notNull(key, "key");
+        Validate.notNull(value, "value");
         final SoftReference<V> reference = data.put(key, new SoftReference<V>(value));
 
         if (null != reference) {
@@ -105,11 +104,7 @@ public class SoftCache<K, V> {
      * @param f must not be {@code null}
      */
     public void finder(final Finder<K, V> f) {
-        if (null == f) {
-            throw new NullPointerException("Parameter 'f' must not be null!");
-        }
-
-        finder = f;
+        finder = Validate.notNull(f, "f");
     }
 
     /**

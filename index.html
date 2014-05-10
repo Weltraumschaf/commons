@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20140511" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Weltraumschaf's Commons Java Library - Common Utility Classes for Java</title>
+    <title>Commons Validate - Commons Validate</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -38,7 +38,7 @@
         <div class="container-fluid">
           <div id="banner">
         <div class="pull-left">
-                                                  <a href="index.html" id="bannerLeft" title="Weltraumschaf's Commons Java Library">
+                                                  <a href="../index.html" id="bannerLeft" title="Weltraumschaf's Commons Java Library">
                 <h2>Weltraumschaf's Commons Java Library</h2>
                 </a>
                       </div>
@@ -79,89 +79,27 @@
                 <ul class="nav nav-list">
                     <li class="nav-header">Commons</li>
                                 
-      <li class="active">
+      <li>
     
-            <a href="#"><i class="none"></i>Home</a>
-          </li>
+                          <a href="../index.html" title="Home">
+          <i class="none"></i>
+        Home</a>
+            </li>
                   
       <li>
     
-                          <a href="history.html" title="History">
+                          <a href="../history.html" title="History">
           <i class="none"></i>
         History</a>
             </li>
                   
       <li>
     
-                          <a href="versions.html" title="Versions">
+                          <a href="../versions.html" title="Versions">
           <i class="none"></i>
         Versions</a>
             </li>
-                              <li class="nav-header">Modules</li>
-                                
-      <li>
-    
-                          <a href="application/index.html" title="Commons Application">
-          <i class="none"></i>
-        Commons Application</a>
-            </li>
-                  
-      <li>
-    
-                          <a href="concurrent/index.html" title="Commons Concurrent">
-          <i class="none"></i>
-        Commons Concurrent</a>
-            </li>
-                  
-      <li>
-    
-                          <a href="experimental/index.html" title="Commons Experimental">
-          <i class="none"></i>
-        Commons Experimental</a>
-            </li>
-                  
-      <li>
-    
-                          <a href="guava/index.html" title="Commons Guava">
-          <i class="none"></i>
-        Commons Guava</a>
-            </li>
-                  
-      <li>
-    
-                          <a href="shell/index.html" title="Commons Shell">
-          <i class="none"></i>
-        Commons Shell</a>
-            </li>
-                  
-      <li>
-    
-                          <a href="swing/index.html" title="Commons Swing">
-          <i class="none"></i>
-        Commons Swing</a>
-            </li>
-                  
-      <li>
-    
-                          <a href="system/index.html" title="Commons System">
-          <i class="none"></i>
-        Commons System</a>
-            </li>
-                  
-      <li>
-    
-                          <a href="testing/index.html" title="Commons Testing">
-          <i class="none"></i>
-        Commons Testing</a>
-            </li>
-                  
-      <li>
-    
-                          <a href="validate/index.html" title="Commons Validate">
-          <i class="none"></i>
-        Commons Validate</a>
-            </li>
-                              <li class="nav-header">Reports</li>
+                                        <li class="nav-header">Reports</li>
                                                                                                                                                                                                                                                               
       <li>
     
@@ -239,7 +177,7 @@
             </li>
               </ul>
         </li>
-                                                                                                                                                                                
+                                                                                                                                                                                                                                      
       <li>
     
                           <a href="project-reports.html" title="Project Reports">
@@ -266,61 +204,9 @@
                         
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Common Utility Classes for Java</h1>
-<p>In this library I collect classes I&#x2019;m using in several projects to minimize code duplication over the projects.</p>
-<div class="section">
-<h2>Goal<a name="Goal"></a></h2>
-<p>Goal of this class library is to share common functionality to reduce duplicated code. Further goal is to have no external dependencies. Only external dependencies are <a class="externalLink" href="http://www.junit.org/">JUnit</a> and <a class="externalLink" href="http://code.google.com/p/mockito/">Mockito</a> for testing and <a class="externalLink" href="http://findbugs.sourceforge.net/">Findbugs</a> annotations to suppress some warnings.</p></div>
-<div class="section">
-<h2>Usage<a name="Usage"></a></h2>
-<p>Add this <tt>&lt;dependency&gt;</tt> to your <a class="externalLink" href="http://maven.apache.org/">Maven</a> pom.xml:</p>
-
-<div class="source">
-<pre>&lt;dependencies&gt;
-
-    &lt;!-- ... --&gt;
-
-    &lt;dependency&gt;
-        &lt;!-- http://weltraumschaf.github.com/commons/ --&gt;
-        &lt;groupId&gt;de.weltraumschaf.commons&lt;/groupId&gt;
-        &lt;artifactId&gt;MODULE-NAME&lt;/artifactId&gt;
-        &lt;version&gt;1.0.0&lt;/version&gt;
-    &lt;/dependency&gt;
-
-    &lt;!-- ... --&gt;
-
-&lt;dependencies&gt;
-</pre></div>
-<p>Available modules (artifact id) are:</p>
-
-<ul>
-  
-<li><a href="application/index.html">application</a></li>
-  
-<li><a href="concurrent/index.html">concurrent</a></li>
-  
-<li><a href="experimental/index.html">experimental</a></li>
-  
-<li><a href="guava/index.html">guava</a></li>
-  
-<li><a href="shell/index.html">shell</a></li>
-  
-<li><a href="swing/index.html">swing</a></li>
-  
-<li><a href="system/index.html">system</a></li>
-  
-<li><a href="validate/index.html">validate</a></li>
-</ul></div>
-<div class="section">
-<h2>File Signatures<a name="File_Signatures"></a></h2>
-<p>To receive the keys type:</p>
-
-<div class="source">
-<pre>$&gt; gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 45585598
-</pre></div></div>
-<div class="section">
-<h2>Deployment<a name="Deployment"></a></h2>
-<p>This artefact is deployed to Maven Central Repository along with this <a class="externalLink" href="http://maven.apache.org/guides/mini/guide-central-repository-upload.html">guide</a>.</p></div>
+            <h1>Commons Validate</h1>
+<p>Provides classes to validate input. It&#x2019;s like the validate methods from Apache&#x2019;s <a class="externalLink" href="https://commons.apache.org/proper/commons-lang/">commongs Lang</a>, but with less load of other classes. This module is designed to be very small and only provides validate methods.</p>
+<p>See <a href="apidocs/de/weltraumschaf/commons/validate/Validate.html">Validate</a> class for examples.</p>
                   </div>
             </div>
           </div>

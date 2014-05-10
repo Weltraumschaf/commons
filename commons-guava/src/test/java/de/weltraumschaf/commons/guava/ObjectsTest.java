@@ -73,7 +73,7 @@ public class ObjectsTest {
     }
 
     @Test
-    public void toStringHelper_object() {
+    public void toStringHelper_object_namedValues() {
         final Objects.ToStringHelper sut = Objects.toStringHelper(new Object());
         assertThat(sut.toString(), is(equalTo("Object{}")));
 
@@ -88,10 +88,58 @@ public class ObjectsTest {
 
         sut.add("arr", new ArrayList<Object>());
         assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[]}")));
+
+        sut.add("boolean", true);
+        assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[], boolean=true}")));
+
+        sut.add("char", 'c');
+        assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c}")));
+
+        sut.add("double", 3.14d);
+        assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c, double=3.14}")));
+
+        sut.add("float", 2.7f);
+        assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c, double=3.14, float=2.7}")));
+
+        sut.add("long", 23L);
+        assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c, double=3.14, float=2.7, long=23}")));
     }
 
     @Test
-    public void toStringHelper_class() {
+    public void toStringHelper_object_unnamedValues() {
+        final Objects.ToStringHelper sut = Objects.toStringHelper(new Object());
+        assertThat(sut.toString(), is(equalTo("Object{}")));
+
+        sut.addValue("foo");
+        assertThat(sut.toString(), is(equalTo("Object{foo}")));
+
+        sut.addValue(null);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null}")));
+
+        sut.addValue(42);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42}")));
+
+        sut.addValue(new ArrayList<Object>());
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, []}")));
+
+        sut.addValue(true);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, [], true}")));
+
+        sut.addValue('c');
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, [], true, c}")));
+
+        sut.addValue(3.14d);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, [], true, c, 3.14}")));
+
+        sut.addValue(2.7f);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, [], true, c, 3.14, 2.7}")));
+
+        sut.addValue(23L);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, [], true, c, 3.14, 2.7, 23}")));
+    }
+
+    @Test
+    public void toStringHelper_class_namedValues() {
         final Objects.ToStringHelper sut = Objects.toStringHelper(Object.class);
         assertThat(sut.toString(), is(equalTo("Object{}")));
 
@@ -106,10 +154,58 @@ public class ObjectsTest {
 
         sut.add("arr", new ArrayList<Object>());
         assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[]}")));
+
+        sut.add("boolean", true);
+        assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[], boolean=true}")));
+
+        sut.add("char", 'c');
+        assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c}")));
+
+        sut.add("double", 3.14d);
+        assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c, double=3.14}")));
+
+        sut.add("float", 2.7f);
+        assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c, double=3.14, float=2.7}")));
+
+        sut.add("long", 23L);
+        assertThat(sut.toString(), is(equalTo("Object{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c, double=3.14, float=2.7, long=23}")));
     }
 
     @Test
-    public void toStringHelper_string() {
+    public void toStringHelper_class_unnamedValues() {
+        final Objects.ToStringHelper sut = Objects.toStringHelper(Object.class);
+        assertThat(sut.toString(), is(equalTo("Object{}")));
+
+        sut.addValue("foo");
+        assertThat(sut.toString(), is(equalTo("Object{foo}")));
+
+        sut.addValue(null);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null}")));
+
+        sut.addValue(42);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42}")));
+
+        sut.addValue(new ArrayList<Object>());
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, []}")));
+
+        sut.addValue(true);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, [], true}")));
+
+        sut.addValue('c');
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, [], true, c}")));
+
+        sut.addValue(3.14d);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, [], true, c, 3.14}")));
+
+        sut.addValue(2.7f);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, [], true, c, 3.14, 2.7}")));
+
+        sut.addValue(23L);
+        assertThat(sut.toString(), is(equalTo("Object{foo, null, 42, [], true, c, 3.14, 2.7, 23}")));
+    }
+
+    @Test
+    public void toStringHelper_string_namedValues() {
         final Objects.ToStringHelper sut = Objects.toStringHelper("Test");
         assertThat(sut.toString(), is(equalTo("Test{}")));
 
@@ -124,17 +220,64 @@ public class ObjectsTest {
 
         sut.add("arr", new ArrayList<Object>());
         assertThat(sut.toString(), is(equalTo("Test{foo=bar, snafu=null, num=42, arr=[]}")));
-    }
 
-    @Test(expected = NullPointerException.class)
-    public void checkNotNull_throwsExcpetionForNull() {
-        Objects.checkNotNull(null);
+        sut.add("boolean", true);
+        assertThat(sut.toString(), is(equalTo("Test{foo=bar, snafu=null, num=42, arr=[], boolean=true}")));
+
+        sut.add("char", 'c');
+        assertThat(sut.toString(), is(equalTo("Test{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c}")));
+
+        sut.add("double", 3.14d);
+        assertThat(sut.toString(), is(equalTo("Test{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c, double=3.14}")));
+
+        sut.add("float", 2.7f);
+        assertThat(sut.toString(), is(equalTo("Test{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c, double=3.14, float=2.7}")));
+
+        sut.add("long", 23L);
+        assertThat(sut.toString(), is(equalTo("Test{foo=bar, snafu=null, num=42, arr=[], boolean=true, char=c, double=3.14, float=2.7, long=23}")));
     }
 
     @Test
-    public void checkNotNull() {
-        final Object object = new Object();
-        assertThat(Objects.checkNotNull(object), is(sameInstance(object)));
+    public void toStringHelper_string_unnamedValues() {
+        final Objects.ToStringHelper sut = Objects.toStringHelper("Test");
+        assertThat(sut.toString(), is(equalTo("Test{}")));
+
+        sut.addValue("foo");
+        assertThat(sut.toString(), is(equalTo("Test{foo}")));
+
+        sut.addValue(null);
+        assertThat(sut.toString(), is(equalTo("Test{foo, null}")));
+
+        sut.addValue(42);
+        assertThat(sut.toString(), is(equalTo("Test{foo, null, 42}")));
+
+        sut.addValue(new ArrayList<Object>());
+        assertThat(sut.toString(), is(equalTo("Test{foo, null, 42, []}")));
+
+        sut.addValue(true);
+        assertThat(sut.toString(), is(equalTo("Test{foo, null, 42, [], true}")));
+
+        sut.addValue('c');
+        assertThat(sut.toString(), is(equalTo("Test{foo, null, 42, [], true, c}")));
+
+        sut.addValue(3.14d);
+        assertThat(sut.toString(), is(equalTo("Test{foo, null, 42, [], true, c, 3.14}")));
+
+        sut.addValue(2.7f);
+        assertThat(sut.toString(), is(equalTo("Test{foo, null, 42, [], true, c, 3.14, 2.7}")));
+
+        sut.addValue(23L);
+        assertThat(sut.toString(), is(equalTo("Test{foo, null, 42, [], true, c, 3.14, 2.7, 23}")));
     }
 
+@Test
+    public void toStringHelper_ommitNullValues() {
+        final Objects.ToStringHelper sut = Objects.toStringHelper("Test");
+        sut.omitNullValues();
+        sut.addValue("foo");
+        sut.addValue(null);
+        sut.addValue(42);
+
+        assertThat(sut.toString(), is(equalTo("Test{foo, 42}")));
+    }
 }

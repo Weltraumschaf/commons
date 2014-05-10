@@ -15,6 +15,7 @@
  */
 package de.weltraumschaf.commons.guava;
 
+import de.weltraumschaf.commons.validate.Validate;
 import java.util.Arrays;
 
 /**
@@ -161,24 +162,6 @@ public final class Objects {
     }
 
     /**
-     * Ensures that an object reference passed as a parameter to the calling method is not null.
-     *
-     * @param <T> type of reference
-     * @param reference an object reference
-     * @return the non-null reference that was validated
-     * CHECKSTYLE:OFF
-     * @throws NullPointerException if {@code reference} is null
-     * CHECKSTYLE:ON
-     */
-    public static <T> T checkNotNull(final T reference) {
-        if (reference == null) {
-            throw new NullPointerException();
-        }
-
-        return reference;
-    }
-
-    /**
      * {@link Class#getSimpleName()} is not GWT compatible yet, so we provide our own implementation.
      *
      * @param clazz the {@link Class} of the instance
@@ -239,7 +222,7 @@ public final class Objects {
          * @param className must not be {@code null}
          */
         private ToStringHelper(final String className) {
-            this.className = checkNotNull(className);
+            this.className = Validate.notNull(className, "className");
         }
 
         /**
@@ -517,7 +500,7 @@ public final class Objects {
         private ToStringHelper addHolder(final String name, final Object value) {
             final ValueHolder valueHolder = addHolder();
             valueHolder.value = value;
-            valueHolder.name = checkNotNull(name);
+            valueHolder.name = Validate.notNull(name);
             return this;
         }
 

@@ -23,6 +23,14 @@
         <maven.findbugs.includefilterfile>${project.parent.basedir}/src/main/config/findbugs-include.xml</maven.findbugs.includefilterfile>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>de.weltraumschaf.commons</groupId>
+            <artifactId>validate</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>

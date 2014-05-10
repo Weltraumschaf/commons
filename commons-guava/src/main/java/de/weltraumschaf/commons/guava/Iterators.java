@@ -15,6 +15,7 @@
  */
 package de.weltraumschaf.commons.guava;
 
+import de.weltraumschaf.commons.validate.Validate;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -45,8 +46,8 @@ final class Iterators {
      * @return whether the collection was modified or not
      */
     public static <T> boolean addAll(final Collection<T> addTo, final Iterator<? extends T> iterator) {
-        Objects.checkNotNull(addTo);
-        Objects.checkNotNull(iterator);
+        Validate.notNull(addTo, "addTo");
+        Validate.notNull(iterator, "iterator");
         boolean wasModified = false;
 
         while (iterator.hasNext()) {

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ShutDownHook.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Application</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.application</a> &gt; <span class="el_source">ShutDownHook.java</span></div><h1>ShutDownHook.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.application;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Holds {@link Runnable callbacks} to execute them in any order.
+ *
+ * Example:
+ * &lt;pre&gt;{@code
+ * final ShutDownHook hook = new ShutDownHook();
+ * hook.register(new Runnable() {
+ *
+ *      &amp;#064;Override
+ *      public void  run() {
+ *          // Your shutdown code.
+ *      }
+ *
+ * });
+ * }&lt;/pre&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public class ShutDownHook extends Thread {
+
+    /**
+     * Default logger for this class.
+     */
+<span class="fc" id="L44">    private static final Logger DEFAULT_LOGGER = Logger.getLogger(ShutDownHook.class.getName());</span>
+
+    /**
+     * Set of callbacks.
+     */
+<span class="fc" id="L49">    private final Set&lt;Runnable&gt; callbacks = new HashSet&lt;Runnable&gt;();</span>
+
+    /**
+     * Logger instance.
+     */
+    private final Logger logger;
+
+    /**
+     * Initializes {@link #logger} with {@link #DEFAULT_LOGGER}.
+     */
+    public ShutDownHook() {
+<span class="fc" id="L60">        this(DEFAULT_LOGGER);</span>
+<span class="fc" id="L61">    }</span>
+
+    /**
+     * Designated constructor.
+     *
+     * @param logger Logger to use by this class.
+     */
+    public ShutDownHook(final Logger logger) {
+<span class="fc" id="L69">        super();</span>
+<span class="fc" id="L70">        this.logger = logger;</span>
+<span class="fc" id="L71">    }</span>
+
+    /**
+     * Iterates over all {@link #callbacks} and run them.
+     */
+    @Override
+    public void run() {
+<span class="fc" id="L78">        final Iterator&lt;Runnable&gt; iterator = callbacks.iterator();</span>
+
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        while (iterator.hasNext()) {</span>
+            try {
+<span class="fc" id="L82">                iterator.next().run();</span>
+<span class="fc" id="L83">            } catch (Exception ex) {</span>
+<span class="fc" id="L84">                logger.log(Level.SEVERE, &quot;Exception thrown by running a callback!&quot;, ex);</span>
+<span class="fc" id="L85">            }</span>
+        }
+<span class="fc" id="L87">    }</span>
+
+    /**
+     * Registers a callback.
+     *
+     * @param callback Runnable object.
+     * @return Return itself for method chaining.
+     */
+    public ShutDownHook register(final Runnable callback) {
+<span class="fc" id="L96">        callbacks.add(callback);</span>
+<span class="fc" id="L97">        return this;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Version.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Application</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.application</a> &gt; <span class="el_source">Version.java</span></div><h1>Version.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.application;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+/**
+ * Reads the current version from a property file.
+ *
+ * &lt;p&gt;
+ * The property files only defines one property. Import is to switch resource filtering on in your POM
+ * for that properties file.
+ * &lt;/p&gt;
+ * &lt;pre&gt;
+ *  version=1.0.0
+ * &lt;/pre&gt;
+ *
+ * &lt;p&gt;
+ * This property file may be processed by a Maven filter to provide the verison from
+ * the pom.xml:
+ * &lt;/p&gt;
+ * &lt;pre&gt;
+ *  version=${pom.version}
+ * &lt;/pre&gt;
+ *
+ * &lt;p&gt;
+ * If you save the file in &lt;kbd&gt;src/main/resources/foo/bar/version.properties&lt;/kbd&gt;
+ * you can use the version this way:
+ * &lt;/p&gt;
+ *
+ * &lt;pre&gt;{@code
+ * Version version = new Version(&quot;/foo/bar/version.properties&quot;);
+ * version.load()
+ * println(version.getVersion);
+ * }&lt;/pre&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class Version {
+
+    /**
+     * Location of property file.
+     */
+    private final String propertyFileName;
+
+    /**
+     * Indicates whether the properties are already loaded or not.
+     */
+    private boolean propertiesLoaded;
+
+    /**
+     * Properties.
+     */
+<span class="fc" id="L66">    private final Properties properties = new Properties();</span>
+
+    /**
+     * Private constructor for singleton.
+     *
+     * @param propertyFileName Location of file, e.g. /de/weltraumschaf/commons/version.properties.
+     */
+    public Version(final String propertyFileName) {
+<span class="fc" id="L74">        super();</span>
+<span class="fc" id="L75">        this.propertyFileName = propertyFileName;</span>
+<span class="fc" id="L76">    }</span>
+
+    /**
+     * Opens the properties file and loads it.
+     *
+     * Only loads th property file once.
+     *
+     * @throws IOException On IO errors of the property file.
+     */
+    public void load() throws IOException {
+<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        if (!propertiesLoaded) {</span>
+<span class="fc" id="L87">            loadImpl();</span>
+<span class="fc" id="L88">            propertiesLoaded = true;</span>
+        }
+<span class="fc" id="L90">    }</span>
+
+    /**
+     * Encapsulates the file loading.
+     *
+     * @throws IOException On IO errors of the property file.
+     */
+    void loadImpl() throws IOException {
+<span class="fc" id="L98">        InputStream in = null;</span>
+
+        try {
+<span class="fc" id="L101">            in = getClass().getResourceAsStream(propertyFileName);</span>
+<span class="fc" id="L102">            properties.load(in);</span>
+<span class="fc" id="L103">            in.close();</span>
+        } finally {
+<span class="pc bpc" id="L105" title="3 of 4 branches missed.">            if (null != in) {</span>
+<span class="pc" id="L106">                in.close();</span>
+            }
+        }
+<span class="fc" id="L109">    }</span>
+
+    /**
+     * Get the version string.
+     *
+     * @return The version string.
+     */
+    public String getVersion() {
+<span class="fc" id="L117">        return properties.getProperty(PropertyNames.VERSION.toString(),</span>
+                                      PropertyNames.VERSION.getDefaultValue());
+    }
+
+    /**
+     * Returns the version string.
+     *
+     * @return Same as {@link #getVersion()}.
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L128">        return getVersion();</span>
+    }
+
+    /**
+     * Available properties in the file.
+     */
+<span class="pc" id="L134">    enum PropertyNames {</span>
+
+        /**
+         * Version property.
+         */
+<span class="fc" id="L139">        VERSION(&quot;version&quot;, &quot;n/a&quot;);</span>
+
+        /**
+         * Property name.
+         */
+        private final String name;
+
+        /**
+         * Default value.
+         */
+        private final String defaultValue;
+
+        /**
+         * Initializes the enum with the property name.
+         *
+         * @param name The property name.
+         * @param defaultValue Fall back value.
+         */
+<span class="fc" id="L157">        PropertyNames(final String name, final String defaultValue) {</span>
+<span class="fc" id="L158">            this.name = name;</span>
+<span class="fc" id="L159">            this.defaultValue = defaultValue;</span>
+<span class="fc" id="L160">        }</span>
+
+        /**
+         * Returns the property name.
+         *
+         * @return String containing the property name.
+         */
+        @Override
+        public String toString() {
+<span class="fc" id="L169">            return name;</span>
+        }
+
+        /**
+         * Get the fallback value.
+         *
+         * @return Return default value string.
+         */
+        public String getDefaultValue() {
+<span class="fc" id="L178">            return defaultValue;</span>
+        }
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

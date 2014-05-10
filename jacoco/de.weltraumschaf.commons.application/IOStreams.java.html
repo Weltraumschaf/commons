@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>IOStreams.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Application</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.application</a> &gt; <span class="el_source">IOStreams.java</span></div><h1>IOStreams.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.application;
+
+import de.weltraumschaf.commons.validate.Validate;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+
+/**
+ * Immutable aggregate object which contains STDIN, STDOUT and STDERR streams.
+ *
+ * &lt;p&gt;
+ * It is not good practice to clutter production code with calls to
+ * {@link System#out}, {@link System#err}, and {@link System#in}. But on the
+ * other hand most applications must do I/O to the user. This aggregate object
+ * contains I/O streams to pass around as injected dependency. It is only
+ * necessary to the systems IO only at the main applications entry point:
+ * &lt;/p&gt;
+ *
+ * &lt;pre&gt;{@code
+ * public void main(final String[] args) {
+ *      final IOStreams io = new IOStreams(System.in, System.out, System.err);
+ *
+ *      // Pass around the io object to your client code.
+ *
+ *      System.exit(0);
+ * }
+ * }&lt;/pre&gt;
+ *
+ * &lt;p&gt;
+ * In the test code it will be easy to replace the I/O with mocks:
+ * &lt;/p&gt;
+ *
+ * &lt;pre&gt;{@code
+ * &amp;#064;Test public void someTestWithIO() {
+ *      final IOStreams io = new IOStreams(mock(InputStream.class),
+ *                                   mock(PrintStream.class),
+ *                                   mock(PrintStream.class));
+ *
+ *      // Pass around the io object to your client code and assert something.
+ * }
+ * }&lt;/pre&gt;
+ *
+ * &lt;p&gt;
+ * As a convenience method for creating an I/O streams object with the default I/O streams
+ * of {@link System} you can use {@link IOStreams#newDefault()}.
+ * &lt;/p&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class IOStreams implements IO {
+
+    /**
+     * Default character encoding for out put print streams.
+     */
+    public static final String DEFAULT_ENCODING = &quot;UTF-8&quot;;
+
+    /**
+     * Standard input stream.
+     */
+    private final InputStream stdin;
+
+    /**
+     * Standard output stream.
+     */
+    private final PrintStream stdout;
+
+    /**
+     * Standard error stream.
+     */
+    private final PrintStream stderr;
+
+    /**
+     * Initializes the streams.
+     *
+     * @param stdin must not be {@code null}
+     * @param stdout must not be {@code null}
+     * @param stderr must not be {@code null}
+     */
+    public IOStreams(final InputStream stdin, final PrintStream stdout, final PrintStream stderr) {
+<span class="fc" id="L92">        super();</span>
+<span class="fc" id="L93">        this.stdin  = Validate.notNull(stdin, &quot;stdin&quot;);</span>
+<span class="fc" id="L94">        this.stdout = Validate.notNull(stdout, &quot;stdout&quot;);</span>
+<span class="fc" id="L95">        this.stderr = Validate.notNull(stderr, &quot;stderr&quot;);</span>
+<span class="fc" id="L96">    }</span>
+
+    /**
+     * Get standard errorln output stream.
+     *
+     * @return Print stream object.
+     */
+    @Override
+    public PrintStream getStderr() {
+<span class="fc" id="L105">        return stderr;</span>
+    }
+
+    /**
+     * Get standard input stream.
+     *
+     * @return Input stream object.
+     */
+    @Override
+    public InputStream getStdin() {
+<span class="fc" id="L115">        return stdin;</span>
+    }
+
+    /**
+     * Get standard output stream.
+     *
+     * @return Print stream object.
+     */
+    @Override
+    public PrintStream getStdout() {
+<span class="fc" id="L125">        return stdout;</span>
+    }
+
+    /**
+     * Creates same as {@link #newDefault(java.lang.String)} but with {@link #DEFAULT_ENCODING} as encoding.
+     *
+     * @return Return always new instance.
+     * @throws UnsupportedEncodingException If system does not support {@link #DEFAULT_ENCODING encoding}.
+     */
+    public static IOStreams newDefault() throws UnsupportedEncodingException {
+<span class="fc" id="L135">        return newDefault(DEFAULT_ENCODING);</span>
+    }
+
+    /**
+     * Creates a new streams object initialized with {@link System#in}, {@link System#out}, and {@link System#err}.
+     *
+     * The output {@link PrintStream &quot;print streams&quot;} get {@link #DEFAULT_ENCODING} as encoding set.
+     * Also the {@link System#out}, and {@link System#err} are changed with a copy of the original
+     * print stream with the encoding.
+     *
+     * @param encoding must not be {@code null} or empty
+     * @return return always new instance
+     * @throws UnsupportedEncodingException if system does not support passed encoding
+     */
+    public static IOStreams newDefault(final String encoding) throws UnsupportedEncodingException {
+<span class="fc" id="L150">        Validate.notEmpty(encoding, &quot;encoding&quot;);</span>
+<span class="fc" id="L151">        final PrintStream out = new PrintStream(System.out, true, encoding);</span>
+<span class="fc" id="L152">        final PrintStream err = new PrintStream(System.err, true, encoding);</span>
+<span class="fc" id="L153">        System.setOut(out);</span>
+<span class="fc" id="L154">        System.setErr(err);</span>
+<span class="fc" id="L155">        return new IOStreams(System.in, out, err);</span>
+    }
+
+    /**
+     * Prints exception stack trace.
+     *
+     * @param ex must not be {@code null}
+     */
+    @Override
+    public void printStackTrace(final Throwable ex) {
+<span class="fc" id="L165">        Validate.notNull(ex, &quot;ex&quot;).printStackTrace(getStderr());</span>
+<span class="fc" id="L166">    }</span>
+
+    /**
+     * Prints error line.
+     *
+     * @param str String to print.
+     */
+    @Override
+    public void errorln(final String str) {
+<span class="fc" id="L175">        getStderr().println(str);</span>
+<span class="fc" id="L176">    }</span>
+
+    /**
+     * Prints error.
+     *
+     * @param str String to print.
+     */
+    @Override
+    public void error(final String str) {
+<span class="fc" id="L185">        getStderr().print(str);</span>
+<span class="fc" id="L186">    }</span>
+
+    /**
+     * Prints string line.
+     *
+     * @param str String to print.
+     */
+    @Override
+    public void println(final String str) {
+<span class="fc" id="L195">        getStdout().println(str);</span>
+<span class="fc" id="L196">    }</span>
+
+    /**
+     * Prints string.
+     *
+     * @param str String to print.
+     */
+    @Override
+    public void print(final String str) {
+<span class="fc" id="L205">        getStdout().print(str);</span>
+<span class="fc" id="L206">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

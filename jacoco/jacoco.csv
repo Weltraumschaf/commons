@@ -1,9 +1,6 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Commons System,de.weltraumschaf.commons.system,BrowserLauncher.CliCommands,9,108,0,0,0,13,2,4,2,4
-Commons System,de.weltraumschaf.commons.system,ExitableAdapter,0,8,0,0,0,3,0,2,0,2
-Commons System,de.weltraumschaf.commons.system,BrowserLauncher,24,112,2,4,5,31,4,10,2,8
-Commons System,de.weltraumschaf.commons.system,DefaultExiter,6,0,0,0,3,0,2,0,2,0
-Commons System,de.weltraumschaf.commons.system,BrowserLauncher.DefaultExecutor,0,13,0,0,0,4,0,2,0,2
-Commons System,de.weltraumschaf.commons.system,BrowserLauncher.new Object() {...},3,23,0,0,0,1,0,1,0,1
-Commons System,de.weltraumschaf.commons.system,NullExiter,4,0,0,0,2,0,2,0,2,0
-Commons System,de.weltraumschaf.commons.system,OperatingSystem,5,100,0,6,0,19,1,9,1,6
+Commons Application,de.weltraumschaf.commons.application,InvokableAdapter,20,100,2,2,5,38,2,13,0,13
+Commons Application,de.weltraumschaf.commons.application,Version.PropertyNames,9,33,0,0,0,8,2,4,2,4
+Commons Application,de.weltraumschaf.commons.application,Version,8,52,4,2,0,17,3,5,0,5
+Commons Application,de.weltraumschaf.commons.application,ShutDownHook,0,48,0,2,0,16,0,6,0,5
+Commons Application,de.weltraumschaf.commons.application,IOStreams,0,90,0,0,0,25,0,11,0,11

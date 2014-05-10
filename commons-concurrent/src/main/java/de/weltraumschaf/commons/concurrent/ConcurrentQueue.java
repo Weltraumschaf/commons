@@ -184,13 +184,5 @@ final class ConcurrentQueue<E> implements Queue<E> {
             return Objects.equal(value, other.value) && Objects.equal(next, other.next);
         }
 
-        @Override
-        public String toString() {
-            final String nextHashcode = (null == next)
-                    ? "null"
-                    : Integer.toHexString(next.hashCode());
-            return String.format("%s (%s -> %s)", value, Integer.toHexString(hashCode()), nextHashcode);
-        }
-
     }
 }

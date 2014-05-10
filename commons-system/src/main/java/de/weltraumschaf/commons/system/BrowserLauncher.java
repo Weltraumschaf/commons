@@ -127,7 +127,7 @@ public final class BrowserLauncher {
      * Opens browser on GNU/Linux.
      *
      * @param url URL to open.
-     * @return <code>true</code> if started
+     * @return {@code true} if started
      */
     private boolean openLinuxBrowser(final String url) {
         // See if the default browser is Konqueror by resolving the symlink.
@@ -201,7 +201,7 @@ public final class BrowserLauncher {
      * Opens browser on Mac OS X.
      *
      * @param url URL to open.
-     * @return <code>true</code> if started
+     * @return {@code true} if started
      */
     private boolean openMacBrowser(final String url) {
         try {
@@ -217,7 +217,7 @@ public final class BrowserLauncher {
      * Opens browser on Microsoft Windows.
      *
      * @param url URL to open.
-     * @return <code>true</code> if started
+     * @return {@code true} if started
      */
     private boolean openWindowsBrowser(final String url) {
         try {

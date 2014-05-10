@@ -9,7 +9,6 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-
 package de.weltraumschaf.commons.concurrent;
 
 import de.weltraumschaf.commons.guava.Objects;
@@ -40,8 +39,8 @@ class ConcurrentStack<E> implements Stack<E> {
     public E peek() {
         final Entry<E> currentTop = top.get();
         return null == currentTop
-            ? null
-            : currentTop.element;
+                ? null
+                : currentTop.value;
     }
 
     @Override
@@ -56,7 +55,7 @@ class ConcurrentStack<E> implements Stack<E> {
             }
 
             if (top.compareAndSet(currentTop, currentTop.next)) {
-                return currentTop.element;
+                return currentTop.value;
             }
         }
     }
@@ -74,17 +73,44 @@ class ConcurrentStack<E> implements Stack<E> {
 
     @Override
     public int hashCode() {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        final Entry<E> currentTop = top.get();
+
+        if (null == currentTop) {
+            return 0;
+        }
+
+        return currentTop.hashCode();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        throw  new UnsupportedOperationException("Not implemented yet!");
+    public boolean equals(final Object obj) {
+        if (!(obj instanceof ConcurrentStack)) {
+            return false;
+        }
+
+        final ConcurrentStack other = (ConcurrentStack) obj;
+        return Objects.equal(top.get(), other.top.get());
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("Not implemented yet!");
+        final StringBuilder buffer = new StringBuilder();
+        buffer.append(getClass().getSimpleName()).append('[');
+
+        Entry<E> element = top.get();
+        boolean first = true;
+
+        while (null != element) {
+            if (!first) {
+                buffer.append(", ");
+            }
+
+            buffer.append(element.value);
+            element = element.next;
+            first = false;
+        }
+
+        return buffer.append(']').toString();
     }
 
     /**
@@ -95,10 +121,11 @@ class ConcurrentStack<E> implements Stack<E> {
      * @param <T> type of entry object
      */
     private static final class Entry<T> {
+
         /**
          * Entry element.
          */
-        private final T element;
+        private final T value;
         /**
          * Link to next entry, maybe {@code null}.
          */
@@ -112,13 +139,13 @@ class ConcurrentStack<E> implements Stack<E> {
          */
         Entry(final T element, final Entry<T> next) {
             super();
-            this.element = element;
+            this.value = element;
             this.next = next;
         }
 
         @Override
         public int hashCode() {
-            return Objects.hashCode(element, next);
+            return Objects.hashCode(value, next);
         }
 
         @Override
@@ -128,7 +155,7 @@ class ConcurrentStack<E> implements Stack<E> {
             }
 
             final Entry other = (Entry) obj;
-            return Objects.equal(element, other.element) && Objects.equal(next, other.next);
+            return Objects.equal(value, other.value) && Objects.equal(next, other.next);
         }
 
         @Override
@@ -136,7 +163,7 @@ class ConcurrentStack<E> implements Stack<E> {
             final String nextHashcode = (null == next)
                     ? "null"
                     : Integer.toHexString(next.hashCode());
-            return String.format("%s (%s -> %s)", element, Integer.toHexString(hashCode()), nextHashcode);
+            return String.format("%s (%s -> %s)", value, Integer.toHexString(hashCode()), nextHashcode);
         }
 
     }

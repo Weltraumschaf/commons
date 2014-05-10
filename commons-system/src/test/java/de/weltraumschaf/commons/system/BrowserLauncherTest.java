@@ -36,45 +36,52 @@ public class BrowserLauncherTest {
     // CHECKSTYLE:ON
 
     @Test
-    public void BrowserCommands_getCommand_windows() {
+    public void CliCommands_getCommand_windows() {
         assertThat(
-                BrowserLauncher.BrowserCommands.WINDOWS.getCommand("foobar"),
+                BrowserLauncher.CliCommands.WINDOWS.getCommand("foobar"),
                 is(equalTo("cmd /c start foobar")));
     }
 
     @Test
-    public void BrowserCommands_getCommand_macOsX() {
+    public void CliCommands_getCommand_macOsX() {
         assertThat(
-                BrowserLauncher.BrowserCommands.MAC_OS.getCommand("foobar"),
+                BrowserLauncher.CliCommands.MAC_OS.getCommand("foobar"),
                 is(equalTo("open foobar")));
     }
 
     @Test
-    public void BrowserCommands_getCommand_GNU_X_wwwBrowser() {
+    public void CliCommands_getCommand_GNU_X_wwwBrowser() {
         assertThat(
-                BrowserLauncher.BrowserCommands.GNU_X_WWW_BROWSER.getCommand("foobar"),
+                BrowserLauncher.CliCommands.GNU_X_WWW_BROWSER.getCommand("foobar"),
                 is(equalTo("x-www-browser foobar")));
     }
 
     @Test
-    public void BrowserCommands_getCommand_GNUR_firefox() {
+    public void CliCommands_getCommand_GNUR_firefox() {
         assertThat(
-                BrowserLauncher.BrowserCommands.GNU_FIREFOX.getCommand("foobar"),
+                BrowserLauncher.CliCommands.GNU_FIREFOX.getCommand("foobar"),
                 is(equalTo("firefox foobar")));
     }
 
     @Test
-    public void BrowserCommands_getCommand_GNU_mozilla() {
+    public void CliCommands_getCommand_GNU_mozilla() {
         assertThat(
-                BrowserLauncher.BrowserCommands.GNU_MOZILLA.getCommand("foobar"),
+                BrowserLauncher.CliCommands.GNU_MOZILLA.getCommand("foobar"),
                 is(equalTo("mozilla foobar")));
     }
 
     @Test
-    public void BrowserCommands_getCommand_GNU_konqueror() {
+    public void CliCommands_getCommand_GNU_konqueror() {
         assertThat(
-                BrowserLauncher.BrowserCommands.GNU_KONQUEROR.getCommand("foobar"),
+                BrowserLauncher.CliCommands.GNU_KONQUEROR.getCommand("foobar"),
                 is(equalTo("konqueror foobar")));
+    }
+
+    @Test
+    public void CliCommands_getCommand_UNIX_which() {
+        assertThat(
+                BrowserLauncher.CliCommands.GNU_KONQUEROR.getCommand("foobar"),
+                is(equalTo("which foobar")));
     }
 
     @Test(expected = NullPointerException.class)

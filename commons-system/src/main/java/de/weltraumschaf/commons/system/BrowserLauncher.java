@@ -135,7 +135,7 @@ public final class BrowserLauncher {
 
         try {
             // Find out the location of the x-www-browser link from path.
-            final Process process = execCommand("which", GNU_X_WWW_BROWSER_CMD);
+            final Process process = execCommand(CliCommands.UNIX_WHICH, GNU_X_WWW_BROWSER_CMD);
             final BufferedInputStream ins = new BufferedInputStream(process.getInputStream());
             @SuppressWarnings(
                     value = "DM_DEFAULT_ENCODING",
@@ -163,7 +163,7 @@ public final class BrowserLauncher {
         // except if we found that it is Konqueror.
         if (!isDefaultKonqueror) {
             try {
-                execCommand(GNU_X_WWW_BROWSER_CMD, url);
+                execCommand(CliCommands.GNU_X_WWW_BROWSER, url);
                 return true;
             } catch (final IOException ex) { // NOPMD
                 // Try the next one.
@@ -172,7 +172,7 @@ public final class BrowserLauncher {
 
         // Try firefox
         try {
-            execCommand(GNU_FIREFOX_CMD, url);
+            execCommand(CliCommands.GNU_FIREFOX, url);
             return true;
         } catch (final IOException ex) { // NOPMD
             // Try the next one.
@@ -180,7 +180,7 @@ public final class BrowserLauncher {
 
         // Try mozilla
         try {
-            execCommand(GNU_MOZILLA_CMD, url);
+            execCommand(CliCommands.GNU_MOZILLA, url);
             return true;
         } catch (final IOException ex) { // NOPMD
             // Try the next one.
@@ -188,7 +188,7 @@ public final class BrowserLauncher {
 
         // Try konqueror
         try {
-            execCommand(GNU_KONQUEROR_CMD, url);
+            execCommand(CliCommands.GNU_KONQUEROR, url);
             return true;
         } catch (final IOException ex) { // NOPMD
             // Try the next one.
@@ -205,7 +205,7 @@ public final class BrowserLauncher {
      */
     private boolean openMacBrowser(final String url) {
         try {
-            execCommand(MAC_OS_CMD, url);
+            execCommand(CliCommands.MAC_OS, url);
         } catch (final IOException e) {
             return false;
         }
@@ -221,7 +221,7 @@ public final class BrowserLauncher {
      */
     private boolean openWindowsBrowser(final String url) {
         try {
-            execCommand(WINDOWS_CMD, url);
+            execCommand(CliCommands.WINDOWS, url);
         } catch (final IOException e) {
             return false;
         }
@@ -237,9 +237,8 @@ public final class BrowserLauncher {
      * @return A new {@link java.io.Process} object for managing the subprocess
      * @throws IOException if an I/O error occurs
      */
-    private Process execCommand(final String cmd, final String argument) throws IOException {
-        return runtime.exec(
-                String.format("%s %s", Validate.notEmpty(cmd, "cmd"), Validate.notEmpty(argument, "argument")));
+    private Process execCommand(final CliCommands cmd, final String argument) throws IOException {
+        return runtime.exec(cmd.getCommand(argument));
     }
 
     /**
@@ -287,7 +286,7 @@ public final class BrowserLauncher {
     /**
      * Collects browser open commands for the CLI of various operating systems and browsers.
      */
-    static enum BrowserCommands {
+    static enum CliCommands {
 
         /**
          * Windows command to open an URL.
@@ -312,7 +311,11 @@ public final class BrowserLauncher {
         /**
          * Konqueror Linux command to open an URL.
          */
-        GNU_KONQUEROR("konqueror %s");
+        GNU_KONQUEROR("konqueror %s"),
+        /**
+         * Command to find a binary on UNIX systems.
+         */
+        UNIX_WHICH("which %s");
 
         /**
          * Holds the command format string.
@@ -324,7 +327,7 @@ public final class BrowserLauncher {
          *
          * @param command must not be {@code null} or empty
          */
-        BrowserCommands(final String command) {
+        CliCommands(final String command) {
             this.command = Validate.notEmpty(command);
         }
 

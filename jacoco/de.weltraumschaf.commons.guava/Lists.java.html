@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Lists.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Guava</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.guava</a> &gt; <span class="el_source">Lists.java</span></div><h1>Lists.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2007 The Guava Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package de.weltraumschaf.commons.guava;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * Minimal set of {@code com.google.common.collect.Lists}.
+ *
+ * @author Kevin Bourrillion
+ * @author Mike Bostock
+ * @author Louis Wasserman
+ * @since 2.0 (imported from Google Collections Library)
+ */
+public final class Lists {
+
+    /**
+     * Hidden for pure static factory.
+     */
+    private Lists() {
+<span class="fc" id="L37">        super();</span>
+<span class="fc" id="L38">        throw new UnsupportedOperationException(&quot;Constructor must not be called by reflection!&quot;);</span>
+    }
+
+    /**
+     * Creates a &lt;em&gt;mutable&lt;/em&gt;, empty {@link java.util.ArrayList} instance.
+     *
+     * @param &lt;E&gt; type of elements
+     * @return a new, empty {@code ArrayList}
+     */
+    public static &lt;E&gt; List&lt;E&gt; newArrayList() {
+<span class="fc" id="L48">        return new ArrayList&lt;E&gt;();</span>
+    }
+
+    /**
+     * Used to avoid http://bugs.sun.com/view_bug.do?bug_id=6558557 problem.
+     *
+     * @param &lt;T&gt; type of elements
+     * @param iterable iterable to cast
+     * @return the iterable casted to collection
+     */
+    private static &lt;T&gt; Collection&lt;T&gt; cast(final Iterable&lt;T&gt; iterable) {
+<span class="nc" id="L59">        return (Collection&lt;T&gt;) iterable;</span>
+    }
+
+    /**
+     * Creates a &lt;em&gt;mutable&lt;/em&gt; {@link java.util.ArrayList} instance containing the given elements.
+     *
+     * @param &lt;E&gt; type of elements
+     * @param elements the elements that the list should contain, in order
+     * @return a new {@code ArrayList} containing those elements
+     */
+    public static &lt;E&gt; List&lt;E&gt; newArrayList(final Iterable&lt;? extends E&gt; elements) {
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        if (elements == null) {</span>
+<span class="fc" id="L71">            throw new NullPointerException();</span>
+        }
+
+        // Let ArrayList's sizing logic work, if possible
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (elements instanceof Collection) {</span>
+<span class="nc" id="L76">            return new ArrayList&lt;E&gt;(cast(elements));</span>
+        } else {
+<span class="nc" id="L78">            return newArrayList(elements.iterator());</span>
+        }
+    }
+
+    /**
+     * Creates a &lt;em&gt;mutable&lt;/em&gt; {@link java.util.ArrayList} instance containing the given elements.
+     *
+     * @param &lt;E&gt; type of elements
+     * @param elements the elements that the list should contain, in order
+     * @return a new {@code ArrayList} containing those elements
+     */
+    public static &lt;E&gt; List&lt;E&gt; newArrayList(final Iterator&lt;? extends E&gt; elements) {
+<span class="fc" id="L90">        final List&lt;E&gt; list = newArrayList();</span>
+<span class="fc" id="L91">        Iterators.addAll(list, elements);</span>
+<span class="fc" id="L92">        return list;</span>
+    }
+
+    /**
+     * Creates a &lt;em&gt;mutable&lt;/em&gt; {@link java.util.ArrayList} instance containing the given elements.
+     *
+     * @param &lt;E&gt; type of elements
+     * @param elements the elements that the list should contain, in order
+     * @return a new {@code ArrayList} containing those elements
+     */
+    @SafeVarargs
+    public static &lt;E&gt; List&lt;E&gt; newArrayList(final E ... elements) {
+<span class="fc" id="L104">        final List&lt;E&gt; list = newArrayList();</span>
+
+<span class="fc bfc" id="L106" title="All 2 branches covered.">        for (final E element : elements) {</span>
+<span class="fc" id="L107">            list.add(element);</span>
+        }
+
+<span class="fc" id="L110">        return list;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

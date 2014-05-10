@@ -100,38 +100,9 @@ public final class BrowserLauncher {
      * @return {@code true} if started
      */
     private Process openLinuxBrowser(final String url) throws IOException {
-        // See if the default browser is Konqueror by resolving the symlink.
-        boolean isDefaultKonqueror = false;
-
-        try {
-            // Find out the location of the x-www-browser link from path.
-            final Process process = execCommand(CliCommands.UNIX_WHICH, CliCommands.GNU_X_WWW_BROWSER.getCommand());
-            final BufferedInputStream ins = new BufferedInputStream(process.getInputStream());
-            @SuppressWarnings(
-                    value = "DM_DEFAULT_ENCODING",
-                    justification = "We readfrom process IO, so hopefully this uses the platform encoding.")
-            final BufferedReader bufreader = new BufferedReader(new InputStreamReader(ins));
-            final String defaultLinkPath = bufreader.readLine();
-            ins.close();
-            bufreader.close();
-
-            // The path is null if the link did not exist.
-            if (defaultLinkPath != null) {
-                // See if the default browser is Konqueror.
-                final File file = new File(defaultLinkPath);
-                final String canonical = file.getCanonicalPath();
-
-                if (canonical.contains(CliCommands.GNU_KONQUEROR.getCommand())) {
-                    isDefaultKonqueror = true;
-                }
-            }
-        } catch (final IOException ex) { // NOPMD
-            // The symlink was probably not found, so this is ok.
-        }
-
         // Try x-www-browser, which is symlink to the default browser,
         // except if we found that it is Konqueror.
-        if (!isDefaultKonqueror) {
+        if (!isKonquerorTheDefaultBrowser()) {
             try {
                 return execCommand(CliCommands.GNU_X_WWW_BROWSER, url);
             } catch (final IOException ex) { // NOPMD
@@ -157,6 +128,41 @@ public final class BrowserLauncher {
         }
 
         throw new IOException();
+    }
+
+    /**
+     * See if the default browser is Konqueror by resolving the symlink.
+     *
+     * @return {@code true} if Konqueror is default browser, else {@code false}
+     */
+    private boolean isKonquerorTheDefaultBrowser() {
+        try {
+            // Find out the location of the x-www-browser link from path.
+            final Process process = execCommand(CliCommands.UNIX_WHICH, CliCommands.GNU_X_WWW_BROWSER.getCommand());
+            final BufferedInputStream ins = new BufferedInputStream(process.getInputStream());
+            @SuppressWarnings(
+                    value = "DM_DEFAULT_ENCODING",
+                    justification = "We readfrom process IO, so hopefully this uses the platform encoding.")
+            final BufferedReader bufreader = new BufferedReader(new InputStreamReader(ins));
+            final String defaultLinkPath = bufreader.readLine();
+            bufreader.close();
+            ins.close();
+
+            // The path is null if the link did not exist.
+            if (defaultLinkPath != null) {
+                // See if the default browser is Konqueror.
+                final File file = new File(defaultLinkPath);
+                final String canonical = file.getCanonicalPath();
+
+                if (canonical.contains(CliCommands.GNU_KONQUEROR.getCommand())) {
+                    return true;
+                }
+            }
+        } catch (final IOException ex) { // NOPMD
+            // The symlink was probably not found, so this is ok.
+        }
+
+        return false;
     }
 
     /**

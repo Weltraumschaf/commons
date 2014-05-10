@@ -14,7 +14,6 @@ package de.weltraumschaf.commons.system;
 import java.io.IOException;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

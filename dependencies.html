@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20140510" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Commons Swing - Project Dependencies</title>
+    <title>Commons Testing - Project Dependencies</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -211,11 +211,11 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
-<td>de.weltraumschaf.commons</td>
-<td><a class="externalLink" href="http://weltraumschaf.github.com/commons/system/">system</a></td>
-<td>1.0.0-alpha</td>
+<td>junit</td>
+<td><a class="externalLink" href="http://junit.org">junit</a></td>
+<td>4.11</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></td></tr>
+<td><a class="externalLink" href="http://www.opensource.org/licenses/cpl1.0.txt">Common Public License Version 1.0</a></td></tr>
 <tr class="a">
 <td>net.sourceforge.findbugs</td>
 <td><a class="externalLink" href="http://findbugs.sourceforge.net/">annotations</a></td>
@@ -239,18 +239,12 @@
 <td>jar</td>
 <td><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></td></tr>
 <tr class="a">
-<td>junit</td>
-<td><a class="externalLink" href="http://junit.org">junit</a></td>
-<td>4.11</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.opensource.org/licenses/cpl1.0.txt">Common Public License Version 1.0</a></td></tr>
-<tr class="b">
 <td>org.hamcrest</td>
 <td><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-library">hamcrest-library</a></td>
 <td>1.3</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.mockito</td>
 <td><a class="externalLink" href="http://www.mockito.org">mockito-core</a></td>
 <td>1.9.5</td>
@@ -270,11 +264,11 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
-<td>de.weltraumschaf.commons</td>
-<td><a class="externalLink" href="http://weltraumschaf.github.com/commons/validate/">validate</a></td>
-<td>1.0.0-alpha</td>
+<td>org.hamcrest</td>
+<td><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-core">hamcrest-core</a></td>
+<td>1.3</td>
 <td>jar</td>
-<td><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></td></tr></table></div><a name="Project_Transitive_Dependencies_test"></a>
+<td><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></td></tr></table></div><a name="Project_Transitive_Dependencies_test"></a>
 <div class="section">
 <h3>test<a name="test"></a></h3>
 <p>The following is a list of test dependencies for this project. These dependencies are only required to compile and run unit tests for the application:</p>
@@ -286,12 +280,6 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
-<td>org.hamcrest</td>
-<td><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-core">hamcrest-core</a></td>
-<td>1.3</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></td></tr>
-<tr class="a">
 <td>org.objenesis</td>
 <td><a class="externalLink" href="http://objenesis.googlecode.com/svn/docs/index.html">objenesis</a></td>
 <td>1.0</td>
@@ -319,35 +307,36 @@
 <div class="section">
 <h3>Dependency Tree<a name="Dependency_Tree"></a></h3>
 <ul>
-<li>de.weltraumschaf.commons:swing:jar:1.0.0-alpha <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<li>de.weltraumschaf.commons:testing:jar:1.0.0-alpha <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
-<th>Commons Swing</th></tr>
+<th>Commons Testing</th></tr>
 <tr class="b">
 <td>
 <p><b>Description: </b>TBD</p>
-<p><b>URL: </b><a class="externalLink" href="http://weltraumschaf.github.com/commons/swing/">http://weltraumschaf.github.com/commons/swing/</a></p>
+<p><b>URL: </b><a class="externalLink" href="http://weltraumschaf.github.com/commons/testing/">http://weltraumschaf.github.com/commons/testing/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></p></td></tr></table></div>
 <ul>
-<li>de.weltraumschaf.commons:system:jar:1.0.0-alpha (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
+<li>junit:junit:jar:4.11 (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
-<th>Commons System</th></tr>
+<th>JUnit</th></tr>
 <tr class="b">
 <td>
-<p><b>Description: </b>TBD</p>
-<p><b>URL: </b><a class="externalLink" href="http://weltraumschaf.github.com/commons/system/">http://weltraumschaf.github.com/commons/system/</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></p></td></tr></table></div>
+<p><b>Description: </b>JUnit is a regression testing framework written by Erich Gamma and Kent Beck.
+        It is used by the developer who implements unit tests in Java.</p>
+<p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/cpl1.0.txt">Common Public License Version 1.0</a></p></td></tr></table></div>
 <ul>
-<li>de.weltraumschaf.commons:validate:jar:1.0.0-alpha (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
+<li>org.hamcrest:hamcrest-core:jar:1.3 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
-<th>Commons Validate</th></tr>
+<th>Hamcrest Core</th></tr>
 <tr class="b">
 <td>
-<p><b>Description: </b>TBD</p>
-<p><b>URL: </b><a class="externalLink" href="http://weltraumschaf.github.com/commons/validate/">http://weltraumschaf.github.com/commons/validate/</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></p></td></tr></table></div></li></ul></li>
+<p><b>Description: </b>This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.</p>
+<p><b>URL: </b><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-core">https://github.com/hamcrest/JavaHamcrest/hamcrest-core</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td></tr></table></div></li></ul></li>
 <li>net.sourceforge.findbugs:annotations:jar:1.3.2 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
@@ -357,17 +346,7 @@
 <p><b>Description: </b>Annotation supports the FindBugs tool</p>
 <p><b>URL: </b><a class="externalLink" href="http://findbugs.sourceforge.net/">http://findbugs.sourceforge.net/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.gnu.org/licenses/lgpl.html">GNU Lesser Public License</a></p></td></tr></table></div></li>
-<li>junit:junit:jar:4.11 (test) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
-<table border="0" class="table table-striped">
-<tr class="a">
-<th>JUnit</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>JUnit is a regression testing framework written by Erich Gamma and Kent Beck.
-        It is used by the developer who implements unit tests in Java.</p>
-<p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/cpl1.0.txt">Common Public License Version 1.0</a></p></td></tr></table></div></li>
-<li>org.hamcrest:hamcrest-library:jar:1.3 (test) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
+<li>org.hamcrest:hamcrest-library:jar:1.3 (test) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>Hamcrest library</th></tr>
@@ -375,18 +354,8 @@
 <td>
 <p><b>Description: </b>Hamcrest library of matcher implementations.</p>
 <p><b>URL: </b><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-library">https://github.com/hamcrest/JavaHamcrest/hamcrest-library</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td></tr></table></div>
-<ul>
-<li>org.hamcrest:hamcrest-core:jar:1.3 (test) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
-<table border="0" class="table table-striped">
-<tr class="a">
-<th>Hamcrest Core</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.</p>
-<p><b>URL: </b><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-core">https://github.com/hamcrest/JavaHamcrest/hamcrest-core</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td></tr></table></div></li></ul></li>
-<li>org.mockito:mockito-core:jar:1.9.5 (test) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
+<p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td></tr></table></div></li>
+<li>org.mockito:mockito-core:jar:1.9.5 (test) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>Mockito</th></tr>
@@ -396,7 +365,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://www.mockito.org">http://www.mockito.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://code.google.com/p/mockito/wiki/License">The MIT License</a></p></td></tr></table></div>
 <ul>
-<li>org.objenesis:objenesis:jar:1.0 (test) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
+<li>org.objenesis:objenesis:jar:1.0 (test) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>Objenesis</th></tr>
@@ -405,7 +374,7 @@
 <p><b>Description: </b>A library for instantiating Java objects</p>
 <p><b>URL: </b><a class="externalLink" href="http://objenesis.googlecode.com/svn/docs/index.html">http://objenesis.googlecode.com/svn/docs/index.html</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://objenesis.googlecode.com/svn/docs/license.html">MIT License</a></p></td></tr></table></div></li></ul></li>
-<li>com.googlecode.multithreadedtc:multithreadedtc:jar:1.01 (test) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
+<li>com.googlecode.multithreadedtc:multithreadedtc:jar:1.01 (test) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>multithreadedtc</th></tr>
@@ -417,7 +386,7 @@
 <div class="section">
 <h2>Licenses<a name="Licenses"></a></h2>
 <p><b>New BSD License: </b>Hamcrest Core, Hamcrest library, multithreadedtc</p>
-<p><b>THE BEER-WARE LICENSE: </b>Commons Swing, Commons System, Commons Validate</p>
+<p><b>THE BEER-WARE LICENSE: </b>Commons Testing</p>
 <p><b>Common Public License Version 1.0: </b>JUnit</p>
 <p><b>MIT License: </b>Objenesis</p>
 <p><b>The MIT License: </b>Mockito</p>
@@ -440,22 +409,6 @@
 <td>10</td>
 <td>1</td>
 <td>1.5</td>
-<td>debug</td></tr>
-<tr class="a">
-<td>system-1.0.0-alpha.jar</td>
-<td>11.04 kB</td>
-<td>23</td>
-<td>11</td>
-<td>1</td>
-<td>1.6</td>
-<td>debug</td></tr>
-<tr class="b">
-<td>validate-1.0.0-alpha.jar</td>
-<td>3.33 kB</td>
-<td>12</td>
-<td>1</td>
-<td>1</td>
-<td>1.6</td>
 <td>debug</td></tr>
 <tr class="a">
 <td>junit-4.11.jar</td>
@@ -514,29 +467,29 @@
 <th>JDK Rev</th>
 <th>Debug</th></tr>
 <tr class="b">
-<td>9</td>
-<td>1.83 MB</td>
-<td>1,750</td>
-<td>1,031</td>
-<td>114</td>
-<td>1.6</td>
-<td>9</td></tr>
+<td>7</td>
+<td>1.81 MB</td>
+<td>1,715</td>
+<td>1,019</td>
+<td>112</td>
+<td>1.5</td>
+<td>7</td></tr>
 <tr class="a">
 <td>compile: 3</td>
-<td>compile: 25.66 kB</td>
-<td>compile: 64</td>
-<td>compile: 31</td>
-<td>compile: 4</td>
+<td>compile: 294.55 kB</td>
+<td>compile: 347</td>
+<td>compile: 297</td>
+<td>compile: 33</td>
 <td>-</td>
 <td>compile: 3</td></tr>
 <tr class="b">
-<td>test: 6</td>
-<td>test: 1.80 MB</td>
-<td>test: 1,686</td>
-<td>test: 1,000</td>
-<td>test: 110</td>
+<td>test: 4</td>
+<td>test: 1.53 MB</td>
+<td>test: 1,368</td>
+<td>test: 722</td>
+<td>test: 79</td>
 <td>-</td>
-<td>test: 6</td></tr></table></div><a name="Dependency_Repository_Locations"></a>
+<td>test: 4</td></tr></table></div><a name="Dependency_Repository_Locations"></a>
 <div class="section">
 <h2>Dependency Repository Locations<a name="Dependency_Repository_Locations"></a></h2>
 <table border="0" class="table table-striped">
@@ -573,16 +526,6 @@
 <td>-</td>
 <td><a class="externalLink" href="http://repo.maven.apache.org/maven2/com/googlecode/multithreadedtc/multithreadedtc/1.01/multithreadedtc-1.01.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="a">
-<td>de.weltraumschaf.commons:system:jar:1.0.0-alpha</td>
-<td>-</td>
-<td>-</td>
-<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/de/weltraumschaf/commons/system/1.0.0-alpha/system-1.0.0-alpha.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
-<td>de.weltraumschaf.commons:validate:jar:1.0.0-alpha</td>
-<td>-</td>
-<td>-</td>
-<td><a class="externalLink" href="http://repo.maven.apache.org/maven2/de/weltraumschaf/commons/validate/1.0.0-alpha/validate-1.0.0-alpha.jar"><img alt="Found at http://repo.maven.apache.org/maven2" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
 <td>junit:junit:jar:4.11</td>
 <td>-</td>
 <td>-</td>
@@ -618,10 +561,10 @@
 <th>jboss-public-repository-group</th>
 <th>central</th></tr>
 <tr class="b">
-<td>9 (compile: 3, test: 6)</td>
+<td>7 (compile: 3, test: 4)</td>
 <td>0</td>
 <td>1</td>
-<td>9</td></tr></table></div>
+<td>7</td></tr></table></div>
                   </div>
             </div>
           </div>

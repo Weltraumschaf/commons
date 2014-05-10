@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CapturingPrintStream.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Testing</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.testing</a> &gt; <span class="el_source">CapturingPrintStream.java</span></div><h1>CapturingPrintStream.java</h1><pre class="source lang-java linenums">/*
+ *  LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt;
+ */
+package de.weltraumschaf.commons.testing;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.util.Locale;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+
+/**
+ * Captures the written bytes instead of printing them to any output stream.
+ *
+ * &lt;p&gt;
+ * This type of object is useful in tests to capture output written to {@link System#out} or {@link System#err}:
+ * &lt;/p&gt;
+ *
+ * &lt;pre&gt;{@code
+ * final CapturingPrintStream out = new CapturingPrintStream();
+ * System.setOut(out);
+ *
+ * // ... executes to code which calls System.out()
+ *
+ * final String output = out.getCapturedOutput();
+ * }&lt;/pre&gt;
+ *
+ * &lt;p&gt;
+ * This capturing output streams buffers everything written to {@link OutputStream#write(int)}, if you want to reset the
+ * buffer you must create a new instance.
+ * &lt;/p&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class CapturingPrintStream extends PrintStream {
+
+    /**
+     * Used to collect captured output.
+     */
+<span class="fc" id="L51">    private final ByteArrayOutputStream capturedOutput = new ByteArrayOutputStream();</span>
+    /**
+     * used to do the real work.
+     */
+    private PrintStream delegate;
+    /**
+     * Encoding of the captured bytes.
+     */
+    private final String encoding;
+
+    /**
+     * Creates the print stream with platform encoding.
+     *
+     * @throws UnsupportedEncodingException if the platform encoding is not supported
+     */
+    public CapturingPrintStream() throws UnsupportedEncodingException {
+<span class="fc" id="L67">        this(Charset.defaultCharset().name());</span>
+<span class="fc" id="L68">    }</span>
+
+    /**
+     * Dedicated constructor.
+     *
+     * &lt;p&gt;
+     * Initializes parents output stream with a dummy stream.
+     * &lt;/p&gt;
+     *
+     * @param encoding must not be {@code null} or empty
+     * @throws UnsupportedEncodingException if the platform encoding is not supported
+     */
+    public CapturingPrintStream(final String encoding) throws UnsupportedEncodingException {
+<span class="fc" id="L81">        super(new OutputStream() {</span>
+            @Override
+            public void write(int b) throws IOException {
+                // We ignore everything here.
+<span class="nc" id="L85">            }</span>
+        }, true, encoding);
+<span class="fc" id="L87">        delegate = new PrintStream(capturedOutput, true, encoding);</span>
+<span class="fc" id="L88">        this.encoding = encoding;</span>
+<span class="fc" id="L89">    }</span>
+
+    /**
+     * Only for testing.
+     *
+     * @return never {@code null}
+     */
+    PrintStream getDelegate() {
+<span class="fc" id="L97">        return delegate;</span>
+    }
+
+    /**
+     * Injection point for testing.
+     *
+     * @param delegate must not be {@code null}
+     */
+    void setDelegate(final PrintStream delegate) {
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        if (null == delegate) {</span>
+<span class="nc" id="L107">            throw new NullPointerException(&quot;Parameter 'delegate' must not be null!&quot;);</span>
+        }
+
+<span class="fc" id="L110">        this.delegate = delegate;</span>
+<span class="fc" id="L111">    }</span>
+
+    /**
+     * Returns the whole string of everything written to this stream.
+     *
+     * @return never {@code null}
+     * @throws UnsupportedEncodingException if the platform encoding is not supported
+     */
+    public String getCapturedOutput() throws UnsupportedEncodingException {
+<span class="fc" id="L120">        return capturedOutput.toString(encoding);</span>
+    }
+
+    /**
+     * Resets the captured output.
+     *
+     * @return self for chaining
+     */
+    public CapturingPrintStream reset() {
+<span class="fc" id="L129">        capturedOutput.reset();</span>
+<span class="fc" id="L130">        return this;</span>
+    }
+
+    @Override
+    public void flush() {
+<span class="fc" id="L135">        delegate.flush();</span>
+<span class="fc" id="L136">    }</span>
+
+    @Override
+    public void close() {
+<span class="nc" id="L140">        delegate.close();</span>
+<span class="nc" id="L141">    }</span>
+
+    @Override
+    public boolean checkError() {
+<span class="fc" id="L145">        return delegate.checkError();</span>
+    }
+
+    @Override
+    public void write(int b) {
+<span class="fc" id="L150">        delegate.write(b);</span>
+<span class="fc" id="L151">    }</span>
+
+    @Override
+    public void write(final byte[] buf, final int off, final int len) {
+<span class="fc" id="L155">        delegate.write(buf, off, len);</span>
+<span class="fc" id="L156">    }</span>
+
+    @Override
+    public void print(final boolean b) {
+<span class="fc" id="L160">        delegate.print(b);</span>
+<span class="fc" id="L161">    }</span>
+
+    @Override
+    public void print(final char c) {
+<span class="fc" id="L165">        delegate.print(c);</span>
+<span class="fc" id="L166">    }</span>
+
+    @Override
+    public void print(final int i) {
+<span class="fc" id="L170">        delegate.print(i);</span>
+<span class="fc" id="L171">    }</span>
+
+    @Override
+    public void print(final long l) {
+<span class="fc" id="L175">        delegate.print(l);</span>
+<span class="fc" id="L176">    }</span>
+
+    @Override
+    public void print(final float f) {
+<span class="fc" id="L180">        delegate.print(f);</span>
+<span class="fc" id="L181">    }</span>
+
+    @Override
+    public void print(final double d) {
+<span class="fc" id="L185">        delegate.print(d);</span>
+<span class="fc" id="L186">    }</span>
+
+    @Override
+    public void print(final char[] s) {
+<span class="fc" id="L190">        delegate.print(s);</span>
+<span class="fc" id="L191">    }</span>
+
+    @Override
+    public void print(final String s) {
+<span class="fc" id="L195">        delegate.print(s);</span>
+<span class="fc" id="L196">    }</span>
+
+    @Override
+    public void print(final Object obj) {
+<span class="fc" id="L200">        delegate.print(obj);</span>
+<span class="fc" id="L201">    }</span>
+
+    @Override
+    public void println() {
+<span class="fc" id="L205">        delegate.println();</span>
+<span class="fc" id="L206">    }</span>
+
+    @Override
+    public void println(boolean x) {
+<span class="fc" id="L210">        delegate.println(x);</span>
+<span class="fc" id="L211">    }</span>
+
+    @Override
+    public void println(char x) {
+<span class="fc" id="L215">        delegate.println(x);</span>
+<span class="fc" id="L216">    }</span>
+
+    @Override
+    public void println(final int x) {
+<span class="fc" id="L220">        delegate.println(x);</span>
+<span class="fc" id="L221">    }</span>
+
+    @Override
+    public void println(final long x) {
+<span class="fc" id="L225">        delegate.println(x);</span>
+<span class="fc" id="L226">    }</span>
+
+    @Override
+    public void println(final float x) {
+<span class="fc" id="L230">        delegate.println(x);</span>
+<span class="fc" id="L231">    }</span>
+
+    @Override
+    public void println(double x) {
+<span class="fc" id="L235">        delegate.println(x);</span>
+<span class="fc" id="L236">    }</span>
+
+    @Override
+    public void println(final char[] x) {
+<span class="fc" id="L240">        delegate.println(x);</span>
+<span class="fc" id="L241">    }</span>
+
+    @Override
+    public void println(final String x) {
+<span class="fc" id="L245">        delegate.println(x);</span>
+<span class="fc" id="L246">    }</span>
+
+    @Override
+    public void println(final Object x) {
+<span class="fc" id="L250">        delegate.println(x);</span>
+<span class="fc" id="L251">    }</span>
+
+    @Override
+    public PrintStream printf(final String format, final Object... args) {
+<span class="fc" id="L255">        return delegate.printf(format, args);</span>
+    }
+
+    @Override
+    public PrintStream printf(final Locale l, final String format, final Object... args) {
+<span class="fc" id="L260">        return delegate.printf(l, format, args);</span>
+    }
+
+    @Override
+    public PrintStream format(final String format, final Object... args) {
+<span class="fc" id="L265">        return delegate.format(format, args);</span>
+    }
+
+    @Override
+    public PrintStream format(final Locale l, final String format, final Object... args) {
+<span class="fc" id="L270">        return delegate.format(l, format, args);</span>
+    }
+
+    @Override
+    public PrintStream append(final CharSequence csq) {
+<span class="fc" id="L275">        return delegate.append(csq);</span>
+    }
+
+    @Override
+    public PrintStream append(final CharSequence csq, final int start, final int end) {
+<span class="fc" id="L280">        return delegate.append(csq, start, end);</span>
+    }
+
+    @Override
+    public PrintStream append(final char c) {
+<span class="fc" id="L285">        return delegate.append(c);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

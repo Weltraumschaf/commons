@@ -19,7 +19,7 @@ package de.weltraumschaf.commons.system;
 public abstract class ExitableAdapter implements Exitable {
 
     @Override
-    public final void exit(ExitCode status) {
+    public final void exit(final ExitCode status) {
         exit(status.getCode());
     }
 

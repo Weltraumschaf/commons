@@ -12,10 +12,7 @@
 
 package de.weltraumschaf.commons.token;
 
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.CoreMatchers.sameInstance;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.*;
 import org.junit.Test;
 import static org.junit.Assert.assertThat;
 

@@ -242,18 +242,36 @@ public final class BrowserLauncher {
                 String.format("%s %s", Validate.notEmpty(cmd, "cmd"), Validate.notEmpty(argument, "argument")));
     }
 
+    /**
+     * Abstracts process execution.
+     */
     interface Executor {
 
-        public Process exec(String command) throws IOException;
+        /**
+         * Executes given string command as new process.
+         *
+         * @param command must not be {@code null} or empty
+         * @return never {@code null}
+         * @throws IOException if command can't be read/executed
+         */
+        Process exec(String command) throws IOException;
     }
 
-    private static final class DefaultExecutor implements Executor {
+    /**
+     * Default implementation which delegates to {@link Runtime}.
+     */
+    static final class DefaultExecutor implements Executor {
 
         /**
          * To executes external commands.
          */
         private final Runtime runtime;
 
+        /**
+         * Dedicated constructor.
+         *
+         * @param runtime must not be {@code null}
+         */
         public DefaultExecutor(final Runtime runtime) {
             super();
             this.runtime = Validate.notNull(runtime);

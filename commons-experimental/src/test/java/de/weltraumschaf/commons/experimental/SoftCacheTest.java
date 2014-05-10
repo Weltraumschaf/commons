@@ -33,6 +33,7 @@ public class SoftCacheTest {
     public final ExpectedException thrown = ExpectedException.none();
     // CHECKSTYLE:ON
 
+    @SuppressWarnings("unchecked")
     private final Finder<String, String> finder = mock(Finder.class);
     private final SoftCache<String, String> sut = new SoftCache<String, String>();
 

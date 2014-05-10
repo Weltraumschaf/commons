@@ -255,6 +255,15 @@ class DefaultScanner implements Scanner {
         return commandMap.isCommand(token) || commandMap.isSubCommand(token);
     }
 
+    /**
+     * Whether an character is allowed in float literals.
+     * <p>
+     * Allowed are signs (+|-) and the exponential characters (E|e).
+     * </p>
+     *
+     * @param c any character
+     * @return {@code true} if c is allowed, else {@code false}
+     */
     private boolean isAllowedInFloat(final char c) {
         return CharacterHelper.isSign(c) || 'e' == c || 'E' == c;
     }

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BrowserLauncher.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons System</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.system</a> &gt; <span class="el_source">BrowserLauncher.java</span></div><h1>BrowserLauncher.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.system;
+
+import de.weltraumschaf.commons.validate.Validate;
+import java.io.IOException;
+
+/**
+ * This class opens default browser for DemoLauncher class.
+ * &lt;p&gt;
+ * Default browser is detected by the operating system.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * Copied from &lt;a href=&quot;http://dev.vaadin.com/svn/releases/6.6.4/src/com/vaadin/launcher/&quot;&gt;Vaadin browser launcher&lt;/a&gt;.
+ * &lt;/p&gt;
+ *
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class BrowserLauncher {
+
+    /**
+     * Default executor.
+     */
+<span class="fc" id="L33">    private static final Executor DEFAULT_EXECUTOR = new DefaultExecutor(Runtime.getRuntime());</span>
+
+    /**
+     * Determined operating system.
+     */
+    private final OperatingSystem os;
+    /**
+     * To executes external commands.
+     */
+    private final Executor executor;
+
+    /**
+     * Default constructor.
+     * &lt;p&gt;
+     * Try to determine operating system by itself via system property.
+     * &lt;/p&gt;
+     */
+    public BrowserLauncher() {
+<span class="nc" id="L51">        this(OperatingSystem.determine(System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, &quot;&quot;)));</span>
+<span class="nc" id="L52">    }</span>
+
+    /**
+     * Create launcher for particular operating system.
+     * &lt;p&gt;
+     * You can determine the OS e.g. this way:
+     * &lt;/p&gt;
+     * &lt;pre&gt;{@code
+     *  final BrowserLauncher launcher new BrowserLauncher(
+     *      OperatingSystem.determine(System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, &quot;&quot;)));
+     * }&lt;/pre&gt;
+     *
+     * @param os detected operating system, must not be {@code null}
+     */
+    public BrowserLauncher(final OperatingSystem os) {
+<span class="nc" id="L67">        this(os, DEFAULT_EXECUTOR);</span>
+<span class="nc" id="L68">    }</span>
+
+    /**
+     * Dedicated constructor.
+     *
+     * @param os detected operating system, must not be {@code null}
+     * @param runtime runtime for command execution, must not be {@code null}
+     */
+    public BrowserLauncher(final OperatingSystem os, final Executor runtime) {
+<span class="fc" id="L77">        super();</span>
+<span class="fc" id="L78">        this.os = Validate.notNull(os, &quot;os&quot;);</span>
+<span class="fc" id="L79">        this.executor = Validate.notNull(runtime, &quot;runtime&quot;);</span>
+<span class="fc" id="L80">    }</span>
+
+    /**
+     * Open browser on specified URL.
+     * &lt;p&gt;
+     * This method throws an {@link IllegalArgumentException} if the OS (given by constructor) is not supported.
+     * &lt;/p&gt;
+     * &lt;p&gt;
+     * This method throws an {@link RuntimeException} if the browser can't be started.
+     * &lt;/p&gt;
+     *
+     * @param url URL to open, must not be {@code null} or empty
+     */
+    public void openBrowser(final String url) {
+<span class="fc" id="L94">        Validate.notEmpty(url, &quot;url&quot;);</span>
+
+        try {
+<span class="pc bpc" id="L97" title="1 of 4 branches missed.">            switch (os) {</span>
+                case LINUX:
+<span class="fc" id="L99">                    openLinuxBrowser(url);</span>
+<span class="fc" id="L100">                    break;</span>
+                case MACOSX:
+<span class="fc" id="L102">                    openMacBrowser(url);</span>
+<span class="fc" id="L103">                    break;</span>
+                case WINDOWS:
+<span class="fc" id="L105">                    openWindowsBrowser(url);</span>
+<span class="fc" id="L106">                    break;</span>
+                default:
+<span class="nc" id="L108">                    throw new IllegalArgumentException(&quot;Unsupported OS. Please open URL by hand: &quot; + url);</span>
+            }
+<span class="fc" id="L110">        } catch (final IOException ex) {</span>
+<span class="fc" id="L111">            throw new RuntimeException(&quot;Failed to open browser. Please go to &quot; + url, ex);</span>
+<span class="fc" id="L112">        }</span>
+<span class="fc" id="L113">    }</span>
+
+    /**
+     * Opens browser on GNU/Linux.
+     *
+     * @param url URL to open.
+     * @return {@code true} if started
+     * @throws IOException if no browser can be opened
+     */
+    private Process openLinuxBrowser(final String url) throws IOException {
+        // Try x-www-browser, which is symlink to the default browser,
+        // except if we found that it is Konqueror.
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if (!isKonquerorTheDefaultBrowser()) {</span>
+            try {
+<span class="fc" id="L127">                return execCommand(CliCommands.GNU_X_WWW_BROWSER, url);</span>
+<span class="fc" id="L128">            } catch (final IOException ex) { // NOPMD</span>
+                // Try the next one.
+            }
+        }
+
+        try {
+<span class="fc" id="L134">            return execCommand(CliCommands.GNU_FIREFOX, url);</span>
+<span class="fc" id="L135">        } catch (final IOException ex) { // NOPMD</span>
+            // Try the next one.
+        }
+
+        try {
+<span class="fc" id="L140">            return execCommand(CliCommands.GNU_MOZILLA, url);</span>
+<span class="fc" id="L141">        } catch (final IOException ex) { // NOPMD</span>
+            // Try the next one.
+        }
+        try {
+<span class="fc" id="L145">            return execCommand(CliCommands.GNU_KONQUEROR, url);</span>
+<span class="fc" id="L146">        } catch (final IOException ex) { // NOPMD</span>
+            // Try the next one.
+        }
+
+<span class="fc" id="L150">        throw new IOException();</span>
+    }
+
+    /**
+     * See if the default browser is Konqueror by resolving the symlink.
+     *
+     * @return {@code true} if Konqueror is default browser, else {@code false}
+     */
+    private boolean isKonquerorTheDefaultBrowser() {
+//        try {
+//            // Find out the location of the x-www-browser link from path.
+//            final Process process = execCommand(CliCommands.UNIX_WHICH, CliCommands.GNU_X_WWW_BROWSER.getCommand());
+//            final BufferedInputStream ins = new BufferedInputStream(process.getInputStream());
+//            @SuppressWarnings(
+//                    value = &quot;DM_DEFAULT_ENCODING&quot;,
+//                    justification = &quot;We readfrom process IO, so hopefully this uses the platform encoding.&quot;)
+//            final BufferedReader bufreader = new BufferedReader(new InputStreamReader(ins));
+//            final String defaultLinkPath = bufreader.readLine();
+//            bufreader.close();
+//            ins.close();
+//
+//            // The path is null if the link did not exist.
+//            if (defaultLinkPath != null) {
+//                // See if the default browser is Konqueror.
+//                final File file = new File(defaultLinkPath);
+//                final String canonical = file.getCanonicalPath();
+//
+//                if (canonical.contains(CliCommands.GNU_KONQUEROR.getCommand())) {
+//                    return true;
+//                }
+//            }
+//        } catch (final IOException ex) { // NOPMD
+//            // The symlink was probably not found, so this is ok.
+//        }
+
+<span class="fc" id="L185">        return false;</span>
+    }
+
+    /**
+     * Opens browser on Mac OS X.
+     *
+     * @param url URL to open.
+     * @return {@code true} if started
+     * @throws IOException if browser can not be opened
+     */
+    private Process openMacBrowser(final String url) throws IOException {
+<span class="fc" id="L196">        return execCommand(CliCommands.MAC_OS, url);</span>
+    }
+
+    /**
+     * Opens browser on Microsoft Windows.
+     *
+     * @param url URL to open.
+     * @return {@code true} if started
+     * @throws IOException if browser can not be opened
+     */
+    private Process openWindowsBrowser(final String url) throws IOException {
+<span class="fc" id="L207">        return execCommand(CliCommands.WINDOWS, url);</span>
+    }
+
+    /**
+     * Executes external command to open URL.
+     *
+     * @param cmd external command, must not be {@code null} or empty
+     * @param argument argument string, must not be {@code null} or empty
+     * @return A new {@link java.io.Process} object for managing the subprocess
+     * @throws IOException if an I/O error occurs
+     */
+    private Process execCommand(final CliCommands cmd, final String argument) throws IOException {
+<span class="fc" id="L219">        return executor.exec(cmd.getCommand(argument));</span>
+    }
+
+    /**
+     * Abstracts process execution.
+     */
+    public interface Executor {
+
+        /**
+         * Executes given string command as new process.
+         *
+         * @param command must not be {@code null} or empty
+         * @return never {@code null}
+         * @throws IOException if command can't be read/executed
+         */
+        Process exec(String command) throws IOException;
+    }
+
+    /**
+     * Default implementation which delegates to {@link Runtime}.
+     */
+    static final class DefaultExecutor implements Executor {
+
+        /**
+         * To executes external commands.
+         */
+        private final Runtime runtime;
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param runtime must not be {@code null}
+         */
+        public DefaultExecutor(final Runtime runtime) {
+<span class="fc" id="L253">            super();</span>
+<span class="fc" id="L254">            this.runtime = Validate.notNull(runtime);</span>
+<span class="fc" id="L255">        }</span>
+
+        @Override
+        public Process exec(final String command) throws IOException {
+<span class="fc" id="L259">            return runtime.exec(command);</span>
+        }
+
+    }
+
+    /**
+     * Collects browser open commands for the CLI of various operating systems and browsers.
+     */
+<span class="pc" id="L267">    static enum CliCommands {</span>
+
+        /**
+         * Windows command to open an URL.
+         */
+<span class="fc" id="L272">        WINDOWS(&quot;cmd /c start&quot;),</span>
+        /**
+         * Mac OS command to open an URL.
+         */
+<span class="fc" id="L276">        MAC_OS(&quot;open&quot;),</span>
+        /**
+         * Default Linux command to open an URL.
+         */
+<span class="fc" id="L280">        GNU_X_WWW_BROWSER(&quot;x-www-browser&quot;),</span>
+        /**
+         * Firefox Linux command to open an URL.
+         */
+<span class="fc" id="L284">        GNU_FIREFOX(&quot;firefox&quot;),</span>
+        /**
+         * Mozilla Linux command to open an URL.
+         */
+<span class="fc" id="L288">        GNU_MOZILLA(&quot;mozilla&quot;),</span>
+        /**
+         * Konqueror Linux command to open an URL.
+         */
+<span class="fc" id="L292">        GNU_KONQUEROR(&quot;konqueror&quot;),</span>
+        /**
+         * Command to find a binary on UNIX systems.
+         */
+<span class="fc" id="L296">        UNIX_WHICH(&quot;which&quot;);</span>
+
+        /**
+         * Holds the command format string.
+         */
+        private final String command;
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param command must not be {@code null} or empty
+         */
+<span class="fc" id="L308">        CliCommands(final String command) {</span>
+<span class="fc" id="L309">            this.command = Validate.notEmpty(command);</span>
+<span class="fc" id="L310">        }</span>
+
+        /**
+         * Returns the bare command.
+         *
+         * @return never {@code null} or empty
+         */
+        String getCommand() {
+<span class="fc" id="L318">            return command;</span>
+        }
+
+        /**
+         * Returns the command appended with the argument string with a space before.
+         *
+         * @param arguments must not be {@code null} or empty
+         * @return never {@code null} or empty
+         */
+        String getCommand(final String arguments) {
+<span class="fc" id="L328">            return String.format(&quot;%s %s&quot;, command, Validate.notEmpty(arguments));</span>
+        }
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

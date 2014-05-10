@@ -154,15 +154,21 @@ abstract class BaseToken<T> implements Token {
         }
 
         @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = "NP_BOOLEAN_RETURN_NULL",
+                justification = "Return never reached, because exception thrown before.")
         public Float asFloat() {
             raiseUnsupportedValueOperationError(TokenType.FLOAT);
-            return null; // Never reached, because exception thrown before.
+            return null;
         }
 
         @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = "NP_BOOLEAN_RETURN_NULL",
+                justification = "Return never reached, because exception thrown before.")
         public Integer asInteger() {
             raiseUnsupportedValueOperationError(TokenType.INTEGER);
-            return null; // Never reached, because exception thrown before.
+            return null;
         }
 
     }
@@ -184,15 +190,21 @@ abstract class BaseToken<T> implements Token {
         }
 
         @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = "NP_BOOLEAN_RETURN_NULL",
+                justification = "Return never reached, because exception thrown before.")
         public Boolean asBoolean() {
             raiseUnsupportedValueOperationError(TokenType.BOOLEAN);
-            return null; // Never reached, because exception thrown before.
+            return null;
         }
 
         @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = "NP_BOOLEAN_RETURN_NULL",
+                justification = "Return never reached, because exception thrown before.")
         public Float asFloat() {
             raiseUnsupportedValueOperationError(TokenType.FLOAT);
-            return null; // Never reached, because exception thrown before.
+            return null;
         }
 
         @Override
@@ -219,9 +231,12 @@ abstract class BaseToken<T> implements Token {
         }
 
         @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = "NP_BOOLEAN_RETURN_NULL",
+                justification = "Return never reached, because exception thrown before.")
         public Boolean asBoolean() {
             raiseUnsupportedValueOperationError(TokenType.BOOLEAN);
-            return null; // Never reached, because exception thrown before.
+            return null;
         }
 
         @Override
@@ -230,9 +245,12 @@ abstract class BaseToken<T> implements Token {
         }
 
         @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = "NP_BOOLEAN_RETURN_NULL",
+                justification = "Return never reached, because exception thrown before.")
         public Integer asInteger() {
             raiseUnsupportedValueOperationError(TokenType.INTEGER);
-            return null; // Never reached, because exception thrown before.
+            return null;
         }
 
     }
@@ -266,21 +284,30 @@ abstract class BaseToken<T> implements Token {
         }
 
         @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = "NP_BOOLEAN_RETURN_NULL",
+                justification = "Return never reached, because exception thrown before.")
         public Boolean asBoolean() {
             raiseUnsupportedValueOperationError(TokenType.BOOLEAN);
-            return null; // Never reached, because exception thrown before.
+            return null;
         }
 
         @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = "NP_BOOLEAN_RETURN_NULL",
+                justification = "Return never reached, because exception thrown before.")
         public Float asFloat() {
             raiseUnsupportedValueOperationError(TokenType.FLOAT);
-            return null; // Never reached, because exception thrown before.
+            return null;
         }
 
         @Override
+        @edu.umd.cs.findbugs.annotations.SuppressWarnings(
+                value = "NP_BOOLEAN_RETURN_NULL",
+                justification = "Return never reached, because exception thrown before.")
         public Integer asInteger() {
             raiseUnsupportedValueOperationError(TokenType.INTEGER);
-            return null; // Never reached, because exception thrown before.
+            return null;
         }
 
     }

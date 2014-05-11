@@ -1,0 +1,7 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Commons Application,de.weltraumschaf.commons.application,InvokableAdapter,20,100,2,2,5,38,2,13,0,13
+Commons Application,de.weltraumschaf.commons.application,ApplicationException,19,0,2,0,6,0,3,0,2,0
+Commons Application,de.weltraumschaf.commons.application,Version.PropertyNames,9,33,0,0,0,8,2,4,2,4
+Commons Application,de.weltraumschaf.commons.application,Version,8,52,4,2,0,17,3,5,0,5
+Commons Application,de.weltraumschaf.commons.application,ShutDownHook,0,48,0,2,0,16,0,6,0,5
+Commons Application,de.weltraumschaf.commons.application,IOStreams,0,90,0,0,0,25,0,11,0,11

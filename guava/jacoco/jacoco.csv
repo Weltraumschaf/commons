@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Commons Guava,de.weltraumschaf.commons.guava,Sets,0,48,0,6,0,13,0,7,0,4
+Commons Guava,de.weltraumschaf.commons.guava,Objects,0,69,2,6,0,13,2,9,0,7
+Commons Guava,de.weltraumschaf.commons.guava,Maps,0,16,0,0,0,4,0,3,0,3
+Commons Guava,de.weltraumschaf.commons.guava,Objects.ToStringHelper.ValueHolder,0,3,0,0,0,1,0,1,0,1
+Commons Guava,de.weltraumschaf.commons.guava,Lists,16,49,3,3,4,12,3,6,1,5
+Commons Guava,de.weltraumschaf.commons.guava,Objects.ToStringHelper,0,190,0,8,0,44,0,24,0,20
+Commons Guava,de.weltraumschaf.commons.guava,Iterators,0,30,0,2,0,8,0,3,0,2

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Iterators.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Guava</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.guava</a> &gt; <span class="el_source">Iterators.java</span></div><h1>Iterators.java</h1><pre class="source lang-java linenums">/*
+ * Copyright (C) 2007 The Guava Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package de.weltraumschaf.commons.guava;
+
+import de.weltraumschaf.commons.validate.Validate;
+import java.util.Collection;
+import java.util.Iterator;
+
+/**
+ * Minimal set of {@code com.google.common.collect.Iterators}.
+ *
+ * @author Kevin Bourrillion
+ * @author Jared Levy
+ * @since 2.0 (imported from Google Collections Library)
+ */
+final class Iterators {
+
+    /**
+     * Hidden for pure static factory.
+     */
+    private Iterators() {
+<span class="fc" id="L35">        super();</span>
+<span class="fc" id="L36">        throw new UnsupportedOperationException(&quot;Constructor must not be called by reflection!&quot;);</span>
+    }
+
+    /**
+     * Adds all elements in {@code iterator} to {@code collection}. The iterator will be left exhausted: its
+     * {@code hasNext()} method will return {@code false}.
+     *
+     * @param &lt;T&gt; type of elements
+     * @param addTo must not be {@code null}
+     * @param iterator must not be {@code null}
+     * @return whether the collection was modified or not
+     */
+    public static &lt;T&gt; boolean addAll(final Collection&lt;T&gt; addTo, final Iterator&lt;? extends T&gt; iterator) {
+<span class="fc" id="L49">        Validate.notNull(addTo, &quot;addTo&quot;);</span>
+<span class="fc" id="L50">        Validate.notNull(iterator, &quot;iterator&quot;);</span>
+<span class="fc" id="L51">        boolean wasModified = false;</span>
+
+<span class="fc bfc" id="L53" title="All 2 branches covered.">        while (iterator.hasNext()) {</span>
+<span class="fc" id="L54">            wasModified |= addTo.add(iterator.next());</span>
+        }
+
+<span class="fc" id="L57">        return wasModified;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

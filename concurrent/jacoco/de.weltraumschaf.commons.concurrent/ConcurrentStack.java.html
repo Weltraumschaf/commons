@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ConcurrentStack.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Concurrent</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.concurrent</a> &gt; <span class="el_source">ConcurrentStack.java</span></div><h1>ConcurrentStack.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.concurrent;
+
+import de.weltraumschaf.commons.guava.Objects;
+import java.util.concurrent.atomic.AtomicReference;
+
+/**
+ * Stack implemented with compare-and-set algorithm from Brian Goetz.
+ * &lt;p&gt;
+ * Implemented with a linked list.
+ * &lt;/p&gt;
+ *
+ * &lt;pre&gt;
+ * TOP     Node_0        Node_1        Node_2        Node_3     Node_4
+ * null    next-&gt;        next-&gt;        next-&gt;        next-&gt;     null
+ * &lt;/pre&gt;
+ *
+ * @since 1.0.0
+ * @param &lt;E&gt; type of stack entries
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+<span class="fc" id="L32">final class ConcurrentStack&lt;E&gt; implements Stack&lt;E&gt; {</span>
+
+    /**
+     * References the top of the stack.
+     */
+<span class="fc" id="L37">    private final AtomicReference&lt;Entry&lt;E&gt;&gt; top = new AtomicReference&lt;Entry&lt;E&gt;&gt;();</span>
+
+    @Override
+    public boolean isEmpty() {
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        return null == top.get();</span>
+    }
+
+    @Override
+    public E peek() {
+<span class="fc" id="L46">        final Entry&lt;E&gt; currentTop = top.get();</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        return null == currentTop</span>
+                ? null
+                : currentTop.value;
+    }
+
+    @Override
+    public E pop() {
+        Entry&lt;E&gt; currentTop;
+
+        while (true) {
+<span class="fc" id="L57">            currentTop = top.get();</span>
+
+<span class="fc bfc" id="L59" title="All 2 branches covered.">            if (null == currentTop) {</span>
+<span class="fc" id="L60">                return null;</span>
+            }
+
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">            if (top.compareAndSet(currentTop, currentTop.next)) {</span>
+<span class="fc" id="L64">                return currentTop.value;</span>
+            }
+        }
+    }
+
+    @Override
+    public void push(final E element) {
+        while (true) {
+<span class="fc" id="L72">            final Entry&lt;E&gt; currentTop = top.get();</span>
+
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">            if (top.compareAndSet(currentTop, new Entry&lt;E&gt;(element, currentTop))) {</span>
+<span class="fc" id="L75">                break;</span>
+            }
+<span class="nc" id="L77">        }</span>
+<span class="fc" id="L78">    }</span>
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L82">        final Entry&lt;E&gt; currentTop = top.get();</span>
+
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        if (null == currentTop) {</span>
+<span class="fc" id="L85">            return 0;</span>
+        }
+
+<span class="fc" id="L88">        return currentTop.hashCode();</span>
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (!(obj instanceof ConcurrentStack)) {</span>
+<span class="fc" id="L94">            return false;</span>
+        }
+
+<span class="fc" id="L97">        final ConcurrentStack other = (ConcurrentStack) obj;</span>
+<span class="fc" id="L98">        return Objects.equal(top.get(), other.top.get());</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L103">        final StringBuilder buffer = new StringBuilder();</span>
+<span class="fc" id="L104">        buffer.append(getClass().getSimpleName()).append('[');</span>
+
+<span class="fc" id="L106">        Entry&lt;E&gt; element = top.get();</span>
+<span class="fc" id="L107">        boolean first = true;</span>
+
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        while (null != element) {</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">            if (!first) {</span>
+<span class="fc" id="L111">                buffer.append(&quot;, &quot;);</span>
+            }
+
+<span class="fc" id="L114">            buffer.append(element.value);</span>
+<span class="fc" id="L115">            element = element.next;</span>
+<span class="fc" id="L116">            first = false;</span>
+        }
+
+<span class="fc" id="L119">        return buffer.append(']').toString();</span>
+    }
+
+    /**
+     * Linked list entry.
+     *
+     * Not used outside the class.
+     *
+     * @param &lt;T&gt; type of entry object
+     */
+<span class="fc" id="L129">    private static final class Entry&lt;T&gt; {</span>
+
+        /**
+         * Entry element.
+         */
+        private final T value;
+        /**
+         * Link to next entry, maybe {@code null}.
+         */
+        private final Entry&lt;T&gt; next;
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param element entry element
+         * @param next next element
+         */
+        Entry(final T element, final Entry&lt;T&gt; next) {
+<span class="fc" id="L147">            super();</span>
+<span class="fc" id="L148">            this.value = element;</span>
+<span class="fc" id="L149">            this.next = next;</span>
+<span class="fc" id="L150">        }</span>
+
+        @Override
+        public int hashCode() {
+<span class="fc" id="L154">            return Objects.hashCode(value, next);</span>
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+<span class="fc bfc" id="L159" title="All 2 branches covered.">            if (!(obj instanceof Entry)) {</span>
+<span class="fc" id="L160">                return false;</span>
+            }
+
+<span class="fc" id="L163">            final Entry other = (Entry) obj;</span>
+<span class="pc bpc" id="L164" title="1 of 4 branches missed.">            return Objects.equal(value, other.value) &amp;&amp; Objects.equal(next, other.next);</span>
+        }
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

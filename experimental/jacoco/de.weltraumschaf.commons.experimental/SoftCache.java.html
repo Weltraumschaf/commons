@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>SoftCache.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Experimental</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.experimental</a> &gt; <span class="el_source">SoftCache.java</span></div><h1>SoftCache.java</h1><pre class="source lang-java linenums">/*
+ *  LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt;
+ */
+package de.weltraumschaf.commons.experimental;
+
+import de.weltraumschaf.commons.validate.Validate;
+import java.lang.ref.SoftReference;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+/**
+ * A simple in memory cache based on {@link SoftReference soft reference}.
+ *
+ * @param &lt;K&gt; type of cache key
+ * @param &lt;V&gt; type of cached value
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+@Experimental
+<span class="fc" id="L27">public class SoftCache&lt;K, V&gt; {</span>
+
+    /**
+     * Holds the cached data.
+     */
+<span class="fc" id="L32">    private final Map&lt;K, SoftReference&lt;V&gt;&gt; data = new ConcurrentHashMap&lt;K, SoftReference&lt;V&gt;&gt;();</span>
+    /**
+     * Try to finds values if a key not present yet in cache.
+     */
+<span class="fc" id="L36">    private Finder&lt;K, V&gt; finder = new NullFinder&lt;K, V&gt;();</span>
+
+    /**
+     * Get a value from the cache.
+     * &lt;p&gt;
+     * If key not present yet, then the finder is asked. If no finder set a default finder is used which does not find
+     * anything.
+     * &lt;/p&gt;
+     *
+     * @param key must not be {@code null}
+     * @return may be {@code null}
+     */
+    public V get(final K key) {
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        if (null == key) {</span>
+<span class="nc" id="L50">            throw new NullPointerException(&quot;Parameter 'key' must not be null!&quot;);</span>
+        }
+
+<span class="fc" id="L53">        final SoftReference&lt;V&gt; reference = data.get(key);</span>
+
+<span class="pc bpc" id="L55" title="1 of 4 branches missed.">        if (null == reference || null == reference.get()) {</span>
+<span class="fc" id="L56">            final V value = finder.find(key);</span>
+
+<span class="fc bfc" id="L58" title="All 2 branches covered.">            if (null == value) {</span>
+<span class="fc" id="L59">                throw new NullPointerException(String.format(&quot;No value fond for key '%s'!&quot;, key));</span>
+            }
+<span class="fc" id="L61">            add(key, value);</span>
+<span class="fc" id="L62">            return value;</span>
+        }
+
+<span class="fc" id="L65">        return reference.get();</span>
+    }
+
+    /**
+     * Add a value to the cache.
+     *
+     * @param key must not be {@code null}
+     * @param value must not be {@code null}
+     */
+    public void add(final K key, final V value) {
+<span class="fc" id="L75">        Validate.notNull(key, &quot;key&quot;);</span>
+<span class="fc" id="L76">        Validate.notNull(value, &quot;value&quot;);</span>
+<span class="fc" id="L77">        final SoftReference&lt;V&gt; reference = data.put(key, new SoftReference&lt;V&gt;(value));</span>
+
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (null != reference) {</span>
+<span class="nc" id="L80">            reference.clear();</span>
+        }
+<span class="fc" id="L82">    }</span>
+
+    /**
+     * Removes value from cache.
+     *
+     * @param key must not be {@code null}
+     */
+    public void remove(final K key) {
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">        if (null == key) {</span>
+<span class="nc" id="L91">            throw new NullPointerException(&quot;Parameter 'key' must not be null!&quot;);</span>
+        }
+
+<span class="fc" id="L94">        final SoftReference&lt;V&gt; reference = data.remove(key);</span>
+
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        if (null != reference) {</span>
+<span class="fc" id="L97">            reference.clear();</span>
+        }
+<span class="fc" id="L99">    }</span>
+
+    /**
+     * Set the finder for this cache.
+     *
+     * @param f must not be {@code null}
+     */
+    public void finder(final Finder&lt;K, V&gt; f) {
+<span class="fc" id="L107">        finder = Validate.notNull(f, &quot;f&quot;);</span>
+<span class="fc" id="L108">    }</span>
+
+    /**
+     * Implementations of this interface may be used to provide values not in the cache yet.
+     *
+     * @param &lt;K&gt; type of cache key
+     * @param &lt;V&gt; type of cached value
+     */
+    public interface Finder&lt;K, V&gt; {
+
+        /**
+         * Try to find a value for the key not already in the cache.
+         *
+         * @param key must not be {@code null}
+         * @return may be {@code null}
+         */
+        V find(K key);
+    }
+
+    /**
+     * Default implementation which does not find anything.
+     *
+     * @param &lt;K&gt; type of cache key
+     * @param &lt;V&gt; type of cached value
+     */
+<span class="fc" id="L133">    private static final class NullFinder&lt;K, V&gt; implements Finder&lt;K, V&gt; {</span>
+
+        @Override
+        public V find(final K key) {
+<span class="fc" id="L137">            return null;</span>
+        }
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

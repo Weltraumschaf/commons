@@ -1,14 +1,15 @@
 # Common Utility Classes for Java
 
-In this  library I  collect classes  I'm using in  several projects  to minimize
-code duplication over the projects.
+This library provides  several tool classes in different modules.  They help you
+build command line/Swing  applications, help parsing cmmand  line input, testing
+etc. 
 
 ## Goal
 
 Goal  of  this  class  library  is  to  share  common  functionality  to  reduce
-duplicated  code.  Further  goal  is  to have  no  external  dependencies.  Only
-external dependencies are [JUnit][junit]  and [Mockito][mockito] for testing and
-[Findbugs][findbugs] annotations to suppress some warnings.
+duplicated boiler plate code. Further goal  is to have no external dependencies.
+Only  external  dependencies  are   [JUnit][junit]  and  [Mockito][mockito]  for
+testing and [Findbugs][findbugs] annotations to suppress some warnings.
 
 ## Usage
 

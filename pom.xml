@@ -183,6 +183,11 @@
                         <siteDirectory>${project.parent.basedir}/src/site</siteDirectory>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.jasig.maven</groupId>
+                    <artifactId>sass-maven-plugin</artifactId>
+                    <version>1.1.1</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -362,26 +367,26 @@
                     </reportPlugins>
                 </configuration>
             </plugin>
-            <!-- https://groups.google.com/forum/m/#!topic/sass-lang/YPHqCcc_l8Y -->
-            		<plugin>
-						<groupId>org.jasig.maven</groupId>
-						<artifactId>sass-maven-plugin</artifactId>
-						<version>1.1.1</version>
-						<executions>
-							<execution>
-								<id>sassProcessSource</id>
-								<phase>package</phase>
-								<goals>
-									<goal>update-stylesheets</goal>
-								</goals>
-								<configuration>
-									<baseOutputDirectory>${project.build.directory}/sassOutput</baseOutputDirectory>
-									<buildDirectory>${project.build.directory}</buildDirectory>
-									<sassSourceDirectory>${basedir}/src/site/resources/sass/scss</sassSourceDirectory>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin> 
+
+            <plugin>
+                <!-- https://groups.google.com/forum/m/#!topic/sass-lang/YPHqCcc_l8Y -->
+                <groupId>org.jasig.maven</groupId>
+                <artifactId>sass-maven-plugin</artifactId>
+                <configuration>
+                    <baseOutputDirectory>${basedir}/src/site/resources/css</baseOutputDirectory>
+                    <buildDirectory>${project.build.directory}</buildDirectory>
+                    <sassSourceDirectory>${basedir}/src/site/resources/sass</sassSourceDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>sassProcessSource</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>update-stylesheets</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
             <!--            <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>

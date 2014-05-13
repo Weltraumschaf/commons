@@ -1,0 +1,83 @@
+/*
+    http://sass-lang.com/guide
+
+    Schema 1
+    E0AC5E
+    F2D169
+    A3743C
+    895425
+    5A180B
+
+    Schema 2
+    FFF7AD
+    BFB982
+    807B57
+    403E2B
+    1E1E1E
+
+    Schema 3
+    FFC764
+    FFD384
+    FFBC47
+    EEA425
+    FDCC2E
+
+    Schema 4
+    034C8C
+    024059
+    049DBF
+    85F2F2
+    5ABFAD
+ */
+
+$font-stack: Helvetica, sans-serif;
+$black: #22F;
+$white: #F5F5F5;
+$lightBlue: B3D4FC;
+$lightGrey: E1E1E1;
+$lessLighterGrey: E3E3E3;
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+    color: $black;
+    background-color: $white;
+}
+
+::-moz-selection {
+    background: $lightBlue;
+    text-shadow: none;
+}
+
+::selection {
+    background: $lightBlue;
+    text-shadow: none;
+}
+
+.well, .breadcrumb {
+    background-color: $lightGrey;
+    border: 1px solid $lessLighterGrey;
+}
+
+h1 {
+    font-size: 1.4em;
+}
+
+#bannerLeft h2 {
+    font-size: 3em;
+}
+
+h2 {
+    font-size: 1.2em;
+}
+
+h3 {
+    font-size: 1.0em;
+}
+
+h4 {
+    font-size: 0.8em;
+}

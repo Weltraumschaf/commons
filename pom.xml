@@ -49,8 +49,13 @@
         <connection>scm:git:git://github.com/Weltraumschaf/commons.git</connection>
         <developerConnection>scm:git:git@github.com:Weltraumschaf/commons.git</developerConnection>
         <url>https://github.com/Weltraumschaf/commons.git</url>
-      <tag>HEAD</tag>
-  </scm>
+        <tag>HEAD</tag>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/Weltraumschaf/commons/issues</url>
+    </issueManagement>
 
     <distributionManagement>
         <site>
@@ -58,6 +63,11 @@
             <url>gitsite:git@github.com/Weltraumschaf/commons.git</url>
         </site>
     </distributionManagement>
+
+    <ciManagement>
+        <system>jenkins</system>
+        <url>https://ci.weltraumschaf.de/job/Commons/</url>
+    </ciManagement>
 
     <modules>
         <module>commons-application</module>

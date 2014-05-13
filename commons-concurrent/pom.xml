@@ -14,7 +14,7 @@
 
     <name>Commons Concurrent</name>
     <description>
-        TBD
+        Provides common data structures (such as queue, stack etc.) in a concurrent flavor.
     </description>
 
     <properties>

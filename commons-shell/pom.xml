@@ -14,7 +14,8 @@
 
     <name>Commons Shell</name>
     <description>
-        TBD
+        Utilities for creating more complex shell commands with subcommands. It provides easy ability to
+        parse the users command line input.
     </description>
 
     <properties>

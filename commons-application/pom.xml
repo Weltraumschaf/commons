@@ -14,7 +14,7 @@
 
     <name>Commons Application</name>
     <description>
-        TBD
+        Provides utilities to reduce boiler plate code when creating simple command line or swing applications.
     </description>
 
     <properties>

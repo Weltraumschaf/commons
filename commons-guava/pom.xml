@@ -14,7 +14,7 @@
 
     <name>Commons Guava</name>
     <description>
-        TBD
+        A small subset of Guava to reduce the footprint of this library.
     </description>
 
     <properties>

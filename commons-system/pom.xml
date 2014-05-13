@@ -14,7 +14,7 @@
 
     <name>Commons System</name>
     <description>
-        TBD
+        Abstraction of system call such es exit().
     </description>
 
     <properties>

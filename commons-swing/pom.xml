@@ -14,7 +14,8 @@
 
     <name>Commons Swing</name>
     <description>
-        TBD
+        Provide helpers to create Swing applications: Builders to create menu/tool bars and bordered
+        layout base frame.
     </description>
 
     <properties>

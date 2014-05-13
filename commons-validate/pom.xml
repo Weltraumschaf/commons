@@ -14,7 +14,8 @@
 
     <name>Commons Validate</name>
     <description>
-        TBD
+        Same functionality like Apache Commons Lang3 Validate, but without the heavy footprint
+        of the whole lib from Apache.
     </description>
 
     <properties>

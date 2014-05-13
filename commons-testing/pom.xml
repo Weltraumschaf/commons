@@ -14,7 +14,7 @@
 
     <name>Commons Testing</name>
     <description>
-        TBD
+        Helpers for unit testing such as capture STDOUT printing.
     </description>
 
     <properties>

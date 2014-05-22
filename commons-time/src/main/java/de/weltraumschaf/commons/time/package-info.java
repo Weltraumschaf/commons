@@ -11,9 +11,9 @@
  */
 
 /**
- * Classes to help with strings.
+ * Classes to help with time.
  *
  * <p>This package is a part of the open-source
  * <a href="https://github.com/Weltraumschaf/commons">Commons</a></p>
  */
-package de.weltraumschaf.commons.string;
+package de.weltraumschaf.commons.time;

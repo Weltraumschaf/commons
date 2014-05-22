@@ -10,11 +10,10 @@
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
 
-package de.weltraumschaf.commons.validate;
+package de.weltraumschaf.commons.string;
 
-import de.weltraumschaf.commons.string.StringEscape;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.Rule;
@@ -30,5 +29,8 @@ public class StringEscapeTest {
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
 
-    
+    @Test
+    public void escapeXml() {
+        assertThat(StringEscape.escapeXml("f<o&o'b\"a>r"), is(equalTo("f&lt;o&amp;o&apos;b&quot;a&gt;r")));
+    }
 }

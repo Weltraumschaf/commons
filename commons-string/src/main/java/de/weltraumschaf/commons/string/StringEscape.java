@@ -11,20 +11,26 @@
  */
 package de.weltraumschaf.commons.string;
 
+import de.weltraumschaf.commons.validate.Validate;
+
 /**
- *
  *
  * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class StringEscape {
 
-    /**
-     * Hidden for pure static class.
-     */
     private StringEscape() {
         super();
-        throw new UnsupportedOperationException("Must not be caled via reflection!");
+        throw new UnsupportedOperationException("Do not call by reflection!");
     }
 
+    public static String escapeXml(final String input) {
+        return Validate.notNull(input, "Parameter 'input' must not be null!")
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("'", "&apos;")
+                .replace("\"", "&quot;");
+    }
 }

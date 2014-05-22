@@ -9,7 +9,6 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
-
 package de.weltraumschaf.commons.validate;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -117,5 +116,17 @@ public class ValidateTest {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Parameter 'foo' muts be greater than 5 (was 4)!");
         Validate.greaterThan(4, 5, "foo");
+    }
+
+    @Test
+    public void isTrue_falseThrowsExcpetion() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("message");
+        Validate.isTrue(false, "message");
+    }
+
+    @Test
+    public void isTrue_trueDoesNotThrowsExcpetion() {
+        Validate.isTrue(true, "message");
     }
 }

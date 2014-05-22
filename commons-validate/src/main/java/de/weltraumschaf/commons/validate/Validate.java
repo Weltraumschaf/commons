@@ -161,4 +161,21 @@ public final class Validate {
     public static int greaterThan(final int reference, final int lowerBound) {
         return greaterThan(reference, lowerBound, null);
     }
+
+    /**
+     * Tests that a given expression is true.
+     * <p>
+     * Throws an {@link IllegalArgumentException} if the expression is {@code false}.
+     * </p>
+     *
+     * @param expression tested expression
+     * @param message must not be {@code null} or empty
+     */
+    public static void isTrue(final boolean expression, final String message) {
+        Validate.notEmpty(message, "Parameter 'message' must not be null or empty!");
+
+        if (!expression) {
+            throw new IllegalArgumentException(message);
+        }
+    }
 }

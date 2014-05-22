@@ -11,7 +11,7 @@
  */
 
 /**
- * Classes to validate input.
+ * Classes to help with strings.
  *
  * <p>This package is a part of the open-source
  * <a href="https://github.com/Weltraumschaf/commons">Commons</a></p>

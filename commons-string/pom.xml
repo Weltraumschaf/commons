@@ -14,7 +14,7 @@
 
     <name>Commons String</name>
     <description>
-        TODO
+        This module provides string helpers(e.g. XML or HTML escaping).
     </description>
 
     <properties>

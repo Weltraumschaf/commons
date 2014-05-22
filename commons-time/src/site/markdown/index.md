@@ -1,6 +1,6 @@
 # Commons Time
 
-This module provides a [string escaping helper][StringEscape].
+This module provides a [stopwatch][StopWatch] to measure time.
 
 [commons-lang]: https://commons.apache.org/proper/commons-lang/
-[StringEscape]: apidocs/de/weltraumschaf/commons/string/StringEscape.html
+[StopWatch]: apidocs/de/weltraumschaf/commons/time/StopWatch.html

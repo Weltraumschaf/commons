@@ -14,17 +14,29 @@ package de.weltraumschaf.commons.string;
 import de.weltraumschaf.commons.validate.Validate;
 
 /**
+ * Tools to escape strings.
  *
  * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class StringEscape {
 
+    /**
+     * Hidden for pure static class.
+     */
     private StringEscape() {
         super();
         throw new UnsupportedOperationException("Do not call by reflection!");
     }
 
+    /**
+     * Escapes string for XML.
+     *
+     * See https://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references#Predefined_entities_in_XML
+     *
+     * @param input must not be null
+     * @return never {@code null}
+     */
     public static String escapeXml(final String input) {
         return Validate.notNull(input, "Parameter 'input' must not be null!")
                 .replace("&", "&amp;")

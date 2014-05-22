@@ -75,6 +75,7 @@
         <module>commons-experimental</module>
         <module>commons-guava</module>
         <module>commons-shell</module>
+        <module>commons-string</module>
         <module>commons-swing</module>
         <module>commons-system</module>
         <module>commons-testing</module>

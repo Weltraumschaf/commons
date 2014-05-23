@@ -16,6 +16,10 @@
  */
 package de.weltraumschaf.commons.time;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * {@code StopWatch} provides a convenient API for timings.
  *
@@ -56,6 +60,11 @@ package de.weltraumschaf.commons.time;
 public final class StopWatch {
 
     /**
+     * Default format for string representation.
+     */
+    private static final String DATE_FORMAT = "HH:mm:ss.SSS";
+
+    /**
      * Factor to convert from nanoseconds to milliseconds.
      */
     private static final long NANO_2_MILLIS = 1000000L;
@@ -94,8 +103,8 @@ public final class StopWatch {
      * </p>
      *
      * CHECKSTYLE:OFF
-     * @throws IllegalStateException if the StopWatch is already running.
-     * CHECKSTYLE:ON
+     *
+     * @throws IllegalStateException if the StopWatch is already running. CHECKSTYLE:ON
      */
     public void start() {
         if (this.runningState == State.STOPPED) {
@@ -118,9 +127,9 @@ public final class StopWatch {
      * This method ends a new timing session, allowing the time to be retrieved.
      * </p>
      *
-     * CHECKSTYLE:OFF
-     * @throws IllegalStateException if the StopWatch is not running.
-     * CHECKSTYLE:ON
+     * <p>
+     * Throws {@link IllegalStateException} if the StopWatch is not running.
+     * </p>
      */
     public void stop() {
         if (this.runningState != State.RUNNING && this.runningState != State.SUSPENDED) {
@@ -154,9 +163,9 @@ public final class StopWatch {
      * enabling {@link #unsplit()} to continue the timing from the original start point.
      * </p>
      *
-     * CHECKSTYLE:OFF
-     * @throws IllegalStateException if the StopWatch is not running.
-     * CHECKSTYLE:ON
+     * <p>
+     * Throws {@link IllegalStateException if the StopWatch is not running.
+     * </p>
      */
     public void split() {
         if (this.runningState != State.RUNNING) {
@@ -175,9 +184,9 @@ public final class StopWatch {
      * continue.
      * </p>
      *
-     * CHECKSTYLE:OFF
-     * @throws IllegalStateException if the StopWatch has not been split.
-     * CHECKSTYLE:ON
+     * <p>
+     * Throws {@link IllegalStateException if the StopWatch has not been split.
+     * </p>
      */
     public void unsplit() {
         if (this.splitState != SplitState.SPLIT) {
@@ -195,9 +204,9 @@ public final class StopWatch {
      * resume calls in the total time.
      * </p>
      *
-     * CHECKSTYLE:OFF
-     * @throws IllegalStateException if the StopWatch is not currently running.
-     * CHECKSTYLE:ON
+     * <p>
+     * Throws {@link IllegalStateException if the StopWatch is not currently running.
+     * </p>
      */
     public void suspend() {
         if (this.runningState != State.RUNNING) {
@@ -216,9 +225,9 @@ public final class StopWatch {
      * resume calls in the total time.
      * </p>
      *
-     * CHECKSTYLE:OFF
-     * @throws IllegalStateException if the StopWatch has not been suspended.
-     * CHECKSTYLE:ON
+     * <p>
+     * Throws {@link IllegalStateException if the StopWatch has not been suspended.
+     * </p>
      */
     public void resume() {
         if (this.runningState != State.SUSPENDED) {
@@ -272,10 +281,11 @@ public final class StopWatch {
      * This is the time between start and latest split.
      * </p>
      *
+     * <p>
+     * Throws {@link IllegalStateException if the StopWatch has not yet been split.
+     * </p>
+     *
      * @return the split time in milliseconds
-     * CHECKSTYLE:OFF
-     * @throws IllegalStateException if the StopWatch has not yet been split.
-     * CHECKSTYLE:ON
      */
     public long getSplitTime() {
         return getSplitNanoTime() / NANO_2_MILLIS;
@@ -288,10 +298,11 @@ public final class StopWatch {
      * This is the time between start and latest split.
      * </p>
      *
+     * <p>
+     * Throws {@link IllegalStateException if the StopWatch has not yet been split.
+     * </p>
+     *
      * @return the split time in nanoseconds
-     * CHECKSTYLE:OFF
-     * @throws IllegalStateException if the StopWatch has not yet been split.
-     * CHECKSTYLE:ON
      */
     public long getSplitNanoTime() {
         if (this.splitState != SplitState.SPLIT) {
@@ -304,10 +315,11 @@ public final class StopWatch {
     /**
      * Returns the time this stopwatch was started.
      *
+     * <p>
+     * Throws {@link IllegalStateException if this StopWatch has not been started.
+     * </p>
+     *
      * @return the time this stopwatch was started
-     * CHECKSTYLE:OFF
-     * @throws IllegalStateException if this StopWatch has not been started
-     * CHECKSTYLE:ON
      */
     public long getStartTime() {
         if (this.runningState == State.UNSTARTED) {
@@ -321,20 +333,32 @@ public final class StopWatch {
     /**
      * Gets a summary of the time that the stopwatch recorded as a string.
      *
+     * <p>
+     * The format used is ISO8601-like, <i>hours</i>:<i>minutes</i>:<i>seconds</i>.<i>milliseconds</i>.
+     * </p>
+     *
      * @return the time as a String
      */
     @Override
     public String toString() {
-        return String.valueOf(getTime());
+        final Date date = new Date(getTime());
+        final DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        return formatter.format(date);
     }
 
     /**
      * Gets a summary of the split time that the stopwatch recorded as a string.
      *
+     * <p>
+     * The format used is ISO8601-like, <i>hours</i>:<i>minutes</i>:<i>seconds</i>.<i>milliseconds</i>.
+     * </p>
+     *
      * @return the split time as a String
      */
     public String toSplitString() {
-        return String.valueOf(getSplitTime());
+        final Date date = new Date(getSplitTime());
+        final DateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        return formatter.format(date);
     }
 
     /**
@@ -476,8 +500,7 @@ public final class StopWatch {
         /**
          * This method is used to find out whether the StopWatch is stopped.
          *
-         * The stopwatch which's not yet started and
-         * explicitly stopped stopwatch is considered as stopped.
+         * The stopwatch which's not yet started and explicitly stopped stopwatch is considered as stopped.
          *
          * @return boolean If the StopWatch is stopped.
          */

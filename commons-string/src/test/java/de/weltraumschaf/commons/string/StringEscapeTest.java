@@ -55,8 +55,12 @@ public class StringEscapeTest {
     }
 
     @Test
-    @Ignore
     public void escapeFileName_singleOcurrence() {
+        assertThat(StringEscape.escapeFileName("foo/bar baz:do\\mundo"), is(equalTo("foo_bar_baz_do_mundo")));
+    }
 
+    @Test
+    public void escapeFileName_multiOcurrence() {
+        assertThat(StringEscape.escapeFileName("foo///bar   ba/z:do\\\\mundo"), is(equalTo("foo___bar___ba_z_do__mundo")));
     }
 }

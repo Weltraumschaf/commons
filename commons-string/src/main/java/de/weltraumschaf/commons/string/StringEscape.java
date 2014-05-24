@@ -45,4 +45,28 @@ public final class StringEscape {
                 .replace("'", "&apos;")
                 .replace("\"", "&quot;");
     }
+
+    /**
+     * Escapes a string that i is usable as file name.
+     * <p>
+     * Escaped characters and there replacements:
+     * </p>
+     *
+     * <ul>
+     * <li>{@literal ' '} becomes {@literal '_'}</li>
+     * <li>{@literal '/'} becomes {@literal '_'}</li>
+     * <li>{@literal '\'} becomes {@literal '_'}</li>
+     * <li>{@literal ':'} becomes {@literal '_'}</li>
+     * </ul>
+     *
+     * @param input must not be {@code null} or empty
+     * @return never {@code null} or empty
+     */
+    public static String escapeFileName(final String input) {
+        return Validate.notEmpty(input, "Parameter 'input' must not be null!")
+                .replace(" ", "_")
+                .replace("/", "_")
+                .replace("\\", "_")
+                .replace(":", "_");
+    }
 }

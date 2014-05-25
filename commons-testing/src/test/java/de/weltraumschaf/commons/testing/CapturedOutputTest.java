@@ -12,6 +12,7 @@
 
 package de.weltraumschaf.commons.testing;
 
+import de.weltraumschaf.commons.application.IOStreams;
 import java.io.UnsupportedEncodingException;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.not;
@@ -45,6 +46,17 @@ public class CapturedOutputTest {
     }
 
     @Test
+    public void captureOut_withIo() throws UnsupportedEncodingException {
+        sut.expectOut("foobar");
+        sut.expectOut(startsWith("foo"));
+        sut.expectOut(not(startsWith("bar")));
+        sut.expectOut(endsWith("bar"));
+        sut.expectOut(not("snafu"));
+
+        IOStreams.newDefault().print("foobar");
+    }
+
+    @Test
     public void captureErr() {
         sut.expectErr("foobar");
         sut.expectErr(startsWith("foo"));
@@ -53,6 +65,17 @@ public class CapturedOutputTest {
         sut.expectErr(not("snafu"));
 
         System.err.print("foobar");
+    }
+
+    @Test
+    public void captureErr_withIo() throws UnsupportedEncodingException {
+        sut.expectErr("foobar");
+        sut.expectErr(startsWith("foo"));
+        sut.expectErr(not(startsWith("bar")));
+        sut.expectErr(endsWith("bar"));
+        sut.expectErr(not("snafu"));
+
+        IOStreams.newDefault().error("foobar");
     }
 
 }

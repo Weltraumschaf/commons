@@ -12,6 +12,7 @@
 package de.weltraumschaf.commons.application;
 
 import de.weltraumschaf.commons.system.ExitCode;
+import de.weltraumschaf.commons.validate.Validate;
 
 /**
  * Used to signal abnormal exceptional application states.
@@ -31,14 +32,24 @@ public class ApplicationException extends Exception {
     private final ExitCode exitCode;
 
     /**
+     * Initializes the cause with {@code null}.
+     *
+     * @param exitCode must not be {@code null}
+     * @param message must not be {@code null} or empty
+     */
+    public ApplicationException(final ExitCode exitCode, final String message) {
+        this(exitCode, message, null);
+    }
+
+    /**
      * Dedicated constructor.
      *
      * @param exitCode must not be {@code null}
-     * @param message passed to {@link RuntimeException#RuntimeException(java.lang.String, java.lang.Throwable)}
-     * @param cause passed to {@link RuntimeException#RuntimeException(java.lang.String, java.lang.Throwable)}
+     * @param message must not be {@code null} or empty
+     * @param cause may be {@code null}
      */
     public ApplicationException(final ExitCode exitCode, final String message, final Throwable cause) {
-        super(message, cause);
+        super(Validate.notEmpty(message, "Parameter 'message' mut not be null or empty"), cause);
 
         if (null == exitCode) {
             throw new NullPointerException("Parameter 'exitCode' must not be null!");
@@ -54,6 +65,11 @@ public class ApplicationException extends Exception {
      */
     public ExitCode getExitCode() {
         return exitCode;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (" + exitCode + ')';
     }
 
 }

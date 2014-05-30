@@ -22,7 +22,7 @@
 
     <groupId>de.weltraumschaf.commons</groupId>
     <artifactId>reactor</artifactId>
-    <version>1.0.0-beta</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Commons</name>
@@ -49,7 +49,7 @@
         <connection>scm:git:git://github.com/Weltraumschaf/commons.git</connection>
         <developerConnection>scm:git:git@github.com:Weltraumschaf/commons.git</developerConnection>
         <url>https://github.com/Weltraumschaf/commons.git</url>
-        <tag>1.0.0-beta</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <issueManagement>

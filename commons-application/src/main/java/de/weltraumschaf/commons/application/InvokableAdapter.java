@@ -15,6 +15,7 @@ import de.weltraumschaf.commons.system.DefaultExiter;
 import de.weltraumschaf.commons.system.ExitCode;
 import de.weltraumschaf.commons.system.Exitable;
 import java.io.UnsupportedEncodingException;
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -198,9 +199,18 @@ public abstract class InvokableAdapter implements Invokable {
     /**
      * Register a {@link Runnable callback} as shut down hook.
      *
-     * @param callback On shutdown running callback.
+     * @param callback must not be {@code null}
      */
     public final void registerShutdownHook(final Runnable callback) {
+        shutDownHook.register(callback);
+    }
+
+    /**
+     * Register a {@link Callable callback} as shut down hook.
+     *
+     * @param callback must not be {@code null}
+     */
+    public final void registerShutdownHook(final Callable<Void> callback) {
         shutDownHook.register(callback);
     }
 

@@ -11,9 +11,11 @@
  */
 package de.weltraumschaf.commons.application;
 
+import de.weltraumschaf.commons.validate.Validate;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,7 +48,7 @@ public class ShutDownHook extends Thread {
     /**
      * Set of callbacks.
      */
-    private final Set<Runnable> callbacks = new HashSet<Runnable>();
+    private final Set<Callable<Void>> callbacks = new HashSet<Callable<Void>>();
 
     /**
      * Logger instance.
@@ -75,11 +77,11 @@ public class ShutDownHook extends Thread {
      */
     @Override
     public void run() {
-        final Iterator<Runnable> iterator = callbacks.iterator();
+        final Iterator<Callable<Void>> iterator = callbacks.iterator();
 
         while (iterator.hasNext()) {
             try {
-                iterator.next().run();
+                iterator.next().call();
             } catch (Exception ex) {
                 logger.log(Level.SEVERE, "Exception thrown by running a callback!", ex);
             }
@@ -89,11 +91,29 @@ public class ShutDownHook extends Thread {
     /**
      * Registers a callback.
      *
-     * @param callback Runnable object.
+     * @param callback must not be {@code null}
      * @return Return itself for method chaining.
      */
     public ShutDownHook register(final Runnable callback) {
-        callbacks.add(callback);
+        Validate.notNull(callback, "callback");
+        return register(new Callable<Void>() {
+
+            @Override
+            public Void call() throws Exception {
+                callback.run();
+                return null;
+            }
+        });
+    }
+
+    /**
+     * Registers a callback.
+     *
+     * @param callback must not be {@code null}
+     * @return Return itself for method chaining.
+     */
+    public ShutDownHook register(final Callable<Void> callback) {
+        callbacks.add(Validate.notNull(callback, "callback"));
         return this;
     }
 

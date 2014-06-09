@@ -144,7 +144,7 @@ public final class Validate {
                 throw new IllegalArgumentException();
             } else {
                 throw new IllegalArgumentException(
-                        String.format("Parameter '%s' muts be greater than %d (was %d)!", name, lowerBound, reference));
+                    String.format("Parameter '%s' must be greater than %d (was %d)!", name, lowerBound, reference));
             }
         }
 
@@ -160,6 +160,114 @@ public final class Validate {
      */
     public static int greaterThan(final int reference, final int lowerBound) {
         return greaterThan(reference, lowerBound, null);
+    }
+
+    /**
+     * Tests that a given integer reference value is greater than or equal the given lower bound.
+     * <p>
+     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given
+     * lower bound value.
+     * </p>
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
+    public static int greaterThanOrEqual(final int reference, final int lowerBound, final String name) {
+        if (reference < lowerBound) {
+            if (null == name) {
+                throw new IllegalArgumentException();
+            } else {
+                throw new IllegalArgumentException(
+                    String.format("Parameter '%s' must be greater or equal than %d (was %d)!", name, lowerBound, reference));
+            }
+        }
+
+        return reference;
+    }
+
+    /**
+     * Convenience method for {@link #greaterThanOrEqual(int, int, java.lang.String)} with {@code null} as name.
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @return the reference, if it is valid
+     */
+    public static int greaterThanOrEqual(final int reference, final int lowerBound) {
+        return greaterThanOrEqual(reference, lowerBound, null);
+    }
+
+    /**
+     * Tests that a given integer reference value is greater than the given lower bound.
+     * <p>
+     * The method throws an {@link IllegalArgumentException} if the given reference is less than or equal the given
+     * lower bound value.
+     * </p>
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
+    public static long greaterThan(final long reference, final long lowerBound, final String name) {
+        if (reference <= lowerBound) {
+            if (null == name) {
+                throw new IllegalArgumentException();
+            } else {
+                throw new IllegalArgumentException(
+                    String.format("Parameter '%s' must be greater than %d (was %d)!", name, lowerBound, reference));
+            }
+        }
+
+        return reference;
+    }
+
+    /**
+     * Convenience method for {@link #greaterThan(long, long, java.lang.String)} with {@code null} as name.
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @return the reference, if it is valid
+     */
+    public static long greaterThan(final long reference, final long lowerBound) {
+        return greaterThan(reference, lowerBound, null);
+    }
+
+    /**
+     * Tests that a given integer reference value is greater than or equal the given lower bound.
+     * <p>
+     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given
+     * lower bound value.
+     * </p>
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
+    public static long greaterThanOrEqual(final long reference, final long lowerBound, final String name) {
+        if (reference < lowerBound) {
+            if (null == name) {
+                throw new IllegalArgumentException();
+            } else {
+                throw new IllegalArgumentException(
+                    String.format("Parameter '%s' must be greater than or equal %d (was %d)!", name, lowerBound, reference));
+            }
+        }
+
+        return reference;
+    }
+
+    /**
+     * Convenience method for {@link #greaterThanOrEqual(long, long, java.lang.String)} with {@code null} as name.
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @return the reference, if it is valid
+     */
+    public static long greaterThanOrEqual(final long reference, final long lowerBound) {
+        return greaterThanOrEqual(reference, lowerBound, null);
     }
 
     /**

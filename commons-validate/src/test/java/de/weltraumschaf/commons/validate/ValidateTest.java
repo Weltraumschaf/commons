@@ -100,22 +100,76 @@ public class ValidateTest {
     }
 
     @Test
-    public void greaterThan_greaterThanReturnsReference() {
+    public void greaterThan_int_greaterThanReturnsReference() {
         assertThat(Validate.greaterThan(5, 4, ""), is(5));
     }
 
     @Test
-    public void greaterThan_sameValuesThrowsException() {
+    public void greaterThan_int_sameValuesThrowsException() {
         thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("Parameter 'foo' muts be greater than 5 (was 5)!");
+        thrown.expectMessage("Parameter 'foo' must be greater than 5 (was 5)!");
         Validate.greaterThan(5, 5, "foo");
     }
 
     @Test
-    public void greaterThan_referenceLessThrowsException() {
+    public void greaterThan_int_referenceLessThrowsException() {
         thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("Parameter 'foo' muts be greater than 5 (was 4)!");
+        thrown.expectMessage("Parameter 'foo' must be greater than 5 (was 4)!");
         Validate.greaterThan(4, 5, "foo");
+    }
+
+    @Test
+    public void greaterThanOrEqual_int_greaterThanReturnsReference() {
+        assertThat(Validate.greaterThanOrEqual(5, 4, ""), is(5));
+    }
+
+    @Test
+    public void greaterThanOrEqual_int_sameValuesThrowsException() {
+        assertThat(Validate.greaterThanOrEqual(5, 5, ""), is(5));
+    }
+
+    @Test
+    public void greaterThanOrEqual_int_referenceLessThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' must be greater or equal than 5 (was 4)!");
+        Validate.greaterThanOrEqual(4, 5, "foo");
+    }
+
+
+    @Test
+    public void greaterThan_long_greaterThanReturnsReference() {
+        assertThat(Validate.greaterThan(5L, 4L, ""), is(5L));
+    }
+
+    @Test
+    public void greaterThan_long_sameValuesThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' must be greater than 5 (was 5)!");
+        Validate.greaterThan(5L, 5L, "foo");
+    }
+
+    @Test
+    public void greaterThan_long_referenceLessThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' must be greater than 5 (was 4)!");
+        Validate.greaterThan(4L, 5L, "foo");
+    }
+
+    @Test
+    public void greaterThanOrEqual_long_greaterThanReturnsReference() {
+        assertThat(Validate.greaterThanOrEqual(5L, 4L, ""), is(5L));
+    }
+
+    @Test
+    public void greaterThanOrEqual_long_sameValuesThrowsException() {
+        assertThat(Validate.greaterThanOrEqual(5L, 5L, ""), is(5L));
+    }
+
+    @Test
+    public void greaterThanOrEqual_long_referenceLessThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' must be greater than or equal 5 (was 4)!");
+        Validate.greaterThanOrEqual(4L, 5L, "foo");
     }
 
     @Test

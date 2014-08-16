@@ -18,6 +18,8 @@ package de.weltraumschaf.commons.guava;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Minimal set of {@code com.google.common.collect.Sets}.
@@ -99,6 +101,10 @@ public final class Sets {
      */
     public static <E> Set<E> newHashSetWithExpectedSize(final int expectedSize) {
         return new HashSet<E>(capacity(expectedSize));
+    }
+
+    public static <E> SortedSet<E> newTreeSet() {
+        return new TreeSet<E>();
     }
 
 }

@@ -81,6 +81,7 @@
         <module>commons-testing</module>
         <module>commons-time</module>
         <module>commons-validate</module>
+        <module>commons-jcommander</module>
     </modules>
 
     <dependencies>

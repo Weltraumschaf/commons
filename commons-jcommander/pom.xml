@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.weltraumschaf.commons</groupId>
+        <artifactId>reactor</artifactId>
+        <version>1.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>de.weltraumschaf.commons</groupId>
+    <artifactId>jcommander</artifactId>
+    <packaging>jar</packaging>
+
+    <name>Commons JCommander</name>
+    <description>
+        Handy extensions for JCommander.
+    </description>
+
+    <properties>
+        <maven.pmd.rulesetfiles>${project.parent.basedir}/src/main/config/pmd.xml</maven.pmd.rulesetfiles>
+        <maven.findbugs.excludefilterfile>${project.parent.basedir}/src/main/config/findbugs-exclude.xml</maven.findbugs.excludefilterfile>
+        <maven.findbugs.includefilterfile>${project.parent.basedir}/src/main/config/findbugs-include.xml</maven.findbugs.includefilterfile>
+        
+        <dependency.jcommander.version>1.35</dependency.jcommander.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.weltraumschaf.commons</groupId>
+            <artifactId>validate</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.beust</groupId>
+            <artifactId>jcommander</artifactId>
+            <version>${dependency.jcommander.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <reportPlugins>
+                        <plugin>
+                            <artifactId>maven-project-info-reports-plugin</artifactId>
+                            <reportSets>
+                                <reportSet>
+                                    <reports>
+                                        <report>index</report>
+                                        <report>dependencies</report>
+                                        <report>dependency-convergence</report>
+                                    </reports>
+                                </reportSet>
+                            </reportSets>
+                        </plugin>
+                    </reportPlugins>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <!-- https://groups.google.com/forum/m/#!topic/sass-lang/YPHqCcc_l8Y -->
+                <groupId>org.jasig.maven</groupId>
+                <artifactId>sass-maven-plugin</artifactId>
+                <configuration>
+                    <baseOutputDirectory>${basedir}/src/site/resources/css</baseOutputDirectory>
+                    <buildDirectory>${project.build.directory}</buildDirectory>
+                    <sassSourceDirectory>${project.parent.basedir}/src/site/resources/sass</sassSourceDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>sassProcessSource</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>update-stylesheets</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

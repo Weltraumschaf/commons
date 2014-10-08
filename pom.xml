@@ -186,11 +186,11 @@
                         <siteDirectory>${project.parent.basedir}/src/site</siteDirectory>
                     </configuration>
                 </plugin>
-                <plugin>
+<!--                <plugin>
                     <groupId>org.jasig.maven</groupId>
                     <artifactId>sass-maven-plugin</artifactId>
                     <version>1.1.1</version>
-                </plugin>
+                </plugin>-->
             </plugins>
         </pluginManagement>
 
@@ -371,9 +371,9 @@
                 </configuration>
             </plugin>
 
-            <plugin>
+            <!--<plugin>-->
                 <!-- https://groups.google.com/forum/m/#!topic/sass-lang/YPHqCcc_l8Y -->
-                <groupId>org.jasig.maven</groupId>
+<!--                <groupId>org.jasig.maven</groupId>
                 <artifactId>sass-maven-plugin</artifactId>
                 <configuration>
                     <baseOutputDirectory>${basedir}/src/site/resources/css</baseOutputDirectory>
@@ -389,7 +389,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
 
             <!--            <plugin>
                 <groupId>com.mycila.maven-license-plugin</groupId>

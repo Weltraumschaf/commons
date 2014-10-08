@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.weltraumschaf.commons</groupId>
         <artifactId>reactor</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
 
     <groupId>de.weltraumschaf.commons</groupId>
@@ -21,7 +21,7 @@
         <maven.pmd.rulesetfiles>${project.parent.basedir}/src/main/config/pmd.xml</maven.pmd.rulesetfiles>
         <maven.findbugs.excludefilterfile>${project.parent.basedir}/src/main/config/findbugs-exclude.xml</maven.findbugs.excludefilterfile>
         <maven.findbugs.includefilterfile>${project.parent.basedir}/src/main/config/findbugs-include.xml</maven.findbugs.includefilterfile>
-        
+
         <dependency.jcommander.version>1.35</dependency.jcommander.version>
     </properties>
 
@@ -31,7 +31,7 @@
             <artifactId>validate</artifactId>
             <version>1.0.2-SNAPSHOT</version>
         </dependency>
-        
+
         <dependency>
             <groupId>com.beust</groupId>
             <artifactId>jcommander</artifactId>
@@ -62,9 +62,9 @@
                 </configuration>
             </plugin>
 
-            <plugin>
+<!--            <plugin>-->
                 <!-- https://groups.google.com/forum/m/#!topic/sass-lang/YPHqCcc_l8Y -->
-                <groupId>org.jasig.maven</groupId>
+<!--                <groupId>org.jasig.maven</groupId>
                 <artifactId>sass-maven-plugin</artifactId>
                 <configuration>
                     <baseOutputDirectory>${basedir}/src/site/resources/css</baseOutputDirectory>
@@ -80,7 +80,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 </project>

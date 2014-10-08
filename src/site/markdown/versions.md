@@ -86,4 +86,16 @@
 - Add validate module.
 - Remove <code>CapturingOutputStream</code> and add <code>CapturingPrintStream</code>.
 
+## Version 1.0.1
+
+- Add null aware trim.
+- Add some common environment names.
+- Add JCommander extension.
+- Add method to create sorted set.
+
+## Version 1.1.0
+
+- System Module
+    - Add falback value to environment.
+
 [junit]:    http://www.junit.org/

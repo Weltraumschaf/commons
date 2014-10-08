@@ -48,6 +48,7 @@ public final class Environments {
          * @return never {@code null}, maybe empty
          */
         String get(String name);
+
         /**
          * Get a environment variable.
          *
@@ -55,6 +56,26 @@ public final class Environments {
          * @return never {@code null}, maybe empty
          */
         String get(Names name);
+
+        /**
+         * Get a environment variable.
+         *
+         * @since 1.1.0
+         * @param name must not be {@code null} or empty
+         * @param fallback must not be {@code null}
+         * @return never {@code null}, maybe empty
+         */
+        String get(String name, String fallback);
+
+        /**
+         * Get a environment variable.
+         *
+         * @since 1.1.0
+         * @param name must not be {@code null}
+         * @param fallback must not be {@code null}
+         * @return never {@code null}, maybe empty
+         */
+        String get(Names name, String fallback);
     }
 
     /**
@@ -64,14 +85,27 @@ public final class Environments {
 
         @Override
         public String get(final String name) {
-            Validate.notEmpty(name, "Name must not be null or empty!");
-            final String var = System.getenv(name);
-            return var == null ? "" : var;
+            return get(name, "");
         }
 
         @Override
         public String get(final Names name) {
             return get(name.getPropertyName());
+        }
+
+        @Override
+        public String get(final String name, final String fallback) {
+            Validate.notEmpty(name, "name");
+            Validate.notEmpty(fallback, "fallback");
+
+            final String var = System.getenv(name);
+
+            return var == null ? fallback : var;
+        }
+
+        @Override
+        public String get(final Names name, final String fallback) {
+            return get(name.getPropertyName(), fallback);
         }
 
     }
@@ -145,7 +179,9 @@ public final class Environments {
          */
         USER_NAME("user.name");
 
-        /** The property name. */
+        /**
+         * The property name.
+         */
         private final String propertyName;
 
         /**

@@ -52,9 +52,11 @@ public final class Environments {
         /**
          * Get a environment variable.
          *
+         * @deprecated Will be remove in next version.
          * @param name must not be {@code null}
          * @return never {@code null}, maybe empty
          */
+        @Deprecated
         String get(Names name);
 
         /**
@@ -67,15 +69,6 @@ public final class Environments {
          */
         String get(String name, String fallback);
 
-        /**
-         * Get a environment variable.
-         *
-         * @since 1.1.0
-         * @param name must not be {@code null}
-         * @param fallback must not be {@code null}
-         * @return never {@code null}, maybe empty
-         */
-        String get(Names name, String fallback);
     }
 
     /**
@@ -96,23 +89,22 @@ public final class Environments {
         @Override
         public String get(final String name, final String fallback) {
             Validate.notEmpty(name, "name");
-            Validate.notEmpty(fallback, "fallback");
+            Validate.notNull(fallback, "fallback");
 
             final String var = System.getenv(name);
 
             return var == null ? fallback : var;
         }
 
-        @Override
-        public String get(final Names name, final String fallback) {
-            return get(name.getPropertyName(), fallback);
-        }
-
     }
 
     /**
      * Some common names provided by the JVM.
+     *
+     * FIXME Remove this. Has nothing to do with env. Are system properties.
+     * @deprecated Will be remove in next version.
      */
+    @Deprecated
     public static enum Names {
 
         /**

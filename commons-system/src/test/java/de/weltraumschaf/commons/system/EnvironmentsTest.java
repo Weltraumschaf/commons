@@ -24,10 +24,21 @@ import static org.hamcrest.Matchers.*;
 public class EnvironmentsTest {
 
     private final Environments.Env sut = Environments.defaultEnv();
-    
 
     @Test
-    public void testSomeMethod() {
+    public void getByString() {
+        assertThat(sut.get("SHELL"), is(equalTo("/bin/bash")));
+        assertThat(sut.get("_commons__unknown__"), is(equalTo("")));
     }
 
+    @Test
+    public void getByString_withFallback() {
+        assertThat(sut.get("SHELL", "default"), is(equalTo("/bin/bash")));
+        assertThat(sut.get("_commons__unknown__", "default"), is(equalTo("default")));
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void getByString_fallbackMustNotBeNull() {
+        sut.get("SHELL", null);
+    }
 }

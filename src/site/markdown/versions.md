@@ -99,5 +99,6 @@
     - Introduces autorealoading properties based configuration.
 - System Module
     - Add falback value to environment.
+    - Add helper to read system properties.
 
 [junit]:    http://www.junit.org/

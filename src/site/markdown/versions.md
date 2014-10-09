@@ -95,6 +95,8 @@
 
 ## Version 1.1.0
 
+- Config Module
+    - Introduces autorealoading properties based configuration.
 - System Module
     - Add falback value to environment.
 

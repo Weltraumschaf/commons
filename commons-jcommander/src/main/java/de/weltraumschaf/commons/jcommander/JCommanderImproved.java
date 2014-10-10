@@ -17,14 +17,42 @@ import de.weltraumschaf.commons.validate.Validate;
 import java.util.List;
 
 /**
+ * This helper class removes boiler plate if you use {@link JCommander}.
+ * <p>
+ * Example:
+ * </p>
+ * <pre>
+ * {@code
+ * public static void main(final String[] args) {
+ *     // Create an instance for your custom Options type.
+ *     // This option type is a typical JCommander annotated beanclass.
+ *     // Note that this type must provide a zero argument constructor.
+ *     // If not the constructor of JCommanderImproved throws an exception.
+ *     final JCommanderImproved<Options> cliArgs = new JCommanderImproved<Options>("mytool", Options.class);
  *
- * @parma O type of options model
+ *     // Parse and gather the options.
+ *     final Options opts = cliArgs.gatherOptions(args);
+ *
+ *     // Print the helpmessage:
+ *     System.out.print(
+ *         cliArgs.helpMessage(
+ *             "[-v|--version] [-h|--help]",
+ *             "This is mytool.",
+ *             "$> mytool -v")
+ *     );
+ * }
+ * }
+ * </pre>
+ *
+ * @param <O> type of options bean
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class JCommanderImproved<O> {
 
+    /**
+     * System dependent newline character.
+     */
     private static final String DEFAULT_NEW_LINE = String.format("%n");
-
     /**
      * Parses the command line options.
      */
@@ -33,10 +61,16 @@ public final class JCommanderImproved<O> {
      * Class for type of options model.
      */
     private final Class<O> optionsType;
+    /**
+     * The name of the tool for what this class gather options.
+     */
     private final String programName;
 
     /**
      * Dedicated constructor.
+     * <p>
+     * Throws an {@link IllegalArgumentException} if the options type can't be instantiated.
+     * </p>
      *
      * @param programName must not be {@code null} or empty
      * @param optionsType must not be {@code null}
@@ -49,6 +83,16 @@ public final class JCommanderImproved<O> {
         createOptions(optionsType); // Check if instantiatable.
     }
 
+    /**
+     * Creates an option bean.
+     * <p>
+     * Throws an {@link IllegalArgumentException} if the options type can't be instantiated.
+     * </p>
+     *
+     * @param <O> type of options bean
+     * @param optionsType must not be {@code null}
+     * @return never {@code null}, always new instance
+     */
     private static <O> O createOptions(final Class<O> optionsType) {
         try {
             return optionsType.newInstance();
@@ -57,11 +101,17 @@ public final class JCommanderImproved<O> {
         }
     }
 
+    /**
+     * Parses the given arguments and return a ready set up options bean.
+     *
+     * @param args must not be {@code null}
+     * @return never {@code null} always new instance
+     */
     public O gatherOptions(final String[] args) {
         final O opts = createOptions(optionsType);
 
         optionsParser.addObject(opts);
-        optionsParser.parse(args);
+        optionsParser.parse(Validate.notNull(args, "args"));
 
         return opts;
     }
@@ -117,7 +167,7 @@ public final class JCommanderImproved<O> {
             final int rightColumnwidth = 80 - leftColumnWidth;
 
             for (final ParameterDescription parameter : parameters) {
-                help.append(pad(indent + parameter.getNames(), leftColumnWidth))
+                help.append(rightPad(indent + parameter.getNames(), leftColumnWidth))
                         .append(lineBreak(parameter.getDescription(), rightColumnwidth, leftColumnWidth))
                         .append(DEFAULT_NEW_LINE);
             }
@@ -135,7 +185,16 @@ public final class JCommanderImproved<O> {
         return help.toString();
     }
 
-    static String pad(final String in, final int length) {
+    /**
+     * Pads given string with spaces on the right side to given length.
+     *
+     * @param in if {@code null} only spaces will be returned
+     * @param length must not be negative
+     * @return
+     */
+    static String rightPad(final String in, final int length) {
+        Validate.greaterThanOrEqual(length, 0, "length");
+
         if (null == in) {
             return spaces(length);
         }
@@ -143,6 +202,12 @@ public final class JCommanderImproved<O> {
         return in + spaces(length - in.length());
     }
 
+    /**
+     * Generates a string of spaces with given length.
+     *
+     * @param length empty string will be returned if < 1
+     * @return never {@code null}
+     */
     static String spaces(final int length) {
         if (length < 1) {
             return "";
@@ -157,10 +222,21 @@ public final class JCommanderImproved<O> {
         return buffer.toString();
     }
 
+    /**
+     * Breaks the given string to fit given length and pads on the left side before line breaks.
+     *
+     * @param in empty string will be returned if {@code null}
+     * @param length must not be negative
+     * @param leftPadLength must not be negative
+     * @return never {@code null}
+     */
     static String lineBreak(final String in, final int length, final int leftPadLength) {
         if (null == in) {
             return "";
         }
+
+        Validate.greaterThanOrEqual(length, 0, "length");
+        Validate.greaterThanOrEqual(leftPadLength, 0, "leftPadLength");
 
         if (in.length() <= length) {
             return in;

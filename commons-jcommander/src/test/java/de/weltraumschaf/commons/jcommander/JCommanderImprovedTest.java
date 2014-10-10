@@ -37,9 +37,9 @@ public class JCommanderImprovedTest {
 
     @Test
     public void pad() {
-        assertThat(JCommanderImproved.pad(null, 10), is(equalTo("          ")));
-        assertThat(JCommanderImproved.pad("", 10), is(equalTo("          ")));
-        assertThat(JCommanderImproved.pad("foo", 10), is(equalTo("foo       ")));
+        assertThat(JCommanderImproved.rightPad(null, 10), is(equalTo("          ")));
+        assertThat(JCommanderImproved.rightPad("", 10), is(equalTo("          ")));
+        assertThat(JCommanderImproved.rightPad("foo", 10), is(equalTo("foo       ")));
     }
 
     @Test

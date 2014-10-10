@@ -24,7 +24,7 @@ import org.junit.Test;
  */
 public class JCommanderImprovedTest {
 
-    private final JCommanderImproved<Object> sut = new JCommanderImproved("name", Object.class);
+    private final JCommanderImproved<Object> sut = new JCommanderImproved<>("name", Object.class);
 
     @Test
     public void spaces() {

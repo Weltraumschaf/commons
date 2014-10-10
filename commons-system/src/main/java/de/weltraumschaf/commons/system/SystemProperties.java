@@ -48,7 +48,6 @@ public final class SystemProperties {
         /**
          * Get a environment variable.
          *
-         * @deprecated Will be remove in next version.
          * @param name must not be {@code null}
          * @return never {@code null}, maybe empty
          */

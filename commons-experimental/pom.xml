@@ -28,17 +28,17 @@
         <dependency>
             <groupId>de.weltraumschaf.commons</groupId>
             <artifactId>guava</artifactId>
-            <version>1.0.2-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>de.weltraumschaf.commons</groupId>
             <artifactId>shell</artifactId>
-            <version>1.0.2-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>de.weltraumschaf.commons</groupId>
             <artifactId>validate</artifactId>
-            <version>1.0.2-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

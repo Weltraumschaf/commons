@@ -27,12 +27,12 @@
         <dependency>
             <groupId>de.weltraumschaf.commons</groupId>
             <artifactId>system</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>de.weltraumschaf.commons</groupId>
             <artifactId>validate</artifactId>
-            <version>${parent.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

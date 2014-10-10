@@ -190,13 +190,17 @@ public final class JCommanderImproved<O> {
      *
      * @param in if {@code null} only spaces will be returned
      * @param length must not be negative
-     * @return
+     * @return never {@code null}
      */
     static String rightPad(final String in, final int length) {
         Validate.greaterThanOrEqual(length, 0, "length");
 
         if (null == in) {
             return spaces(length);
+        }
+
+        if (length - in.length() == 0) {
+            return in;
         }
 
         return in + spaces(length - in.length());

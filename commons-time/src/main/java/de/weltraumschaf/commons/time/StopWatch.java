@@ -52,7 +52,8 @@ import java.util.Date;
  * </ol>
  *
  * <p>
- * This class is not thread-safe</p>
+ * This class is not thread-safe
+ * </p>
  *
  * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
@@ -67,7 +68,7 @@ public final class StopWatch {
     /**
      * Factor to convert from nanoseconds to milliseconds.
      */
-    private static final long NANO_2_MILLIS = 1000000L;
+    private static final long NANO_2_MILLIS = 1_000_000L;
 
     /**
      * The current running state of the StopWatch.
@@ -164,7 +165,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException if the StopWatch is not running.
+     * Throws {@link IllegalStateException} if the StopWatch is not running.
      * </p>
      */
     public void split() {
@@ -185,7 +186,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException if the StopWatch has not been split.
+     * Throws {@link IllegalStateException} if the StopWatch has not been split.
      * </p>
      */
     public void unsplit() {
@@ -205,7 +206,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException if the StopWatch is not currently running.
+     * Throws {@link IllegalStateException} if the StopWatch is not currently running.
      * </p>
      */
     public void suspend() {
@@ -226,7 +227,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException if the StopWatch has not been suspended.
+     * Throws {@link IllegalStateException} if the StopWatch has not been suspended.
      * </p>
      */
     public void resume() {
@@ -282,7 +283,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException if the StopWatch has not yet been split.
+     * Throws {@link IllegalStateException} if the StopWatch has not yet been split.
      * </p>
      *
      * @return the split time in milliseconds
@@ -299,7 +300,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException if the StopWatch has not yet been split.
+     * Throws {@link IllegalStateException} if the StopWatch has not yet been split.
      * </p>
      *
      * @return the split time in nanoseconds
@@ -316,7 +317,7 @@ public final class StopWatch {
      * Returns the time this stopwatch was started.
      *
      * <p>
-     * Throws {@link IllegalStateException if this StopWatch has not been started.
+     * Throws {@link IllegalStateException} if this StopWatch has not been started.
      * </p>
      *
      * @return the time this stopwatch was started
@@ -326,7 +327,6 @@ public final class StopWatch {
             throw new IllegalStateException("Stopwatch has not been started");
         }
 
-        // System.nanoTime is for elapsed time
         return this.startTimeMillis;
     }
 

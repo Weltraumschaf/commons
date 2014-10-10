@@ -68,20 +68,42 @@ public final class JCommanderImproved<O> {
 
     /**
      * Generates help message for main command.
+     * <p>
+     * The given parameters enhance the produced help messages:
+     * </p>
+     * <ul>
+     * <li>{@code usage}: A usage string like e.g. {@literal -a --foo [-h|--help]}</li>
+     * <li>{@code descriptions}: A more or less longer description of the tool.</li>
+     * <li>{@code example}: Examples how to use the tool.</li>
+     * </ul>
+     * <p>
+     * If one of the three parameters is empty the whole part is omitted in the output.
+     * </p>
      *
+     * @param usage must not be {@code null}
+     * @param descriptions must not be {@code null}
+     * @param example must not be {@code null}
      * @return never {@code null} or empty
      */
     public String helpMessage(final String usage, final String descriptions, final String example) {
+        Validate.notNull(usage, "usage");
+        Validate.notNull(descriptions, "descriptions");
+        Validate.notNull(example, "example");
+
         final String indent = "  ";
         final StringBuilder help = new StringBuilder();
-        help.append("Usage: ")
-                .append(programName)
-                .append(' ')
-                .append(usage)
-                .append(DEFAULT_NEW_LINE)
-                .append(DEFAULT_NEW_LINE)
-                .append(descriptions)
-                .append(DEFAULT_NEW_LINE);
+
+        help.append("Usage: ").append(programName);
+
+        if (!usage.trim().isEmpty()) {
+            help.append(' ').append(usage.trim());
+        }
+
+        help.append(DEFAULT_NEW_LINE).append(DEFAULT_NEW_LINE);
+
+        if (!descriptions.trim().isEmpty()) {
+            help.append(descriptions.trim()).append(DEFAULT_NEW_LINE);
+        }
 
         final List<ParameterDescription> parameters = optionsParser.getParameters();
 
@@ -101,14 +123,15 @@ public final class JCommanderImproved<O> {
             }
         }
 
-        help.append(DEFAULT_NEW_LINE)
-                .append("Example")
-                .append(DEFAULT_NEW_LINE)
-                .append(DEFAULT_NEW_LINE)
-                .append(indent + example)
-                .append(DEFAULT_NEW_LINE)
-                .append(DEFAULT_NEW_LINE);
+        help.append(DEFAULT_NEW_LINE);
 
+        if (!example.trim().isEmpty()) {
+            help.append("Example").append(DEFAULT_NEW_LINE)
+                .append(DEFAULT_NEW_LINE)
+                .append(indent).append(example.trim()).append(DEFAULT_NEW_LINE);
+        }
+
+        help.append(DEFAULT_NEW_LINE);
         return help.toString();
     }
 
@@ -147,12 +170,12 @@ public final class JCommanderImproved<O> {
         int i = 0;
 
         while ((i = sb.indexOf(" ", i + length)) != -1) {
-            sb.replace(i, i + 1, DEFAULT_NEW_LINE.toString());
+            sb.replace(i, i + 1, DEFAULT_NEW_LINE);
         }
 
         return sb.toString()
                 .replace(
-                        DEFAULT_NEW_LINE.toString(),
-                        DEFAULT_NEW_LINE.toString() + spaces(leftPadLength));
+                        DEFAULT_NEW_LINE,
+                        DEFAULT_NEW_LINE + spaces(leftPadLength));
     }
 }

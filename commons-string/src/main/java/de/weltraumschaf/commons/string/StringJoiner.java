@@ -52,6 +52,7 @@ public final class StringJoiner {
      * @param elements the values to join together, may be null
      * @return the joined String, {@code null} if null array input
      */
+    @SafeVarargs
     public static <T> String join(final T... elements) {
         return join(elements, null);
     }

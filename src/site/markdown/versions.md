@@ -100,5 +100,8 @@
 - System Module
     - Add falback value to environment.
     - Add helper to read system properties.
+- Testing Module
+    - Matcher (`ApplicationExceptionCodeMatcher#hasExitCode()`) to expect
+      an `ApplicationException` with particular `ExitCode`.
 
 [junit]:    http://www.junit.org/

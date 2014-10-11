@@ -70,7 +70,7 @@ public class InvokableAdapterTest {
         InvokableAdapter.main(app, io);
         verify(app, times(1)).setIoStreams(io);
         verify(app, times(1)).init();
-        verify(io.getStderr(), times(1)).println(msg);
+        verify(io.getStderr(), times(1)).println("FATAL: " + msg);
         verify(app, never()).execute();
         verify(app, times(1)).exit(-1);
     }
@@ -87,7 +87,7 @@ public class InvokableAdapterTest {
         verify(app, times(1)).setIoStreams(io);
         verify(app, times(1)).init();
         verify(app, times(1)).execute();
-        verify(io.getStderr(), times(1)).println(msg);
+        verify(io.getStderr(), times(1)).println("FATAL: " + msg);
         verify(app, times(1)).exit(-1);
     }
 

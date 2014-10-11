@@ -36,7 +36,6 @@
             <groupId>de.weltraumschaf.commons</groupId>
             <artifactId>application</artifactId>
             <version>${project.parent.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 

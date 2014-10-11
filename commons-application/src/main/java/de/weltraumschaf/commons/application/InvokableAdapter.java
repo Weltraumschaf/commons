@@ -153,7 +153,7 @@ public abstract class InvokableAdapter implements Invokable {
             invokable.init();
             invokable.execute();
         } catch (final Exception ex) {
-            ioStreams.errorln(ex.getMessage());
+            ioStreams.errorln("FATAL: " + ex.getMessage());
 
             if (debug) {
                 ioStreams.printStackTrace(ex);

@@ -29,37 +29,37 @@ import org.hamcrest.TypeSafeMatcher;
  */
 public final class ApplicationExceptionCodeMatcher <T extends ApplicationException> extends TypeSafeMatcher<T> {
 
-    private final Matcher<ExitCode> exitCodeMatcher;
+    private final ExitCode expectedExitCode;
 
     /**
      * Dedicated constructor.
      *
      * @param exitCodeMatcher must not be {@code null}
      */
-    public ApplicationExceptionCodeMatcher(final Matcher<ExitCode> exitCodeMatcher) {
+    public ApplicationExceptionCodeMatcher(final ExitCode exitCodeMatcher) {
         super();
-        this.exitCodeMatcher = Validate.notNull(exitCodeMatcher, "exitCodeMatcher");
+        this.expectedExitCode = Validate.notNull(exitCodeMatcher, "exitCodeMatcher");
     }
 
     @Override
     public void describeTo(final Description description) {
         description.appendText("exception with exit code ");
-        description.appendDescriptionOf(exitCodeMatcher);
+        description.appendText(expectedExitCode.toString());
     }
 
     @Override
     protected boolean matchesSafely(final T item) {
-        return exitCodeMatcher.matches(item.getExitCode());
+        return expectedExitCode.getCode() == item.getExitCode().getCode();
     }
 
     @Override
     protected void describeMismatchSafely(final T item, final Description mismatch) {
         mismatch.appendText("exit code ");
-        exitCodeMatcher.describeMismatch(item.getExitCode(), mismatch);
+        mismatch.appendText(item.getExitCode().toString());
     }
 
     @Factory
-    public static <T extends ApplicationException> Matcher<T> hasExitCode(final Matcher<ExitCode> matcher) {
+    public static <T extends ApplicationException> Matcher<T> hasExitCode(final ExitCode matcher) {
         return new ApplicationExceptionCodeMatcher<>(matcher);
     }
 

@@ -29,16 +29,19 @@ import org.hamcrest.TypeSafeMatcher;
  */
 public final class ApplicationExceptionCodeMatcher <T extends ApplicationException> extends TypeSafeMatcher<T> {
 
+    /**
+     * Exit code to verify against it.
+     */
     private final ExitCode expectedExitCode;
 
     /**
      * Dedicated constructor.
      *
-     * @param exitCodeMatcher must not be {@code null}
+     * @param expectedExitCode must not be {@code null}
      */
-    public ApplicationExceptionCodeMatcher(final ExitCode exitCodeMatcher) {
+    public ApplicationExceptionCodeMatcher(final ExitCode expectedExitCode) {
         super();
-        this.expectedExitCode = Validate.notNull(exitCodeMatcher, "exitCodeMatcher");
+        this.expectedExitCode = Validate.notNull(expectedExitCode, "expectedExitCode");
     }
 
     @Override
@@ -59,8 +62,8 @@ public final class ApplicationExceptionCodeMatcher <T extends ApplicationExcepti
     }
 
     @Factory
-    public static <T extends ApplicationException> Matcher<T> hasExitCode(final ExitCode matcher) {
-        return new ApplicationExceptionCodeMatcher<>(matcher);
+    public static <T extends ApplicationException> Matcher<T> hasExitCode(final ExitCode expectedExitCode) {
+        return new ApplicationExceptionCodeMatcher<>(expectedExitCode);
     }
 
 }

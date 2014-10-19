@@ -12,9 +12,16 @@
 
 package de.weltraumschaf.commons.testing;
 
-import org.junit.Test;
+import de.weltraumschaf.commons.application.ApplicationException;
+import de.weltraumschaf.commons.system.ExitCode;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.Matchers.*;
+import org.junit.Test;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 /**
  * Tests for {@link ApplicationExceptionCodeMatcher}.
@@ -24,8 +31,51 @@ import static org.hamcrest.Matchers.*;
 public class ApplicationExceptionCodeMatcherTest {
 
     @Test
-    public void testSomeMethod() {
-        // TODO Write tests for ApplicationExceptionCodeMatcher.
+    public void matchesSafely() {
+        final Matcher<ApplicationException> sut =
+                ApplicationExceptionCodeMatcher.<ApplicationException>hasExitCode(ExitCodeImpl.FOO);
+
+        assertThat(sut.matches(new ApplicationException(ExitCodeImpl.FOO, "foo")), is(true));
+        assertThat(sut.matches(new ApplicationException(ExitCodeImpl.BAR, "bar")), is(false));
+        assertThat(sut.matches(new ApplicationException(ExitCodeImpl.BAZ, "baz")), is(false));
     }
 
+    @Test
+    public void describeTo() {
+        final Description desc = mock(Description.class);
+        final Matcher<ApplicationException> sut =
+                ApplicationExceptionCodeMatcher.<ApplicationException>hasExitCode(ExitCodeImpl.FOO);
+
+        sut.describeTo(desc);
+
+        verify(desc, times(1)).appendText("exception with exit code ");
+        verify(desc, times(1)).appendText("FOO");
+    }
+
+    @Test
+    public void describeMismatchSafely() {
+        final Description desc = mock(Description.class);
+        final Matcher<ApplicationException> sut =
+                ApplicationExceptionCodeMatcher.<ApplicationException>hasExitCode(ExitCodeImpl.FOO);
+
+        sut.describeMismatch(new ApplicationException(ExitCodeImpl.BAR, "bar"), desc);
+
+        verify(desc, times(1)).appendText("exit code ");
+        verify(desc, times(1)).appendText("BAR");
+    }
+
+    private static enum ExitCodeImpl implements ExitCode {
+        FOO(0), BAR(1), BAZ(2);
+
+        private final int code;
+
+        private ExitCodeImpl(final int code) {
+            this.code = code;
+        }
+
+        @Override
+        public int getCode() {
+            return code;
+        }
+    }
 }

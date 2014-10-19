@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Properties;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -117,19 +118,18 @@ public class ReloadingPropertiesConfigurationTest {
     }
 
     @Test
-    public void getFlag() {
+    public void getInteger() {
         assertThat(sut.getInteger("snafu", 23), is(42));
         assertThat(sut.getInteger("notexisting", 23), is(23));
     }
 
     @Test
-    public void getInteger() {
+    public void getFlag() {
         assertThat(sut.getFlag("baz", true), is(false));
         assertThat(sut.getFlag("notexisting", true), is(true));
     }
 
     @Test
-    @Ignore("FIXME Does not work.")
     public void reloadConfigurationAfterChange() throws IOException, InterruptedException {
         assertThat(sut.getProperty("foo", "deffoo"), is("bar"));
         assertThat(sut.getProperty("baz", "defbaz"), is("false"));

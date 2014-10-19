@@ -9,7 +9,6 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
-
 package de.weltraumschaf.config;
 
 import de.weltraumschaf.commons.validate.Validate;
@@ -17,15 +16,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
 
 /**
- * This configuration is a Java properties file based configuration, which reloads its content
- * if the properties file has changed.
+ * This configuration is a Java properties file based configuration, which reloads its content if the properties file
+ * has changed.
  * <p>
- * This configuration does not need you to force an application restart, if you changed the
- * properties file.
+ * This configuration does not need you to force an application restart, if you changed the properties file.
  * </p>
  * <p>
  * Based on this <a href"http://www.javacodegeeks.com/2014/10/dead-simple-configuration.html">blog post</a>.
@@ -56,29 +55,69 @@ import java.util.Properties;
  * }
  * }
  * </pre>
+ * <p>
+ * This class is thread safe because the method reading the file is synchronized.
+ * </p>
  *
  * @since 1.1.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public abstract class ReloadingPropertiesConfiguration {
 
+    /**
+     * Holds the configuration values.
+     */
     private final Properties properties = new Properties();
-    private final File configFile;
+    /**
+     * Where the configuration is loaded from.
+     */
+    private final Path configFile;
+    /**
+     * Time in milliseconds.
+     * <p>
+     * Initial {@code -1} so that file will be read anyway on first property access.
+     * </p>
+     */
     private long lastLoad = -1L;
 
+    /**
+     * Convenience constructor for file name as string.
+     *
+     * @param filename must not be {@code null} or empty
+     */
     public ReloadingPropertiesConfiguration(final String filename) {
-        this(new File(filename));
+        this(new File(Validate.notEmpty(filename, "filename")));
     }
 
-    public ReloadingPropertiesConfiguration(final Path file) {
-        this(file.toFile());
-    }
-
+    /**
+     * Convenience constructor for file.
+     *
+     * @param file must not be {@code null}
+     */
     public ReloadingPropertiesConfiguration(final File file) {
+        this(file.toPath());
+    }
+
+    /**
+     * Dedicated constructor.
+     *
+     * @param file must not be {@code null}
+     */
+    public ReloadingPropertiesConfiguration(final Path file) {
         super();
         this.configFile = Validate.notNull(file, "file");
     }
 
+    /**
+     * Get a property by name.
+     * <p>
+     * If the property does not exist then the default value will be returned.
+     * </p>
+     *
+     * @param propertyName must not be {@code null} or empty
+     * @param defaultValue must not be {@code null}
+     * @return never {@code null}
+     */
     public final String getProperty(final String propertyName, final String defaultValue) {
         Validate.notNull(defaultValue, "defaultValue");
         final String result = getProperty(propertyName);
@@ -90,6 +129,15 @@ public abstract class ReloadingPropertiesConfiguration {
         return result;
     }
 
+    /**
+     * Get a property by name.
+     * <p>
+     * Throws a {@link RuntimeException if property does not exists.
+     * </p>
+     *
+     * @param propertyName must not be {@code null} or empty
+     * @return never {@code null}
+     */
     public final String getRequiredProperty(final String propertyName) {
         final String result = getProperty(propertyName);
 
@@ -100,30 +148,64 @@ public abstract class ReloadingPropertiesConfiguration {
         return result;
     }
 
+    /**
+     * Get a boolean property by name.
+     * <p>
+     * This method calls {@link #getProperty(java.lang.String, java.lang.String)}. The result will be
+     * passed through {@link Boolean#parseBoolean(java.lang.String)}.
+     * </p>
+     *
+     * @param propertyName must not be {@code null} or empty
+     * @param defaultValue must not be {@code null}
+     * @return never {@code null}
+     */
     public final boolean getFlag(final String propertyName, final boolean defaultValue) {
         return Boolean.parseBoolean(getProperty(propertyName, String.valueOf(defaultValue)));
     }
 
+    /**
+     * Get a integer property by name.
+     * <p>
+     * This method calls {@link #getProperty(java.lang.String, java.lang.String)}. The result will be
+     * passed through {@link Integer#parseInt(java.lang.String, int)} with radix of {@code 10}.
+     * </p>
+     *
+     * @param propertyName must not be {@code null} or empty
+     * @param defaultValue must not be {@code null}
+     * @return never {@code null}
+     */
     public final int getInteger(final String propertyName, final int defaultValue) {
         return Integer.parseInt(getProperty(propertyName, String.valueOf(defaultValue)), 10);
     }
 
+    /**
+     * Get the property from the underlying object and ensures it is fresh loaded.
+     *
+     * @param propertyName must not be {@code null} or empty
+     * @return never {@code null}
+     */
     private String getProperty(final String propertyName) {
         ensureConfigurationIsFresh();
         return properties.getProperty(Validate.notEmpty(propertyName, "propertyName"));
     }
 
+    /**
+     * Reads the property file from disk if the files modification date is after the last one read.
+     */
     private synchronized void ensureConfigurationIsFresh() {
-        final long lastModified = configFile.lastModified();
+        try {
+            final long lastModified = Files.getLastModifiedTime(configFile).toMillis();
 
-        if (lastModified <= lastLoad) {
-            return;
-        }
+            if (lastLoad > lastModified) {
+                return;
+            }
 
-        try (final InputStream inputStream = new FileInputStream(configFile)) {
-            properties.clear();
-            lastLoad = System.currentTimeMillis();
-            properties.load(inputStream);
+            lastLoad = lastModified;
+
+            try (final InputStream inputStream = new FileInputStream(configFile.toFile())) {
+                properties.clear();
+                properties.load(inputStream);
+            }
         } catch (final IOException ex) {
             throw new RuntimeException(String.format("Failed to load configuration file '%s'!", configFile), ex);
         }

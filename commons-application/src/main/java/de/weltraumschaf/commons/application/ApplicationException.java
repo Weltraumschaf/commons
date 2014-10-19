@@ -49,10 +49,10 @@ public class ApplicationException extends Exception {
      * @param cause may be {@code null}
      */
     public ApplicationException(final ExitCode exitCode, final String message, final Throwable cause) {
-        super(Validate.notEmpty(message, "Parameter 'message' mut not be null or empty"), cause);
+        super(Validate.notEmpty(message, "message"), cause);
 
         if (null == exitCode) {
-            throw new NullPointerException("Parameter 'exitCode' must not be null!");
+            throw new NullPointerException("exitCode");
         }
 
         this.exitCode = exitCode;

@@ -161,7 +161,7 @@
 <a class="jxr_linenumber" name="L153" href="#L153">153</a>             invokable.init();
 <a class="jxr_linenumber" name="L154" href="#L154">154</a>             invokable.execute();
 <a class="jxr_linenumber" name="L155" href="#L155">155</a>         } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> Exception ex) {
-<a class="jxr_linenumber" name="L156" href="#L156">156</a>             ioStreams.errorln(ex.getMessage());
+<a class="jxr_linenumber" name="L156" href="#L156">156</a>             ioStreams.errorln(<span class="jxr_string">"FATAL: "</span> + ex.getMessage());
 <a class="jxr_linenumber" name="L157" href="#L157">157</a> 
 <a class="jxr_linenumber" name="L158" href="#L158">158</a>             <strong class="jxr_keyword">if</strong> (debug) {
 <a class="jxr_linenumber" name="L159" href="#L159">159</a>                 ioStreams.printStackTrace(ex);

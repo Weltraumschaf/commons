@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>JCommanderImproved.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons JCommander</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.jcommander</a> &gt; <span class="el_source">JCommanderImproved.java</span></div><h1>JCommanderImproved.java</h1><pre class="source lang-java linenums">/*
+ *  LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt;
+ */
+package de.weltraumschaf.commons.jcommander;
+
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.ParameterDescription;
+import de.weltraumschaf.commons.validate.Validate;
+import java.util.List;
+
+/**
+ * This helper class removes boiler plate if you use {@link JCommander}.
+ * &lt;p&gt;
+ * Example:
+ * &lt;/p&gt;
+ * &lt;pre&gt;
+ * {@code
+ * public static void main(final String[] args) {
+ *     // Create an instance for your custom Options type.
+ *     // This option type is a typical JCommander annotated beanclass.
+ *     // Note that this type must provide a zero argument constructor.
+ *     // If not the constructor of JCommanderImproved throws an exception.
+ *     final JCommanderImproved&lt;Options&gt; cliArgs = new JCommanderImproved&lt;Options&gt;(&quot;mytool&quot;, Options.class);
+ *
+ *     // Parse and gather the options.
+ *     final Options opts = cliArgs.gatherOptions(args);
+ *
+ *     // Print the helpmessage:
+ *     System.out.print(
+ *         cliArgs.helpMessage(
+ *             &quot;[-v|--version] [-h|--help]&quot;,
+ *             &quot;This is mytool.&quot;,
+ *             &quot;$&gt; mytool -v&quot;)
+ *     );
+ * }
+ * }
+ * &lt;/pre&gt;
+ *
+ * @param &lt;O&gt; type of options bean
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class JCommanderImproved&lt;O&gt; {
+
+    /**
+     * System dependent newline character.
+     */
+<span class="fc" id="L55">    private static final String DEFAULT_NEW_LINE = String.format(&quot;%n&quot;);</span>
+    /**
+     * Parses the command line options.
+     */
+<span class="fc" id="L59">    private final JCommander optionsParser = new JCommander();</span>
+    /**
+     * Class for type of options model.
+     */
+    private final Class&lt;O&gt; optionsType;
+    /**
+     * The name of the tool for what this class gather options.
+     */
+    private final String programName;
+
+    /**
+     * Dedicated constructor.
+     * &lt;p&gt;
+     * Throws an {@link IllegalArgumentException} if the options type can't be instantiated.
+     * &lt;/p&gt;
+     *
+     * @param programName must not be {@code null} or empty
+     * @param optionsType must not be {@code null}
+     */
+    public JCommanderImproved(final String programName, final Class&lt;O&gt; optionsType) {
+<span class="fc" id="L79">        super();</span>
+<span class="fc" id="L80">        this.programName = Validate.notEmpty(programName, &quot;programName&quot;);</span>
+<span class="fc" id="L81">        this.optionsParser.setProgramName(programName);</span>
+<span class="fc" id="L82">        this.optionsType = Validate.notNull(optionsType, &quot;optionsType&quot;);</span>
+<span class="fc" id="L83">        createOptions(optionsType); // Check if instantiatable.</span>
+<span class="fc" id="L84">    }</span>
+
+    /**
+     * Creates an option bean.
+     * &lt;p&gt;
+     * Throws an {@link IllegalArgumentException} if the options type can't be instantiated.
+     * &lt;/p&gt;
+     *
+     * @param &lt;O&gt; type of options bean
+     * @param optionsType must not be {@code null}
+     * @return never {@code null}, always new instance
+     */
+    private static &lt;O&gt; O createOptions(final Class&lt;O&gt; optionsType) {
+        try {
+<span class="fc" id="L98">            return optionsType.newInstance();</span>
+<span class="nc" id="L99">        } catch (final InstantiationException | IllegalAccessException ex) {</span>
+<span class="nc" id="L100">            throw new IllegalArgumentException(ex.getMessage(), ex);</span>
+        }
+    }
+
+    /**
+     * Parses the given arguments and return a ready set up options bean.
+     *
+     * @param args must not be {@code null}
+     * @return never {@code null} always new instance
+     */
+    public O gatherOptions(final String[] args) {
+<span class="fc" id="L111">        final O opts = createOptions(optionsType);</span>
+
+<span class="fc" id="L113">        optionsParser.addObject(opts);</span>
+<span class="fc" id="L114">        optionsParser.parse(Validate.notNull(args, &quot;args&quot;));</span>
+
+<span class="fc" id="L116">        return opts;</span>
+    }
+
+    /**
+     * Generates help message for main command.
+     * &lt;p&gt;
+     * The given parameters enhance the produced help messages:
+     * &lt;/p&gt;
+     * &lt;ul&gt;
+     * &lt;li&gt;{@code usage}: A usage string like e.g. {@literal -a --foo [-h|--help]}&lt;/li&gt;
+     * &lt;li&gt;{@code descriptions}: A more or less longer description of the tool.&lt;/li&gt;
+     * &lt;li&gt;{@code example}: Examples how to use the tool.&lt;/li&gt;
+     * &lt;/ul&gt;
+     * &lt;p&gt;
+     * If one of the three parameters is empty the whole part is omitted in the output.
+     * &lt;/p&gt;
+     *
+     * @param usage must not be {@code null}
+     * @param descriptions must not be {@code null}
+     * @param example must not be {@code null}
+     * @return never {@code null} or empty
+     */
+    public String helpMessage(final String usage, final String descriptions, final String example) {
+<span class="fc" id="L139">        Validate.notNull(usage, &quot;usage&quot;);</span>
+<span class="fc" id="L140">        Validate.notNull(descriptions, &quot;descriptions&quot;);</span>
+<span class="fc" id="L141">        Validate.notNull(example, &quot;example&quot;);</span>
+
+<span class="fc" id="L143">        final String indent = &quot;  &quot;;</span>
+<span class="fc" id="L144">        final StringBuilder help = new StringBuilder();</span>
+
+<span class="fc" id="L146">        help.append(&quot;Usage: &quot;).append(programName);</span>
+
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">        if (!usage.trim().isEmpty()) {</span>
+<span class="fc" id="L149">            help.append(' ').append(usage.trim());</span>
+        }
+
+<span class="fc" id="L152">        help.append(DEFAULT_NEW_LINE).append(DEFAULT_NEW_LINE);</span>
+
+<span class="pc bpc" id="L154" title="1 of 2 branches missed.">        if (!descriptions.trim().isEmpty()) {</span>
+<span class="fc" id="L155">            help.append(descriptions.trim()).append(DEFAULT_NEW_LINE);</span>
+        }
+
+<span class="fc" id="L158">        final List&lt;ParameterDescription&gt; parameters = optionsParser.getParameters();</span>
+
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">        if (!parameters.isEmpty()) {</span>
+<span class="nc" id="L161">            help.append(DEFAULT_NEW_LINE)</span>
+                    .append(&quot;Options&quot;)
+                    .append(DEFAULT_NEW_LINE)
+                    .append(DEFAULT_NEW_LINE);
+
+<span class="nc" id="L166">            final int leftColumnWidth = 22;</span>
+<span class="nc" id="L167">            final int rightColumnwidth = 80 - leftColumnWidth;</span>
+
+<span class="nc bnc" id="L169" title="All 2 branches missed.">            for (final ParameterDescription parameter : parameters) {</span>
+<span class="nc" id="L170">                help.append(rightPad(indent + parameter.getNames(), leftColumnWidth))</span>
+                        .append(lineBreak(parameter.getDescription(), rightColumnwidth, leftColumnWidth))
+                        .append(DEFAULT_NEW_LINE);
+<span class="nc" id="L173">            }</span>
+        }
+
+<span class="fc" id="L176">        help.append(DEFAULT_NEW_LINE);</span>
+
+<span class="pc bpc" id="L178" title="1 of 2 branches missed.">        if (!example.trim().isEmpty()) {</span>
+<span class="fc" id="L179">            help.append(&quot;Example&quot;).append(DEFAULT_NEW_LINE)</span>
+                .append(DEFAULT_NEW_LINE)
+                .append(indent).append(example.trim()).append(DEFAULT_NEW_LINE);
+        }
+
+<span class="fc" id="L184">        help.append(DEFAULT_NEW_LINE);</span>
+<span class="fc" id="L185">        return help.toString();</span>
+    }
+
+    /**
+     * Pads given string with spaces on the right side to given length.
+     *
+     * @param in if {@code null} only spaces will be returned
+     * @param length must not be negative
+     * @return never {@code null}
+     */
+    static String rightPad(final String in, final int length) {
+<span class="fc" id="L196">        Validate.greaterThanOrEqual(length, 0, &quot;length&quot;);</span>
+
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        if (null == in) {</span>
+<span class="fc" id="L199">            return spaces(length);</span>
+        }
+
+<span class="pc bpc" id="L202" title="1 of 2 branches missed.">        if (length - in.length() == 0) {</span>
+<span class="nc" id="L203">            return in;</span>
+        }
+
+<span class="fc" id="L206">        return in + spaces(length - in.length());</span>
+    }
+
+    /**
+     * Generates a string of spaces with given length.
+     *
+     * @param length empty string will be returned if &lt; 1
+     * @return never {@code null}
+     */
+    static String spaces(final int length) {
+<span class="fc bfc" id="L216" title="All 2 branches covered.">        if (length &lt; 1) {</span>
+<span class="fc" id="L217">            return &quot;&quot;;</span>
+        }
+
+<span class="fc" id="L220">        final StringBuilder buffer = new StringBuilder(&quot; &quot;);</span>
+
+<span class="fc bfc" id="L222" title="All 2 branches covered.">        for (int i = 1; i &lt; length; ++i) {</span>
+<span class="fc" id="L223">            buffer.append(' ');</span>
+        }
+
+<span class="fc" id="L226">        return buffer.toString();</span>
+    }
+
+    /**
+     * Breaks the given string to fit given length and pads on the left side before line breaks.
+     *
+     * @param in empty string will be returned if {@code null}
+     * @param length must not be negative
+     * @param leftPadLength must not be negative
+     * @return never {@code null}
+     */
+    static String lineBreak(final String in, final int length, final int leftPadLength) {
+<span class="fc bfc" id="L238" title="All 2 branches covered.">        if (null == in) {</span>
+<span class="fc" id="L239">            return &quot;&quot;;</span>
+        }
+
+<span class="fc" id="L242">        Validate.greaterThanOrEqual(length, 0, &quot;length&quot;);</span>
+<span class="fc" id="L243">        Validate.greaterThanOrEqual(leftPadLength, 0, &quot;leftPadLength&quot;);</span>
+
+<span class="fc bfc" id="L245" title="All 2 branches covered.">        if (in.length() &lt;= length) {</span>
+<span class="fc" id="L246">            return in;</span>
+        }
+
+<span class="fc" id="L249">        final StringBuilder sb = new StringBuilder(in);</span>
+<span class="fc" id="L250">        int i = 0;</span>
+
+<span class="fc bfc" id="L252" title="All 2 branches covered.">        while ((i = sb.indexOf(&quot; &quot;, i + length)) != -1) {</span>
+<span class="fc" id="L253">            sb.replace(i, i + 1, DEFAULT_NEW_LINE);</span>
+        }
+
+<span class="fc" id="L256">        return sb.toString()</span>
+                .replace(
+                        DEFAULT_NEW_LINE,
+                        DEFAULT_NEW_LINE + spaces(leftPadLength));
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>

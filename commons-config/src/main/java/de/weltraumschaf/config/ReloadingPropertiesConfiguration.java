@@ -132,7 +132,7 @@ public abstract class ReloadingPropertiesConfiguration {
     /**
      * Get a property by name.
      * <p>
-     * Throws a {@link RuntimeException if property does not exists.
+     * Throws a {@link RuntimeException} if property does not exists.
      * </p>
      *
      * @param propertyName must not be {@code null} or empty

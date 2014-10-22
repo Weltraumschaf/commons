@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Environments.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons System</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.system</a> &gt; <span class="el_source">Environments.java</span></div><h1>Environments.java</h1><pre class="source lang-java linenums">/*
+ *  LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt;
+ */
+package de.weltraumschaf.commons.system;
+
+import de.weltraumschaf.commons.validate.Validate;
+
+/**
+ * Provides instances to access environment variables.
+ *
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ */
+public final class Environments {
+
+    /**
+     * Hidden for static factory.
+     */
+    private Environments() {
+<span class="nc" id="L27">        super();</span>
+<span class="nc" id="L28">    }</span>
+
+    /**
+     * Get a default implementation.
+     *
+     * @return never {@code null}, always new instance
+     */
+    public static Env defaultEnv() {
+<span class="fc" id="L36">        return new DefaultEnv();</span>
+    }
+
+    /**
+     * Implementations provide access to read environment variables.
+     */
+    public interface Env {
+
+        /**
+         * Get a environment variable.
+         *
+         * @param name must not be {@code null} or empty
+         * @return never {@code null}, maybe empty
+         */
+        String get(String name);
+
+        /**
+         * Get a environment variable.
+         *
+         * @deprecated Will be remove in next version.
+         * @param name must not be {@code null}
+         * @return never {@code null}, maybe empty
+         */
+        @Deprecated
+        String get(Names name);
+
+        /**
+         * Get a environment variable.
+         *
+         * @since 1.1.0
+         * @param name must not be {@code null} or empty
+         * @param fallback must not be {@code null}
+         * @return never {@code null}, maybe empty
+         */
+        String get(String name, String fallback);
+
+    }
+
+    /**
+     * Default implementation which uses {@link System#getenv(java.lang.String)}.
+     */
+<span class="fc" id="L77">    private static final class DefaultEnv implements Env {</span>
+
+        @Override
+        public String get(final String name) {
+<span class="fc" id="L81">            return get(name, &quot;&quot;);</span>
+        }
+
+        @Override
+        public String get(final Names name) {
+<span class="nc" id="L86">            return get(name.getPropertyName());</span>
+        }
+
+        @Override
+        public String get(final String name, final String fallback) {
+<span class="fc" id="L91">            Validate.notEmpty(name, &quot;name&quot;);</span>
+<span class="fc" id="L92">            Validate.notNull(fallback, &quot;fallback&quot;);</span>
+
+<span class="fc" id="L94">            final String var = System.getenv(name);</span>
+
+<span class="fc bfc" id="L96" title="All 2 branches covered.">            return var == null ? fallback : var;</span>
+        }
+
+    }
+
+    /**
+     * Some common names provided by the JVM.
+     *
+     * FIXME Remove this. Has nothing to do with env. Are system properties.
+     * @deprecated Will be remove in next version.
+     */
+<span class="nc" id="L107">    @Deprecated</span>
+    public static enum Names {
+
+        /**
+         * Character that separates components of a file path.
+         * &lt;p&gt;
+         * This is “/” on UNIX and “\” on Windows.
+         * &lt;/p&gt;
+         */
+<span class="nc" id="L116">        FILE_SEPARATOR(&quot;file.separator&quot;),</span>
+        /**
+         * Path used to find directories and JAR archives containing class files.
+         * &lt;p&gt;
+         * Elements of the class path are separated by a platform-specific character specified in the path.separator
+         * property.
+         * &lt;/p&gt;
+         */
+<span class="nc" id="L124">        CLASS_PATH(&quot;java.class.path&quot;),</span>
+        /**
+         * Installation directory for Java Runtime Environment (JRE).
+         */
+<span class="nc" id="L128">        JAVA_HOME(&quot;java.home&quot;),</span>
+        /**
+         * JRE vendor name.
+         */
+<span class="nc" id="L132">        JAVA_VENDOR(&quot;java.vendor&quot;),</span>
+        /**
+         * JRE vendor URL.
+         */
+<span class="nc" id="L136">        JAVA_VENDOR_URL(&quot;java.vendor.url&quot;),</span>
+        /**
+         * JRE version number.
+         */
+<span class="nc" id="L140">        JAVA_VERSION(&quot;java.version&quot;),</span>
+        /**
+         * Sequence used by operating system to separate lines in text files.
+         */
+<span class="nc" id="L144">        LINE_SEPARATOR(&quot;line.separator&quot;),</span>
+        /**
+         * Operating system architecture.
+         */
+<span class="nc" id="L148">        OS_ARCH(&quot;os.arch&quot;),</span>
+        /**
+         * Operating system name.
+         */
+<span class="nc" id="L152">        OS_NAME(&quot;os.name&quot;),</span>
+        /**
+         * Operating system version.
+         */
+<span class="nc" id="L156">        OS_VERSION(&quot;os.version&quot;),</span>
+        /**
+         * Path separator character used in java.class.path.
+         */
+<span class="nc" id="L160">        OS_PATH_SEPARATOR(&quot;path.separator&quot;),</span>
+        /**
+         * User working directory.
+         */
+<span class="nc" id="L164">        USER_DIR(&quot;user.dir&quot;),</span>
+        /**
+         * User home directory.
+         */
+<span class="nc" id="L168">        USER_HOME(&quot;user.home&quot;),</span>
+        /**
+         * User account name.
+         */
+<span class="nc" id="L172">        USER_NAME(&quot;user.name&quot;);</span>
+
+        /**
+         * The property name.
+         */
+        private final String propertyName;
+
+        /**
+         * Dedicated constructor.
+         *
+         * @param propertyName must not be {@code null} or empty.
+         */
+<span class="nc" id="L184">        private Names(final String propertyName) {</span>
+<span class="nc" id="L185">            this.propertyName = Validate.notEmpty(propertyName, &quot;propertyName&quot;);</span>
+<span class="nc" id="L186">        }</span>
+
+        /**
+         * Get the literal property name.
+         *
+         * @return never {@code null} or empty
+         */
+        public String getPropertyName() {
+<span class="nc" id="L194">            return propertyName;</span>
+        }
+
+        @Override
+        public String toString() {
+<span class="nc" id="L199">            return getPropertyName();</span>
+        }
+
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

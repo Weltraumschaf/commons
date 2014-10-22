@@ -144,7 +144,7 @@ public final class Validate {
 <span class="nc" id="L144">                throw new IllegalArgumentException();</span>
             } else {
 <span class="fc" id="L146">                throw new IllegalArgumentException(</span>
-                        String.format(&quot;Parameter '%s' muts be greater than %d (was %d)!&quot;, name, lowerBound, reference));
+                    String.format(&quot;Parameter '%s' must be greater than %d (was %d)!&quot;, name, lowerBound, reference));
             }
         }
 
@@ -161,5 +161,130 @@ public final class Validate {
     public static int greaterThan(final int reference, final int lowerBound) {
 <span class="nc" id="L162">        return greaterThan(reference, lowerBound, null);</span>
     }
+
+    /**
+     * Tests that a given integer reference value is greater than or equal the given lower bound.
+     * &lt;p&gt;
+     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given
+     * lower bound value.
+     * &lt;/p&gt;
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
+    public static int greaterThanOrEqual(final int reference, final int lowerBound, final String name) {
+<span class="fc bfc" id="L178" title="All 2 branches covered.">        if (reference &lt; lowerBound) {</span>
+<span class="pc bpc" id="L179" title="1 of 2 branches missed.">            if (null == name) {</span>
+<span class="nc" id="L180">                throw new IllegalArgumentException();</span>
+            } else {
+<span class="fc" id="L182">                throw new IllegalArgumentException(</span>
+                    String.format(&quot;Parameter '%s' must be greater or equal than %d (was %d)!&quot;, name, lowerBound, reference));
+            }
+        }
+
+<span class="fc" id="L187">        return reference;</span>
+    }
+
+    /**
+     * Convenience method for {@link #greaterThanOrEqual(int, int, java.lang.String)} with {@code null} as name.
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @return the reference, if it is valid
+     */
+    public static int greaterThanOrEqual(final int reference, final int lowerBound) {
+<span class="nc" id="L198">        return greaterThanOrEqual(reference, lowerBound, null);</span>
+    }
+
+    /**
+     * Tests that a given integer reference value is greater than the given lower bound.
+     * &lt;p&gt;
+     * The method throws an {@link IllegalArgumentException} if the given reference is less than or equal the given
+     * lower bound value.
+     * &lt;/p&gt;
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
+    public static long greaterThan(final long reference, final long lowerBound, final String name) {
+<span class="fc bfc" id="L214" title="All 2 branches covered.">        if (reference &lt;= lowerBound) {</span>
+<span class="pc bpc" id="L215" title="1 of 2 branches missed.">            if (null == name) {</span>
+<span class="nc" id="L216">                throw new IllegalArgumentException();</span>
+            } else {
+<span class="fc" id="L218">                throw new IllegalArgumentException(</span>
+                    String.format(&quot;Parameter '%s' must be greater than %d (was %d)!&quot;, name, lowerBound, reference));
+            }
+        }
+
+<span class="fc" id="L223">        return reference;</span>
+    }
+
+    /**
+     * Convenience method for {@link #greaterThan(long, long, java.lang.String)} with {@code null} as name.
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @return the reference, if it is valid
+     */
+    public static long greaterThan(final long reference, final long lowerBound) {
+<span class="nc" id="L234">        return greaterThan(reference, lowerBound, null);</span>
+    }
+
+    /**
+     * Tests that a given integer reference value is greater than or equal the given lower bound.
+     * &lt;p&gt;
+     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given
+     * lower bound value.
+     * &lt;/p&gt;
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
+    public static long greaterThanOrEqual(final long reference, final long lowerBound, final String name) {
+<span class="fc bfc" id="L250" title="All 2 branches covered.">        if (reference &lt; lowerBound) {</span>
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">            if (null == name) {</span>
+<span class="nc" id="L252">                throw new IllegalArgumentException();</span>
+            } else {
+<span class="fc" id="L254">                throw new IllegalArgumentException(</span>
+                    String.format(&quot;Parameter '%s' must be greater than or equal %d (was %d)!&quot;, name, lowerBound, reference));
+            }
+        }
+
+<span class="fc" id="L259">        return reference;</span>
+    }
+
+    /**
+     * Convenience method for {@link #greaterThanOrEqual(long, long, java.lang.String)} with {@code null} as name.
+     *
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @return the reference, if it is valid
+     */
+    public static long greaterThanOrEqual(final long reference, final long lowerBound) {
+<span class="nc" id="L270">        return greaterThanOrEqual(reference, lowerBound, null);</span>
+    }
+
+    /**
+     * Tests that a given expression is true.
+     * &lt;p&gt;
+     * Throws an {@link IllegalArgumentException} if the expression is {@code false}.
+     * &lt;/p&gt;
+     *
+     * @param expression tested expression
+     * @param message must not be {@code null} or empty
+     */
+    public static void isTrue(final boolean expression, final String message) {
+<span class="fc" id="L283">        Validate.notEmpty(message, &quot;Parameter 'message' must not be null or empty!&quot;);</span>
+
+<span class="fc bfc" id="L285" title="All 2 branches covered.">        if (!expression) {</span>
+<span class="fc" id="L286">            throw new IllegalArgumentException(message);</span>
+        }
+<span class="fc" id="L288">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

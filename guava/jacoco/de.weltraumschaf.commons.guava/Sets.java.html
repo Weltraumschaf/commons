@@ -18,6 +18,8 @@ package de.weltraumschaf.commons.guava;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Minimal set of {@code com.google.common.collect.Sets}.
@@ -38,8 +40,8 @@ public final class Sets {
      * Hidden for pure static factory.
      */
     private Sets() {
-<span class="fc" id="L41">        super();</span>
-<span class="fc" id="L42">        throw new UnsupportedOperationException(&quot;Constructor must not be called by reflection!&quot;);</span>
+<span class="fc" id="L43">        super();</span>
+<span class="fc" id="L44">        throw new UnsupportedOperationException(&quot;Constructor must not be called by reflection!&quot;);</span>
     }
 
     /**
@@ -50,19 +52,19 @@ public final class Sets {
      * @return not negative
      */
     static int capacity(final int expectedSize) {
-<span class="fc bfc" id="L53" title="All 2 branches covered.">        if (expectedSize &lt; THIRD) {</span>
-<span class="fc bfc" id="L54" title="All 2 branches covered.">            if (!(expectedSize &gt;= 0)) {</span>
-<span class="fc" id="L55">                throw new IllegalArgumentException(&quot;Parameter 'expectedSize' must not be negative!&quot;);</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (expectedSize &lt; THIRD) {</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (!(expectedSize &gt;= 0)) {</span>
+<span class="fc" id="L57">                throw new IllegalArgumentException(&quot;Parameter 'expectedSize' must not be negative!&quot;);</span>
             }
 
-<span class="fc" id="L58">            return expectedSize + 1;</span>
+<span class="fc" id="L60">            return expectedSize + 1;</span>
         }
 
-<span class="fc bfc" id="L61" title="All 2 branches covered.">        if (expectedSize &lt; 1 &lt;&lt; (Integer.SIZE - 2)) {</span>
-<span class="fc" id="L62">            return expectedSize + expectedSize / THIRD;</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (expectedSize &lt; 1 &lt;&lt; (Integer.SIZE - 2)) {</span>
+<span class="fc" id="L64">            return expectedSize + expectedSize / THIRD;</span>
         }
 
-<span class="fc" id="L65">        return Integer.MAX_VALUE; // any large value</span>
+<span class="fc" id="L67">        return Integer.MAX_VALUE; // any large value</span>
     }
 
     /**
@@ -74,9 +76,9 @@ public final class Sets {
      */
     @SuppressWarnings(&quot;unchecked&quot;)
     public static &lt;E&gt; Set&lt;E&gt; newHashSet(final E... elements) {
-<span class="fc" id="L77">        final Set&lt;E&gt; set = newHashSetWithExpectedSize(elements.length);</span>
-<span class="fc" id="L78">        Collections.addAll(set, elements);</span>
-<span class="fc" id="L79">        return set;</span>
+<span class="fc" id="L79">        final Set&lt;E&gt; set = newHashSetWithExpectedSize(elements.length);</span>
+<span class="fc" id="L80">        Collections.addAll(set, elements);</span>
+<span class="fc" id="L81">        return set;</span>
     }
 
     /**
@@ -98,8 +100,12 @@ public final class Sets {
      * //CHECKSTYLE:ON
      */
     public static &lt;E&gt; Set&lt;E&gt; newHashSetWithExpectedSize(final int expectedSize) {
-<span class="fc" id="L101">        return new HashSet&lt;E&gt;(capacity(expectedSize));</span>
+<span class="fc" id="L103">        return new HashSet&lt;E&gt;(capacity(expectedSize));</span>
+    }
+
+    public static &lt;E&gt; SortedSet&lt;E&gt; newTreeSet() {
+<span class="nc" id="L107">        return new TreeSet&lt;E&gt;();</span>
     }
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

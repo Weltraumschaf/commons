@@ -15,6 +15,7 @@ import de.weltraumschaf.commons.system.DefaultExiter;
 import de.weltraumschaf.commons.system.ExitCode;
 import de.weltraumschaf.commons.system.Exitable;
 import java.io.UnsupportedEncodingException;
+import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -77,7 +78,7 @@ public abstract class InvokableAdapter implements Invokable {
     /**
      * Abstraction for {@link System#exit(int)}.
      */
-<span class="fc" id="L80">    private Exitable exiter = new DefaultExiter();</span>
+<span class="fc" id="L81">    private Exitable exiter = new DefaultExiter();</span>
 
     /**
      * Runtime for registering callbacks.
@@ -90,8 +91,8 @@ public abstract class InvokableAdapter implements Invokable {
      * @param args Command line arguments.
      */
     public InvokableAdapter(final String[] args) {
-<span class="fc" id="L93">        this(args, Runtime.getRuntime(), new ShutDownHook());</span>
-<span class="fc" id="L94">    }</span>
+<span class="fc" id="L94">        this(args, Runtime.getRuntime(), new ShutDownHook());</span>
+<span class="fc" id="L95">    }</span>
 
     /**
      * Dedicated constructor.
@@ -100,11 +101,11 @@ public abstract class InvokableAdapter implements Invokable {
      * @param runtime Runtime for registering callbacks.
      * @param shutDownHook Object to hold shutdown hooks.
      */
-<span class="fc" id="L103">    public InvokableAdapter(final String[] args, final Runtime runtime, final ShutDownHook shutDownHook) {</span>
-<span class="fc" id="L104">        this.args = args.clone();</span>
-<span class="fc" id="L105">        this.runtime = runtime;</span>
-<span class="fc" id="L106">        this.shutDownHook = shutDownHook;</span>
-<span class="fc" id="L107">    }</span>
+<span class="fc" id="L104">    public InvokableAdapter(final String[] args, final Runtime runtime, final ShutDownHook shutDownHook) {</span>
+<span class="fc" id="L105">        this.args = args.clone();</span>
+<span class="fc" id="L106">        this.runtime = runtime;</span>
+<span class="fc" id="L107">        this.shutDownHook = shutDownHook;</span>
+<span class="fc" id="L108">    }</span>
 
     /**
      * Invokes {@link #main(de.weltraumschaf.commons.application.Invokable, de.weltraumschaf.commons.application.IO)
@@ -114,12 +115,12 @@ public abstract class InvokableAdapter implements Invokable {
      */
     public static void main(final Invokable invokable) {
         try {
-<span class="fc" id="L117">            main(invokable, IOStreams.newDefault());</span>
-<span class="nc" id="L118">        } catch (UnsupportedEncodingException ex) {</span>
-<span class="nc" id="L119">            Logger.getLogger(InvokableAdapter.class.getName()).log(Level.SEVERE, null, ex);</span>
-<span class="nc" id="L120">            invokable.exit(-1);</span>
-<span class="fc" id="L121">        }</span>
-<span class="fc" id="L122">    }</span>
+<span class="fc" id="L118">            main(invokable, IOStreams.newDefault());</span>
+<span class="nc" id="L119">        } catch (UnsupportedEncodingException ex) {</span>
+<span class="nc" id="L120">            Logger.getLogger(InvokableAdapter.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L121">            invokable.exit(-1);</span>
+<span class="fc" id="L122">        }</span>
+<span class="fc" id="L123">    }</span>
 
     /**
      * Inject the I/O streams to the invokable and then calls {@link Invokable#init()} and then
@@ -131,8 +132,8 @@ public abstract class InvokableAdapter implements Invokable {
      * @param ioStreams I/O streams.
      */
     public static void main(final Invokable invokable, final IO ioStreams) {
-<span class="fc" id="L134">        main(invokable, ioStreams, false);</span>
-<span class="fc" id="L135">    }</span>
+<span class="fc" id="L135">        main(invokable, ioStreams, false);</span>
+<span class="fc" id="L136">    }</span>
 
     /**
      * Inject the I/O streams to the invokable and then calls {@link Invokable#init()} and then
@@ -146,35 +147,35 @@ public abstract class InvokableAdapter implements Invokable {
      * @param debug print stack trace if true
      */
     public static void main(final Invokable invokable, final IO ioStreams, final boolean debug) {
-<span class="fc" id="L149">        invokable.setIoStreams(ioStreams);</span>
+<span class="fc" id="L150">        invokable.setIoStreams(ioStreams);</span>
 
         try {
-<span class="fc" id="L152">            invokable.init();</span>
-<span class="fc" id="L153">            invokable.execute();</span>
-<span class="fc" id="L154">        } catch (final Exception ex) {</span>
-<span class="fc" id="L155">            ioStreams.errorln(ex.getMessage());</span>
+<span class="fc" id="L153">            invokable.init();</span>
+<span class="fc" id="L154">            invokable.execute();</span>
+<span class="fc" id="L155">        } catch (final Exception ex) {</span>
+<span class="fc" id="L156">            ioStreams.errorln(&quot;FATAL: &quot; + ex.getMessage());</span>
 
-<span class="pc bpc" id="L157" title="1 of 2 branches missed.">            if (debug) {</span>
-<span class="nc" id="L158">                ioStreams.printStackTrace(ex);</span>
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">            if (debug) {</span>
+<span class="nc" id="L159">                ioStreams.printStackTrace(ex);</span>
             }
 
-<span class="pc bpc" id="L161" title="1 of 2 branches missed.">            if (ex instanceof ApplicationException) { // NOPMD Don't want to duplicate code for ERR out.</span>
-<span class="nc" id="L162">                invokable.exit(((ApplicationException) ex).getExitCode());</span>
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">            if (ex instanceof ApplicationException) { // NOPMD Don't want to duplicate code for ERR out.</span>
+<span class="nc" id="L163">                invokable.exit(((ApplicationException) ex).getExitCode());</span>
             } else {
-<span class="fc" id="L164">                invokable.exit(-1);</span>
+<span class="fc" id="L165">                invokable.exit(-1);</span>
             }
-<span class="fc" id="L166">        }</span>
+<span class="fc" id="L167">        }</span>
 
-<span class="fc" id="L168">        invokable.exit(0);</span>
-<span class="fc" id="L169">    }</span>
+<span class="fc" id="L169">        invokable.exit(0);</span>
+<span class="fc" id="L170">    }</span>
 
     /**
      * Adds shutdown hook to runtime.
      */
     @Override
     public final void init() {
-<span class="fc" id="L176">        runtime.addShutdownHook(shutDownHook);</span>
-<span class="fc" id="L177">    }</span>
+<span class="fc" id="L177">        runtime.addShutdownHook(shutDownHook);</span>
+<span class="fc" id="L178">    }</span>
 
     /**
      * Get the command line arguments.
@@ -182,42 +183,51 @@ public abstract class InvokableAdapter implements Invokable {
      * @return Returns copy of the arguments array.
      */
     public final String[] getArgs() {
-<span class="fc" id="L185">        return args.clone();</span>
+<span class="fc" id="L186">        return args.clone();</span>
     }
 
     @Override
     public final IO getIoStreams() {
-<span class="fc" id="L190">        return ioStreams;</span>
+<span class="fc" id="L191">        return ioStreams;</span>
     }
 
     @Override
     public final void setIoStreams(final IO ioStreams) {
-<span class="fc" id="L195">        this.ioStreams = ioStreams;</span>
-<span class="fc" id="L196">    }</span>
+<span class="fc" id="L196">        this.ioStreams = ioStreams;</span>
+<span class="fc" id="L197">    }</span>
 
     /**
      * Register a {@link Runnable callback} as shut down hook.
      *
-     * @param callback On shutdown running callback.
+     * @param callback must not be {@code null}
      */
     public final void registerShutdownHook(final Runnable callback) {
-<span class="fc" id="L204">        shutDownHook.register(callback);</span>
-<span class="fc" id="L205">    }</span>
+<span class="fc" id="L205">        shutDownHook.register(callback);</span>
+<span class="fc" id="L206">    }</span>
+
+    /**
+     * Register a {@link Callable callback} as shut down hook.
+     *
+     * @param callback must not be {@code null}
+     */
+    public final void registerShutdownHook(final Callable&lt;Void&gt; callback) {
+<span class="nc" id="L214">        shutDownHook.register(callback);</span>
+<span class="nc" id="L215">    }</span>
 
     @Override
     public final void exit(int status) {
-<span class="fc" id="L209">        exiter.exit(status);</span>
-<span class="fc" id="L210">    }</span>
+<span class="fc" id="L219">        exiter.exit(status);</span>
+<span class="fc" id="L220">    }</span>
 
     @Override
     public final void exit(ExitCode status) {
-<span class="fc" id="L214">        exiter.exit(status);</span>
-<span class="fc" id="L215">    }</span>
+<span class="fc" id="L224">        exiter.exit(status);</span>
+<span class="fc" id="L225">    }</span>
 
     @Override
     public final void setExiter(final Exitable exiter) {
-<span class="fc" id="L219">        this.exiter = exiter;</span>
-<span class="fc" id="L220">    }</span>
+<span class="fc" id="L229">        this.exiter = exiter;</span>
+<span class="fc" id="L230">    }</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.0.201403182114</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

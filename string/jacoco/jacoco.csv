@@ -1,0 +1,4 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Commons String,de.weltraumschaf.commons.string,StringJoiner,614,0,126,0,173,0,87,0,24,0
+Commons String,de.weltraumschaf.commons.string,Strings,7,8,0,2,2,1,1,2,1,1
+Commons String,de.weltraumschaf.commons.string,StringEscape,7,36,0,0,2,2,1,2,1,2

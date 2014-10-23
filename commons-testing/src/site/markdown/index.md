@@ -64,7 +64,36 @@ This module provides custom matchers for [Hamcrest][hamcrest].
 
 ### ApplicationExceptionCodeMatcher
 
-TODO Write documentation.
+This  matcher  helps you  to  match  your  own  exit code  implementations  (see
+application module).
+
+Example:
+
+    enum ExitCodeImpl implements ExitCode {
+        FOO(0), BAR(1), BAZ(2);
+
+        private final int code;
+
+        private ExitCodeImpl(final int code) {
+            this.code = code;
+        }
+
+        @Override
+        public int getCode() {
+            return code;
+        }
+    }
+
+    public class MyTest {
+
+        @Test
+        public void throwsFooException() {
+            final ApplicationException ex =
+                new ApplicationException(ExitCodeImpl.FOO, "foo");
+
+            assertThat(ex, hasExitCode(ExitCodeImpl.FOO));
+        }
+    }
 
 [junit]:        http://junit.org/
 [junit-rules]:  https://github.com/junit-team/junit/wiki/Rules

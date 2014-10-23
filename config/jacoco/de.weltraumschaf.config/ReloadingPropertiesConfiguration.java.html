@@ -36,7 +36,7 @@ import java.util.Properties;
  * {@code
  * final class MyAppConfig extends ReloadingPropertiesConfiguration {
  *
- *     public MyAppConfig(final File file) {
+ *     public MyAppConfig(final Path file) {
  *         super(file);
  *     }
  *

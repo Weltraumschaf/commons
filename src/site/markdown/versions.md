@@ -104,4 +104,9 @@
     - Matcher (`ApplicationExceptionCodeMatcher#hasExitCode()`) to expect
       an `ApplicationException` with particular `ExitCode`.
 
+## Version 1.1.1
+
+- Fix the maven project site.
+- Add missing documentation.
+
 [junit]:    http://www.junit.org/

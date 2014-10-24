@@ -14,4 +14,5 @@ echo "Make stage: ${STAGE}."
 mkdir -pv "${STAGE}"
 time mvn clean install site site:stage -DstagingDirectory="${STAGE}"
 
+echo "Site generated into: ${STAGE}"
 echo "Finished :-)"

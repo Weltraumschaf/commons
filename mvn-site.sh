@@ -12,6 +12,6 @@ fi
 
 echo "Make stage: ${STAGE}."
 mkdir -pv "${STAGE}"
-time mvn clean package site site:stage -DstagingDirectory="${STAGE}"
+time mvn clean install site site:stage -DstagingDirectory="${STAGE}"
 
 echo "Finished :-)"

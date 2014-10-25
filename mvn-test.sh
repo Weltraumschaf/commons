@@ -1,5 +1,5 @@
 #!/bin/bash
 
-time mvn clean package test
+time mvn clean verify
 
 echo "Finished :-)"

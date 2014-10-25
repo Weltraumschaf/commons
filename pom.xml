@@ -484,13 +484,16 @@
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <artifactId>maven-source-plugin</artifactId>
                 <executions>
@@ -502,6 +505,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <!-- http://wiki.netbeans.org/MavenCodeCoverage -->
                 <groupId>org.jacoco</groupId>
@@ -513,6 +517,7 @@
                     </excludes>
                 </configuration>
             </plugin>
+
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
@@ -543,10 +548,12 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <artifactId>maven-site-plugin</artifactId>
                 <!--http://tech-mind.blogspot.de/2009/01/configure-site-plugin-for-maven-multi.html-->
-                <!--<inherited>false</inherited>-->
+                <inherited>false</inherited>
+
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.doxia</groupId>
@@ -554,6 +561,7 @@
                         <version>1.5</version>
                     </dependency>
                 </dependencies>
+
                 <executions>
                     <execution>
                         <id>attach-descriptor</id>
@@ -562,28 +570,13 @@
                         </goals>
                     </execution>
                 </executions>
+
                 <configuration>
-                    <siteDirectory>${project.basedir}/src/site</siteDirectory>
                     <reportPlugins>
                         <plugin>
-                            <artifactId>maven-jxr-plugin</artifactId>
-                            <configuration>
-                                <aggregate>true</aggregate>
-                                <linkJavadoc>true</linkJavadoc>
-                                <javadocDir>${project.reporting.outputDirectory}/apidocs</javadocDir>
-                            </configuration>
-                            <reportSets>
-                                <reportSet>
-                                    <id>main</id>
-                                    <reports>
-                                        <report>jxr</report>
-                                    </reports>
-                                </reportSet>
-                            </reportSets>
-                        </plugin>
-
-                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-javadoc-plugin</artifactId>
+
                             <configuration>
                                 <bottom>
                                     Copyright &amp;copy; 2012 &lt;a href="http://www.weltraumschaf.de/" target="_blank"&gt;
@@ -615,6 +608,7 @@
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>versions-maven-plugin</artifactId>
+
                             <reportSets>
                                 <reportSet>
                                     <reports>
@@ -626,14 +620,17 @@
                         </plugin>
 
                         <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-changelog-plugin</artifactId>
                         </plugin>
 
                         <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-plugin-plugin</artifactId>
                         </plugin>
 
                         <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-project-info-reports-plugin</artifactId>
                             <reportSets>
                                 <reportSet>
@@ -660,16 +657,6 @@
 
                         <plugin>
                             <groupId>org.codehaus.mojo</groupId>
-                            <artifactId>findbugs-maven-plugin</artifactId>
-                        </plugin>
-
-                        <plugin>
-                            <groupId>org.codehaus.mojo</groupId>
-                            <artifactId>javancss-maven-plugin</artifactId>
-                        </plugin>
-
-                        <plugin>
-                            <groupId>org.codehaus.mojo</groupId>
                             <artifactId>jdepend-maven-plugin</artifactId>
                         </plugin>
 
@@ -677,6 +664,7 @@
                             <groupId>org.codehaus.mojo</groupId>
                             <artifactId>taglist-maven-plugin</artifactId>
                             <configuration>
+                                <linkXRef>false</linkXRef>
                                 <tagListOptions>
                                     <tagClasses>
                                         <tagClass>
@@ -710,62 +698,53 @@
                                 </tagListOptions>
                             </configuration>
                         </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-checkstyle-plugin</artifactId>
+                            <configuration>
+                                <configLocation>${project.basedir}/src/main/config/checkstyle-ruleset.xml</configLocation>
+                                <suppressionsLocation>${project.basedir}/src/main/config/checkstyle-suppressions.xml</suppressionsLocation>
+                                <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+                                <logViolationsToConsole>true</logViolationsToConsole>
+                                <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                                <linkXRef>false</linkXRef>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.codehaus.mojo</groupId>
+                            <artifactId>findbugs-maven-plugin</artifactId>
+                            <configuration>
+                                <effort>Max</effort>
+                                <threshold>Default</threshold>
+                                <xmlOutput>true</xmlOutput>
+                                <findbugsXmlOutput>true</findbugsXmlOutput>
+                                <excludeFilterFile>${maven.findbugs.excludefilterfile}</excludeFilterFile>
+                                <includeFilterFile>${maven.findbugs.includefilterfile}</includeFilterFile>
+                                <!-- Optional directory to put findbugs xdoc xml report -->
+                                <xmlOutputDirectory>target/site</xmlOutputDirectory>
+                                <xmlOutput>true</xmlOutput>
+                                <threshold>Low</threshold>
+                                <effort>Max</effort>
+                                <debug>false</debug>
+                                <relaxed>false</relaxed>
+                            </configuration>
+                        </plugin>
                     </reportPlugins>
                 </configuration>
             </plugin>
 
-            <!--<plugin>-->
-            <!-- https://groups.google.com/forum/m/#!topic/sass-lang/YPHqCcc_l8Y -->
-            <!--                <groupId>org.jasig.maven</groupId>
-                <artifactId>sass-maven-plugin</artifactId>
-                <configuration>
-                    <baseOutputDirectory>${basedir}/src/site/resources/css</baseOutputDirectory>
-                    <buildDirectory>${project.build.directory}</buildDirectory>
-                    <sassSourceDirectory>${basedir}/src/site/resources/sass</sassSourceDirectory>
-                </configuration>
+            <plugin>
+                <groupId>com.kryshchuk.maven.plugins</groupId>
+                <artifactId>umlet-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>sassProcessSource</id>
-                        <phase>prepare-package</phase>
+                        <id>convert-uml</id>
                         <goals>
-                            <goal>update-stylesheets</goal>
+                            <goal>convert</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>-->
-
-            <!--            <plugin>
-                <groupId>com.mycila.maven-license-plugin</groupId>
-                <artifactId>maven-license-plugin</artifactId>
-                <configuration>
-                    <header>LICENSE</header>
-                    <properties>
-                        <year>2013</year>
-                        <email>weltraumschaf(at)googlemail(dot)com</email>
-                    </properties>
-                    <encoding>UTF-8</encoding>
-                    <useDefaultExcludes>true</useDefaultExcludes>
-                    <strictCheck>true</strictCheck>
-                    <mapping>
-                        <java>SLASHSTAR_STYLE</java>
-                        <css>SLASHSTAR_STYLE</css>
-                    </mapping>
-                    <excludes>
-                        <exclude>.gitignore</exclude>
-                        <exclude>LICENSE</exclude>
-                        <exclude>**/*.md</exclude>
-                        <exclude>.idea/**</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
 

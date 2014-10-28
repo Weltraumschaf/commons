@@ -21,9 +21,9 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][maven] pom.xml:
 
         <dependency>
             <!-- http://weltraumschaf.github.com/commons/ -->
-            <groupId>de.weltraumschaf.commons</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>MODULE-NAME</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- ... -->

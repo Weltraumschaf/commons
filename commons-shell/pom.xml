@@ -37,48 +37,4 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <configuration>
-                    <reportPlugins>
-                        <plugin>
-                            <artifactId>maven-project-info-reports-plugin</artifactId>
-                            <reportSets>
-                                <reportSet>
-                                    <reports>
-                                        <report>index</report>
-                                        <report>dependencies</report>
-                                        <report>dependency-convergence</report>
-                                    </reports>
-                                </reportSet>
-                            </reportSets>
-                        </plugin>
-                    </reportPlugins>
-                </configuration>
-            </plugin>
-
-<!--            <plugin>-->
-                <!-- https://groups.google.com/forum/m/#!topic/sass-lang/YPHqCcc_l8Y -->
-<!--                <groupId>org.jasig.maven</groupId>
-                <artifactId>sass-maven-plugin</artifactId>
-                <configuration>
-                    <baseOutputDirectory>${basedir}/src/site/resources/css</baseOutputDirectory>
-                    <buildDirectory>${project.build.directory}</buildDirectory>
-                    <sassSourceDirectory>${project.parent.basedir}/src/site/resources/sass</sassSourceDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>sassProcessSource</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>update-stylesheets</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
-        </plugins>
-    </build>
 </project>

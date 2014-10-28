@@ -50,11 +50,6 @@
     </bannerLeft>
 
     <body>
-        <links>
-            <item name="Weltraumschaf" href="http://www.weltraumschaf.de"/>
-            <item name="Continious Integration" href="http://ci.weltraumschaf.de/job/Commons/"/>
-        </links>
-
         <menu name="${project.name}" inherit="top">
             <item name="Home" href="index.html"/>
             <item name="History" href="history.html"/>

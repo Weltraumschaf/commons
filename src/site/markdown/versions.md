@@ -109,4 +109,8 @@
 - Fix the maven project site.
 - Add missing documentation.
 
+## Version 1.1.2
+
+- Fix the maven project site.
+
 [junit]:    http://www.junit.org/

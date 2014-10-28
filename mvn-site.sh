@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CWD=`pwd`
-STAGE="${CWD}/staged-site"
+STAGE="${CWD}/site"
 
 echo "Stage site into ${STAGE} ..."
 
@@ -12,7 +12,9 @@ fi
 
 echo "Make stage: ${STAGE}."
 mkdir -pv "${STAGE}"
-time mvn clean install site site:stage -DstagingDirectory="${STAGE}"
+time mvn clean install site site:stage \
+    -DskipTests=true \
+    -DstagingDirectory="${STAGE}"
 
 echo "Site generated into: ${STAGE}"
 echo "Finished :-)"

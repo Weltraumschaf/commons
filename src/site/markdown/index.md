@@ -2,7 +2,7 @@
 
 This library provides  several tool classes in different modules.  They help you
 build command line/Swing  applications, help parsing cmmand  line input, testing
-etc. 
+etc.
 
 ## Goal
 
@@ -29,16 +29,21 @@ Add this <code>&lt;dependency&gt;</code> to your [Maven][maven] pom.xml:
         <!-- ... -->
 
     <dependencies>
-    
+
 Available modules (artifact id) are:
 
 - [application](application/index.html)
 - [concurrent](concurrent/index.html)
+- [config](config/index.html)
 - [experimental](experimental/index.html)
 - [guava](guava/index.html)
+- [jcommander](jcommander/index.html)
 - [shell](shell/index.html)
+- [string](string/index.html)
 - [swing](swing/index.html)
 - [system](system/index.html)
+- [testing](testing/index.html)
+- [time](time/index.html)
 - [validate](validate/index.html)
 
 ## File Signatures

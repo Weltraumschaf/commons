@@ -2,9 +2,9 @@
 
 ## Version 0.1.0
 
-- <code>CapturingOutputStream</code>: Can be used to capture output print
-  to <code>System.out</code> or <code>System.err</code>.
-- <code>IOStreams</code>: Immutable object to aggregate I/O streams.
+- `CapturingOutputStream`: Can be used to capture output print to `System.out`
+  or `System.err`.
+- `IOStreams`: Immutable object to aggregate I/O streams.
 
 ## Version 0.1.1
 
@@ -13,9 +13,9 @@
 ## Version 0.1.2
 
 - Add more documentation.
-- Add <code>toString()</code>, <code>hashCode()</code>, <code>equals()</code>
-  to <code>CapturingOutputStream()</code>.
-- Add example code and documentation to <code>IOStreams</code>.
+- Add `toString()`, `hashCode()`, `equals()`
+  to `CapturingOutputStream()`.
+- Add example code and documentation to `IOStreams`.
 
 ## Version 0.1.3
 
@@ -27,18 +27,18 @@
 
 ## Version 0.2.0
 
-- <code>Version</code>: Reads the current version from a property file.
-- <code>Invokable</code>: Application object invokable by command line interface.
+- `Version`: Reads the current version from a property file.
+- `Invokable`: Application object invokable by command line interface.
 
 ## Version 0.2.1
 
-- <code>Exitable</code>: Abstraction for <code>java.lang.System#exit()</code>.
+- `Exitable`: Abstraction for `java.lang.System#exit()`.
 
 ## Version 0.2.2
 
-- <code>SwingFrame</code>: Common base functionality for a Swing main window.
-- <code>MenuBarBuilder</code>: Simple internal DSL to create menu bars.
-- <code>ToolBarBuilder</code>: Simple internal DSL to create tool bars.
+- `SwingFrame`: Common base functionality for a Swing main window.
+- `MenuBarBuilder`: Simple internal DSL to create menu bars.
+- `ToolBarBuilder`: Simple internal DSL to create tool bars.
 
 ## Version 0.2.3
 
@@ -51,14 +51,14 @@
 
 ## Version 0.2.5
 
-- <code>IO</code>: Print stack trace of Throwable instead of Exception.
-- <code>OperatingSystem</code>: Helper to determine the OS the JVM runs on.
-- <code>BrowserLauncher</code>: HElper to open an URL in systems default browser.
+- `IO`: Print stack trace of Throwable instead of Exception.
+- `OperatingSystem`: Helper to determine the OS the JVM runs on.
+- `BrowserLauncher`: HElper to open an URL in systems default browser.
 
 ## Version 0.2.6
 
-- <code>ShutDownHook</code>: Is now public, because it is exported API by InvokableAdapter.
-- <code>InvokableAdapter</code>: Add debug option to print stack trace on errors during execution.
+- `ShutDownHook`: Is now public, because it is exported API by InvokableAdapter.
+- `InvokableAdapter`: Add debug option to print stack trace on errors during execution.
 
 ## Version 0.3.0
 
@@ -81,10 +81,10 @@
 
 - Add concurrent package.
 - Introduce modules.
-- Move application stuff under new package name <code>aplication</code>.
+- Move application stuff under new package name `aplication`.
 - Add capturing output rule for [JUnit][junit].
 - Add validate module.
-- Remove <code>CapturingOutputStream</code> and add <code>CapturingPrintStream</code>.
+- Remove `CapturingOutputStream` and add `CapturingPrintStream`.
 
 ## Version 1.0.1
 

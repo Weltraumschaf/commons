@@ -52,11 +52,6 @@ To receive the keys type:
 
     $> gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 45585598
 
-## Deployment
-
-This  artefact  is  deployed  to   Maven  Central  Repository  along  with  this
-[guide][sonatype].
-
 [sonatype]: http://maven.apache.org/guides/mini/guide-central-repository-upload.html
 [maven]:    http://maven.apache.org/
 [junit]:    http://www.junit.org/

@@ -2,7 +2,7 @@
 
 ## Version 0.1.0
 
-- `CapturingOutputStream`: Can be used to capture output print to `System.out`
+- `CapturingOutputStream`: Can be used to capture output printed to `System.out`
   or `System.err`.
 - `IOStreams`: Immutable object to aggregate I/O streams.
 
@@ -13,8 +13,7 @@
 ## Version 0.1.2
 
 - Add more documentation.
-- Add `toString()`, `hashCode()`, `equals()`
-  to `CapturingOutputStream()`.
+- Add `toString()`, `hashCode()`, `equals()` to `CapturingOutputStream()`.
 - Add example code and documentation to `IOStreams`.
 
 ## Version 0.1.3
@@ -37,8 +36,8 @@
 ## Version 0.2.2
 
 - `SwingFrame`: Common base functionality for a Swing main window.
-- `MenuBarBuilder`: Simple internal DSL to create menu bars.
-- `ToolBarBuilder`: Simple internal DSL to create tool bars.
+- `MenuBarBuilder`: Simple internal DSL to create Swing menu bars.
+- `ToolBarBuilder`: Simple internal DSL to create Swing tool bars.
 
 ## Version 0.2.3
 
@@ -53,16 +52,18 @@
 
 - `IO`: Print stack trace of Throwable instead of Exception.
 - `OperatingSystem`: Helper to determine the OS the JVM runs on.
-- `BrowserLauncher`: HElper to open an URL in systems default browser.
+- `BrowserLauncher`: Helper to open an URI in systems default browser.
 
 ## Version 0.2.6
 
-- `ShutDownHook`: Is now public, because it is exported API by InvokableAdapter.
-- `InvokableAdapter`: Add debug option to print stack trace on errors during execution.
+- `ShutDownHook`: Is now public because it is exported API by InvokableAdapter.
+- `InvokableAdapter`: Add debug option to print stack trace on errors during
+  execution.
 
 ## Version 0.3.0
 
-- Introduce shell package: Provides basics for an interactive shell w/ input command parsing.
+- Introduce shell package: Provides basics for an interactive shell with input
+  command parsing.
 
 ## Version 0.3.1
 
@@ -70,10 +71,10 @@
 
 ## Version 0.4.0
 
-- Add ApplicationException and catch it in InvokableAdapter t ouse exit code.
+- Add `ApplicationException` and catch it in `InvokableAdapter` to use exit code.
 - Introduce own packages for character/token stuff useful for lexing/parsing.
-- Introduce new token types: FLOAT, BOOLEAN.
-- Renamed token type NUMBER -> INTEGER.
+- Introduce new token types: `FLOAT`, `BOOLEAN`.
+- Renamed token type `NUMBER` -> `INTEGER`.
 - Introduce separate methods to determine single/double quote characters.
 - Introduce method for recognizing operator characters.
 
@@ -81,7 +82,7 @@
 
 - Add concurrent package.
 - Introduce modules.
-- Move application stuff under new package name `aplication`.
+- Move application stuff under new package name `application`.
 - Add capturing output rule for [JUnit][junit].
 - Add validate module.
 - Remove `CapturingOutputStream` and add `CapturingPrintStream`.
@@ -112,5 +113,9 @@
 ## Version 1.1.2
 
 - Fix the maven project site.
+
+## Version 1.1.3
+
+- Fixes in documentation.
 
 [junit]:    http://www.junit.org/

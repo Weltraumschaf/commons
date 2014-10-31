@@ -177,10 +177,17 @@ public final class Validate {
     public static int greaterThanOrEqual(final int reference, final int lowerBound, final String name) {
         if (reference < lowerBound) {
             if (null == name) {
-                throw new IllegalArgumentException();
+                throw new NullPointerException(String.format(
+                    "Reference is not less than lower bound: %d < %d!",
+                    reference,
+                    lowerBound));
             } else {
                 throw new IllegalArgumentException(
-                    String.format("Parameter '%s' must be greater or equal than %d (was %d)!", name, lowerBound, reference));
+                    String.format(
+                        "Parameter '%s' must be greater or equal than %d (was %d)!",
+                        name,
+                        lowerBound,
+                        reference));
             }
         }
 

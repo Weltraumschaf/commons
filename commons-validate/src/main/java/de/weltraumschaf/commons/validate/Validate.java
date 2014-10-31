@@ -106,7 +106,7 @@ public final class Validate {
 
         if (reference.isEmpty()) {
             if (null == name) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Parameter must not be empty!");
             } else {
                 throw new IllegalArgumentException(String.format("Parameter '%s' must not be empty!", name));
             }
@@ -141,7 +141,10 @@ public final class Validate {
     public static int greaterThan(final int reference, final int lowerBound, final String name) {
         if (reference <= lowerBound) {
             if (null == name) {
-                throw new IllegalArgumentException();
+                throw new NullPointerException(String.format(
+                    "Reference is not greater than lower bound: %d > %d!",
+                    reference,
+                    lowerBound));
             } else {
                 throw new IllegalArgumentException(
                     String.format("Parameter '%s' must be greater than %d (was %d)!", name, lowerBound, reference));
@@ -220,10 +223,17 @@ public final class Validate {
     public static long greaterThan(final long reference, final long lowerBound, final String name) {
         if (reference <= lowerBound) {
             if (null == name) {
-                throw new IllegalArgumentException();
+                throw new NullPointerException(String.format(
+                    "Reference is not less equal than lower bound: %d <= %d!",
+                    reference,
+                    lowerBound));
             } else {
                 throw new IllegalArgumentException(
-                    String.format("Parameter '%s' must be greater than %d (was %d)!", name, lowerBound, reference));
+                    String.format(
+                        "Parameter '%s' must be greater than %d (was %d)!",
+                        name,
+                        lowerBound,
+                        reference));
             }
         }
 
@@ -256,10 +266,17 @@ public final class Validate {
     public static long greaterThanOrEqual(final long reference, final long lowerBound, final String name) {
         if (reference < lowerBound) {
             if (null == name) {
-                throw new IllegalArgumentException();
+                throw new NullPointerException(String.format(
+                    "Reference is not less than lower bound: %d < %d!",
+                    reference,
+                    lowerBound));
             } else {
                 throw new IllegalArgumentException(
-                    String.format("Parameter '%s' must be greater than or equal %d (was %d)!", name, lowerBound, reference));
+                    String.format(
+                        "Parameter '%s' must be greater than or equal %d (was %d)!",
+                        name,
+                        lowerBound,
+                        reference));
             }
         }
 

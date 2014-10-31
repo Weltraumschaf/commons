@@ -175,7 +175,7 @@ public abstract class ReloadingPropertiesConfiguration {
      * @return never {@code null}
      */
     public final int getInteger(final String propertyName, final int defaultValue) {
-        return Integer.parseInt(getProperty(propertyName, String.valueOf(defaultValue)), 10);
+        return Integer.parseInt(getProperty(propertyName, String.valueOf(defaultValue)));
     }
 
     /**

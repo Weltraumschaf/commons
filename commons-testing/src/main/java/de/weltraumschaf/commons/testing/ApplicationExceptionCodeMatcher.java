@@ -24,7 +24,7 @@ import org.hamcrest.TypeSafeMatcher;
  * Matcher to test for {@link ApplicationException#getExitCode()}.
  *
  * @since 1.1.0
- * @param <T> matched type
+ * @param <T> type of exception to match its code
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public final class ApplicationExceptionCodeMatcher <T extends ApplicationException> extends TypeSafeMatcher<T> {
@@ -61,6 +61,13 @@ public final class ApplicationExceptionCodeMatcher <T extends ApplicationExcepti
         mismatch.appendText(item.getExitCode().toString());
     }
 
+    /**
+     * Static factory method.
+     *
+     * @param <T> type of exception to match its code
+     * @param expectedExitCode code to match, must not be {@code null}
+     * @return never {@code null}, always new instance
+     */
     @Factory
     public static <T extends ApplicationException> Matcher<T> hasExitCode(final ExitCode expectedExitCode) {
         return new ApplicationExceptionCodeMatcher<>(expectedExitCode);

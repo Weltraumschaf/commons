@@ -737,14 +737,14 @@ public final class StringJoiner {
      *         {@code endIndex - startIndex <= 0}. The number of joined entries is given by
      *         {@code endIndex - startIndex}
      */
-    public static String join(final Object[] array, String separator, final int startIndex, final int endIndex) {
+    public static String join(final Object[] array, final String separator, final int startIndex, final int endIndex) {
         if (array == null) {
             return null;
         }
 
-        if (separator == null) {
-            separator = EMPTY;
-        }
+        final String validatedSeparator = separator == null
+            ? EMPTY
+            : separator;
 
         // endIndex - startIndex > 0:   Len = NofStrings *(len(firstString) + len(separator))
         //           (Assuming that all Strings are roughly equally long)
@@ -758,7 +758,7 @@ public final class StringJoiner {
 
         for (int i = startIndex; i < endIndex; i++) {
             if (i > startIndex) {
-                buf.append(separator);
+                buf.append(validatedSeparator);
             }
             if (array[i] != null) {
                 buf.append(array[i]);

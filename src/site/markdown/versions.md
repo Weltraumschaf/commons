@@ -117,5 +117,6 @@
 ## Version 1.1.3
 
 - Fixes in documentation.
+- Fix Sonar warnings.
 
 [junit]:    http://www.junit.org/

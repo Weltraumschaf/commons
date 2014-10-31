@@ -37,6 +37,7 @@ public final class StringJoiner {
      */
     private StringJoiner() {
         super();
+        throw new UnsupportedOperationException("Must not be caled via reflection!");
     }
 
     /**

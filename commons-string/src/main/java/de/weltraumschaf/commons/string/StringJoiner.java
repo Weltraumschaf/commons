@@ -714,17 +714,20 @@ public final class StringJoiner {
      * StringUtils.join([null, "", "a"], ',', 0, 3)   = ",,a"
      * </pre>
      *
+     * <p>
+     * Throws {@link ArrayIndexOutOfBoundsException} if<br/>
+     * {@code startIndex < 0} or<br/>
+     * {@code startIndex >= array.length()} or <br/>
+     * {@code endIndex < 0} or <br/>
+     * {@code endIndex > array.length()}
+     * </p>
+     *
      * @param array the array of values to join together, may be null
      * @param separator the separator character to use, null treated as ""
      * @param startIndex the first index to start joining from.
      * @param endIndex the index to stop joining from (exclusive).
      * @return the joined String, {@code null} if null array input; or the empty string if
      *         {@code endIndex - startIndex <= 0}. The number of joined entries is given by {@code endIndex - startIndex}
-     * @throws ArrayIndexOutOfBoundsException ife
-     *         <br/> {@code startIndex < 0} or
-     *         {@code startIndex >= array.length()} or <br/>
-     *         {@code endIndex < 0} or <br/>
-     *         {@code endIndex > array.length()}
      */
     public static String join(final Object[] array, String separator, final int startIndex, final int endIndex) {
         if (array == null) {

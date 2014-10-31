@@ -33,6 +33,13 @@ public final class StringJoiner {
     public static final String EMPTY = "";
 
     /**
+     * Hidden because pure static final class.
+     */
+    private StringJoiner() {
+        super();
+    }
+
+    /**
      * Joins the elements of the provided array into a single String containing the provided list of elements.
      *
      * <p>

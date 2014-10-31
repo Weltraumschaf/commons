@@ -727,7 +727,8 @@ public final class StringJoiner {
      * @param startIndex the first index to start joining from.
      * @param endIndex the index to stop joining from (exclusive).
      * @return the joined String, {@code null} if null array input; or the empty string if
-     *         {@code endIndex - startIndex <= 0}. The number of joined entries is given by {@code endIndex - startIndex}
+     *         {@code endIndex - startIndex <= 0}. The number of joined entries is given by
+     *         {@code endIndex - startIndex}
      */
     public static String join(final Object[] array, String separator, final int startIndex, final int endIndex) {
         if (array == null) {

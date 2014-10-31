@@ -68,6 +68,16 @@ public final class Sets {
     }
 
     /**
+     * Creates a new hash set.
+     *
+     * @param <E> type of elements
+     * @return never {@code null}, always new instance
+     */
+    public static <E> Set<E> newHashSet() {
+        return new HashSet<E>();
+    }
+
+    /**
      * Creates a <em>mutable</em> {@code HashSet} instance containing the given elements in unspecified order.
      *
      * @param <E> type of elements
@@ -103,6 +113,12 @@ public final class Sets {
         return new HashSet<E>(capacity(expectedSize));
     }
 
+    /**
+     * Creates a new tree set.
+     *
+     * @param <E> type of elements
+     * @return never {@code null}, always new instance
+     */
     public static <E> SortedSet<E> newTreeSet() {
         return new TreeSet<E>();
     }

@@ -51,6 +51,14 @@ import java.util.List;
 public final class JCommanderImproved<O> {
 
     /**
+     * Default width of left column (in characters) for generated help string.
+     */
+    private static final int LEFT_COL_WIDTH = 22;
+    /**
+     * Available width (in characters) for generated help string.
+     */
+    private static final int AVAILABLE_WIDTH = 80;
+    /**
      * System dependent newline character.
      */
     private static final String DEFAULT_NEW_LINE = String.format("%n");
@@ -164,8 +172,8 @@ public final class JCommanderImproved<O> {
                     .append(DEFAULT_NEW_LINE)
                     .append(DEFAULT_NEW_LINE);
 
-            final int leftColumnWidth = 22;
-            final int rightColumnwidth = 80 - leftColumnWidth;
+            final int leftColumnWidth = LEFT_COL_WIDTH;
+            final int rightColumnwidth = AVAILABLE_WIDTH - leftColumnWidth;
 
             for (final ParameterDescription parameter : parameters) {
                 help.append(rightPad(indent + parameter.getNames(), leftColumnWidth))

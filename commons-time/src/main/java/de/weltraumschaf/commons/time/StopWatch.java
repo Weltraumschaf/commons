@@ -103,9 +103,9 @@ public final class StopWatch {
      * This method starts a new timing session, clearing any previous values.
      * </p>
      *
-     * CHECKSTYLE:OFF
-     *
-     * @throws IllegalStateException if the StopWatch is already running. CHECKSTYLE:ON
+     * <p>
+     * Throws {@link IllegalStateException} if the StopWatch is already running or not started yet.
+     * </p>
      */
     public void start() {
         if (this.runningState == State.STOPPED) {

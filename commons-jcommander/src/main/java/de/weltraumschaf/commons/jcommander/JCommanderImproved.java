@@ -44,6 +44,7 @@ import java.util.List;
  * }
  * </pre>
  *
+ * @since 1.0.1
  * @param <O> type of options bean
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */

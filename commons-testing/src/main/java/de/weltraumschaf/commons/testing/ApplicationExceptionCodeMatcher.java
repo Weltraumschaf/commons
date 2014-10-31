@@ -27,7 +27,7 @@ import org.hamcrest.TypeSafeMatcher;
  * @param <T> type of exception to match its code
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
-public final class ApplicationExceptionCodeMatcher <T extends ApplicationException> extends TypeSafeMatcher<T> {
+public final class ApplicationExceptionCodeMatcher<T extends ApplicationException> extends TypeSafeMatcher<T> {
 
     /**
      * Exit code to verify against it.

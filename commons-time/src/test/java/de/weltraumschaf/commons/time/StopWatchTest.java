@@ -295,4 +295,12 @@ public class StopWatchTest {
         assertThat(sut.runningState, is(State.RUNNING));
     }
 
+    @Test
+    public void startStopAndGetTime() throws InterruptedException {
+        sut.start();
+        Thread.sleep(1_000L);
+        sut.stop();
+
+        assertTime(sut.getTime(), 1_000L);
+    }
 }

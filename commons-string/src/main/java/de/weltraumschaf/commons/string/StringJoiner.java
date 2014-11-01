@@ -20,7 +20,7 @@ import java.util.Iterator;
 import java.util.Objects;
 
 /**
- * From {@literal org.apache.commons.lang3.StringUtils}.
+ * From {@literal org.apache.commons.lang3.StringJoiner}.
  *
  * @since 1.0.0
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
@@ -49,16 +49,16 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null)            = null
-     * StringUtils.join([])              = ""
-     * StringUtils.join([null])          = ""
-     * StringUtils.join(["a", "b", "c"]) = "abc"
-     * StringUtils.join([null, "", "a"]) = "a"
+     * StringJoiner.join(null)            = ""
+     * StringJoiner.join([])              = ""
+     * StringJoiner.join([null])          = ""
+     * StringJoiner.join(["a", "b", "c"]) = "abc"
+     * StringJoiner.join([null, "", "a"]) = "a"
      * </pre>
      *
      * @param <T> the specific type of values to join together
      * @param elements the values to join together, may be null
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     @SafeVarargs
     public static <T> String join(final T... elements) {
@@ -74,21 +74,21 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)               = null
-     * StringUtils.join([], *)                 = ""
-     * StringUtils.join([null], *)             = ""
-     * StringUtils.join(["a", "b", "c"], ';')  = "a;b;c"
-     * StringUtils.join(["a", "b", "c"], null) = "abc"
-     * StringUtils.join([null, "", "a"], ';')  = ";;a"
+     * StringJoiner.join(null, *)               = ""
+     * StringJoiner.join([], *)                 = ""
+     * StringJoiner.join([null], *)             = ""
+     * StringJoiner.join(["a", "b", "c"], ';')  = "a;b;c"
+     * StringJoiner.join(["a", "b", "c"], null) = "abc"
+     * StringJoiner.join([null, "", "a"], ';')  = ";;a"
      * </pre>
      *
      * @param array the array of values to join together, may be null
      * @param separator the separator character to use
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final Object[] array, final char separator) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         return join(array, separator, 0, array.length);
@@ -103,20 +103,19 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = ""
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
      * @param separator the separator character to use
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final long[] array, final char separator) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         return join(array, separator, 0, array.length);
@@ -131,20 +130,19 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = ""
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
      * @param separator the separator character to use
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final int[] array, final char separator) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         return join(array, separator, 0, array.length);
@@ -161,20 +159,19 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
      * @param separator the separator character to use
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final short[] array, final char separator) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         return join(array, separator, 0, array.length);
@@ -189,20 +186,19 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
      * @param separator the separator character to use
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final byte[] array, final char separator) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         return join(array, separator, 0, array.length);
@@ -217,20 +213,19 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
      * @param separator the separator character to use
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final char[] array, final char separator) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         return join(array, separator, 0, array.length);
@@ -245,20 +240,19 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
      * @param separator the separator character to use
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final float[] array, final char separator) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         return join(array, separator, 0, array.length);
@@ -273,20 +267,20 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([null], *)       = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
      * @param separator the separator character to use
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final double[] array, final char separator) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         return join(array, separator, 0, array.length);
@@ -301,12 +295,12 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)               = null
-     * StringUtils.join([], *)                 = ""
-     * StringUtils.join([null], *)             = ""
-     * StringUtils.join(["a", "b", "c"], ';')  = "a;b;c"
-     * StringUtils.join(["a", "b", "c"], null) = "abc"
-     * StringUtils.join([null, "", "a"], ';')  = ";;a"
+     * StringJoiner.join(null, *)               = null
+     * StringJoiner.join([], *)                 = ""
+     * StringJoiner.join([null], *)             = ""
+     * StringJoiner.join(["a", "b", "c"], ';')  = "a;b;c"
+     * StringJoiner.join(["a", "b", "c"], null) = "abc"
+     * StringJoiner.join([null, "", "a"], ';')  = ";;a"
      * </pre>
      *
      * @param array the array of values to join together, may be null
@@ -315,11 +309,11 @@ public final class StringJoiner {
      * the array
      * @param endIndex the index to stop joining from (exclusive). It is an error to pass in an end index past the end
      * of the array
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final Object[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         final int noOfItems = endIndex - startIndex;
@@ -331,7 +325,7 @@ public final class StringJoiner {
         final StringBuilder buf = new StringBuilder(noOfItems * 16);
 
         for (int i = startIndex; i < endIndex; i++) {
-            if (i > startIndex) {
+            if (i > startIndex && separator > 0) {
                 buf.append(separator);
             }
 
@@ -352,11 +346,11 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([null], *)       = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
@@ -365,11 +359,11 @@ public final class StringJoiner {
      * the array
      * @param endIndex the index to stop joining from (exclusive). It is an error to pass in an end index past the end
      * of the array
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final long[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         final int noOfItems = endIndex - startIndex;
@@ -381,7 +375,7 @@ public final class StringJoiner {
         final StringBuilder buf = new StringBuilder(noOfItems * 16);
 
         for (int i = startIndex; i < endIndex; i++) {
-            if (i > startIndex) {
+            if (i > startIndex && separator > 0) {
                 buf.append(separator);
             }
 
@@ -400,11 +394,11 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([null], *)       = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
@@ -413,11 +407,11 @@ public final class StringJoiner {
      * the array
      * @param endIndex the index to stop joining from (exclusive). It is an error to pass in an end index past the end
      * of the array
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final int[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         final int noOfItems = endIndex - startIndex;
@@ -429,7 +423,7 @@ public final class StringJoiner {
         final StringBuilder buf = new StringBuilder(noOfItems * 16);
 
         for (int i = startIndex; i < endIndex; i++) {
-            if (i > startIndex) {
+            if (i > startIndex && separator > 0) {
                 buf.append(separator);
             }
 
@@ -448,11 +442,11 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([null], *)       = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
@@ -461,11 +455,11 @@ public final class StringJoiner {
      * the array
      * @param endIndex the index to stop joining from (exclusive). It is an error to pass in an end index past the end
      * of the array
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final byte[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         final int noOfItems = endIndex - startIndex;
@@ -477,7 +471,7 @@ public final class StringJoiner {
         final StringBuilder buf = new StringBuilder(noOfItems * 16);
 
         for (int i = startIndex; i < endIndex; i++) {
-            if (i > startIndex) {
+            if (i > startIndex && separator > 0) {
                 buf.append(separator);
             }
 
@@ -496,11 +490,11 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([null], *)       = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
@@ -509,11 +503,11 @@ public final class StringJoiner {
      * the array
      * @param endIndex the index to stop joining from (exclusive). It is an error to pass in an end index past the end
      * of the array
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final short[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         final int noOfItems = endIndex - startIndex;
@@ -525,7 +519,7 @@ public final class StringJoiner {
         final StringBuilder buf = new StringBuilder(noOfItems * 16);
 
         for (int i = startIndex; i < endIndex; i++) {
-            if (i > startIndex) {
+            if (i > startIndex && separator > 0) {
                 buf.append(separator);
             }
 
@@ -544,11 +538,11 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([null], *)       = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
@@ -557,11 +551,11 @@ public final class StringJoiner {
      * the array
      * @param endIndex the index to stop joining from (exclusive). It is an error to pass in an end index past the end
      * of the array
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final char[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         final int noOfItems = endIndex - startIndex;
@@ -573,7 +567,7 @@ public final class StringJoiner {
         final StringBuilder buf = new StringBuilder(noOfItems * 16);
 
         for (int i = startIndex; i < endIndex; i++) {
-            if (i > startIndex) {
+            if (i > startIndex && separator > 0) {
                 buf.append(separator);
             }
 
@@ -592,11 +586,11 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([null], *)       = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
@@ -605,11 +599,11 @@ public final class StringJoiner {
      * the array
      * @param endIndex the index to stop joining from (exclusive). It is an error to pass in an end index past the end
      * of the array
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final double[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
 
         final int noOfItems = endIndex - startIndex;
@@ -621,7 +615,7 @@ public final class StringJoiner {
         final StringBuilder buf = new StringBuilder(noOfItems * 16);
 
         for (int i = startIndex; i < endIndex; i++) {
-            if (i > startIndex) {
+            if (i > startIndex && separator > 0) {
                 buf.append(separator);
             }
 
@@ -640,11 +634,11 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *)         = null
-     * StringUtils.join([], *)           = ""
-     * StringUtils.join([null], *)       = ""
-     * StringUtils.join([1, 2, 3], ';')  = "1;2;3"
-     * StringUtils.join([1, 2, 3], null) = "123"
+     * StringJoiner.join(null, *)         = null
+     * StringJoiner.join([], *)           = ""
+     * StringJoiner.join([null], *)       = ""
+     * StringJoiner.join([1, 2, 3], ';')  = "1;2;3"
+     * StringJoiner.join([1, 2, 3], null) = "123"
      * </pre>
      *
      * @param array the array of values to join together, may be null
@@ -653,23 +647,29 @@ public final class StringJoiner {
      * the array
      * @param endIndex the index to stop joining from (exclusive). It is an error to pass in an end index past the end
      * of the array
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final float[] array, final char separator, final int startIndex, final int endIndex) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
+
         final int noOfItems = endIndex - startIndex;
+
         if (noOfItems <= 0) {
             return EMPTY;
         }
+
         final StringBuilder buf = new StringBuilder(noOfItems * 16);
+
         for (int i = startIndex; i < endIndex; i++) {
-            if (i > startIndex) {
+            if (i > startIndex && separator > 0) {
                 buf.append(separator);
             }
+
             buf.append(array[i]);
         }
+
         return buf.toString();
     }
 
@@ -681,23 +681,24 @@ public final class StringJoiner {
      * Null objects or empty strings within the array are represented by empty strings.</p>
      *
      * <pre>
-     * StringUtils.join(null, *)                = null
-     * StringUtils.join([], *)                  = ""
-     * StringUtils.join([null], *)              = ""
-     * StringUtils.join(["a", "b", "c"], "--")  = "a--b--c"
-     * StringUtils.join(["a", "b", "c"], null)  = "abc"
-     * StringUtils.join(["a", "b", "c"], "")    = "abc"
-     * StringUtils.join([null, "", "a"], ',')   = ",,a"
+     * StringJoiner.join(null, *)                = null
+     * StringJoiner.join([], *)                  = ""
+     * StringJoiner.join([null], *)              = ""
+     * StringJoiner.join(["a", "b", "c"], "--")  = "a--b--c"
+     * StringJoiner.join(["a", "b", "c"], null)  = "abc"
+     * StringJoiner.join(["a", "b", "c"], "")    = "abc"
+     * StringJoiner.join([null, "", "a"], ',')   = ",,a"
      * </pre>
      *
      * @param array the array of values to join together, may be null
      * @param separator the separator character to use, null treated as ""
-     * @return the joined String, {@code null} if null array input
+     * @return the joined String, never {@code null}
      */
     public static String join(final Object[] array, final String separator) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
+
         return join(array, separator, 0, array.length);
     }
 
@@ -710,16 +711,16 @@ public final class StringJoiner {
      * </p>
      *
      * <pre>
-     * StringUtils.join(null, *, *, *)                = null
-     * StringUtils.join([], *, *, *)                  = ""
-     * StringUtils.join([null], *, *, *)              = ""
-     * StringUtils.join(["a", "b", "c"], "--", 0, 3)  = "a--b--c"
-     * StringUtils.join(["a", "b", "c"], "--", 1, 3)  = "b--c"
-     * StringUtils.join(["a", "b", "c"], "--", 2, 3)  = "c"
-     * StringUtils.join(["a", "b", "c"], "--", 2, 2)  = ""
-     * StringUtils.join(["a", "b", "c"], null, 0, 3)  = "abc"
-     * StringUtils.join(["a", "b", "c"], "", 0, 3)    = "abc"
-     * StringUtils.join([null, "", "a"], ',', 0, 3)   = ",,a"
+     * StringJoiner.join(null, *, *, *)                = null
+     * StringJoiner.join([], *, *, *)                  = ""
+     * StringJoiner.join([null], *, *, *)              = ""
+     * StringJoiner.join(["a", "b", "c"], "--", 0, 3)  = "a--b--c"
+     * StringJoiner.join(["a", "b", "c"], "--", 1, 3)  = "b--c"
+     * StringJoiner.join(["a", "b", "c"], "--", 2, 3)  = "c"
+     * StringJoiner.join(["a", "b", "c"], "--", 2, 2)  = ""
+     * StringJoiner.join(["a", "b", "c"], null, 0, 3)  = "abc"
+     * StringJoiner.join(["a", "b", "c"], "", 0, 3)    = "abc"
+     * StringJoiner.join([null, "", "a"], ',', 0, 3)   = ",,a"
      * </pre>
      *
      * <p>
@@ -734,18 +735,14 @@ public final class StringJoiner {
      * @param separator the separator character to use, null treated as ""
      * @param startIndex the first index to start joining from.
      * @param endIndex the index to stop joining from (exclusive).
-     * @return the joined String, {@code null} if null array input; or the empty string if
+     * @return the joined String, never {@code null}; or the empty string if
      *         {@code endIndex - startIndex <= 0}. The number of joined entries is given by
      *         {@code endIndex - startIndex}
      */
     public static String join(final Object[] array, final String separator, final int startIndex, final int endIndex) {
         if (array == null) {
-            return null;
+            return EMPTY;
         }
-
-        final String validatedSeparator = separator == null
-            ? EMPTY
-            : separator;
 
         // endIndex - startIndex > 0:   Len = NofStrings *(len(firstString) + len(separator))
         //           (Assuming that all Strings are roughly equally long)
@@ -758,9 +755,10 @@ public final class StringJoiner {
         final StringBuilder buf = new StringBuilder(noOfItems * 16);
 
         for (int i = startIndex; i < endIndex; i++) {
-            if (i > startIndex) {
-                buf.append(validatedSeparator);
+            if (i > startIndex && separator != null) {
+                buf.append(separator);
             }
+
             if (array[i] != null) {
                 buf.append(array[i]);
             }
@@ -783,13 +781,12 @@ public final class StringJoiner {
      *
      * @param iterator the {@code Iterator} of values to join together, may be null
      * @param separator the separator character to use
-     * @return the joined String, {@code null} if null iterator input
+     * @return the joined String, never {@code null}
      */
     public static String join(final Iterator<?> iterator, final char separator) {
-
         // handle null, zero and one elements before building a buffer
         if (iterator == null) {
-            return null;
+            return EMPTY;
         }
 
         if (!iterator.hasNext()) {
@@ -804,13 +801,18 @@ public final class StringJoiner {
 
         // two or more elements
         final StringBuilder buf = new StringBuilder(256); // Java default is 16, probably too small
+
         if (first != null) {
             buf.append(first);
         }
 
         while (iterator.hasNext()) {
-            buf.append(separator);
+            if (separator > 0) {
+                buf.append(separator);
+            }
+
             final Object obj = iterator.next();
+
             if (obj != null) {
                 buf.append(obj);
             }
@@ -832,13 +834,12 @@ public final class StringJoiner {
      *
      * @param iterator the {@code Iterator} of values to join together, may be null
      * @param separator the separator character to use, null treated as ""
-     * @return the joined String, {@code null} if null iterator input
+     * @return the joined String, never {@code null}
      */
     public static String join(final Iterator<?> iterator, final String separator) {
-
         // handle null, zero and one elements before building a buffer
         if (iterator == null) {
-            return null;
+            return EMPTY;
         }
 
         if (!iterator.hasNext()) {
@@ -887,11 +888,11 @@ public final class StringJoiner {
      *
      * @param iterable the {@code Iterable} providing the values to join together, may be null
      * @param separator the separator character to use
-     * @return the joined String, {@code null} if null iterator input
+     * @return the joined String, never {@code null}
      */
     public static String join(final Iterable<?> iterable, final char separator) {
         if (iterable == null) {
-            return null;
+            return EMPTY;
         }
 
         return join(iterable.iterator(), separator);
@@ -910,11 +911,11 @@ public final class StringJoiner {
      *
      * @param iterable the {@code Iterable} providing the values to join together, may be null
      * @param separator the separator character to use, null treated as ""
-     * @return the joined String, {@code null} if null iterator input
+     * @return the joined String, join {@code null}
      */
     public static String join(final Iterable<?> iterable, final String separator) {
         if (iterable == null) {
-            return null;
+            return EMPTY;
         }
 
         return join(iterable.iterator(), separator);

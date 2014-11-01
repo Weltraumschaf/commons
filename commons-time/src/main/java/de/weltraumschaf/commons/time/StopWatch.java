@@ -73,12 +73,12 @@ public final class StopWatch {
     /**
      * The current running state of the StopWatch.
      */
-    private State runningState = State.UNSTARTED;
+    State runningState = State.UNSTARTED;
 
     /**
      * Whether the stopwatch has a split time recorded.
      */
-    private SplitState splitState = SplitState.UNSPLIT;
+    SplitState splitState = SplitState.UNSPLIT;
 
     /**
      * The start time.
@@ -109,11 +109,11 @@ public final class StopWatch {
      */
     public void start() {
         if (this.runningState == State.STOPPED) {
-            throw new IllegalStateException("Stopwatch must be reset before being restarted. ");
+            throw new IllegalStateException("Stopwatch must be reset before being restarted!");
         }
 
         if (this.runningState != State.UNSTARTED) {
-            throw new IllegalStateException("Stopwatch already started. ");
+            throw new IllegalStateException("Stopwatch already started!");
         }
 
         this.startTime = System.nanoTime();
@@ -134,7 +134,7 @@ public final class StopWatch {
      */
     public void stop() {
         if (this.runningState != State.RUNNING && this.runningState != State.SUSPENDED) {
-            throw new IllegalStateException("Stopwatch is not running. ");
+            throw new IllegalStateException("Stopwatch is not running!");
         }
 
         if (this.runningState == State.RUNNING) {
@@ -170,7 +170,7 @@ public final class StopWatch {
      */
     public void split() {
         if (this.runningState != State.RUNNING) {
-            throw new IllegalStateException("Stopwatch is not running. ");
+            throw new IllegalStateException("Stopwatch is not running!");
         }
 
         this.stopTime = System.nanoTime();
@@ -191,7 +191,7 @@ public final class StopWatch {
      */
     public void unsplit() {
         if (this.splitState != SplitState.SPLIT) {
-            throw new IllegalStateException("Stopwatch has not been split. ");
+            throw new IllegalStateException("Stopwatch has not been split!");
         }
 
         this.splitState = SplitState.UNSPLIT;
@@ -211,7 +211,7 @@ public final class StopWatch {
      */
     public void suspend() {
         if (this.runningState != State.RUNNING) {
-            throw new IllegalStateException("Stopwatch must be running to suspend. ");
+            throw new IllegalStateException("Stopwatch must be running to suspend!");
         }
 
         this.stopTime = System.nanoTime();
@@ -232,7 +232,7 @@ public final class StopWatch {
      */
     public void resume() {
         if (this.runningState != State.SUSPENDED) {
-            throw new IllegalStateException("Stopwatch must be suspended to resume. ");
+            throw new IllegalStateException("Stopwatch must be suspended to resume!");
         }
 
         this.startTime += System.nanoTime() - this.stopTime;
@@ -394,7 +394,7 @@ public final class StopWatch {
     /**
      * Enumeration type which indicates the split status of stopwatch.
      */
-    private enum SplitState {
+    enum SplitState {
 
         /**
          * Stopwatch is split.
@@ -409,7 +409,7 @@ public final class StopWatch {
     /**
      * Enumeration type which indicates the status of stopwatch.
      */
-    private enum State {
+    enum State {
 
         /**
          * Stopwatch is not started.

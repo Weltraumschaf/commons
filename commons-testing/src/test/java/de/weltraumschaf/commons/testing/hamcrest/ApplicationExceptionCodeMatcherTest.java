@@ -10,7 +10,7 @@
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
 
-package de.weltraumschaf.commons.testing;
+package de.weltraumschaf.commons.testing.hamcrest;
 
 import de.weltraumschaf.commons.application.ApplicationException;
 import de.weltraumschaf.commons.system.ExitCode;

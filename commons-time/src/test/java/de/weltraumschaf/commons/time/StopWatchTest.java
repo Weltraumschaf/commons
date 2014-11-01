@@ -37,6 +37,48 @@ public class StopWatchTest {
     }
 
     @Test
+    public void defaults() {
+        assertThat(sut.isStarted(), is(false));
+        assertThat(sut.isStopped(), is(true));
+        assertThat(sut.isSuspended(), is(false));
+        assertThat(sut.getNanoTime(), is(0L));
+        assertThat(sut.getTime(), is(0L));
+        assertThat(sut.toString(), is("01:00:00.000"));
+    }
+
+    @Test
+    public void toSplitString_inUnsplitState() {
+        thrown.expect(IllegalStateException.class);
+        thrown.expectMessage("Stopwatch must be split to get the split time!");
+
+        sut.toSplitString();
+    }
+
+    @Test
+    public void getSplitNanoTime_inUnsplitState() {
+        thrown.expect(IllegalStateException.class);
+        thrown.expectMessage("Stopwatch must be split to get the split time!");
+
+        sut.getSplitNanoTime();
+    }
+
+    @Test
+    public void getSplitTime_inUnsplitState() {
+        thrown.expect(IllegalStateException.class);
+        thrown.expectMessage("Stopwatch must be split to get the split time!");
+
+        sut.getSplitTime();
+    }
+
+    @Test
+    public void getStartTime_inUnstartedState() {
+        thrown.expect(IllegalStateException.class);
+        thrown.expectMessage("Stopwatch has not been started!");
+
+        sut.getStartTime();
+    }
+
+    @Test
     public void start_inStoppedState() {
         thrown.expect(IllegalStateException.class);
         thrown.expectMessage("Stopwatch must be reset before being restarted!");

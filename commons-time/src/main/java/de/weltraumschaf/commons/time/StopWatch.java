@@ -307,7 +307,7 @@ public final class StopWatch {
      */
     public long getSplitNanoTime() {
         if (this.splitState != SplitState.SPLIT) {
-            throw new IllegalStateException("Stopwatch must be split to get the split time. ");
+            throw new IllegalStateException("Stopwatch must be split to get the split time!");
         }
 
         return this.stopTime - this.startTime;
@@ -324,7 +324,7 @@ public final class StopWatch {
      */
     public long getStartTime() {
         if (this.runningState == State.UNSTARTED) {
-            throw new IllegalStateException("Stopwatch has not been started");
+            throw new IllegalStateException("Stopwatch has not been started!");
         }
 
         return this.startTimeMillis;

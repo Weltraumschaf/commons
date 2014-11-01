@@ -256,7 +256,9 @@ public class StopWatchTest {
 
         sut.suspend();
 
-        assertThat(sut.runningState, is(State.SUSPENDED));
+        assertThat(sut.isStarted(), is(true));
+        assertThat(sut.isSuspended(), is(true));
+        assertThat(sut.isStopped(), is(false));
     }
 
     @Test

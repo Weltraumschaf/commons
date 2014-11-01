@@ -36,6 +36,10 @@ public class StopWatchTest {
         assertThat(actual, is(closeTo(expected, DELTA)));
     }
 
+    private void waitOneSecond() throws InterruptedException {
+        Thread.sleep(1_000L);
+    }
+
     @Test
     public void defaults() {
         assertThat(sut.isStarted(), is(false));
@@ -298,9 +302,41 @@ public class StopWatchTest {
     @Test
     public void startStopAndGetTime() throws InterruptedException {
         sut.start();
-        Thread.sleep(1_000L);
+        waitOneSecond();
         sut.stop();
 
         assertTime(sut.getTime(), 1_000L);
+    }
+
+    @Test
+    public void startSuspendresumeStopAndGetTime() throws InterruptedException {
+        sut.start();
+        waitOneSecond();
+        sut.suspend();
+
+        assertTime(sut.getTime(), 1_000L);
+
+        waitOneSecond();
+        sut.resume();
+        waitOneSecond();
+        sut.stop();
+
+        assertTime(sut.getTime(), 2_000L);
+    }
+
+    @Test
+    public void startSplitStopAndGetTime() throws InterruptedException {
+        sut.start();
+        waitOneSecond();
+        sut.split();
+
+        assertTime(sut.getTime(), 1_000L);
+
+        waitOneSecond();
+        sut.unsplit();
+        waitOneSecond();
+        sut.stop();
+
+        assertTime(sut.getTime(), 3_000L);
     }
 }

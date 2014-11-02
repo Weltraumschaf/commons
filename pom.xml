@@ -123,9 +123,8 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>**/ExitCodeImpl.class</exclude>
-                        <exclude>**/ApplicationException.class</exclude>
-                        <exclude>**/NullExiter.class</exclude>
+                        <exclude>de/weltraumschaf/commons/application/ApplicationException.class</exclude>
+                        <exclude>de/weltraumschaf/commons/system/NullExiter.class</exclude>
                     </excludes>
                 </configuration>
             </plugin>

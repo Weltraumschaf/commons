@@ -11,6 +11,6 @@
  */
 
 /**
- * Some custom matchers for <a href="http://hamcrest.org/">Hamcrest</p>.
+ * Some custom matchers for <a href="http://hamcrest.org/">Hamcrest</a>.
  */
 package de.weltraumschaf.commons.testing.hamcrest;

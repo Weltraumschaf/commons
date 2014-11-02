@@ -72,6 +72,12 @@ public class IsCloseTo extends TypeSafeMatcher<Long> {
                 .appendValue(value);
     }
 
+    /**
+     * Calculates the actual delta.
+     *
+     * @param item any long
+     * @return any double
+     */
     private double actualDelta(final Long item) {
         return (Math.abs((item - value)) - delta);
     }

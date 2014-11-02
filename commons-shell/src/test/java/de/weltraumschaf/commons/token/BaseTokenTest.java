@@ -89,11 +89,6 @@ public class BaseTokenTest {
         assertThat(sut.toString(), is(equalTo("BaseTokenStub{type=STRING, position=(0, 0), raw=foobar, value=snafu}")));
     }
 
-    @Test
-    public void equalsContract() {
-//        EqualsVerifier.forClass(BaseToken.class).verify();
-    }
-
     private static final class BaseTokenStub<T> extends BaseToken<T> {
 
         public BaseTokenStub(final TokenType type, final Position position, final String raw, final T value) {

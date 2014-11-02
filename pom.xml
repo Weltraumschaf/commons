@@ -39,14 +39,13 @@
 
         <jacoco.exclude.1>**/ApplicationException.*</jacoco.exclude.1>
         <jacoco.exclude.2>**/NullExiter.*</jacoco.exclude.2>
-        <jacoco.exclude.3>**/Environments$Names.*</jacoco.exclude.3>
 
         <sonar.language>java</sonar.language>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.doxygen.generateDocumentation>enable</sonar.doxygen.generateDocumentation>
         <!-- FIXME This crap does not work! -->
-        <sonar.exclusions>${jacoco.exclude.1}:${jacoco.exclude.2}:${jacoco.exclude.3}</sonar.exclusions>
+        <sonar.exclusions>${jacoco.exclude.1}:${jacoco.exclude.2}</sonar.exclusions>
 
         <maven.version>3.0.3</maven.version>
         <maven.pmd.rulesetfiles>${project.basedir}/src/main/config/pmd.xml</maven.pmd.rulesetfiles>
@@ -57,7 +56,6 @@
 
         <dependency.findbugs.annotations>1.3.2</dependency.findbugs.annotations>
         <dependency.jcip.annotations>1.0-1</dependency.jcip.annotations>
-        <dependency.equalsverifier>1.5</dependency.equalsverifier>
     </properties>
 
     <prerequisites>
@@ -117,26 +115,6 @@
             <artifactId>jcip-annotations</artifactId>
             <version>${dependency.jcip.annotations}</version>
         </dependency>
-
-        <dependency>
-            <!-- http://www.jqno.nl/equalsverifier/ -->
-            <groupId>nl.jqno.equalsverifier</groupId>
-            <artifactId>equalsverifier</artifactId>
-            <version>${dependency.equalsverifier}</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.ow2.asm</groupId>
-                    <artifactId>asm</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm</artifactId>
-            <version>5.0.3</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -162,7 +140,6 @@
                     <excludes>
                         <exclude>${jacoco.exclude.1}</exclude>
                         <exclude>${jacoco.exclude.2}</exclude>
-                        <exclude>${jacoco.exclude.3}</exclude>
                     </excludes>
                 </configuration>
             </plugin>

@@ -30,30 +30,29 @@ public class FloatTokenTest {
     //CHECKSTYLE:ON
 
     private final Token sut = Tokens.newFloatToken(Position.NULL, "3.14", 3.14f);
+    private final Token sutZero = Tokens.newFloatToken(Position.NULL, "0.0", 0.0f);
 
     @Test
     public void asBoolean() {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type BOOLEAN! But is of type FLOAT.");
-
-        sut.asBoolean();
+        assertThat(sut.asBoolean(), is(true));
+        assertThat(sutZero.asBoolean(), is(false));
     }
 
     @Test
     public void asFloat() {
         assertThat((double) sut.asFloat(), is(closeTo(3.14, 0.0001)));
+        assertThat(sutZero.asFloat(), is(0.0f));
     }
 
     @Test
     public void asInteger() {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type INTEGER! But is of type FLOAT.");
-
-        sut.asInteger();
+        assertThat(sut.asInteger(), is(3));
+        assertThat(sutZero.asInteger(), is(0));
     }
 
     @Test
     public void asString() {
         assertThat(sut.asString(), is(equalTo("3.14")));
+        assertThat(sutZero.asString(), is(equalTo("0.0")));
     }
 }

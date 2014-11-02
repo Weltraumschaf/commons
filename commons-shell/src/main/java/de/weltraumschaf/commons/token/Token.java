@@ -47,10 +47,6 @@ public interface Token {
 
     /**
      * Get the boolean typed value.
-     * <p>
-     * This method throws {@link UnsupportedOperationException} if the token's {@link #getType() token class}
-     * is not of type {@link TokenType#BOOLEAN}.
-     * </p>
      *
      * @return never {@code null}
      */
@@ -58,10 +54,6 @@ public interface Token {
 
     /**
      * Get the float typed value.
-     * <p>
-     * This method throws {@link UnsupportedOperationException} if the token's {@link #getType() token class}
-     * is not of type {@link TokenType#FLOAT}.
-     * </p>
      *
      * @return never {@code null}
      */
@@ -69,10 +61,6 @@ public interface Token {
 
     /**
      * Get the integer typed value.
-     * <p>
-     * This method throws {@link UnsupportedOperationException} if the token's {@link #getType() token class}
-     * is not of type {@link TokenType#INTEGER}.
-     * </p>
      *
      * @return never {@code null}
      */
@@ -80,10 +68,6 @@ public interface Token {
 
     /**
      * Get the string typed value.
-     * <p>
-     * This method never throws {@link UnsupportedOperationException}.
-     * It always calls {@link Object#toString()} on the recognized typed value.
-     * </p>
      *
      * @return never {@code null}
      */

@@ -11,12 +11,11 @@
  */
 package de.weltraumschaf.commons.token;
 
+import de.weltraumschaf.commons.token.BaseToken.IntegerToken;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 /**
  * Tests for {@link IntegerToken}.
@@ -25,36 +24,30 @@ import org.junit.rules.ExpectedException;
  */
 public class IntegerTokenTest {
 
-    @Rule
-    //CHECKSTYLE:OFF
-    public final ExpectedException thrown = ExpectedException.none();
-    //CHECKSTYLE:ON
-
     private final Token sut = Tokens.newIntegerToken(Position.NULL, "42", 42);
+    private final Token sutZero = Tokens.newIntegerToken(Position.NULL, "0", 0);
 
     @Test
     public void asBoolean() {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type BOOLEAN! But is of type INTEGER.");
-
-        sut.asBoolean();
+        assertThat(sut.asBoolean(), is(true));
+        assertThat(sutZero.asBoolean(), is(false));
     }
 
     @Test
     public void asFloat() {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type FLOAT! But is of type INTEGER.");
-
-        sut.asFloat();
+        assertThat(sut.asFloat(), is(42.0f));
+        assertThat(sutZero.asFloat(), is(0.0f));
     }
 
     @Test
     public void asInteger() {
         assertThat(sut.asInteger(), is(42));
+        assertThat(sutZero.asInteger(), is(0));
     }
 
     @Test
     public void asString() {
         assertThat(sut.asString(), is(equalTo("42")));
+        assertThat(sutZero.asString(), is(equalTo("0")));
     }
 }

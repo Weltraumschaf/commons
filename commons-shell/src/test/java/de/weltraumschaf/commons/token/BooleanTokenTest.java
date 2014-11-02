@@ -30,31 +30,30 @@ public class BooleanTokenTest {
     public final ExpectedException thrown = ExpectedException.none();
     //CHECKSTYLE:ON
 
-    private final Token sut = Tokens.newBooleanToken(Position.NULL, "true", Boolean.TRUE);
+    private final Token sutTrue = Tokens.newBooleanToken(Position.NULL, "true", Boolean.TRUE);
+    private final Token sutFalse = Tokens.newBooleanToken(Position.NULL, "true", Boolean.FALSE);
 
     @Test
     public void asBoolean() {
-        assertThat(sut.asBoolean(), is(true));
+        assertThat(sutTrue.asBoolean(), is(true));
+        assertThat(sutFalse.asBoolean(), is(false));
     }
 
     @Test
     public void asFloat() {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type FLOAT! But is of type BOOLEAN.");
-
-        sut.asFloat();
+        assertThat(sutTrue.asFloat(), is(1.0f));
+        assertThat(sutFalse.asFloat(), is(0.0f));
     }
 
     @Test
     public void asInteger() {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type INTEGER! But is of type BOOLEAN.");
-
-        sut.asInteger();
+        assertThat(sutTrue.asInteger(), is(1));
+        assertThat(sutFalse.asInteger(), is(0));
     }
 
     @Test
     public void asString() {
-        assertThat(sut.asString(), is(equalTo("true")));
+        assertThat(sutTrue.asString(), is(equalTo("true")));
+        assertThat(sutFalse.asString(), is(equalTo("false")));
     }
 }

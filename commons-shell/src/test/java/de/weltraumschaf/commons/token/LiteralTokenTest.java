@@ -11,12 +11,11 @@
  */
 package de.weltraumschaf.commons.token;
 
+import de.weltraumschaf.commons.token.BaseToken.LiteralToken;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 /**
  * Tests for {@link LiteralToken}.
@@ -25,39 +24,30 @@ import org.junit.rules.ExpectedException;
  */
 public class LiteralTokenTest {
 
-    @Rule
-    //CHECKSTYLE:OFF
-    public final ExpectedException thrown = ExpectedException.none();
-    //CHECKSTYLE:ON
-
     private final Token sut = Tokens.newLiteralToken(Position.NULL, "foobar", "foobar");
+    private final Token sutEmpty = Tokens.newKeywordToken(Position.NULL, "", "");
 
     @Test
     public void asBoolean() {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type BOOLEAN! But is of type LITERAL.");
-
-        sut.asBoolean();
+        assertThat(sut.asBoolean(), is(true));
+        assertThat(sutEmpty.asBoolean(), is(false));
     }
 
     @Test
     public void asFloat() {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type FLOAT! But is of type LITERAL.");
-
-        sut.asFloat();
+        assertThat(sut.asFloat(), is(1.0f));
+        assertThat(sutEmpty.asFloat(), is(0.0f));
     }
 
     @Test
     public void asInteger() {
-        thrown.expect(UnsupportedOperationException.class);
-        thrown.expectMessage("Token is not of type INTEGER! But is of type LITERAL.");
-
-        sut.asInteger();
+        assertThat(sut.asInteger(), is(1));
+        assertThat(sutEmpty.asInteger(), is(0));
     }
 
     @Test
     public void asString() {
         assertThat(sut.asString(), is(equalTo("foobar")));
+        assertThat(sutEmpty.asString(), is(equalTo("")));
     }
 }

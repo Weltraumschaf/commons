@@ -121,4 +121,6 @@
 
 ## Version 1.1.4
 
+- More unit tests.
+
 [junit]:    http://www.junit.org/

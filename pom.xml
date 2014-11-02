@@ -39,12 +39,13 @@
 
         <jacoco.exclude.1>**/ApplicationException.*</jacoco.exclude.1>
         <jacoco.exclude.2>**/NullExiter.*</jacoco.exclude.2>
+        <jacoco.exclude.3>**/Environments$Names.*</jacoco.exclude.3>
 
         <sonar.language>java</sonar.language>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <!-- FIXME This crap does not work! -->
-        <sonar.exclusions>${jacoco.exclude.1}:${jacoco.exclude.2}</sonar.exclusions>
+        <sonar.exclusions>${jacoco.exclude.1}:${jacoco.exclude.2}:jacoco.exclude.3</sonar.exclusions>
 
         <maven.version>3.0.3</maven.version>
         <maven.pmd.rulesetfiles>${project.basedir}/src/main/config/pmd.xml</maven.pmd.rulesetfiles>
@@ -130,6 +131,7 @@
                     <excludes>
                         <exclude>${jacoco.exclude.1}</exclude>
                         <exclude>${jacoco.exclude.2}</exclude>
+                        <exclude>${jacoco.exclude.3}</exclude>
                     </excludes>
                 </configuration>
             </plugin>

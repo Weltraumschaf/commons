@@ -64,7 +64,7 @@ public class StringJoinerTest {
         assertThat(StringJoiner.join(new Object[]{null}, '*'), is(""));
         assertThat(StringJoiner.join(new Object[]{"a", "b", "c"}, ';'), is("a;b;c"));
         assertThat(StringJoiner.join(new Object[]{"a", "b", "c"}, (char) 0), is("abc"));
-        assertThat(StringJoiner.join(new Object[]{null, "", "a"}, ';'), is(";;a"));
+        assertThat(StringJoiner.join(new Object[]{null, "", "a"}, ';'), is(";a"));
     }
 
     @Test

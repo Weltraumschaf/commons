@@ -24,6 +24,7 @@ public final class Scanners {
      */
     private Scanners() {
         super();
+        throw new UnsupportedOperationException("Constructor must not be called by reflection!");
     }
 
     /**

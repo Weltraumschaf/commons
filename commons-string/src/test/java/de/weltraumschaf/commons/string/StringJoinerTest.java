@@ -11,6 +11,10 @@
  */
 package de.weltraumschaf.commons.string;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
@@ -96,5 +100,44 @@ public class StringJoinerTest {
         assertThat(StringJoiner.join(new double[]{1, 2, 3}, ';'), is("1.0;2.0;3.0"));
         assertThat(StringJoiner.join(new double[]{1, 2, 3}, (char) 0), is("1.02.03.0"));
     }
-//    @Test public void join_
+
+    @Test
+    public void join_iterableWithStringSeparator() {
+        assertThat(StringJoiner.join((Iterable)null, ""), is(""));
+        assertThat(StringJoiner.join((Iterable)null, ";"), is(""));
+        assertThat(StringJoiner.join(Collections.emptyList(), ""), is(""));
+        assertThat(StringJoiner.join(Collections.emptyList(), ";"), is(""));
+        assertThat(StringJoiner.join(Arrays.asList("a", "b", "c"), ""), is("abc"));
+        assertThat(StringJoiner.join(Arrays.asList("a", "b", "c"), ";"), is("a;b;c"));
+    }
+
+    @Test
+    public void join_iterablewithCharSeparator() {
+        assertThat(StringJoiner.join((Iterable)null, (char)0), is(""));
+        assertThat(StringJoiner.join((Iterable)null, ';'), is(""));
+        assertThat(StringJoiner.join(Collections.emptyList(), (char)0), is(""));
+        assertThat(StringJoiner.join(Collections.emptyList(), ';'), is(""));
+        assertThat(StringJoiner.join(Arrays.asList("a", "b", "c"), (char)0), is("abc"));
+        assertThat(StringJoiner.join(Arrays.asList("a", "b", "c"), ';'), is("a;b;c"));
+    }
+
+    @Test
+    public void join_iteratorWithStringSeparator() {
+        assertThat(StringJoiner.join((Iterator)null, ""), is(""));
+        assertThat(StringJoiner.join((Iterator)null, ";"), is(""));
+        assertThat(StringJoiner.join(Collections.emptyIterator(), ""), is(""));
+        assertThat(StringJoiner.join(Collections.emptyIterator(), ";"), is(""));
+        assertThat(StringJoiner.join(Arrays.asList("a", "b", "c").iterator(), ""), is("abc"));
+        assertThat(StringJoiner.join(Arrays.asList("a", "b", "c").iterator(), ";"), is("a;b;c"));
+    }
+
+    @Test
+    public void join_iteratorWithCharSeparator() {
+        assertThat(StringJoiner.join((Iterator)null, (char)0), is(""));
+        assertThat(StringJoiner.join((Iterator)null, ';'), is(""));
+        assertThat(StringJoiner.join(Collections.emptyIterator(), (char)0), is(""));
+        assertThat(StringJoiner.join(Collections.emptyIterator(), ';'), is(""));
+        assertThat(StringJoiner.join(Arrays.asList("a", "b", "c").iterator(), (char)0), is("abc"));
+        assertThat(StringJoiner.join(Arrays.asList("a", "b", "c").iterator(), ';'), is("a;b;c"));
+    }
 }

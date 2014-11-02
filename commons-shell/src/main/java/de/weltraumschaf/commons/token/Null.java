@@ -15,7 +15,7 @@ package de.weltraumschaf.commons.token;
  * Represents a null value.
  * <p>
  * Used instead of {@code null} to prevent null pointer exceptions.
- * Implemented as singleton w/o any state.
+ * Implemented as singleton w/o any state, so thread safe.
  * </p>
  *
  * @since 1.0.0
@@ -24,9 +24,9 @@ package de.weltraumschaf.commons.token;
 public final class Null {
 
     /**
-     * The only instance.
+     * The only reusable instance.
      */
-    private static final Null INSTANCE = new Null();
+    public static final Null NULL = new Null();
 
     /**
      * Hidden to prevent multiple instances.
@@ -38,9 +38,11 @@ public final class Null {
     /**
      * Getter to obtain the instance.
      *
+     * @deprecated Use {@link #NULL} instead.
      * @return always same instance
      */
+    @Deprecated
     public static Null getInstance() {
-        return INSTANCE;
+        return NULL;
     }
 }

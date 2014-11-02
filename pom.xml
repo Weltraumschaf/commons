@@ -116,19 +116,6 @@
             <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
             </plugin>
-
-            <plugin>
-                <!-- http://wiki.netbeans.org/MavenCodeCoverage -->
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>**/ExitCodeImpl.class</exclude>
-                        <exclude>**/ApplicationException.class</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 

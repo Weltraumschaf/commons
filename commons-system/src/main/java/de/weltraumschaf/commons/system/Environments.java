@@ -84,7 +84,7 @@ public final class Environments {
 
         @Override
         public String get(final Names name) {
-            return get(name.getPropertyName());
+            return get(name.getName());
         }
 
         @Override
@@ -100,90 +100,82 @@ public final class Environments {
     }
 
     /**
-     * Some common names provided by the JVM.
-     *
-     * FIXME Remove this. Has nothing to do with env. Are system properties.
-     * @deprecated Will be remove in next version.
+     * Some common environment variable names.
+     * <p>
+     * These environment variables need not be defined necessarily.
+     * </p>
      */
-    @Deprecated
     public static enum Names {
 
         /**
-         * Character that separates components of a file path.
-         * <p>
-         * This is “/” on UNIX and “\” on Windows.
-         * </p>
+         * Maven home directory such as {@code /Users/johndoe/.m2}.
          */
-        FILE_SEPARATOR("file.separator"),
+        M2("M2"),
         /**
-         * Path used to find directories and JAR archives containing class files.
-         * <p>
-         * Elements of the class path are separated by a platform-specific character specified in the path.separator
-         * property.
-         * </p>
+         * Maven repository directory such as {@code /Users/johndoe/.m2/repository}.
          */
-        CLASS_PATH("java.class.path"),
+        M2_REPO("M2_REPO"),
         /**
-         * Installation directory for Java Runtime Environment (JRE).
+         * Maen options.
          */
-        JAVA_HOME("java.home"),
+        MAVEN_OPTS("MAVEN_OPTS"),
         /**
-         * JRE vendor name.
+         * Home direcotry of Java.
          */
-        JAVA_VENDOR("java.vendor"),
+        JAVA_HOME("JAVA_HOME"),
         /**
-         * JRE vendor URL.
+         * Systems CLI pager (e.g. more/less).
          */
-        JAVA_VENDOR_URL("java.vendor.url"),
+        PAGER("PAGER"),
         /**
-         * JRE version number.
+         * Current user.
          */
-        JAVA_VERSION("java.version"),
+        USER("USER"),
         /**
-         * Sequence used by operating system to separate lines in text files.
+         * Home directory of current user.
          */
-        LINE_SEPARATOR("line.separator"),
+        HOME("HOME"),
         /**
-         * Operating system architecture.
+         * Path variable of current user.
          */
-        OS_ARCH("os.arch"),
+        PATH("PATH"),
         /**
-         * Operating system name.
+         * Current working direcotry.
          */
-        OS_NAME("os.name"),
+        PWD("PWD"),
         /**
-         * Operating system version.
+         * Language setting of current user.
          */
-        OS_VERSION("os.version"),
+        LANGUAGE("LANGUAGE"),
         /**
-         * Path separator character used in java.class.path.
+         * Lang setting of current user.
          */
-        OS_PATH_SEPARATOR("path.separator"),
+        LANG("LANG"),
         /**
-         * User working directory.
+         * Default shell of current user.
          */
-        USER_DIR("user.dir"),
+        SHELL("SHELL"),
         /**
-         * User home directory.
+         * Default terminal of current user.
          */
-        USER_HOME("user.home"),
+        TERM("TERM"),
         /**
-         * User account name.
+         * Temporary directory.
          */
-        USER_NAME("user.name");
+        TMPDIR("TMPDIR");
 
         /**
          * The property name.
          */
-        private final String propertyName;
+        private final String envVarName;
 
         /**
          * Dedicated constructor.
          *
-         * @param propertyName must not be {@code null} or empty.
+         * @param envVarName must not be {@code null} or empty.
          */
-        private Names(final String propertyName) {
-            this.propertyName = Validate.notEmpty(propertyName, "propertyName");
+        private Names(final String envVarName) {
+            this.envVarName = Validate.notEmpty(envVarName, "envVarName");
         }
 
         /**
@@ -191,13 +183,13 @@ public final class Environments {
          *
          * @return never {@code null} or empty
          */
-        public String getPropertyName() {
-            return propertyName;
+        public String getName() {
+            return envVarName;
         }
 
         @Override
         public String toString() {
-            return getPropertyName();
+            return getName();
         }
 
     }

@@ -25,6 +25,7 @@ public final class Environments {
      */
     private Environments() {
         super();
+        throw new UnsupportedOperationException("Constructor must not be called by reflection!");
     }
 
     /**

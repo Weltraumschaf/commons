@@ -11,6 +11,7 @@
  */
 package de.weltraumschaf.commons.system;
 
+import de.weltraumschaf.commons.system.Environments.Names;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import org.junit.Test;
@@ -57,8 +58,25 @@ public class EnvironmentsTest {
         assertThat(sut.get("_commons__unknown__", "default"), is(equalTo("default")));
     }
 
+    @Test
+    public void getByName() {
+        assertThat(sut.get(Names.SHELL), is(equalTo("/bin/bash")));
+    }
+
+    @Test
+    public void getByName_withFallback() {
+        assertThat(sut.get(Names.SHELL, "default"), is(equalTo("/bin/bash")));
+    }
+
     @Test(expected = NullPointerException.class)
     public void getByString_fallbackMustNotBeNull() {
         sut.get("SHELL", null);
+    }
+
+    @Test
+    public void allNamesAreThemSelves() {
+        for (final Names name : Names.values()) {
+            assertThat(name.name(), is(name.getName()));
+        }
     }
 }

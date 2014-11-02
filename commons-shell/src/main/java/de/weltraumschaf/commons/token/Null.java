@@ -11,6 +11,8 @@
  */
 package de.weltraumschaf.commons.token;
 
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * Represents a null value.
  * <p>
@@ -21,6 +23,7 @@ package de.weltraumschaf.commons.token;
  * @since 1.0.0
  * @author "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
+@ThreadSafe
 public final class Null {
 
     /**

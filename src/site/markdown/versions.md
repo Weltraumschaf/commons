@@ -122,5 +122,6 @@
 ## Version 1.1.4
 
 - More unit tests.
+- Introduce JCIP annotatios.
 
 [junit]:    http://www.junit.org/

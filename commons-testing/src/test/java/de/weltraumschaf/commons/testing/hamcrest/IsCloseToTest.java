@@ -17,6 +17,8 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static de.weltraumschaf.commons.testing.hamcrest.IsCloseTo.closeTo;
 import static org.hamcrest.Matchers.not;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 /**
  * Tests for {@link IsCloseTo}.
@@ -25,9 +27,13 @@ import static org.hamcrest.Matchers.not;
  */
 public class IsCloseToTest {
 
+    @Rule
+    //CHECKSTYLE:OFF
+    public final ExpectedException thrown = ExpectedException.none();
+    //CHECKSTYLE:ON
+
     @Test
-    public void closeTo_() {
-        assertThat(96L, is(not(closeTo(100L, 3L))));
+    public void closeTo_matches() {
         assertThat(97L, is(closeTo(100L, 3L)));
         assertThat(98L, is(closeTo(100L, 3L)));
         assertThat(99L, is(closeTo(100L, 3L)));
@@ -35,7 +41,26 @@ public class IsCloseToTest {
         assertThat(101L, is(closeTo(100L, 3L)));
         assertThat(102L, is(closeTo(100L, 3L)));
         assertThat(103L, is(closeTo(100L, 3L)));
-        assertThat(104L, is(not(closeTo(100L, 3L))));
+    }
+
+    @Test
+    public void closeto_matchesNotLowerBound() {
+        try {
+            assertThat(96L, is(closeTo(100L, 3L)));
+        } catch(final AssertionError ex) {
+            assertThat(ex.getMessage(),
+                is("\nExpected: is a numeric value within <3L> of <100L>\n     but: <96L> differed by <1.0>"));
+        }
+    }
+
+    @Test
+    public void closeto_matchesNotUpperBound() {
+        try {
+            assertThat(104L, is(closeTo(100L, 3L)));
+        } catch(final AssertionError ex) {
+            assertThat(ex.getMessage(),
+                is("\nExpected: is a numeric value within <3L> of <100L>\n     but: <104L> differed by <1.0>"));
+        }
     }
 
 }

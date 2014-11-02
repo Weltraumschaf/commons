@@ -43,6 +43,7 @@
         <sonar.language>java</sonar.language>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <!-- FIXME This crap does not work! -->
         <sonar.exclusions>${jacoco.exclude.1}:${jacoco.exclude.2}</sonar.exclusions>
 
         <maven.version>3.0.3</maven.version>

@@ -85,12 +85,12 @@ abstract class BaseToken<T> implements Token {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hashCode(type, position, raw, value);
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public final boolean equals(final Object obj) {
         if (!(obj instanceof BaseToken)) {
             return false;
         }
@@ -103,7 +103,7 @@ abstract class BaseToken<T> implements Token {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return Objects.toStringHelper(this)
                 .add("type", type)
                 .add("position", position)

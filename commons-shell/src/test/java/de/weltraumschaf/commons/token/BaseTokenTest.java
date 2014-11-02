@@ -17,6 +17,7 @@ import static org.junit.Assert.assertThat;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 /**
  * Tests for {@link BaseToken}.
@@ -82,6 +83,16 @@ public class BaseTokenTest {
     @Test
     public void getValue() {
         assertThat(sut.getValue(), is(equalTo("snafu")));
+    }
+
+    @Test
+    public void testToString() {
+        assertThat(sut.toString(), is(equalTo("BaseTokenStub{type=STRING, position=(0, 0), raw=foobar, value=snafu}")));
+    }
+
+    @Test
+    public void equalsContract() {
+        EqualsVerifier.forClass(BaseToken.class).verify();
     }
 
     private static final class BaseTokenStub<T> extends BaseToken<T> {

@@ -44,9 +44,9 @@
         <sonar.language>java</sonar.language>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <sonar.doxygen.generateDocumentation>true</sonar.doxygen.generateDocumentation>
+        <sonar.doxygen.generateDocumentation>enable</sonar.doxygen.generateDocumentation>
         <!-- FIXME This crap does not work! -->
-        <sonar.exclusions>${jacoco.exclude.1}:${jacoco.exclude.2}:jacoco.exclude.3</sonar.exclusions>
+        <sonar.exclusions>${jacoco.exclude.1}:${jacoco.exclude.2}:${jacoco.exclude.3}</sonar.exclusions>
 
         <maven.version>3.0.3</maven.version>
         <maven.pmd.rulesetfiles>${project.basedir}/src/main/config/pmd.xml</maven.pmd.rulesetfiles>

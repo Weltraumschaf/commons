@@ -43,7 +43,7 @@
         <sonar.language>java</sonar.language>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <sonar.jacoco.excludes>${jacoco.exclude.1}:${jacoco.exclude.2}</sonar.jacoco.excludes>
+        <sonar.coverage.exclusions>${jacoco.exclude.1}:${jacoco.exclude.2}</sonar.coverage.exclusions>
 
         <maven.version>3.0.3</maven.version>
         <maven.pmd.rulesetfiles>${project.basedir}/src/main/config/pmd.xml</maven.pmd.rulesetfiles>

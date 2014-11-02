@@ -16,6 +16,7 @@ import de.weltraumschaf.commons.system.Exitable;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.util.concurrent.Callable;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import static org.mockito.Mockito.*;
@@ -27,7 +28,7 @@ import static org.mockito.Mockito.*;
  */
 public class InvokableAdapterTest {
 
-    private final String[] args = new String[] {"foo", "bar", "baz"};
+    private final String[] args = new String[]{"foo", "bar", "baz"};
 
     private final InvokableAdapter sut = new InvokableAdapter(args) {
 
@@ -38,7 +39,8 @@ public class InvokableAdapterTest {
 
     };
 
-    @Test public void mainWithCustomDefaultIo() throws Exception {
+    @Test
+    public void mainWithCustomDefaultIo() throws Exception {
         final IOStreams io = IOStreams.newDefault();
         final Invokable app = mock(Invokable.class);
 
@@ -49,7 +51,8 @@ public class InvokableAdapterTest {
         verify(app, times(1)).exit(0);
     }
 
-    @Test public void mainWithDefaultIo() throws Exception {
+    @Test
+    public void mainWithDefaultIo() throws Exception {
         final Invokable app = mock(Invokable.class);
 
         InvokableAdapter.main(app);
@@ -59,13 +62,14 @@ public class InvokableAdapterTest {
         verify(app, times(1)).exit(0);
     }
 
-    @Test public void mainWithExceptionInInit() throws Exception {
+    @Test
+    public void mainWithExceptionInInit() throws Exception {
         final Invokable app = mock(Invokable.class);
         final String msg = "Error message";
         doThrow(new RuntimeException(msg)).when(app).init();
         final IOStreams io = new IOStreams(mock(InputStream.class),
-                                           mock(PrintStream.class),
-                                           mock(PrintStream.class));
+                mock(PrintStream.class),
+                mock(PrintStream.class));
 
         InvokableAdapter.main(app, io);
         verify(app, times(1)).setIoStreams(io);
@@ -75,13 +79,14 @@ public class InvokableAdapterTest {
         verify(app, times(1)).exit(-1);
     }
 
-    @Test public void mainWithExceptionInExecute() throws Exception {
+    @Test
+    public void mainWithExceptionInExecute() throws Exception {
         final Invokable app = mock(Invokable.class);
         final String msg = "Error message";
         doThrow(new RuntimeException(msg)).when(app).execute();
         final IOStreams io = new IOStreams(mock(InputStream.class),
-                                           mock(PrintStream.class),
-                                           mock(PrintStream.class));
+                mock(PrintStream.class),
+                mock(PrintStream.class));
 
         InvokableAdapter.main(app, io);
         verify(app, times(1)).setIoStreams(io);
@@ -91,19 +96,22 @@ public class InvokableAdapterTest {
         verify(app, times(1)).exit(-1);
     }
 
-    @Test public void getArgs() {
+    @Test
+    public void getArgs() {
         assertArrayEquals(args, sut.getArgs());
         assertNotSame(args, sut.getArgs());
     }
 
-    @Test public void getAndSetIo() throws UnsupportedEncodingException {
+    @Test
+    public void getAndSetIo() throws UnsupportedEncodingException {
         assertNull(sut.getIoStreams());
         final IOStreams io = IOStreams.newDefault();
         sut.setIoStreams(io);
         assertSame(io, sut.getIoStreams());
     }
 
-    @Test public void callExiter() {
+    @Test
+    public void callExiter() {
         final Exitable exiter = mock(Exitable.class);
         sut.setExiter(exiter);
         InvokableAdapter.main(sut);
@@ -114,7 +122,8 @@ public class InvokableAdapterTest {
         verify(exiter, times(1)).exit(code);
     }
 
-    @Test public void registerShutdownHooksOnInit() {
+    @Test
+    public void registerShutdownHooksOnInit() {
         final Runtime runtime = mock(Runtime.class);
         final ShutDownHook hook = mock(ShutDownHook.class);
         final InvokableAdapter otherSut = new InvokableAdapter(args, runtime, hook) {
@@ -130,12 +139,28 @@ public class InvokableAdapterTest {
         verify(runtime, times(1)).addShutdownHook(hook);
     }
 
-
-    @Test public void registerShutDownHook() {
-        final Runtime runtime = mock(Runtime.class);
+    @Test
+    public void registerShutDownHook_runnable() {
         final ShutDownHook hook = mock(ShutDownHook.class);
         final Runnable callback = mock(Runnable.class);
-        final InvokableAdapter otherSut = new InvokableAdapter(args, runtime, hook) {
+        final InvokableAdapter otherSut = new InvokableAdapter(args, mock(Runtime.class), hook) {
+
+            @Override
+            public void execute() throws Exception {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+        };
+
+        otherSut.registerShutdownHook(callback);
+        verify(hook, times(1)).register(callback);
+    }
+
+    @Test
+    public void registerShutDownHook_callable() {
+        final ShutDownHook hook = mock(ShutDownHook.class);
+        final Callable<Void> callback = mock(Callable.class);
+        final InvokableAdapter otherSut = new InvokableAdapter(args, mock(Runtime.class), hook) {
 
             @Override
             public void execute() throws Exception {

@@ -11,8 +11,12 @@
  */
 package de.weltraumschaf.commons.string;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.either;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.Rule;
@@ -26,7 +30,21 @@ import org.junit.rules.ExpectedException;
 public class StringEscapeTest {
 
     @Rule
+    //CHECKSTYLE:OFF
     public final ExpectedException thrown = ExpectedException.none();
+    //CHECKSTYLE:ON
+
+    @Test
+    public void invokeConstructorByReflectionThrowsException() throws Exception {
+        assertThat(StringEscape.class.getDeclaredConstructors().length, is(1));
+
+        final Constructor<StringEscape> ctor = StringEscape.class.getDeclaredConstructor();
+        ctor.setAccessible(true);
+
+        thrown.expect(either(instanceOf(UnsupportedOperationException.class))
+                .or(instanceOf(InvocationTargetException.class)));
+        ctor.newInstance();
+    }
 
     @Test(expected = NullPointerException.class)
     public void escapeXml_nullGiven() {

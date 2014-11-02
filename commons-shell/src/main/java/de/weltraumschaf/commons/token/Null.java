@@ -38,14 +38,4 @@ public final class Null {
         super();
     }
 
-    /**
-     * Getter to obtain the instance.
-     *
-     * @deprecated Use {@link #NULL} instead.
-     * @return always same instance
-     */
-    @Deprecated
-    public static Null getInstance() {
-        return NULL;
-    }
 }

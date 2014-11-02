@@ -119,9 +119,12 @@
 - Fixes in documentation.
 - Fix Sonar warnings.
 
-## Version 1.1.4
+## Version 2.0.0
 
 - More unit tests.
 - Introduce JCIP annotatios.
+- Remove deprecated API.
+- Introduce some common environment variable names.
+- Change token implementation so that they convert their value.
 
 [junit]:    http://www.junit.org/

@@ -35,7 +35,7 @@ public final class Concurrent {
      * @return new instance
      */
     public static <E> Stack<E> newStack() {
-        return new ConcurrentStack<E>();
+        return new ConcurrentStack<>();
     }
 
     /**
@@ -45,7 +45,7 @@ public final class Concurrent {
      * @return new instance
      */
     public static <E> Queue<E> newQueue() {
-        return new ConcurrentQueue<E>();
+        return new ConcurrentQueue<>();
     }
 
 }

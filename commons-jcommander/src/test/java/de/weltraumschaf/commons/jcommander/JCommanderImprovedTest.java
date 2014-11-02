@@ -9,9 +9,9 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
-
 package de.weltraumschaf.commons.jcommander;
 
+import com.beust.jcommander.Parameter;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -24,7 +24,7 @@ import org.junit.Test;
  */
 public class JCommanderImprovedTest {
 
-    private final JCommanderImproved<Object> sut = new JCommanderImproved<>("name", Object.class);
+    private final JCommanderImproved<Options> sut = new JCommanderImproved<>("name", Options.class);
 
     @Test
     public void spaces() {
@@ -52,16 +52,32 @@ public class JCommanderImprovedTest {
     }
 
     @Test
-    public void helpMessage() {
+    public void helpMessage_withoutOptions() {
         sut.gatherOptions(new String[0]);
-        assertThat(sut.helpMessage("foo", "bar" ,"baz"), is(equalTo(
-                "Usage: name foo\n"
-                + "\n"
-                + "bar\n"
-                + "\n"
-                + "Example\n"
-                + "\n"
-                + "  baz\n"
-                + "\n")));
+        assertThat(sut.helpMessage("usage", "descriptions", "example"), is(equalTo(
+              "Usage: name usage\n"
+            + "\n"
+            + "descriptions\n"
+            + "\n"
+            + "Options\n"
+            + "\n"
+            + "  bar                 bar option\n"
+            + "  foo                 foo option\n"
+            + "  baz                 baz option\n"
+            + "\n"
+            + "Example\n"
+            + "\n"
+            + "  example\n"
+            + "\n")));
+    }
+
+    static final class Options {
+
+        @Parameter(names = "foo", description = "foo option")
+        private String foo;
+        @Parameter(names = "bar", description = "bar option")
+        private String bar;
+        @Parameter(names = "baz", description = "baz option")
+        private String baz;
     }
 }

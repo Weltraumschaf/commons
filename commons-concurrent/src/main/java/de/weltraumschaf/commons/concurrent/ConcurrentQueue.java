@@ -13,6 +13,7 @@ package de.weltraumschaf.commons.concurrent;
 
 import de.weltraumschaf.commons.guava.Objects;
 import java.util.concurrent.atomic.AtomicReference;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * Queue implemented with compare-and-set algorithm from Brian Goetz.
@@ -29,6 +30,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @param <E> type of queue entries
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
+@ThreadSafe
 final class ConcurrentQueue<E> implements Queue<E> {
 
     /**

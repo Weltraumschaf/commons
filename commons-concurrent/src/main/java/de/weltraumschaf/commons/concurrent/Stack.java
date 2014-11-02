@@ -12,6 +12,8 @@
 
 package de.weltraumschaf.commons.concurrent;
 
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * Interface for a stack (LIFO).
  *
@@ -19,6 +21,7 @@ package de.weltraumschaf.commons.concurrent;
  * @param <E> type of stack entries
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
+@ThreadSafe
 public interface Stack<E> {
 
     /**

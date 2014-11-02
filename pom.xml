@@ -37,9 +37,13 @@
         <project.build.version.source>1.7</project.build.version.source>
         <project.build.version.target>1.7</project.build.version.target>
 
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <jacoco.exclude.1>de/weltraumschaf/commons/application/ApplicationException.class</jacoco.exclude.1>
+        <jacoco.exclude.2>de/weltraumschaf/commons/system/NullExiter.class</jacoco.exclude.2>
+
         <sonar.language>java</sonar.language>
+        <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
+        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+        <sonar.jacoco.excludes>${jacoco.exclude.1}:${jacoco.exclude.2}</sonar.jacoco.excludes>
 
         <maven.version>3.0.3</maven.version>
         <maven.pmd.rulesetfiles>${project.basedir}/src/main/config/pmd.xml</maven.pmd.rulesetfiles>
@@ -123,8 +127,8 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <exclude>de/weltraumschaf/commons/application/ApplicationException.class</exclude>
-                        <exclude>de/weltraumschaf/commons/system/NullExiter.class</exclude>
+                        <exclude>${jacoco.exclude.1}</exclude>
+                        <exclude>${jacoco.exclude.2}</exclude>
                     </excludes>
                 </configuration>
             </plugin>

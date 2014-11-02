@@ -37,8 +37,8 @@
         <project.build.version.source>1.7</project.build.version.source>
         <project.build.version.target>1.7</project.build.version.target>
 
-        <jacoco.exclude.1>**/ApplicationException.java</jacoco.exclude.1>
-        <jacoco.exclude.2>**/NullExiter.java</jacoco.exclude.2>
+        <jacoco.exclude.1>**/ApplicationException.*</jacoco.exclude.1>
+        <jacoco.exclude.2>**/NullExiter.*</jacoco.exclude.2>
 
         <sonar.language>java</sonar.language>
         <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>

@@ -64,9 +64,12 @@ public class CapturingPrintStreamTest {
     }
 
     @Test
-    @Ignore("Throws java.lang.IllegalStateException.")
     public void close() {
+        delegate = mock(PrintStream.class); // Use mock because spy throws IllegalStateException and don't know why.
+        sut.setDelegate(delegate);
+
         sut.close();
+
         verify(delegate, times(1)).close();
     }
 

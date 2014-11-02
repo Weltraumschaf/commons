@@ -12,9 +12,13 @@
 
 package de.weltraumschaf.commons.token;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import static org.hamcrest.Matchers.*;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
+import org.junit.Test;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 /**
  * Tests for {@link Tokens}.
@@ -23,7 +27,24 @@ import static org.junit.Assert.assertThat;
  */
 public class TokensTest {
 
+    @Rule
+    //CHECKSTYLE:OFF
+    public final ExpectedException thrown = ExpectedException.none();
+    //CHECKSTYLE:ON
+
     private final Position pos = new Position(1, 1);
+
+    @Test
+    public void invokeConstructorByReflectionThrowsException() throws Exception {
+        assertThat(Tokens.class.getDeclaredConstructors().length, is(1));
+
+        final Constructor<Tokens> ctor = Tokens.class.getDeclaredConstructor();
+        ctor.setAccessible(true);
+
+        thrown.expect(either(instanceOf(UnsupportedOperationException.class))
+                .or(instanceOf(InvocationTargetException.class)));
+        ctor.newInstance();
+    }
 
     @Test
     public void newBooleanToken() {

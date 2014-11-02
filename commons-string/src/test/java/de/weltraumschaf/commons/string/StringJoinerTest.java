@@ -11,13 +11,18 @@
  */
 package de.weltraumschaf.commons.string;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
+import static org.hamcrest.Matchers.either;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Tests for {@link StringJoiner}.
@@ -25,6 +30,23 @@ import org.junit.Test;
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class StringJoinerTest {
+
+    @Rule
+    //CHECKSTYLE:OFF
+    public final ExpectedException thrown = ExpectedException.none();
+    //CHECKSTYLE:ON
+
+    @Test
+    public void invokeConstructorByReflectionThrowsException() throws Exception {
+        assertThat(StringJoiner.class.getDeclaredConstructors().length, is(1));
+
+        final Constructor<StringJoiner> ctor = StringJoiner.class.getDeclaredConstructor();
+        ctor.setAccessible(true);
+
+        thrown.expect(either(instanceOf(UnsupportedOperationException.class))
+                .or(instanceOf(InvocationTargetException.class)));
+        ctor.newInstance();
+    }
 
     @Test
     public void join_genericElements() {

@@ -12,9 +12,14 @@
 
 package de.weltraumschaf.commons.string;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertThat;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 /**
  * Tests for {@link Strings}.
@@ -22,6 +27,23 @@ import static org.hamcrest.Matchers.*;
  * @author Sven Strittmatter <weltraumschaf@googlemail.com>
  */
 public class StringsTest {
+
+    @Rule
+    //CHECKSTYLE:OFF
+    public final ExpectedException thrown = ExpectedException.none();
+    //CHECKSTYLE:ON
+
+    @Test
+    public void invokeConstructorByReflectionThrowsException() throws Exception {
+        assertThat(Strings.class.getDeclaredConstructors().length, is(1));
+
+        final Constructor<Strings> ctor = Strings.class.getDeclaredConstructor();
+        ctor.setAccessible(true);
+
+        thrown.expect(either(instanceOf(UnsupportedOperationException.class))
+                .or(instanceOf(InvocationTargetException.class)));
+        ctor.newInstance();
+    }
 
     @Test
     public void nullAwareTrim() {

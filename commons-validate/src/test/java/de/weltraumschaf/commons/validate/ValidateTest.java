@@ -11,8 +11,12 @@
  */
 package de.weltraumschaf.commons.validate;
 
-import static org.hamcrest.CoreMatchers.is;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import static org.hamcrest.CoreMatchers.sameInstance;
+import static org.hamcrest.Matchers.either;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.Rule;
@@ -26,7 +30,21 @@ import org.junit.rules.ExpectedException;
 public class ValidateTest {
 
     @Rule
+    //CHECKSTYLE:OFF
     public final ExpectedException thrown = ExpectedException.none();
+    //CHECKSTYLE:ON
+
+    @Test
+    public void invokeConstructorByReflectionThrowsException() throws Exception {
+        assertThat(Validate.class.getDeclaredConstructors().length, is(1));
+
+        final Constructor<Validate> ctor = Validate.class.getDeclaredConstructor();
+        ctor.setAccessible(true);
+
+        thrown.expect(either(instanceOf(UnsupportedOperationException.class))
+                .or(instanceOf(InvocationTargetException.class)));
+        ctor.newInstance();
+    }
 
     @Test
     public void notNull_nullReferenceThrowsException_nullName() {
@@ -134,7 +152,6 @@ public class ValidateTest {
         thrown.expectMessage("Parameter 'foo' must be greater or equal than 5 (was 4)!");
         Validate.greaterThanOrEqual(4, 5, "foo");
     }
-
 
     @Test
     public void greaterThan_long_greaterThanReturnsReference() {

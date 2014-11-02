@@ -9,7 +9,6 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
  */
-
 package de.weltraumschaf.commons.system;
 
 import java.lang.reflect.Constructor;
@@ -27,12 +26,12 @@ import org.junit.rules.ExpectedException;
  */
 public class EnvironmentsTest {
 
-    private final Environments.Env sut = Environments.defaultEnv();
-
     @Rule
     //CHECKSTYLE:OFF
     public final ExpectedException thrown = ExpectedException.none();
     //CHECKSTYLE:ON
+
+    private final Environments.Env sut = Environments.defaultEnv();
 
     @Test
     public void invokeConstructorByReflectionThrowsException() throws Exception {

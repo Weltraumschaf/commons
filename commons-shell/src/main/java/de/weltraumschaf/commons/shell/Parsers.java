@@ -24,6 +24,7 @@ public final class Parsers {
      */
     private Parsers() {
         super();
+        throw new UnsupportedOperationException("Constructor must not be called by reflection!");
     }
 
     /**
@@ -44,7 +45,7 @@ public final class Parsers {
      * @return new instance
      */
     public static Parser newParser(final Scanner s, final LiteralCommandMap m) {
-        return newParser(Scanners.newScanner(m), new NullCommandVerifier(), m);
+        return newParser(s, new NullCommandVerifier(), m);
     }
 
     /**

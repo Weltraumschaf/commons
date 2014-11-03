@@ -159,6 +159,7 @@ public class InvokableAdapterTest {
     @Test
     public void registerShutDownHook_callable() {
         final ShutDownHook hook = mock(ShutDownHook.class);
+        @SuppressWarnings("unchecked")
         final Callable<Void> callback = mock(Callable.class);
         final InvokableAdapter otherSut = new InvokableAdapter(args, mock(Runtime.class), hook) {
 

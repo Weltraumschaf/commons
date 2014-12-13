@@ -11,9 +11,9 @@ duplicated boiler plate code. Further goal  is to have no external dependencies.
 Only  external  dependencies  are   [JUnit][junit]  and  [Mockito][mockito]  for
 testing and [Findbugs][findbugs] annotations to suppress some warnings.
 
-## Usage
+## Installation
 
-Add this <code>&lt;dependency&gt;</code> to your [Maven][maven] pom.xml:
+Add this <code>&lt;dependency&gt;</code> to your [Maven][mvn] pom.xml:
 
     <dependencies>
 
@@ -53,7 +53,8 @@ To receive the keys type:
     $> gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 45585598
 
 [sonatype]: http://maven.apache.org/guides/mini/guide-central-repository-upload.html
-[maven]:    http://maven.apache.org/
 [junit]:    http://www.junit.org/
 [mockito]:  http://code.google.com/p/mockito/
 [findbugs]: http://findbugs.sourceforge.net/
+[mvn]:      http://maven.apache.org/
+[mvn-repo]: http://search.maven.org/#search|gav|1|g:%22de.weltraumschaf.commons

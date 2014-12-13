@@ -11,11 +11,14 @@
  */
 package de.weltraumschaf.commons.testing;
 
+import java.io.IOError;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.hamcrest.CoreMatchers.containsString;
 import org.hamcrest.Matcher;
@@ -89,10 +92,8 @@ public final class CapturedOutput implements TestRule {
 
     /**
      * Creates a capturing rule with platform encoding.
-     *
-     * @throws UnsupportedEncodingException if the platform encoding is not supported
      */
-    public CapturedOutput() throws UnsupportedEncodingException {
+    public CapturedOutput() {
         this(Charset.defaultCharset().name());
     }
 
@@ -100,11 +101,14 @@ public final class CapturedOutput implements TestRule {
      * Dedicated constructor.
      *
      * @param encoding must not be {@code null} or empty
-     * @throws UnsupportedEncodingException if the platform encoding is not supported
      */
-    public CapturedOutput(final String encoding) throws UnsupportedEncodingException {
-        out = new CapturingPrintStream(encoding);
-        err = new CapturingPrintStream(encoding);
+    public CapturedOutput(final String encoding) {
+        try {
+            out = new CapturingPrintStream(encoding);
+            err = new CapturingPrintStream(encoding);
+        } catch (UnsupportedEncodingException ex) {
+            throw new IOError(ex);
+        }
     }
 
     /**

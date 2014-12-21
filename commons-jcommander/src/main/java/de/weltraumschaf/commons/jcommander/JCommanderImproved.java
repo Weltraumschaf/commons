@@ -65,7 +65,7 @@ public final class JCommanderImproved<O> {
     /**
      * Parses the command line options.
      */
-    private final JCommander optionsParser = new JCommander();
+    private JCommander optionsParser = new JCommander();
     /**
      * Class for type of options model.
      */
@@ -93,24 +93,6 @@ public final class JCommanderImproved<O> {
     }
 
     /**
-     * Creates an option bean.
-     * <p>
-     * Throws an {@link IllegalArgumentException} if the options type can't be instantiated.
-     * </p>
-     *
-     * @param <O> type of options bean
-     * @param optionsType must not be {@code null}
-     * @return never {@code null}, always new instance
-     */
-    private static <O> O createOptions(final Class<O> optionsType) {
-        try {
-            return optionsType.newInstance();
-        } catch (final InstantiationException | IllegalAccessException ex) {
-            throw new IllegalArgumentException(ex.getMessage(), ex);
-        }
-    }
-
-    /**
      * Parses the given arguments and return a ready set up options bean.
      *
      * @param args must not be {@code null}
@@ -119,6 +101,7 @@ public final class JCommanderImproved<O> {
     public O gatherOptions(final String[] args) {
         final O opts = createOptions(optionsType);
 
+        reset();
         optionsParser.addObject(opts);
         optionsParser.parse(Validate.notNull(args, "args"));
 
@@ -149,6 +132,7 @@ public final class JCommanderImproved<O> {
         Validate.notNull(descriptions, "descriptions");
         Validate.notNull(example, "example");
 
+        reset();
         final String indent = "  ";
         final StringBuilder help = new StringBuilder();
 
@@ -162,6 +146,11 @@ public final class JCommanderImproved<O> {
 
         if (!descriptions.trim().isEmpty()) {
             help.append(descriptions.trim()).append(DEFAULT_NEW_LINE);
+        }
+
+        if (optionsParser.getParameters().isEmpty()) {
+            // This adds the filed escriptions first time.
+            gatherOptions(new String[0]);
         }
 
         final List<ParameterDescription> parameters = optionsParser.getParameters();
@@ -186,8 +175,8 @@ public final class JCommanderImproved<O> {
 
         if (!example.trim().isEmpty()) {
             help.append("Example").append(DEFAULT_NEW_LINE)
-                .append(DEFAULT_NEW_LINE)
-                .append(indent).append(example.trim()).append(DEFAULT_NEW_LINE);
+                    .append(DEFAULT_NEW_LINE)
+                    .append(indent).append(example.trim()).append(DEFAULT_NEW_LINE);
         }
 
         help.append(DEFAULT_NEW_LINE);
@@ -266,5 +255,27 @@ public final class JCommanderImproved<O> {
                 .replace(
                         DEFAULT_NEW_LINE,
                         DEFAULT_NEW_LINE + spaces(leftPadLength));
+    }
+
+    private void reset() {
+        optionsParser = new JCommander();
+    }
+
+    /**
+     * Creates an option bean.
+     * <p>
+     * Throws an {@link IllegalArgumentException} if the options type can't be instantiated.
+     * </p>
+     *
+     * @param <O> type of options bean
+     * @param optionsType must not be {@code null}
+     * @return never {@code null}, always new instance
+     */
+    private static <O> O createOptions(final Class<O> optionsType) {
+        try {
+            return optionsType.newInstance();
+        } catch (final InstantiationException | IllegalAccessException ex) {
+            throw new IllegalArgumentException(ex.getMessage(), ex);
+        }
     }
 }

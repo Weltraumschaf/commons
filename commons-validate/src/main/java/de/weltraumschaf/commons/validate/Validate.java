@@ -142,12 +142,12 @@ public final class Validate {
         if (reference <= lowerBound) {
             if (null == name) {
                 throw new NullPointerException(String.format(
-                    "Reference is not greater than lower bound: %d > %d!",
-                    reference,
-                    lowerBound));
+                        "Reference is not greater than lower bound: %d > %d!",
+                        reference,
+                        lowerBound));
             } else {
                 throw new IllegalArgumentException(
-                    String.format("Parameter '%s' must be greater than %d (was %d)!", name, lowerBound, reference));
+                        String.format("Parameter '%s' must be greater than %d (was %d)!", name, lowerBound, reference));
             }
         }
 
@@ -168,8 +168,8 @@ public final class Validate {
     /**
      * Tests that a given integer reference value is greater than or equal the given lower bound.
      * <p>
-     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given
-     * lower bound value.
+     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given lower bound
+     * value.
      * </p>
      *
      * @param reference validated reference
@@ -181,16 +181,16 @@ public final class Validate {
         if (reference < lowerBound) {
             if (null == name) {
                 throw new NullPointerException(String.format(
-                    "Reference is not less than lower bound: %d < %d!",
-                    reference,
-                    lowerBound));
+                        "Reference is not less than lower bound: %d < %d!",
+                        reference,
+                        lowerBound));
             } else {
                 throw new IllegalArgumentException(
-                    String.format(
-                        "Parameter '%s' must be greater or equal than %d (was %d)!",
-                        name,
-                        lowerBound,
-                        reference));
+                        String.format(
+                                "Parameter '%s' must be greater or equal than %d (was %d)!",
+                                name,
+                                lowerBound,
+                                reference));
             }
         }
 
@@ -224,16 +224,16 @@ public final class Validate {
         if (reference <= lowerBound) {
             if (null == name) {
                 throw new NullPointerException(String.format(
-                    "Reference is not less equal than lower bound: %d <= %d!",
-                    reference,
-                    lowerBound));
+                        "Reference is not less equal than lower bound: %d <= %d!",
+                        reference,
+                        lowerBound));
             } else {
                 throw new IllegalArgumentException(
-                    String.format(
-                        "Parameter '%s' must be greater than %d (was %d)!",
-                        name,
-                        lowerBound,
-                        reference));
+                        String.format(
+                                "Parameter '%s' must be greater than %d (was %d)!",
+                                name,
+                                lowerBound,
+                                reference));
             }
         }
 
@@ -254,8 +254,8 @@ public final class Validate {
     /**
      * Tests that a given integer reference value is greater than or equal the given lower bound.
      * <p>
-     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given
-     * lower bound value.
+     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given lower bound
+     * value.
      * </p>
      *
      * @param reference validated reference
@@ -267,16 +267,16 @@ public final class Validate {
         if (reference < lowerBound) {
             if (null == name) {
                 throw new NullPointerException(String.format(
-                    "Reference is not less than lower bound: %d < %d!",
-                    reference,
-                    lowerBound));
+                        "Reference is not less than lower bound: %d < %d!",
+                        reference,
+                        lowerBound));
             } else {
                 throw new IllegalArgumentException(
-                    String.format(
-                        "Parameter '%s' must be greater than or equal %d (was %d)!",
-                        name,
-                        lowerBound,
-                        reference));
+                        String.format(
+                                "Parameter '%s' must be greater than or equal %d (was %d)!",
+                                name,
+                                lowerBound,
+                                reference));
             }
         }
 
@@ -308,6 +308,169 @@ public final class Validate {
 
         if (!expression) {
             throw new IllegalArgumentException(message);
+        }
+    }
+
+    /**
+     * Ensures that {@code index} specifies a valid <i>element</i> in an array, list or string of size {@code size}. An
+     * element index may range from zero, inclusive, to {@code size}, exclusive.
+     *
+     * TODO: Review this method.
+     *
+     * @since 2.0
+     * @param index a user-supplied index identifying an element of an array, list or string
+     * @param size the size of that array, list or string
+     * @return the value of {@code index}
+     * @throws IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
+     * @throws IllegalArgumentException if {@code size} is negative
+     */
+    public static int checkElementIndex(int index, int size) {
+        return checkElementIndex(index, size, "index");
+    }
+
+    /**
+     * Ensures that {@code index} specifies a valid <i>element</i> in an array, list or string of size {@code size}. An
+     * element index may range from zero, inclusive, to {@code size}, exclusive.
+     *
+     * TODO: Review this method.
+     *
+     * @since 2.0
+     * @param index a user-supplied index identifying an element of an array, list or string
+     * @param size the size of that array, list or string
+     * @param desc the text to use to describe this index in an error message
+     * @return the value of {@code index}
+     * @throws IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
+     * @throws IllegalArgumentException if {@code size} is negative
+     */
+    public static int checkElementIndex(
+            int index, int size, String desc) {
+        // Carefully optimized for execution by hotspot (explanatory comment above)
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException(badElementIndex(index, size, desc));
+        }
+        return index;
+    }
+
+    /**
+     * TODO: Review this method.
+     *
+     * @since 2.0
+     * @param index
+     * @param size
+     * @param desc
+     * @return
+     */
+    private static String badElementIndex(int index, int size, String desc) {
+        if (index < 0) {
+            return format("%s (%s) must not be negative", desc, index);
+        } else if (size < 0) {
+            throw new IllegalArgumentException("negative size: " + size);
+        } else { // index >= size
+            return format("%s (%s) must be less than size (%s)", desc, index, size);
+        }
+    }
+
+    /**
+     * Substitutes each {@code %s} in {@code template} with an argument. These are matched by position - the first
+     * {@code %s} gets {@code args[0]}, etc. If there are more arguments than placeholders, the unmatched arguments will
+     * be appended to the end of the formatted message in square braces.
+     *
+     * TODO: Review this method.
+     *
+     * @param template a non-null string containing 0 or more {@code %s} placeholders.
+     * @param args the arguments to be substituted into the message template. Arguments are converted to strings using
+     * {@link String#valueOf(Object)}. Arguments can be null.
+     */
+    static String format(String template,
+            Object... args) {
+        template = String.valueOf(template); // null -> "null"
+
+        // start substituting the arguments into the '%s' placeholders
+        StringBuilder builder = new StringBuilder(
+                template.length() + 16 * args.length);
+        int templateStart = 0;
+        int i = 0;
+        while (i < args.length) {
+            int placeholderStart = template.indexOf("%s", templateStart);
+            if (placeholderStart == -1) {
+                break;
+            }
+            builder.append(template.substring(templateStart, placeholderStart));
+            builder.append(args[i++]);
+            templateStart = placeholderStart + 2;
+        }
+        builder.append(template.substring(templateStart));
+
+        // if we run out of placeholders, append the extra args in square braces
+        if (i < args.length) {
+            builder.append(" [");
+            builder.append(args[i++]);
+            while (i < args.length) {
+                builder.append(", ");
+                builder.append(args[i++]);
+            }
+            builder.append(']');
+        }
+
+        return builder.toString();
+    }
+
+    /**
+     * Ensures that {@code start} and {@code end} specify a valid <i>positions</i>
+     * in an array, list or string of size {@code size}, and are in order. A position index may range from zero to
+     * {@code size}, inclusive.
+     *
+     * TODO: Review this method.
+     *
+     * @since 2.0
+     * @param start a user-supplied index identifying a starting position in an array, list or string
+     * @param end a user-supplied index identifying a ending position in an array, list or string
+     * @param size the size of that array, list or string
+     * @throws IndexOutOfBoundsException if either index is negative or is greater than {@code size}, or if {@code end}
+     * is less than {@code start}
+     * @throws IllegalArgumentException if {@code size} is negative
+     */
+    public static void checkPositionIndexes(int start, int end, int size) {
+        // Carefully optimized for execution by hotspot (explanatory comment above)
+        if (start < 0 || end < start || end > size) {
+            throw new IndexOutOfBoundsException(badPositionIndexes(start, end, size));
+        }
+    }
+
+    /**
+     * @since 2.0
+     * @param start
+     * @param end
+     * @param size
+     * @return
+     */
+    private static String badPositionIndexes(int start, int end, int size) {
+        if (start < 0 || start > size) {
+            return badPositionIndex(start, size, "start index");
+        }
+        if (end < 0 || end > size) {
+            return badPositionIndex(end, size, "end index");
+        }
+        // end < start
+        return format("end index (%s) must not be less than start index (%s)",
+                end, start);
+    }
+
+    /**
+     * @since 2.0
+     * @param index
+     * @param size
+     * @param desc
+     * @return
+     */
+    private static String badPositionIndex(int index, int size, String desc) {
+        if (index < 0) {
+            return format("%s (%s) must not be negative", desc, index);
+        } else if (size < 0) {
+            throw new IllegalArgumentException("negative size: " + size);
+        } else { // index > size
+            return format("%s (%s) must not be greater than size (%s)",
+                    desc, index, size);
         }
     }
 }

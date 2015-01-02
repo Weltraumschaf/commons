@@ -72,7 +72,7 @@ public final class Objects {
      *   public int hashCode() {
      *     return Objects.hashCode(getX(), getY(), getZ());
      *   }}</pre>
-     *</p>
+     * </p>
      *
      * <p>
      * <strong>Warning</strong>: When a single object is supplied, the returned hash code does not equal the hash code
@@ -84,6 +84,24 @@ public final class Objects {
      */
     public static int hashCode(final Object... objects) {
         return Arrays.hashCode(objects);
+    }
+
+    /**
+     * Returns the first of two given parameters that is not {@code null}, if either is, or otherwise throws a
+     * {@link NullPointerException}.
+     *
+     * <p>
+     * <b>Note:</b> if {@code first} is represented as an {@code Optional<T>}, this can be accomplished with
+     * {@code first.or(second)}. That approach also allows for lazy evaluation of the fallback instance, using
+     * {@code first.or(Supplier)}.
+     *
+     * @return {@code first} if {@code first} is not {@code null}, or {@code second} if {@code first} is {@code null}
+     * and {@code second} is not {@code null}
+     * @throws NullPointerException if both {@code first} and {@code second} were {@code null}
+     * @since 2.0
+     */
+    public static <T> T firstNonNull(final T first, final T second) {
+        return first != null ? first : Validate.notNull(second);
     }
 
     /**
@@ -228,8 +246,8 @@ public final class Objects {
         /**
          * Configures the {@link ToStringHelper} so {@link #toString()} will ignore properties with null value.
          *
-         * The order of calling this method, relative to the {@code add()}/{@code addValue()} methods,
-         * is not significant.
+         * The order of calling this method, relative to the {@code add()}/{@code addValue()} methods, is not
+         * significant.
          *
          * @since 12.0
          * @return self for method chaining
@@ -508,6 +526,7 @@ public final class Objects {
          * Value class to hold properties.
          */
         private static final class ValueHolder {
+
             /**
              * Name of property.
              */

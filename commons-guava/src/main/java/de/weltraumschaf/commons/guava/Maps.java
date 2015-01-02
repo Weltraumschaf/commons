@@ -16,6 +16,7 @@
 package de.weltraumschaf.commons.guava;
 
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.Map;
 
 /**
@@ -61,4 +62,12 @@ public final class Maps {
         return new HashMap<K, V>(map);
     }
 
+    /**
+     * Creates an {@code IdentityHashMap} instance.
+     *
+     * @return a new, empty {@code IdentityHashMap}
+     */
+    public static <K, V> IdentityHashMap<K, V> newIdentityHashMap() {
+        return new IdentityHashMap<K, V>();
+    }
 }

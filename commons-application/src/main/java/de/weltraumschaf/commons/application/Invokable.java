@@ -70,4 +70,6 @@ public interface Invokable {
      */
     void setExiter(Exitable exiter);
 
+    boolean isDebugEnabled();
+
 }

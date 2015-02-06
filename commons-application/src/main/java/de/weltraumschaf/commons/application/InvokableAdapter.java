@@ -60,6 +60,8 @@ import java.util.logging.Logger;
  */
 public abstract class InvokableAdapter implements Invokable {
 
+    public boolean debug;
+
     /**
      * Copy of the command line arguments.
      */
@@ -132,7 +134,7 @@ public abstract class InvokableAdapter implements Invokable {
      * @param ioStreams I/O streams.
      */
     public static void main(final Invokable invokable, final IO ioStreams) {
-        main(invokable, ioStreams, false);
+        main(invokable, ioStreams, invokable.isDebugEnabled());
     }
 
     /**
@@ -141,6 +143,8 @@ public abstract class InvokableAdapter implements Invokable {
      *
      * This method handles ell thrown {@link Exception} and calls {@link System#exit(int)}, and prints stack trace if
      * <code>debug</code> is <tt>true</tt>.
+     *
+     * FIXME Remove debug parameter.
      *
      * @param invokable implementation to invoke
      * @param ioStreams I/O streams
@@ -155,7 +159,7 @@ public abstract class InvokableAdapter implements Invokable {
         } catch (final Exception ex) {
             ioStreams.errorln("FATAL: " + ex.getMessage());
 
-            if (debug) {
+            if (invokable.isDebugEnabled()) {
                 ioStreams.printStackTrace(ex);
             }
 
@@ -169,12 +173,21 @@ public abstract class InvokableAdapter implements Invokable {
         invokable.exit(0);
     }
 
+    @Override
+    public final boolean isDebugEnabled() {
+        return debug;
+    }
+
     /**
      * Adds shutdown hook to runtime.
      */
     @Override
     public final void init() {
         runtime.addShutdownHook(shutDownHook);
+
+        if (debug) {
+            getIoStreams().println("[Commons] Debug is on.");
+        }
     }
 
     /**

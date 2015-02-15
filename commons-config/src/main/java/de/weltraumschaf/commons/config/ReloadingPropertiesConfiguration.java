@@ -27,7 +27,7 @@ import java.util.Properties;
  * This configuration does not need you to force an application restart, if you changed the properties file.
  * </p>
  * <p>
- * Based on this <a href"http://www.javacodegeeks.com/2014/10/dead-simple-configuration.html">blog post</a>.
+ * Based on this <a href="http://www.javacodegeeks.com/2014/10/dead-simple-configuration.html">blog post</a>.
  * </p>
  * <p>
  * Example:

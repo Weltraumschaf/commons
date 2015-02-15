@@ -46,7 +46,7 @@ public class JCommanderImproved_ReuseTest {
 
     @Test
     public void gatherOptions_allAsShort() {
-        final Options options = Options.gatherOptions(new String[] {
+        final Options options = Options.gatherOptions(new String[]{
             "-v", "-h", "-l", "location", "-c", "config"
         });
 
@@ -58,7 +58,7 @@ public class JCommanderImproved_ReuseTest {
 
     @Test
     public void gatherOptions_allAsLong() {
-        final Options options = Options.gatherOptions(new String[] {
+        final Options options = Options.gatherOptions(new String[]{
             "--version", "--help", "--location", "location", "--config", "config"
         });
 
@@ -71,24 +71,24 @@ public class JCommanderImproved_ReuseTest {
     @Test
     public void helpMessage() {
         assertThat(
-                Options.helpMessage(),
-                is(
-                        "Usage: NAME USAGE\n"
-                        + "\n"
-                        + "DESCRIPTION\n"
-                        + "\n"
-                        + "Options\n"
-                        + "\n"
-                        + "  -l, --location      Location of the blog installation.\n"
-                        + "  -v, --version       Show the version.\n"
-                        + "  -h, --help          Show this help.\n"
-                        + "  -c, --config        Config file to use.\n"
-                        + "\n"
-                        + "Example\n"
-                        + "\n"
-                        + "  EXAMPLE\n"
-                        + "\n"
-                ));
+            Options.helpMessage(),
+            is(
+                "Usage: NAME USAGE\n"
+                + "\n"
+                + "DESCRIPTION\n"
+                + "\n"
+                + "Options\n"
+                + "\n"
+                + "  -c, --config        Config file to use.\n"
+                + "  -h, --help          Show this help.\n"
+                + "  -l, --location      Location of the blog installation.\n"
+                + "  -v, --version       Show the version.\n"
+                + "\n"
+                + "Example\n"
+                + "\n"
+                + "  EXAMPLE\n"
+                + "\n"
+            ));
     }
 
     public static final class Options {
@@ -102,31 +102,31 @@ public class JCommanderImproved_ReuseTest {
          * Command line options parser.
          */
         private static final JCommanderImproved<Options> PROVIDER
-                = new JCommanderImproved<>(NAME, Options.class);
+            = new JCommanderImproved<>(NAME, Options.class);
 
         @Parameter(
-                names = {"-h", "--help"},
-                description = "Show this help.")
+            names = {"-h", "--help"},
+            description = "Show this help.")
         private boolean help;
         @Parameter(
-                names = {"-v", "--version"},
-                description = "Show the version.")
+            names = {"-v", "--version"},
+            description = "Show the version.")
         private boolean version;
         /**
          * Where is the blog installed.
          */
         @Parameter(
-                names = {"-l", "--location"},
-                //            required = true,
-                description = "Location of the blog installation.")
+            names = {"-l", "--location"},
+            //            required = true,
+            description = "Location of the blog installation.")
         private String location = "";
         /**
          * Configuration file argument.
          */
         @Parameter(
-                names = {"-c", "--config"},
-                //            required = true,
-                description = "Config file to use.")
+            names = {"-c", "--config"},
+            //            required = true,
+            description = "Config file to use.")
         private String configurationFile = "";
 
         public static Options gatherOptions(final String[] args) {
@@ -150,9 +150,9 @@ public class JCommanderImproved_ReuseTest {
 
             final Options other = (Options) obj;
             return Objects.equals(configurationFile, other.configurationFile)
-                    && Objects.equals(help, other.help)
-                    && Objects.equals(location, other.location)
-                    && Objects.equals(version, other.version);
+                && Objects.equals(help, other.help)
+                && Objects.equals(location, other.location)
+                && Objects.equals(version, other.version);
         }
 
     }

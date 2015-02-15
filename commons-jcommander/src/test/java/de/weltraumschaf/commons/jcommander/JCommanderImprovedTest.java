@@ -48,22 +48,22 @@ public class JCommanderImprovedTest {
         assertThat(JCommanderImproved.lineBreak("", 10, 5), is(equalTo("")));
         assertThat(JCommanderImproved.lineBreak("foo bar baz", 10, 5), is(equalTo("foo bar baz")));
         assertThat(JCommanderImproved.lineBreak("foo bar baz foo bar baz foo bar baz foo bar baz", 10, 5),
-                is(equalTo("foo bar baz\n     foo bar baz\n     foo bar baz\n     foo bar baz")));
+            is(equalTo("foo bar baz\n     foo bar baz\n     foo bar baz\n     foo bar baz")));
     }
 
     @Test
     public void helpMessage_withoutOptions() {
         sut.gatherOptions(new String[0]);
         assertThat(sut.helpMessage("usage", "descriptions", "example"), is(equalTo(
-              "Usage: name usage\n"
+            "Usage: name usage\n"
             + "\n"
             + "descriptions\n"
             + "\n"
             + "Options\n"
             + "\n"
+            + "  baz                 baz option\n"
             + "  bar                 bar option\n"
             + "  foo                 foo option\n"
-            + "  baz                 baz option\n"
             + "\n"
             + "Example\n"
             + "\n"

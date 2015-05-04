@@ -14,6 +14,8 @@ package de.weltraumschaf.commons.jcommander;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterDescription;
 import de.weltraumschaf.commons.validate.Validate;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -154,6 +156,14 @@ public final class JCommanderImproved<O> {
         }
 
         final List<ParameterDescription> parameters = optionsParser.getParameters();
+        // Sort them, so the order is same on different VMs.
+        Collections.sort(parameters, new Comparator<ParameterDescription>() {
+
+          @Override
+          public int compare(final ParameterDescription o1, final ParameterDescription o2) {
+            return o1.getLongestName().compareTo(o2.getLongestName());
+          }
+        });
 
         if (!parameters.isEmpty()) {
             help.append(DEFAULT_NEW_LINE)

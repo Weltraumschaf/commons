@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 /**
  * Test cases for Menu bar builder.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class MenuBarBuilderTest {
 

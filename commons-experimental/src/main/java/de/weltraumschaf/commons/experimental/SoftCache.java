@@ -2,12 +2,12 @@
  *  LICENSE
  *
  * "THE BEER-WARE LICENSE" (Revision 43):
- * "Sven Strittmatter" <weltraumschaf@googlemail.com> wrote this file.
+ * "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt; wrote this file.
  * As long as you retain this notice you can do whatever you want with
  * this stuff. If we meet some day, and you think this stuff is worth it,
  * you can buy me a non alcohol-free beer in return.
  *
- * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
+ * Copyright (C) 2012 "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt;
  */
 package de.weltraumschaf.commons.experimental;
 
@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * @param <K> type of cache key
  * @param <V> type of cached value
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 @Experimental
 public class SoftCache<K, V> {

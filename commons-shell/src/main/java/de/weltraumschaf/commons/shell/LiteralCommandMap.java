@@ -22,7 +22,7 @@ import java.util.Map;
  * This class is not thread safe!
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public abstract class LiteralCommandMap {
 

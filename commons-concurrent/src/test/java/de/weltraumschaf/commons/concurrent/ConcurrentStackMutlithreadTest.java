@@ -21,7 +21,7 @@ import static org.hamcrest.CoreMatchers.*;
 /**
  * Multithreaded tests for {@link ConcurrentStack}.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class ConcurrentStackMutlithreadTest extends MultithreadedTestCase {
 

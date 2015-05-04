@@ -14,7 +14,7 @@ package de.weltraumschaf.commons.system;
 /**
  * An exitable gives the interface to exit an program w/o calling {@link System#exit(int)} directly.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public interface Exitable {
 

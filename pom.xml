@@ -32,8 +32,6 @@
     <url>http://weltraumschaf.github.com/commons/</url>
 
     <properties>
-        <maven.javadoc.failOnError>false</maven.javadoc.failOnError>
-
         <jacoco.exclude.1>**/ApplicationException.*</jacoco.exclude.1>
         <jacoco.exclude.2>**/NullExiter.*</jacoco.exclude.2>
 

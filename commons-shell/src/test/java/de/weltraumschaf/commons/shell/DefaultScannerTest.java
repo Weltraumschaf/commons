@@ -25,7 +25,7 @@ import org.junit.rules.ExpectedException;
 /**
  * Tests for {@link DefaultScanner}.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class DefaultScannerTest {
 

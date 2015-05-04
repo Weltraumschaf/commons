@@ -28,7 +28,7 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @since 1.0.0
  * @param <E> type of queue entries
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 @ThreadSafe
 final class ConcurrentQueue<E> implements Queue<E> {

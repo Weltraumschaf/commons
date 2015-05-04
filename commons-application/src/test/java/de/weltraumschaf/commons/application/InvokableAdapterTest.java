@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 /**
  * Test cases for {@link InvokableAdapter}.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class InvokableAdapterTest {
 

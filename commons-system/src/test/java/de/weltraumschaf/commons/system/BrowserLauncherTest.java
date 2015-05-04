@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 /**
  * Tests for {@link BrowserLauncher}.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class BrowserLauncherTest {
 

@@ -23,7 +23,7 @@ import java.util.Objects;
  * From {@literal org.apache.commons.lang3.StringJoiner}.
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public final class StringJoiner {
 

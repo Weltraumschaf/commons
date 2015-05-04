@@ -25,7 +25,7 @@ import de.weltraumschaf.commons.validate.Validate;
  * final OperatingSystem os = OperatingSystem.determine(osName);
  * }</pre>
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public enum OperatingSystem {
 

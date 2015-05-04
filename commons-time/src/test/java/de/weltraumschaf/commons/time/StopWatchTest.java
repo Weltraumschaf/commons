@@ -2,12 +2,12 @@
  *  LICENSE
  *
  * "THE BEER-WARE LICENSE" (Revision 43):
- * "Sven Strittmatter" <weltraumschaf@googlemail.com> wrote this file.
+ * "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt; wrote this file.
  * As long as you retain this notice you can do whatever you want with
  * this stuff. If we meet some day, and you think this stuff is worth it,
  * you can buy me a non alcohol-free beer in return.
  *
- * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf@googlemail.com>
+ * Copyright (C) 2012 "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt;
  */
 package de.weltraumschaf.commons.time;
 
@@ -23,13 +23,13 @@ import org.junit.rules.ExpectedException;
 /**
  * Tests for {@link StopWatch}.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class StopWatchTest {
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
-    private static final long DELTA = 10L;
+    private static final long DELTA = 20L;
     private final StopWatch sut = new StopWatch();
 
     private void assertTime(final long actual, final long expected) {

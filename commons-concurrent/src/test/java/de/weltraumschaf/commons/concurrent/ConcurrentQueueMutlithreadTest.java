@@ -22,7 +22,7 @@ import org.junit.Test;
 /**
  * Multithreaded tests for {@link ConcurrentQueue}.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class ConcurrentQueueMutlithreadTest extends MultithreadedTestCase {
 

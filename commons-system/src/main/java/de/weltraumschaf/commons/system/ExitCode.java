@@ -37,7 +37,7 @@ package de.weltraumschaf.commons.system;
  * }
  * }</pre>
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public interface ExitCode {
 

@@ -16,7 +16,7 @@ package de.weltraumschaf.commons.system;
  *
  * Useful in tests where you don't want to exit the JVM.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public final class NullExiter extends ExitableAdapter {
 

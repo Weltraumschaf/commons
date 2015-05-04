@@ -15,7 +15,7 @@ package de.weltraumschaf.commons.shell;
  * Marker interface for shell sub command types.
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public interface SubCommandType extends CommandType {
 

@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * Test cases for {@link Version}.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class VersionTest {
 

@@ -18,7 +18,7 @@ import java.util.Set;
 /**
  * Helper class to verify if a given character belong to a specified group or range of characters.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public final class CharacterHelper {
 

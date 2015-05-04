@@ -14,7 +14,7 @@ package de.weltraumschaf.commons.system;
 /**
  * Common shared functionality for exiters.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public abstract class ExitableAdapter implements Exitable {
 

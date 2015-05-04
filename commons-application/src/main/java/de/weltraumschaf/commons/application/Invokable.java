@@ -18,7 +18,7 @@ import de.weltraumschaf.commons.system.Exitable;
  * An invokable is an application object invokable by command line interface.
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public interface Invokable {
 

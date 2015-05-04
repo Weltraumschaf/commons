@@ -20,7 +20,7 @@ import static org.mockito.Mockito.*;
 /**
  * Test cases for {@link ShutDownHook}.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 @java.lang.SuppressWarnings("CallToThreadRun")
 @SuppressWarnings(value = "RU_INVOKE_RUN", justification = "Testing correct template method behaviour.")

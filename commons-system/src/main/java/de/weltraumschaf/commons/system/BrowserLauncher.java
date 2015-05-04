@@ -23,7 +23,7 @@ import java.io.IOException;
  * Copied from <a href="http://dev.vaadin.com/svn/releases/6.6.4/src/com/vaadin/launcher/">Vaadin browser launcher</a>.
  * </p>
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public final class BrowserLauncher {
 

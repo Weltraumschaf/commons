@@ -45,7 +45,7 @@ import java.util.List;
  * </pre>
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 class DefaultParser implements Parser {
 

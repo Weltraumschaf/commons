@@ -15,7 +15,7 @@ package de.weltraumschaf.commons.shell;
  * Verifies nothing.
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class NullCommandVerifier implements CommandVerifier {
 

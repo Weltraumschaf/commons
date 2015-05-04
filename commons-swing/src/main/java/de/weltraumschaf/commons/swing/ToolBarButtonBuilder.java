@@ -22,7 +22,7 @@ import javax.swing.JButton;
  * </p>
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public final class ToolBarButtonBuilder {
 

@@ -16,7 +16,7 @@ package de.weltraumschaf.commons.concurrent;
  * Factory to create implementations.
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public final class Concurrent {
 

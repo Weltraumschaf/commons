@@ -15,7 +15,7 @@ package de.weltraumschaf.commons.shell;
  * Signals syntax errors in the input scanned from an interactive shell.
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public final class SyntaxException extends Exception {
 

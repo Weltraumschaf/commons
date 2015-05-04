@@ -18,7 +18,7 @@ import java.util.List;
  * Scans the input line from an interactive shell.
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public interface Scanner {
 

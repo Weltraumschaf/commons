@@ -18,7 +18,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 /**
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class PositionTest {
 

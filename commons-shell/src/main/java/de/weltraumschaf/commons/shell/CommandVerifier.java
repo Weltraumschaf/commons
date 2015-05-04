@@ -25,7 +25,7 @@ package de.weltraumschaf.commons.shell;
  * </p>
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public interface CommandVerifier {
 

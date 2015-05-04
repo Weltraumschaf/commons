@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 /**
  * Test cases for tool bar builder.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class ToolBarBuilderTest {
 

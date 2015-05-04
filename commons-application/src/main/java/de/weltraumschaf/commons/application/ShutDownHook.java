@@ -36,7 +36,7 @@ import java.util.logging.Logger;
  * }</pre>
  *
  * @since 1.0.0
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class ShutDownHook extends Thread {
 

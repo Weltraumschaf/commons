@@ -14,7 +14,7 @@ package de.weltraumschaf.commons.system;
 /**
  * Invokes {@link System#exit(int)}.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public final class DefaultExiter extends ExitableAdapter {
 

@@ -21,7 +21,7 @@ import static org.mockito.Mockito.*;
 /**
  * Test cases for {@link IOStreams}.
  *
- * @author Sven Strittmatter <weltraumschaf@googlemail.com>
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public class IOStreamsTest {
 

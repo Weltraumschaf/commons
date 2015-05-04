@@ -16,6 +16,7 @@ package de.weltraumschaf.commons.characters;
  *
  * <p>
  * Example:
+ * </p>
  * <pre>
  * {@code final CharacterStream characterStream = new CharacterStream("...");
  *
@@ -24,7 +25,6 @@ package de.weltraumschaf.commons.characters;
  *     // Do something with the current char.
  * }
  * }</pre>
- * </p>
  *
  * TODO: Implement line and column.
  *

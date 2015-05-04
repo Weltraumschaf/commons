@@ -218,7 +218,7 @@ public final class JCommanderImproved<O> {
     /**
      * Generates a string of spaces with given length.
      *
-     * @param length empty string will be returned if < 1
+     * @param length empty string will be returned if &lt; 1
      * @return never {@code null}
      */
     static String spaces(final int length) {

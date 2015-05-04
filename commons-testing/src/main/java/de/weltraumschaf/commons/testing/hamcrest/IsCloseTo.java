@@ -24,7 +24,7 @@ import org.hamcrest.TypeSafeMatcher;
  * </p>
  *
  * <p>
- * Adapted from {@link org.hamcrest.number.IsCloseTo} for use with long values.
+ * Adapted from {@code org.hamcrest.number.IsCloseTo} for use with long values.
  * </p>
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;

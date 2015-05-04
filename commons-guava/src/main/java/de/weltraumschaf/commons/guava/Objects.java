@@ -69,11 +69,11 @@ public final class Objects {
      * <p>
      * This is useful for implementing {@link java.lang.Object#hashCode()}. For example, in an object that has three properties,
      * {@code x}, {@code y}, and {@code z}, one could write:
+     * </p>
      * <pre>   {@code
      *   public int hashCode() {
      *     return Objects.hashCode(getX(), getY(), getZ());
      *   }}</pre>
-     * </p>
      *
      * <p>
      * <strong>Warning</strong>: When a single object is supplied, the returned hash code does not equal the hash code
@@ -113,6 +113,7 @@ public final class Objects {
      *
      * <p>
      * This is helpful for implementing {@link java.lang.Object#toString()}. Specification by example:
+     * </p>
      * <pre>   {@code
      *   // Returns "ClassName{}"
      *   Objects.toStringHelper(this)
@@ -141,7 +142,6 @@ public final class Objects {
      *       .add("y", null)
      *       .toString();
      *   }}</pre>
-     * </p>
      *
      * <p>
      * Note that in GWT, class names are often obfuscated.

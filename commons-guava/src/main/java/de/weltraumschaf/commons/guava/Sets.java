@@ -54,7 +54,7 @@ public final class Sets {
 
     /**
      * Returns a capacity that is sufficient to keep the map from being resized as long as it grows no larger than
-     * expectedSize and the load factor is >= its default (0.75).
+     * expectedSize and the load factor is {@literal >=} its default (0.75).
      *
      * @param expectedSize must not be negative
      * @return not negative

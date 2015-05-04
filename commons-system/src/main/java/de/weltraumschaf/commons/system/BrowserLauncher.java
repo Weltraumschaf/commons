@@ -212,7 +212,7 @@ public final class BrowserLauncher {
      *
      * @param cmd external command, must not be {@code null} or empty
      * @param argument argument string, must not be {@code null} or empty
-     * @return A new {@link java.io.Process} object for managing the subprocess
+     * @return A new {@link java.lang.Process} object for managing the subprocess
      * @throws IOException if an I/O error occurs
      */
     private Process execCommand(final CliCommands cmd, final String argument) throws IOException {

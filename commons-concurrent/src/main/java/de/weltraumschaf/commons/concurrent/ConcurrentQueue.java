@@ -22,9 +22,10 @@ import net.jcip.annotations.ThreadSafe;
  * </p>
  *
  * <pre>
+ * {@code
  * HEAD    Node_0        Node_1        Node_2        Node_3     TAIL
  * null    next->        next->        next->        next->     null
- * </pre>
+ * }</pre>
  *
  * @since 1.0.0
  * @param <E> type of queue entries

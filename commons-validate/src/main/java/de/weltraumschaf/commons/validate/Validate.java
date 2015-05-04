@@ -342,8 +342,7 @@ public final class Validate {
      * @throws IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
      * @throws IllegalArgumentException if {@code size} is negative
      */
-    public static int checkElementIndex(
-            int index, int size, String desc) {
+    public static int checkElementIndex(int index, int size, String desc) {
         // Carefully optimized for execution by hotspot (explanatory comment above)
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(badElementIndex(index, size, desc));
@@ -355,10 +354,10 @@ public final class Validate {
      * TODO: Review this method.
      *
      * @since 2.0
-     * @param index
-     * @param size
-     * @param desc
-     * @return
+     * @param index TODO Write comment
+     * @param size TODO Write comment
+     * @param desc TODO Write comment
+     * @return TODO Write comment
      */
     private static String badElementIndex(int index, int size, String desc) {
         if (index < 0) {
@@ -438,11 +437,13 @@ public final class Validate {
     }
 
     /**
+     * TODO Write comment
+     *
      * @since 2.0
-     * @param start
-     * @param end
-     * @param size
-     * @return
+     * @param start TODO Write comment
+     * @param end TODO Write comment
+     * @param size TODO Write comment
+     * @return TODO Write comment
      */
     private static String badPositionIndexes(int start, int end, int size) {
         if (start < 0 || start > size) {
@@ -457,11 +458,13 @@ public final class Validate {
     }
 
     /**
+     * TODO Write comment
+     *
      * @since 2.0
-     * @param index
-     * @param size
-     * @param desc
-     * @return
+     * @param index TODO Write comment
+     * @param size TODO Write comment
+     * @param desc TODO Write comment
+     * @return TODO Write comment
      */
     private static String badPositionIndex(int index, int size, String desc) {
         if (index < 0) {

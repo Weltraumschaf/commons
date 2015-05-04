@@ -66,7 +66,7 @@ class PatternWithGroups {
      */
     private final String regex;
     /**
-     * The compiled regular expression of {@link #regex}.
+     * The compiled regular expression of  {@code #regex}.
      */
     private final Pattern regexPattern;
     /**

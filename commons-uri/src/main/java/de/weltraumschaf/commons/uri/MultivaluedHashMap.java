@@ -47,15 +47,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A hash table based implementation of {@link MultivaluedMap} interface.
+ * A hash table based implementation of {@code  MultivaluedMap} interface.
  *
  * This implementation provides all of the optional map operations. This class
  * makes no guarantees as to the order of the map; in particular, it does not
  * guarantee that the order will remain constant over time. The implementation
  * permits {@code null} key. By default the implementation does also permit
  * {@code null} values, but ignores them. This behavior can be customized
- * by overriding the protected {@link #addNull(List) addNull(...)} and
- * {@link #addFirstNull(List) addFirstNull(...)} methods.
+ * by overriding the protected  {@code #addNull(List) addNull(...)} and
+ *  {@code #addFirstNull(List) addFirstNull(...)} methods.
  * <p />
  * This implementation provides constant-time performance for the basic
  * operations (<tt>get</tt> and <tt>put</tt>), assuming the hash function
@@ -103,7 +103,7 @@ import java.util.Map;
  * The iterators returned by all of this class's "collection view methods"
  * are <i>fail-fast</i>: if the map is structurally modified at any time after
  * the iterator is created, in any way except through the iterator's own
- * <tt>remove</tt> method, the iterator will throw a {@link ConcurrentModificationException}.
+ * <tt>remove</tt> method, the iterator will throw a {@code  ConcurrentModificationException}.
  * Thus, in the face of concurrent modification, the iterator fails quickly and
  * cleanly, rather than risking arbitrary, non-deterministic behavior at an
  * undetermined time in the future.
@@ -160,7 +160,7 @@ class MultivaluedHashMap<K, V> extends AbstractMultivaluedMap<K, V> implements S
 
     /**
      * Constructs a new multivalued hash map with the same mappings as the
-     * specified {@link MultivaluedMap }. The {@link List} instances holding
+     * specified {@code  MultivaluedMap }. The {@code  List} instances holding
      * the values of each key are created anew instead of being reused.
      *
      * @param map the multivalued map whose mappings are to be placed in this
@@ -188,7 +188,7 @@ class MultivaluedHashMap<K, V> extends AbstractMultivaluedMap<K, V> implements S
 
     /**
      * Constructs a new multivalued hash map with the same mappings as the
-     * specified single-valued {@link Map }.
+     * specified single-valued {@code  Map }.
      *
      * @param map the single-valued map whose mappings are to be placed in this
      *            multivalued map.

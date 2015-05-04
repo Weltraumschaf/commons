@@ -285,7 +285,7 @@ class UriTemplate {
      * Normalize the URI by resolve the dot & dot-dot path segments as described in
      * <a href="http://tools.ietf.org/html/rfc3986#section-5.2.4">RFC 3986</a>.
      *
-     * This method provides a workaround for issues with {@link java.net.URI#normalize()} which is not able to properly
+     * This method provides a workaround for issues with {@code  java.net.URI#normalize()} which is not able to properly
      * normalize absolute paths that start with a {@code ".."} segment, e.g. {@code "/../a/b"} as required by RFC 3986
      * (according to RFC 3986 the path {@code "/../a/b"} should resolve to {@code "/a/b"}, while {@code URI.normalize()}
      * keeps the {@code ".."} segment in the URI path.
@@ -303,7 +303,7 @@ class UriTemplate {
      * Normalize the URI by resolve the dot & dot-dot path segments as described in
      * <a href="http://tools.ietf.org/html/rfc3986#section-5.2.4">RFC 3986</a>.
      *
-     * This method provides a workaround for issues with {@link java.net.URI#normalize()} which is not able to properly
+     * This method provides a workaround for issues with {@code  java.net.URI#normalize()} which is not able to properly
      * normalize absolute paths that start with a {@code ".."} segment, e.g. {@code "/../a/b"} as required by RFC 3986
      * (according to RFC 3986 the path {@code "/../a/b"} should resolve to {@code "/a/b"}, while {@code URI.normalize()}
      * keeps the {@code ".."} segment in the URI path.
@@ -357,7 +357,7 @@ class UriTemplate {
     /**
      * Relativize URI with respect to a base URI.
      *
-     * After the relativization is done, dots in paths of both URIs are {@link #normalize(java.net.URI) resolved}.
+     * After the relativization is done, dots in paths of both URIs are  {@code #normalize(java.net.URI) resolved}.
      *
      * @param baseUri base URI to be used for relativization.
      * @param refUri URI to be relativized.

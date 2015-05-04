@@ -50,20 +50,18 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.namespace.QName;
 
 /**
- * <p>Class representing hypermedia links. A hypermedia link may include additional
+ * <p>Class representing hypermedia links.
+ * <p>A hypermedia link may include additional
  * parameters beyond its underlying URI. Parameters such as {@code rel} or {@code type}
- * provide additional meta-data. Links in responses can be <emph>followed</emph> by
- * creating an {@link javax.ws.rs.client.Invocation.Builder} or a
- * {@link javax.ws.rs.client.WebTarget}.</p>
+ * provide additional meta-data. Links in responses can be <em>followed</em> by
+ * creating an {@code javax.ws.rs.client.Invocation.Builder} or a
+ * {@code javax.ws.rs.client.WebTarget}.</p>
  *
- * <p>The methods {@link #toString} and {@link #valueOf} can be used to serialize
+ * <p>The methods  {@code #toString()} and {@code #valueOf} can be used to serialize
  * and de-serialize a link into a link header (RFC 5988).</p>
  *
  * @author Marek Potociar
  * @author Santiago Pericas-Geertsen
- * @see javax.ws.rs.client.Client#invocation
- * @see javax.ws.rs.client.Client#target(javax.ws.rs.core.Link)
- * @see javax.ws.rs.core.Response#getLink(java.lang.String)
  * @since 2.0
  */
 abstract class Link {
@@ -91,7 +89,7 @@ abstract class Link {
     public abstract URI getUri();
 
     /**
-     * Convenience method that returns a {@link javax.ws.rs.core.UriBuilder}
+     * Convenience method that returns a {@code javax.ws.rs.core.UriBuilder}
      * initialized with this link's underlying URI.
      *
      * @return BaseUriBuilder initialized using underlying URI.
@@ -146,7 +144,7 @@ abstract class Link {
      * All link params are serialized as link-param="value" where value
      * is a quoted-string. For example,
      *
-     * <http://foo.bar/employee/john>; title="employee"; rel="manager friend"
+     * {@literal <http://foo.bar/employee/john>; title="employee"; rel="manager friend"}
      */
     @Override
     public abstract String toString();
@@ -171,10 +169,10 @@ abstract class Link {
         /**
          * Initialize builder using another link represented as a string. Uses
          * simple parser to convert string representation into a link.
-         * <pre>
+         * <pre>{@code
          * link ::= '<' uri '>' (';' link-param)*
          * link-param ::= name '=' quoted-string
-         * </pre>
+         * }</pre>
          *
          * See <a href="http://tools.ietf.org/html/rfc5988">RFC 5988</a> for more information.
          *
@@ -207,9 +205,6 @@ abstract class Link {
          *
          * @param uri base URI for relative links.
          * @return the updated builder.
-         * @see Link#fromPath(java.lang.String)
-         * @see Link#fromResource(java.lang.Class)
-         * @see Link#fromMethod(java.lang.Class, java.lang.String)
          */
         public Builder baseUri(URI uri);
 
@@ -220,9 +215,6 @@ abstract class Link {
          * @param uri base URI for relative links.
          * @return the updated builder.
          * @throws IllegalArgumentException if string representation of URI is invalid.
-         * @see Link#fromPath(java.lang.String)
-         * @see Link#fromResource(java.lang.Class)
-         * @see Link#fromMethod(java.lang.Class, java.lang.String)
          */
         public Builder baseUri(String uri);
 
@@ -267,7 +259,7 @@ abstract class Link {
         /**
          * Set an arbitrary parameter on this link. Note that link parameters are those
          * defined in RFC 5988 and should not be confused with URI parameters which can
-         * be specified when calling {@link #build(Object...)}.
+         * be specified when calling  {@code #build(Object...)}.
          *
          * @param name  the name of the parameter.
          * @param value the value set for the parameter.
@@ -297,8 +289,8 @@ abstract class Link {
          *
          * If the underlying link is already relative or if it is absolute but does
          * not share a prefix with the supplied URI, this method is equivalent to calling
-         * {@link Link.Builder#build(java.lang.Object[])}. Note that a base URI can
-         * be set on a relative link using {@link Link.Builder#baseUri(java.net.URI)}.
+         * {@code  Link.Builder#build(java.lang.Object[])}. Note that a base URI can
+         * be set on a relative link using {@code  Link.Builder#baseUri(java.net.URI)}.
          * The state of the builder is unaffected; this method may be called
          * multiple times on the same builder instance.
          *
@@ -316,10 +308,9 @@ abstract class Link {
     }
 
     /**
-     * Value type for {@link javax.ws.rs.core.Link} that can be marshalled and
+     * Value type for {@code javax.ws.rs.core.Link} that can be marshalled and
      * unmarshalled by JAXB.
      *
-     * @see javax.ws.rs.core.Link.JaxbAdapter
      * @since 2.0
      */
     public static class JaxbLink {

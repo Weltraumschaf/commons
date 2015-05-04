@@ -43,7 +43,7 @@ package de.weltraumschaf.commons.uri;
 //import org.glassfish.jersey.internal.LocalizationMessages;
 
 /**
- * Parser for string URI with template parameters which produces {@link java.net.URI URIs} from Strings.
+ * Parser for string URI with template parameters which produces {@code  java.net.URI URIs} from Strings.
  * Example of parsed uri: {@code "http://user@{host}:{port}/a/{path}?query=1#fragment"}.
  * The parser is not thread safe.
  *
@@ -88,7 +88,7 @@ final class UriParser {
     /**
      * Parses the URI component. Parsing starts at position of the first character of
      * component and ends with position of one of the delimiters. The string and current
-     * position is taken from the {@link org.glassfish.jersey.uri.internal.CharacterIterator}.
+     * position is taken from the {@code  org.glassfish.jersey.uri.internal.CharacterIterator}.
      *
      * @param delimiters String with delimiters which terminates the component.
      * @param mayEnd     True if component might be the last part of the URI.
@@ -139,7 +139,7 @@ final class UriParser {
 
     /**
      * Parses the input string URI. After calling this method The result components can be retrieved by calling appropriate
-     * getter methods like {@link #getHost()}, {@link #getPort()}, etc.
+     * getter methods like  {@code #getHost()},  {@code #getPort()}, etc.
      */
     public void parse() {
         this.parserExecuted = true;
@@ -265,7 +265,7 @@ final class UriParser {
     }
 
     /**
-     * Returns parsed scheme specific part. The {@link #parse() method} must be called before executing this method.
+     * Returns parsed scheme specific part. The  {@code #parse() method} must be called before executing this method.
      *
      * @return Scheme specific part.
      */
@@ -277,7 +277,7 @@ final class UriParser {
     }
 
     /**
-     * Returns parsed scheme component. The {@link #parse() method} must be called before executing this method.
+     * Returns parsed scheme component. The  {@code #parse() method} must be called before executing this method.
      *
      * @return Scheme.
      */
@@ -289,7 +289,7 @@ final class UriParser {
     }
 
     /**
-     * Returns parsed user info component. The {@link #parse() method} must be called before executing this method.
+     * Returns parsed user info component. The  {@code #parse() method} must be called before executing this method.
      *
      * @return User info.
      */
@@ -301,7 +301,7 @@ final class UriParser {
     }
 
     /**
-     * Returns parsed host component. The {@link #parse() method} must be called before executing this method.
+     * Returns parsed host component. The  {@code #parse() method} must be called before executing this method.
      *
      * @return Host.
      */
@@ -313,7 +313,7 @@ final class UriParser {
     }
 
     /**
-     * Returns parsed port component. The {@link #parse() method} must be called before executing this method.
+     * Returns parsed port component. The  {@code #parse() method} must be called before executing this method.
      *
      * @return Port.
      */
@@ -325,7 +325,7 @@ final class UriParser {
     }
 
     /**
-     * Returns parsed query component. The {@link #parse() method} must be called before executing this method.
+     * Returns parsed query component. The  {@code #parse() method} must be called before executing this method.
      *
      * @return Query.
      */
@@ -337,7 +337,7 @@ final class UriParser {
     }
 
     /**
-     * Returns parsed path component. The {@link #parse() method} must be called before executing this method.
+     * Returns parsed path component. The  {@code #parse() method} must be called before executing this method.
      *
      * @return Path.
      */
@@ -349,7 +349,7 @@ final class UriParser {
     }
 
     /**
-     * Returns parsed fragment component. The {@link #parse() method} must be called before executing this method.
+     * Returns parsed fragment component. The  {@code #parse() method} must be called before executing this method.
      *
      * @return Fragment.
      */
@@ -361,7 +361,7 @@ final class UriParser {
     }
 
     /**
-     * Returns parsed authority component. The {@link #parse() method} must be called before executing this method.
+     * Returns parsed authority component. The  {@code #parse() method} must be called before executing this method.
      *
      * @return Authority.
      */
@@ -373,7 +373,7 @@ final class UriParser {
     }
 
     /**
-     * Returns whether the input string URI is opaque. The {@link #parse() method} must be called before executing this method.
+     * Returns whether the input string URI is opaque. The  {@code #parse() method} must be called before executing this method.
      *
      * @return True if the uri is opaque.
      */

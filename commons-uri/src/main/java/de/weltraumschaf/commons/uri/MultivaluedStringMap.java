@@ -43,7 +43,7 @@ import java.lang.reflect.Constructor;
 import java.util.List;
 
 /**
- * An implementation of {@link MultivaluedMap} where keys and values are
+ * An implementation of {@code  MultivaluedMap} where keys and values are
  * instances of String.
  * <p />
  * This map has an additional ability to instantiate classes using the

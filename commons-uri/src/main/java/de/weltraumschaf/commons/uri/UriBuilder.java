@@ -50,7 +50,7 @@ import java.util.Map;
 import de.weltraumschaf.commons.guava.Maps;
 
 /**
- * A Jersey implementation of {@link de.weltraumschaf.commons.uri.BaseUriBuilder}.
+ * A Jersey implementation of {@code  de.weltraumschaf.commons.uri.BaseUriBuilder}.
  *
  * @author Paul Sandoz
  * @author Martin Matula (martin.matula at oracle.com)

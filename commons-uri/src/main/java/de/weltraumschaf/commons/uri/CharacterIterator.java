@@ -64,7 +64,7 @@ final class CharacterIterator {
     /**
      * Determines whether there is next character in the iteration chain.
      *
-     * @return True if there is a character which can be retrieved by {@link #next()}, false otherwise.
+     * @return True if there is a character which can be retrieved by  {@code #next()}, false otherwise.
      */
      boolean hasNext() {
         return pos < s.length() - 1;
@@ -84,7 +84,7 @@ final class CharacterIterator {
     }
 
     /**
-     * Returns the next character without increasing the position. The method does the same as {@link #next()} but the
+     * Returns the next character without increasing the position. The method does the same as  {@code #next()} but the
      * position is not changed by calling this method.
      *
      * @return Next character.
@@ -107,7 +107,7 @@ final class CharacterIterator {
     }
 
     /**
-     * Returns the input String on which this {@link CharacterIterator iterator} operates.
+     * Returns the input String on which this {@code  CharacterIterator iterator} operates.
      *
      * @return String which initialized this iterator.
      */

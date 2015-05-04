@@ -44,7 +44,7 @@ import java.net.URI;
 import java.util.Map;
 
 /**
- * URI template-aware utility class for building URIs from their components. See {@link javax.ws.rs.Path#value} for an
+ * URI template-aware utility class for building URIs from their components. See {@code javax.ws.rs.Path#value} for an
  * explanation of URI templates.
  *
  * <p>
@@ -68,7 +68,6 @@ import java.util.Map;
  * @author Paul Sandoz
  * @author Marc Hadley
  * @see java.net.URI
- * @see javax.ws.rs.Path
  * @since 1.0
  */
 abstract class BaseUriBuilder {
@@ -139,10 +138,10 @@ abstract class BaseUriBuilder {
     /**
      * Create a new instance representing a relative URI initialized from a root resource class.
      *
-     * @param resource a root resource whose {@link javax.ws.rs.Path} value will be used to initialize the
+     * @param resource a root resource whose {@code javax.ws.rs.Path} value will be used to initialize the
      * BaseUriBuilder.
      * @return a new BaseUriBuilder.
-     * @throws IllegalArgumentException if resource is not annotated with {@link javax.ws.rs.Path} or resource is
+     * @throws IllegalArgumentException if resource is not annotated with {@code javax.ws.rs.Path} or resource is
      * {@code null}.
      */
     static BaseUriBuilder fromResource(Class<?> resource) {
@@ -153,7 +152,7 @@ abstract class BaseUriBuilder {
      * {@inheritDoc}
      *
      * Create a copy of the BaseUriBuilder preserving its state. This is a more efficient means of creating a copy than
-     * constructing a new BaseUriBuilder from a URI returned by the {@link #build(Object...)} method.
+     * constructing a new BaseUriBuilder from a URI returned by the  {@code #build(Object...)} method.
      */
     @SuppressWarnings("CloneDoesntDeclareCloneNotSupportedException")
     @Override
@@ -191,7 +190,7 @@ abstract class BaseUriBuilder {
     abstract BaseUriBuilder scheme(String scheme);
 
     /**
-     * Set the URI scheme-specific-part (see {@link java.net.URI}). This method will overwrite any existing values for
+     * Set the URI scheme-specific-part (see {@code  java.net.URI}). This method will overwrite any existing values for
      * authority, user-info, host, port and path.
      *
      * @param ssp the URI scheme-specific-part, may contain URI template parameters.
@@ -213,8 +212,8 @@ abstract class BaseUriBuilder {
      * Set the URI host.
      *
      * @param host the URI host, may contain URI template parameters. A {@code null} value will unset the host component
-     * of the URI, but will not unset other authority component parts ({@link #userInfo(String) user info} or
-     * {@link #port(int) port}).
+     * of the URI, but will not unset other authority component parts ( {@code #userInfo(String) user info} or
+     *  {@code #port(int) port}).
      * @return the updated BaseUriBuilder.
      * @throws IllegalArgumentException if host is invalid.
      */
@@ -254,21 +253,21 @@ abstract class BaseUriBuilder {
      * Append the path from a Path-annotated class to the existing path. When constructing the final path, a '/'
      * separator will be inserted between the existing path and the supplied path if necessary.
      *
-     * @param resource a resource whose {@link javax.ws.rs.Path} value will be used to obtain the path to append.
+     * @param resource a resource whose {@code javax.ws.rs.Path} value will be used to obtain the path to append.
      * @return the updated BaseUriBuilder.
      * @throws IllegalArgumentException if resource is {@code null}, or if resource is not annotated with
-     * {@link javax.ws.rs.Path}.
+     * {@code javax.ws.rs.Path}.
      */
     abstract BaseUriBuilder path(Class resource);
 
     /**
-     * Append the path from a {@link javax.ws.rs.Path}-annotated method to the existing path. When constructing the
+     * Append the path from a {@code javax.ws.rs.Path}-annotated method to the existing path. When constructing the
      * final path, a '/' separator will be inserted between the existing path and the supplied path if necessary.
      *
-     * @param method a method whose {@link javax.ws.rs.Path} value will be used to obtain the path to append to the
+     * @param method a method whose {@code javax.ws.rs.Path} value will be used to obtain the path to append to the
      * existing path.
      * @return the updated BaseUriBuilder.
-     * @throws IllegalArgumentException if method is {@code null} or is not annotated with a {@link javax.ws.rs.Path}.
+     * @throws IllegalArgumentException if method is {@code null} or is not annotated with a {@code javax.ws.rs.Path}.
      */
     abstract BaseUriBuilder path(Method method);
 
@@ -375,7 +374,7 @@ abstract class BaseUriBuilder {
     /**
      * Resolve a URI template with a given {@code name} in this {@code BaseUriBuilder} instance using a supplied value.
      *
-     * In case a {@code null} template name or value is entered a {@link IllegalArgumentException} is thrown.
+     * In case a {@code null} template name or value is entered a {@code  IllegalArgumentException} is thrown.
      *
      * @param name name of the URI template.
      * @param value value to be used to resolve the template.
@@ -388,7 +387,7 @@ abstract class BaseUriBuilder {
     /**
      * Resolve a URI template with a given {@code name} in this {@code BaseUriBuilder} instance using a supplied value.
      *
-     * In case a {@code null} template name or value is entered a {@link IllegalArgumentException} is thrown.
+     * In case a {@code null} template name or value is entered a {@code  IllegalArgumentException} is thrown.
      *
      * @param name name of the URI template.
      * @param value value to be used to resolve the template.
@@ -410,7 +409,7 @@ abstract class BaseUriBuilder {
      * pertain. All % characters in the stringified values that are not followed by two hexadecimal numbers will be
      * encoded.
      *
-     * In case a {@code null} template name or encoded value is entered a {@link IllegalArgumentException} is thrown.
+     * In case a {@code null} template name or encoded value is entered a {@code  IllegalArgumentException} is thrown.
      *
      * @param name name of the URI template.
      * @param value encoded value to be used to resolve the template.
@@ -474,7 +473,7 @@ abstract class BaseUriBuilder {
      * builder is unaffected; this method may be called multiple times on the same builder instance.
      * <p>
      * NOTE: By default all {@code '/'} characters in the stringified values will be encoded in path templates, i.e. the
-     * result is identical to invoking {@link #buildFromMap(java.util.Map, boolean) buildFromMap(valueMap, true)}. To
+     * result is identical to invoking  {@code #buildFromMap(java.util.Map, boolean) buildFromMap(valueMap, true)}. To
      * override this behavior use {@code buildFromMap(valueMap, false)} instead.
      * </p>
      *
@@ -498,7 +497,7 @@ abstract class BaseUriBuilder {
      * <p>
      * The {@code encodeSlashInPath} parameter may be used to override the default encoding of {@code '/'} characters in
      * the stringified template values in cases when the template is part of the URI path component when using the
-     * {@link #buildFromMap(java.util.Map)} method. If the {@code encodeSlashInPath} parameter is set to {@code true}
+     *  {@code #buildFromMap(java.util.Map)} method. If the {@code encodeSlashInPath} parameter is set to {@code true}
      * (default), the slash ({@code '/'}) characters in parameter values will be encoded if the template is placed in
      * the URI path component. If set to {@code false} the default encoding behavior is overridden an slash characters
      * in template values will not be encoded when used to substitute path templates.
@@ -552,7 +551,7 @@ abstract class BaseUriBuilder {
      * </p>
      * <p>
      * NOTE: By default all {@code '/'} characters in the stringified values will be encoded in path templates, i.e. the
-     * result is identical to invoking {@link #build(Object[], boolean)} build(values, true)}. To override this behavior
+     * result is identical to invoking  {@code #build(Object[], boolean)} build(values, true)}. To override this behavior
      * use {@code build(values, false)} instead.
      * </p>
      *
@@ -581,7 +580,7 @@ abstract class BaseUriBuilder {
      * <p>
      * The {@code encodeSlashInPath} parameter may be used to override the default encoding of {@code '/'} characters in
      * the stringified template values in cases when the template is part of the URI path component when using the
-     * {@link #build(Object[])} method. If the {@code encodeSlashInPath} parameter is set to {@code true} (default), the
+     *  {@code #build(Object[])} method. If the {@code encodeSlashInPath} parameter is set to {@code true} (default), the
      * slash ({@code '/'}) characters in parameter values will be encoded if the template is placed in the URI path
      * component. If set to {@code false} the default encoding behavior is overridden an slash characters in template
      * values will not be encoded when used to substitute path templates.

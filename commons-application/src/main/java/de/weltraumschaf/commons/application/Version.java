@@ -35,7 +35,7 @@ import java.util.Properties;
  * </pre>
  *
  * <p>
- * If you save the file in <kbd>src/main/resources/foo/bar/version.properties</kbd>
+ * If you save the file in {@code src/main/resources/foo/bar/version.properties}
  * you can use the version this way:
  * </p>
  *

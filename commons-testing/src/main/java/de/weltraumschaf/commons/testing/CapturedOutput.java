@@ -26,10 +26,10 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 /**
- * This rule captures all output written to {@link System#out} and {@link System#err}.
+ * This rule captures all output written to {@link java.lang.System#out} and {@link java.lang.System#err}.
  *
  * <p>
- * This rule redirects the constant print streams for out/err to an {@link CapturingPrintStream} before each test and
+ * This rule redirects the constant print streams for out/err to an {@link de.weltraumschaf.commons.testing.CapturingPrintStream} before each test and
  * backups the origin streams after each test.
  * </p>
  *
@@ -60,6 +60,7 @@ import org.junit.runners.model.Statement;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class CapturedOutput implements TestRule {
 
@@ -147,6 +148,7 @@ public final class CapturedOutput implements TestRule {
         errMatcherBuilder.add(notNull(matcher, "matcher"));
     }
 
+    /** {@inheritDoc} */
     @Override
     public Statement apply(final Statement base, final Description description) {
         return new Statement() {

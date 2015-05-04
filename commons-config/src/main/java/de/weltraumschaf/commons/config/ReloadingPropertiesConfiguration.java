@@ -61,6 +61,7 @@ import java.util.Properties;
  *
  * @since 1.1.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public abstract class ReloadingPropertiesConfiguration {
 
@@ -132,7 +133,7 @@ public abstract class ReloadingPropertiesConfiguration {
     /**
      * Get a property by name.
      * <p>
-     * Throws a {@link RuntimeException} if property does not exists.
+     * Throws a {@link java.lang.RuntimeException} if property does not exists.
      * </p>
      *
      * @param propertyName must not be {@code null} or empty
@@ -152,7 +153,7 @@ public abstract class ReloadingPropertiesConfiguration {
      * Get a boolean property by name.
      * <p>
      * This method calls {@link #getProperty(java.lang.String, java.lang.String)}. The result will be
-     * passed through {@link Boolean#parseBoolean(java.lang.String)}.
+     * passed through {@link java.lang.Boolean#parseBoolean(java.lang.String)}.
      * </p>
      *
      * @param propertyName must not be {@code null} or empty
@@ -167,7 +168,7 @@ public abstract class ReloadingPropertiesConfiguration {
      * Get a integer property by name.
      * <p>
      * This method calls {@link #getProperty(java.lang.String, java.lang.String)}. The result will be
-     * passed through {@link Integer#parseInt(java.lang.String, int)} with radix of {@code 10}.
+     * passed through {@link java.lang.Integer#parseInt(java.lang.String, int)} with radix of {@code 10}.
      * </p>
      *
      * @param propertyName must not be {@code null} or empty

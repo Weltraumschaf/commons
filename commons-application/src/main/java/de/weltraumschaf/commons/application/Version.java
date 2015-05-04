@@ -47,6 +47,7 @@ import java.util.Properties;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class Version {
 
@@ -80,7 +81,7 @@ public final class Version {
      *
      * Only loads th property file once.
      *
-     * @throws IOException On IO errors of the property file.
+     * @throws java.io.IOException On IO errors of the property file.
      */
     public void load() throws IOException {
         if (!propertiesLoaded) {
@@ -119,9 +120,9 @@ public final class Version {
     }
 
     /**
-     * Returns the version string.
+     * {@inheritDoc}
      *
-     * @return Same as {@link #getVersion()}.
+     * Returns the version string.
      */
     @Override
     public String toString() {

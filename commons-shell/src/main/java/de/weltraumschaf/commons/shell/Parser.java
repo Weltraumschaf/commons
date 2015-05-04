@@ -16,6 +16,7 @@ package de.weltraumschaf.commons.shell;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public interface Parser {
 
@@ -24,7 +25,7 @@ public interface Parser {
      *
      * @param input line to parse
      * @return recognized shell command
-     * @throws SyntaxException if, the parsed line has syntax errors
+     * @throws de.weltraumschaf.commons.shell.SyntaxException if, the parsed line has syntax errors
      */
     ShellCommand parse(final String input) throws SyntaxException;
 

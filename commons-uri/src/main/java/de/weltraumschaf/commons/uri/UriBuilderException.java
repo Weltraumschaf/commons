@@ -40,13 +40,14 @@
 package de.weltraumschaf.commons.uri;
 
 /**
- * A runtime exception thrown by {@link UriBuilder#build(Object...)} methods when
+ * A runtime exception thrown by {@link de.weltraumschaf.commons.uri.UriBuilder#build(Object...)} methods when
  * a {@link java.net.URI} cannot be constructed based on the current state of the
  * builder.
  *
  * @author Paul Sandoz
  * @author Marc Hadley
  * @since 1.0
+ * @version $Id: $Id
  */
 public final class UriBuilderException extends java.lang.RuntimeException {
 

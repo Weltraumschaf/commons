@@ -17,6 +17,7 @@ import de.weltraumschaf.commons.validate.Validate;
  * Provides instances to access environment variables.
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class Environments {
 

@@ -57,6 +57,7 @@ import java.util.Date;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class StopWatch {
 
@@ -104,7 +105,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException} if the StopWatch is already running or not started yet.
+     * Throws {@link java.lang.IllegalStateException} if the StopWatch is already running or not started yet.
      * </p>
      */
     public void start() {
@@ -129,7 +130,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException} if the StopWatch is not running.
+     * Throws {@link java.lang.IllegalStateException} if the StopWatch is not running.
      * </p>
      */
     public void stop() {
@@ -165,7 +166,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException} if the StopWatch is not running.
+     * Throws {@link java.lang.IllegalStateException} if the StopWatch is not running.
      * </p>
      */
     public void split() {
@@ -186,7 +187,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException} if the StopWatch has not been split.
+     * Throws {@link java.lang.IllegalStateException} if the StopWatch has not been split.
      * </p>
      */
     public void unsplit() {
@@ -206,7 +207,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException} if the StopWatch is not currently running.
+     * Throws {@link java.lang.IllegalStateException} if the StopWatch is not currently running.
      * </p>
      */
     public void suspend() {
@@ -227,7 +228,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException} if the StopWatch has not been suspended.
+     * Throws {@link java.lang.IllegalStateException} if the StopWatch has not been suspended.
      * </p>
      */
     public void resume() {
@@ -283,7 +284,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException} if the StopWatch has not yet been split.
+     * Throws {@link java.lang.IllegalStateException} if the StopWatch has not yet been split.
      * </p>
      *
      * @return the split time in milliseconds
@@ -300,7 +301,7 @@ public final class StopWatch {
      * </p>
      *
      * <p>
-     * Throws {@link IllegalStateException} if the StopWatch has not yet been split.
+     * Throws {@link java.lang.IllegalStateException} if the StopWatch has not yet been split.
      * </p>
      *
      * @return the split time in nanoseconds
@@ -317,7 +318,7 @@ public final class StopWatch {
      * Returns the time this stopwatch was started.
      *
      * <p>
-     * Throws {@link IllegalStateException} if this StopWatch has not been started.
+     * Throws {@link java.lang.IllegalStateException} if this StopWatch has not been started.
      * </p>
      *
      * @return the time this stopwatch was started
@@ -331,13 +332,13 @@ public final class StopWatch {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Gets a summary of the time that the stopwatch recorded as a string.
      *
      * <p>
      * The format used is ISO8601-like, <i>hours</i>:<i>minutes</i>:<i>seconds</i>.<i>milliseconds</i>.
      * </p>
-     *
-     * @return the time as a String
      */
     @Override
     public String toString() {

@@ -37,6 +37,7 @@ import java.util.logging.Logger;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public class ShutDownHook extends Thread {
 
@@ -73,6 +74,8 @@ public class ShutDownHook extends Thread {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Iterates over all {@link #callbacks} and run them.
      */
     @Override

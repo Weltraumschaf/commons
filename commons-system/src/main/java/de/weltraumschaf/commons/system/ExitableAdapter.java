@@ -15,9 +15,11 @@ package de.weltraumschaf.commons.system;
  * Common shared functionality for exiters.
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public abstract class ExitableAdapter implements Exitable {
 
+    /** {@inheritDoc} */
     @Override
     public final void exit(final ExitCode status) {
         exit(status.getCode());

@@ -40,6 +40,7 @@ import javax.swing.JToolBar;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class ToolBarBuilder {
 

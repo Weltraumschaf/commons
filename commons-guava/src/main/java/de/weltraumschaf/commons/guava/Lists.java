@@ -27,6 +27,7 @@ import java.util.List;
  * @author Mike Bostock
  * @author Louis Wasserman
  * @since 2.0 (imported from Google Collections Library)
+ * @version $Id: $Id
  */
 public final class Lists {
 

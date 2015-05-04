@@ -88,7 +88,7 @@ interface MultivaluedMap<K, V> extends Map<K, List<V>> {
      *
      * @param key       the key.
      * @param newValues the values to be added.
-     * @throws NullPointerException if the supplied array of new values is {@code null}.
+     * @throws java.lang.NullPointerException if the supplied array of new values is {@code null}.
      * @since 2.0
      */
     @SuppressWarnings("unchecked")
@@ -102,7 +102,7 @@ interface MultivaluedMap<K, V> extends Map<K, List<V>> {
      *
      * @param key       the key.
      * @param valueList the list of values to be added.
-     * @throws NullPointerException if the supplied value list is {@code null}.
+     * @throws java.lang.NullPointerException if the supplied value list is {@code null}.
      * @since 2.0
      */
     void addAll(K key, List<V> valueList);

@@ -387,11 +387,13 @@ class PatternWithGroups {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public final int hashCode() {
         return regex.hashCode();
     }
 
+    /** {@inheritDoc} */
     @Override
     public final boolean equals(final Object obj) {
         if (obj == null) {
@@ -407,6 +409,7 @@ class PatternWithGroups {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public final String toString() {
         return regex;

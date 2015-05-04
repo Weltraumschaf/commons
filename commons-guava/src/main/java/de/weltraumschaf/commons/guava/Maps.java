@@ -27,6 +27,7 @@ import java.util.Map;
  * @author Isaac Shum
  * @author Louis Wasserman
  * @since 2.0 (imported from Google Collections Library)
+ * @version $Id: $Id
  */
 public final class Maps {
 
@@ -66,6 +67,8 @@ public final class Maps {
      * Creates an {@code IdentityHashMap} instance.
      *
      * @return a new, empty {@code IdentityHashMap}
+     * @param <K> a K object.
+     * @param <V> a V object.
      */
     public static <K, V> IdentityHashMap<K, V> newIdentityHashMap() {
         return new IdentityHashMap<K, V>();

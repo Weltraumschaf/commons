@@ -18,11 +18,12 @@ import javax.swing.JButton;
 /**
  * Builder to create a tool bar button.
  * <p>
- * You should not use this class directly. Instead use {@link ToolBarBuilder}.
+ * You should not use this class directly. Instead use {@link de.weltraumschaf.commons.swing.ToolBarBuilder}.
  * </p>
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class ToolBarButtonBuilder {
 

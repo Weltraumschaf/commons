@@ -72,11 +72,13 @@ final class MultivaluedStringMap extends MultivaluedHashMap<String, String> {
         super();
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void addFirstNull(List<String> values) {
         values.add("");
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void addNull(List<String> values) {
         values.add(0, "");

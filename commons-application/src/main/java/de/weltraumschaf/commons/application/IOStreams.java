@@ -21,7 +21,7 @@ import java.io.UnsupportedEncodingException;
  *
  * <p>
  * It is not good practice to clutter production code with calls to
- * {@link System#out}, {@link System#err}, and {@link System#in}. But on the
+ * {@link java.lang.System#out}, {@link java.lang.System#err}, and {@link java.lang.System#in}. But on the
  * other hand most applications must do I/O to the user. This aggregate object
  * contains I/O streams to pass around as injected dependency. It is only
  * necessary to the systems IO only at the main applications entry point:
@@ -53,11 +53,12 @@ import java.io.UnsupportedEncodingException;
  *
  * <p>
  * As a convenience method for creating an I/O streams object with the default I/O streams
- * of {@link System} you can use {@link IOStreams#newDefault()}.
+ * of {@link java.lang.System} you can use {@link de.weltraumschaf.commons.application.IOStreams#newDefault()}.
  * </p>
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class IOStreams implements IO {
 
@@ -96,9 +97,9 @@ public final class IOStreams implements IO {
     }
 
     /**
-     * Get standard errorln output stream.
+     * {@inheritDoc}
      *
-     * @return Print stream object.
+     * Get standard errorln output stream.
      */
     @Override
     public PrintStream getStderr() {
@@ -106,9 +107,9 @@ public final class IOStreams implements IO {
     }
 
     /**
-     * Get standard input stream.
+     * {@inheritDoc}
      *
-     * @return Input stream object.
+     * Get standard input stream.
      */
     @Override
     public InputStream getStdin() {
@@ -116,9 +117,9 @@ public final class IOStreams implements IO {
     }
 
     /**
-     * Get standard output stream.
+     * {@inheritDoc}
      *
-     * @return Print stream object.
+     * Get standard output stream.
      */
     @Override
     public PrintStream getStdout() {
@@ -129,22 +130,22 @@ public final class IOStreams implements IO {
      * Creates same as {@link #newDefault(java.lang.String)} but with {@link #DEFAULT_ENCODING} as encoding.
      *
      * @return Return always new instance.
-     * @throws UnsupportedEncodingException If system does not support {@link #DEFAULT_ENCODING encoding}.
+     * @throws java.io.UnsupportedEncodingException If system does not support {@link #DEFAULT_ENCODING encoding}.
      */
     public static IOStreams newDefault() throws UnsupportedEncodingException {
         return newDefault(DEFAULT_ENCODING);
     }
 
     /**
-     * Creates a new streams object initialized with {@link System#in}, {@link System#out}, and {@link System#err}.
+     * Creates a new streams object initialized with {@link java.lang.System#in}, {@link java.lang.System#out}, and {@link java.lang.System#err}.
      *
      * The output {@link PrintStream "print streams"} get {@link #DEFAULT_ENCODING} as encoding set.
-     * Also the {@link System#out}, and {@link System#err} are changed with a copy of the original
+     * Also the {@link java.lang.System#out}, and {@link java.lang.System#err} are changed with a copy of the original
      * print stream with the encoding.
      *
      * @param encoding must not be {@code null} or empty
      * @return return always new instance
-     * @throws UnsupportedEncodingException if system does not support passed encoding
+     * @throws java.io.UnsupportedEncodingException if system does not support passed encoding
      */
     public static IOStreams newDefault(final String encoding) throws UnsupportedEncodingException {
         Validate.notEmpty(encoding, "encoding");
@@ -156,9 +157,9 @@ public final class IOStreams implements IO {
     }
 
     /**
-     * Prints exception stack trace.
+     * {@inheritDoc}
      *
-     * @param ex must not be {@code null}
+     * Prints exception stack trace.
      */
     @Override
     public void printStackTrace(final Throwable ex) {
@@ -166,9 +167,9 @@ public final class IOStreams implements IO {
     }
 
     /**
-     * Prints error line.
+     * {@inheritDoc}
      *
-     * @param str String to print.
+     * Prints error line.
      */
     @Override
     public void errorln(final String str) {
@@ -176,9 +177,9 @@ public final class IOStreams implements IO {
     }
 
     /**
-     * Prints error.
+     * {@inheritDoc}
      *
-     * @param str String to print.
+     * Prints error.
      */
     @Override
     public void error(final String str) {
@@ -186,9 +187,9 @@ public final class IOStreams implements IO {
     }
 
     /**
-     * Prints string line.
+     * {@inheritDoc}
      *
-     * @param str String to print.
+     * Prints string line.
      */
     @Override
     public void println(final String str) {
@@ -196,9 +197,9 @@ public final class IOStreams implements IO {
     }
 
     /**
-     * Prints string.
+     * {@inheritDoc}
      *
-     * @param str String to print.
+     * Prints string.
      */
     @Override
     public void print(final String str) {

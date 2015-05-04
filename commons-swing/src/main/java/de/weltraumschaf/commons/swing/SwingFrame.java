@@ -61,6 +61,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public class SwingFrame extends JFrame {
 
@@ -174,7 +175,7 @@ public class SwingFrame extends JFrame {
      * Binds on the window closing event and calls the exiter to exit application.
      *
      * This method add a default window listener which {@link #exiter exits} on
-     * {@link WindowAdapter#windowClosing(java.awt.event.WindowEvent)}. You may override this method for other
+     * {@link java.awt.event.WindowAdapter#windowClosing(java.awt.event.WindowEvent)}. You may override this method for other
      * behaviour. This method is only invoked if {@link #setExitOnCloseWindow(boolean)} is set true.
      */
     protected void bindWindowClosing() {

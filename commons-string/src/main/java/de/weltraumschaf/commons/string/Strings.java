@@ -17,6 +17,7 @@ package de.weltraumschaf.commons.string;
  *
  * @since 1.0.1
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class Strings {
 
@@ -29,7 +30,7 @@ public final class Strings {
     }
 
     /**
-     * Trims passed in string and does not throw {@link NullPointerException} if passed in string is {@code null}.
+     * Trims passed in string and does not throw {@link java.lang.NullPointerException} if passed in string is {@code null}.
      *
      * @param fileName may be {@code null}
      * @return never {@code null}

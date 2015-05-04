@@ -35,6 +35,7 @@ import java.util.TreeSet;
  * @author Jared Levy
  * @author Chris Povirk
  * @since 2.0 (imported from Google Collections Library)
+ * @version $Id: $Id
  */
 public final class Sets {
 
@@ -111,7 +112,7 @@ public final class Sets {
      * @param expectedSize the number of elements you expect to add to the returned set
      * @return a new, empty {@code HashSet} with enough capacity to hold {@code
      *         expectedSize} elements without resizing //CHECKSTYLE:OFF
-     * @throws IllegalArgumentException if {@code expectedSize} is negative //CHECKSTYLE:ON
+     * @throws java.lang.IllegalArgumentException if {@code expectedSize} is negative //CHECKSTYLE:ON
      */
     public static <E> Set<E> newHashSetWithExpectedSize(final int expectedSize) {
         return new HashSet<E>(capacity(expectedSize));
@@ -134,6 +135,8 @@ public final class Sets {
      * instance. This behavior is similar to the way {@code IdentityHashMap} handles key lookups.
      *
      * @since 8.0
+     * @param <E> a E object.
+     * @return a {@link java.util.Set} object.
      */
     public static <E> Set<E> newIdentityHashSet() {
         return Sets.newSetFromMap(Maps.<E, Boolean>newIdentityHashMap());
@@ -141,9 +144,9 @@ public final class Sets {
 
     /**
      * Returns a set backed by the specified map. The resulting set displays the same ordering, concurrency, and
-     * performance characteristics as the backing map. In essence, this factory method provides a {@link Set}
-     * implementation corresponding to any {@link Map} implementation. There is no need to use this method on a
-     * {@link Map} implementation that already has a corresponding {@link Set} implementation (such as
+     * performance characteristics as the backing map. In essence, this factory method provides a {@link java.util.Set}
+     * implementation corresponding to any {@link java.util.Map} implementation. There is no need to use this method on a
+     * {@link java.util.Map} implementation that already has a corresponding {@link java.util.Set} implementation (such as
      * {@link java.util.HashMap} or {@link java.util.TreeMap}).
      *
      * <p>
@@ -165,7 +168,8 @@ public final class Sets {
      *
      * @param map the backing map
      * @return the set backed by the map
-     * @throws IllegalArgumentException if {@code map} is not empty
+     * @throws java.lang.IllegalArgumentException if {@code map} is not empty
+     * @param <E> a E object.
      */
     public static <E> Set<E> newSetFromMap(Map<E, Boolean> map) {
         return new SetFromMap<E>(map);
@@ -176,8 +180,8 @@ public final class Sets {
      *
      * @param expression a boolean expression
      * @param errorMessage the exception message to use if the check fails; will be converted to a string using
-     * {@link String#valueOf(Object)}
-     * @throws IllegalArgumentException if {@code expression} is false
+     * {@link java.lang.String#valueOf(Object)}
+     * @throws java.lang.IllegalArgumentException if {@code expression} is false
      */
     public static void checkArgument(
             boolean expression, Object errorMessage) {

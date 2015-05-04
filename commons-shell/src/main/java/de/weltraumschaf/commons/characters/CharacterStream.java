@@ -29,6 +29,7 @@ package de.weltraumschaf.commons.characters;
  * TODO: Implement line and column.
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public class CharacterStream {
 
@@ -56,7 +57,7 @@ public class CharacterStream {
      *
      * @return next character
      * // CHECKSTYLE:OFF
-     * @throws IndexOutOfBoundsException if, there are no more characters.
+     * @throws java.lang.IndexOutOfBoundsException if, there are no more characters.
      * // CHECKSTYLE:ON
      */
     public char next() {
@@ -97,7 +98,7 @@ public class CharacterStream {
      *
      * @return the peeked character.
      * // CHECKSTYLE:OFF
-     * @throws IndexOutOfBoundsException if there are no more character to peek
+     * @throws java.lang.IndexOutOfBoundsException if there are no more character to peek
      * // CHECKSTYLE:ON
      */
     public char peek() {

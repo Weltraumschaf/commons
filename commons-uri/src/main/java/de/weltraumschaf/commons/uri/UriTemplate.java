@@ -205,8 +205,8 @@ class UriTemplate {
      * <p>
      *
      * @param templateParser the parser to parse the template.
-     * @throws PatternSyntaxException if the specified regular expression could not be generated
-     * @throws IllegalArgumentException if the template is {@code null} or an empty string.
+     * @throws java.util.regex.PatternSyntaxException if the specified regular expression could not be generated
+     * @throws java.lang.IllegalArgumentException if the template is {@code null} or an empty string.
      */
     @SuppressWarnings("DuplicateThrows")
     protected UriTemplate(UriTemplateParser templateParser) throws
@@ -576,15 +576,16 @@ class UriTemplate {
         return b.toString();
     }
 
+    /** {@inheritDoc} */
     @Override
     public final String toString() {
         return pattern.toString();
     }
 
     /**
-     * Hashcode is calculated from String of the regular expression generated from the template.
+     * {@inheritDoc}
      *
-     * @return the hash code.
+     * Hashcode is calculated from String of the regular expression generated from the template.
      */
     @Override
     public final int hashCode() {
@@ -592,10 +593,9 @@ class UriTemplate {
     }
 
     /**
-     * Equality is calculated from the String of the regular expression generated from the templates.
+     * {@inheritDoc}
      *
-     * @param o the reference object with which to compare.
-     * @return true if equals, otherwise false.
+     * Equality is calculated from the String of the regular expression generated from the templates.
      */
     @Override
     public final boolean equals(Object o) {

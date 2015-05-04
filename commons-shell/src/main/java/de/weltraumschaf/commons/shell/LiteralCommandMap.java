@@ -23,6 +23,7 @@ import java.util.Map;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public abstract class LiteralCommandMap {
 
@@ -81,7 +82,7 @@ public abstract class LiteralCommandMap {
      * @param t token to check
      * @return command main type
      * // CHECKSTYLE:OFF
-     * @throws IllegalArgumentException if, token is not a main command
+     * @throws java.lang.IllegalArgumentException if, token is not a main command
      * // CHECKSTYLE:ON
      */
     public final MainCommandType determineCommand(final Token t) {
@@ -119,7 +120,7 @@ public abstract class LiteralCommandMap {
      * @param t token to check
      * @return command sub type
      * // CHECKSTYLE:OFF
-     * @throws IllegalArgumentException if, token is not a sub command
+     * @throws java.lang.IllegalArgumentException if, token is not a sub command
      * // CHECKSTYLE:ON
      */
     public final SubCommandType determineSubCommand(final Token t) {

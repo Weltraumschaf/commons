@@ -22,6 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @param <K> type of cache key
  * @param <V> type of cached value
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 @Experimental
 public class SoftCache<K, V> {

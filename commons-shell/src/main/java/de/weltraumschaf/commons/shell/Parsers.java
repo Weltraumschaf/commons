@@ -16,6 +16,7 @@ package de.weltraumschaf.commons.shell;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class Parsers {
 
@@ -28,7 +29,7 @@ public final class Parsers {
     }
 
     /**
-     * Creates a new parser with default scanner implementation and {@link NullCommandVerifier}.
+     * Creates a new parser with default scanner implementation and {@link de.weltraumschaf.commons.shell.NullCommandVerifier}.
      *
      * @param m map key word literals to command types
      * @return new instance
@@ -38,7 +39,7 @@ public final class Parsers {
     }
 
     /**
-     * Create new parser with custom scanner and {@link NullCommandVerifier}.
+     * Create new parser with custom scanner and {@link de.weltraumschaf.commons.shell.NullCommandVerifier}.
      *
      * @param s used to tokenize input
      * @param m map key word literals to command types
@@ -49,7 +50,7 @@ public final class Parsers {
     }
 
     /**
-     * Creates parser with {@link DefaultScanner}.
+     * Creates parser with {@link de.weltraumschaf.commons.shell.DefaultScanner}.
      *
      * @param v verifies parsed commands
      * @param m map key word literals to command types

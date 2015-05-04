@@ -19,6 +19,7 @@ import java.util.Set;
  * Helper class to verify if a given character belong to a specified group or range of characters.
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class CharacterHelper {
 
@@ -76,7 +77,6 @@ public final class CharacterHelper {
      * Checks whether a character is a number [0-9].
      *
      * @param character a single character
-     *
      * @return {@code true} if character is a number, unless {@code false}
      */
     public static boolean isNum(final char character) {
@@ -87,7 +87,6 @@ public final class CharacterHelper {
      * Checks whether a character is a number or alpha [0-9a-zA-Z].
      *
      * @param character a single character
-     *
      * @return {@code true} if character is a letter or number, unless {@code false}
      */
     public static boolean isAlphaNum(final char character) {

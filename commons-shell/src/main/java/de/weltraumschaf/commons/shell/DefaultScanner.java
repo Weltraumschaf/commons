@@ -54,11 +54,9 @@ class DefaultScanner implements Scanner {
     }
 
     /**
-     * Scans give line and returns list of recognized tokens.
+     * {@inheritDoc}
      *
-     * @param line must not be {@code null}
-     * @return never {@code null}, maybe empty
-     * @throws SyntaxException if syntax error occurred
+     * Scans give line and returns list of recognized tokens.
      */
     @Override
     public List<Token> scan(final String line) throws SyntaxException {

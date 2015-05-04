@@ -28,6 +28,7 @@ import org.hamcrest.TypeSafeMatcher;
  * </p>
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public class IsCloseTo extends TypeSafeMatcher<Long> {
 
@@ -52,11 +53,13 @@ public class IsCloseTo extends TypeSafeMatcher<Long> {
         this.value = value;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean matchesSafely(final Long item) {
         return actualDelta(item) <= 0.0;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void describeMismatchSafely(final Long item, final Description mismatchDescription) {
         mismatchDescription.appendValue(item)
@@ -64,6 +67,7 @@ public class IsCloseTo extends TypeSafeMatcher<Long> {
                 .appendValue(actualDelta(item));
     }
 
+    /** {@inheritDoc} */
     @Override
     public void describeTo(final Description description) {
         description.appendText("a numeric value within ")
@@ -83,7 +87,7 @@ public class IsCloseTo extends TypeSafeMatcher<Long> {
     }
 
     /**
-     * Creates a matcher of {@link Double}s that matches when an examined double is equal to the specified
+     * Creates a matcher of {@link java.lang.Double}s that matches when an examined double is equal to the specified
      * {@code operand}, within a range of +/- {@code error}.
      *
      * <p>

@@ -16,6 +16,7 @@ package de.weltraumschaf.commons.validate;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class Validate {
 
@@ -31,7 +32,7 @@ public final class Validate {
      * Validates that a given reference is not {@code null}.
      *
      * <p>
-     * This example validates that {@code input} is not null. If it is {@code null} a {@link NullPointerException} will
+     * This example validates that {@code input} is not null. If it is {@code null} a {@link java.lang.NullPointerException} will
      * be thrown with the {@code name} as hint in the exception message.:
      * </p>
      * <pre>{@code
@@ -42,7 +43,7 @@ public final class Validate {
      * }</pre>
      *
      * <p>
-     * The second parameter {@code name} may be omitted. Then a {@link NullPointerException} without any message will be
+     * The second parameter {@code name} may be omitted. Then a {@link java.lang.NullPointerException} without any message will be
      * thrown. For this purpose you can call the convenience method {@link #notNull(java.lang.Object)}.
      * </p>
      *
@@ -79,9 +80,9 @@ public final class Validate {
      * Validates that a given string reference is not {@code null} or empty.
      *
      * <p>
-     * This example validates that {@code input} is not null. If it is {@code null} a {@link NullPointerException} will
+     * This example validates that {@code input} is not null. If it is {@code null} a {@link java.lang.NullPointerException} will
      * be thrown with the {@code name} as hint in the exception message. Also it validates that {@code input} is not
-     * empty by calling {@link String#isEmpty()}. If the string is empty an {@link IllegalArgumentException} will be
+     * empty by calling {@link java.lang.String#isEmpty()}. If the string is empty an {@link java.lang.IllegalArgumentException} will be
      * thrown:
      * </p>
      * <pre>{@code
@@ -92,8 +93,8 @@ public final class Validate {
      * }</pre>
      *
      * <p>
-     * The second parameter {@code name} may be omitted. Then a {@link NullPointerException} or
-     * {@link IllegalArgumentException} without any message will be thrown. For this purpose you can call the
+     * The second parameter {@code name} may be omitted. Then a {@link java.lang.NullPointerException} or
+     * {@link java.lang.IllegalArgumentException} without any message will be thrown. For this purpose you can call the
      * convenience method {@link #notEmpty(java.lang.String)}.
      * </p>
      *
@@ -129,7 +130,7 @@ public final class Validate {
     /**
      * Tests that a given integer reference value is greater than the given lower bound.
      * <p>
-     * The method throws an {@link IllegalArgumentException} if the given reference is less than or equal the given
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than or equal the given
      * lower bound value.
      * </p>
      *
@@ -168,7 +169,7 @@ public final class Validate {
     /**
      * Tests that a given integer reference value is greater than or equal the given lower bound.
      * <p>
-     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given lower bound
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than the given lower bound
      * value.
      * </p>
      *
@@ -211,7 +212,7 @@ public final class Validate {
     /**
      * Tests that a given integer reference value is greater than the given lower bound.
      * <p>
-     * The method throws an {@link IllegalArgumentException} if the given reference is less than or equal the given
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than or equal the given
      * lower bound value.
      * </p>
      *
@@ -254,7 +255,7 @@ public final class Validate {
     /**
      * Tests that a given integer reference value is greater than or equal the given lower bound.
      * <p>
-     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given lower bound
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than the given lower bound
      * value.
      * </p>
      *
@@ -297,7 +298,7 @@ public final class Validate {
     /**
      * Tests that a given expression is true.
      * <p>
-     * Throws an {@link IllegalArgumentException} if the expression is {@code false}.
+     * Throws an {@link java.lang.IllegalArgumentException} if the expression is {@code false}.
      * </p>
      *
      * @param expression tested expression
@@ -321,8 +322,8 @@ public final class Validate {
      * @param index a user-supplied index identifying an element of an array, list or string
      * @param size the size of that array, list or string
      * @return the value of {@code index}
-     * @throws IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
-     * @throws IllegalArgumentException if {@code size} is negative
+     * @throws java.lang.IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
+     * @throws java.lang.IllegalArgumentException if {@code size} is negative
      */
     public static int checkElementIndex(int index, int size) {
         return checkElementIndex(index, size, "index");
@@ -339,8 +340,8 @@ public final class Validate {
      * @param size the size of that array, list or string
      * @param desc the text to use to describe this index in an error message
      * @return the value of {@code index}
-     * @throws IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
-     * @throws IllegalArgumentException if {@code size} is negative
+     * @throws java.lang.IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
+     * @throws java.lang.IllegalArgumentException if {@code size} is negative
      */
     public static int checkElementIndex(int index, int size, String desc) {
         // Carefully optimized for execution by hotspot (explanatory comment above)
@@ -425,9 +426,9 @@ public final class Validate {
      * @param start a user-supplied index identifying a starting position in an array, list or string
      * @param end a user-supplied index identifying a ending position in an array, list or string
      * @param size the size of that array, list or string
-     * @throws IndexOutOfBoundsException if either index is negative or is greater than {@code size}, or if {@code end}
+     * @throws java.lang.IndexOutOfBoundsException if either index is negative or is greater than {@code size}, or if {@code end}
      * is less than {@code start}
-     * @throws IllegalArgumentException if {@code size} is negative
+     * @throws java.lang.IllegalArgumentException if {@code size} is negative
      */
     public static void checkPositionIndexes(int start, int end, int size) {
         // Carefully optimized for execution by hotspot (explanatory comment above)

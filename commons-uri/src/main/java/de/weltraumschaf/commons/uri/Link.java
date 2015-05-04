@@ -140,13 +140,13 @@ abstract class Link {
     public abstract Map<String, String> getParams();
 
     /**
+     * {@inheritDoc}
+     *
      * Returns a string representation as a link header (RFC 5988).
      * All link params are serialized as link-param="value" where value
      * is a quoted-string. For example,
      *
      * <http://foo.bar/employee/john>; title="employee"; rel="manager friend"
-     *
-     * @return string link header representation for this link.
      */
     @Override
     public abstract String toString();

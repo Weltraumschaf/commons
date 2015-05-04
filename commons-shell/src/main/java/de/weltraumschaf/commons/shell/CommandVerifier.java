@@ -21,11 +21,12 @@ package de.weltraumschaf.commons.shell;
  * <li>Check if a command has legal arguments.</li>
  * </ul>
  * <p>
- * If a check fails throw {@link SyntaxException}.
+ * If a check fails throw {@link de.weltraumschaf.commons.shell.SyntaxException}.
  * </p>
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public interface CommandVerifier {
 
@@ -37,7 +38,7 @@ public interface CommandVerifier {
      * - correct number of arguments
      *
      * @param cmd command to verify
-     * @throws SyntaxException if, verification has failed
+     * @throws de.weltraumschaf.commons.shell.SyntaxException if, verification has failed
      */
     void verifyCommand(final ShellCommand cmd) throws SyntaxException;
 

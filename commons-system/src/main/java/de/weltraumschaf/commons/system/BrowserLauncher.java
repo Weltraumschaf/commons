@@ -24,6 +24,7 @@ import java.io.IOException;
  * </p>
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class BrowserLauncher {
 
@@ -82,10 +83,10 @@ public final class BrowserLauncher {
     /**
      * Open browser on specified URL.
      * <p>
-     * This method throws an {@link IllegalArgumentException} if the OS (given by constructor) is not supported.
+     * This method throws an {@link java.lang.IllegalArgumentException} if the OS (given by constructor) is not supported.
      * </p>
      * <p>
-     * This method throws an {@link RuntimeException} if the browser can't be started.
+     * This method throws an {@link java.lang.RuntimeException} if the browser can't be started.
      * </p>
      *
      * @param url URL to open, must not be {@code null} or empty

@@ -23,6 +23,7 @@ import de.weltraumschaf.commons.validate.Validate;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class Position {
 
@@ -102,9 +103,9 @@ public final class Position {
     }
 
     /**
-     * Returns human readable string representation.
+     * {@inheritDoc}
      *
-     * @return String representation.
+     * Returns human readable string representation.
      */
     @Override
     public String toString() {
@@ -118,11 +119,13 @@ public final class Position {
         return str.toString();
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hashCode(line, column, file);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (! (obj instanceof Position)) {

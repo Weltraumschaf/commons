@@ -21,11 +21,12 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
- * Matcher to test for {@link ApplicationException#getExitCode()}.
+ * Matcher to test for {@link de.weltraumschaf.commons.application.ApplicationException#getExitCode()}.
  *
  * @since 1.1.0
  * @param <T> type of exception to match its code
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class ApplicationExceptionCodeMatcher<T extends ApplicationException> extends TypeSafeMatcher<T> {
 
@@ -44,17 +45,20 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
         this.expectedExitCode = Validate.notNull(expectedExitCode, "expectedExitCode");
     }
 
+    /** {@inheritDoc} */
     @Override
     public void describeTo(final Description description) {
         description.appendText("exception with exit code ");
         description.appendText(expectedExitCode.toString());
     }
 
+    /** {@inheritDoc} */
     @Override
     protected boolean matchesSafely(final T item) {
         return expectedExitCode.getCode() == item.getExitCode().getCode();
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void describeMismatchSafely(final T item, final Description mismatch) {
         mismatch.appendText("exit code ");
@@ -64,7 +68,6 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
     /**
      * Static factory method.
      *
-     * @param <T> type of exception to match its code
      * @param expectedExitCode code to match, must not be {@code null}
      * @return never {@code null}, always new instance
      */

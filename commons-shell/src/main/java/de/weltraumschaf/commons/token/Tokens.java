@@ -16,6 +16,7 @@ package de.weltraumschaf.commons.token;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class Tokens {
 
@@ -28,7 +29,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link TokenType#BOOLEAN boolean} token.
+     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#BOOLEAN boolean} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}
@@ -40,7 +41,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link TokenType#INTEGER integer} token.
+     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#INTEGER integer} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}
@@ -52,7 +53,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link TokenType#FLOAT float} token.
+     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#FLOAT float} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}
@@ -64,7 +65,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link TokenType#STRING string} token.
+     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#STRING string} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}
@@ -76,7 +77,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link TokenType#KEYWORD keyword} token.
+     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#KEYWORD keyword} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}
@@ -88,7 +89,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link TokenType#LITERAL literal} token.
+     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#LITERAL literal} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}

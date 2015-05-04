@@ -19,6 +19,7 @@ import de.weltraumschaf.commons.system.Exitable;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public interface Invokable {
 
@@ -30,7 +31,7 @@ public interface Invokable {
     /**
      * Template method for main application code.
      *
-     * @throws Exception If something goes wrong.
+     * @throws java.lang.Exception If something goes wrong.
      */
     void execute() throws Exception;
 
@@ -70,6 +71,11 @@ public interface Invokable {
      */
     void setExiter(Exitable exiter);
 
+    /**
+     * <p>isDebugEnabled.</p>
+     *
+     * @return a boolean.
+     */
     boolean isDebugEnabled();
 
 }

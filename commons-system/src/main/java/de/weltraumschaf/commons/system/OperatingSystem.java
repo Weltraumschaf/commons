@@ -26,6 +26,7 @@ import de.weltraumschaf.commons.validate.Validate;
  * }</pre>
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public enum OperatingSystem {
 

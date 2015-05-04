@@ -19,7 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * This helper class removes boiler plate if you use {@link JCommander}.
+ * This helper class removes boiler plate if you use {@link com.beust.jcommander.JCommander}.
  * <p>
  * Example:
  * </p>
@@ -49,6 +49,7 @@ import java.util.List;
  * @since 1.0.1
  * @param <O> type of options bean
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class JCommanderImproved<O> {
 
@@ -80,7 +81,7 @@ public final class JCommanderImproved<O> {
     /**
      * Dedicated constructor.
      * <p>
-     * Throws an {@link IllegalArgumentException} if the options type can't be instantiated.
+     * Throws an {@link java.lang.IllegalArgumentException} if the options type can't be instantiated.
      * </p>
      *
      * @param programName must not be {@code null} or empty

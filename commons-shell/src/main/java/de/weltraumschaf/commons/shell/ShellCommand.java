@@ -27,6 +27,7 @@ import java.util.List;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public class ShellCommand {
 
@@ -79,7 +80,7 @@ public class ShellCommand {
     /**
      * Get optional mainCommand sub type.
      *
-     * If the main type does not support any sub type the same value as {@link LiteralCommandMap#getDefaultSubCommand()}
+     * If the main type does not support any sub type the same value as {@link de.weltraumschaf.commons.shell.LiteralCommandMap#getDefaultSubCommand()}
      * will be returned.
      *
      * @return sub type of mainCommand
@@ -99,6 +100,7 @@ public class ShellCommand {
         return Collections.unmodifiableList(arguments);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return Objects.toStringHelper(this)

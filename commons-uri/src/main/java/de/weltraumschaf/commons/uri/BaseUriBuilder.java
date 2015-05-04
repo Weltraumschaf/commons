@@ -150,10 +150,10 @@ abstract class BaseUriBuilder {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Create a copy of the BaseUriBuilder preserving its state. This is a more efficient means of creating a copy than
      * constructing a new BaseUriBuilder from a URI returned by the {@link #build(Object...)} method.
-     *
-     * @return a copy of the BaseUriBuilder.
      */
     @SuppressWarnings("CloneDoesntDeclareCloneNotSupportedException")
     @Override

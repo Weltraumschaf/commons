@@ -31,6 +31,7 @@ import net.jcip.annotations.ThreadSafe;
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 @ThreadSafe
+@ThreadSafe
 final class ConcurrentStack<E> implements Stack<E> {
 
     /**
@@ -38,11 +39,13 @@ final class ConcurrentStack<E> implements Stack<E> {
      */
     private final AtomicReference<Entry<E>> top = new AtomicReference<Entry<E>>();
 
+    /** {@inheritDoc} */
     @Override
     public boolean isEmpty() {
         return null == top.get();
     }
 
+    /** {@inheritDoc} */
     @Override
     public E peek() {
         final Entry<E> currentTop = top.get();
@@ -51,6 +54,7 @@ final class ConcurrentStack<E> implements Stack<E> {
                 : currentTop.value;
     }
 
+    /** {@inheritDoc} */
     @Override
     public E pop() {
         Entry<E> currentTop;
@@ -68,6 +72,7 @@ final class ConcurrentStack<E> implements Stack<E> {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void push(final E element) {
         while (true) {
@@ -79,6 +84,7 @@ final class ConcurrentStack<E> implements Stack<E> {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final Entry<E> currentTop = top.get();
@@ -90,6 +96,7 @@ final class ConcurrentStack<E> implements Stack<E> {
         return currentTop.hashCode();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (!(obj instanceof ConcurrentStack)) {
@@ -100,6 +107,7 @@ final class ConcurrentStack<E> implements Stack<E> {
         return Objects.equal(top.get(), other.top.get());
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder();

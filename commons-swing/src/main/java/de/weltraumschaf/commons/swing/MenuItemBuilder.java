@@ -20,11 +20,12 @@ import javax.swing.KeyStroke;
 /**
  * Builder to create a menu item.
  * <p>
- * You should not use this class directly. Instead use {@link MenuBarBuilder}.
+ * You should not use this class directly. Instead use {@link de.weltraumschaf.commons.swing.MenuBarBuilder}.
  * </p>
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @version $Id: $Id
  */
 public final class MenuItemBuilder {
     /**
@@ -79,8 +80,8 @@ public final class MenuItemBuilder {
     /**
      * Add an accelerator key.
      *
-     * For Mac OS with mask {@link KeyEvent#META_DOWN_MASK} for all other systems
-     * {@link KeyEvent#CTRL_DOWN_MASK}.
+     * For Mac OS with mask {@link java.awt.event.KeyEvent#META_DOWN_MASK} for all other systems
+     * {@link java.awt.event.KeyEvent#CTRL_DOWN_MASK}.
      *
      * @param accelerator Accelerator key character.
      * @return Returns the builder itself.

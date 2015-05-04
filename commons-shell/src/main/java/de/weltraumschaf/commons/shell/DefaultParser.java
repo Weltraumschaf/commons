@@ -79,11 +79,9 @@ class DefaultParser implements Parser {
     }
 
     /**
-     * Parses given input line.
+     * {@inheritDoc}
      *
-     * @param input must not be {@code null}
-     * @return never {@code null}
-     * @throws SyntaxException if the parsed line has syntax errors
+     * Parses given input line.
      */
     @Override
     public ShellCommand parse(final String input) throws SyntaxException {

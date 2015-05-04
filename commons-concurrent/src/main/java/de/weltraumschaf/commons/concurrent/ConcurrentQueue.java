@@ -31,7 +31,6 @@ import net.jcip.annotations.ThreadSafe;
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 @ThreadSafe
-@ThreadSafe
 final class ConcurrentQueue<E> implements Queue<E> {
 
     /**

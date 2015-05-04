@@ -124,6 +124,8 @@ import java.lang.annotation.Target;
      * Note that percent encoded values are allowed in the literal part of the
      * value, an implementation will recognize such values and will not double
      * encode the '%' character.</p>
+     *
+     * @return TODO
      */
     String value();
 }

@@ -282,7 +282,7 @@ class UriTemplate {
     }
 
     /**
-     * Normalize the URI by resolve the dot & dot-dot path segments as described in
+     * Normalize the URI by resolve the dot &amp; dot-dot path segments as described in
      * <a href="http://tools.ietf.org/html/rfc3986#section-5.2.4">RFC 3986</a>.
      *
      * This method provides a workaround for issues with {@code  java.net.URI#normalize()} which is not able to properly
@@ -300,7 +300,7 @@ class UriTemplate {
     }
 
     /**
-     * Normalize the URI by resolve the dot & dot-dot path segments as described in
+     * Normalize the URI by resolve the dot &amp; dot-dot path segments as described in
      * <a href="http://tools.ietf.org/html/rfc3986#section-5.2.4">RFC 3986</a>.
      *
      * This method provides a workaround for issues with {@code  java.net.URI#normalize()} which is not able to properly

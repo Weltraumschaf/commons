@@ -782,6 +782,12 @@ class UriComponent {
      * Decode a continuous sequence of percent encoded octets.
      * <p>
      * Assumes the index, i, starts that the first hex digit of the first percent-encoded octet.
+     * </p>
+     *
+     * @param s TODO
+     * @param i TODO
+     * @param bb TODO
+     * @return TODO
      */
     private static ByteBuffer decodePercentEncodedOctets(String s, int i, ByteBuffer bb) {
         if (bb == null) {
@@ -822,6 +828,9 @@ class UriComponent {
     /**
      * Decodes octets to characters using the UTF-8 decoding and appends the characters to a StringBuffer.
      *
+     * @param i TODO
+     * @param bb TODO
+     * @param sb TODO
      * @return the index to the next unchecked character in the string to decode
      */
     private static int decodeOctets(int i, ByteBuffer bb, StringBuilder sb) {

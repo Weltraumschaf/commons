@@ -2,12 +2,12 @@
  *  LICENSE
  *
  * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
- * &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt; wrote this file.
+ * &quot;Sven Strittmatter&quot; &amp;lt;weltraumschaf@googlemail.com&amp;gt; wrote this file.
  * As long as you retain this notice you can do whatever you want with
  * this stuff. If we meet some day, and you think this stuff is worth it,
  * you can buy me a non alcohol-free beer in return.
  *
- * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt;
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &amp;lt;weltraumschaf@googlemail.com&amp;gt;
  */
 package de.weltraumschaf.commons.validate;
 
@@ -15,7 +15,8 @@ package de.weltraumschaf.commons.validate;
  * Provides methods to validate inputs.
  *
  * @since 1.0.0
- * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @author Sven Strittmatter &amp;lt;weltraumschaf@googlemail.com&amp;gt;
+ * @version $Id: $Id
  */
 public final class Validate {
 
@@ -23,15 +24,15 @@ public final class Validate {
      * Hidden for pure static class.
      */
     private Validate() {
-<span class="nc" id="L26">        super();</span>
-<span class="nc" id="L27">        throw new UnsupportedOperationException(&quot;Must not be caled via reflection!&quot;);</span>
+<span class="fc" id="L27">        super();</span>
+<span class="fc" id="L28">        throw new UnsupportedOperationException(&quot;Must not be caled via reflection!&quot;);</span>
     }
 
     /**
      * Validates that a given reference is not {@code null}.
      *
      * &lt;p&gt;
-     * This example validates that {@code input} is not null. If it is {@code null} a {@link NullPointerException} will
+     * This example validates that {@code input} is not null. If it is {@code null} a {@link java.lang.NullPointerException} will
      * be thrown with the {@code name} as hint in the exception message.:
      * &lt;/p&gt;
      * &lt;pre&gt;{@code
@@ -42,7 +43,7 @@ public final class Validate {
      * }&lt;/pre&gt;
      *
      * &lt;p&gt;
-     * The second parameter {@code name} may be omitted. Then a {@link NullPointerException} without any message will be
+     * The second parameter {@code name} may be omitted. Then a {@link java.lang.NullPointerException} without any message will be
      * thrown. For this purpose you can call the convenience method {@link #notNull(java.lang.Object)}.
      * &lt;/p&gt;
      *
@@ -52,15 +53,15 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static &lt;T&gt; T notNull(final T reference, final String name) {
-<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (null == reference) {</span>
-<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (null == name) {</span>
-<span class="fc" id="L57">                throw new NullPointerException();</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if (null == reference) {</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            if (null == name) {</span>
+<span class="fc" id="L58">                throw new NullPointerException();</span>
             } else {
-<span class="fc" id="L59">                throw new NullPointerException(String.format(&quot;Parameter '%s' must not be null!&quot;, name));</span>
+<span class="fc" id="L60">                throw new NullPointerException(String.format(&quot;Parameter '%s' must not be null!&quot;, name));</span>
             }
         }
 
-<span class="fc" id="L63">        return reference;</span>
+<span class="fc" id="L64">        return reference;</span>
     }
 
     /**
@@ -72,16 +73,16 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static &lt;T&gt; T notNull(final T reference) {
-<span class="fc" id="L75">        return notNull(reference, null);</span>
+<span class="fc" id="L76">        return notNull(reference, null);</span>
     }
 
     /**
      * Validates that a given string reference is not {@code null} or empty.
      *
      * &lt;p&gt;
-     * This example validates that {@code input} is not null. If it is {@code null} a {@link NullPointerException} will
+     * This example validates that {@code input} is not null. If it is {@code null} a {@link java.lang.NullPointerException} will
      * be thrown with the {@code name} as hint in the exception message. Also it validates that {@code input} is not
-     * empty by calling {@link String#isEmpty()}. If the string is empty an {@link IllegalArgumentException} will be
+     * empty by calling {@link java.lang.String#isEmpty()}. If the string is empty an {@link java.lang.IllegalArgumentException} will be
      * thrown:
      * &lt;/p&gt;
      * &lt;pre&gt;{@code
@@ -92,8 +93,8 @@ public final class Validate {
      * }&lt;/pre&gt;
      *
      * &lt;p&gt;
-     * The second parameter {@code name} may be omitted. Then a {@link NullPointerException} or
-     * {@link IllegalArgumentException} without any message will be thrown. For this purpose you can call the
+     * The second parameter {@code name} may be omitted. Then a {@link java.lang.NullPointerException} or
+     * {@link java.lang.IllegalArgumentException} without any message will be thrown. For this purpose you can call the
      * convenience method {@link #notEmpty(java.lang.String)}.
      * &lt;/p&gt;
      *
@@ -102,17 +103,17 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static String notEmpty(final String reference, final String name) {
-<span class="fc" id="L105">        notNull(reference, name);</span>
+<span class="fc" id="L106">        notNull(reference, name);</span>
 
-<span class="fc bfc" id="L107" title="All 2 branches covered.">        if (reference.isEmpty()) {</span>
-<span class="fc bfc" id="L108" title="All 2 branches covered.">            if (null == name) {</span>
-<span class="fc" id="L109">                throw new IllegalArgumentException();</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        if (reference.isEmpty()) {</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">            if (null == name) {</span>
+<span class="fc" id="L110">                throw new IllegalArgumentException(&quot;Parameter must not be empty!&quot;);</span>
             } else {
-<span class="fc" id="L111">                throw new IllegalArgumentException(String.format(&quot;Parameter '%s' must not be empty!&quot;, name));</span>
+<span class="fc" id="L112">                throw new IllegalArgumentException(String.format(&quot;Parameter '%s' must not be empty!&quot;, name));</span>
             }
         }
 
-<span class="fc" id="L115">        return reference;</span>
+<span class="fc" id="L116">        return reference;</span>
     }
 
     /**
@@ -123,13 +124,13 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static String notEmpty(final String reference) {
-<span class="fc" id="L126">        return notEmpty(reference, null);</span>
+<span class="fc" id="L127">        return notEmpty(reference, null);</span>
     }
 
     /**
      * Tests that a given integer reference value is greater than the given lower bound.
      * &lt;p&gt;
-     * The method throws an {@link IllegalArgumentException} if the given reference is less than or equal the given
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than or equal the given
      * lower bound value.
      * &lt;/p&gt;
      *
@@ -139,16 +140,19 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static int greaterThan(final int reference, final int lowerBound, final String name) {
-<span class="fc bfc" id="L142" title="All 2 branches covered.">        if (reference &lt;= lowerBound) {</span>
-<span class="pc bpc" id="L143" title="1 of 2 branches missed.">            if (null == name) {</span>
-<span class="nc" id="L144">                throw new IllegalArgumentException();</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">        if (reference &lt;= lowerBound) {</span>
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">            if (null == name) {</span>
+<span class="nc" id="L145">                throw new NullPointerException(String.format(</span>
+                        &quot;Reference is not greater than lower bound: %d &gt; %d!&quot;,
+                        reference,
+                        lowerBound));
             } else {
-<span class="fc" id="L146">                throw new IllegalArgumentException(</span>
-                    String.format(&quot;Parameter '%s' must be greater than %d (was %d)!&quot;, name, lowerBound, reference));
+<span class="fc" id="L150">                throw new IllegalArgumentException(</span>
+                        String.format(&quot;Parameter '%s' must be greater than %d (was %d)!&quot;, name, lowerBound, reference));
             }
         }
 
-<span class="fc" id="L151">        return reference;</span>
+<span class="fc" id="L155">        return reference;</span>
     }
 
     /**
@@ -159,14 +163,14 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static int greaterThan(final int reference, final int lowerBound) {
-<span class="nc" id="L162">        return greaterThan(reference, lowerBound, null);</span>
+<span class="nc" id="L166">        return greaterThan(reference, lowerBound, null);</span>
     }
 
     /**
      * Tests that a given integer reference value is greater than or equal the given lower bound.
      * &lt;p&gt;
-     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given
-     * lower bound value.
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than the given lower bound
+     * value.
      * &lt;/p&gt;
      *
      * @param reference validated reference
@@ -175,16 +179,23 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static int greaterThanOrEqual(final int reference, final int lowerBound, final String name) {
-<span class="fc bfc" id="L178" title="All 2 branches covered.">        if (reference &lt; lowerBound) {</span>
-<span class="pc bpc" id="L179" title="1 of 2 branches missed.">            if (null == name) {</span>
-<span class="nc" id="L180">                throw new IllegalArgumentException();</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        if (reference &lt; lowerBound) {</span>
+<span class="pc bpc" id="L183" title="1 of 2 branches missed.">            if (null == name) {</span>
+<span class="nc" id="L184">                throw new NullPointerException(String.format(</span>
+                        &quot;Reference is not less than lower bound: %d &lt; %d!&quot;,
+                        reference,
+                        lowerBound));
             } else {
-<span class="fc" id="L182">                throw new IllegalArgumentException(</span>
-                    String.format(&quot;Parameter '%s' must be greater or equal than %d (was %d)!&quot;, name, lowerBound, reference));
+<span class="fc" id="L189">                throw new IllegalArgumentException(</span>
+                        String.format(
+                                &quot;Parameter '%s' must be greater or equal than %d (was %d)!&quot;,
+                                name,
+                                lowerBound,
+                                reference));
             }
         }
 
-<span class="fc" id="L187">        return reference;</span>
+<span class="fc" id="L198">        return reference;</span>
     }
 
     /**
@@ -195,13 +206,13 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static int greaterThanOrEqual(final int reference, final int lowerBound) {
-<span class="nc" id="L198">        return greaterThanOrEqual(reference, lowerBound, null);</span>
+<span class="nc" id="L209">        return greaterThanOrEqual(reference, lowerBound, null);</span>
     }
 
     /**
      * Tests that a given integer reference value is greater than the given lower bound.
      * &lt;p&gt;
-     * The method throws an {@link IllegalArgumentException} if the given reference is less than or equal the given
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than or equal the given
      * lower bound value.
      * &lt;/p&gt;
      *
@@ -211,16 +222,23 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static long greaterThan(final long reference, final long lowerBound, final String name) {
-<span class="fc bfc" id="L214" title="All 2 branches covered.">        if (reference &lt;= lowerBound) {</span>
-<span class="pc bpc" id="L215" title="1 of 2 branches missed.">            if (null == name) {</span>
-<span class="nc" id="L216">                throw new IllegalArgumentException();</span>
+<span class="fc bfc" id="L225" title="All 2 branches covered.">        if (reference &lt;= lowerBound) {</span>
+<span class="pc bpc" id="L226" title="1 of 2 branches missed.">            if (null == name) {</span>
+<span class="nc" id="L227">                throw new NullPointerException(String.format(</span>
+                        &quot;Reference is not less equal than lower bound: %d &lt;= %d!&quot;,
+                        reference,
+                        lowerBound));
             } else {
-<span class="fc" id="L218">                throw new IllegalArgumentException(</span>
-                    String.format(&quot;Parameter '%s' must be greater than %d (was %d)!&quot;, name, lowerBound, reference));
+<span class="fc" id="L232">                throw new IllegalArgumentException(</span>
+                        String.format(
+                                &quot;Parameter '%s' must be greater than %d (was %d)!&quot;,
+                                name,
+                                lowerBound,
+                                reference));
             }
         }
 
-<span class="fc" id="L223">        return reference;</span>
+<span class="fc" id="L241">        return reference;</span>
     }
 
     /**
@@ -231,14 +249,14 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static long greaterThan(final long reference, final long lowerBound) {
-<span class="nc" id="L234">        return greaterThan(reference, lowerBound, null);</span>
+<span class="nc" id="L252">        return greaterThan(reference, lowerBound, null);</span>
     }
 
     /**
      * Tests that a given integer reference value is greater than or equal the given lower bound.
      * &lt;p&gt;
-     * The method throws an {@link IllegalArgumentException} if the given reference is less than the given
-     * lower bound value.
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than the given lower bound
+     * value.
      * &lt;/p&gt;
      *
      * @param reference validated reference
@@ -247,16 +265,23 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static long greaterThanOrEqual(final long reference, final long lowerBound, final String name) {
-<span class="fc bfc" id="L250" title="All 2 branches covered.">        if (reference &lt; lowerBound) {</span>
-<span class="pc bpc" id="L251" title="1 of 2 branches missed.">            if (null == name) {</span>
-<span class="nc" id="L252">                throw new IllegalArgumentException();</span>
+<span class="fc bfc" id="L268" title="All 2 branches covered.">        if (reference &lt; lowerBound) {</span>
+<span class="pc bpc" id="L269" title="1 of 2 branches missed.">            if (null == name) {</span>
+<span class="nc" id="L270">                throw new NullPointerException(String.format(</span>
+                        &quot;Reference is not less than lower bound: %d &lt; %d!&quot;,
+                        reference,
+                        lowerBound));
             } else {
-<span class="fc" id="L254">                throw new IllegalArgumentException(</span>
-                    String.format(&quot;Parameter '%s' must be greater than or equal %d (was %d)!&quot;, name, lowerBound, reference));
+<span class="fc" id="L275">                throw new IllegalArgumentException(</span>
+                        String.format(
+                                &quot;Parameter '%s' must be greater than or equal %d (was %d)!&quot;,
+                                name,
+                                lowerBound,
+                                reference));
             }
         }
 
-<span class="fc" id="L259">        return reference;</span>
+<span class="fc" id="L284">        return reference;</span>
     }
 
     /**
@@ -267,24 +292,190 @@ public final class Validate {
      * @return the reference, if it is valid
      */
     public static long greaterThanOrEqual(final long reference, final long lowerBound) {
-<span class="nc" id="L270">        return greaterThanOrEqual(reference, lowerBound, null);</span>
+<span class="nc" id="L295">        return greaterThanOrEqual(reference, lowerBound, null);</span>
     }
 
     /**
      * Tests that a given expression is true.
      * &lt;p&gt;
-     * Throws an {@link IllegalArgumentException} if the expression is {@code false}.
+     * Throws an {@link java.lang.IllegalArgumentException} if the expression is {@code false}.
      * &lt;/p&gt;
      *
      * @param expression tested expression
      * @param message must not be {@code null} or empty
      */
     public static void isTrue(final boolean expression, final String message) {
-<span class="fc" id="L283">        Validate.notEmpty(message, &quot;Parameter 'message' must not be null or empty!&quot;);</span>
+<span class="fc" id="L308">        Validate.notEmpty(message, &quot;Parameter 'message' must not be null or empty!&quot;);</span>
 
-<span class="fc bfc" id="L285" title="All 2 branches covered.">        if (!expression) {</span>
-<span class="fc" id="L286">            throw new IllegalArgumentException(message);</span>
+<span class="fc bfc" id="L310" title="All 2 branches covered.">        if (!expression) {</span>
+<span class="fc" id="L311">            throw new IllegalArgumentException(message);</span>
         }
-<span class="fc" id="L288">    }</span>
+<span class="fc" id="L313">    }</span>
+
+    /**
+     * Ensures that {@code index} specifies a valid &lt;i&gt;element&lt;/i&gt; in an array, list or string of size {@code size}. An
+     * element index may range from zero, inclusive, to {@code size}, exclusive.
+     *
+     * TODO: Review this method.
+     *
+     * @since 2.0
+     * @param index a user-supplied index identifying an element of an array, list or string
+     * @param size the size of that array, list or string
+     * @return the value of {@code index}
+     * @throws java.lang.IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
+     * @throws java.lang.IllegalArgumentException if {@code size} is negative
+     */
+    public static int checkElementIndex(int index, int size) {
+<span class="nc" id="L329">        return checkElementIndex(index, size, &quot;index&quot;);</span>
+    }
+
+    /**
+     * Ensures that {@code index} specifies a valid &lt;i&gt;element&lt;/i&gt; in an array, list or string of size {@code size}. An
+     * element index may range from zero, inclusive, to {@code size}, exclusive.
+     *
+     * TODO: Review this method.
+     *
+     * @since 2.0
+     * @param index a user-supplied index identifying an element of an array, list or string
+     * @param size the size of that array, list or string
+     * @param desc the text to use to describe this index in an error message
+     * @return the value of {@code index}
+     * @throws java.lang.IndexOutOfBoundsException if {@code index} is negative or is not less than {@code size}
+     * @throws java.lang.IllegalArgumentException if {@code size} is negative
+     */
+    public static int checkElementIndex(int index, int size, String desc) {
+        // Carefully optimized for execution by hotspot (explanatory comment above)
+<span class="nc bnc" id="L348" title="All 4 branches missed.">        if (index &lt; 0 || index &gt;= size) {</span>
+<span class="nc" id="L349">            throw new IndexOutOfBoundsException(badElementIndex(index, size, desc));</span>
+        }
+<span class="nc" id="L351">        return index;</span>
+    }
+
+    /**
+     * TODO: Review this method.
+     *
+     * @since 2.0
+     * @param index TODO Write comment
+     * @param size TODO Write comment
+     * @param desc TODO Write comment
+     * @return TODO Write comment
+     */
+    private static String badElementIndex(int index, int size, String desc) {
+<span class="nc bnc" id="L364" title="All 2 branches missed.">        if (index &lt; 0) {</span>
+<span class="nc" id="L365">            return format(&quot;%s (%s) must not be negative&quot;, desc, index);</span>
+<span class="nc bnc" id="L366" title="All 2 branches missed.">        } else if (size &lt; 0) {</span>
+<span class="nc" id="L367">            throw new IllegalArgumentException(&quot;negative size: &quot; + size);</span>
+        } else { // index &gt;= size
+<span class="nc" id="L369">            return format(&quot;%s (%s) must be less than size (%s)&quot;, desc, index, size);</span>
+        }
+    }
+
+    /**
+     * Substitutes each {@code %s} in {@code template} with an argument. These are matched by position - the first
+     * {@code %s} gets {@code args[0]}, etc. If there are more arguments than placeholders, the unmatched arguments will
+     * be appended to the end of the formatted message in square braces.
+     *
+     * TODO: Review this method.
+     *
+     * @param template a non-null string containing 0 or more {@code %s} placeholders.
+     * @param args the arguments to be substituted into the message template. Arguments are converted to strings using
+     * {@link String#valueOf(Object)}. Arguments can be null.
+     */
+    static String format(String template,
+            Object... args) {
+<span class="nc" id="L386">        template = String.valueOf(template); // null -&gt; &quot;null&quot;</span>
+
+        // start substituting the arguments into the '%s' placeholders
+<span class="nc" id="L389">        StringBuilder builder = new StringBuilder(</span>
+                template.length() + 16 * args.length);
+<span class="nc" id="L391">        int templateStart = 0;</span>
+<span class="nc" id="L392">        int i = 0;</span>
+<span class="nc bnc" id="L393" title="All 2 branches missed.">        while (i &lt; args.length) {</span>
+<span class="nc" id="L394">            int placeholderStart = template.indexOf(&quot;%s&quot;, templateStart);</span>
+<span class="nc bnc" id="L395" title="All 2 branches missed.">            if (placeholderStart == -1) {</span>
+<span class="nc" id="L396">                break;</span>
+            }
+<span class="nc" id="L398">            builder.append(template.substring(templateStart, placeholderStart));</span>
+<span class="nc" id="L399">            builder.append(args[i++]);</span>
+<span class="nc" id="L400">            templateStart = placeholderStart + 2;</span>
+<span class="nc" id="L401">        }</span>
+<span class="nc" id="L402">        builder.append(template.substring(templateStart));</span>
+
+        // if we run out of placeholders, append the extra args in square braces
+<span class="nc bnc" id="L405" title="All 2 branches missed.">        if (i &lt; args.length) {</span>
+<span class="nc" id="L406">            builder.append(&quot; [&quot;);</span>
+<span class="nc" id="L407">            builder.append(args[i++]);</span>
+<span class="nc bnc" id="L408" title="All 2 branches missed.">            while (i &lt; args.length) {</span>
+<span class="nc" id="L409">                builder.append(&quot;, &quot;);</span>
+<span class="nc" id="L410">                builder.append(args[i++]);</span>
+            }
+<span class="nc" id="L412">            builder.append(']');</span>
+        }
+
+<span class="nc" id="L415">        return builder.toString();</span>
+    }
+
+    /**
+     * Ensures that {@code start} and {@code end} specify a valid &lt;i&gt;positions&lt;/i&gt;
+     * in an array, list or string of size {@code size}, and are in order. A position index may range from zero to
+     * {@code size}, inclusive.
+     *
+     * TODO: Review this method.
+     *
+     * @since 2.0
+     * @param start a user-supplied index identifying a starting position in an array, list or string
+     * @param end a user-supplied index identifying a ending position in an array, list or string
+     * @param size the size of that array, list or string
+     * @throws java.lang.IndexOutOfBoundsException if either index is negative or is greater than {@code size}, or if {@code end}
+     * is less than {@code start}
+     * @throws java.lang.IllegalArgumentException if {@code size} is negative
+     */
+    public static void checkPositionIndexes(int start, int end, int size) {
+        // Carefully optimized for execution by hotspot (explanatory comment above)
+<span class="nc bnc" id="L435" title="All 6 branches missed.">        if (start &lt; 0 || end &lt; start || end &gt; size) {</span>
+<span class="nc" id="L436">            throw new IndexOutOfBoundsException(badPositionIndexes(start, end, size));</span>
+        }
+<span class="nc" id="L438">    }</span>
+
+    /**
+     * TODO Write comment
+     *
+     * @since 2.0
+     * @param start TODO Write comment
+     * @param end TODO Write comment
+     * @param size TODO Write comment
+     * @return TODO Write comment
+     */
+    private static String badPositionIndexes(int start, int end, int size) {
+<span class="nc bnc" id="L450" title="All 4 branches missed.">        if (start &lt; 0 || start &gt; size) {</span>
+<span class="nc" id="L451">            return badPositionIndex(start, size, &quot;start index&quot;);</span>
+        }
+<span class="nc bnc" id="L453" title="All 4 branches missed.">        if (end &lt; 0 || end &gt; size) {</span>
+<span class="nc" id="L454">            return badPositionIndex(end, size, &quot;end index&quot;);</span>
+        }
+        // end &lt; start
+<span class="nc" id="L457">        return format(&quot;end index (%s) must not be less than start index (%s)&quot;,</span>
+                end, start);
+    }
+
+    /**
+     * TODO Write comment
+     *
+     * @since 2.0
+     * @param index TODO Write comment
+     * @param size TODO Write comment
+     * @param desc TODO Write comment
+     * @return TODO Write comment
+     */
+    private static String badPositionIndex(int index, int size, String desc) {
+<span class="nc bnc" id="L471" title="All 2 branches missed.">        if (index &lt; 0) {</span>
+<span class="nc" id="L472">            return format(&quot;%s (%s) must not be negative&quot;, desc, index);</span>
+<span class="nc bnc" id="L473" title="All 2 branches missed.">        } else if (size &lt; 0) {</span>
+<span class="nc" id="L474">            throw new IllegalArgumentException(&quot;negative size: &quot; + size);</span>
+        } else { // index &gt; size
+<span class="nc" id="L476">            return format(&quot;%s (%s) must not be greater than size (%s)&quot;,</span>
+                    desc, index, size);
+        }
+    }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

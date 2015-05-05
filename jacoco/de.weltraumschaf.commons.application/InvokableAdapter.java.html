@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>InvokableAdapter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Commons Application</a> &gt; <a href="index.source.html" class="el_package">de.weltraumschaf.commons.application</a> &gt; <span class="el_source">InvokableAdapter.java</span></div><h1>InvokableAdapter.java</h1><pre class="source lang-java linenums">/*
+ * LICENSE
+ *
+ * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
+ * &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf(at)googlemail(dot)com&gt;
+ */
+package de.weltraumschaf.commons.application;
+
+import de.weltraumschaf.commons.system.DefaultExiter;
+import de.weltraumschaf.commons.system.ExitCode;
+import de.weltraumschaf.commons.system.Exitable;
+import java.io.UnsupportedEncodingException;
+import java.util.concurrent.Callable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Abstract base implementation of an command line invokable.
+ *
+ * &lt;p&gt;
+ * Extend this class in your client code.
+ * &lt;/p&gt;
+ *
+ * &lt;p&gt;
+ * Example:
+ * &lt;/p&gt;
+ * &lt;pre&gt;{@code
+ *  public final class MyApp extends InvokableAdapter {
+ *
+ *      public MyApp(final String[] args) {
+ *          super(args);
+ *      }
+ *
+ *      public static void main(final String[] args) {
+ *          InvokableAdapter.main(new MyApp(args));
+ *      }
+ *
+ *      &amp;#064;Override
+ *      public void execute() throws Exception {
+ *          registerShutdownHook(new Runnable() {
+ *
+ *              &amp;#064;Override
+ *              public void run() {
+ *                  // Your shutdown code goes here.
+ *              }
+ *          });
+ *
+ *          // Your application code here.
+ *      }
+ *  }
+ * }&lt;/pre&gt;
+ *
+ * @since 1.0.0
+ * @author Sven Strittmatter &amp;lt;weltraumschaf@googlemail.com&amp;gt;
+ * @version $Id: $Id
+ */
+public abstract class InvokableAdapter implements Invokable {
+
+    public boolean debug;
+
+    /**
+     * Copy of the command line arguments.
+     */
+    private final String[] args;
+
+    /**
+     * Container for shutdown {@link Runnable callbacks}.
+     */
+    private final ShutDownHook shutDownHook;
+
+    /**
+     * I/O streams.
+     */
+    private IO ioStreams;
+
+    /**
+     * Abstraction for {@link System#exit(int)}.
+     */
+<span class="fc" id="L84">    private Exitable exiter = new DefaultExiter();</span>
+
+    /**
+     * Runtime for registering callbacks.
+     */
+    private final Runtime runtime;
+
+    /**
+     * Copies the command line arguments.
+     *
+     * @param args Command line arguments.
+     */
+    public InvokableAdapter(final String[] args) {
+<span class="fc" id="L97">        this(args, Runtime.getRuntime(), new ShutDownHook());</span>
+<span class="fc" id="L98">    }</span>
+
+    /**
+     * Dedicated constructor.
+     *
+     * @param args Command line arguments.
+     * @param runtime Runtime for registering callbacks.
+     * @param shutDownHook Object to hold shutdown hooks.
+     */
+<span class="fc" id="L107">    public InvokableAdapter(final String[] args, final Runtime runtime, final ShutDownHook shutDownHook) {</span>
+<span class="fc" id="L108">        this.args = args.clone();</span>
+<span class="fc" id="L109">        this.runtime = runtime;</span>
+<span class="fc" id="L110">        this.shutDownHook = shutDownHook;</span>
+<span class="fc" id="L111">    }</span>
+
+    /**
+     * Invokes {@link #main(de.weltraumschaf.commons.application.Invokable, de.weltraumschaf.commons.application.IO)
+     * invokable} with default I/O.
+     *
+     * @param invokable Implementation to invoke.
+     */
+    public static void main(final Invokable invokable) {
+        try {
+<span class="fc" id="L121">            main(invokable, IOStreams.newDefault());</span>
+<span class="nc" id="L122">        } catch (UnsupportedEncodingException ex) {</span>
+<span class="nc" id="L123">            Logger.getLogger(InvokableAdapter.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L124">            invokable.exit(-1);</span>
+<span class="fc" id="L125">        }</span>
+<span class="fc" id="L126">    }</span>
+
+    /**
+     * Inject the I/O streams to the invokable and then calls {@link de.weltraumschaf.commons.application.Invokable#init()} and then
+     * {@link de.weltraumschaf.commons.application.Invokable#execute()}.
+     *
+     * This method handles ell thrown {@link java.lang.Exception} and calls {@link java.lang.System#exit(int)}.
+     *
+     * @param invokable Implementation to invoke.
+     * @param ioStreams I/O streams.
+     */
+    public static void main(final Invokable invokable, final IO ioStreams) {
+<span class="fc" id="L138">        main(invokable, ioStreams, invokable.isDebugEnabled());</span>
+<span class="fc" id="L139">    }</span>
+
+    /**
+     * Inject the I/O streams to the invokable and then calls {@link de.weltraumschaf.commons.application.Invokable#init()} and then
+     * {@link de.weltraumschaf.commons.application.Invokable#execute()}.
+     *
+     * This method handles ell thrown {@link java.lang.Exception} and calls {@link java.lang.System#exit(int)}, and prints stack trace if
+     * &lt;code&gt;debug&lt;/code&gt; is &lt;tt&gt;true&lt;/tt&gt;.
+     *
+     * FIXME Remove debug parameter.
+     *
+     * @param invokable implementation to invoke
+     * @param ioStreams I/O streams
+     * @param debug print stack trace if true
+     */
+    public static void main(final Invokable invokable, final IO ioStreams, final boolean debug) {
+<span class="fc" id="L155">        invokable.setIoStreams(ioStreams);</span>
+
+        try {
+<span class="fc" id="L158">            invokable.init();</span>
+<span class="fc" id="L159">            invokable.execute();</span>
+<span class="fc" id="L160">        } catch (final Exception ex) {</span>
+<span class="fc" id="L161">            ioStreams.errorln(&quot;FATAL: &quot; + ex.getMessage());</span>
+
+<span class="pc bpc" id="L163" title="1 of 2 branches missed.">            if (invokable.isDebugEnabled()) {</span>
+<span class="nc" id="L164">                ioStreams.printStackTrace(ex);</span>
+            }
+
+<span class="pc bpc" id="L167" title="1 of 2 branches missed.">            if (ex instanceof ApplicationException) { // NOPMD Don't want to duplicate code for ERR out.</span>
+<span class="nc" id="L168">                invokable.exit(((ApplicationException) ex).getExitCode());</span>
+            } else {
+<span class="fc" id="L170">                invokable.exit(-1);</span>
+            }
+<span class="fc" id="L172">        }</span>
+
+<span class="fc" id="L174">        invokable.exit(0);</span>
+<span class="fc" id="L175">    }</span>
+
+    /** {@inheritDoc} */
+    @Override
+    public final boolean isDebugEnabled() {
+<span class="fc" id="L180">        return debug;</span>
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * Adds shutdown hook to runtime.
+     */
+    @Override
+    public final void init() {
+<span class="fc" id="L190">        runtime.addShutdownHook(shutDownHook);</span>
+
+<span class="pc bpc" id="L192" title="1 of 2 branches missed.">        if (debug) {</span>
+<span class="nc" id="L193">            getIoStreams().println(&quot;[Commons] Debug is on.&quot;);</span>
+        }
+<span class="fc" id="L195">    }</span>
+
+    /**
+     * Get the command line arguments.
+     *
+     * @return Returns copy of the arguments array.
+     */
+    public final String[] getArgs() {
+<span class="fc" id="L203">        return args.clone();</span>
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final IO getIoStreams() {
+<span class="fc" id="L209">        return ioStreams;</span>
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public final void setIoStreams(final IO ioStreams) {
+<span class="fc" id="L215">        this.ioStreams = ioStreams;</span>
+<span class="fc" id="L216">    }</span>
+
+    /**
+     * Register a {@link Runnable callback} as shut down hook.
+     *
+     * @param callback must not be {@code null}
+     */
+    public final void registerShutdownHook(final Runnable callback) {
+<span class="fc" id="L224">        shutDownHook.register(callback);</span>
+<span class="fc" id="L225">    }</span>
+
+    /**
+     * Register a {@link Callable callback} as shut down hook.
+     *
+     * @param callback must not be {@code null}
+     */
+    public final void registerShutdownHook(final Callable&lt;Void&gt; callback) {
+<span class="fc" id="L233">        shutDownHook.register(callback);</span>
+<span class="fc" id="L234">    }</span>
+
+    /** {@inheritDoc} */
+    @Override
+    public final void exit(int status) {
+<span class="fc" id="L239">        exiter.exit(status);</span>
+<span class="fc" id="L240">    }</span>
+
+    /** {@inheritDoc} */
+    @Override
+    public final void exit(ExitCode status) {
+<span class="fc" id="L245">        exiter.exit(status);</span>
+<span class="fc" id="L246">    }</span>
+
+    /** {@inheritDoc} */
+    @Override
+    public final void setExiter(final Exitable exiter) {
+<span class="fc" id="L251">        this.exiter = exiter;</span>
+<span class="fc" id="L252">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

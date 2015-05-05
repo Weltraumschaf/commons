@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150505" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Commons Concurrent &#x2013; Commons Concurrent</title>
+    <title>Commons Config &#x2013; Commons Config</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -63,11 +63,11 @@
         </li>
       <li class="divider ">/</li>
                 <li class="">
-                    <a href="./" title="Commons Concurrent">
-        Commons Concurrent</a>
+                    <a href="./" title="Commons Config">
+        Commons Config</a>
         </li>
       <li class="divider ">/</li>
-        <li class="">Commons Concurrent</li>
+        <li class="">Commons Config</li>
                 
                 
                     
@@ -153,23 +153,34 @@
                         
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Commons Concurrent</h1>
-<p>This module provides concurrent implementations of common data structures.</p>
-<p>Provided data structures are:</p>
-
-<ul>
-  
-<li><a href="apidocs/de/weltraumschaf/commons/concurrent/Stack.html">Javadoc of Stack</a></li>
-  
-<li><a href="apidocs/de/weltraumschaf/commons/concurrent/Queue.html">Javadoc of Queue</a></li>
-</ul>
-<p>Implementations may be obtained by the <a href="apidocs/de/weltraumschaf/commons/concurrent/Concurrent.html">factory</a>:</p>
+            <h1>Commons Config</h1>
+<p>This module contains utilities and helpers for configurations.</p>
+<div class="section">
+<h2><a name="ReloadingPropertiesConfiguration"></a>ReloadingPropertiesConfiguration</h2>
+<p>This properties based configuration reloads automatically if thefile has changed. So you need not to restart an application due to configuration change. The implementation is bsed on this <a class="externalLink" href="http://www.javacodegeeks.com/2014/10/dead-simple-configuration.html">blog article</a>.</p>
+<p>Example:</p>
 
 <div class="source">
 <div class="source">
-<pre>final Stack stack = Concurrent.newStack();
-final Queue queue = Concurrent.newQueue();
-</pre></div></div>
+<pre>final class MyAppConfig extends ReloadingPropertiesConfiguration {
+
+    public MyAppConfig(final Path file) {
+        super(file);
+    }
+
+    public String getServiceUrl() {
+        return getRequiredProperty(&quot;service.url&quot;);
+    }
+
+    public boolean getShouldStartSlow() {
+        return getFlag(&quot;start-slow&quot;, false);
+    }
+
+    public int getHttpPort(final int defaultPort) {
+        return getInteger(&quot;myapp.http.port&quot;, defaultPort);
+    }
+}
+</pre></div></div></div>
                   </div>
             </div>
           </div>

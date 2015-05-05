@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150505" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Commons Experimental &#x2013; Project Dependencies</title>
+    <title>Commons JCommander &#x2013; Project Dependencies</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -63,8 +63,8 @@
         </li>
       <li class="divider ">/</li>
                 <li class="">
-                    <a href="./" title="Commons Experimental">
-        Commons Experimental</a>
+                    <a href="./" title="Commons JCommander">
+        Commons JCommander</a>
         </li>
       <li class="divider ">/</li>
         <li class="">Project Dependencies</li>
@@ -167,30 +167,24 @@
 <th>Type</th>
 <th>License</th></tr>
 <tr class="b">
+<td>com.beust</td>
+<td><a class="externalLink" href="http://beust.com/jcommander">jcommander</a></td>
+<td>1.35</td>
+<td>jar</td>
+<td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></td></tr>
+<tr class="a">
 <td>com.github.stephenc.jcip</td>
 <td><a class="externalLink" href="http://stephenc.github.com/jcip-annotations">jcip-annotations</a></td>
 <td>1.0-1</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></td></tr>
-<tr class="a">
-<td>de.weltraumschaf.commons</td>
-<td><a class="externalLink" href="http://weltraumschaf.github.com/commons/guava/">guava</a></td>
-<td>2.0.0</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></td></tr>
 <tr class="b">
-<td>de.weltraumschaf.commons</td>
-<td><a class="externalLink" href="http://weltraumschaf.github.com/commons/shell/">shell</a></td>
-<td>2.0.0</td>
-<td>jar</td>
-<td><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></td></tr>
-<tr class="a">
 <td>de.weltraumschaf.commons</td>
 <td><a class="externalLink" href="http://weltraumschaf.github.com/commons/validate/">validate</a></td>
 <td>2.0.0</td>
 <td>jar</td>
 <td><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>net.sourceforge.findbugs</td>
 <td><a class="externalLink" href="http://findbugs.sourceforge.net/">annotations</a></td>
 <td>1.3.2</td>
@@ -295,37 +289,17 @@
 <div class="section">
 <h3><a name="Dependency_Tree"></a>Dependency Tree</h3>
 <ul>
-<li>de.weltraumschaf.commons:experimental:jar:2.0.0 <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
+<li>de.weltraumschaf.commons:jcommander:jar:2.0.0 <img id="_img1" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep0', '_img1' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep0" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
-<th>Commons Experimental</th></tr>
+<th>Commons JCommander</th></tr>
 <tr class="b">
 <td>
-<p><b>Description: </b>This modul contains experimental API. Do not use in production code.
-        Everything in this module may change drastically or may be vanish at least.</p>
-<p><b>URL: </b><a class="externalLink" href="http://weltraumschaf.github.com/commons/experimental/">http://weltraumschaf.github.com/commons/experimental/</a></p>
+<p><b>Description: </b>Handy extensions for JCommander.</p>
+<p><b>URL: </b><a class="externalLink" href="http://weltraumschaf.github.com/commons/jcommander/">http://weltraumschaf.github.com/commons/jcommander/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></p></td></tr></table></div>
 <ul>
-<li>de.weltraumschaf.commons:guava:jar:2.0.0 (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
-<table border="0" class="table table-striped">
-<tr class="a">
-<th>Commons Guava</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>A small subset of Guava to reduce the footprint of this library.</p>
-<p><b>URL: </b><a class="externalLink" href="http://weltraumschaf.github.com/commons/guava/">http://weltraumschaf.github.com/commons/guava/</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></p></td></tr></table></div></li>
-<li>de.weltraumschaf.commons:shell:jar:2.0.0 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
-<table border="0" class="table table-striped">
-<tr class="a">
-<th>Commons Shell</th></tr>
-<tr class="b">
-<td>
-<p><b>Description: </b>Utilities for creating more complex shell commands with subcommands. It provides easy ability to
-        parse the users command line input.</p>
-<p><b>URL: </b><a class="externalLink" href="http://weltraumschaf.github.com/commons/shell/">http://weltraumschaf.github.com/commons/shell/</a></p>
-<p><b>Project License: </b><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></p></td></tr></table></div></li>
-<li>de.weltraumschaf.commons:validate:jar:2.0.0 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
+<li>de.weltraumschaf.commons:validate:jar:2.0.0 (compile) <img id="_img3" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep2', '_img3' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep2" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>Commons Validate</th></tr>
@@ -335,7 +309,16 @@
         of the whole lib from Apache.</p>
 <p><b>URL: </b><a class="externalLink" href="http://weltraumschaf.github.com/commons/validate/">http://weltraumschaf.github.com/commons/validate/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.weltraumschaf.de/the-beer-ware-license.txt">THE BEER-WARE LICENSE</a></p></td></tr></table></div></li>
-<li>net.sourceforge.findbugs:annotations:jar:1.3.2 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
+<li>com.beust:jcommander:jar:1.35 (compile) <img id="_img5" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep4', '_img5' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep4" style="display:none">
+<table border="0" class="table table-striped">
+<tr class="a">
+<th>JCommander</th></tr>
+<tr class="b">
+<td>
+<p><b>Description: </b>A Java framework to parse command line options with annotations.</p>
+<p><b>URL: </b><a class="externalLink" href="http://beust.com/jcommander">http://beust.com/jcommander</a></p>
+<p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div></li>
+<li>net.sourceforge.findbugs:annotations:jar:1.3.2 (compile) <img id="_img7" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep6', '_img7' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep6" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>FindBugs-Annotations</th></tr>
@@ -344,7 +327,7 @@
 <p><b>Description: </b>Annotation supports the FindBugs tool</p>
 <p><b>URL: </b><a class="externalLink" href="http://findbugs.sourceforge.net/">http://findbugs.sourceforge.net/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.gnu.org/licenses/lgpl.html">GNU Lesser Public License</a></p></td></tr></table></div></li>
-<li>com.github.stephenc.jcip:jcip-annotations:jar:1.0-1 (compile) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
+<li>com.github.stephenc.jcip:jcip-annotations:jar:1.0-1 (compile) <img id="_img9" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep8', '_img9' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep8" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>JCIP Annotations under Apache License</th></tr>
@@ -353,7 +336,7 @@
 <p><b>Description: </b>A clean room implementation of the JCIP Annotations based entirely on the specification provided by the javadocs.</p>
 <p><b>URL: </b><a class="externalLink" href="http://stephenc.github.com/jcip-annotations">http://stephenc.github.com/jcip-annotations</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache License, Version 2.0</a></p></td></tr></table></div></li>
-<li>junit:junit:jar:4.12 (test) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
+<li>junit:junit:jar:4.12 (test) <img id="_img11" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep10', '_img11' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep10" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>JUnit</th></tr>
@@ -362,7 +345,7 @@
 <p><b>Description: </b>JUnit is a unit testing framework for Java, created by Erich Gamma and Kent Beck.</p>
 <p><b>URL: </b><a class="externalLink" href="http://junit.org">http://junit.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.eclipse.org/legal/epl-v10.html">Eclipse Public License 1.0</a></p></td></tr></table></div></li>
-<li>org.mockito:mockito-core:jar:1.10.8 (test) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
+<li>org.mockito:mockito-core:jar:1.10.8 (test) <img id="_img13" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep12', '_img13' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep12" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>Mockito</th></tr>
@@ -372,7 +355,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://www.mockito.org">http://www.mockito.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://github.com/mockito/mockito/blob/master/LICENSE">The MIT License</a></p></td></tr></table></div>
 <ul>
-<li>org.objenesis:objenesis:jar:2.1 (test) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
+<li>org.objenesis:objenesis:jar:2.1 (test) <img id="_img15" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep14', '_img15' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep14" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>Objenesis</th></tr>
@@ -381,7 +364,7 @@
 <p><b>Description: </b>A library for instantiating Java objects</p>
 <p><b>URL: </b><a class="externalLink" href="http://objenesis.org">http://objenesis.org</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2</a></p></td></tr></table></div></li></ul></li>
-<li>org.hamcrest:hamcrest-library:jar:1.3 (test) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
+<li>org.hamcrest:hamcrest-library:jar:1.3 (test) <img id="_img17" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep16', '_img17' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep16" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>Hamcrest library</th></tr>
@@ -391,7 +374,7 @@
 <p><b>URL: </b><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-library">https://github.com/hamcrest/JavaHamcrest/hamcrest-library</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td></tr></table></div>
 <ul>
-<li>org.hamcrest:hamcrest-core:jar:1.3 (test) <img id="_img21" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep20', '_img21' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep20" style="display:none">
+<li>org.hamcrest:hamcrest-core:jar:1.3 (test) <img id="_img19" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep18', '_img19' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep18" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>Hamcrest Core</th></tr>
@@ -400,7 +383,7 @@
 <p><b>Description: </b>This is the core API of hamcrest matcher framework to be used by third-party framework providers. This includes the a foundation set of matcher implementations for common operations.</p>
 <p><b>URL: </b><a class="externalLink" href="https://github.com/hamcrest/JavaHamcrest/hamcrest-core">https://github.com/hamcrest/JavaHamcrest/hamcrest-core</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td></tr></table></div></li></ul></li>
-<li>com.googlecode.multithreadedtc:multithreadedtc:jar:1.01 (test) <img id="_img23" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep22', '_img23' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep22" style="display:none">
+<li>com.googlecode.multithreadedtc:multithreadedtc:jar:1.01 (test) <img id="_img21" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep20', '_img21' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep20" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>multithreadedtc</th></tr>
@@ -409,7 +392,7 @@
 <p><b>Description: </b>A framework for testing concurrent Java applications</p>
 <p><b>URL: </b><a class="externalLink" href="http://code.google.com/p/multithreadedtc/">http://code.google.com/p/multithreadedtc/</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.opensource.org/licenses/bsd-license.php">New BSD License</a></p></td></tr></table></div></li>
-<li>org.skyscreamer:jsonassert:jar:1.2.3 (test) <img id="_img25" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep24', '_img25' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep24" style="display:none">
+<li>org.skyscreamer:jsonassert:jar:1.2.3 (test) <img id="_img23" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep22', '_img23' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep22" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>JSONassert</th></tr>
@@ -419,7 +402,7 @@
 <p><b>URL: </b><a class="externalLink" href="http://github.com/skyscreamer/yoga">http://github.com/skyscreamer/yoga</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.apache.org/licenses/LICENSE-2.0.txt">The Apache Software License, Version 2.0</a></p></td></tr></table></div>
 <ul>
-<li>org.json:json:jar:20090211 (test) <img id="_img27" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep26', '_img27' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep26" style="display:none">
+<li>org.json:json:jar:20090211 (test) <img id="_img25" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep24', '_img25' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep24" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>JSON (JavaScript Object Notation)</th></tr>
@@ -434,7 +417,7 @@
     These properties make JSON an ideal data-interchange language.</p>
 <p><b>URL: </b><a class="externalLink" href="http://www.json.org/java/index.html">http://www.json.org/java/index.html</a></p>
 <p><b>Project License: </b><a class="externalLink" href="http://www.json.org/license.html">provided without support or warranty</a></p></td></tr></table></div></li></ul></li>
-<li>nl.jqno.equalsverifier:equalsverifier:jar:1.5.1 (test) <img id="_img29" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep28', '_img29' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep28" style="display:none">
+<li>nl.jqno.equalsverifier:equalsverifier:jar:1.5.1 (test) <img id="_img27" src="./images/icon_info_sml.gif" alt="Information" onclick="toggleDependencyDetail( '_dep26', '_img27' );" style="cursor: pointer;vertical-align:text-bottom;"></img><div id="_dep26" style="display:none">
 <table border="0" class="table table-striped">
 <tr class="a">
 <th>EqualsVerifier</th></tr>
@@ -449,9 +432,9 @@
 <p><b>Apache 2: </b>Objenesis</p>
 <p><b>Eclipse Public License 1.0: </b>JUnit</p>
 <p><b>Apache License, Version 2.0: </b>JCIP Annotations under Apache License</p>
-<p><b>THE BEER-WARE LICENSE: </b>Commons Experimental, Commons Guava, Commons Shell, Commons Validate</p>
+<p><b>THE BEER-WARE LICENSE: </b>Commons JCommander, Commons Validate</p>
 <p><b>provided without support or warranty: </b>JSON (JavaScript Object Notation)</p>
-<p><b>The Apache Software License, Version 2.0: </b>EqualsVerifier, JSONassert</p>
+<p><b>The Apache Software License, Version 2.0: </b>EqualsVerifier, JCommander, JSONassert</p>
 <p><b>The MIT License: </b>Mockito</p>
 <p><b>GNU Lesser Public License: </b>FindBugs-Annotations</p></div><a name="Dependency_File_Details"></a>
 <div class="section">
@@ -466,6 +449,14 @@
 <th>JDK Rev</th>
 <th>Debug</th></tr>
 <tr class="b">
+<td>jcommander-1.35.jar</td>
+<td>59.13 kB</td>
+<td>64</td>
+<td>50</td>
+<td>5</td>
+<td>1.5</td>
+<td>debug</td></tr>
+<tr class="a">
 <td>jcip-annotations-1.0-1.jar</td>
 <td>4.61 kB</td>
 <td>14</td>
@@ -473,7 +464,7 @@
 <td>1</td>
 <td>1.5</td>
 <td>release</td></tr>
-<tr class="a">
+<tr class="b">
 <td>multithreadedtc-1.01.jar</td>
 <td>18.72 kB</td>
 <td>19</td>
@@ -481,23 +472,7 @@
 <td>1</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="b">
-<td>guava-2.0.0.jar</td>
-<td>13.05 kB</td>
-<td>21</td>
-<td>9</td>
-<td>1</td>
-<td>1.6</td>
-<td>debug</td></tr>
 <tr class="a">
-<td>shell-2.0.0.jar</td>
-<td>27.79 kB</td>
-<td>43</td>
-<td>29</td>
-<td>3</td>
-<td>1.6</td>
-<td>debug</td></tr>
-<tr class="b">
 <td>validate-2.0.0.jar</td>
 <td>5.09 kB</td>
 <td>12</td>
@@ -505,7 +480,7 @@
 <td>1</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>junit-4.12.jar</td>
 <td>307.55 kB</td>
 <td>323</td>
@@ -513,7 +488,7 @@
 <td>30</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>annotations-1.3.2.jar</td>
 <td>11.29 kB</td>
 <td>29</td>
@@ -521,7 +496,7 @@
 <td>2</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>equalsverifier-1.5.1.jar</td>
 <td>478.27 kB</td>
 <td>389</td>
@@ -529,7 +504,7 @@
 <td>21</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>hamcrest-core-1.3.jar</td>
 <td>43.97 kB</td>
 <td>52</td>
@@ -537,7 +512,7 @@
 <td>3</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>hamcrest-library-1.3.jar</td>
 <td>51.83 kB</td>
 <td>46</td>
@@ -545,7 +520,7 @@
 <td>7</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>json-20090211.jar</td>
 <td>44.87 kB</td>
 <td>21</td>
@@ -553,7 +528,7 @@
 <td>1</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>mockito-core-1.10.8.jar</td>
 <td>1.10 MB</td>
 <td>1,106</td>
@@ -561,7 +536,7 @@
 <td>65</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <td>objenesis-2.1.jar</td>
 <td>40.78 kB</td>
 <td>52</td>
@@ -569,7 +544,7 @@
 <td>9</td>
 <td>1.5</td>
 <td>debug</td></tr>
-<tr class="a">
+<tr class="b">
 <td>jsonassert-1.2.3.jar</td>
 <td>27.02 kB</td>
 <td>30</td>
@@ -577,7 +552,7 @@
 <td>2</td>
 <td>1.6</td>
 <td>debug</td></tr>
-<tr class="b">
+<tr class="a">
 <th>Total</th>
 <th>Size</th>
 <th>Entries</th>
@@ -585,23 +560,23 @@
 <th>Packages</th>
 <th>JDK Rev</th>
 <th>Debug</th></tr>
-<tr class="a">
-<td>14</td>
-<td>2.15 MB</td>
-<td>2,157</td>
-<td>1,545</td>
-<td>147</td>
-<td>1.6</td>
-<td>13</td></tr>
 <tr class="b">
-<td>compile: 5</td>
-<td>compile: 61.83 kB</td>
-<td>compile: 119</td>
-<td>compile: 62</td>
-<td>compile: 8</td>
-<td>-</td>
-<td>compile: 4</td></tr>
+<td>13</td>
+<td>2.16 MB</td>
+<td>2,157</td>
+<td>1,557</td>
+<td>148</td>
+<td>1.6</td>
+<td>12</td></tr>
 <tr class="a">
+<td>compile: 4</td>
+<td>compile: 80.12 kB</td>
+<td>compile: 119</td>
+<td>compile: 74</td>
+<td>compile: 9</td>
+<td>-</td>
+<td>compile: 3</td></tr>
+<tr class="b">
 <td>test: 9</td>
 <td>test: 2.09 MB</td>
 <td>test: 2,038</td>
@@ -628,53 +603,50 @@
 <th>Artifact</th>
 <th>icon-development</th></tr>
 <tr class="b">
+<td>com.beust:jcommander:jar:1.35</td>
+<td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//com/beust/jcommander/1.35/jcommander-1.35.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
+<tr class="a">
 <td>com.github.stephenc.jcip:jcip-annotations:jar:1.0-1</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//com/github/stephenc/jcip/jcip-annotations/1.0-1/jcip-annotations-1.0-1.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>com.googlecode.multithreadedtc:multithreadedtc:jar:1.01</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//com/googlecode/multithreadedtc/multithreadedtc/1.01/multithreadedtc-1.01.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
-<td>de.weltraumschaf.commons:guava:jar:2.0.0</td>
-<td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//de/weltraumschaf/commons/guava/2.0.0/guava-2.0.0.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
 <tr class="a">
-<td>de.weltraumschaf.commons:shell:jar:2.0.0</td>
-<td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//de/weltraumschaf/commons/shell/2.0.0/shell-2.0.0.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
 <td>de.weltraumschaf.commons:validate:jar:2.0.0</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//de/weltraumschaf/commons/validate/2.0.0/validate-2.0.0.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>junit:junit:jar:4.12</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//junit/junit/4.12/junit-4.12.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>net.sourceforge.findbugs:annotations:jar:1.3.2</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//net/sourceforge/findbugs/annotations/1.3.2/annotations-1.3.2.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>nl.jqno.equalsverifier:equalsverifier:jar:1.5.1</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//nl/jqno/equalsverifier/equalsverifier/1.5.1/equalsverifier-1.5.1.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.hamcrest:hamcrest-core:jar:1.3</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.hamcrest:hamcrest-library:jar:1.3</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//org/hamcrest/hamcrest-library/1.3/hamcrest-library-1.3.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.json:json:jar:20090211</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//org/json/json/20090211/json-20090211.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.mockito:mockito-core:jar:1.10.8</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//org/mockito/mockito-core/1.10.8/mockito-core-1.10.8.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <td>org.objenesis:objenesis:jar:2.1</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//org/objenesis/objenesis/2.1/objenesis-2.1.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="a">
+<tr class="b">
 <td>org.skyscreamer:jsonassert:jar:1.2.3</td>
 <td><a class="externalLink" href="http://archiva.icongmbh.de/archiva/repository/icon-development//org/skyscreamer/jsonassert/1.2.3/jsonassert-1.2.3.jar"><img alt="Found at http://archiva.icongmbh.de/archiva/repository/icon-development/" src="images/icon_success_sml.gif" /></a></td></tr>
-<tr class="b">
+<tr class="a">
 <th>Total</th>
 <th>icon-development</th></tr>
-<tr class="a">
-<td>14 (compile: 5, test: 9)</td>
-<td>14</td></tr></table></div>
+<tr class="b">
+<td>13 (compile: 4, test: 9)</td>
+<td>13</td></tr></table></div>
                   </div>
             </div>
           </div>

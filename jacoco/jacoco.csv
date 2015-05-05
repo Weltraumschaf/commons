@@ -1,3 +1,4 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Commons JCommander,de.weltraumschaf.commons.jcommander,JCommanderImproved,10,329,6,20,3,66,6,16,0,9
-Commons JCommander,de.weltraumschaf.commons.jcommander,JCommanderImproved.new Comparator() {...},0,12,0,0,0,2,0,2,0,2
+Commons String,de.weltraumschaf.commons.string,StringJoiner,10,563,12,116,8,128,12,67,0,15
+Commons String,de.weltraumschaf.commons.string,Strings,0,15,0,2,0,3,0,3,0,2
+Commons String,de.weltraumschaf.commons.string,StringEscape,0,43,0,0,0,4,0,3,0,3

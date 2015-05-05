@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="Date-Revision-yyyymmdd" content="20150505" />
     <meta http-equiv="Content-Language" content="en" />
-    <title>Commons Validate &#x2013; Commons Validate</title>
+    <title>Commons System &#x2013; Commons System</title>
     <link rel="stylesheet" href="./css/apache-maven-fluido-1.3.0.min.css" />
     <link rel="stylesheet" href="./css/site.css" />
     <link rel="stylesheet" href="./css/print.css" media="print" />
@@ -63,11 +63,11 @@
         </li>
       <li class="divider ">/</li>
                 <li class="">
-                    <a href="./" title="Commons Validate">
-        Commons Validate</a>
+                    <a href="./" title="Commons System">
+        Commons System</a>
         </li>
       <li class="divider ">/</li>
-        <li class="">Commons Validate</li>
+        <li class="">Commons System</li>
                 
                 
                     
@@ -153,9 +153,66 @@
                         
         <div id="bodyColumn"  class="span9" >
                                   
-            <h1>Commons Validate</h1>
-<p>Provides classes to validate input. It&#x2019;s like the validate methods from Apache&#x2019;s <a class="externalLink" href="https://commons.apache.org/proper/commons-lang/">commongs Lang</a>, but with less load of other classes. This module is designed to be very small and only provides validate methods.</p>
-<p>See <a href="apidocs/de/weltraumschaf/commons/validate/Validate.html">Validate</a> class for examples.</p>
+            <h1>Commons System</h1>
+<p>This module provides helpers/utilities to abstract away system calls with side effects such as <tt>System.exit()</tt>. Also system dependnet this such as find out the operating system or opening the operatinfgs systems default browser with an URI. </p>
+<div class="section">
+<h2><a name="Exitable_Interface_and_Friends"></a>Exitable Interface and Friends</h2>
+<p>TBD</p></div>
+<div class="section">
+<h2><a name="ExitCode_Interface"></a>ExitCode Interface</h2>
+<p>This interface provides the ability to implement own exit code enums for exitables (section before). Purpose is to provide exit code numbers (as integer) for the exitable to signal a evaluatable return code the JVM emits on exit.</p>
+<p>Example:</p>
+
+<div class="source">
+<div class="source">
+<pre>public enum ExitCodeImpl implements ExitCode {
+
+    OK(0), ERROR(1), FATAL(-1);
+
+    private final int code;
+
+    public ExitCodeImpl(final int code) {
+        super();
+        this.code = code;
+    }
+
+    @Override
+    public int getCode() [
+        return code;
+    }
+
+}
+</pre></div></div></div>
+<div class="section">
+<h2><a name="OperatingSystem_Enum"></a>OperatingSystem Enum</h2>
+<p>This enum helps you to determine the operating system your JVM is running on. It provides three eunum values for the major systems (<tt>WINDOWS</tt>, <tt>LINUX</tt>, <tt>MACOS</tt>) and one for unrecogniezed systems (<tt>UNKNOWN</tt>).</p>
+<p>The enum provides a static factory method which determines the right OS from it&#x2019;s name. </p>
+<p>Example:</p>
+
+<div class="source">
+<div class="source">
+<pre>final String osName = System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, &quot;&quot;);
+final OperatingSystem os = OperatingSystem.determine(osName);
+</pre></div></div></div>
+<div class="section">
+<h2><a name="BrowserLauncher_Class"></a>BrowserLauncher Class</h2>
+<p>This class tries to open a given URL with the operaings system&#x2019;s default browser. Supported operating systems are Windows, Linux and Mac OS X.</p>
+<p>Example:</p>
+
+<div class="source">
+<div class="source">
+<pre>final BrowserLauncher launcher = new BrowserLauncher();
+launcher.openBrowser(&quot;https://www.weltraumschaf.de&quot;);
+</pre></div></div>
+<p>which is a short hand for:</p>
+
+<div class="source">
+<div class="source">
+<pre>final String osName = System.getProperty(OperatingSystem.OS_SYSTEM_PROPERTY, &quot;&quot;);
+final OperatingSystem os = OperatingSystem.determine(osName);
+final BrowserLauncher launcher = new BrowserLauncher(os);
+launcher.openBrowser(&quot;https://www.weltraumschaf.de&quot;);
+</pre></div></div></div>
                   </div>
             </div>
           </div>

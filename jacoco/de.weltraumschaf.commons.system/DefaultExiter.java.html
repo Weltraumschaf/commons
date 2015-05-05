@@ -12,16 +12,18 @@
 package de.weltraumschaf.commons.system;
 
 /**
- * Invokes {@link System#exit(int)}.
+ * Invokes {@link java.lang.System#exit(int)}.
  *
- * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @author Sven Strittmatter &amp;lt;weltraumschaf@googlemail.com&amp;gt;
+ * @version $Id: $Id
  */
-<span class="nc" id="L19">public final class DefaultExiter extends ExitableAdapter {</span>
+<span class="nc" id="L20">public final class DefaultExiter extends ExitableAdapter {</span>
 
+    /** {@inheritDoc} */
     @Override
     public void exit(int status) {
-<span class="nc" id="L23">        System.exit(status);</span>
-<span class="nc" id="L24">    }</span>
+<span class="nc" id="L25">        System.exit(status);</span>
+<span class="nc" id="L26">    }</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

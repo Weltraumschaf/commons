@@ -14,14 +14,16 @@ package de.weltraumschaf.commons.system;
 /**
  * Common shared functionality for exiters.
  *
- * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @author Sven Strittmatter &amp;lt;weltraumschaf@googlemail.com&amp;gt;
+ * @version $Id: $Id
  */
-<span class="fc" id="L19">public abstract class ExitableAdapter implements Exitable {</span>
+<span class="fc" id="L20">public abstract class ExitableAdapter implements Exitable {</span>
 
+    /** {@inheritDoc} */
     @Override
     public final void exit(final ExitCode status) {
-<span class="fc" id="L23">        exit(status.getCode());</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L25">        exit(status.getCode());</span>
+<span class="fc" id="L26">    }</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

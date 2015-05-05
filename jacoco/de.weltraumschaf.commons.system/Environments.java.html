@@ -2,12 +2,12 @@
  *  LICENSE
  *
  * &quot;THE BEER-WARE LICENSE&quot; (Revision 43):
- * &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt; wrote this file.
+ * &quot;Sven Strittmatter&quot; &amp;lt;weltraumschaf@googlemail.com&amp;gt; wrote this file.
  * As long as you retain this notice you can do whatever you want with
  * this stuff. If we meet some day, and you think this stuff is worth it,
  * you can buy me a non alcohol-free beer in return.
  *
- * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &lt;weltraumschaf@googlemail.com&gt;
+ * Copyright (C) 2012 &quot;Sven Strittmatter&quot; &amp;lt;weltraumschaf@googlemail.com&amp;gt;
  */
 package de.weltraumschaf.commons.system;
 
@@ -16,7 +16,8 @@ import de.weltraumschaf.commons.validate.Validate;
 /**
  * Provides instances to access environment variables.
  *
- * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @author Sven Strittmatter &amp;lt;weltraumschaf@googlemail.com&amp;gt;
+ * @version $Id: $Id
  */
 public final class Environments {
 
@@ -24,8 +25,9 @@ public final class Environments {
      * Hidden for static factory.
      */
     private Environments() {
-<span class="nc" id="L27">        super();</span>
-<span class="nc" id="L28">    }</span>
+<span class="fc" id="L28">        super();</span>
+<span class="fc" id="L29">        throw new UnsupportedOperationException(&quot;Constructor must not be called by reflection!&quot;);</span>
+    }
 
     /**
      * Get a default implementation.
@@ -33,7 +35,7 @@ public final class Environments {
      * @return never {@code null}, always new instance
      */
     public static Env defaultEnv() {
-<span class="fc" id="L36">        return new DefaultEnv();</span>
+<span class="fc" id="L38">        return new DefaultEnv();</span>
     }
 
     /**
@@ -52,11 +54,9 @@ public final class Environments {
         /**
          * Get a environment variable.
          *
-         * @deprecated Will be remove in next version.
          * @param name must not be {@code null}
          * @return never {@code null}, maybe empty
          */
-        @Deprecated
         String get(Names name);
 
         /**
@@ -69,136 +69,145 @@ public final class Environments {
          */
         String get(String name, String fallback);
 
+        /**
+         * Get a environment variable.
+         *
+         * @since 2.0.0
+         * @param name must not be {@code null} or empty
+         * @param fallback must not be {@code null}
+         * @return never {@code null}, maybe empty
+         */
+        String get(Names name, String fallback);
+
     }
 
     /**
      * Default implementation which uses {@link System#getenv(java.lang.String)}.
      */
-<span class="fc" id="L77">    private static final class DefaultEnv implements Env {</span>
+<span class="fc" id="L87">    private static final class DefaultEnv implements Env {</span>
 
         @Override
         public String get(final String name) {
-<span class="fc" id="L81">            return get(name, &quot;&quot;);</span>
+<span class="fc" id="L91">            return get(name, &quot;&quot;);</span>
         }
 
         @Override
         public String get(final Names name) {
-<span class="nc" id="L86">            return get(name.getPropertyName());</span>
+<span class="fc" id="L96">            return get(name.getName());</span>
         }
 
         @Override
         public String get(final String name, final String fallback) {
-<span class="fc" id="L91">            Validate.notEmpty(name, &quot;name&quot;);</span>
-<span class="fc" id="L92">            Validate.notNull(fallback, &quot;fallback&quot;);</span>
+<span class="fc" id="L101">            Validate.notEmpty(name, &quot;name&quot;);</span>
+<span class="fc" id="L102">            Validate.notNull(fallback, &quot;fallback&quot;);</span>
 
-<span class="fc" id="L94">            final String var = System.getenv(name);</span>
+<span class="fc" id="L104">            final String var = System.getenv(name);</span>
 
-<span class="fc bfc" id="L96" title="All 2 branches covered.">            return var == null ? fallback : var;</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">            return var == null ? fallback : var;</span>
+        }
+
+        @Override
+        public String get(final Names name, final String fallback) {
+<span class="fc" id="L111">            return get(name.getName(), fallback);</span>
         }
 
     }
 
     /**
-     * Some common names provided by the JVM.
+     * Some common environment variable names.
+     * &lt;p&gt;
+     * These environment variables need not be defined necessarily.
+     * &lt;/p&gt;
      *
-     * FIXME Remove this. Has nothing to do with env. Are system properties.
-     * @deprecated Will be remove in next version.
+     * @since 2.0.0
      */
-<span class="nc" id="L107">    @Deprecated</span>
-    public static enum Names {
+<span class="pc" id="L124">    public static enum Names {</span>
 
         /**
-         * Character that separates components of a file path.
-         * &lt;p&gt;
-         * This is “/” on UNIX and “\” on Windows.
-         * &lt;/p&gt;
+         * Maven home directory such as {@code /Users/johndoe/.m2}.
          */
-<span class="nc" id="L116">        FILE_SEPARATOR(&quot;file.separator&quot;),</span>
+<span class="fc" id="L129">        M2(&quot;M2&quot;),</span>
         /**
-         * Path used to find directories and JAR archives containing class files.
-         * &lt;p&gt;
-         * Elements of the class path are separated by a platform-specific character specified in the path.separator
-         * property.
-         * &lt;/p&gt;
+         * Maven repository directory such as {@code /Users/johndoe/.m2/repository}.
          */
-<span class="nc" id="L124">        CLASS_PATH(&quot;java.class.path&quot;),</span>
+<span class="fc" id="L133">        M2_REPO(&quot;M2_REPO&quot;),</span>
         /**
-         * Installation directory for Java Runtime Environment (JRE).
+         * Maen options.
          */
-<span class="nc" id="L128">        JAVA_HOME(&quot;java.home&quot;),</span>
+<span class="fc" id="L137">        MAVEN_OPTS(&quot;MAVEN_OPTS&quot;),</span>
         /**
-         * JRE vendor name.
+         * Home direcotry of Java.
          */
-<span class="nc" id="L132">        JAVA_VENDOR(&quot;java.vendor&quot;),</span>
+<span class="fc" id="L141">        JAVA_HOME(&quot;JAVA_HOME&quot;),</span>
         /**
-         * JRE vendor URL.
+         * Systems CLI pager (e.g. more/less).
          */
-<span class="nc" id="L136">        JAVA_VENDOR_URL(&quot;java.vendor.url&quot;),</span>
+<span class="fc" id="L145">        PAGER(&quot;PAGER&quot;),</span>
         /**
-         * JRE version number.
+         * Current user.
          */
-<span class="nc" id="L140">        JAVA_VERSION(&quot;java.version&quot;),</span>
+<span class="fc" id="L149">        USER(&quot;USER&quot;),</span>
         /**
-         * Sequence used by operating system to separate lines in text files.
+         * Home directory of current user.
          */
-<span class="nc" id="L144">        LINE_SEPARATOR(&quot;line.separator&quot;),</span>
+<span class="fc" id="L153">        HOME(&quot;HOME&quot;),</span>
         /**
-         * Operating system architecture.
+         * Path variable of current user.
          */
-<span class="nc" id="L148">        OS_ARCH(&quot;os.arch&quot;),</span>
+<span class="fc" id="L157">        PATH(&quot;PATH&quot;),</span>
         /**
-         * Operating system name.
+         * Current working direcotry.
          */
-<span class="nc" id="L152">        OS_NAME(&quot;os.name&quot;),</span>
+<span class="fc" id="L161">        PWD(&quot;PWD&quot;),</span>
         /**
-         * Operating system version.
+         * Language setting of current user.
          */
-<span class="nc" id="L156">        OS_VERSION(&quot;os.version&quot;),</span>
+<span class="fc" id="L165">        LANGUAGE(&quot;LANGUAGE&quot;),</span>
         /**
-         * Path separator character used in java.class.path.
+         * Lang setting of current user.
          */
-<span class="nc" id="L160">        OS_PATH_SEPARATOR(&quot;path.separator&quot;),</span>
+<span class="fc" id="L169">        LANG(&quot;LANG&quot;),</span>
         /**
-         * User working directory.
+         * Default shell of current user.
          */
-<span class="nc" id="L164">        USER_DIR(&quot;user.dir&quot;),</span>
+<span class="fc" id="L173">        SHELL(&quot;SHELL&quot;),</span>
         /**
-         * User home directory.
+         * Default terminal of current user.
          */
-<span class="nc" id="L168">        USER_HOME(&quot;user.home&quot;),</span>
+<span class="fc" id="L177">        TERM(&quot;TERM&quot;),</span>
         /**
-         * User account name.
+         * Temporary directory.
          */
-<span class="nc" id="L172">        USER_NAME(&quot;user.name&quot;);</span>
+<span class="fc" id="L181">        TMPDIR(&quot;TMPDIR&quot;);</span>
 
         /**
          * The property name.
          */
-        private final String propertyName;
+        private final String envVarName;
 
         /**
          * Dedicated constructor.
          *
-         * @param propertyName must not be {@code null} or empty.
+         * @param envVarName must not be {@code null} or empty.
          */
-<span class="nc" id="L184">        private Names(final String propertyName) {</span>
-<span class="nc" id="L185">            this.propertyName = Validate.notEmpty(propertyName, &quot;propertyName&quot;);</span>
-<span class="nc" id="L186">        }</span>
+<span class="fc" id="L193">        private Names(final String envVarName) {</span>
+<span class="fc" id="L194">            this.envVarName = Validate.notEmpty(envVarName, &quot;envVarName&quot;);</span>
+<span class="fc" id="L195">        }</span>
 
         /**
          * Get the literal property name.
          *
          * @return never {@code null} or empty
          */
-        public String getPropertyName() {
-<span class="nc" id="L194">            return propertyName;</span>
+        public String getName() {
+<span class="fc" id="L203">            return envVarName;</span>
         }
 
         @Override
         public String toString() {
-<span class="nc" id="L199">            return getPropertyName();</span>
+<span class="nc" id="L208">            return getName();</span>
         }
 
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

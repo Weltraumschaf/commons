@@ -25,26 +25,27 @@ import de.weltraumschaf.commons.validate.Validate;
  * final OperatingSystem os = OperatingSystem.determine(osName);
  * }&lt;/pre&gt;
  *
- * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @author Sven Strittmatter &amp;lt;weltraumschaf@googlemail.com&amp;gt;
+ * @version $Id: $Id
  */
-<span class="pc" id="L30">public enum OperatingSystem {</span>
+<span class="pc" id="L31">public enum OperatingSystem {</span>
 
     /**
      * Microsoft Windows.
      */
-<span class="fc" id="L35">    WINDOWS(&quot;win&quot;),</span>
+<span class="fc" id="L36">    WINDOWS(&quot;win&quot;),</span>
     /**
      * GNU/Linux.
      */
-<span class="fc" id="L39">    LINUX(&quot;linux&quot;),</span>
+<span class="fc" id="L40">    LINUX(&quot;linux&quot;),</span>
     /**
      * Mac OS X.
      */
-<span class="fc" id="L43">    MACOSX(&quot;mac os x&quot;),</span>
+<span class="fc" id="L44">    MACOSX(&quot;mac os x&quot;),</span>
     /**
      * Unknown OS.
      */
-<span class="fc" id="L47">    UNKNOWN();</span>
+<span class="fc" id="L48">    UNKNOWN();</span>
 
     /**
      * Name to get OS name via {@link System#getProperty(java.lang.String)}.
@@ -60,17 +61,17 @@ import de.weltraumschaf.commons.validate.Validate;
      * Unknown OS osName.
      */
     private OperatingSystem() {
-<span class="fc" id="L63">        this(&quot;&quot;);</span>
-<span class="fc" id="L64">    }</span>
+<span class="fc" id="L64">        this(&quot;&quot;);</span>
+<span class="fc" id="L65">    }</span>
 
     /**
      * Dedicated constructor.
      *
      * @param osName must not be {@code null}
      */
-<span class="fc" id="L71">    private OperatingSystem(final String osName) {</span>
-<span class="fc" id="L72">        this.osName = Validate.notNull(osName, &quot;osName&quot;);</span>
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L72">    private OperatingSystem(final String osName) {</span>
+<span class="fc" id="L73">        this.osName = Validate.notNull(osName, &quot;osName&quot;);</span>
+<span class="fc" id="L74">    }</span>
 
     /**
      * Get the OS osName.
@@ -78,7 +79,7 @@ import de.weltraumschaf.commons.validate.Validate;
      * @return OS osName as string
      */
     public String getName() {
-<span class="fc" id="L81">        return osName;</span>
+<span class="fc" id="L82">        return osName;</span>
     }
 
     /**
@@ -88,22 +89,22 @@ import de.weltraumschaf.commons.validate.Validate;
      * @return the best matching OS
      */
     public static OperatingSystem determine(final String osNameProperty) {
-<span class="fc" id="L91">        final String normalizedOsNameProperty = Validate.notNull(osNameProperty, osNameProperty).toLowerCase();</span>
+<span class="fc" id="L92">        final String normalizedOsNameProperty = Validate.notNull(osNameProperty, osNameProperty).toLowerCase();</span>
 
-<span class="fc bfc" id="L93" title="All 2 branches covered.">        if (normalizedOsNameProperty.contains(LINUX.osName)) {</span>
-<span class="fc" id="L94">            return LINUX;</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        if (normalizedOsNameProperty.contains(LINUX.osName)) {</span>
+<span class="fc" id="L95">            return LINUX;</span>
         }
 
-<span class="fc bfc" id="L97" title="All 2 branches covered.">        if (normalizedOsNameProperty.contains(MACOSX.osName)) {</span>
-<span class="fc" id="L98">            return MACOSX;</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">        if (normalizedOsNameProperty.contains(MACOSX.osName)) {</span>
+<span class="fc" id="L99">            return MACOSX;</span>
         }
 
-<span class="fc bfc" id="L101" title="All 2 branches covered.">        if (normalizedOsNameProperty.contains(WINDOWS.osName)) {</span>
-<span class="fc" id="L102">            return WINDOWS;</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        if (normalizedOsNameProperty.contains(WINDOWS.osName)) {</span>
+<span class="fc" id="L103">            return WINDOWS;</span>
         }
 
-<span class="fc" id="L105">        return UNKNOWN;</span>
+<span class="fc" id="L106">        return UNKNOWN;</span>
     }
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>

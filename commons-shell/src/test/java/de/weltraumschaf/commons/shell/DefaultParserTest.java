@@ -11,8 +11,8 @@
  */
 package de.weltraumschaf.commons.shell;
 
-import de.weltraumschaf.commons.token.Token;
-import de.weltraumschaf.commons.token.TokenType;
+import de.weltraumschaf.commons.shell.token.ShellToken;
+import de.weltraumschaf.commons.shell.token.TokenType;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
@@ -83,7 +83,7 @@ public class DefaultParserTest {
         assertThat((TestSubType) c.getSubCommand(), is(TestSubType.ADD));
         assertThat(c.getArguments().size(), is(1));
 
-        Token t =  c.getArguments().get(0);
+        ShellToken t =  c.getArguments().get(0);
         assertThat(t.getType(), is(TokenType.INTEGER));
         assertThat(t.asInteger(), is(1234));
 

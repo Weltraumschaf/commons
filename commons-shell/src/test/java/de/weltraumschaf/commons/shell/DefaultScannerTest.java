@@ -12,8 +12,8 @@
 package de.weltraumschaf.commons.shell;
 
 import de.weltraumschaf.commons.guava.Lists;
-import de.weltraumschaf.commons.token.Token;
-import de.weltraumschaf.commons.token.TokenType;
+import de.weltraumschaf.commons.shell.token.ShellToken;
+import de.weltraumschaf.commons.shell.token.TokenType;
 import java.util.List;
 import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.is;
@@ -42,7 +42,7 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_emptyLine() throws SyntaxException {
-        final List<Token> tokens = sut.scan("");
+        final List<ShellToken> tokens = sut.scan("");
         assertThat(tokens.size(), is(0));
     }
 
@@ -65,10 +65,10 @@ public class DefaultScannerTest {
             types.add(t);
         }
 
-        final List<Token> tokens = sut.scan(input.toString());
+        final List<ShellToken> tokens = sut.scan(input.toString());
         int tokenId = 0;
 
-        for (final Token token : tokens) {
+        for (final ShellToken token : tokens) {
             assertThat(token.getType(), is(TokenType.KEYWORD));
             assertThat(token.asString(), is(types.get(tokenId).getLiteral()));
             ++tokenId;
@@ -77,9 +77,9 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_lineWithSingleKeyword() throws SyntaxException {
-        List<Token> tokens = sut.scan(TestMainType.FOO.getLiteral());
+        List<ShellToken> tokens = sut.scan(TestMainType.FOO.getLiteral());
         assertThat(tokens.size(), is(1));
-        Token token = tokens.get(0);
+        ShellToken token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.KEYWORD));
         assertThat(token.asString(), is(TestMainType.FOO.getLiteral()));
 
@@ -98,10 +98,10 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_lineWithSingleString() throws SyntaxException {
-        List<Token> tokens = sut.scan("'foo'\n");
+        List<ShellToken> tokens = sut.scan("'foo'\n");
 
         assertThat(tokens.size(), is(1));
-        Token token = tokens.get(0);
+        ShellToken token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.STRING));
         assertThat(token.asString(), is("foo"));
 
@@ -121,10 +121,10 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_lineWithMultipleStrings() throws SyntaxException {
-        final List<Token> tokens = sut.scan("'foo' 'bar' 'baz'\n");
+        final List<ShellToken> tokens = sut.scan("'foo' 'bar' 'baz'\n");
 
         assertThat(tokens.size(), is(3));
-        Token token = tokens.get(0);
+        ShellToken token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.STRING));
         assertThat(token.asString(), is("foo"));
 
@@ -139,10 +139,10 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_lineWithLiteralStartingWithInteger() throws SyntaxException {
-        final List<Token> tokens = sut.scan("192.168.1.1 127.0.0.1\n");
+        final List<ShellToken> tokens = sut.scan("192.168.1.1 127.0.0.1\n");
 
         assertThat(tokens.size(), is(2));
-        Token token = tokens.get(0);
+        ShellToken token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.LITERAL));
         assertThat(token.asString(), is("192.168.1.1")); // NOPMD Only want to test parsing of an ip.
 
@@ -153,11 +153,11 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_lineWithMultipleLiterals() throws SyntaxException {
-        final List<Token> tokens = sut.scan("loo l-ar laz_1");
+        final List<ShellToken> tokens = sut.scan("loo l-ar laz_1");
 
         assertThat(tokens.size(), is(3));
 
-        Token token = tokens.get(0);
+        ShellToken token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.LITERAL));
         assertThat(token.asString(), is("loo"));
 
@@ -172,9 +172,9 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_literalsStartWithSpecialCharacters() throws SyntaxException {
-        List<Token> tokens = sut.scan("/foo/bar/baz");
+        List<ShellToken> tokens = sut.scan("/foo/bar/baz");
         assertThat(tokens.size(), is(1));
-        Token token = tokens.get(0);
+        ShellToken token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.LITERAL));
         assertThat(token.asString(), is("/foo/bar/baz"));
 
@@ -196,40 +196,40 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_lineWithSingleIntegerWithoutSign() throws SyntaxException {
-        final List<Token> tokens = sut.scan("1234");
+        final List<ShellToken> tokens = sut.scan("1234");
         assertThat(tokens.size(), is(1));
 
-        final Token token = tokens.get(0);
+        final ShellToken token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.INTEGER));
         assertThat(token.asInteger(), is(1234));
     }
 
     @Test
     public void scan_lineWithSingleIntegerWithoutPositiveSign() throws SyntaxException {
-        final List<Token> tokens = sut.scan("+1234");
+        final List<ShellToken> tokens = sut.scan("+1234");
         assertThat(tokens.size(), is(1));
 
-        final Token token = tokens.get(0);
+        final ShellToken token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.INTEGER));
         assertThat(token.asInteger(), is(1234));
     }
 
     @Test
     public void scan_lineWithSingleIntegerWithoutNegativeSign() throws SyntaxException {
-        final List<Token> tokens = sut.scan("-1234");
+        final List<ShellToken> tokens = sut.scan("-1234");
         assertThat(tokens.size(), is(1));
 
-        final Token token = tokens.get(0);
+        final ShellToken token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.INTEGER));
         assertThat(token.asInteger(), is(-1234));
     }
 
     @Test
     public void scan_lineWithMultipleIntegers() throws SyntaxException {
-        final List<Token> tokens = sut.scan("1234 +5678 -90");
+        final List<ShellToken> tokens = sut.scan("1234 +5678 -90");
         assertThat(tokens.size(), is(3));
 
-        Token token = tokens.get(0);
+        ShellToken token = tokens.get(0);
         assertThat(token.getType(), is(TokenType.INTEGER));
         assertThat(token.asInteger(), is(1234));
 
@@ -244,9 +244,9 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_lineWithLiteralKeywordAndIntegers() throws SyntaxException {
-        Token intToken;
-        Token strToken;
-        List<Token> tokens = sut.scan("loo 1234 -5678 bar");
+        ShellToken intToken;
+        ShellToken strToken;
+        List<ShellToken> tokens = sut.scan("loo 1234 -5678 bar");
 
         assertThat(tokens.size(), is(4));
         strToken = tokens.get(0);
@@ -288,10 +288,10 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_lineWithMaliciousInteger() throws SyntaxException {
-        final List<Token> tokens = sut.scan("1234foo");
+        final List<ShellToken> tokens = sut.scan("1234foo");
 
         assertThat(tokens.size(), is(1));
-        final Token strToken = tokens.get(0);
+        final ShellToken strToken = tokens.get(0);
 
         assertThat(strToken.getType(), is(TokenType.LITERAL));
         assertThat(strToken.asString(), is("1234foo"));
@@ -299,10 +299,10 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_booleanTrue() throws SyntaxException {
-        final List<Token> tokens = sut.scan("true");
+        final List<ShellToken> tokens = sut.scan("true");
 
         assertThat(tokens.size(), is(1));
-        final Token token = tokens.get(0);
+        final ShellToken token = tokens.get(0);
 
         assertThat(token.getType(), is(TokenType.BOOLEAN));
         assertThat(token.asBoolean(), is(true));
@@ -310,10 +310,10 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_booleanFalse() throws SyntaxException {
-        final List<Token> tokens = sut.scan("false");
+        final List<ShellToken> tokens = sut.scan("false");
 
         assertThat(tokens.size(), is(1));
-        final Token token = tokens.get(0);
+        final ShellToken token = tokens.get(0);
 
         assertThat(token.getType(), is(TokenType.BOOLEAN));
         assertThat(token.asBoolean(), is(false));
@@ -321,10 +321,10 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_lineWithMultipleBooleans() throws SyntaxException {
-        final List<Token> tokens = sut.scan("false true true false");
+        final List<ShellToken> tokens = sut.scan("false true true false");
 
         assertThat(tokens.size(), is(4));
-        Token token = tokens.get(0);
+        ShellToken token = tokens.get(0);
 
         assertThat(token.getType(), is(TokenType.BOOLEAN));
         assertThat(token.asBoolean(), is(false));
@@ -344,10 +344,10 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_floats() throws SyntaxException {
-        final List<Token> tokens = sut.scan("3.14 -3.14");
+        final List<ShellToken> tokens = sut.scan("3.14 -3.14");
 
         assertThat(tokens.size(), is(2));
-        Token token = tokens.get(0);
+        ShellToken token = tokens.get(0);
 
         assertThat(token.getType(), is(TokenType.FLOAT));
         assertThat((double) token.asFloat(), is(closeTo(3.14, 0.0001)));
@@ -359,10 +359,10 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_floatsWithExponent() throws SyntaxException {
-        final List<Token> tokens = sut.scan("3.14e3 -3.14E3");
+        final List<ShellToken> tokens = sut.scan("3.14e3 -3.14E3");
 
         assertThat(tokens.size(), is(2));
-        Token token = tokens.get(0);
+        ShellToken token = tokens.get(0);
 
         assertThat(token.getType(), is(TokenType.FLOAT));
         assertThat((double) token.asFloat(), is(closeTo(3140.0, 0.0001)));
@@ -374,10 +374,10 @@ public class DefaultScannerTest {
 
     @Test
     public void scan_floatsWithNegativeExponent() throws SyntaxException {
-        final List<Token> tokens = sut.scan("3.14e-3 -3.14E-3");
+        final List<ShellToken> tokens = sut.scan("3.14e-3 -3.14E-3");
 
         assertThat(tokens.size(), is(2));
-        Token token = tokens.get(0);
+        ShellToken token = tokens.get(0);
 
         assertThat(token.getType(), is(TokenType.FLOAT));
         assertThat((double) token.asFloat(), is(closeTo(0.00314, 0.0001)));

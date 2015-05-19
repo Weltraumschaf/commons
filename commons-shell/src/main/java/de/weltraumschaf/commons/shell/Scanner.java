@@ -11,7 +11,7 @@
  */
 package de.weltraumschaf.commons.shell;
 
-import de.weltraumschaf.commons.token.Token;
+import de.weltraumschaf.commons.shell.token.ShellToken;
 import java.util.List;
 
 /**
@@ -31,6 +31,6 @@ public interface Scanner {
      * @throws de.weltraumschaf.commons.shell.SyntaxException if, syntax error occurred.
      * // CHECKSTYLE:OFF
      */
-    List<Token> scan(final String line) throws SyntaxException;
+    List<ShellToken> scan(final String line) throws SyntaxException;
 
 }

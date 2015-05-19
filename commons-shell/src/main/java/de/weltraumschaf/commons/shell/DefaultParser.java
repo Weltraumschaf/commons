@@ -12,8 +12,8 @@
 package de.weltraumschaf.commons.shell;
 
 import de.weltraumschaf.commons.guava.Lists;
-import de.weltraumschaf.commons.token.Token;
-import de.weltraumschaf.commons.token.TokenType;
+import de.weltraumschaf.commons.shell.token.ShellToken;
+import de.weltraumschaf.commons.shell.token.TokenType;
 import de.weltraumschaf.commons.validate.Validate;
 import java.util.List;
 
@@ -85,8 +85,8 @@ class DefaultParser implements Parser {
      */
     @Override
     public ShellCommand parse(final String input) throws SyntaxException {
-        final List<Token> tokens = scanner.scan(input);
-        final Token commandtoken = tokens.get(0);
+        final List<ShellToken> tokens = scanner.scan(input);
+        final ShellToken commandtoken = tokens.get(0);
 
         if (TokenType.KEYWORD != commandtoken.getType()) {
             throw new SyntaxException("Command expected as first input!");
@@ -97,10 +97,10 @@ class DefaultParser implements Parser {
         int argumentBegin = 1;
 
         if (tokens.size() > 1) {
-            final Token secondToken = tokens.get(1);
+            final ShellToken secondToken = tokens.get(1);
 
             if (secondToken.getType() == TokenType.KEYWORD) {
-                final Token keyword = secondToken;
+                final ShellToken keyword = secondToken;
 
                 if (! commandMap.isSubCommand(keyword)) {
                     throw new SyntaxException(
@@ -113,7 +113,7 @@ class DefaultParser implements Parser {
             }
         }
 
-        final List<Token> arguments;
+        final List<ShellToken> arguments;
 
         if (tokens.size() > argumentBegin) {
             arguments = tokens.subList(argumentBegin, tokens.size());

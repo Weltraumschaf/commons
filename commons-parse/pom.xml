@@ -9,13 +9,11 @@
     </parent>
 
     <groupId>de.weltraumschaf.commons</groupId>
-    <artifactId>shell</artifactId>
+    <artifactId>parse</artifactId>
     <packaging>jar</packaging>
 
-    <name>Commons Shell</name>
+    <name>Commons Parse</name>
     <description>
-        Utilities for creating more complex shell commands with subcommands. It provides easy ability to
-        parse the users command line input.
     </description>
 
     <properties>
@@ -33,16 +31,6 @@
         <dependency>
             <groupId>de.weltraumschaf.commons</groupId>
             <artifactId>validate</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.weltraumschaf.commons</groupId>
-            <artifactId>validate</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.weltraumschaf.commons</groupId>
-            <artifactId>parse</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

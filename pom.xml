@@ -92,6 +92,7 @@
         <module>commons-time</module>
         <module>commons-validate</module>
         <module>commons-uri</module>
+        <module>commons-parse</module>
     </modules>
 
     <dependencies>

@@ -12,7 +12,7 @@
 package de.weltraumschaf.commons.shell;
 
 import de.weltraumschaf.commons.guava.Maps;
-import de.weltraumschaf.commons.token.Token;
+import de.weltraumschaf.commons.shell.token.ShellToken;
 import de.weltraumschaf.commons.validate.Validate;
 import java.util.Map;
 
@@ -60,7 +60,7 @@ public abstract class LiteralCommandMap {
      * @param token token to check
      * @return true if the token is a command else false
      */
-    public final boolean isCommand(final Token token) {
+    public final boolean isCommand(final ShellToken token) {
         return isCommand(token.asString());
     }
 
@@ -85,7 +85,7 @@ public abstract class LiteralCommandMap {
      * @throws java.lang.IllegalArgumentException if, token is not a main command
      * // CHECKSTYLE:ON
      */
-    public final MainCommandType determineCommand(final Token t) {
+    public final MainCommandType determineCommand(final ShellToken t) {
         if (isCommand(t)) {
             return mainCommands.get(t.asString());
         }
@@ -98,7 +98,7 @@ public abstract class LiteralCommandMap {
      * @param token token to check
      * @return true if the token is a sub command else false
      */
-    public final boolean isSubCommand(final Token token) {
+    public final boolean isSubCommand(final ShellToken token) {
         return isSubCommand(token.asString());
     }
 
@@ -123,7 +123,7 @@ public abstract class LiteralCommandMap {
      * @throws java.lang.IllegalArgumentException if, token is not a sub command
      * // CHECKSTYLE:ON
      */
-    public final SubCommandType determineSubCommand(final Token t) {
+    public final SubCommandType determineSubCommand(final ShellToken t) {
         if (isSubCommand(t)) {
             return subCommands.get(t.asString());
         }

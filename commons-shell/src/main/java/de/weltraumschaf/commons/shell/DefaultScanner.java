@@ -11,12 +11,12 @@
  */
 package de.weltraumschaf.commons.shell;
 
-import de.weltraumschaf.commons.token.Token;
-import de.weltraumschaf.commons.characters.CharacterStream;
-import de.weltraumschaf.commons.characters.CharacterHelper;
+import de.weltraumschaf.commons.shell.token.ShellToken;
+import de.weltraumschaf.commons.parse.characters.CharacterStream;
+import de.weltraumschaf.commons.parse.characters.CharacterHelper;
 import de.weltraumschaf.commons.guava.Lists;
-import de.weltraumschaf.commons.token.Position;
-import de.weltraumschaf.commons.token.Tokens;
+import de.weltraumschaf.commons.parse.token.Position;
+import de.weltraumschaf.commons.shell.token.Tokens;
 import de.weltraumschaf.commons.validate.Validate;
 import java.util.List;
 
@@ -59,9 +59,9 @@ class DefaultScanner implements Scanner {
      * Scans give line and returns list of recognized tokens.
      */
     @Override
-    public List<Token> scan(final String line) throws SyntaxException {
+    public List<ShellToken> scan(final String line) throws SyntaxException {
         Validate.notNull(line, "line");
-        final List<Token> tokens = Lists.newArrayList();
+        final List<ShellToken> tokens = Lists.newArrayList();
 
         if (line.isEmpty()) {
             return tokens;
@@ -78,7 +78,7 @@ class DefaultScanner implements Scanner {
      * @param characterStream input line to scan
      * @throws SyntaxException if string is not correct encapsulated by quotes
      */
-    private void scan(final List<Token> tokens, final CharacterStream characterStream) throws SyntaxException {
+    private void scan(final List<ShellToken> tokens, final CharacterStream characterStream) throws SyntaxException {
         while (characterStream.hasNext()) {
             final char currentChar = characterStream.next();
 
@@ -100,7 +100,7 @@ class DefaultScanner implements Scanner {
      * @param characterStream input line to scan
      * @return Return string type token
      */
-    private Token scanLiteral(final CharacterStream characterStream) {
+    private ShellToken scanLiteral(final CharacterStream characterStream) {
         return scanLiteralOrKeyword(characterStream, new StringBuilder());
     }
 
@@ -111,7 +111,7 @@ class DefaultScanner implements Scanner {
      * @param value collects the token string, must not be {@code null}
      * @return Return string type token
      */
-    private Token scanLiteralOrKeyword(final CharacterStream characterStream, final StringBuilder value) {
+    private ShellToken scanLiteralOrKeyword(final CharacterStream characterStream, final StringBuilder value) {
         value.append(characterStream.current());
 
         while (characterStream.hasNext()) {
@@ -145,7 +145,7 @@ class DefaultScanner implements Scanner {
      * @param characterStream input line to scan
      * @return integer or float or literal or keyword type token
      */
-    private Token scanNumber(final CharacterStream characterStream) {
+    private ShellToken scanNumber(final CharacterStream characterStream) {
         final StringBuilder value = new StringBuilder();
         value.append(characterStream.current());
 
@@ -181,7 +181,7 @@ class DefaultScanner implements Scanner {
      * @param value accumulates the token literal string
      * @return float or literal or keyword type token
      */
-    private Token scanFloat(final CharacterStream characterStream, final StringBuilder value) {
+    private ShellToken scanFloat(final CharacterStream characterStream, final StringBuilder value) {
         value.append(characterStream.current());
 
         while (characterStream.hasNext()) {
@@ -211,7 +211,7 @@ class DefaultScanner implements Scanner {
      * @return integer type token
      * @throws SyntaxException if string is not correct encapsulated by quotes
      */
-    private Token scanString(final CharacterStream characterStream) throws SyntaxException {
+    private ShellToken scanString(final CharacterStream characterStream) throws SyntaxException {
         final StringBuilder value = new StringBuilder();
         final char startQuote = characterStream.current();
         boolean terminated = false;

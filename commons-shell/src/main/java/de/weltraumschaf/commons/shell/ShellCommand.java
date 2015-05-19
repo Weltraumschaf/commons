@@ -11,7 +11,7 @@
  */
 package de.weltraumschaf.commons.shell;
 
-import de.weltraumschaf.commons.token.Token;
+import de.weltraumschaf.commons.shell.token.ShellToken;
 import de.weltraumschaf.commons.guava.Lists;
 import de.weltraumschaf.commons.guava.Objects;
 import de.weltraumschaf.commons.validate.Validate;
@@ -49,7 +49,7 @@ public class ShellCommand {
      *
      * If the mainCommand has no arguments this will be an empty list.
      */
-    private final List<Token> arguments;
+    private final List<ShellToken> arguments;
 
     /**
      * Dedicated constructor.
@@ -61,7 +61,7 @@ public class ShellCommand {
     public ShellCommand(
             final MainCommandType mainCommand,
             final SubCommandType subCommand,
-            final List<Token> arguments) {
+            final List<ShellToken> arguments) {
         super();
         this.mainCommand = Validate.notNull(mainCommand, "mainCommand");
         this.subCommand = Validate.notNull(subCommand, "subCommand");
@@ -96,7 +96,7 @@ public class ShellCommand {
      *
      * @return Returns a defense copy.
      */
-    public List<Token> getArguments() {
+    public List<ShellToken> getArguments() {
         return Collections.unmodifiableList(arguments);
     }
 

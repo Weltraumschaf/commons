@@ -11,7 +11,7 @@
  */
 package de.weltraumschaf.commons.parse.characters;
 
-import de.weltraumschaf.commons.parse.characters.CharacterStream;
+import de.weltraumschaf.commons.parse.token.Position;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import org.junit.Rule;
@@ -24,13 +24,15 @@ import org.junit.rules.ExpectedException;
  */
 public class CharacterStreamTest {
 
-    @Rule public ExpectedException thrown = ExpectedException.none();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     private final CharacterStream sut = new CharacterStream("foo bar baz");
     private final CharacterStream sutWithNewline = new CharacterStream("foo\n");
     private final CharacterStream emptySut = new CharacterStream("");
 
-    @Test public void callEmptyStream() {
+    @Test
+    public void callEmptyStream() {
         thrown.expect(IndexOutOfBoundsException.class);
         thrown.expectMessage("No more next characters!");
         emptySut.next();
@@ -122,5 +124,80 @@ public class CharacterStreamTest {
         assertThat(sut.current(), is('f'));
         assertThat(sut.peek(), is('o'));
         assertThat(sut.current(), is('f'));
+    }
+
+    @Test
+    public void position() {
+        final CharacterStream sutWithMultilines = new CharacterStream(
+            "1234\n" // 1
+            + "123456\n" // 2
+            + "1\n" // 3
+            + "\n" // 4
+            + "123\n" // 5
+            + "\n" // 6
+            + "\n" // 7
+            + "\t2345"); // 8
+
+        assertThat(sutWithMultilines.position(), is(Position.NULL));
+
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(1, 1)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(1, 2)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(1, 3)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(1, 4)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(1, 5)));
+
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(2, 1)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(2, 2)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(2, 3)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(2, 4)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(2, 5)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(2, 6)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(2, 7)));
+
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(3, 1)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(3, 2)));
+
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(4, 1)));
+
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(5, 1)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(5, 2)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(5, 3)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(5, 4)));
+
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(6, 1)));
+
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(7, 1)));
+
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(8, 1)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(8, 2)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(8, 3)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(8, 4)));
+        sutWithMultilines.next();
+        assertThat(sutWithMultilines.position(), is(new Position(8, 5)));
     }
 }

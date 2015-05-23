@@ -11,6 +11,7 @@
  */
 package de.weltraumschaf.commons.parse.characters;
 
+import de.weltraumschaf.commons.parse.token.Position;
 import de.weltraumschaf.commons.validate.Validate;
 
 /**
@@ -26,14 +27,12 @@ import de.weltraumschaf.commons.validate.Validate;
  *     final char currentChar = characterStream.next();
  *     // Do something with the current char.
  * }
- * }</pre>
- *
- * TODO: Implement line and column.
- *
- * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * }</pre> * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  * @version $Id: $Id
  */
 public final class CharacterStream {
+
+    private static final char NL = '\n';
 
     /**
      * Accessed string.
@@ -44,6 +43,9 @@ public final class CharacterStream {
      * Current character position.
      */
     private int index = -1;
+    private int line;
+    private int column;
+    private boolean newLineSeen;
 
     /**
      * Initializes stream with string.
@@ -58,18 +60,35 @@ public final class CharacterStream {
     /**
      * Returns next character.
      *
-     * @return next character
-     * // CHECKSTYLE:OFF
-     * @throws java.lang.IndexOutOfBoundsException if, there are no more characters.
-     * // CHECKSTYLE:ON
+     * @return next character // CHECKSTYLE:OFF
+     * @throws java.lang.IndexOutOfBoundsException if, there are no more characters. // CHECKSTYLE:ON
      */
     public char next() {
         if (!hasNext()) {
             throw new IndexOutOfBoundsException("No more next characters!");
         }
 
+        if (position().at(Position.NULL)) {
+            line = 1;
+        }
+
         ++index;
-        return current();
+        final char current = current();
+
+
+        if (newLineSeen) {
+            line++;
+            column = 1;
+            newLineSeen = false;
+        } else {
+            column++;
+        }
+
+        if (NL == current) {
+            newLineSeen = true;
+        }
+        
+        return current;
     }
 
     /**
@@ -99,18 +118,21 @@ public final class CharacterStream {
     /**
      * Look ahead one character w/o advancing the internal pointer for the current character.
      *
-     * @return the peeked character.
-     * // CHECKSTYLE:OFF
-     * @throws java.lang.IndexOutOfBoundsException if there are no more character to peek
-     * // CHECKSTYLE:ON
+     * @return the peeked character. // CHECKSTYLE:OFF
+     * @throws java.lang.IndexOutOfBoundsException if there are no more character to peek // CHECKSTYLE:ON
      */
     public char peek() {
         if (!hasNext()) {
             throw new IndexOutOfBoundsException("No more next characters!");
         }
 
+        final int oldLine = line;
+        final int oldColumn = column;
         final char peekedCharacter = next();
-        --index;
+        --index; // Restore index to previous position.
+        // Restore position.
+        line = oldLine;
+        column = oldColumn;
         return peekedCharacter;
     }
 
@@ -123,4 +145,7 @@ public final class CharacterStream {
         return index;
     }
 
+    public Position position() {
+        return new Position(line, column);
+    }
 }

@@ -102,11 +102,6 @@ public final class Position {
         return column;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * Returns human readable string representation.
-     */
     @Override
     public String toString() {
         final StringBuilder str = new StringBuilder();
@@ -119,13 +114,11 @@ public final class Position {
         return str.toString();
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return Objects.hashCode(line, column, file);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (! (obj instanceof Position)) {
@@ -136,6 +129,14 @@ public final class Position {
         return Objects.equal(line, other.line)
                 && Objects.equal(column, other.column)
                 && Objects.equal(file, other.file);
+    }
+
+    public boolean at(final Position p) {
+        return line == p.line && column == p.column;
+    }
+
+    public Position incColumn() {
+        return new Position(line, column + 1, file);
     }
 
 }

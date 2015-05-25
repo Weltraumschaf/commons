@@ -127,13 +127,19 @@ public final class CharacterStream {
             throw new IndexOutOfBoundsException("No more next characters!");
         }
 
+        // Backup position.
         final int oldLine = line;
         final int oldColumn = column;
+        final boolean oldNewLineSeen = newLineSeen;
+
         final char peekedCharacter = next();
         --index; // Restore index to previous position.
+
         // Restore position.
         line = oldLine;
         column = oldColumn;
+        newLineSeen = oldNewLineSeen;
+
         return peekedCharacter;
     }
 

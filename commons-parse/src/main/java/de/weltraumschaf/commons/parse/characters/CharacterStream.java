@@ -28,6 +28,7 @@ import de.weltraumschaf.commons.validate.Validate;
  *     // Do something with the current char.
  * }
  * }</pre> * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ *
  * @version $Id: $Id
  */
 public final class CharacterStream {
@@ -75,7 +76,6 @@ public final class CharacterStream {
         ++index;
         final char current = current();
 
-
         if (newLineSeen) {
             line++;
             column = 1;
@@ -87,7 +87,7 @@ public final class CharacterStream {
         if (NL == current) {
             newLineSeen = true;
         }
-        
+
         return current;
     }
 
@@ -148,4 +148,10 @@ public final class CharacterStream {
     public Position position() {
         return new Position(line, column);
     }
+
+    @Override
+    public String toString() {
+        return input;
+    }
+
 }

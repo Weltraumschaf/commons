@@ -126,6 +126,15 @@ public class CharacterStreamTest {
         assertThat(sut.current(), is('f'));
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void position_empty() {
+        assertThat(emptySut.position(), is(Position.NULL));
+
+        emptySut.next();
+
+        assertThat(emptySut.position(), is(Position.NULL));
+    }
+
     @Test
     public void position() {
         final CharacterStream sutWithMultilines = new CharacterStream(

@@ -13,6 +13,7 @@ package de.weltraumschaf.commons.parse.characters;
 
 import de.weltraumschaf.commons.parse.token.Position;
 import de.weltraumschaf.commons.validate.Validate;
+import java.util.Objects;
 
 /**
  * Access a string as stream of characters.
@@ -152,6 +153,25 @@ public final class CharacterStream {
     @Override
     public String toString() {
         return input;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.input);
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (!(obj instanceof CharacterStream)) {
+            return false;
+        }
+
+        final CharacterStream other = (CharacterStream) obj;
+        return Objects.equals(input, other.input);
+    }
+
+    public boolean isEmpty() {
+        return input.isEmpty();
     }
 
 }

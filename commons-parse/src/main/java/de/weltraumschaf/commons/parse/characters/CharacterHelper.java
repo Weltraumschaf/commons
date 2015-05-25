@@ -102,7 +102,19 @@ public final class CharacterHelper {
      * @return {@code true} if character is a whitespace character, unless {@code false}
      */
     public static boolean isWhiteSpace(final char character) {
-        return ' ' == character || '\t' == character || '\n' == character || '\r' == character;
+        return isSpace(character) || isNewline(character) || isReturn(character);
+    }
+
+    public static boolean isSpace(final char character) {
+        return ' ' == character || '\t' == character;
+    }
+
+    public static boolean isNewline(final char character) {
+        return '\n' == character;
+    }
+
+    public static boolean isReturn(final char character) {
+        return '\r' == character;
     }
 
     /**

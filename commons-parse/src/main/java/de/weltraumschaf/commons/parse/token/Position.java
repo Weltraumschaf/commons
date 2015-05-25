@@ -138,9 +138,13 @@ public final class Position {
     public Position incColumn() {
         return new Position(line, column + 1, file);
     }
-    
+
     public Position incLine() {
         return new Position(line + 1, column, file);
+    }
+
+    public Position column(final int col) {
+        return new Position(line, col, file);
     }
 
 }

@@ -27,24 +27,27 @@ public class CharacterStreamTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final CharacterStream sut = new CharacterStream("foo bar baz");
-    private final CharacterStream sutWithNewline = new CharacterStream("foo\n");
-    private final CharacterStream emptySut = new CharacterStream("");
-
     @Test
     public void callEmptyStream() {
+        final CharacterStream emptySut = new CharacterStream("");
+
         thrown.expect(IndexOutOfBoundsException.class);
         thrown.expectMessage("No more next characters!");
+
         emptySut.next();
     }
 
     @Test
     public void callNextFirst() {
+        final CharacterStream sut = new CharacterStream("foo bar baz");
+
         assertThat(sut.current(), is('f'));
     }
 
     @Test
     public void accessCharactersWithNewline() {
+        final CharacterStream sutWithNewline = new CharacterStream("foo\n");
+
         assertThat(sutWithNewline.next(), is('f'));
         assertThat(sutWithNewline.current(), is('f'));
         assertThat(sutWithNewline.hasNext(), is(true));
@@ -64,6 +67,8 @@ public class CharacterStreamTest {
 
     @Test
     public void accessCharacters() {
+        final CharacterStream sut = new CharacterStream("foo bar baz");
+
         assertThat(sut.next(), is('f'));
         assertThat(sut.current(), is('f'));
         assertThat(sut.current(), is('f'));
@@ -121,6 +126,8 @@ public class CharacterStreamTest {
 
     @Test
     public void peekCharacter() {
+        final CharacterStream sut = new CharacterStream("foo bar baz");
+
         assertThat(sut.current(), is('f'));
         assertThat(sut.peek(), is('o'));
         assertThat(sut.current(), is('f'));
@@ -128,6 +135,8 @@ public class CharacterStreamTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void position_empty() {
+        final CharacterStream emptySut = new CharacterStream("");
+
         assertThat(emptySut.position(), is(Position.NULL));
 
         emptySut.next();

@@ -11,9 +11,9 @@
  */
 package de.weltraumschaf.commons.parse.characters;
 
+import de.weltraumschaf.commons.guava.Objects;
 import de.weltraumschaf.commons.parse.token.Position;
 import de.weltraumschaf.commons.validate.Validate;
-import java.util.Objects;
 
 /**
  * Access a string as stream of characters.
@@ -152,12 +152,18 @@ public final class CharacterStream {
 
     @Override
     public String toString() {
-        return input;
+        return Objects.toStringHelper(this)
+            .add("input", input)
+            .add("index", index)
+            .add("line", line)
+            .add("column", column)
+            .add("newLineSeen", newLineSeen)
+            .toString();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.input);
+        return Objects.hashCode(input);
     }
 
     @Override
@@ -167,7 +173,7 @@ public final class CharacterStream {
         }
 
         final CharacterStream other = (CharacterStream) obj;
-        return Objects.equals(input, other.input);
+        return Objects.equal(input, other.input);
     }
 
     public boolean isEmpty() {

@@ -38,6 +38,7 @@
         <sonar.doxygen.generateDocumentation>enable</sonar.doxygen.generateDocumentation>
         <!-- FIXME This crap does not work! -->
         <sonar.exclusions>${jacoco.exclude.1}:${jacoco.exclude.2}</sonar.exclusions>
+        <sonar.scm.disabled>true</sonar.scm.disabled>
 
         <maven.pmd.rulesetfiles>${project.basedir}/src/main/config/pmd.xml</maven.pmd.rulesetfiles>
         <maven.pmd.cpd-excludes>${project.basedir}/src/main/config/exclude-cpd.properties</maven.pmd.cpd-excludes>

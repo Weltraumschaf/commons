@@ -31,7 +31,7 @@ public final class CharacterHelper {
      * Operator characters.
      */
     private static final Set<Character> OPERATORS = Sets.newHashSet('+', '-', '*', '/', '%', '&',
-        '|', '^', '<', '>', '=', ':', '?', '(', ')', '{', '}', '[', ']', '!', '~', '@', '#', '$');
+        '|', '^', '<', '>', '=', ':', '?', '(', ')', '{', '}', '[', ']', '!', '~', '@', '#', '$', ',');
     /**
      * Number sign characters.
      */

@@ -130,6 +130,7 @@
 ## Version 2.1.0
 
 - More custom [Hamcrest][hamcrest] matchers fortesting.
+- [JUnit][junit] rules to repeat tests.
 
 [junit]:    http://www.junit.org/
 [hamcrest]: http://hamcrest.org/JavaHamcrest/

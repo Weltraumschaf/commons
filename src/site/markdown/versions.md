@@ -131,6 +131,7 @@
 
 - More custom [Hamcrest][hamcrest] matchers fortesting.
 - [JUnit][junit] rules to repeat tests.
+- `DelayedRepeater` for tests which need to wait but does not provide callbacks.
 
 [junit]:    http://www.junit.org/
 [hamcrest]: http://hamcrest.org/JavaHamcrest/

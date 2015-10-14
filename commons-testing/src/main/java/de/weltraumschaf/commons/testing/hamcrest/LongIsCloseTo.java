@@ -30,7 +30,7 @@ import org.hamcrest.TypeSafeMatcher;
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  * @since 2.1.0
  */
-final class LongIsCloseTo extends TypeSafeMatcher<Long> {
+class LongIsCloseTo extends TypeSafeMatcher<Long> {
 
     /**
      * Accepted delta.
@@ -56,13 +56,11 @@ final class LongIsCloseTo extends TypeSafeMatcher<Long> {
         this.value = value;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean matchesSafely(final Long item) {
         return actualDelta(item) <= 0.0;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void describeMismatchSafely(final Long item, final Description mismatchDescription) {
         mismatchDescription.appendValue(item)
@@ -70,7 +68,6 @@ final class LongIsCloseTo extends TypeSafeMatcher<Long> {
                 .appendValue(actualDelta(item));
     }
 
-    /** {@inheritDoc} */
     @Override
     public void describeTo(final Description description) {
         description.appendText("a numeric value within ")

@@ -1,3 +1,14 @@
+/*
+ *  LICENSE
+ *
+ * "THE BEER-WARE LICENSE" (Revision 43):
+ * "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt; wrote this file.
+ * As long as you retain this notice you can do whatever you want with
+ * this stuff. If we meet some day, and you think this stuff is worth it,
+ * you can buy me a non alcohol-free beer in return.
+ *
+ * Copyright (C) 2012 "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt;
+ */
 package de.weltraumschaf.commons.testing.rules;
 
 import java.lang.annotation.ElementType;
@@ -49,8 +60,9 @@ import java.lang.annotation.Target;
  * Blog post by Frank Appel</a>.
  * </p>
  *
- * @see de.iteratec.stu.testtools.Repeater
- * @since 1.0.0
+ * @see Repeater
+ * @since 2.1.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

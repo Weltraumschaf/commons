@@ -43,6 +43,9 @@ final class LongIsCloseTo extends TypeSafeMatcher<Long> {
 
     /**
      * Dedicated constructor.
+     * <p>
+     * Use {@link #closeTo(long, long)} to create new instances.
+     * </p>
      *
      * @param value matched value
      * @param error accepted delta

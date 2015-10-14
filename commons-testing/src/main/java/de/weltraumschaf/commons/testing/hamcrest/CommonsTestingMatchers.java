@@ -7,6 +7,7 @@ import org.hamcrest.Matcher;
 /**
  * Factory for custom Hamcrest matchers.
  *
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  * @since 1.0.0
  */
 public final class CommonsTestingMatchers {
@@ -20,6 +21,8 @@ public final class CommonsTestingMatchers {
     }
 
     /**
+     * Creates matcher to check if an integer is close to expected.
+     *
      * @see IntegerIsCloseTo
      * @param operand the expected value of matching doubles
      * @param error the delta (+/-) within which matches will be allowed
@@ -29,6 +32,14 @@ public final class CommonsTestingMatchers {
         return IntegerIsCloseTo.closeTo(operand, error);
     }
 
+    /**
+     * Creates matcher to check if an long is close to expected.
+     *
+     * @see LongIsCloseTo
+     * @param operand the expected value of matching doubles
+     * @param error the delta (+/-) within which matches will be allowed
+     * @return never {@code null}
+     */
     public static Matcher<Long> closeTo(final long operand, final long error) {
         return LongIsCloseTo.closeTo(operand, error);
     }

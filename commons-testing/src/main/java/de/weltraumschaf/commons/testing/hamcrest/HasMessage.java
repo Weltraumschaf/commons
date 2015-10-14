@@ -9,6 +9,7 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Does have a {@link Throwable} a message, which {@link Matcher matches something}?
  *
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  * @since 1.0.0
  */
 final class HasMessage extends TypeSafeMatcher<Throwable> {

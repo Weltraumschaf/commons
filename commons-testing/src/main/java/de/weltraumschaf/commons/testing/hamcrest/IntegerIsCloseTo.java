@@ -8,14 +8,29 @@ import org.hamcrest.TypeSafeMatcher;
 /**
  * Is the value a number equal to a value within some range of acceptable error?
  *
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  * @since 2.1.0
  */
 final class IntegerIsCloseTo extends TypeSafeMatcher<Integer> {
 
+    /**
+     * Accepted delta.
+     */
     private final int delta;
-
+    /**
+     * Matched value.
+     */
     private final int value;
 
+    /**
+     * Dedicated constructor.
+     * <p>
+     * Use {@link #closeTo(int, int)} to create new instances.
+     * </p>
+     *
+     * @param value matched value
+     * @param error accepted delta
+     */
     private IntegerIsCloseTo(final int value, final int error) {
         super();
         this.delta = error;

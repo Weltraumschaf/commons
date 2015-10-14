@@ -28,7 +28,6 @@ import org.hamcrest.TypeSafeMatcher;
  * </p>
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  * @deprecated Use {@link CustomMatchers#closeTo(long, long)} instead
  */
 @Deprecated

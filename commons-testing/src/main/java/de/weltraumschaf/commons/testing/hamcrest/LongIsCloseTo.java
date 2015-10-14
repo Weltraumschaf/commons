@@ -28,11 +28,9 @@ import org.hamcrest.TypeSafeMatcher;
  * </p>
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
- * @deprecated Use {@link CustomMatchers#closeTo(long, long)} instead
+ * @since 2.1.0
  */
-@Deprecated
-public class IsCloseTo extends TypeSafeMatcher<Long> {
+final class LongIsCloseTo extends TypeSafeMatcher<Long> {
 
     /**
      * Accepted delta.
@@ -49,7 +47,7 @@ public class IsCloseTo extends TypeSafeMatcher<Long> {
      * @param value matched value
      * @param error accepted delta
      */
-    public IsCloseTo(final long value, final long error) {
+    public LongIsCloseTo(final long value, final long error) {
         super();
         this.delta = error;
         this.value = value;
@@ -103,6 +101,6 @@ public class IsCloseTo extends TypeSafeMatcher<Long> {
      */
     @Factory
     public static Matcher<Long> closeTo(final long operand, final long error) {
-        return new IsCloseTo(operand, error);
+        return new LongIsCloseTo(operand, error);
     }
 }

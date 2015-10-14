@@ -26,8 +26,9 @@ import org.hamcrest.TypeSafeMatcher;
  * @since 1.1.0
  * @param <T> type of exception to match its code
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
+ * @deprecated Use {@link CustomMatchers#hasExitCode(de.weltraumschaf.commons.system.ExitCode)} instead
  */
+@Deprecated
 public final class ApplicationExceptionCodeMatcher<T extends ApplicationException> extends TypeSafeMatcher<T> {
 
     /**
@@ -45,20 +46,17 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
         this.expectedExitCode = Validate.notNull(expectedExitCode, "expectedExitCode");
     }
 
-    /** {@inheritDoc} */
     @Override
     public void describeTo(final Description description) {
         description.appendText("exception with exit code ");
         description.appendText(expectedExitCode.toString());
     }
 
-    /** {@inheritDoc} */
     @Override
     protected boolean matchesSafely(final T item) {
         return expectedExitCode.getCode() == item.getExitCode().getCode();
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void describeMismatchSafely(final T item, final Description mismatch) {
         mismatch.appendText("exit code ");

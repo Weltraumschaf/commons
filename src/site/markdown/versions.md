@@ -1,4 +1,4 @@
-# Versions
+7# Versions
 
 ## Version 0.1.0
 
@@ -127,4 +127,9 @@
 - Introduce some common environment variable names.
 - Change token implementation so that they convert their value.
 
+## Version 2.1.0
+
+- More custom [Hamcrest][hamcrest] matchers fortesting.
+
 [junit]:    http://www.junit.org/
+[hamcrest]: http://hamcrest.org/JavaHamcrest/

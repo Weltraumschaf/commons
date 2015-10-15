@@ -11,10 +11,8 @@
  */
 package de.weltraumschaf.commons.testing.hamcrest;
 
-import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Matches a long value with some data.
@@ -30,16 +28,7 @@ import org.hamcrest.TypeSafeMatcher;
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  * @since 2.1.0
  */
-class LongIsCloseTo extends TypeSafeMatcher<Long> {
-
-    /**
-     * Accepted delta.
-     */
-    private final long delta;
-    /**
-     * Matched value.
-     */
-    private final long value;
+class LongIsCloseTo extends BaseIsCloseTo<Long> {
 
     /**
      * Dedicated constructor.
@@ -51,39 +40,12 @@ class LongIsCloseTo extends TypeSafeMatcher<Long> {
      * @param error accepted delta
      */
     public LongIsCloseTo(final long value, final long error) {
-        super();
-        this.delta = error;
-        this.value = value;
+        super(value, error);
     }
 
     @Override
-    public boolean matchesSafely(final Long item) {
-        return actualDelta(item) <= 0.0;
-    }
-
-    @Override
-    public void describeMismatchSafely(final Long item, final Description mismatchDescription) {
-        mismatchDescription.appendValue(item)
-                .appendText(" differed by ")
-                .appendValue(actualDelta(item));
-    }
-
-    @Override
-    public void describeTo(final Description description) {
-        description.appendText("a numeric value within ")
-                .appendValue(delta)
-                .appendText(" of ")
-                .appendValue(value);
-    }
-
-    /**
-     * Calculates the actual delta.
-     *
-     * @param item any long
-     * @return any double
-     */
-    private double actualDelta(final Long item) {
-        return (Math.abs((item - value)) - delta);
+    long actualDelta(final Long item) {
+        return (Math.abs((item - matched())) - error());
     }
 
     /**

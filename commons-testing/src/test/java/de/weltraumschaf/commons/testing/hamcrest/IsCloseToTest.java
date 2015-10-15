@@ -16,7 +16,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static de.weltraumschaf.commons.testing.hamcrest.IsCloseTo.closeTo;
-import static org.hamcrest.Matchers.not;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
 
@@ -49,7 +48,7 @@ public class IsCloseToTest {
             assertThat(96L, is(closeTo(100L, 3L)));
         } catch(final AssertionError ex) {
             assertThat(ex.getMessage(),
-                is("\nExpected: is a numeric value within <3L> of <100L>\n     but: <96L> differed by <1.0>"));
+                is("\nExpected: is a numeric value within <3L> of <100L>\n     but: <96L> differed by <1L>"));
         }
     }
 
@@ -59,7 +58,7 @@ public class IsCloseToTest {
             assertThat(104L, is(closeTo(100L, 3L)));
         } catch(final AssertionError ex) {
             assertThat(ex.getMessage(),
-                is("\nExpected: is a numeric value within <3L> of <100L>\n     but: <104L> differed by <1.0>"));
+                is("\nExpected: is a numeric value within <3L> of <100L>\n     but: <104L> differed by <1L>"));
         }
     }
 

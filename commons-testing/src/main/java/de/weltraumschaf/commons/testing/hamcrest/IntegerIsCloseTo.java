@@ -11,27 +11,24 @@
  */
 package de.weltraumschaf.commons.testing.hamcrest;
 
-import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 
 /**
  * Is the value a number equal to a value within some range of acceptable error?
  *
+ * <p>
+ * Useful to match time values where you want to accept some delta.
+ * </p>
+ *
+ * <p>
+ * Adapted from {@code org.hamcrest.number.IsCloseTo} for use with int values.
+ * </p>
+ *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  * @since 2.1.0
  */
-final class IntegerIsCloseTo extends TypeSafeMatcher<Integer> {
-
-    /**
-     * Accepted delta.
-     */
-    private final int delta;
-    /**
-     * Matched value.
-     */
-    private final int value;
+final class IntegerIsCloseTo extends BaseIsCloseTo<Integer> {
 
     /**
      * Dedicated constructor.
@@ -43,32 +40,12 @@ final class IntegerIsCloseTo extends TypeSafeMatcher<Integer> {
      * @param error accepted delta
      */
     private IntegerIsCloseTo(final int value, final int error) {
-        super();
-        this.delta = error;
-        this.value = value;
+        super(value, error);
     }
 
     @Override
-    public boolean matchesSafely(final Integer item) {
-        return actualDelta(item) <= 0;
-    }
-
-    @Override
-    public void describeMismatchSafely(final Integer item, final Description mismatchDescription) {
-        mismatchDescription.appendValue(item)
-            .appendText(" differed by ")
-            .appendValue(actualDelta(item));
-    }
-
-    @Override
-    public void describeTo(final Description description) {
-        description.appendText("a numeric value within ")
-            .appendValue(this.delta).appendText(" of ")
-            .appendValue(this.value);
-    }
-
-    private double actualDelta(final Integer item) {
-        return (Math.abs((item - this.value)) - this.delta);
+    long actualDelta(final Integer item) {
+        return (Math.abs((item - matched())) - error());
     }
 
     /**

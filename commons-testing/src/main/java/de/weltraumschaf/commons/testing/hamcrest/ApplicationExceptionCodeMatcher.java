@@ -9,7 +9,6 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt;
  */
-
 package de.weltraumschaf.commons.testing.hamcrest;
 
 import de.weltraumschaf.commons.application.ApplicationException;
@@ -26,35 +25,44 @@ import org.hamcrest.TypeSafeMatcher;
  * @since 1.1.0
  * @param <T> type of exception to match its code
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @deprecated Use {@link CustomMatchers#hasExitCode(de.weltraumschaf.commons.system.ExitCode)} instead
  */
-@Deprecated
 public final class ApplicationExceptionCodeMatcher<T extends ApplicationException> extends TypeSafeMatcher<T> {
 
     /**
      * Exit code to verify against it.
      */
-    private final ExitCode expectedExitCode;
+    private final int expectedExitCode;
+
+    /**
+     * Convenience constructor.
+     *
+     * @param expectedExitCode must not be {@code null}
+     * @deprecated Use {@link CustomMatchers#hasExitCode(de.weltraumschaf.commons.system.ExitCode)} instead
+     */
+    @Deprecated
+    public ApplicationExceptionCodeMatcher(final ExitCode expectedExitCode) {
+        this(Validate.notNull(expectedExitCode, "expectedExitCode").getCode());
+    }
 
     /**
      * Dedicated constructor.
      *
-     * @param expectedExitCode must not be {@code null}
+     * @param expectedExitCode
      */
-    public ApplicationExceptionCodeMatcher(final ExitCode expectedExitCode) {
+    ApplicationExceptionCodeMatcher(final int expectedExitCode) {
         super();
-        this.expectedExitCode = Validate.notNull(expectedExitCode, "expectedExitCode");
+        this.expectedExitCode = expectedExitCode;
     }
 
     @Override
     public void describeTo(final Description description) {
         description.appendText("exception with exit code ");
-        description.appendText(expectedExitCode.toString());
+        description.appendValue(expectedExitCode);
     }
 
     @Override
     protected boolean matchesSafely(final T item) {
-        return expectedExitCode.getCode() == item.getExitCode().getCode();
+        return expectedExitCode == item.getExitCode().getCode();
     }
 
     @Override
@@ -71,8 +79,20 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
      * @return never {@code null}, always new instance
      */
     @Factory
+    @SuppressWarnings("deprecation")
     public static <T extends ApplicationException> Matcher<T> hasExitCode(final ExitCode expectedExitCode) {
         return new ApplicationExceptionCodeMatcher<>(expectedExitCode);
     }
 
+    /**
+     * Static factory method.
+     *
+     * @since 2.1.0
+     * @param <T> type of matched exception
+     * @param expectedExitCode code to match}
+     * @return never {@code null}, always new instance
+     */
+    public static <T extends ApplicationException> Matcher<T> hasExitCode(final int expectedExitCode) {
+        return new ApplicationExceptionCodeMatcher<>(expectedExitCode);
+    }
 }

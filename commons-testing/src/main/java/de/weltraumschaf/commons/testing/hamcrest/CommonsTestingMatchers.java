@@ -19,7 +19,7 @@ import org.hamcrest.Matcher;
  * Factory for custom Hamcrest matchers.
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @since 1.0.0
+ * @since 2.1.0
  */
 public final class CommonsTestingMatchers {
 
@@ -74,8 +74,19 @@ public final class CommonsTestingMatchers {
      * @param expectedExitCode must not be {@code null}
      * @return never {@code null}, always new instance
      */
-    @SuppressWarnings("deprecation")
     public static <T extends ApplicationException> Matcher<T> hasExitCode(final ExitCode expectedExitCode) {
+        return ApplicationExceptionCodeMatcher.hasExitCode(expectedExitCode);
+    }
+
+    /**
+     * Creates a matcher to test if a {@link ApplicationException} has a particular exit code.
+     *
+     * @see ApplicationExceptionCodeMatcher
+     * @param <T> type of matched exception
+     * @param expectedExitCode any int
+     * @return never {@code null}, always new instance
+     */
+    public static <T extends ApplicationException> Matcher<T> hasExitCode(final int expectedExitCode) {
         return ApplicationExceptionCodeMatcher.hasExitCode(expectedExitCode);
     }
 }

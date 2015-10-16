@@ -1,11 +1,16 @@
 package de.weltraumschaf.commons.testing.hamcrest;
 
 import de.weltraumschaf.commons.system.ExitCode;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import static org.hamcrest.Matchers.either;
+import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.Ignore;
+import org.junit.Rule;
 
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -13,9 +18,21 @@ import static org.mockito.Mockito.mock;
  */
 public class CommonsTestingMatchersTest {
 
+    @Rule
+    //CHECKSTYLE:OFF
+    public final ExpectedException thrown = ExpectedException.none();
+    //CHECKSTYLE:ON
+
     @Test
-    @Ignore
-    public void constructorThrowsException() {
+    public void invokeConstructorByReflectionThrowsException() throws Exception {
+        assertThat(CommonsTestingMatchers.class.getDeclaredConstructors().length, is(1));
+
+        final Constructor<CommonsTestingMatchers> ctor = CommonsTestingMatchers.class.getDeclaredConstructor();
+        ctor.setAccessible(true);
+
+        thrown.expect(either(instanceOf(UnsupportedOperationException.class))
+                .or(instanceOf(InvocationTargetException.class)));
+        ctor.newInstance();
     }
 
     @Test

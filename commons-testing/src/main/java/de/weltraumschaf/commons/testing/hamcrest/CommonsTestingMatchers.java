@@ -69,8 +69,9 @@ public final class CommonsTestingMatchers {
     /**
      * Creates a matcher to test if a {@link ApplicationException} has a particular exit code.
      *
+     * @see ApplicationExceptionCodeMatcher
      * @param <T> type of matched exception
-     * @param expectedExitCode
+     * @param expectedExitCode must not be {@code null}
      * @return never {@code null}, always new instance
      */
     @SuppressWarnings("deprecation")

@@ -66,6 +66,7 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
     /**
      * Static factory method.
      *
+     * @param <T> type of matched exception
      * @param expectedExitCode code to match, must not be {@code null}
      * @return never {@code null}, always new instance
      */

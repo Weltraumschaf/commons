@@ -18,7 +18,7 @@ import org.junit.Test;
 /**
  * Tests for {@link CommonsTestingMatchers}.
  */
-public class CustomMatchersTest {
+public class CommonsTestingMatchersTest {
 
     @Test
     public void integerIscloseTo() {

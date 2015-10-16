@@ -56,6 +56,8 @@ public final class CommonsTestingMatchers {
     }
 
     /**
+     * Creates a matcher to test if a {@link Throwable} has a particular message.
+     *
      * @see HasMessage
      * @param messageTextMatcher matcher for actual message., not {@code null}.
      * @return never {@code null}
@@ -64,6 +66,13 @@ public final class CommonsTestingMatchers {
         return HasMessage.hasMessage(messageTextMatcher);
     }
 
+    /**
+     *
+     * @param <T>
+     * @param expectedExitCode
+     * @return
+     */
+    @SuppressWarnings("deprecation")
     public static <T extends ApplicationException> Matcher<T> hasExitCode(final ExitCode expectedExitCode) {
         return ApplicationExceptionCodeMatcher.hasExitCode(expectedExitCode);
     }

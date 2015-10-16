@@ -37,7 +37,7 @@ public final class CommonsTestingMatchers {
      * @see IntegerIsCloseTo
      * @param operand the expected value of matching doubles
      * @param error the delta (+/-) within which matches will be allowed
-     * @return never {@code null}
+     * @return never {@code null}, always new instance
      */
     public static Matcher<Integer> closeTo(final int operand, final int error) {
         return IntegerIsCloseTo.closeTo(operand, error);
@@ -49,7 +49,7 @@ public final class CommonsTestingMatchers {
      * @see LongIsCloseTo
      * @param operand the expected value of matching doubles
      * @param error the delta (+/-) within which matches will be allowed
-     * @return never {@code null}
+     * @return never {@code null}, always new instance
      */
     public static Matcher<Long> closeTo(final long operand, final long error) {
         return LongIsCloseTo.closeTo(operand, error);
@@ -60,17 +60,18 @@ public final class CommonsTestingMatchers {
      *
      * @see HasMessage
      * @param messageTextMatcher matcher for actual message., not {@code null}.
-     * @return never {@code null}
+     * @return never {@code null}, always new instance
      */
     public static Matcher<Throwable> hasMessage(final Matcher<? super String> messageTextMatcher) {
         return HasMessage.hasMessage(messageTextMatcher);
     }
 
     /**
+     * Creates a matcher to test if a {@link ApplicationException} has a particular exit code.
      *
-     * @param <T>
+     * @param <T> type of matched exception
      * @param expectedExitCode
-     * @return
+     * @return never {@code null}, always new instance
      */
     @SuppressWarnings("deprecation")
     public static <T extends ApplicationException> Matcher<T> hasExitCode(final ExitCode expectedExitCode) {

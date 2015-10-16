@@ -25,8 +25,19 @@ import org.hamcrest.TypeSafeMatcher;
  */
 final class HasMessage extends TypeSafeMatcher<Throwable> {
 
+    /**
+     * String matcher for expected message.
+     */
     private final Matcher<? super String> messageTextMatcher;
 
+    /**
+     * Dedicated constructor.
+     * <p>
+     * Use {@link #hasMessage(org.hamcrest.Matcher)} to create new instances.
+     * </p>
+     *
+     * @param messageTextMatcher must not be {@code null}
+     */
     private HasMessage(final Matcher<? super String> messageTextMatcher) {
         super();
         this.messageTextMatcher

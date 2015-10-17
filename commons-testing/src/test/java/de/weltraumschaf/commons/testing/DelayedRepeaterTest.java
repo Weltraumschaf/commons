@@ -39,7 +39,7 @@ public class DelayedRepeaterTest {
 
     @Test(expected = NullPointerException.class)
     public void execute_withNullCallableThrowsException() throws InterruptedException {
-        DelayedRepeater.create(500, 1).execute((Callable) null);
+        DelayedRepeater.create(500, 1).execute((Callable<Void>) null);
     }
 
     @Test

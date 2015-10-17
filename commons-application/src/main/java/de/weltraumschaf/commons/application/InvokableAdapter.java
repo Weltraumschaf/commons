@@ -57,10 +57,16 @@ import java.util.logging.Logger;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public abstract class InvokableAdapter implements Invokable {
 
+    /**
+     * Use this field to enable the printing of stack traces.
+     * <p>
+     * By default this value is {@code false}. If you want stack traces from exceptions bubbled up until the main
+     * function, then set this field to {@code true}.
+     * </p>
+     */
     public boolean debug;
 
     /**
@@ -126,32 +132,17 @@ public abstract class InvokableAdapter implements Invokable {
     }
 
     /**
-     * Inject the I/O streams to the invokable and then calls {@link de.weltraumschaf.commons.application.Invokable#init()} and then
+     * Inject the I/O streams to the invokable and then calls
+     * {@link de.weltraumschaf.commons.application.Invokable#init()} and then
      * {@link de.weltraumschaf.commons.application.Invokable#execute()}.
-     *
+     * <p>
      * This method handles ell thrown {@link java.lang.Exception} and calls {@link java.lang.System#exit(int)}.
+     * </p>
      *
      * @param invokable Implementation to invoke.
      * @param ioStreams I/O streams.
      */
     public static void main(final Invokable invokable, final IO ioStreams) {
-        main(invokable, ioStreams, invokable.isDebugEnabled());
-    }
-
-    /**
-     * Inject the I/O streams to the invokable and then calls {@link de.weltraumschaf.commons.application.Invokable#init()} and then
-     * {@link de.weltraumschaf.commons.application.Invokable#execute()}.
-     *
-     * This method handles ell thrown {@link java.lang.Exception} and calls {@link java.lang.System#exit(int)}, and prints stack trace if
-     * <code>debug</code> is <tt>true</tt>.
-     *
-     * FIXME Remove debug parameter.
-     *
-     * @param invokable implementation to invoke
-     * @param ioStreams I/O streams
-     * @param debug print stack trace if true
-     */
-    public static void main(final Invokable invokable, final IO ioStreams, final boolean debug) {
         invokable.setIoStreams(ioStreams);
 
         try {
@@ -174,15 +165,34 @@ public abstract class InvokableAdapter implements Invokable {
         invokable.exit(0);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * Inject the I/O streams to the invokable and then calls
+     * {@link de.weltraumschaf.commons.application.Invokable#init()} and then
+     * {@link de.weltraumschaf.commons.application.Invokable#execute()}.
+     *
+     * <p>
+     * This method handles ell thrown {@link java.lang.Exception} and calls {@link java.lang.System#exit(int)}, and
+     * prints stack trace if <code>debug</code> is <tt>true</tt>.
+     * </p>
+     *
+     * @param invokable implementation to invoke
+     * @param ioStreams I/O streams
+     * @param debug print stack trace if {@code true}
+     * @deprecated use
+     * {@link #main(de.weltraumschaf.commons.application.Invokable, de.weltraumschaf.commons.application.IO)} instead
+     */
+    @Deprecated
+    public static void main(final Invokable invokable, final IO ioStreams, final boolean debug) {
+        ((InvokableAdapter) invokable).debug = debug;
+        main(invokable, ioStreams);
+    }
+
     @Override
     public final boolean isDebugEnabled() {
         return debug;
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Adds shutdown hook to runtime.
      */
     @Override
@@ -203,13 +213,11 @@ public abstract class InvokableAdapter implements Invokable {
         return args.clone();
     }
 
-    /** {@inheritDoc} */
     @Override
     public final IO getIoStreams() {
         return ioStreams;
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void setIoStreams(final IO ioStreams) {
         this.ioStreams = ioStreams;
@@ -233,19 +241,16 @@ public abstract class InvokableAdapter implements Invokable {
         shutDownHook.register(callback);
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void exit(int status) {
         exiter.exit(status);
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void exit(ExitCode status) {
         exiter.exit(status);
     }
 
-    /** {@inheritDoc} */
     @Override
     public final void setExiter(final Exitable exiter) {
         this.exiter = exiter;

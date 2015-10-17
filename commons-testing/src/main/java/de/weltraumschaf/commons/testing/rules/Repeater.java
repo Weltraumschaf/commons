@@ -113,6 +113,11 @@ public final class Repeater implements TestRule {
     private abstract static class BaseRepeatStatement extends Statement {
 
         /**
+         * Used for error rate calculation.
+         */
+        private static final double HUNDRED_PERCENT = 100.0d;
+
+        /**
          * how many times to repeat.
          */
         private final int times;
@@ -160,7 +165,7 @@ public final class Repeater implements TestRule {
          * @param errors must not be {@code null}
          * @throws Throwable if list of errors is not empty
          */
-        void assertNoErrors(final Collection<Throwable> errors) throws Throwable {
+        void assertNoErrors(final Collection<Throwable> errors) throws Throwable { // NOSONAR We want all types here.
             Validate.notNull(errors, "errors");
 
             if (errors.isEmpty()) {
@@ -222,8 +227,9 @@ public final class Repeater implements TestRule {
         static double calculateFailedRepetitionPercentage(final int times, final int errors) {
             Validate.isTrue(times > 0, "Parameter times must not be less than 1!");
             Validate.isTrue(errors >= 0, "Parameter errors must not be less than 0l!");
-            return (errors * 100.0d) / times;
+            return (errors * HUNDRED_PERCENT) / times;
         }
+
     }
 
     /**

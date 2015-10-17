@@ -1,5 +1,6 @@
 package de.weltraumschaf.commons.testing;
 
+import java.util.concurrent.Callable;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -15,20 +16,30 @@ public class DelayedRepeaterTest {
     @Rule
     //CHECKSTYLE:OFF
     public final ExpectedException thrown = ExpectedException.none();
-  //CHECKSTYLE:ON
+    //CHECKSTYLE:ON
 
     @Test
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void throwExceptionIfConstructWithWaitMilliesLessThanZero() {
-        this.thrown.expect(IllegalArgumentException.class);
+        thrown.expect(IllegalArgumentException.class);
         DelayedRepeater.create(-1, 3);
     }
 
     @Test
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void throwExceptionIfConstructWithMaxRetriesLessThanOne() {
-        this.thrown.expect(IllegalArgumentException.class);
+        thrown.expect(IllegalArgumentException.class);
         DelayedRepeater.create(500, 0);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void execute_withNullRunnableThrowsException() throws InterruptedException {
+        DelayedRepeater.create(500, 1).execute((Runnable)null);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void execute_withNullCallableThrowsException() throws InterruptedException {
+        DelayedRepeater.create(500, 1).execute((Callable)null);
     }
 
     @Test

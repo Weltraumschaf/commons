@@ -52,7 +52,7 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
     /**
      * Dedicated constructor.
      *
-     * @param expectedExitCodeany int
+     * @param expectedExitCode any int
      */
     private ApplicationExceptionCodeMatcher(final int expectedExitCode) {
         super();

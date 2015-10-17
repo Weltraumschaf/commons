@@ -13,6 +13,7 @@ package de.weltraumschaf.commons.parse.token;
 
 import de.weltraumschaf.commons.guava.Objects;
 import de.weltraumschaf.commons.validate.Validate;
+import net.jcip.annotations.ThreadSafe;
 
 /**
  * Represents a token position in the source string.
@@ -20,11 +21,14 @@ import de.weltraumschaf.commons.validate.Validate;
  * The position contains the line, column and filename where the
  * token occurred. The file name is optional.
  * </p>
+ * <p>
+ * This class is immutable by design.
+ * </p>
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
+@ThreadSafe
 public final class Position {
 
     /**
@@ -131,18 +135,44 @@ public final class Position {
                 && Objects.equal(file, other.file);
     }
 
+    /**
+     * Test if this position is at a particular position.
+     * <p>
+     * Similar to {@link #equals(java.lang.Object)} but does not check for {@link #getFile() file}.
+     * </p>
+     *
+     * @param p must not be {@code null}
+     * @return {@code true} if line and column is same, else {@code false}
+     */
     public boolean at(final Position p) {
+        Validate.notNull(p, "p");
         return line == p.line && column == p.column;
     }
 
+    /**
+     * Increments the column by one.
+     *
+     * @return never {@code null}, new instance with incremented column
+     */
     public Position incColumn() {
         return new Position(line, column + 1, file);
     }
 
+    /**
+     * Increments the line by one.
+     *
+     * @return never {@code null}, new instance with incremented line
+     */
     public Position incLine() {
         return new Position(line + 1, column, file);
     }
 
+    /**
+     * Sets the column.
+     *
+     * @param col any int
+     * @return never {@code null}, new instance with new column
+     */
     public Position column(final int col) {
         return new Position(line, col, file);
     }

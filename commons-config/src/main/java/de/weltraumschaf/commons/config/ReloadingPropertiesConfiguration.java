@@ -61,7 +61,6 @@ import java.util.Properties;
  *
  * @since 1.1.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public abstract class ReloadingPropertiesConfiguration {
 

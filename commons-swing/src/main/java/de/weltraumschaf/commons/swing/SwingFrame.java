@@ -27,6 +27,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 /**
  * Extension of {@link javax.swing.JFrame} with {@link java.awt.BorderLayout} for easier use.
  * <p>
+ * This class uses Java default logging.
+ * </p>
+ * <p>
  * Example:
  * </p>
  * <pre>{@code
@@ -61,7 +64,6 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public class SwingFrame extends JFrame {
 
@@ -147,8 +149,9 @@ public class SwingFrame extends JFrame {
 
     /**
      * Initializes the look and feel.
-     *
+     * <p>
      * Uses the system look and feel. If the guest OS is Mac OS x the menu bar is took off the frame.
+     * </p>
      */
     protected void initLookAndFeel() {
         final OperatingSystem os = OperatingSystem.determine(OperatingSystem.OS_SYSTEM_PROPERTY);
@@ -160,23 +163,18 @@ public class SwingFrame extends JFrame {
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (final ClassNotFoundException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            LOGGER.log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+        } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
         }
     }
 
     /**
      * Binds on the window closing event and calls the exiter to exit application.
-     *
+     * <p>
      * This method add a default window listener which {@link #exiter exits} on
-     * {@link java.awt.event.WindowAdapter#windowClosing(java.awt.event.WindowEvent)}. You may override this method for other
-     * behaviour. This method is only invoked if {@link #setExitOnCloseWindow(boolean)} is set true.
+     * {@link java.awt.event.WindowAdapter#windowClosing(java.awt.event.WindowEvent)}. You may override this method for
+     * other behavior. This method is only invoked if {@link #setExitOnCloseWindow(boolean)} is set true.
+     * </p>
      */
     protected void bindWindowClosing() {
         addWindowListener(new WindowAdapter() {
@@ -191,8 +189,9 @@ public class SwingFrame extends JFrame {
 
     /**
      * Template method for menu initialization.
-     *
+     * <p>
      * Override this method with your custom code, if you need a menu.
+     * </p>
      */
     protected void initMenu() {
         // Empty template method.
@@ -201,7 +200,9 @@ public class SwingFrame extends JFrame {
     /**
      * Template method for tool bar initialization.
      *
+     * <p>
      * Override this method with your custom code, if you need a tool bar.
+     * </p>
      */
     protected void initToolBar() {
         // Empty template method.
@@ -210,7 +211,9 @@ public class SwingFrame extends JFrame {
     /**
      * Template method for main UI initialization.
      *
+     * <p>
      * Override this method with your custom code to add components to {@link #panel}.
+     * </p>
      */
     protected void initPanel() {
         // Empty template method.

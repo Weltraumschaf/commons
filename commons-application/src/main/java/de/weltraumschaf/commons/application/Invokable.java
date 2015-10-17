@@ -19,7 +19,6 @@ import de.weltraumschaf.commons.system.Exitable;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public interface Invokable {
 
@@ -38,36 +37,36 @@ public interface Invokable {
     /**
      * Get stream object for I/O.
      *
-     * @return Return always same instance until it was
-     *        {@link #setIoStreams(de.weltraumschaf.commons.application.IO) reset}.
+     * @return never {@code null}, always same instance until it was
+     *        {@link #setIoStreams(de.weltraumschaf.commons.application.IO) reset}
      */
     IO getIoStreams();
 
     /**
      * Set stream object for I/O.
      *
-     * @param ioStreams Stream object.
+     * @param ioStreams must not be {@code null}
      */
     void setIoStreams(IO ioStreams);
 
     /**
      * Exits the invokable.
      *
-     * @param status exit status.
+     * @param status must not be {@code null}
      */
     void exit(ExitCode status);
 
     /**
      * Exits the invokable.
      *
-     * @param status exit status.
+     * @param status any int
      */
     void exit(int status);
 
     /**
      * Set an {@code exiter} to handle exit calls.
      *
-     * @param exiter Object which handles exit calls.
+     * @param exiter must not be {@code null}
      */
     void setExiter(Exitable exiter);
 

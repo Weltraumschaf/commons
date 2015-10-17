@@ -14,23 +14,23 @@ package de.weltraumschaf.commons.system;
 /**
  * An exitable gives the interface to exit an program w/o calling {@link java.lang.System#exit(int)} directly.
  *
+ * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public interface Exitable {
 
     /**
      * Exits the program.
      *
-     * @param status Status code.
+     * @param status any int
      */
     void exit(int status);
 
     /**
      * Exits the program.
      *
-     * @param status Exit code.
+     * @param status must not be {@code null}
      */
-    void exit(final ExitCode status);
+    void exit(ExitCode status);
 
 }

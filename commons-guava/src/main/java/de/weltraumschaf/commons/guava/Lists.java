@@ -27,7 +27,6 @@ import java.util.List;
  * @author Mike Bostock
  * @author Louis Wasserman
  * @since 2.0 (imported from Google Collections Library)
- * @version $Id: $Id
  */
 public final class Lists {
 
@@ -46,7 +45,7 @@ public final class Lists {
      * @return a new, empty {@code ArrayList}
      */
     public static <E> List<E> newArrayList() {
-        return new ArrayList<E>();
+        return new ArrayList<>();
     }
 
     /**
@@ -74,7 +73,7 @@ public final class Lists {
 
         // Let ArrayList's sizing logic work, if possible
         if (elements instanceof Collection) {
-            return new ArrayList<E>(cast(elements));
+            return new ArrayList<>(cast(elements));
         } else {
             return newArrayList(elements.iterator());
         }

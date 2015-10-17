@@ -57,19 +57,16 @@ abstract class BaseToken<T> implements ShellToken {
         this.value = Validate.notNull(value, "value");
     }
 
-    /** {@inheritDoc} */
     @Override
     public final TokenType getType() {
         return type;
     }
 
-    /** {@inheritDoc} */
     @Override
     public final Position getPosition() {
         return position;
     }
 
-    /** {@inheritDoc} */
     @Override
     public final String getRaw() {
         return raw;
@@ -84,13 +81,11 @@ abstract class BaseToken<T> implements ShellToken {
         return value;
     }
 
-    /** {@inheritDoc} */
     @Override
     public final int hashCode() {
         return Objects.hashCode(type, position, raw, value);
     }
 
-    /** {@inheritDoc} */
     @Override
     public final boolean equals(final Object obj) {
         if (!(obj instanceof BaseToken)) {
@@ -104,7 +99,6 @@ abstract class BaseToken<T> implements ShellToken {
                 && Objects.equal(value, other.value);
     }
 
-    /** {@inheritDoc} */
     @Override
     public final String toString() {
         return Objects.toStringHelper(this)
@@ -115,7 +109,6 @@ abstract class BaseToken<T> implements ShellToken {
                 .toString();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String asString() {
         return value.toString();

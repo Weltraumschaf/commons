@@ -26,8 +26,7 @@ import java.util.Map;
  * @author Mike Bostock
  * @author Isaac Shum
  * @author Louis Wasserman
- * @since 2.0 (imported from Google Collections Library)
- * @version $Id: $Id
+ * @since 2.0.0 (imported from Google Collections Library)
  */
 public final class Maps {
 
@@ -47,7 +46,7 @@ public final class Maps {
      * @return a new, empty {@code HashMap}
      */
     public static <K, V> Map<K, V> newHashMap() {
-        return new HashMap<K, V>();
+        return new HashMap<>();
     }
 
     /**
@@ -60,7 +59,7 @@ public final class Maps {
      *         map}
      */
     public static <K, V> Map<K, V> newHashMap(final Map<? extends K, ? extends V> map) {
-        return new HashMap<K, V>(map);
+        return new HashMap<>(map);
     }
 
     /**
@@ -71,6 +70,6 @@ public final class Maps {
      * @param <V> a V object.
      */
     public static <K, V> IdentityHashMap<K, V> newIdentityHashMap() {
-        return new IdentityHashMap<K, V>();
+        return new IdentityHashMap<>();
     }
 }

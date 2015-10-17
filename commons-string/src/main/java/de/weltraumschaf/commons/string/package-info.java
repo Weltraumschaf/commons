@@ -9,11 +9,10 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt;
  */
-
 /**
  * Classes to help with strings.
- *
- * <p>This package is a part of the open-source
- * <a href="https://github.com/Weltraumschaf/commons">Commons</a></p>
+ * <p>
+ * This package is a part of the open-source <a href="https://github.com/Weltraumschaf/commons">Commons</a> lib.
+ * </p>
  */
 package de.weltraumschaf.commons.string;

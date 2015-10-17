@@ -28,9 +28,10 @@ import de.weltraumschaf.commons.validate.Validate;
  *     final char currentChar = characterStream.next();
  *     // Do something with the current char.
  * }
- * }</pre> * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * }</pre>
  *
- * @version $Id: $Id
+ * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public final class CharacterStream {
 
@@ -45,8 +46,17 @@ public final class CharacterStream {
      * Current character position.
      */
     private int index = -1;
+    /**
+     * Current line.
+     */
     private int line;
+    /**
+     * Current column.
+     */
     private int column;
+    /**
+     * Whether a {@link #NL newline} was seen.
+     */
     private boolean newLineSeen;
 
     /**
@@ -103,8 +113,9 @@ public final class CharacterStream {
 
     /**
      * Returns the current character.
-     *
+     * <p>
      * If {@link #next()} not yet called, it is called implicitly.
+     * </p>
      *
      * @return The current character.
      */
@@ -152,6 +163,11 @@ public final class CharacterStream {
         return index;
     }
 
+    /**
+     * Get the current position in the stream.
+     *
+     * @return never {@code null}, always new instance
+     */
     public Position position() {
         return new Position(line, column);
     }
@@ -182,6 +198,11 @@ public final class CharacterStream {
         return Objects.equal(input, other.input);
     }
 
+    /**
+     * Whether the stream is empty.
+     *
+     * @return {@code true} if the underlying input is an empty string, else {@code false}
+     */
     public boolean isEmpty() {
         return input.isEmpty();
     }

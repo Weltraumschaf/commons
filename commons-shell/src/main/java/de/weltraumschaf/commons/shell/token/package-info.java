@@ -15,5 +15,8 @@
  * <p>
  * This is an attempt to design token classes with strong typed values, but without the need of unsafe casts warnings.
  * </p>
+ * <p>
+ * This package is a part of the open-source <a href="https://github.com/Weltraumschaf/commons">Commons</a> lib.
+ * </p>
  */
 package de.weltraumschaf.commons.shell.token;

@@ -17,7 +17,6 @@ package de.weltraumschaf.commons.string;
  *
  * @since 1.0.1
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class Strings {
 

@@ -18,12 +18,12 @@ import java.util.Map;
 
 /**
  * Maps the literal string of an command to its enum type.
- *
+ * <p>
  * This class is not thread safe!
- *
+ * </p>
+ * 
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public abstract class LiteralCommandMap {
 

@@ -26,20 +26,22 @@ package de.weltraumschaf.commons.shell;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public interface CommandVerifier {
 
     /**
      * Verifies parsed command of consistency.
-     *
+     * <p>
      * Consistency checks are:
-     * - correct sub command type
-     * - correct number of arguments
+     * </p>
+     * <ul>
+     * <li>correct sub command type</li>
+     * <li>correct number of arguments</li>
+     * </ul>
      *
      * @param cmd command to verify
      * @throws de.weltraumschaf.commons.shell.SyntaxException if, verification has failed
      */
-    void verifyCommand(final ShellCommand cmd) throws SyntaxException;
+    void verifyCommand(ShellCommand cmd) throws SyntaxException;
 
 }

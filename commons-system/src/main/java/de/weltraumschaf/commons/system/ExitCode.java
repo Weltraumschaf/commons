@@ -37,18 +37,18 @@ package de.weltraumschaf.commons.system;
  * }
  * }</pre>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public interface ExitCode {
 
     /**
      * Returns the integer representation of the exit code.
-     *
+     * <p>
      * A integer of 0 means everything ok. Everything else
      * signals an erroneous exit code.
-     *
-     * @return Return integer.
+     * </p>
+     * @return any int
      */
     int getCode();
 

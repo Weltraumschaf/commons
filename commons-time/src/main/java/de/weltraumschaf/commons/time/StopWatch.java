@@ -57,7 +57,6 @@ import java.util.Date;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class StopWatch {
 
@@ -332,13 +331,13 @@ public final class StopWatch {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Gets a summary of the time that the stopwatch recorded as a string.
      *
      * <p>
      * The format used is ISO8601-like, <i>hours</i>:<i>minutes</i>:<i>seconds</i>.<i>milliseconds</i>.
      * </p>
+     *
+     * @return never {@code null} or empty
      */
     @Override
     public String toString() {
@@ -381,9 +380,9 @@ public final class StopWatch {
     }
 
     /**
+     * This method is used to find out whether the StopWatch is stopped.
      * <p>
-     * This method is used to find out whether the StopWatch is stopped. The stopwatch which's not yet started and
-     * explicitly stopped stopwatch is considered as stopped.
+     * The stopwatch which's not yet started and explicitly stopped stopwatch is considered as stopped.
      * </p>
      *
      * @return boolean If the StopWatch is stopped.
@@ -416,78 +415,78 @@ public final class StopWatch {
          * Stopwatch is not started.
          */
         UNSTARTED {
-            @Override
-            boolean isStarted() {
-                return false;
-            }
+                @Override
+                boolean isStarted() {
+                    return false;
+                }
 
-            @Override
-            boolean isStopped() {
-                return true;
-            }
+                @Override
+                boolean isStopped() {
+                    return true;
+                }
 
-            @Override
-            boolean isSuspended() {
-                return false;
-            }
-        },
+                @Override
+                boolean isSuspended() {
+                    return false;
+                }
+            },
         /**
          * Stopwatch is running.
          */
         RUNNING {
-            @Override
-            boolean isStarted() {
-                return true;
-            }
+                @Override
+                boolean isStarted() {
+                    return true;
+                }
 
-            @Override
-            boolean isStopped() {
-                return false;
-            }
+                @Override
+                boolean isStopped() {
+                    return false;
+                }
 
-            @Override
-            boolean isSuspended() {
-                return false;
-            }
-        },
+                @Override
+                boolean isSuspended() {
+                    return false;
+                }
+            },
         /**
          * Stopwatch is stopped.
          */
         STOPPED {
-            @Override
-            boolean isStarted() {
-                return false;
-            }
+                @Override
+                boolean isStarted() {
+                    return false;
+                }
 
-            @Override
-            boolean isStopped() {
-                return true;
-            }
+                @Override
+                boolean isStopped() {
+                    return true;
+                }
 
-            @Override
-            boolean isSuspended() {
-                return false;
-            }
-        },
+                @Override
+                boolean isSuspended() {
+                    return false;
+                }
+            },
         /**
          * Stopwatch is suspended.
          */
         SUSPENDED {
-            @Override
-            boolean isStarted() {
-                return true;
-            }
+                @Override
+                boolean isStarted() {
+                    return true;
+                }
 
-            @Override
-            boolean isStopped() {
-                return false;
-            }
+                @Override
+                boolean isStopped() {
+                    return false;
+                }
 
-            @Override
-            boolean isSuspended() {
-                return true;
-            }
-        };
+                @Override
+                boolean isSuspended() {
+                    return true;
+                }
+            };
 
         /**
          * The method is used to find out if the StopWatch is started.

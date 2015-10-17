@@ -9,9 +9,11 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt;
  */
-
 /**
  * Helper classes to reduce boiler plate when using <a href="http://jcommander.org/">JCommander</a>.
+ * <p>
+ * This package is a part of the open-source <a href="https://github.com/Weltraumschaf/commons">Commons</a> lib.
+ * </p>
  *
  * @since 1.0.1
  */

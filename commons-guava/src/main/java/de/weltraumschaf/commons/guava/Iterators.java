@@ -24,7 +24,7 @@ import java.util.Iterator;
  *
  * @author Kevin Bourrillion
  * @author Jared Levy
- * @since 2.0 (imported from Google Collections Library)
+ * @since 2.0.0 (imported from Google Collections Library)
  */
 final class Iterators {
 

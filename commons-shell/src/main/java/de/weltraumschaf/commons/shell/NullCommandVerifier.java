@@ -16,11 +16,9 @@ package de.weltraumschaf.commons.shell;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public class NullCommandVerifier implements CommandVerifier {
 
-    /** {@inheritDoc} */
     @Override
     public void verifyCommand(ShellCommand cmd) throws SyntaxException {
         // Does nothing.

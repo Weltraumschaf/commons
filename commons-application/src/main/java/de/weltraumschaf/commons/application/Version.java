@@ -27,7 +27,7 @@ import java.util.Properties;
  * </pre>
  *
  * <p>
- * This property file may be processed by a Maven filter to provide the verison from
+ * This property file may be processed by a Maven filter to provide the version from
  * the pom.xml:
  * </p>
  * <pre>
@@ -47,7 +47,6 @@ import java.util.Properties;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class Version {
 
@@ -112,7 +111,7 @@ public final class Version {
     /**
      * Get the version string.
      *
-     * @return The version string.
+     * @return never {@code null} or empty
      */
     public String getVersion() {
         return properties.getProperty(PropertyNames.VERSION.toString(),
@@ -120,9 +119,9 @@ public final class Version {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Returns the version string.
+     *
+     * @return never {@code null} or empty
      */
     @Override
     public String toString() {
@@ -163,7 +162,7 @@ public final class Version {
         /**
          * Returns the property name.
          *
-         * @return String containing the property name.
+         * @return never {@code null} or empty
          */
         @Override
         public String toString() {
@@ -173,7 +172,7 @@ public final class Version {
         /**
          * Get the fallback value.
          *
-         * @return Return default value string.
+         * @return never {@code null} or empty
          */
         public String getDefaultValue() {
             return defaultValue;

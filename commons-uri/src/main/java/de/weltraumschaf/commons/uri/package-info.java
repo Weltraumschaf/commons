@@ -12,5 +12,8 @@
 /**
  * In this package is stuff copy pasted from JAX-RS, Jersey and Google Guava to minimize
  * the size of the final jar because I only want to use the UruBuilder.
+ * <p>
+ * This package is a part of the open-source <a href="https://github.com/Weltraumschaf/commons">Commons</a> lib.
+ * </p>
  */
 package de.weltraumschaf.commons.uri;

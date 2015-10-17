@@ -9,8 +9,11 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" <weltraumschaf(at)googlemail(dot)com>
  */
-
 /**
  * Concurrent data structures.
+ *
+ * <p>
+ * This package is a part of the open-source <a href="https://github.com/Weltraumschaf/commons">Commons</a> lib.
+ * </p>
  */
 package de.weltraumschaf.commons.concurrent;

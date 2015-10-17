@@ -24,7 +24,6 @@ import java.util.Objects;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class StringJoiner {
 
@@ -92,7 +91,6 @@ public final class StringJoiner {
             return EMPTY;
         }
 
-
         final StringBuilder buffer = new StringBuilder(array.length * 16);
         boolean first = true;
 
@@ -136,7 +134,6 @@ public final class StringJoiner {
             return EMPTY;
         }
 
-
         final StringBuilder buffer = new StringBuilder(array.length * 16);
         boolean first = true;
 
@@ -179,7 +176,6 @@ public final class StringJoiner {
         if (array == null || array.length == 0) {
             return EMPTY;
         }
-
 
         final StringBuilder buffer = new StringBuilder(array.length * 16);
         boolean first = true;
@@ -226,7 +222,6 @@ public final class StringJoiner {
             return EMPTY;
         }
 
-
         final StringBuilder buffer = new StringBuilder(array.length * 16);
         boolean first = true;
 
@@ -269,7 +264,6 @@ public final class StringJoiner {
         if (array == null || array.length == 0) {
             return EMPTY;
         }
-
 
         final StringBuilder buffer = new StringBuilder(array.length * 16);
         boolean first = true;
@@ -314,7 +308,6 @@ public final class StringJoiner {
             return EMPTY;
         }
 
-
         final StringBuilder buffer = new StringBuilder(array.length * 16);
         boolean first = true;
 
@@ -357,7 +350,6 @@ public final class StringJoiner {
         if (array == null || array.length == 0) {
             return EMPTY;
         }
-
 
         final StringBuilder buffer = new StringBuilder(array.length * 16);
         boolean first = true;
@@ -403,7 +395,6 @@ public final class StringJoiner {
             return EMPTY;
         }
 
-
         final StringBuilder buffer = new StringBuilder(array.length * 16);
         boolean first = true;
 
@@ -448,7 +439,6 @@ public final class StringJoiner {
         if (array == null || array.length == 0) {
             return EMPTY;
         }
-
 
         final StringBuilder buffer = new StringBuilder(array.length * 16);
         boolean first = true;

@@ -23,7 +23,6 @@ import de.weltraumschaf.commons.validate.Validate;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public class ApplicationException extends Exception {
 
@@ -68,7 +67,6 @@ public class ApplicationException extends Exception {
         return exitCode;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return super.toString() + " (" + exitCode + ')';

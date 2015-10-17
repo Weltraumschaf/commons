@@ -37,15 +37,13 @@ final class ConcurrentStack<E> implements Stack<E> {
     /**
      * References the top of the stack.
      */
-    private final AtomicReference<Entry<E>> top = new AtomicReference<Entry<E>>();
+    private final AtomicReference<Entry<E>> top = new AtomicReference<>();
 
-    /** {@inheritDoc} */
     @Override
     public boolean isEmpty() {
         return null == top.get();
     }
 
-    /** {@inheritDoc} */
     @Override
     public E peek() {
         final Entry<E> currentTop = top.get();
@@ -54,7 +52,6 @@ final class ConcurrentStack<E> implements Stack<E> {
                 : currentTop.value;
     }
 
-    /** {@inheritDoc} */
     @Override
     public E pop() {
         Entry<E> currentTop;
@@ -72,19 +69,17 @@ final class ConcurrentStack<E> implements Stack<E> {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void push(final E element) {
         while (true) {
             final Entry<E> currentTop = top.get();
 
-            if (top.compareAndSet(currentTop, new Entry<E>(element, currentTop))) {
+            if (top.compareAndSet(currentTop, new Entry<>(element, currentTop))) {
                 break;
             }
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final Entry<E> currentTop = top.get();
@@ -96,7 +91,6 @@ final class ConcurrentStack<E> implements Stack<E> {
         return currentTop.hashCode();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (!(obj instanceof ConcurrentStack)) {
@@ -107,7 +101,6 @@ final class ConcurrentStack<E> implements Stack<E> {
         return Objects.equal(top.get(), other.top.get());
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder();
@@ -131,9 +124,10 @@ final class ConcurrentStack<E> implements Stack<E> {
 
     /**
      * Linked list entry.
-     *
+     * <p>
      * Not used outside the class.
-     *
+     * </p>
+     * 
      * @param <T> type of entry object
      */
     private static final class Entry<T> {

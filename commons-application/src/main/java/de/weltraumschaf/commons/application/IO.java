@@ -19,63 +19,62 @@ import java.io.PrintStream;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public interface IO {
 
     /**
      * Prints error.
      *
-     * @param str String to print.
+     * @param str string to print
      */
     void error(final String str);
 
     /**
      * Prints error line.
      *
-     * @param str String to print.
+     * @param str string to print
      */
     void errorln(final String str);
 
     /**
      * Prints string.
      *
-     * @param str String to print.
+     * @param str string to print
      */
     void print(final String str);
 
     /**
      * Prints exception stack trace.
      *
-     * @param ex Exception to print.
+     * @param ex exception to print
      */
     void printStackTrace(Throwable ex);
 
     /**
      * Prints string line.
      *
-     * @param str String to print.
+     * @param str string to print
      */
     void println(final String str);
 
     /**
      * Get standard errorln output stream.
      *
-     * @return Print stream object.
+     * @return never {@code null}
      */
     PrintStream getStderr();
 
     /**
      * Get standard input stream.
      *
-     * @return Input stream object.
+     * @return never {@code null}
      */
     InputStream getStdin();
 
     /**
      * Get standard output stream.
      *
-     * @return Print stream object.
+     * @return never {@code null}
      */
     PrintStream getStdout();
 

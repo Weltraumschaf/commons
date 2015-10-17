@@ -21,13 +21,11 @@ import java.util.List;
 /**
  * Describes a parsed mainCommand of the interactive shell.
  * <p>
- * Commands consist always of a mainCommand and may have a subcommand.
- * This type is immutable.
+ * Commands consist always of a mainCommand and may have a subcommand. This type is immutable.
  * </p>
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public class ShellCommand {
 
@@ -38,16 +36,18 @@ public class ShellCommand {
 
     /**
      * Optional sub mainCommand.
-     *
+     * <p>
      * If the shell mainCommand does not support sub commands this will be the value of
- {@link LiteralCommandMap#getDefaultSubCommand()}.
+     * {@link LiteralCommandMap#getDefaultSubCommand()}.
+     * </p>
      */
     private final SubCommandType subCommand;
 
     /**
      * Optional arguments.
-     *
+     * <p>
      * If the mainCommand has no arguments this will be an empty list.
+     * </p>
      */
     private final List<ShellToken> arguments;
 
@@ -59,13 +59,13 @@ public class ShellCommand {
      * @param arguments must not be {@code null}, may be an empty list
      */
     public ShellCommand(
-            final MainCommandType mainCommand,
-            final SubCommandType subCommand,
-            final List<ShellToken> arguments) {
+        final MainCommandType mainCommand,
+        final SubCommandType subCommand,
+        final List<ShellToken> arguments) {
         super();
         this.mainCommand = Validate.notNull(mainCommand, "mainCommand");
         this.subCommand = Validate.notNull(subCommand, "subCommand");
-        this.arguments  = Lists.newArrayList(Validate.notNull(arguments, "arguments")); // Defense copy
+        this.arguments = Lists.newArrayList(Validate.notNull(arguments, "arguments")); // Defense copy
     }
 
     /**
@@ -79,9 +79,10 @@ public class ShellCommand {
 
     /**
      * Get optional mainCommand sub type.
-     *
-     * If the main type does not support any sub type the same value as {@link de.weltraumschaf.commons.shell.LiteralCommandMap#getDefaultSubCommand()}
-     * will be returned.
+     * <p>
+     * If the main type does not support any sub type the same value as
+     * {@link de.weltraumschaf.commons.shell.LiteralCommandMap#getDefaultSubCommand()} will be returned.
+     * </p>
      *
      * @return sub type of mainCommand
      */
@@ -91,8 +92,9 @@ public class ShellCommand {
 
     /**
      * Get arguments.
-     *
+     * <p>
      * This method will always return a list. If no arguments are present an empty list will be returned.
+     * </p>
      *
      * @return Returns a defense copy.
      */
@@ -100,14 +102,13 @@ public class ShellCommand {
         return Collections.unmodifiableList(arguments);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
-                      .add("mainCommand", mainCommand)
-                      .add("subCommand", subCommand)
-                      .add("arguments", arguments)
-                      .toString();
+            .add("mainCommand", mainCommand)
+            .add("subCommand", subCommand)
+            .add("arguments", arguments)
+            .toString();
     }
 
 }

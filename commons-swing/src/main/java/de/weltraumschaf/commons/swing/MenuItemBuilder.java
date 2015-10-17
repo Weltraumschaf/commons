@@ -25,7 +25,6 @@ import javax.swing.KeyStroke;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class MenuItemBuilder {
     /**
@@ -45,8 +44,9 @@ public final class MenuItemBuilder {
 
     /**
      * Package private constructor.
-     *
+     * <p>
      * This sub builder is constructed by the {@link MenuBuilder}.
+     * </p>
      *
      * @param name Name of the item.
      * @param parent Constructing menu builder.
@@ -79,10 +79,11 @@ public final class MenuItemBuilder {
 
     /**
      * Add an accelerator key.
-     *
+     * <p>
      * For Mac OS with mask {@link java.awt.event.KeyEvent#META_DOWN_MASK} for all other systems
      * {@link java.awt.event.KeyEvent#CTRL_DOWN_MASK}.
-     *
+     * </p>
+     * 
      * @param accelerator Accelerator key character.
      * @return Returns the builder itself.
      */

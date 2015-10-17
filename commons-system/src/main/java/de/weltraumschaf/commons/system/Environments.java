@@ -16,8 +16,8 @@ import de.weltraumschaf.commons.validate.Validate;
 /**
  * Provides instances to access environment variables.
  *
+ * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class Environments {
 
@@ -132,11 +132,11 @@ public final class Environments {
          */
         M2_REPO("M2_REPO"),
         /**
-         * Maen options.
+         * Maven options.
          */
         MAVEN_OPTS("MAVEN_OPTS"),
         /**
-         * Home direcotry of Java.
+         * Home directory of Java.
          */
         JAVA_HOME("JAVA_HOME"),
         /**
@@ -156,7 +156,7 @@ public final class Environments {
          */
         PATH("PATH"),
         /**
-         * Current working direcotry.
+         * Current working directory.
          */
         PWD("PWD"),
         /**

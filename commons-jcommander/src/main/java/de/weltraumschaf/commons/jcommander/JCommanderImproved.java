@@ -49,7 +49,6 @@ import java.util.List;
  * @since 1.0.1
  * @param <O> type of options bean
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class JCommanderImproved<O> {
 
@@ -268,6 +267,9 @@ public final class JCommanderImproved<O> {
                         DEFAULT_NEW_LINE + spaces(leftPadLength));
     }
 
+    /**
+     * Resets the instance because it holds state from parsing.
+     */
     private void reset() {
         optionsParser = new JCommander();
     }

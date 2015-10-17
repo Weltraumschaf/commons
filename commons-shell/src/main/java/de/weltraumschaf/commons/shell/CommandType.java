@@ -16,7 +16,6 @@ package de.weltraumschaf.commons.shell;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public interface CommandType {
 

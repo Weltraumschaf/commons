@@ -18,8 +18,8 @@ import java.util.Set;
 /**
  * Helper class to verify if a given character belong to a specified group or range of characters.
  *
+ * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class CharacterHelper {
 
@@ -47,8 +47,9 @@ public final class CharacterHelper {
 
     /**
      * Checks whether a character is inside a given character range (included).
-     *
+     * <p>
      * Throws IllegalArgumentException if end is less than start.
+     * </p>
      *
      * @param character character to check
      * @param start including range
@@ -105,22 +106,41 @@ public final class CharacterHelper {
         return isSpace(character) || isNewline(character) || isReturn(character);
     }
 
+    /**
+     * Checks whether a character is a space {@literal ' '} or tabulator {@literal '\t'}.
+     *
+     * @param character a single character
+     * @return {@code true} if character is a space or tabulator character, unless {@code false}
+     */
     public static boolean isSpace(final char character) {
         return ' ' == character || '\t' == character;
     }
 
+    /**
+     * Checks whether a character is a newline {@literal '\n'}.
+     *
+     * @param character a single character
+     * @return {@code true} if character is a newline, unless {@code false}
+     */
     public static boolean isNewline(final char character) {
         return '\n' == character;
     }
 
+    /**
+     * Checks whether a character is a carriage return {@literal '\r'}.
+     *
+     * @param character a single character
+     * @return {@code true} if character is a carriage return character, unless {@code false}
+     */
     public static boolean isReturn(final char character) {
         return '\r' == character;
     }
 
     /**
      * Checks whether a character is a quote character.
-     *
-     * Quotes are ' and ".
+     * <p>
+     * Quotes are {@literal '} and {@literal "}.
+     * </p>
      *
      * @param character a single character
      * @return {@code true} if character is a quote character, unless {@code false}
@@ -131,8 +151,9 @@ public final class CharacterHelper {
 
     /**
      * Checks whether a character is a single quote character.
-     *
-     * A single quotes is '.
+     * <p>
+     * A single quotes is {@literal '}.
+     * </p>
      *
      * @param character a single character
      * @return {@code true} if character is a single quote character, unless {@code false}
@@ -143,8 +164,9 @@ public final class CharacterHelper {
 
     /**
      * Checks whether a character is a double quote character.
-     *
-     * A single quotes is ".
+     * <p>
+     * A double quotes is {@literal "}.
+     * </p>
      *
      * @param character a single character
      * @return {@code true} if character is a double quote character, unless {@code false}
@@ -155,8 +177,9 @@ public final class CharacterHelper {
 
     /**
      * Checks whether a character is a special character.
-     *
+     * <p>
      * See {@link #SPECIAL_CHARS} for all allowed special characters.
+     * </p>
      *
      * @param character a single character
      * @return {@code true} if character is a special character, unless {@code false}
@@ -167,8 +190,9 @@ public final class CharacterHelper {
 
     /**
      * Checks whether a character is a operator character.
-     *
+     * <p>
      * See {@link #OPERATORS} for all allowed operator characters.
+     * </p>
      *
      * @param character a single character
      * @return {@code true} if character is a operator character, unless {@code false}
@@ -179,8 +203,9 @@ public final class CharacterHelper {
 
     /**
      * Checks whether a character is a sign character.
-     *
+     * <p>
      * See {@link #SIGN_CHARS} for all allowed operator characters.
+     * </p>
      *
      * @param character a single character
      * @return {@code true} if character is a operator character, unless {@code false}

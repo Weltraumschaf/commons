@@ -14,12 +14,11 @@ package de.weltraumschaf.commons.system;
 /**
  * Invokes {@link java.lang.System#exit(int)}.
  *
+ * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class DefaultExiter extends ExitableAdapter {
 
-    /** {@inheritDoc} */
     @Override
     public void exit(int status) {
         System.exit(status);

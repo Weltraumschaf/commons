@@ -16,7 +16,6 @@ package de.weltraumschaf.commons.validate;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class Validate {
 
@@ -32,8 +31,8 @@ public final class Validate {
      * Validates that a given reference is not {@code null}.
      *
      * <p>
-     * This example validates that {@code input} is not null. If it is {@code null} a {@link java.lang.NullPointerException} will
-     * be thrown with the {@code name} as hint in the exception message.:
+     * This example validates that {@code input} is not null. If it is {@code null} a
+     * {@link java.lang.NullPointerException} will be thrown with the {@code name} as hint in the exception message.:
      * </p>
      * <pre>{@code
      * void someMethod(final Object input) {
@@ -43,8 +42,8 @@ public final class Validate {
      * }</pre>
      *
      * <p>
-     * The second parameter {@code name} may be omitted. Then a {@link java.lang.NullPointerException} without any message will be
-     * thrown. For this purpose you can call the convenience method {@link #notNull(java.lang.Object)}.
+     * The second parameter {@code name} may be omitted. Then a {@link java.lang.NullPointerException} without any
+     * message will be thrown. For this purpose you can call the convenience method {@link #notNull(java.lang.Object)}.
      * </p>
      *
      * @param <T> type of reference
@@ -80,10 +79,10 @@ public final class Validate {
      * Validates that a given string reference is not {@code null} or empty.
      *
      * <p>
-     * This example validates that {@code input} is not null. If it is {@code null} a {@link java.lang.NullPointerException} will
-     * be thrown with the {@code name} as hint in the exception message. Also it validates that {@code input} is not
-     * empty by calling {@link java.lang.String#isEmpty()}. If the string is empty an {@link java.lang.IllegalArgumentException} will be
-     * thrown:
+     * This example validates that {@code input} is not null. If it is {@code null} a
+     * {@link java.lang.NullPointerException} will be thrown with the {@code name} as hint in the exception message.
+     * Also it validates that {@code input} is not empty by calling {@link java.lang.String#isEmpty()}. If the string is
+     * empty an {@link java.lang.IllegalArgumentException} will be thrown:
      * </p>
      * <pre>{@code
      * void someMethod(final String input) {
@@ -130,8 +129,8 @@ public final class Validate {
     /**
      * Tests that a given integer reference value is greater than the given lower bound.
      * <p>
-     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than or equal the given
-     * lower bound value.
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than or equal the
+     * given lower bound value.
      * </p>
      *
      * @param reference validated reference
@@ -143,12 +142,12 @@ public final class Validate {
         if (reference <= lowerBound) {
             if (null == name) {
                 throw new NullPointerException(String.format(
-                        "Reference is not greater than lower bound: %d > %d!",
-                        reference,
-                        lowerBound));
+                    "Reference is not greater than lower bound: %d > %d!",
+                    reference,
+                    lowerBound));
             } else {
                 throw new IllegalArgumentException(
-                        String.format("Parameter '%s' must be greater than %d (was %d)!", name, lowerBound, reference));
+                    String.format("Parameter '%s' must be greater than %d (was %d)!", name, lowerBound, reference));
             }
         }
 
@@ -169,8 +168,8 @@ public final class Validate {
     /**
      * Tests that a given integer reference value is greater than or equal the given lower bound.
      * <p>
-     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than the given lower bound
-     * value.
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than the given
+     * lower bound value.
      * </p>
      *
      * @param reference validated reference
@@ -182,16 +181,16 @@ public final class Validate {
         if (reference < lowerBound) {
             if (null == name) {
                 throw new NullPointerException(String.format(
-                        "Reference is not less than lower bound: %d < %d!",
-                        reference,
-                        lowerBound));
+                    "Reference is not less than lower bound: %d < %d!",
+                    reference,
+                    lowerBound));
             } else {
                 throw new IllegalArgumentException(
-                        String.format(
-                                "Parameter '%s' must be greater or equal than %d (was %d)!",
-                                name,
-                                lowerBound,
-                                reference));
+                    String.format(
+                        "Parameter '%s' must be greater or equal than %d (was %d)!",
+                        name,
+                        lowerBound,
+                        reference));
             }
         }
 
@@ -212,8 +211,8 @@ public final class Validate {
     /**
      * Tests that a given integer reference value is greater than the given lower bound.
      * <p>
-     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than or equal the given
-     * lower bound value.
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than or equal the
+     * given lower bound value.
      * </p>
      *
      * @param reference validated reference
@@ -225,16 +224,16 @@ public final class Validate {
         if (reference <= lowerBound) {
             if (null == name) {
                 throw new NullPointerException(String.format(
-                        "Reference is not less equal than lower bound: %d <= %d!",
-                        reference,
-                        lowerBound));
+                    "Reference is not less equal than lower bound: %d <= %d!",
+                    reference,
+                    lowerBound));
             } else {
                 throw new IllegalArgumentException(
-                        String.format(
-                                "Parameter '%s' must be greater than %d (was %d)!",
-                                name,
-                                lowerBound,
-                                reference));
+                    String.format(
+                        "Parameter '%s' must be greater than %d (was %d)!",
+                        name,
+                        lowerBound,
+                        reference));
             }
         }
 
@@ -255,8 +254,8 @@ public final class Validate {
     /**
      * Tests that a given integer reference value is greater than or equal the given lower bound.
      * <p>
-     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than the given lower bound
-     * value.
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than the given
+     * lower bound value.
      * </p>
      *
      * @param reference validated reference
@@ -268,16 +267,16 @@ public final class Validate {
         if (reference < lowerBound) {
             if (null == name) {
                 throw new NullPointerException(String.format(
-                        "Reference is not less than lower bound: %d < %d!",
-                        reference,
-                        lowerBound));
+                    "Reference is not less than lower bound: %d < %d!",
+                    reference,
+                    lowerBound));
             } else {
                 throw new IllegalArgumentException(
-                        String.format(
-                                "Parameter '%s' must be greater than or equal %d (was %d)!",
-                                name,
-                                lowerBound,
-                                reference));
+                    String.format(
+                        "Parameter '%s' must be greater than or equal %d (was %d)!",
+                        name,
+                        lowerBound,
+                        reference));
             }
         }
 
@@ -382,12 +381,12 @@ public final class Validate {
      * {@link String#valueOf(Object)}. Arguments can be null.
      */
     static String format(String template,
-            Object... args) {
+        Object... args) {
         template = String.valueOf(template); // null -> "null"
 
         // start substituting the arguments into the '%s' placeholders
         StringBuilder builder = new StringBuilder(
-                template.length() + 16 * args.length);
+            template.length() + 16 * args.length);
         int templateStart = 0;
         int i = 0;
         while (i < args.length) {
@@ -426,8 +425,8 @@ public final class Validate {
      * @param start a user-supplied index identifying a starting position in an array, list or string
      * @param end a user-supplied index identifying a ending position in an array, list or string
      * @param size the size of that array, list or string
-     * @throws java.lang.IndexOutOfBoundsException if either index is negative or is greater than {@code size}, or if {@code end}
-     * is less than {@code start}
+     * @throws java.lang.IndexOutOfBoundsException if either index is negative or is greater than {@code size}, or if
+     * {@code end} is less than {@code start}
      * @throws java.lang.IllegalArgumentException if {@code size} is negative
      */
     public static void checkPositionIndexes(int start, int end, int size) {
@@ -455,7 +454,7 @@ public final class Validate {
         }
         // end < start
         return format("end index (%s) must not be less than start index (%s)",
-                end, start);
+            end, start);
     }
 
     /**
@@ -474,7 +473,7 @@ public final class Validate {
             throw new IllegalArgumentException("negative size: " + size);
         } else { // index > size
             return format("%s (%s) must not be greater than size (%s)",
-                    desc, index, size);
+                desc, index, size);
         }
     }
 }

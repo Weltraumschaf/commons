@@ -12,8 +12,8 @@
 
 /**
  * Classes to help with time.
- *
- * <p>This package is a part of the open-source
- * <a href="https://github.com/Weltraumschaf/commons">Commons</a></p>
+ * <p>
+ * This package is a part of the open-source <a href="https://github.com/Weltraumschaf/commons">Commons</a> lib.
+ * </p>
  */
 package de.weltraumschaf.commons.time;

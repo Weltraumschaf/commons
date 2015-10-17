@@ -13,15 +13,14 @@ package de.weltraumschaf.commons.system;
 
 /**
  * Does nothing instead of calling {@link java.lang.System#exit(int)}.
- *
+ * <p>
  * Useful in tests where you don't want to exit the JVM.
+ * </p>
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class NullExiter extends ExitableAdapter {
 
-    /** {@inheritDoc} */
     @Override
     public void exit(final int status) {
         // Do nothing here.

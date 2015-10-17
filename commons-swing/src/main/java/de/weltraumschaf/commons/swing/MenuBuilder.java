@@ -21,7 +21,6 @@ import javax.swing.JMenu;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class MenuBuilder {
 
@@ -37,9 +36,10 @@ public final class MenuBuilder {
 
     /**
      * Package private constructor.
-     *
+     * <p>
      * This sub builder is constructed by the {@link MenuBarBuilder}.
-     *
+     * </p>
+     * 
      * @param name Name of the menu.
      * @param parent Constructing menu bar builder.
      */

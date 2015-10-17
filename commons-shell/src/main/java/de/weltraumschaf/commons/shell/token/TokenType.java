@@ -17,7 +17,6 @@ package de.weltraumschaf.commons.shell.token;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public enum TokenType {
 

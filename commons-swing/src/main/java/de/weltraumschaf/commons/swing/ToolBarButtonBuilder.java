@@ -23,7 +23,6 @@ import javax.swing.JButton;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class ToolBarButtonBuilder {
 
@@ -39,9 +38,10 @@ public final class ToolBarButtonBuilder {
 
     /**
      * Package private constructor.
-     *
+     *<p>
      * This sub builder is constructed by the {@link ToolBarBuilder}.
-     *
+     * </p>
+     * 
      * @param image Image of the button.
      * @param parent Constructing tool bar builder.
      */

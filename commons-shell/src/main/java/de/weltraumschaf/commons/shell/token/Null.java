@@ -21,7 +21,6 @@ import net.jcip.annotations.ThreadSafe;
  * </p>
  *
  * @since 1.0.0
- * @version $Id: $Id
  */
 @ThreadSafe
 public final class Null {

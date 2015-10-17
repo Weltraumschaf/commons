@@ -22,7 +22,10 @@ import java.util.logging.Logger;
 /**
  * Holds {@link Runnable callbacks} to execute them in any order.
  *
+ * <p>
  * Example:
+ * </p>
+ *
  * <pre>{@code
  * final ShutDownHook hook = new ShutDownHook();
  * hook.register(new Runnable() {
@@ -37,8 +40,8 @@ import java.util.logging.Logger;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
+@SuppressWarnings("ClassWithMultipleLoggers") // This class uses an injectable logger, but provides a default one.
 public class ShutDownHook extends Thread {
 
     /**
@@ -49,11 +52,12 @@ public class ShutDownHook extends Thread {
     /**
      * Set of callbacks.
      */
-    private final Set<Callable<Void>> callbacks = new HashSet<Callable<Void>>();
+    private final Set<Callable<Void>> callbacks = new HashSet<>();
 
     /**
      * Logger instance.
      */
+    @SuppressWarnings("NonConstantLogger") // This logger is injectable
     private final Logger logger;
 
     /**
@@ -74,8 +78,6 @@ public class ShutDownHook extends Thread {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Iterates over all {@link #callbacks} and run them.
      */
     @Override
@@ -95,7 +97,7 @@ public class ShutDownHook extends Thread {
      * Registers a callback.
      *
      * @param callback must not be {@code null}
-     * @return Return itself for method chaining.
+     * @return never {@code null}, self for chaining
      */
     public ShutDownHook register(final Runnable callback) {
         Validate.notNull(callback, "callback");
@@ -113,7 +115,7 @@ public class ShutDownHook extends Thread {
      * Registers a callback.
      *
      * @param callback must not be {@code null}
-     * @return Return itself for method chaining.
+     * @return never {@code null}, self for chaining
      */
     public ShutDownHook register(final Callable<Void> callback) {
         callbacks.add(Validate.notNull(callback, "callback"));

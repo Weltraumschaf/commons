@@ -21,10 +21,9 @@ import java.io.UnsupportedEncodingException;
  *
  * <p>
  * It is not good practice to clutter production code with calls to
- * {@link java.lang.System#out}, {@link java.lang.System#err}, and {@link java.lang.System#in}. But on the
- * other hand most applications must do I/O to the user. This aggregate object
- * contains I/O streams to pass around as injected dependency. It is only
- * necessary to the systems IO only at the main applications entry point:
+ * {@link java.lang.System#out}, {@link java.lang.System#err}, and {@link java.lang.System#in}. But on the other hand
+ * most applications must do I/O to the user. This aggregate object contains I/O streams to pass around as injected
+ * dependency. It is only necessary to the systems IO only at the main applications entry point:
  * </p>
  *
  * <pre>{@code
@@ -52,13 +51,12 @@ import java.io.UnsupportedEncodingException;
  * }</pre>
  *
  * <p>
- * As a convenience method for creating an I/O streams object with the default I/O streams
- * of {@link java.lang.System} you can use {@link de.weltraumschaf.commons.application.IOStreams#newDefault()}.
+ * As a convenience method for creating an I/O streams object with the default I/O streams of {@link java.lang.System}
+ * you can use {@link de.weltraumschaf.commons.application.IOStreams#newDefault()}.
  * </p>
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class IOStreams implements IO {
 
@@ -91,36 +89,21 @@ public final class IOStreams implements IO {
      */
     public IOStreams(final InputStream stdin, final PrintStream stdout, final PrintStream stderr) {
         super();
-        this.stdin  = Validate.notNull(stdin, "stdin");
+        this.stdin = Validate.notNull(stdin, "stdin");
         this.stdout = Validate.notNull(stdout, "stdout");
         this.stderr = Validate.notNull(stderr, "stderr");
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * Get standard errorln output stream.
-     */
     @Override
     public PrintStream getStderr() {
         return stderr;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * Get standard input stream.
-     */
     @Override
     public InputStream getStdin() {
         return stdin;
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * Get standard output stream.
-     */
     @Override
     public PrintStream getStdout() {
         return stdout;
@@ -129,23 +112,25 @@ public final class IOStreams implements IO {
     /**
      * Creates same as {@link #newDefault(java.lang.String)} but with {@link #DEFAULT_ENCODING} as encoding.
      *
-     * @return Return always new instance.
-     * @throws java.io.UnsupportedEncodingException If system does not support {@link #DEFAULT_ENCODING encoding}.
+     * @return never {@code null} always new instance.
+     * @throws UnsupportedEncodingException if system does not support {@link #DEFAULT_ENCODING encoding}
      */
     public static IOStreams newDefault() throws UnsupportedEncodingException {
         return newDefault(DEFAULT_ENCODING);
     }
 
     /**
-     * Creates a new streams object initialized with {@link java.lang.System#in}, {@link java.lang.System#out}, and {@link java.lang.System#err}.
-     *
-     * The output {@link PrintStream "print streams"} get {@link #DEFAULT_ENCODING} as encoding set.
-     * Also the {@link java.lang.System#out}, and {@link java.lang.System#err} are changed with a copy of the original
-     * print stream with the encoding.
+     * Creates a new streams object initialized with {@link java.lang.System#in}, {@link java.lang.System#out}, and
+     * {@link java.lang.System#err}.
+     * <p>
+     * The output {@link PrintStream "print streams"} get {@link #DEFAULT_ENCODING} as encoding set. Also the
+     * {@link java.lang.System#out}, and {@link java.lang.System#err} are changed with a copy of the original print
+     * stream with the encoding.
+     * </p>
      *
      * @param encoding must not be {@code null} or empty
-     * @return return always new instance
-     * @throws java.io.UnsupportedEncodingException if system does not support passed encoding
+     * @return never {@code null}, always new instance
+     * @throws UnsupportedEncodingException if system does not support passed encoding
      */
     public static IOStreams newDefault(final String encoding) throws UnsupportedEncodingException {
         Validate.notEmpty(encoding, "encoding");
@@ -156,51 +141,26 @@ public final class IOStreams implements IO {
         return new IOStreams(System.in, out, err);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * Prints exception stack trace.
-     */
     @Override
     public void printStackTrace(final Throwable ex) {
         Validate.notNull(ex, "ex").printStackTrace(getStderr());
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * Prints error line.
-     */
     @Override
     public void errorln(final String str) {
         getStderr().println(str);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * Prints error.
-     */
     @Override
     public void error(final String str) {
         getStderr().print(str);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * Prints string line.
-     */
     @Override
     public void println(final String str) {
         getStdout().println(str);
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * Prints string.
-     */
     @Override
     public void print(final String str) {
         getStdout().print(str);

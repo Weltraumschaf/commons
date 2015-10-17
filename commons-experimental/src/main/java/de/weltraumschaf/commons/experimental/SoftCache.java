@@ -22,7 +22,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @param <K> type of cache key
  * @param <V> type of cached value
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 @Experimental
 public class SoftCache<K, V> {
@@ -30,11 +29,11 @@ public class SoftCache<K, V> {
     /**
      * Holds the cached data.
      */
-    private final Map<K, SoftReference<V>> data = new ConcurrentHashMap<K, SoftReference<V>>();
+    private final Map<K, SoftReference<V>> data = new ConcurrentHashMap<>();
     /**
      * Try to finds values if a key not present yet in cache.
      */
-    private Finder<K, V> finder = new NullFinder<K, V>();
+    private Finder<K, V> finder = new NullFinder<>();
 
     /**
      * Get a value from the cache.
@@ -75,7 +74,7 @@ public class SoftCache<K, V> {
     public void add(final K key, final V value) {
         Validate.notNull(key, "key");
         Validate.notNull(value, "value");
-        final SoftReference<V> reference = data.put(key, new SoftReference<V>(value));
+        final SoftReference<V> reference = data.put(key, new SoftReference<>(value));
 
         if (null != reference) {
             reference.clear();

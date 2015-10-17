@@ -19,7 +19,6 @@ import java.util.List;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public interface Scanner {
 
@@ -28,9 +27,8 @@ public interface Scanner {
      *
      * @param line line to scan.
      * @return List of recognized, never null
-     * @throws de.weltraumschaf.commons.shell.SyntaxException if, syntax error occurred.
-     * // CHECKSTYLE:OFF
+     * @throws SyntaxException if, syntax error occurred.
      */
-    List<ShellToken> scan(final String line) throws SyntaxException;
+    List<ShellToken> scan(String line) throws SyntaxException;
 
 }

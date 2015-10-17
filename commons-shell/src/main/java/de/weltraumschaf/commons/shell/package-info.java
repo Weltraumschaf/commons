@@ -11,11 +11,10 @@
  */
 /**
  * Sub package for a simple interactive shell.
- *
- * <p>This package is a part of the open-source
- * <a href="https://github.com/Weltraumschaf/commons">Commons</a></p>
- *
+ * <p>
  * Contains:
+ * </p>
+ *
  * <ul>
  *  <li>input scanner/parser</li>
  *  <li>helper classes for scanning</li>
@@ -122,8 +121,13 @@
  * }</pre>
  * // CHECKSTYLE:ON
  *
- * <p>If you want to verify the parsed commands, e.g. check if a command has a proper subcommand or arguments
+ * <p>
+ * If you want to verify the parsed commands, e.g. check if a command has a proper subcommand or arguments
  * you must implement {@link de.weltraumschaf.commons.shell.CommandVerifier} and pass it to the
- * {@link de.weltraumschaf.commons.shell.Parsers parser factory}.</p>
+ * {@link de.weltraumschaf.commons.shell.Parsers parser factory}.
+ * </p>
+ * <p>
+ * This package is a part of the open-source <a href="https://github.com/Weltraumschaf/commons">Commons</a> lib.
+ * </p>
  */
 package de.weltraumschaf.commons.shell;

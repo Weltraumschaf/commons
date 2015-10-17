@@ -34,8 +34,7 @@ import java.util.TreeSet;
  * @author Kevin Bourrillion
  * @author Jared Levy
  * @author Chris Povirk
- * @since 2.0 (imported from Google Collections Library)
- * @version $Id: $Id
+ * @since 2.0.0 (imported from Google Collections Library)
  */
 public final class Sets {
 
@@ -82,7 +81,7 @@ public final class Sets {
      * @return never {@code null}, always new instance
      */
     public static <E> Set<E> newHashSet() {
-        return new HashSet<E>();
+        return new HashSet<>();
     }
 
     /**
@@ -105,17 +104,19 @@ public final class Sets {
      *
      * <p>
      * This behavior cannot be broadly guaranteed, but it is observed to be true for OpenJDK 1.6. It also can't be
-     * guaranteed that the method isn't inadvertently <i>oversizing</i> the returned set.
+     * guaranteed that the method isn't inadvertently <em>oversizing</em> the returned set.
      * </p>
      *
      * @param <E> type of elements
      * @param expectedSize the number of elements you expect to add to the returned set
      * @return a new, empty {@code HashSet} with enough capacity to hold {@code
-     *         expectedSize} elements without resizing //CHECKSTYLE:OFF
-     * @throws java.lang.IllegalArgumentException if {@code expectedSize} is negative //CHECKSTYLE:ON
+     *         expectedSize} elements without resizing
+     * //CHECKSTYLE:OFF
+     * @throws java.lang.IllegalArgumentException if {@code expectedSize} is negative
+     * //CHECKSTYLE:ON
      */
     public static <E> Set<E> newHashSetWithExpectedSize(final int expectedSize) {
-        return new HashSet<E>(capacity(expectedSize));
+        return new HashSet<>(capacity(expectedSize));
     }
 
     /**
@@ -125,16 +126,18 @@ public final class Sets {
      * @return never {@code null}, always new instance
      */
     public static <E> SortedSet<E> newTreeSet() {
-        return new TreeSet<E>();
+        return new TreeSet<>();
     }
 
     /**
-     * Creates an empty {@code Set} that uses identity to determine equality. It compares object references, instead of
-     * calling {@code equals}, to determine whether a provided object matches an element in the set. For example,
-     * {@code contains} returns {@code false} when passed an object that equals a set member, but isn't the same
-     * instance. This behavior is similar to the way {@code IdentityHashMap} handles key lookups.
+     * Creates an empty {@code Set} that uses identity to determine equality.
+     * <p>
+     * It compares object references, instead of calling {@code equals}, to determine whether a provided object matches
+     * an element in the set. For example, {@code contains} returns {@code false} when passed an object that equals a
+     * set member, but isn't the same instance. This behavior is similar to the way {@code IdentityHashMap} handles key
+     * lookups.
+     * </p>
      *
-     * @since 8.0
      * @param <E> a E object.
      * @return a {@link java.util.Set} object.
      */
@@ -143,11 +146,14 @@ public final class Sets {
     }
 
     /**
-     * Returns a set backed by the specified map. The resulting set displays the same ordering, concurrency, and
+     * Returns a set backed by the specified map.
+     * <p>
+     * The resulting set displays the same ordering, concurrency, and
      * performance characteristics as the backing map. In essence, this factory method provides a {@link java.util.Set}
-     * implementation corresponding to any {@link java.util.Map} implementation. There is no need to use this method on a
-     * {@link java.util.Map} implementation that already has a corresponding {@link java.util.Set} implementation (such as
-     * {@link java.util.HashMap} or {@link java.util.TreeMap}).
+     * implementation corresponding to any {@link java.util.Map} implementation. There is no need to use this method on
+     * a {@link java.util.Map} implementation that already has a corresponding {@link java.util.Set} implementation
+     * (such as {@link java.util.HashMap} or {@link java.util.TreeMap}).
+     * </p>
      *
      * <p>
      * Each method invocation on the set returned by this method results in exactly one method invocation on the backing
@@ -172,7 +178,7 @@ public final class Sets {
      * @param <E> a E object.
      */
     public static <E> Set<E> newSetFromMap(Map<E, Boolean> map) {
-        return new SetFromMap<E>(map);
+        return new SetFromMap<>(map);
     }
 
     /**
@@ -184,7 +190,7 @@ public final class Sets {
      * @throws java.lang.IllegalArgumentException if {@code expression} is false
      */
     public static void checkArgument(
-            boolean expression, Object errorMessage) {
+        boolean expression, Object errorMessage) {
         if (!expression) {
             throw new IllegalArgumentException(String.valueOf(errorMessage));
         }
@@ -192,10 +198,22 @@ public final class Sets {
 
     private static class SetFromMap<E> extends AbstractSet<E> implements Set<E>, Serializable {
 
-        private final Map<E, Boolean> m; // The backing map
-        private transient Set<E> s; // Its keySet
+        /**
+         * For serialization.
+         */
+        private static final long serialVersionUID = 0;
 
-        SetFromMap(Map<E, Boolean> map) {
+        /**
+         * The backing map.
+         */
+        private final Map<E, Boolean> m;
+        /**
+         * Its keySet.
+         */
+        private transient Set<E> s;
+
+        SetFromMap(final Map<E, Boolean> map) {
+            super();
             checkArgument(map.isEmpty(), "Map is non-empty");
             m = map;
             s = map.keySet();
@@ -217,12 +235,14 @@ public final class Sets {
         }
 
         @Override
-        public boolean contains(Object o) {
+        @SuppressWarnings("element-type-mismatch")
+        public boolean contains(final Object o) {
             return m.containsKey(o);
         }
 
         @Override
-        public boolean remove(Object o) {
+        @SuppressWarnings("element-type-mismatch")
+        public boolean remove(final Object o) {
             return m.remove(o) != null;
         }
 
@@ -242,6 +262,7 @@ public final class Sets {
         }
 
         @Override
+        @SuppressWarnings("SuspiciousToArrayCall")
         public <T> T[] toArray(T[] a) {
             return s.toArray(a);
         }
@@ -257,7 +278,7 @@ public final class Sets {
         }
 
         @Override
-        public boolean equals(Object object) {
+        public boolean equals(final Object object) {
             return this == object || this.s.equals(object);
         }
 
@@ -276,11 +297,8 @@ public final class Sets {
             return s.retainAll(c);
         }
 
-        // addAll is the only inherited implementation
-        private static final long serialVersionUID = 0;
-
-        private void readObject(ObjectInputStream stream)
-                throws IOException, ClassNotFoundException {
+        private void readObject(final ObjectInputStream stream)
+            throws IOException, ClassNotFoundException {
             stream.defaultReadObject();
             s = m.keySet();
         }

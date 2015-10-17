@@ -14,6 +14,7 @@ package de.weltraumschaf.commons.application;
 import de.weltraumschaf.commons.system.DefaultExiter;
 import de.weltraumschaf.commons.system.ExitCode;
 import de.weltraumschaf.commons.system.Exitable;
+import de.weltraumschaf.commons.validate.Validate;
 import java.io.UnsupportedEncodingException;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
@@ -111,6 +112,7 @@ public abstract class InvokableAdapter implements Invokable {
      * @param shutDownHook Object to hold shutdown hooks.
      */
     public InvokableAdapter(final String[] args, final Runtime runtime, final ShutDownHook shutDownHook) {
+        super();
         this.args = args.clone();
         this.runtime = runtime;
         this.shutDownHook = shutDownHook;
@@ -120,7 +122,7 @@ public abstract class InvokableAdapter implements Invokable {
      * Invokes {@link #main(de.weltraumschaf.commons.application.Invokable, de.weltraumschaf.commons.application.IO)
      * invokable} with default I/O.
      *
-     * @param invokable Implementation to invoke.
+     * @param invokable must not be {@code null}
      */
     public static void main(final Invokable invokable) {
         try {
@@ -139,10 +141,11 @@ public abstract class InvokableAdapter implements Invokable {
      * This method handles ell thrown {@link java.lang.Exception} and calls {@link java.lang.System#exit(int)}.
      * </p>
      *
-     * @param invokable Implementation to invoke.
-     * @param ioStreams I/O streams.
+     * @param invokable must not be {@code null}
+     * @param ioStreams must not be {@code null}
      */
     public static void main(final Invokable invokable, final IO ioStreams) {
+        Validate.notNull(invokable, "invokable");
         invokable.setIoStreams(ioStreams);
 
         try {
@@ -172,7 +175,7 @@ public abstract class InvokableAdapter implements Invokable {
      *
      * <p>
      * This method handles ell thrown {@link java.lang.Exception} and calls {@link java.lang.System#exit(int)}, and
-     * prints stack trace if <code>debug</code> is <tt>true</tt>.
+     * prints stack trace if {@code debug} is {@code true}.
      * </p>
      *
      * @param invokable implementation to invoke
@@ -220,7 +223,7 @@ public abstract class InvokableAdapter implements Invokable {
 
     @Override
     public final void setIoStreams(final IO ioStreams) {
-        this.ioStreams = ioStreams;
+        this.ioStreams = Validate.notNull(ioStreams, "ioStreams");
     }
 
     /**
@@ -253,7 +256,7 @@ public abstract class InvokableAdapter implements Invokable {
 
     @Override
     public final void setExiter(final Exitable exiter) {
-        this.exiter = exiter;
+        this.exiter = Validate.notNull(exiter, "exiter");
     }
 
 }

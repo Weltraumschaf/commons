@@ -23,8 +23,8 @@ import java.io.IOException;
  * Copied from <a href="http://dev.vaadin.com/svn/releases/6.6.4/src/com/vaadin/launcher/">Vaadin browser launcher</a>.
  * </p>
  *
+ * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @version $Id: $Id
  */
 public final class BrowserLauncher {
 
@@ -154,6 +154,7 @@ public final class BrowserLauncher {
     /**
      * See if the default browser is Konqueror by resolving the symlink.
      *
+     * FIXME: Fix Konqueror browser detection.
      * @return {@code true} if Konqueror is default browser, else {@code false}
      */
     private boolean isKonquerorTheDefaultBrowser() {

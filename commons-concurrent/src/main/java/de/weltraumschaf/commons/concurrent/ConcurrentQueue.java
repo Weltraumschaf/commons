@@ -37,22 +37,20 @@ final class ConcurrentQueue<E> implements Queue<E> {
     /**
      * References the head of the linked list.
      */
-    private final AtomicReference<Entry<E>> head = new AtomicReference<Entry<E>>();
+    private final AtomicReference<Entry<E>> head = new AtomicReference<>();
     /**
      * References the tail of the linked list.
      */
-    private final AtomicReference<Entry<E>> tail = new AtomicReference<Entry<E>>();
+    private final AtomicReference<Entry<E>> tail = new AtomicReference<>();
 
-    /** {@inheritDoc} */
     @Override
     public boolean isEmpty() {
         return null == head.get() && null == tail.get();
     }
 
-    /** {@inheritDoc} */
     @Override
-    public void add(E element) {
-        final Entry<E> node = new Entry<E>(element);
+    public void add(final E element) {
+        final Entry<E> node = new Entry<>(element);
 
         while (true) {
             if (null == head.get()) {
@@ -82,7 +80,6 @@ final class ConcurrentQueue<E> implements Queue<E> {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public E get() {
         while (true) {
@@ -105,7 +102,6 @@ final class ConcurrentQueue<E> implements Queue<E> {
 
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final Entry<E> currentTop = head.get();
@@ -117,7 +113,6 @@ final class ConcurrentQueue<E> implements Queue<E> {
         return currentTop.hashCode();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (!(obj instanceof ConcurrentQueue)) {
@@ -128,7 +123,6 @@ final class ConcurrentQueue<E> implements Queue<E> {
         return Objects.equal(head.get(), other.head.get()) && Objects.equal(tail.get(), other.tail.get());
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder();
@@ -152,8 +146,9 @@ final class ConcurrentQueue<E> implements Queue<E> {
 
     /**
      * Linked list entry.
-     *
+     * <p>
      * Not used outside the class.
+     * </p>
      *
      * @param <T> type of entry object
      */
@@ -184,7 +179,7 @@ final class ConcurrentQueue<E> implements Queue<E> {
         }
 
         @Override
-        public boolean equals(Object obj) {
+        public boolean equals(final Object obj) {
             if (!(obj instanceof Entry)) {
                 return false;
             }

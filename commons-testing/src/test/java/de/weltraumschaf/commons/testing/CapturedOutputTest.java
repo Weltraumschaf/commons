@@ -9,7 +9,6 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt;
  */
-
 package de.weltraumschaf.commons.testing;
 
 import de.weltraumschaf.commons.application.IOStreams;
@@ -19,6 +18,7 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.startsWith;
 import org.junit.Test;
 import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 /**
  * Tests for {@link CapturedOutput}.
@@ -28,7 +28,14 @@ import org.junit.Rule;
 public class CapturedOutputTest {
 
     @Rule
+    //CHECKSTYLE:OFF
     public final CapturedOutput sut = new CapturedOutput();
+    //CHECKSTYLE:ON
+
+    @Rule
+    //CHECKSTYLE:OFF
+    public final ExpectedException thrown = ExpectedException.none();
+    //CHECKSTYLE:ON
 
     public CapturedOutputTest() throws UnsupportedEncodingException {
         super();
@@ -78,4 +85,43 @@ public class CapturedOutputTest {
         IOStreams.newDefault().error("foobar");
     }
 
+    @Test
+    public void captureErr_withOnlyOneMatcher() {
+        sut.expectErr("foo");
+
+        System.err.println("foo");
+    }
+
+    @Test
+    public void captureOut_withOnlyOneMatcher() {
+        sut.expectOut("foo");
+
+        System.out.println("foo");
+    }
+
+    @Test
+    public void captureErr_doesNotMatch() {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("\n"
+            + "Expected: a string containing \"foo\"\n"
+            + "     but: was \"bar\n"
+            + "\"");
+
+        sut.expectErr("foo");
+
+        System.err.println("bar");
+    }
+
+    @Test
+    public void captureOut_doesNotMatch() {
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage("\n"
+            + "Expected: a string containing \"foo\"\n"
+            + "     but: was \"bar\n"
+            + "\"");
+
+        sut.expectOut("foo");
+
+        System.out.println("bar");
+    }
 }

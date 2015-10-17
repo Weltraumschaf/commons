@@ -38,10 +38,10 @@ public final class ToolBarButtonBuilder {
 
     /**
      * Package private constructor.
-     *<p>
+     * <p>
      * This sub builder is constructed by the {@link ToolBarBuilder}.
      * </p>
-     * 
+     *
      * @param image Image of the button.
      * @param parent Constructing tool bar builder.
      */

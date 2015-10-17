@@ -9,7 +9,6 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt;
  */
-
 package de.weltraumschaf.commons.string;
 
 /**
@@ -29,7 +28,8 @@ public final class Strings {
     }
 
     /**
-     * Trims passed in string and does not throw {@link java.lang.NullPointerException} if passed in string is {@code null}.
+     * Trims passed in string and does not throw {@link java.lang.NullPointerException} if passed in string is
+     * {@code null}.
      *
      * @param fileName may be {@code null}
      * @return never {@code null}

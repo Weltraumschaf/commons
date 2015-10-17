@@ -68,7 +68,7 @@ public abstract class InvokableAdapter implements Invokable {
      * function, then set this field to {@code true}.
      * </p>
      */
-    public boolean debug;
+    public boolean debug; // NOSONAR Must be public to be set from static environment.
 
     /**
      * Copy of the command line arguments.

@@ -48,8 +48,8 @@ final class ConcurrentStack<E> implements Stack<E> {
     public E peek() {
         final Entry<E> currentTop = top.get();
         return null == currentTop
-                ? null
-                : currentTop.value;
+            ? null
+            : currentTop.value;
     }
 
     @Override
@@ -127,7 +127,7 @@ final class ConcurrentStack<E> implements Stack<E> {
      * <p>
      * Not used outside the class.
      * </p>
-     * 
+     *
      * @param <T> type of entry object
      */
     private static final class Entry<T> {

@@ -21,7 +21,7 @@ import java.util.Map;
  * <p>
  * This class is not thread safe!
  * </p>
- * 
+ *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
@@ -45,8 +45,8 @@ public abstract class LiteralCommandMap {
     /**
      * Dedicated constructor.
      *
-     * @param defaultSubCommand sub command used for commands w/o sub command,
-     *                          usually a NONE type, must not be {@code null}
+     * @param defaultSubCommand sub command used for commands w/o sub command, usually a NONE type, must not be
+     * {@code null}
      */
     public LiteralCommandMap(final SubCommandType defaultSubCommand) {
         super();
@@ -80,10 +80,8 @@ public abstract class LiteralCommandMap {
      * Determining a non command token string will result in an exception.
      *
      * @param t token to check
-     * @return command main type
-     * // CHECKSTYLE:OFF
-     * @throws java.lang.IllegalArgumentException if, token is not a main command
-     * // CHECKSTYLE:ON
+     * @return command main type // CHECKSTYLE:OFF
+     * @throws java.lang.IllegalArgumentException if, token is not a main command // CHECKSTYLE:ON
      */
     public final MainCommandType determineCommand(final ShellToken t) {
         if (isCommand(t)) {
@@ -118,10 +116,8 @@ public abstract class LiteralCommandMap {
      * Determining a non sub command token string will result in an exception.
      *
      * @param t token to check
-     * @return command sub type
-     * // CHECKSTYLE:OFF
-     * @throws java.lang.IllegalArgumentException if, token is not a sub command
-     * // CHECKSTYLE:ON
+     * @return command sub type // CHECKSTYLE:OFF
+     * @throws java.lang.IllegalArgumentException if, token is not a sub command // CHECKSTYLE:ON
      */
     public final SubCommandType determineSubCommand(final ShellToken t) {
         if (isSubCommand(t)) {
@@ -133,15 +129,13 @@ public abstract class LiteralCommandMap {
     /**
      * Get the default sub command for commands w/o sub commands.
      *
-     * Usually your sub command enum should specify a special type for a non
-     * sub command.
+     * Usually your sub command enum should specify a special type for a non sub command.
      *
      * @return the enum type of the "none" sub command
      */
     public final SubCommandType getDefaultSubCommand() {
         return defaultSubCommand;
     }
-
 
     /**
      * Return here the enum type which declares your main commands.

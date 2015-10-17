@@ -21,6 +21,7 @@ import net.jcip.annotations.ThreadSafe;
  * </p>
  *
  * @since 1.0.0
+ * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 @ThreadSafe
 public final class Null {

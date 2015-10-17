@@ -152,7 +152,7 @@ abstract class BaseUriBuilder {
      * {@inheritDoc}
      *
      * Create a copy of the BaseUriBuilder preserving its state. This is a more efficient means of creating a copy than
-     * constructing a new BaseUriBuilder from a URI returned by the  {@code #build(Object...)} method.
+     * constructing a new BaseUriBuilder from a URI returned by the {@code #build(Object...)} method.
      */
     @SuppressWarnings("CloneDoesntDeclareCloneNotSupportedException")
     @Override
@@ -213,7 +213,7 @@ abstract class BaseUriBuilder {
      *
      * @param host the URI host, may contain URI template parameters. A {@code null} value will unset the host component
      * of the URI, but will not unset other authority component parts ( {@code #userInfo(String) user info} or
-     *  {@code #port(int) port}).
+     * {@code #port(int) port}).
      * @return the updated BaseUriBuilder.
      * @throws IllegalArgumentException if host is invalid.
      */
@@ -445,7 +445,7 @@ abstract class BaseUriBuilder {
      * @since 2.0
      */
     abstract BaseUriBuilder resolveTemplates(Map<String, Object> templateValues, boolean encodeSlashInPath)
-            throws IllegalArgumentException;
+        throws IllegalArgumentException;
 
     /**
      * Resolve one or more URI templates in this {@code BaseUriBuilder} instance using supplied name-value pairs.
@@ -473,7 +473,7 @@ abstract class BaseUriBuilder {
      * builder is unaffected; this method may be called multiple times on the same builder instance.
      * <p>
      * NOTE: By default all {@code '/'} characters in the stringified values will be encoded in path templates, i.e. the
-     * result is identical to invoking  {@code #buildFromMap(java.util.Map, boolean) buildFromMap(valueMap, true)}. To
+     * result is identical to invoking {@code #buildFromMap(java.util.Map, boolean) buildFromMap(valueMap, true)}. To
      * override this behavior use {@code buildFromMap(valueMap, false)} instead.
      * </p>
      *
@@ -497,7 +497,7 @@ abstract class BaseUriBuilder {
      * <p>
      * The {@code encodeSlashInPath} parameter may be used to override the default encoding of {@code '/'} characters in
      * the stringified template values in cases when the template is part of the URI path component when using the
-     *  {@code #buildFromMap(java.util.Map)} method. If the {@code encodeSlashInPath} parameter is set to {@code true}
+     * {@code #buildFromMap(java.util.Map)} method. If the {@code encodeSlashInPath} parameter is set to {@code true}
      * (default), the slash ({@code '/'}) characters in parameter values will be encoded if the template is placed in
      * the URI path component. If set to {@code false} the default encoding behavior is overridden an slash characters
      * in template values will not be encoded when used to substitute path templates.
@@ -515,7 +515,7 @@ abstract class BaseUriBuilder {
      * @see #buildFromEncodedMap(java.util.Map)
      */
     abstract URI buildFromMap(Map<String, ?> values, boolean encodeSlashInPath)
-            throws IllegalArgumentException, UriBuilderException;
+        throws IllegalArgumentException, UriBuilderException;
 
     /**
      * Build a URI.
@@ -536,7 +536,7 @@ abstract class BaseUriBuilder {
      * @since 2.0
      */
     abstract URI buildFromEncodedMap(Map<String, ?> values)
-            throws IllegalArgumentException, UriBuilderException;
+        throws IllegalArgumentException, UriBuilderException;
 
     /**
      * Build a URI, using the supplied values in order to replace any URI template parameters. Values are converted to
@@ -551,7 +551,7 @@ abstract class BaseUriBuilder {
      * </p>
      * <p>
      * NOTE: By default all {@code '/'} characters in the stringified values will be encoded in path templates, i.e. the
-     * result is identical to invoking  {@code #build(Object[], boolean)} build(values, true)}. To override this behavior
+     * result is identical to invoking {@code #build(Object[], boolean)} build(values, true)}. To override this behavior
      * use {@code build(values, false)} instead.
      * </p>
      *
@@ -564,7 +564,7 @@ abstract class BaseUriBuilder {
      * @see #buildFromEncoded(Object...)
      */
     abstract URI build(Object... values)
-            throws IllegalArgumentException, UriBuilderException;
+        throws IllegalArgumentException, UriBuilderException;
 
     /**
      * Build a URI, using the supplied values in order to replace any URI template parameters. Values are converted to
@@ -580,7 +580,7 @@ abstract class BaseUriBuilder {
      * <p>
      * The {@code encodeSlashInPath} parameter may be used to override the default encoding of {@code '/'} characters in
      * the stringified template values in cases when the template is part of the URI path component when using the
-     *  {@code #build(Object[])} method. If the {@code encodeSlashInPath} parameter is set to {@code true} (default), the
+     * {@code #build(Object[])} method. If the {@code encodeSlashInPath} parameter is set to {@code true} (default), the
      * slash ({@code '/'}) characters in parameter values will be encoded if the template is placed in the URI path
      * component. If set to {@code false} the default encoding behavior is overridden an slash characters in template
      * values will not be encoded when used to substitute path templates.
@@ -599,7 +599,7 @@ abstract class BaseUriBuilder {
      * @since 2.0
      */
     abstract URI build(Object[] values, boolean encodeSlashInPath)
-            throws IllegalArgumentException, UriBuilderException;
+        throws IllegalArgumentException, UriBuilderException;
 
     /**
      * Build a URI. Any URI templates parameters will be replaced with the supplied values in order. Values are
@@ -622,7 +622,7 @@ abstract class BaseUriBuilder {
      * @see #build(Object[], boolean)
      */
     abstract URI buildFromEncoded(Object... values)
-            throws IllegalArgumentException, UriBuilderException;
+        throws IllegalArgumentException, UriBuilderException;
 
     /**
      * Get the URI template string represented by this URI builder.

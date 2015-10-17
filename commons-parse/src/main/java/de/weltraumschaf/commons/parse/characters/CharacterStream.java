@@ -35,6 +35,9 @@ import de.weltraumschaf.commons.validate.Validate;
  */
 public final class CharacterStream {
 
+    /**
+     * Used to detect new lines.
+     */
     private static final char NL = '\n';
 
     /**

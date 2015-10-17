@@ -56,7 +56,7 @@ final class CharacterIterator {
      *
      * @param s String trough which the iterator iterates.
      */
-     CharacterIterator(final String s) {
+    CharacterIterator(final String s) {
         this.s = s;
         this.pos = -1;
     }
@@ -64,9 +64,9 @@ final class CharacterIterator {
     /**
      * Determines whether there is next character in the iteration chain.
      *
-     * @return True if there is a character which can be retrieved by  {@code #next()}, false otherwise.
+     * @return True if there is a character which can be retrieved by {@code #next()}, false otherwise.
      */
-     boolean hasNext() {
+    boolean hasNext() {
         return pos < s.length() - 1;
     }
 
@@ -76,7 +76,7 @@ final class CharacterIterator {
      * @return Next character.
      * @throws RuntimeException The method might throw exception when there is no more character to be retrieved.
      */
-     char next() {
+    char next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
@@ -84,12 +84,12 @@ final class CharacterIterator {
     }
 
     /**
-     * Returns the next character without increasing the position. The method does the same as  {@code #next()} but the
+     * Returns the next character without increasing the position. The method does the same as {@code #next()} but the
      * position is not changed by calling this method.
      *
      * @return Next character.
      */
-     char peek() {
+    char peek() {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
@@ -102,7 +102,7 @@ final class CharacterIterator {
      *
      * @return current position of the iterator
      */
-     int pos() {
+    int pos() {
         return pos;
     }
 
@@ -111,7 +111,7 @@ final class CharacterIterator {
      *
      * @return String which initialized this iterator.
      */
-     String getInput() {
+    String getInput() {
         return s;
     }
 
@@ -120,7 +120,7 @@ final class CharacterIterator {
      *
      * @param newPosition New position for the iterator.
      */
-     void setPosition(int newPosition) {
+    void setPosition(int newPosition) {
         if (newPosition > this.s.length() - 1) {
             throw new IndexOutOfBoundsException("Given position " + newPosition + " is outside the input string range.");
         }
@@ -132,7 +132,7 @@ final class CharacterIterator {
      *
      * @return Character from current position.
      */
-     char current() {
+    char current() {
         if (pos == -1) {
             throw new IllegalStateException("Iterator not used yet.");
         }

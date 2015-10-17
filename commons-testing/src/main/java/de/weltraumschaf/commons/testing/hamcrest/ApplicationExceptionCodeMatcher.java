@@ -35,7 +35,7 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
     /**
      * May be {@code null}.
      */
-    private ExitCode expectedExitCode = null;
+    private ExitCode expectedExitCode;
 
     /**
      * Convenience constructor.
@@ -52,7 +52,7 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
     /**
      * Dedicated constructor.
      *
-     * @param expectedExitCode
+     * @param expectedExitCodeany int
      */
     private ApplicationExceptionCodeMatcher(final int expectedExitCode) {
         super();

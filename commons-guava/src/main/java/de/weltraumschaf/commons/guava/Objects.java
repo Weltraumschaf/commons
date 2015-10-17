@@ -259,7 +259,7 @@ public final class Objects {
          * The order of calling this method, relative to the {@code add()}/{@code addValue()} methods, is not
          * significant.
          * </p>
-         * 
+         *
          * @return self for method chaining
          */
         public ToStringHelper omitNullValues() {

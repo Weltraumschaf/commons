@@ -83,7 +83,8 @@ public final class BrowserLauncher {
     /**
      * Open browser on specified URL.
      * <p>
-     * This method throws an {@link java.lang.IllegalArgumentException} if the OS (given by constructor) is not supported.
+     * This method throws an {@link java.lang.IllegalArgumentException} if the OS (given by constructor) is not
+     * supported.
      * </p>
      * <p>
      * This method throws an {@link java.lang.RuntimeException} if the browser can't be started.
@@ -155,6 +156,7 @@ public final class BrowserLauncher {
      * See if the default browser is Konqueror by resolving the symlink.
      *
      * FIXME: Fix Konqueror browser detection.
+     *
      * @return {@code true} if Konqueror is default browser, else {@code false}
      */
     private boolean isKonquerorTheDefaultBrowser() {

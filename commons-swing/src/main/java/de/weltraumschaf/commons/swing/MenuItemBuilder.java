@@ -27,6 +27,7 @@ import javax.swing.KeyStroke;
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 public final class MenuItemBuilder {
+
     /**
      * Used for OS specific differences.
      */
@@ -54,7 +55,7 @@ public final class MenuItemBuilder {
     MenuItemBuilder(final String name, final MenuBuilder parent) {
         super();
         this.menuItem = new JMenuItem(name);
-        this.parent   = parent;
+        this.parent = parent;
     }
 
     /**
@@ -83,7 +84,7 @@ public final class MenuItemBuilder {
      * For Mac OS with mask {@link java.awt.event.KeyEvent#META_DOWN_MASK} for all other systems
      * {@link java.awt.event.KeyEvent#CTRL_DOWN_MASK}.
      * </p>
-     * 
+     *
      * @param accelerator Accelerator key character.
      * @return Returns the builder itself.
      */

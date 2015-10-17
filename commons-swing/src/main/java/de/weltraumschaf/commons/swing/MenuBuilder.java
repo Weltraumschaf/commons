@@ -39,13 +39,13 @@ public final class MenuBuilder {
      * <p>
      * This sub builder is constructed by the {@link MenuBarBuilder}.
      * </p>
-     * 
+     *
      * @param name Name of the menu.
      * @param parent Constructing menu bar builder.
      */
     MenuBuilder(final String name, final MenuBarBuilder parent) {
         super();
-        this.menu   = new JMenu(name);
+        this.menu = new JMenu(name);
         this.parent = parent;
     }
 

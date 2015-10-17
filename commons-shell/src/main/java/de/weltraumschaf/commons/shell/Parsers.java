@@ -28,7 +28,8 @@ public final class Parsers {
     }
 
     /**
-     * Creates a new parser with default scanner implementation and {@link de.weltraumschaf.commons.shell.NullCommandVerifier}.
+     * Creates a new parser with default scanner implementation and
+     * {@link de.weltraumschaf.commons.shell.NullCommandVerifier}.
      *
      * @param m map key word literals to command types
      * @return new instance

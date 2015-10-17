@@ -101,6 +101,33 @@ public class DelayedRepeaterTest {
         assertThat(task.getExecutedCount(), is(3));
     }
 
+    @Test
+    public void execute_withRunnableRethrowsException() throws InterruptedException {
+        thrown.expect(RuntimeException.class);
+        thrown.expectMessage("foobar");
+
+        DelayedRepeater.create(10, 3).execute(new Runnable() {
+
+            @Override
+            public void run() {
+                throw new NullPointerException("foobar");
+            }
+        });
+    }
+    @Test
+    public void execute_withCallableRethrowsException() throws InterruptedException {
+        thrown.expect(RuntimeException.class);
+        thrown.expectMessage("foobar");
+
+        DelayedRepeater.create(10, 3).execute(new Callable<Void>() {
+
+            @Override
+            public Void call() throws Exception {
+                throw new NullPointerException("foobar");
+            }
+        });
+    }
+
     private static abstract class BaseStub {
 
         private int executedCount;

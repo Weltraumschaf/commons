@@ -48,8 +48,8 @@ final class HasMessage extends TypeSafeMatcher<Throwable> {
 
     @Override
     public void describeTo(final Description description) {
-        description.appendText(" with the message ")
-            .appendDescriptionOf(messageTextMatcher);
+        description.appendText(" with the message ");
+        description.appendDescriptionOf(messageTextMatcher);
     }
 
     @Override

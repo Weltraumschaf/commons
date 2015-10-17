@@ -37,11 +37,6 @@
         </dependency>
         <dependency>
             <groupId>de.weltraumschaf.commons</groupId>
-            <artifactId>validate</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.weltraumschaf.commons</groupId>
             <artifactId>parse</artifactId>
             <version>${project.parent.version}</version>
         </dependency>

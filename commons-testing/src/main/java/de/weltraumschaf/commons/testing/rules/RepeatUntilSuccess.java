@@ -75,13 +75,18 @@ import java.lang.annotation.Target;
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Target(ElementType.METHOD)
 public @interface RepeatUntilSuccess {
+
+    /**
+     * Default value for maximum executions.
+     */
+    int DEFAULT_MAX_EXECUTION = 5;
 
     /**
      * How many times a test should be executed at maximum if it fails.
      *
-     * @return must be greater than 0, defaults to 5
+     * @return must be greater than 0, defaults to {@link #DEFAULT_MAX_EXECUTION}
      */
-    int maxExecutions() default 5;
+    int maxExecutions() default DEFAULT_MAX_EXECUTION;
 }

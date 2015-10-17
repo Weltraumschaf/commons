@@ -65,7 +65,7 @@ import java.lang.annotation.Target;
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Target(ElementType.METHOD)
 public @interface Repeat {
 
     /**

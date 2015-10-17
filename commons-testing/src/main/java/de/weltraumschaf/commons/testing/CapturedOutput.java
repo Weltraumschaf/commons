@@ -11,6 +11,7 @@
  */
 package de.weltraumschaf.commons.testing;
 
+import de.weltraumschaf.commons.validate.Validate;
 import java.io.IOError;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
@@ -29,8 +30,9 @@ import org.junit.runners.model.Statement;
  * This rule captures all output written to {@link java.lang.System#out} and {@link java.lang.System#err}.
  *
  * <p>
- * This rule redirects the constant print streams for out/err to an {@link de.weltraumschaf.commons.testing.CapturingPrintStream} before each test and
- * backups the origin streams after each test.
+ * This rule redirects the constant print streams for out/err to an
+ * {@link de.weltraumschaf.commons.testing.CapturingPrintStream} before each test and backups the origin streams after
+ * each test.
  * </p>
  *
  * <pre>{@code
@@ -117,7 +119,7 @@ public final class CapturedOutput implements TestRule {
      * @param substring must not be {@code null}
      */
     public void expectOut(final String substring) {
-        expectOut(containsString(notNull(substring, "substring")));
+        expectOut(containsString(Validate.notNull(substring, "substring")));
     }
 
     /**
@@ -126,7 +128,7 @@ public final class CapturedOutput implements TestRule {
      * @param matcher must not be {@code null}
      */
     public void expectOut(final Matcher<String> matcher) {
-        outMatcherBuilder.add(notNull(matcher, "matcher"));
+        outMatcherBuilder.add(Validate.notNull(matcher, "matcher"));
     }
 
     /**
@@ -136,7 +138,7 @@ public final class CapturedOutput implements TestRule {
      * @param substring must not be {@code null}
      */
     public void expectErr(final String substring) {
-        expectErr(containsString(notNull(substring, "substring")));
+        expectErr(containsString(Validate.notNull(substring, "substring")));
     }
 
     /**
@@ -145,10 +147,9 @@ public final class CapturedOutput implements TestRule {
      * @param matcher must not be {@code null}
      */
     public void expectErr(final Matcher<String> matcher) {
-        errMatcherBuilder.add(notNull(matcher, "matcher"));
+        errMatcherBuilder.add(Validate.notNull(matcher, "matcher"));
     }
 
-    /** {@inheritDoc} */
     @Override
     public Statement apply(final Statement base, final Description description) {
         return new Statement() {
@@ -156,7 +157,7 @@ public final class CapturedOutput implements TestRule {
             // CHECKSTYLE:OFF
             // Throwable required by API.
             public void evaluate() throws Throwable {
-            // CHECKSTYLE:ON
+                // CHECKSTYLE:ON
                 redirectOutputStreams();
 
                 try {
@@ -211,26 +212,6 @@ public final class CapturedOutput implements TestRule {
     }
 
     /**
-     * Validates that given subject is not {@code null}.
-     *
-     * <p>
-     * Will throw {@link NullPointerException} if subject is {@code null}.
-     * </p>
-     *
-     * @param <T> type of subject
-     * @param subject tested subject
-     * @param description name of tested subject for exception message
-     * @return the subject, if not {@code null}
-     */
-    private static <T> T notNull(final T subject, final String description) {
-        if (null == subject) {
-            throw new NullPointerException(String.format("Parameter '%s' must not be null!", description));
-        }
-
-        return subject;
-    }
-
-    /**
      * Builds string matchers.
      */
     private static final class CapturedOutputMatcherBuilder {
@@ -238,7 +219,7 @@ public final class CapturedOutput implements TestRule {
         /**
          * Hold all matchers.
          */
-        private final List<Matcher<String>> matchers = new ArrayList<Matcher<String>>();
+        private final List<Matcher<String>> matchers = new ArrayList<>();
 
         /**
          * Adds a matcher.
@@ -276,9 +257,9 @@ public final class CapturedOutput implements TestRule {
          *
          * @return new instance, not {@code null}
          */
-        @SuppressWarnings({"unchecked", "rawtypes" })
+        @SuppressWarnings({"unchecked", "rawtypes"})
         private List<Matcher<? super String>> castedMatchers() {
-            return new ArrayList<Matcher<? super String>>((List) matchers);
+            return new ArrayList<>((List) matchers);
         }
 
     }

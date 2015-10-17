@@ -34,12 +34,12 @@ public class DelayedRepeaterTest {
 
     @Test(expected = NullPointerException.class)
     public void execute_withNullRunnableThrowsException() throws InterruptedException {
-        DelayedRepeater.create(500, 1).execute((Runnable)null);
+        DelayedRepeater.create(500, 1).execute((Runnable) null);
     }
 
     @Test(expected = NullPointerException.class)
     public void execute_withNullCallableThrowsException() throws InterruptedException {
-        DelayedRepeater.create(500, 1).execute((Callable)null);
+        DelayedRepeater.create(500, 1).execute((Callable) null);
     }
 
     @Test
@@ -48,16 +48,18 @@ public class DelayedRepeaterTest {
     }
 
     @Test
-    public void onlyExecuteOnceIfNoAssertionOrInterruptedException() throws InterruptedException {
+    public void onlyExecuteOnceIfNoAssertionOrInterruptedException_withRunnable() throws InterruptedException {
         final RunnableStub task = new RunnableStub();
         final DelayedRepeater sut = DelayedRepeater.create(10, 3);
+
         sut.execute(task);
+
         assertThat(sut.shouldFail(), is(false));
         assertThat(task.getExecutedCount(), is(1));
     }
 
     @Test
-    public void executeThreeTimesIfAssertionErrrorIsThrownAndMaxRetryIsThree() throws InterruptedException {
+    public void executeThreeTimesIfAssertionErrrorIsThrownAndMaxRetryIsThree_withRunnable() throws InterruptedException {
         final RunnableStub task = new RunnableStub();
         task.throwAssertionError();
         final DelayedRepeater sut = DelayedRepeater.create(10, 3);
@@ -72,27 +74,75 @@ public class DelayedRepeaterTest {
         assertThat(task.getExecutedCount(), is(3));
     }
 
-    private static final class RunnableStub implements Runnable {
+    @Test
+    public void onlyExecuteOnceIfNoAssertionOrInterruptedException_withCallable() throws InterruptedException {
+        final CallableStub task = new CallableStub();
+        final DelayedRepeater sut = DelayedRepeater.create(10, 3);
+
+        sut.execute(task);
+
+        assertThat(sut.shouldFail(), is(false));
+        assertThat(task.getExecutedCount(), is(1));
+    }
+
+    @Test
+    public void executeThreeTimesIfAssertionErrrorIsThrownAndMaxRetryIsThree_withCallable() throws InterruptedException {
+        final CallableStub task = new CallableStub();
+        task.throwAssertionError();
+        final DelayedRepeater sut = DelayedRepeater.create(10, 3);
+
+        try {
+            sut.execute(task);
+        } catch (final AssertionError ex) { /* Ignore because we provoke it. */
+
+        }
+
+        assertThat(sut.shouldFail(), is(true));
+        assertThat(task.getExecutedCount(), is(3));
+    }
+
+    private static abstract class BaseStub {
 
         private int executedCount;
 
         private boolean throwAssertionError;
 
-        @Override
-        public void run() {
-            ++this.executedCount;
+        final void throwAssertionError() {
+            throwAssertionError = true;
+        }
 
-            if (this.throwAssertionError) {
+        final int getExecutedCount() {
+            return this.executedCount;
+        }
+
+        protected final void execute() {
+            ++executedCount;
+            throwErrorIfWanted();
+        }
+
+        private void throwErrorIfWanted() {
+            if (throwAssertionError) {
                 throw new AssertionError();
             }
         }
 
-        public int getExecutedCount() {
-            return this.executedCount;
+    }
+
+    private static final class RunnableStub extends BaseStub implements Runnable {
+
+        @Override
+        public void run() {
+            execute();
         }
 
-        public void throwAssertionError() {
-            this.throwAssertionError = true;
+    }
+
+    private static final class CallableStub extends BaseStub implements Callable<Void> {
+
+        @Override
+        public Void call() throws Exception {
+            execute();
+            return null;
         }
 
     }

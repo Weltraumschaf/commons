@@ -1,17 +1,21 @@
 package de.weltraumschaf.commons.testing.hamcrest;
 
+import de.weltraumschaf.commons.application.ApplicationException;
 import de.weltraumschaf.commons.system.ExitCode;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import org.hamcrest.Matcher;
 import static org.hamcrest.Matchers.either;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import org.junit.Rule;
 
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Tests for {@link CommonsTestingMatchers}.
@@ -31,7 +35,7 @@ public class CommonsTestingMatchersTest {
         ctor.setAccessible(true);
 
         thrown.expect(either(instanceOf(UnsupportedOperationException.class))
-                .or(instanceOf(InvocationTargetException.class)));
+            .or(instanceOf(InvocationTargetException.class)));
         ctor.newInstance();
     }
 
@@ -57,10 +61,22 @@ public class CommonsTestingMatchersTest {
     }
 
     @Test
-    public void hasExitCode_returnsHashExitCodeMatcher() {
-        assertThat(
-            CommonsTestingMatchers.hasExitCode(mock(ExitCode.class)) instanceof ApplicationExceptionCodeMatcher,
-            is(true));
+    public void hasExitCode_returnsHashExitCodeMatcher_forType() {
+        final ExitCode exitCode = mock(ExitCode.class);
+        when(exitCode.getCode()).thenReturn(42);
+        final Matcher<ApplicationException> expected = CommonsTestingMatchers.hasExitCode(exitCode);
+
+        assertThat(expected instanceof ApplicationExceptionCodeMatcher, is(true));
+        assertThat(((ApplicationExceptionCodeMatcher)expected).getExpectedExitCode(), is(exitCode));
+        assertThat(((ApplicationExceptionCodeMatcher)expected).getExpectedExitCodeNumber(), is(42));
     }
 
+    @Test
+    public void hasExitCode_returnsHashExitCodeMatcher_forInt() {
+        final Matcher<ApplicationException> expected = CommonsTestingMatchers.hasExitCode(42);
+
+        assertThat(expected instanceof ApplicationExceptionCodeMatcher, is(true));
+        assertThat(((ApplicationExceptionCodeMatcher)expected).getExpectedExitCode(), is(nullValue()));
+        assertThat(((ApplicationExceptionCodeMatcher)expected).getExpectedExitCodeNumber(), is(42));
+    }
 }

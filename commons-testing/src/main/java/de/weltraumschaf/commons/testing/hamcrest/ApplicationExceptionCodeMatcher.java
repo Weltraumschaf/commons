@@ -59,6 +59,25 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
         this.expectedExitCodeNumber = expectedExitCode;
     }
 
+    /**
+     * Get the expected exit code as number.
+     *
+     * @return any int
+     */
+    int getExpectedExitCodeNumber() {
+        return expectedExitCodeNumber;
+    }
+
+    /**
+     * Get the expected exit code as type.
+     *
+     * @return may be {@code null}
+     */
+    ExitCode getExpectedExitCode() {
+        return expectedExitCode;
+    }
+
+
     @Override
     public void describeTo(final Description description) {
         description.appendText("exception with exit code ");

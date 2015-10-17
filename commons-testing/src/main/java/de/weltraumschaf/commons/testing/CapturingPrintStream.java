@@ -132,65 +132,41 @@ public final class CapturingPrintStream extends PrintStream {
         return this;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void flush() {
         delegate.flush();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void close() {
         delegate.close();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean checkError() {
         return delegate.checkError();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void write(int b) {
         delegate.write(b);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void write(final byte[] buf, final int off, final int len) {
         delegate.write(buf, off, len);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void print(final boolean b) {
         delegate.print(b);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void print(final char c) {
         delegate.print(c);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void print(final int i) {
         delegate.print(i);
@@ -204,177 +180,111 @@ public final class CapturingPrintStream extends PrintStream {
         delegate.print(l);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void print(final float f) {
         delegate.print(f);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void print(final double d) {
         delegate.print(d);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void print(final char[] s) {
         delegate.print(s);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void print(final String s) {
         delegate.print(s);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void print(final Object obj) {
         delegate.print(obj);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void println() {
         delegate.println();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void println(boolean x) {
         delegate.println(x);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void println(char x) {
         delegate.println(x);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void println(final int x) {
         delegate.println(x);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void println(final long x) {
         delegate.println(x);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void println(final float x) {
         delegate.println(x);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void println(double x) {
         delegate.println(x);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void println(final char[] x) {
         delegate.println(x);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void println(final String x) {
         delegate.println(x);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public void println(final Object x) {
         delegate.println(x);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public PrintStream printf(final String format, final Object... args) {
         return delegate.printf(format, args);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public PrintStream printf(final Locale l, final String format, final Object... args) {
         return delegate.printf(l, format, args);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public PrintStream format(final String format, final Object... args) {
         return delegate.format(format, args);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public PrintStream format(final Locale l, final String format, final Object... args) {
         return delegate.format(l, format, args);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public PrintStream append(final CharSequence csq) {
         return delegate.append(csq);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public PrintStream append(final CharSequence csq, final int start, final int end) {
         return delegate.append(csq, start, end);
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public PrintStream append(final char c) {
         return delegate.append(c);

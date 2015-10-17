@@ -11,6 +11,7 @@
  */
 package de.weltraumschaf.commons.testing;
 
+import de.weltraumschaf.commons.validate.Validate;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -105,11 +106,7 @@ public final class CapturingPrintStream extends PrintStream {
      * @param delegate must not be {@code null}
      */
     void setDelegate(final PrintStream delegate) {
-        if (null == delegate) {
-            throw new NullPointerException("Parameter 'delegate' must not be null!");
-        }
-
-        this.delegate = delegate;
+        this.delegate = Validate.notNull(delegate, "delegate");
     }
 
     /**
@@ -191,6 +188,7 @@ public final class CapturingPrintStream extends PrintStream {
     }
 
     @Override
+    @SuppressWarnings("ImplicitArrayToString") // Its the API of PrintStream.
     public void print(final char[] s) {
         delegate.print(s);
     }
@@ -241,6 +239,7 @@ public final class CapturingPrintStream extends PrintStream {
     }
 
     @Override
+    @SuppressWarnings("ImplicitArrayToString") // Its the API of PrintStream.
     public void println(final char[] x) {
         delegate.println(x);
     }

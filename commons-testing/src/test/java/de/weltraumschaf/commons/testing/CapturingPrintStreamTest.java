@@ -19,7 +19,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import static org.mockito.Mockito.*;
 
 /**
@@ -40,6 +39,11 @@ public class CapturingPrintStreamTest {
     public void prepareDelegateSpy() {
         delegate = spy(sut.getDelegate());
         sut.setDelegate(delegate);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void setDelegate_doesNotAlowNull() {
+        sut.setDelegate(null);
     }
 
     @Test
@@ -131,6 +135,7 @@ public class CapturingPrintStreamTest {
     }
 
     @Test
+    @SuppressWarnings("ImplicitArrayToString")
     public void print_charArr() {
         sut.print(new char[] {'f', 'o', 'o'});
         verify(delegate, times(1)).print(new char[] {'f', 'o', 'o'});
@@ -192,6 +197,7 @@ public class CapturingPrintStreamTest {
     }
 
     @Test
+    @SuppressWarnings("ImplicitArrayToString")
     public void println_charArr() {
         sut.println(new char[] {'f', 'o', 'o'});
         verify(delegate, times(1)).println(new char[] {'f', 'o', 'o'});

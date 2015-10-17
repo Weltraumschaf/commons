@@ -9,7 +9,6 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt;
  */
-
 package de.weltraumschaf.commons.testing.hamcrest;
 
 import de.weltraumschaf.commons.application.ApplicationException;
@@ -30,8 +29,8 @@ public class ApplicationExceptionCodeMatcherTest {
 
     @Test
     public void matchesSafely() {
-        final Matcher<ApplicationException> sut =
-                ApplicationExceptionCodeMatcher.<ApplicationException>hasExitCode(ExitCodeImpl.FOO);
+        final Matcher<ApplicationException> sut
+            = ApplicationExceptionCodeMatcher.<ApplicationException>hasExitCode(ExitCodeImpl.FOO);
 
         assertThat(sut.matches(new ApplicationException(ExitCodeImpl.FOO, "foo")), is(true));
         assertThat(sut.matches(new ApplicationException(ExitCodeImpl.BAR, "bar")), is(false));
@@ -39,22 +38,34 @@ public class ApplicationExceptionCodeMatcherTest {
     }
 
     @Test
-    public void describeTo() {
+    public void describeTo_withEnum() {
         final Description desc = mock(Description.class);
-        final Matcher<ApplicationException> sut =
-                ApplicationExceptionCodeMatcher.<ApplicationException>hasExitCode(ExitCodeImpl.FOO);
+        final Matcher<ApplicationException> sut
+            = ApplicationExceptionCodeMatcher.<ApplicationException>hasExitCode(ExitCodeImpl.FOO);
 
         sut.describeTo(desc);
 
         verify(desc, times(1)).appendText("exception with exit code ");
-        verify(desc, times(1)).appendText("FOO");
+        verify(desc, times(1)).appendValue(ExitCodeImpl.FOO);
+    }
+
+    @Test
+    public void describeTo_withNumber() {
+        final Description desc = mock(Description.class);
+        final Matcher<ApplicationException> sut
+            = ApplicationExceptionCodeMatcher.<ApplicationException>hasExitCode(42);
+
+        sut.describeTo(desc);
+
+        verify(desc, times(1)).appendText("exception with exit code ");
+        verify(desc, times(1)).appendValue(42);
     }
 
     @Test
     public void describeMismatchSafely() {
         final Description desc = mock(Description.class);
-        final Matcher<ApplicationException> sut =
-                ApplicationExceptionCodeMatcher.<ApplicationException>hasExitCode(ExitCodeImpl.FOO);
+        final Matcher<ApplicationException> sut
+            = ApplicationExceptionCodeMatcher.<ApplicationException>hasExitCode(ExitCodeImpl.FOO);
 
         sut.describeMismatch(new ApplicationException(ExitCodeImpl.BAR, "bar"), desc);
 
@@ -63,6 +74,7 @@ public class ApplicationExceptionCodeMatcherTest {
     }
 
     private static enum ExitCodeImpl implements ExitCode {
+
         FOO(0), BAR(1), BAZ(2);
 
         private final int code;

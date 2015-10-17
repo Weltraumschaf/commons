@@ -31,7 +31,11 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
     /**
      * Exit code to verify against it.
      */
-    private final int expectedExitCode;
+    private final int expectedExitCodeNumber;
+    /**
+     * May be {@code null}.
+     */
+    private ExitCode expectedExitCode = null;
 
     /**
      * Convenience constructor.
@@ -42,6 +46,7 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
     @Deprecated
     public ApplicationExceptionCodeMatcher(final ExitCode expectedExitCode) {
         this(Validate.notNull(expectedExitCode, "expectedExitCode").getCode());
+        this.expectedExitCode = expectedExitCode;
     }
 
     /**
@@ -49,20 +54,25 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
      *
      * @param expectedExitCode
      */
-    ApplicationExceptionCodeMatcher(final int expectedExitCode) {
+    private ApplicationExceptionCodeMatcher(final int expectedExitCode) {
         super();
-        this.expectedExitCode = expectedExitCode;
+        this.expectedExitCodeNumber = expectedExitCode;
     }
 
     @Override
     public void describeTo(final Description description) {
         description.appendText("exception with exit code ");
-        description.appendValue(expectedExitCode);
+
+        if (null == expectedExitCode) {
+            description.appendValue(expectedExitCodeNumber);
+        } else {
+            description.appendValue(expectedExitCode);
+        }
     }
 
     @Override
     protected boolean matchesSafely(final T item) {
-        return expectedExitCode == item.getExitCode().getCode();
+        return expectedExitCodeNumber == item.getExitCode().getCode();
     }
 
     @Override

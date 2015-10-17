@@ -24,6 +24,7 @@ import org.junit.rules.ExpectedException;
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
+@SuppressWarnings("deprecation")
 public class IsCloseToTest {
 
     @Rule

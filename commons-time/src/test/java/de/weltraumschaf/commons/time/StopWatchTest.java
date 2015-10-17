@@ -11,9 +11,9 @@
  */
 package de.weltraumschaf.commons.time;
 
+import de.weltraumschaf.commons.testing.hamcrest.CommonsTestingMatchers;
 import de.weltraumschaf.commons.time.StopWatch.SplitState;
 import de.weltraumschaf.commons.time.StopWatch.State;
-import static de.weltraumschaf.commons.testing.hamcrest.IsCloseTo.closeTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Rule;
@@ -33,7 +33,7 @@ public class StopWatchTest {
     private final StopWatch sut = new StopWatch();
 
     private void assertTime(final long actual, final long expected) {
-        assertThat(actual, is(closeTo(expected, DELTA)));
+        assertThat(actual, is(CommonsTestingMatchers.closeTo(expected, DELTA)));
     }
 
     private void waitOneSecond() throws InterruptedException {

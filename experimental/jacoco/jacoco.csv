@@ -1,3 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Commons Experimental,de.weltraumschaf.commons.experimental,SoftCache.NullFinder,0,5,0,0,0,2,0,2,0,2
-Commons Experimental,de.weltraumschaf.commons.experimental,SoftCache,12,103,5,9,3,25,5,7,0,5

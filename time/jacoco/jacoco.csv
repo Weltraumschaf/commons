@@ -1,8 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Commons Time,de.weltraumschaf.commons.time,StopWatch.State.new StopWatch.State() {...},12,0,0,0,4,0,4,0,4,0
-Commons Time,de.weltraumschaf.commons.time,StopWatch.State,58,0,0,0,5,0,4,0,4,0
-Commons Time,de.weltraumschaf.commons.time,StopWatch,248,0,30,0,64,0,33,0,18,0
-Commons Time,de.weltraumschaf.commons.time,StopWatch.State.new StopWatch.State() {...},12,0,0,0,4,0,4,0,4,0
-Commons Time,de.weltraumschaf.commons.time,StopWatch.State.new StopWatch.State() {...},12,0,0,0,4,0,4,0,4,0
-Commons Time,de.weltraumschaf.commons.time,StopWatch.SplitState,38,0,0,0,3,0,4,0,4,0
-Commons Time,de.weltraumschaf.commons.time,StopWatch.State.new StopWatch.State() {...},12,0,0,0,4,0,4,0,4,0

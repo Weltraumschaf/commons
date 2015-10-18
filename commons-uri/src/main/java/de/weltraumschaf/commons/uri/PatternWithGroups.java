@@ -57,6 +57,8 @@ import java.util.regex.PatternSyntaxException;
 class PatternWithGroups {
 
     private static final int[] EMPTY_INT_ARRAY = new int[0];
+    private static final EmptyStringMatchResult EMPTY_STRING_MATCH_RESULT = new EmptyStringMatchResult();
+
     /**
      * The empty pattern that matches the null or empty string.
      */
@@ -106,10 +108,6 @@ class PatternWithGroups {
         this(compile(regex), groupIndexes);
     }
 
-    private static Pattern compile(final String regex) throws PatternSyntaxException {
-        return (regex == null || regex.length() == 0) ? null : Pattern.compile(regex);
-    }
-
     /**
      * Construct a new pattern.
      *
@@ -137,6 +135,10 @@ class PatternWithGroups {
         this.groupIndexes = groupIndexes;
     }
 
+    private static Pattern compile(final String regex) throws PatternSyntaxException {
+        return (regex == null || regex.length() == 0) ? null : Pattern.compile(regex);
+    }
+
     /**
      * Get the regular expression.
      *
@@ -153,6 +155,156 @@ class PatternWithGroups {
      */
     final int[] getGroupIndexes() {
         return groupIndexes;
+    }
+
+    /**
+     * Match against the pattern.
+     *
+     * @param cs the char sequence to match against the template.
+     * @return the match result, otherwise null if no match occurs.
+     */
+    final MatchResult match(final CharSequence cs) {
+        // Check for match against the empty pattern
+        if (cs == null) {
+            return (regexPattern == null) ? EMPTY_STRING_MATCH_RESULT : null;
+        } else if (regexPattern == null) {
+            return null;
+        }
+
+        // Match regular expression
+        final Matcher m = regexPattern.matcher(cs);
+        if (!m.matches()) {
+            return null;
+        }
+
+        if (cs.length() == 0) {
+            return EMPTY_STRING_MATCH_RESULT;
+        }
+
+        return (groupIndexes.length > 0) ? new GroupIndexMatchResult(m) : m;
+    }
+
+    /**
+     * Match against the pattern.
+     * <p>
+     * If a matched then the capturing group values (if any) will be added to a list passed in as parameter.
+     *
+     * @param cs the char sequence to match against the template.
+     * @param groupValues the list to add the values of a pattern's capturing groups if matching is successful. The
+     * values are added in the same order as the pattern's capturing groups. The list is cleared before values are
+     * added.
+     * @return true if the char sequence matches the pattern, otherwise false.
+     * @throws IllegalArgumentException if the group values is null.
+     */
+    final boolean match(final CharSequence cs, final List<String> groupValues) throws IllegalArgumentException {
+        if (groupValues == null) {
+            throw new IllegalArgumentException();
+        }
+
+        // Check for match against the empty pattern
+        if (cs == null || cs.length() == 0) {
+            return (regexPattern == null);
+        } else if (regexPattern == null) {
+            return false;
+        }
+
+        // Match the regular expression
+        final Matcher m = regexPattern.matcher(cs);
+        if (!m.matches()) {
+            return false;
+        }
+
+        groupValues.clear();
+        if (groupIndexes.length > 0) {
+            for (int i = 0; i < groupIndexes.length - 1; i++) {
+                groupValues.add(m.group(groupIndexes[i]));
+            }
+        } else {
+            for (int i = 1; i <= m.groupCount(); i++) {
+                groupValues.add(m.group(i));
+            }
+        }
+
+        // TODO check for consistency of different capturing groups
+        // that must have the same value
+        return true;
+    }
+
+    /**
+     * Match against the pattern.
+     * <p>
+     * If a matched then the capturing group values (if any) will be added to a list passed in as parameter.
+     *
+     * @param cs the char sequence to match against the template.
+     * @param groupNames the list names associated with a pattern's capturing groups. The names MUST be in the same
+     * order as the pattern's capturing groups and the size MUST be equal to or less than the number of capturing
+     * groups.
+     * @param groupValues the map to add the values of a pattern's capturing groups if matching is successful. A values
+     * is put into the map using the group name associated with the capturing group. The map is cleared before values
+     * are added.
+     * @return true if the matches the pattern, otherwise false.
+     * @throws IllegalArgumentException if group values is null.
+     */
+    final boolean match(
+            final CharSequence cs,
+            final List<String> groupNames,
+            final Map<String, String> groupValues) throws IllegalArgumentException {
+        if (groupValues == null) {
+            throw new IllegalArgumentException();
+        }
+
+        // Check for match against the empty pattern
+        if (cs == null || cs.length() == 0) {
+            return (regexPattern == null);
+        } else if (regexPattern == null) {
+            return false;
+        }
+
+        // Match the regular expression
+        final Matcher m = regexPattern.matcher(cs);
+        if (!m.matches()) {
+            return false;
+        }
+
+        // Assign the matched group values to group names
+        groupValues.clear();
+        for (int i = 0; i < groupNames.size(); i++) {
+            final String name = groupNames.get(i);
+            final String currentValue = m.group((groupIndexes.length > 0) ? groupIndexes[i] : i + 1);
+
+            // Group names can have the same name occuring more than once,
+            // check that groups values are same.
+            final String previousValue = groupValues.get(name);
+            if (previousValue != null && !previousValue.equals(currentValue)) {
+                return false;
+            }
+
+            groupValues.put(name, currentValue);
+        }
+
+        return true;
+    }
+
+    @Override
+    public final int hashCode() {
+        return regex.hashCode();
+    }
+
+    @Override
+    public final boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PatternWithGroups that = (PatternWithGroups) obj;
+        return !(this.regex != that.regex && (this.regex == null || !this.regex.equals(that.regex)));
+    }
+
+    @Override
+    public final String toString() {
+        return regex;
     }
 
     private static final class EmptyStringMatchResult implements MatchResult {
@@ -201,9 +353,8 @@ class PatternWithGroups {
             return 0;
         }
     }
-    private static final EmptyStringMatchResult EMPTY_STRING_MATCH_RESULT = new EmptyStringMatchResult();
 
-    private final class GroupIndexMatchResult implements MatchResult {
+        private final class GroupIndexMatchResult implements MatchResult {
 
         private final MatchResult result;
 
@@ -259,159 +410,4 @@ class PatternWithGroups {
         }
     }
 
-    /**
-     * Match against the pattern.
-     *
-     * @param cs the char sequence to match against the template.
-     * @return the match result, otherwise null if no match occurs.
-     */
-    final MatchResult match(final CharSequence cs) {
-        // Check for match against the empty pattern
-        if (cs == null) {
-            return (regexPattern == null) ? EMPTY_STRING_MATCH_RESULT : null;
-        } else if (regexPattern == null) {
-            return null;
-        }
-
-        // Match regular expression
-        final Matcher m = regexPattern.matcher(cs);
-        if (!m.matches()) {
-            return null;
-        }
-
-        if (cs.length() == 0) {
-            return EMPTY_STRING_MATCH_RESULT;
-        }
-
-        return (groupIndexes.length > 0) ? new GroupIndexMatchResult(m) : m;
-    }
-
-    /**
-     * Match against the pattern.
-     * <p>
-     * If a matched then the capturing group values (if any) will be added to a list passed in as parameter.
-     *
-     * @param cs the char sequence to match against the template.
-     * @param groupValues the list to add the values of a pattern's capturing groups if matching is successful. The
-     * values are added in the same order as the pattern's capturing groups. The list is cleared before values are
-     * added.
-     * @return true if the char sequence matches the pattern, otherwise false.
-     * @throws IllegalArgumentException if the group values is null.
-     */
-    final boolean match(final CharSequence cs, final List<String> groupValues) throws IllegalArgumentException {
-        if (groupValues == null) {
-            throw new IllegalArgumentException();
-        }
-
-        // Check for match against the empty pattern
-        if (cs == null || cs.length() == 0) {
-            return (regexPattern == null) ? true : false;
-        } else if (regexPattern == null) {
-            return false;
-        }
-
-        // Match the regular expression
-        final Matcher m = regexPattern.matcher(cs);
-        if (!m.matches()) {
-            return false;
-        }
-
-        groupValues.clear();
-        if (groupIndexes.length > 0) {
-            for (int i = 0; i < groupIndexes.length - 1; i++) {
-                groupValues.add(m.group(groupIndexes[i]));
-            }
-        } else {
-            for (int i = 1; i <= m.groupCount(); i++) {
-                groupValues.add(m.group(i));
-            }
-        }
-
-        // TODO check for consistency of different capturing groups
-        // that must have the same value
-        return true;
-    }
-
-    /**
-     * Match against the pattern.
-     * <p>
-     * If a matched then the capturing group values (if any) will be added to a list passed in as parameter.
-     *
-     * @param cs the char sequence to match against the template.
-     * @param groupNames the list names associated with a pattern's capturing groups. The names MUST be in the same
-     * order as the pattern's capturing groups and the size MUST be equal to or less than the number of capturing
-     * groups.
-     * @param groupValues the map to add the values of a pattern's capturing groups if matching is successful. A values
-     * is put into the map using the group name associated with the capturing group. The map is cleared before values
-     * are added.
-     * @return true if the matches the pattern, otherwise false.
-     * @throws IllegalArgumentException if group values is null.
-     */
-    final boolean match(
-            final CharSequence cs,
-            final List<String> groupNames,
-            final Map<String, String> groupValues) throws IllegalArgumentException {
-        if (groupValues == null) {
-            throw new IllegalArgumentException();
-        }
-
-        // Check for match against the empty pattern
-        if (cs == null || cs.length() == 0) {
-            return (regexPattern == null) ? true : false;
-        } else if (regexPattern == null) {
-            return false;
-        }
-
-        // Match the regular expression
-        final Matcher m = regexPattern.matcher(cs);
-        if (!m.matches()) {
-            return false;
-        }
-
-        // Assign the matched group values to group names
-        groupValues.clear();
-        for (int i = 0; i < groupNames.size(); i++) {
-            final String name = groupNames.get(i);
-            final String currentValue = m.group((groupIndexes.length > 0) ? groupIndexes[i] : i + 1);
-
-            // Group names can have the same name occuring more than once,
-            // check that groups values are same.
-            final String previousValue = groupValues.get(name);
-            if (previousValue != null && !previousValue.equals(currentValue)) {
-                return false;
-            }
-
-            groupValues.put(name, currentValue);
-        }
-
-        return true;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final int hashCode() {
-        return regex.hashCode();
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final boolean equals(final Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final PatternWithGroups that = (PatternWithGroups) obj;
-        if (this.regex != that.regex && (this.regex == null || !this.regex.equals(that.regex))) {
-            return false;
-        }
-        return true;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public final String toString() {
-        return regex;
-    }
 }

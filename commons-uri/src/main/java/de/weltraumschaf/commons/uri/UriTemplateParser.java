@@ -56,7 +56,7 @@ import java.util.regex.PatternSyntaxException;
  * @author Paul Sandoz
  */
 class UriTemplateParser {
-    /* package */ static final int[] EMPTY_INT_ARRAY = new int[0];
+    static final int[] EMPTY_INT_ARRAY = new int[0];
     private static final Set<Character> RESERVED_REGEX_CHARACTERS = initReserved();
 
     private static Set<Character> initReserved() {
@@ -75,6 +75,7 @@ class UriTemplateParser {
     }
 
     private static final Pattern TEMPLATE_VALUE_PATTERN = Pattern.compile("[^/]+?");
+    private final static String[] HEX_TO_UPPERCASE_REGEX = initHexToUpperCaseRegex();
 
     private final String template;
     private final StringBuffer regex = new StringBuffer();
@@ -267,8 +268,6 @@ class UriTemplateParser {
             literalCharactersBuffer.setLength(0);
         }
     }
-
-    private final static String[] HEX_TO_UPPERCASE_REGEX = initHexToUpperCaseRegex();
 
     private static String[] initHexToUpperCaseRegex() {
         final String[] table = new String[0x80];

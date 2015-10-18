@@ -58,6 +58,17 @@ import java.util.List;
  */
 class UriComponent {
 
+    private static final String[] SCHEME = {"0-9", "A-Z", "a-z", "+", "-", "."};
+    private static final String[] UNRESERVED = {"0-9", "A-Z", "a-z", "-", ".", "_", "~"};
+    private static final String[] SUB_DELIMS = {"!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="};
+    private static final boolean[][] ENCODING_TABLES = initEncodingTables();
+    private static final Charset UTF_8_CHARSET = Charset.forName("UTF-8");
+    private static final int[] HEX_TABLE = initHexTable();
+    private final static char[] HEX_DIGITS = {
+        '0', '1', '2', '3', '4', '5', '6', '7',
+        '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+    };
+
     private UriComponent() {
     }
 
@@ -260,11 +271,6 @@ class UriComponent {
         return (sb == null) ? s : sb.toString();
     }
 
-    private final static char[] HEX_DIGITS = {
-        '0', '1', '2', '3', '4', '5', '6', '7',
-        '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
-    };
-
     private static void appendPercentEncodedOctet(StringBuilder sb, int b) {
         sb.append('%');
         sb.append(HEX_DIGITS[b >> 4]);
@@ -278,11 +284,6 @@ class UriComponent {
             appendPercentEncodedOctet(sb, bb.get() & 0xFF);
         }
     }
-
-    private static final String[] SCHEME = {"0-9", "A-Z", "a-z", "+", "-", "."};
-    private static final String[] UNRESERVED = {"0-9", "A-Z", "a-z", "-", ".", "_", "~"};
-    private static final String[] SUB_DELIMS = {"!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="};
-    private static final boolean[][] ENCODING_TABLES = initEncodingTables();
 
     private static boolean[][] initEncodingTables() {
         final boolean[][] tables = new boolean[Type.values().length][];
@@ -348,8 +349,6 @@ class UriComponent {
 
         return table;
     }
-
-    private static final Charset UTF_8_CHARSET = Charset.forName("UTF-8");
 
     /**
      * Decodes characters of a string that are percent-encoded octets using UTF-8 decoding (if needed).
@@ -503,35 +502,6 @@ class UriComponent {
         } catch (UnsupportedEncodingException ex) {
             // This should never occur
             throw new IllegalArgumentException(ex);
-        }
-    }
-
-    private static final class PathSegment {
-
-        private static final PathSegment EMPTY_PATH_SEGMENT = new PathSegment("", false);
-        private final String path;
-        private final MultivaluedMap<String, String> matrixParameters;
-
-        PathSegment(String path, boolean decode) {
-            this(path, decode, new MultivaluedStringMap());
-        }
-
-        PathSegment(String path, boolean decode, MultivaluedMap<String, String> matrixParameters) {
-            this.path = (decode) ? UriComponent.decode(path, UriComponent.Type.PATH_SEGMENT) : path;
-            this.matrixParameters = matrixParameters;
-        }
-
-        String getPath() {
-            return path;
-        }
-
-        MultivaluedMap<String, String> getMatrixParameters() {
-            return matrixParameters;
-        }
-
-        @Override
-        public String toString() {
-            return path;
         }
     }
 
@@ -800,8 +770,6 @@ class UriComponent {
         return v;
     }
 
-    private static final int[] HEX_TABLE = initHexTable();
-
     private static int[] initHexTable() {
         final int[] table = new int[0x80];
         Arrays.fill(table, -1);
@@ -886,5 +854,34 @@ class UriComponent {
          * The URI fragment component type.
          */
         FRAGMENT,
+    }
+
+    private static final class PathSegment {
+
+        private static final PathSegment EMPTY_PATH_SEGMENT = new PathSegment("", false);
+        private final String path;
+        private final MultivaluedMap<String, String> matrixParameters;
+
+        PathSegment(String path, boolean decode) {
+            this(path, decode, new MultivaluedStringMap());
+        }
+
+        PathSegment(String path, boolean decode, MultivaluedMap<String, String> matrixParameters) {
+            this.path = (decode) ? UriComponent.decode(path, UriComponent.Type.PATH_SEGMENT) : path;
+            this.matrixParameters = matrixParameters;
+        }
+
+        String getPath() {
+            return path;
+        }
+
+        MultivaluedMap<String, String> getMatrixParameters() {
+            return matrixParameters;
+        }
+
+        @Override
+        public String toString() {
+            return path;
+        }
     }
 }

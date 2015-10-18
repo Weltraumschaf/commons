@@ -165,6 +165,21 @@ class MultivaluedHashMap<K, V> extends AbstractMultivaluedMap<K, V> implements S
         super(new HashMap<K, List<V>>(initialCapacity, loadFactor));
     }
 
+     /**
+     * Constructs a new multivalued hash map with the same mappings as the
+     * specified single-valued {@code  Map }.
+     *
+     * @param map the single-valued map whose mappings are to be placed in this
+     *            multivalued map.
+     * @throws NullPointerException if the specified map is {@code null}
+     */
+     MultivaluedHashMap(final Map<? extends K, ? extends V> map) {
+        this();
+        for (Map.Entry<? extends K, ? extends V> e : map.entrySet()) {
+            this.putSingle(e.getKey(), e.getValue());
+        }
+    }
+
     /**
      * Constructs a new multivalued hash map with the same mappings as the
      * specified {@code  MultivaluedMap }. The {@code  List} instances holding
@@ -193,18 +208,4 @@ class MultivaluedHashMap<K, V> extends AbstractMultivaluedMap<K, V> implements S
         }
     }
 
-    /**
-     * Constructs a new multivalued hash map with the same mappings as the
-     * specified single-valued {@code  Map }.
-     *
-     * @param map the single-valued map whose mappings are to be placed in this
-     *            multivalued map.
-     * @throws NullPointerException if the specified map is {@code null}
-     */
-     MultivaluedHashMap(Map<? extends K, ? extends V> map) {
-        this();
-        for (Map.Entry<? extends K, ? extends V> e : map.entrySet()) {
-            this.putSingle(e.getKey(), e.getValue());
-        }
-    }
 }

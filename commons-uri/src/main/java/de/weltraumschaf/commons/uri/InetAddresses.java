@@ -500,73 +500,6 @@ final class InetAddresses {
     }
 
     /**
-     * A simple immutable data class to encapsulate the information to be found in a Teredo address.
-     *
-     * <p>
-     * All of the fields in this class are encoded in various portions of the IPv6 address as part of the protocol. More
-     * protocols details can be found at:
-     * <a target="_parent" href="http://en.wikipedia.org/wiki/Teredo_tunneling"
-     *    >http://en.wikipedia.org/wiki/Teredo_tunneling</a>.
-     *
-     * <p>
-     * The RFC can be found here:
-     * <a target="_parent" href="http://tools.ietf.org/html/rfc4380"
-     *    >http://tools.ietf.org/html/rfc4380</a>.
-     *
-     * @since 5.0
-     */
-    static final class TeredoInfo {
-
-        private final Inet4Address server;
-        private final Inet4Address client;
-        private final int port;
-        private final int flags;
-
-        /**
-         * Constructs a TeredoInfo instance.
-         *
-         * <p>
-         * Both server and client can be {@code null}, in which case the value {@code "0.0.0.0"} will be assumed.
-         *
-         * @throws IllegalArgumentException if either of the {@code port} or the {@code flags} arguments are out of
-         * range of an unsigned short
-         *
-         * @param server TODO
-         * @param client TODO
-         * @param port TODO
-         * @param flags TODO
-         */
-        // TODO: why is this ?
-        TeredoInfo(Inet4Address server, Inet4Address client, int port, int flags) {
-            Validate.isTrue((port >= 0) && (port <= 0xffff),
-                String.format("port '%s' is out of range (0 <= port <= 0xffff)", port));
-            Validate.isTrue((flags >= 0) && (flags <= 0xffff),
-                String.format("flags '%s' is out of range (0 <= flags <= 0xffff)", flags));
-
-            this.server = Objects.firstNonNull(server, ANY4);
-            this.client = Objects.firstNonNull(client, ANY4);
-            this.port = port;
-            this.flags = flags;
-        }
-
-        Inet4Address getServer() {
-            return server;
-        }
-
-        Inet4Address getClient() {
-            return client;
-        }
-
-        int getPort() {
-            return port;
-        }
-
-        int getFlags() {
-            return flags;
-        }
-    }
-
-    /**
      * Evaluates whether the argument is a Teredo address.
      *
      * <p>
@@ -735,4 +668,70 @@ final class InetAddresses {
         return true;
     }
 
+    /**
+     * A simple immutable data class to encapsulate the information to be found in a Teredo address.
+     *
+     * <p>
+     * All of the fields in this class are encoded in various portions of the IPv6 address as part of the protocol. More
+     * protocols details can be found at:
+     * <a target="_parent" href="http://en.wikipedia.org/wiki/Teredo_tunneling"
+     *    >http://en.wikipedia.org/wiki/Teredo_tunneling</a>.
+     *
+     * <p>
+     * The RFC can be found here:
+     * <a target="_parent" href="http://tools.ietf.org/html/rfc4380"
+     *    >http://tools.ietf.org/html/rfc4380</a>.
+     *
+     * @since 5.0
+     */
+    static final class TeredoInfo {
+
+        private final Inet4Address server;
+        private final Inet4Address client;
+        private final int port;
+        private final int flags;
+
+        /**
+         * Constructs a TeredoInfo instance.
+         *
+         * <p>
+         * Both server and client can be {@code null}, in which case the value {@code "0.0.0.0"} will be assumed.
+         *
+         * @throws IllegalArgumentException if either of the {@code port} or the {@code flags} arguments are out of
+         * range of an unsigned short
+         *
+         * @param server TODO
+         * @param client TODO
+         * @param port TODO
+         * @param flags TODO
+         */
+        // TODO: why is this ?
+        TeredoInfo(Inet4Address server, Inet4Address client, int port, int flags) {
+            Validate.isTrue((port >= 0) && (port <= 0xffff),
+                String.format("port '%s' is out of range (0 <= port <= 0xffff)", port));
+            Validate.isTrue((flags >= 0) && (flags <= 0xffff),
+                String.format("flags '%s' is out of range (0 <= flags <= 0xffff)", flags));
+
+            this.server = Objects.firstNonNull(server, ANY4);
+            this.client = Objects.firstNonNull(client, ANY4);
+            this.port = port;
+            this.flags = flags;
+        }
+
+        Inet4Address getServer() {
+            return server;
+        }
+
+        Inet4Address getClient() {
+            return client;
+        }
+
+        int getPort() {
+            return port;
+        }
+
+        int getFlags() {
+            return flags;
+        }
+    }
 }

@@ -58,62 +58,6 @@ import java.util.List;
  */
 class UriComponent {
 
-    // TODO rewrite to use masks and not lookup tables
-    /**
-     * The URI component type.
-     */
-    enum Type {
-
-        /**
-         * ALPHA / DIGIT / "-" / "." / "_" / "~" characters
-         */
-        UNRESERVED,
-        /**
-         * The URI scheme component type.
-         */
-        SCHEME,
-        /**
-         * The URI authority component type.
-         */
-        AUTHORITY,
-        /**
-         * The URI user info component type.
-         */
-        USER_INFO,
-        /**
-         * The URI host component type.
-         */
-        HOST,
-        /**
-         * The URI port component type.
-         */
-        PORT,
-        /**
-         * The URI path component type.
-         */
-        PATH,
-        /**
-         * The URI path component type that is a path segment.
-         */
-        PATH_SEGMENT,
-        /**
-         * The URI path component type that is a matrix parameter.
-         */
-        MATRIX_PARAM,
-        /**
-         * The URI query component type.
-         */
-        QUERY,
-        /**
-         * The URI query component type that is a query parameter.
-         */
-        QUERY_PARAM,
-        /**
-         * The URI fragment component type.
-         */
-        FRAGMENT,
-    }
-
     private UriComponent() {
     }
 
@@ -886,5 +830,61 @@ class UriComponent {
      */
     static boolean isHexCharacter(char c) {
         return c < 128 && HEX_TABLE[c] != -1;
+    }
+
+    // TODO rewrite to use masks and not lookup tables
+    /**
+     * The URI component type.
+     */
+    enum Type {
+
+        /**
+         * ALPHA / DIGIT / "-" / "." / "_" / "~" characters.
+         */
+        UNRESERVED,
+        /**
+         * The URI scheme component type.
+         */
+        SCHEME,
+        /**
+         * The URI authority component type.
+         */
+        AUTHORITY,
+        /**
+         * The URI user info component type.
+         */
+        USER_INFO,
+        /**
+         * The URI host component type.
+         */
+        HOST,
+        /**
+         * The URI port component type.
+         */
+        PORT,
+        /**
+         * The URI path component type.
+         */
+        PATH,
+        /**
+         * The URI path component type that is a path segment.
+         */
+        PATH_SEGMENT,
+        /**
+         * The URI path component type that is a matrix parameter.
+         */
+        MATRIX_PARAM,
+        /**
+         * The URI query component type.
+         */
+        QUERY,
+        /**
+         * The URI query component type that is a query parameter.
+         */
+        QUERY_PARAM,
+        /**
+         * The URI fragment component type.
+         */
+        FRAGMENT,
     }
 }

@@ -40,14 +40,14 @@
 package de.weltraumschaf.commons.uri;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 /**
- * An implementation of {@code  MultivaluedMap} where keys and values are
- * instances of String.
+ * An implementation of {@code  MultivaluedMap} where keys and values are instances of String.
  * <p>
- * This map has an additional ability to instantiate classes using the
- * individual string values as a constructor parameters.
+ * This map has an additional ability to instantiate classes using the individual string values as a constructor
+ * parameters.
  * </p>
  *
  * @author Paul Sandoz
@@ -57,35 +57,39 @@ final class MultivaluedStringMap extends MultivaluedHashMap<String, String> {
 
     static final long serialVersionUID = -6052320403766368902L;
 
-     MultivaluedStringMap(MultivaluedMap<? extends String, ? extends String> map) {
+    MultivaluedStringMap(MultivaluedMap<? extends String, ? extends String> map) {
         super(map);
     }
 
-     MultivaluedStringMap(int initialCapacity, float loadFactor) {
+    MultivaluedStringMap(int initialCapacity, float loadFactor) {
         super(initialCapacity, loadFactor);
     }
 
-     MultivaluedStringMap(int initialCapacity) {
+    MultivaluedStringMap(int initialCapacity) {
         super(initialCapacity);
     }
 
-     MultivaluedStringMap() {
+    MultivaluedStringMap() {
         super();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void addFirstNull(List<String> values) {
         values.add("");
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void addNull(List<String> values) {
         values.add(0, "");
     }
 
-     final <A> A getFirst(String key, Class<A> type) {
+    <A> A getFirst(String key, Class<A> type) {
         final String value = getFirst(key);
         if (value == null) {
             return null;
@@ -93,19 +97,24 @@ final class MultivaluedStringMap extends MultivaluedHashMap<String, String> {
         Constructor<A> c = null;
         try {
             c = type.getConstructor(String.class);
-        } catch (Exception ex) {
+        } catch (final NoSuchMethodException | SecurityException ex) {
             throw new IllegalArgumentException(type.getName() + " has no String constructor", ex);
         }
         A retVal = null;
         try {
             retVal = c.newInstance(value);
-        } catch (Exception ex) {
+        } catch (final InstantiationException
+            | IllegalAccessException
+            | IllegalArgumentException
+            | InvocationTargetException ex)
+        {
+            // Ignore this.
         }
         return retVal;
     }
 
     @SuppressWarnings("unchecked")
-     final <A> A getFirst(String key, A defaultValue) {
+    <A> A getFirst(String key, A defaultValue) {
         final String value = getFirst(key);
         if (value == null) {
             return defaultValue;
@@ -116,13 +125,18 @@ final class MultivaluedStringMap extends MultivaluedHashMap<String, String> {
         Constructor<A> c = null;
         try {
             c = type.getConstructor(String.class);
-        } catch (Exception ex) {
+        } catch (final NoSuchMethodException | SecurityException ex) {
             throw new IllegalArgumentException(type.getName() + " has no String constructor", ex);
         }
         A retVal = defaultValue;
         try {
             retVal = c.newInstance(value);
-        } catch (Exception ex) {
+        } catch (final InstantiationException
+            | IllegalAccessException
+            | IllegalArgumentException
+            | InvocationTargetException ex)
+        {
+            // Ignore this.
         }
         return retVal;
     }

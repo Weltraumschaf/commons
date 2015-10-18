@@ -437,7 +437,7 @@ public final class Validate {
     }
 
     /**
-     * TODO Write comment
+     * TODO Write comment.
      *
      * @since 2.0
      * @param start TODO Write comment
@@ -458,7 +458,7 @@ public final class Validate {
     }
 
     /**
-     * TODO Write comment
+     * TODO Write comment.
      *
      * @since 2.0
      * @param index TODO Write comment

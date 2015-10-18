@@ -26,5 +26,5 @@ sloccount --duplicates --wide --details --append \
     commons-testing/src/main/java \
     commons-time/src/main/java \
     commons-uri/src/main/java \
-    commons-validate/src/main/java > "${TARGET}"
-sloccount --cached
+    commons-validate/src/main/java 
+sloccount --cached > "${TARGET}"

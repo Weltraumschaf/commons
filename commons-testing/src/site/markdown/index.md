@@ -7,10 +7,12 @@ This module contains utilities and helpers for unit testing.
 `CapturingPrintStream` is a  class for capturing print stream which  may be used
 to capture the output printed to `System.out` or `System.err`.
 
-    final CapturingPrintStream out = new CapturingPrintStream();
-    System.setOut(out);
-    System.out.print("hello, world");
-    final String output = out.getCapturedOutput();
+```
+final CapturingPrintStream out = new CapturingPrintStream();
+System.setOut(out);
+System.out.print("hello, world");
+final String output = out.getCapturedOutput();
+```
 
 Same    way    you    can    redirect    the    error    output    by    setting
 `System.setErr(PrintStream)`. Usualy  this is  helpful if  you have  legacy code
@@ -19,43 +21,98 @@ can capture that output and inspect it.
 
 So essentially `CapturingPrintStream` is a convenient shorthand for:
 
-    final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(out));
-    final String content = out.toString();
+```
+final ByteArrayOutputStream out = new ByteArrayOutputStream();
+System.setOut(new PrintStream(out));
+final String content = out.toString();
+```
 
 ## JUnit Rules
 
 This module provides custom rules for [JUnit][junit].
 For more information about JUnit rules see [the documentation][junit-rules].
 
-### @Rule CapturedOutput
+### CapturedOutput Rule
 
 This  rule  utilizes the  `CapturingPrintStream`  to  redirect `System.out`  and
 `System.err` before each test method  invocation and restores them afterwards to
 the origins. The rule also provides  methods to set expectation matchers for the
 captured string.
 
-    public class OutputTest {
+```
+public class OutputTest {
 
-        @Rule
-        public final CapturedOutput output = new CapturedOutput();
+    @Rule
+    public final CapturedOutput output = new CapturedOutput();
 
-        @Test
-        public void captureOut() {
-            output.expectOut("foobar");
-            output.expectOut(not("snafu"));
+    @Test
+    public void captureOut() {
+        output.expectOut("foobar");
+        output.expectOut(not("snafu"));
 
-            System.out.print("foobar");
-        }
-
-        @Test
-        public void captureErr() {
-            output.expectErr("foobar");
-            output.expectErr(not("snafu"));
-
-            System.err.print("foobar");
-        }
+        System.out.print("foobar");
     }
+
+    @Test
+    public void captureErr() {
+        output.expectErr("foobar");
+        output.expectErr(not("snafu"));
+
+        System.err.print("foobar");
+    }
+}
+```
+
+### JavaDefaultLocale Rule
+
+Sometime you have legacy code which relies internally on the java default locale
+and you can't inject or change this from your test code. This is a big pain if you
+have machines with different locales (e.g. de_DE as developer machine and en_US as
+CI machine). A common approach is to set the default locale before the tests to a
+fix one. But you have to remember to set it back to not influence other code which
+may rely on that locale:
+
+```
+public class TestSomething {
+
+    private Locale backup;
+    
+    @Before
+    public void setLocale() {
+        backup = Locale.getDefault();
+        Locale.setDefault(Locale.ENGLISH);
+    }
+    
+    @After
+    public void restoreLocale9) {
+        Locale.setDefault(backup);    
+    }
+
+    @Test
+    public void testSomeThing() {
+        ...
+    }
+}
+```
+
+But this approach is tedious and error prone. It is easy to forget resetting.
+Also it is code duplication and violates DRY if you do this in all ou tests.
+The `JavaDefaultLocale` is for doing this tedious stuff for you:
+
+```
+public class TestSomething {
+
+    @Rule 
+    public final JavaDefaultLocale localeRule = new JavaDefaultLocale(Locale.ENGLISH);
+    
+    @Test
+    public void testSomeThing() {
+        ...
+    }
+}
+```
+
+### Repeater Rule
 
 ## Custom Hamcrest Matchers
 
@@ -68,31 +125,33 @@ application module).
 
 Example:
 
-    enum ExitCodeImpl implements ExitCode {
-        FOO(0), BAR(1), BAZ(2);
+```
+enum ExitCodeImpl implements ExitCode {
+    FOO(0), BAR(1), BAZ(2);
 
-        private final int code;
+    private final int code;
 
-        private ExitCodeImpl(final int code) {
-            this.code = code;
-        }
-
-        @Override
-        public int getCode() {
-            return code;
-        }
+    private ExitCodeImpl(final int code) {
+        this.code = code;
     }
 
-    public class MyTest {
-
-        @Test
-        public void throwsFooException() {
-            final ApplicationException ex =
-                new ApplicationException(ExitCodeImpl.FOO, "foo");
-
-            assertThat(ex, hasExitCode(ExitCodeImpl.FOO));
-        }
+    @Override
+    public int getCode() {
+        return code;
     }
+}
+
+public class MyTest {
+
+    @Test
+    public void throwsFooException() {
+        final ApplicationException ex =
+            new ApplicationException(ExitCodeImpl.FOO, "foo");
+
+        assertThat(ex, hasExitCode(ExitCodeImpl.FOO));
+    }
+}
+```
 
 [junit]:        http://junit.org/
 [junit-rules]:  https://github.com/junit-team/junit/wiki/Rules

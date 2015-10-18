@@ -27,12 +27,19 @@ public class Repeater_WithRunTimesTest {
 
     private final Repeater sut = new Repeater();
 
-    private static Description createDescriptionWithoutAnnotations() {
-        return Description.createTestDescription(Repeater_WithRunTimesTest.class, "foo");
-    }
+    private static Description createDescriptionWithRepeatAnnotation(final int times) {
+        return Description.createTestDescription(Repeater_WithRunTimesTest.class, "foo", new RunTimes() {
 
-    private static Description createDescriptionWithRepeatAnnotation(final int ruleValue) {
-        return Description.createTestDescription(Repeater_WithRunTimesTest.class, "foo", new RuleStub(ruleValue));
+            @Override
+            public int value() {
+                return times;
+            }
+
+            @Override
+            public Class<? extends Annotation> annotationType() {
+                return RunTimes.class;
+            }
+        });
     }
 
     @Test
@@ -85,31 +92,6 @@ public class Repeater_WithRunTimesTest {
         }
 
         assertThat(base.getEvaluatedCount(), is(20));
-    }
-
-    /**
-     * Stubs the annotation which will be given by JVM runtime.
-     */
-    @SuppressWarnings("all")
-    // Suppress warning about implementing Repeat annotation
-    private static class RuleStub implements Annotation, RunTimes {
-
-        private final int value;
-
-        RuleStub(final int value) {
-            this.value = value;
-        }
-
-        @Override
-        public int value() {
-            return value;
-        }
-
-        @Override
-        public Class<? extends Annotation> annotationType() {
-            return RunTimes.class;
-        }
-
     }
 
     /**

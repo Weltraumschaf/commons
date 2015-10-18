@@ -27,8 +27,19 @@ public class Repeater_RepeatUntilSuccess {
 
     private final Repeater sut = new Repeater();
 
-    private static Description createDescriptionWithRepeatUntilSuccessAnnotation(final int ruleValue) {
-        return Description.createTestDescription(Repeater_RepeatUntilSuccess.class, "foo", new RuleStub(ruleValue));
+    private static Description createDescriptionWithRepeatUntilSuccessAnnotation(final int times) {
+        return Description.createTestDescription(Repeater_RepeatUntilSuccess.class, "foo", new RunMaxTimes() {
+
+            @Override
+            public int value() {
+                return times;
+            }
+
+            @Override
+            public Class<? extends Annotation> annotationType() {
+                return RunMaxTimes.class;
+            }
+        });
     }
 
     @Test
@@ -70,30 +81,6 @@ public class Repeater_RepeatUntilSuccess {
             assertThat(e.getMessage(), startsWith("There were 5 (100.00 %) errors in 5 runs:"));
         }
         assertThat(base.getEvaluatedCount(), is(5));
-    }
-
-    /**
-     * Stubs the annotation which will be given by JVM runtime.
-     */
-    @SuppressWarnings("all")
-    // Suppress warning about implementing Repeat annotation
-    private static class RuleStub implements Annotation, RunMaxTimes {
-
-        private final int value;
-
-        RuleStub(final int value) {
-            this.value = value;
-        }
-
-        @Override
-        public int value() {
-            return value;
-        }
-
-        @Override
-        public Class<? extends Annotation> annotationType() {
-            return RunMaxTimes.class;
-        }
     }
 
     /**

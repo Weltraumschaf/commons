@@ -26,6 +26,7 @@ So essentially `CapturingPrintStream` is a convenient shorthand for:
 ## JUnit Rules
 
 This module provides custom rules for [JUnit][junit].
+For more information about JUnit rules see [the documentation][junit-rules].
 
 ### @Rule CapturedOutput
 
@@ -55,8 +56,6 @@ captured string.
             System.err.print("foobar");
         }
     }
-
-For more information about JUnit rules see [the documentation][junit-rules].
 
 ## Custom Hamcrest Matchers
 

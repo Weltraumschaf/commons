@@ -9,7 +9,7 @@
  *
  * Copyright (C) 2012 "Sven Strittmatter" &lt;weltraumschaf@googlemail.com&gt;
  */
-package de.weltraumschaf.commons.testing;
+package de.weltraumschaf.commons.testing.rules;
 
 import de.weltraumschaf.commons.application.IOStreams;
 import java.io.UnsupportedEncodingException;

@@ -2,7 +2,9 @@
 
 This module contains utilities and helpers for unit testing.
 
-## Capturing Print Stream
+## General Helpers
+
+### Capturing Print Stream
 
 `CapturingPrintStream` is a  class for capturing print stream which  may be used
 to capture the output printed to `System.out` or `System.err`.
@@ -26,6 +28,10 @@ final ByteArrayOutputStream out = new ByteArrayOutputStream();
 System.setOut(new PrintStream(out));
 final String content = out.toString();
 ```
+
+### DelayedRepeater
+
+TODO
 
 ## JUnit Rules
 
@@ -65,12 +71,13 @@ public class OutputTest {
 
 ### JavaDefaultLocale Rule
 
-Sometime you have legacy code which relies internally on the java default locale
-and you can't inject or change this from your test code. This is a big pain if you
-have machines with different locales (e.g. de_DE as developer machine and en_US as
-CI machine). A common approach is to set the default locale before the tests to a
-fix one. But you have to remember to set it back to not influence other code which
-may rely on that locale:
+Sometime  you have  legacy  code which  relies internally  on  the java  default
+locale and you  can't inject or change this  from your test code. This  is a big
+pain  if you  have  machines with  different locales  (e.g.  de_DE as  developer
+machine  and en_US  as CI  machine). A  common approach  is to  set the  default
+locale before the  tests to a fix one.  But you have to remember to  set it back
+to not influence other code which may rely on that locale:
+
 
 ```
 public class TestSomething {
@@ -95,8 +102,8 @@ public class TestSomething {
 }
 ```
 
-But this approach is tedious and error prone. It is easy to forget resetting.
-Also it is code duplication and violates DRY if you do this in all ou tests.
+But this approach  is tedious and error  prone. It is easy  to forget resetting.
+Also it  is code duplication and  violates DRY if you  do this in all  ou tests.
 The `JavaDefaultLocale` is for doing this tedious stuff for you:
 
 ```
@@ -113,6 +120,77 @@ public class TestSomething {
 ```
 
 ### Repeater Rule
+
+The repeater rule executes annotated tests multiple times.
+
+#### RunTimes Annotation
+
+Sometimes you  have legacy code with  weird timing issues or  other side effects
+and the  code only does  sometimes something  wrong. Imagine: The  customer says
+every one hundred  X or so the bug  happens. But when you runt  your tests every
+thing is  fine. Then you  start hitting  the run test  button over and  over and
+BANG!, the bug  occures. But the next time  it is gone. The nyou  start to write
+loops in  your test code to  provoke the bug. But  this is not good  practice to
+add logic into your tests. (Because where are tests for this logic?)
+
+The repeat rule  is a tested helper to  do that. You add that  rule and annotate
+the tests you wanted repeatedly executed with an annoation:
+
+```
+public class TestSomething {
+
+    @Rule 
+    public final Repeater repeater = new Repeater();
+    
+    @Test
+    @RunTimes(100)
+    public void testSomeThing() {
+        ...
+    }
+}
+```
+
+#### RunMaxTimes Annotation
+
+Common pain  in the ass  are UI tests.  You have tests  which runs fine  on your
+machine and they run fine on the  CI almost always, but sometimes they fail. The
+nyou  investigate, but  they  rune fine  on  your  machine and  on  the CI.  But
+sometimes... The problem is timing: You have  to define timeouts in your UI test
+framework.  That's almost  always enough.  But  in rare  situation (heavy  load,
+solar wind,  what ever) the  timeout is not enough  and the tests  fail randomly
+without a reason.  This erodes the whole test suite  because everybody starts to
+ignore the red ci.
+
+A simple solution is: If a single UI  test fails, then start it again and see if
+fails again.  Unless everuthing is fine.  If it continues failing  then there is
+maybe a  r eal  bug. But  you don  ot wnat to  do this  manually with  the whole
+suite. For  this use  case is  the `RunMaxtimes` annotation.  In contrat  to the
+`RunTimes` annotation it  does not run the  test the given vlaue  times, it only
+runs the  test multiple  times if  it fails until  it succeds  or the  max times
+value is reached. If  one of the runs succeded the test is  marked green. If all
+runs failed the test is marked red.
+
+Example:
+
+```
+public class TestSomething {
+
+    @Rule 
+    public final Repeater repeater = new Repeater();
+    
+    @Test
+    @RunMaxTimes(3)
+    public void testSomeThing() {
+        ...
+    }
+}
+```
+
+In the example above  the test is executed one time. If  it didn't failed that's
+it. Unless the  test is repeated and  executed second time. If  it didn't failed
+that's it. Unless the  test is repeated again and executed  third and last time.
+If it failed again, then the test is  marked red. So the test is always executed
+multiple times until it succeded or the given number of tries is exhausted.
 
 ## Custom Hamcrest Matchers
 
@@ -152,6 +230,18 @@ public class MyTest {
     }
 }
 ```
+
+### HasMessage
+
+TODO
+
+### IntegerIsCloseTo
+
+TODO
+
+### LongIsCloseTo
+
+TODO
 
 [junit]:        http://junit.org/
 [junit-rules]:  https://github.com/junit-team/junit/wiki/Rules

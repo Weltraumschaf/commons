@@ -43,7 +43,6 @@ import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.security.AccessController;
 import java.util.List;
 import java.util.Map;
 

@@ -1,5 +1,6 @@
 package de.weltraumschaf.commons.testing.rules;
 
+import java.lang.annotation.Annotation;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
@@ -42,8 +43,58 @@ public final class RepeaterTest {
 
         final Statement repeeted = sut.apply(
             base,
-            Description.createTestDescription(RepeaterTest.class, "foo"));
+            Description.createTestDescription(Repeater.class, "foo"));
 
         assertThat(repeeted, is(sameInstance(base)));
+    }
+
+    @Test
+    public void hasRepeatAnnotation_withRunTimes() {
+        assertThat(
+            sut.hasRunTimesAnnotation(Description.createTestDescription(Repeater.class, "foo", new RunTimes() {
+
+                @Override
+                public int value() {
+                    return 1;
+                }
+
+                @Override
+                public Class<? extends Annotation> annotationType() {
+                    return RunTimes.class;
+                }
+            })),
+            is(true));
+    }
+
+    @Test
+    public void hasRepeatAnnotation_withNoRunTimes() {
+        assertThat(
+            sut.hasRunTimesAnnotation(Description.createTestDescription(Repeater.class, "foo")),
+            is(false));
+    }
+
+    @Test
+    public void hasRepeatAnnotation_withRunMaxTimes() {
+        assertThat(
+            sut.hasRunMaxTimesAnnotation(Description.createTestDescription(Repeater.class, "foo", new RunMaxTimes() {
+
+                @Override
+                public int value() {
+                    return RunMaxTimes.DEFAULT_MAX_TIMES;
+                }
+
+                @Override
+                public Class<? extends Annotation> annotationType() {
+                    return RunMaxTimes.class;
+                }
+            })),
+            is(true));
+    }
+
+    @Test
+    public void hasRepeatAnnotation_withNoRunMaxTimes() {
+        assertThat(
+            sut.hasRunMaxTimesAnnotation(Description.createTestDescription(Repeater.class, "foo")),
+            is(false));
     }
 }

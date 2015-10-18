@@ -74,13 +74,13 @@ public final class Repeater implements TestRule {
         Validate.notNull(base, "base");
         Validate.notNull(description, "description");
 
-        if (hasRepeatAnnotation(description)) {
+        if (hasRunTimesAnnotation(description)) {
             return new RepeatStatement(
                 description.getAnnotation(RunTimes.class).value(),
                 base);
         }
 
-        if (hasRepeatUntilSuccessAnnotation(description)) {
+        if (hasRunMaxTimesAnnotation(description)) {
             return new RepeatUntilSuccessStatement(
                 description.getAnnotation(RunMaxTimes.class).value(),
                 base);
@@ -95,7 +95,7 @@ public final class Repeater implements TestRule {
      * @param description must not be {@code null}
      * @return {@code true} if present, else {@code false}
      */
-     boolean hasRepeatAnnotation(final Description description) {
+     boolean hasRunTimesAnnotation(final Description description) {
         return null != description.getAnnotation(RunTimes.class);
     }
 
@@ -105,7 +105,7 @@ public final class Repeater implements TestRule {
      * @param description must not be {@code null}
      * @return {@code true} if present, else {@code false}
      */
-    boolean hasRepeatUntilSuccessAnnotation(final Description description) {
+    boolean hasRunMaxTimesAnnotation(final Description description) {
         return null != description.getAnnotation(RunMaxTimes.class);
     }
 

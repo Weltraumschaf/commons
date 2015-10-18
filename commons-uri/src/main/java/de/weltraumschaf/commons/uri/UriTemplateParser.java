@@ -60,14 +60,14 @@ class UriTemplateParser {
     private static final Set<Character> RESERVED_REGEX_CHARACTERS = initReserved();
 
     private static Set<Character> initReserved() {
-        char[] reserved = {
+        final char[] reserved = {
                 '.', '^', '&', '!',
                 '?', '-', ':', '<',
                 '(', '[', '$', '=',
                 ')', ']', ',', '>',
                 '*', '+', '|'};
 
-        Set<Character> s = new HashSet<>(reserved.length);
+        final Set<Character> s = new HashSet<>(reserved.length);
         for (char c : reserved) {
             s.add(c);
         }
@@ -181,7 +181,7 @@ class UriTemplateParser {
             return EMPTY_INT_ARRAY;
         }
 
-        int[] indexes = new int[names.size() + 1];
+        final int[] indexes = new int[names.size() + 1];
         indexes[0] = 1;
         for (int i = 1; i < indexes.length; i++) {
             indexes[i] = indexes[i - 1] + groupCounts.get(i - 1);
@@ -225,7 +225,7 @@ class UriTemplateParser {
     private void parse(final CharacterIterator ci) {
         try {
             while (ci.hasNext()) {
-                char c = ci.next();
+                final char c = ci.next();
                 if (c == '{') {
                     processLiteralCharacters();
                     parseName(ci);
@@ -245,13 +245,13 @@ class UriTemplateParser {
         if (literalCharactersBuffer.length() > 0) {
             literalCharacters += literalCharactersBuffer.length();
 
-            String s = encodeLiteralCharacters(literalCharactersBuffer.toString());
+            final String s = encodeLiteralCharacters(literalCharactersBuffer.toString());
 
             normalizedTemplate.append(s);
 
             // Escape if reserved regex character
             for (int i = 0; i < s.length(); i++) {
-                char c = s.charAt(i);
+                final char c = s.charAt(i);
                 if (RESERVED_REGEX_CHARACTERS.contains(c)) {
                     regex.append("\\");
                     regex.append(c);
@@ -273,7 +273,7 @@ class UriTemplateParser {
     private final static String[] HEX_TO_UPPERCASE_REGEX = initHexToUpperCaseRegex();
 
     private static String[] initHexToUpperCaseRegex() {
-        String[] table = new String[0x80];
+        final String[] table = new String[0x80];
         for (int i = 0; i < table.length; i++) {
             table[i] = String.valueOf((char) i);
         }
@@ -294,7 +294,7 @@ class UriTemplateParser {
     private void parseName(final CharacterIterator ci) {
         char c = consumeWhiteSpace(ci);
 
-        StringBuilder nameBuffer = new StringBuilder();
+        final StringBuilder nameBuffer = new StringBuilder();
         if (Character.isLetterOrDigit(c) || c == '_') {
             // Template name character
             nameBuffer.append(c);
@@ -336,14 +336,14 @@ class UriTemplateParser {
                         c, ci.pos(), template));
             }
         }
-        String name = nameBuffer.toString();
+        final String name = nameBuffer.toString();
         names.add(name);
 
         try {
             if (nameRegexString.length() > 0) {
                 numOfExplicitRegexes++;
             }
-            Pattern namePattern = (nameRegexString.length() == 0)
+            final Pattern namePattern = (nameRegexString.length() == 0)
                     ? TEMPLATE_VALUE_PATTERN : Pattern.compile(nameRegexString);
             if (nameToPattern.containsKey(name)) {
                 if (!nameToPattern.get(name).equals(namePattern)) {
@@ -356,8 +356,8 @@ class UriTemplateParser {
             }
 
             // Determine group count of pattern
-            Matcher m = namePattern.matcher("");
-            int g = m.groupCount();
+            final Matcher m = namePattern.matcher("");
+            final int g = m.groupCount();
             groupCounts.add(g + 1);
 
             regex.append('(').
@@ -374,11 +374,11 @@ class UriTemplateParser {
     }
 
     private String parseRegex(final CharacterIterator ci) {
-        StringBuilder regexBuffer = new StringBuilder();
+        final StringBuilder regexBuffer = new StringBuilder();
 
         int braceCount = 1;
         while (true) {
-            char c = ci.next();
+            final char c = ci.next();
             if (c == '{') {
                 braceCount++;
             } else if (c == '}') {

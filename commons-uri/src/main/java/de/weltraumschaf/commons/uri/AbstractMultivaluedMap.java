@@ -89,7 +89,7 @@ abstract class AbstractMultivaluedMap<K, V> implements MultivaluedMap<K, V> {
      */
     @Override
     public final void putSingle(K key, V value) {
-        List<V> values = getValues(key);
+        final List<V> values = getValues(key);
 
         values.clear();
         if (value != null) {
@@ -139,7 +139,7 @@ abstract class AbstractMultivaluedMap<K, V> implements MultivaluedMap<K, V> {
      */
     @Override
     public final void add(K key, V value) {
-        List<V> values = getValues(key);
+        final List<V> values = getValues(key);
 
         if (value != null) {
             values.add(value);
@@ -172,7 +172,7 @@ abstract class AbstractMultivaluedMap<K, V> implements MultivaluedMap<K, V> {
             return;
         }
 
-        List<V> values = getValues(key);
+        final List<V> values = getValues(key);
 
         for (V value : newValues) {
             if (value != null) {
@@ -206,7 +206,7 @@ abstract class AbstractMultivaluedMap<K, V> implements MultivaluedMap<K, V> {
             return;
         }
 
-        List<V> values = getValues(key);
+        final List<V> values = getValues(key);
 
         for (V value : valueList) {
             if (value != null) {
@@ -222,7 +222,7 @@ abstract class AbstractMultivaluedMap<K, V> implements MultivaluedMap<K, V> {
      */
     @Override
     public final V getFirst(K key) {
-        List<V> values = store.get(key);
+        final List<V> values = store.get(key);
         if (values != null && values.size() > 0) {
             return values.get(0);
         } else {
@@ -242,7 +242,7 @@ abstract class AbstractMultivaluedMap<K, V> implements MultivaluedMap<K, V> {
      */
     @Override
     public final void addFirst(K key, V value) {
-        List<V> values = getValues(key);
+        final List<V> values = getValues(key);
 
         if (value != null) {
             values.add(0, value);
@@ -409,20 +409,25 @@ abstract class AbstractMultivaluedMap<K, V> implements MultivaluedMap<K, V> {
         if (this == omap) {
             return true;
         }
+
         if (!keySet().equals(omap.keySet())) {
             return false;
         }
-        for (Map.Entry<K, List<V>> e : entrySet()) {
-            List<V> olist = omap.get(e.getKey());
+
+        for (final Map.Entry<K, List<V>> e : entrySet()) {
+            final List<V> olist = omap.get(e.getKey());
+
             if (e.getValue().size() != olist.size()) {
                 return false;
             }
-            for (V v : e.getValue()) {
+
+            for (final V v : e.getValue()) {
                 if (!olist.contains(v)) {
                     return false;
                 }
             }
         }
+
         return true;
     }
 }

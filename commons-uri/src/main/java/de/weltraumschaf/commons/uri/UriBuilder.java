@@ -94,14 +94,18 @@ public final class UriBuilder extends BaseUriBuilder {
         this.fragment = that.fragment;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("CloneDoesntCallSuperClone")
     @Override
     public UriBuilder clone() {
         return new UriBuilder(this);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder uri(URI uri) {
         if (uri == null) {
@@ -163,7 +167,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder uri(String uriTemplate) {
         if (uriTemplate == null) {
@@ -248,7 +254,9 @@ public final class UriBuilder extends BaseUriBuilder {
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder scheme(String scheme) {
         if (scheme != null) {
@@ -260,25 +268,27 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder schemeSpecificPart(String ssp) {
         if (ssp == null) {
             throw new IllegalArgumentException("Supplied scheme-specific part parameter is null.");
         }
 
-        UriParser parser = new UriParser((scheme != null) ? scheme + ":" + ssp : ssp);
+        final UriParser parser = new UriParser((scheme != null) ? scheme + ":" + ssp : ssp);
         parser.parse();
 
         if (parser.getScheme() != null && !parser.getScheme().equals(scheme)) {
             throw new IllegalStateException(
-                    String.format("Supplied scheme-specific URI part \"%s\" contains unexpected URI Scheme component: %s.",
-                            ssp, parser.getScheme()));
+                String.format("Supplied scheme-specific URI part \"%s\" contains unexpected URI Scheme component: %s.",
+                    ssp, parser.getScheme()));
         }
         if (parser.getFragment() != null) {
             throw new IllegalStateException(
-                    String.format("Supplied scheme-specific URI part \"%s\" contains URI Fragment component: %s.",
-                            ssp, parser.getFragment()));
+                String.format("Supplied scheme-specific URI part \"%s\" contains URI Fragment component: %s.",
+                    ssp, parser.getFragment()));
         }
 
         schemeSpecificPart(parser);
@@ -286,16 +296,20 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder userInfo(String ui) {
         checkSsp();
         this.userInfo = (ui != null)
-                ? encode(ui, UriComponent.Type.USER_INFO) : null;
+            ? encode(ui, UriComponent.Type.USER_INFO) : null;
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder host(String host) {
         checkSsp();
@@ -315,7 +329,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder port(int port) {
         checkSsp();
@@ -328,7 +344,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder replacePath(String path) {
         checkSsp();
@@ -339,7 +357,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder path(String path) {
         checkSsp();
@@ -347,7 +367,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @SuppressWarnings("unchecked")
     @Override
     public BaseUriBuilder path(Class resource) throws IllegalArgumentException {
@@ -356,16 +378,15 @@ public final class UriBuilder extends BaseUriBuilder {
             throw new IllegalArgumentException("Parameter 'resource' must not be null!");
         }
 
-        Path p = Path.class.cast(resource.getAnnotation(Path.class));
+        final Path p = Path.class.cast(resource.getAnnotation(Path.class));
         if (p == null) {
             throw new IllegalArgumentException(
-                    String.format("The class, %s is not annotated with @Path.", resource));
+                String.format("The class, %s is not annotated with @Path.", resource));
         }
         appendPath(p);
         return this;
     }
 
-    /** {@inheritDoc} */
     @Override
     public UriBuilder path(Method method) {
         checkSsp();
@@ -377,15 +398,17 @@ public final class UriBuilder extends BaseUriBuilder {
     }
 
     private Path getPath(AnnotatedElement ae) {
-        Path p = ae.getAnnotation(Path.class);
+        final Path p = ae.getAnnotation(Path.class);
         if (p == null) {
             throw new IllegalArgumentException(
-                    String.format("The annotated element \"{0}\" is not annotated with @Path.", ae));
+                String.format("The annotated element \"{0}\" is not annotated with @Path.", ae));
         }
         return p;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder segment(String... segments) throws IllegalArgumentException {
         checkSsp();
@@ -399,7 +422,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder replaceMatrix(String matrix) {
         checkSsp();
@@ -420,7 +445,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder matrixParam(String name, Object... values) {
         checkSsp();
@@ -460,7 +487,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder replaceMatrixParam(String name, Object... values) {
         checkSsp();
@@ -495,7 +524,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder replaceQuery(String query) {
         checkSsp();
@@ -506,7 +537,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder queryParam(String name, Object... values) {
         checkSsp();
@@ -546,7 +579,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder replaceQueryParam(String name, Object... values) {
         checkSsp();
@@ -573,7 +608,9 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder resolveTemplate(String name, Object value) throws IllegalArgumentException {
         resolveTemplate(name, value, true, true);
@@ -581,21 +618,25 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder resolveTemplate(String name, Object value, boolean encodeSlashInPath) {
         resolveTemplate(name, value, true, encodeSlashInPath);
         return this;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder resolveTemplateFromEncoded(String name, Object value) {
         resolveTemplate(name, value, false, false);
         return this;
     }
 
-    private UriBuilder resolveTemplate(String name, Object value, boolean encode, boolean encodeSlashInPath) {
+    private UriBuilder resolveTemplate(final String name, Object value, final boolean encode, final boolean encodeSlashInPath) {
         if (name == null) {
             throw new IllegalArgumentException("Parameter 'name' must not be null!");
         }
@@ -603,37 +644,32 @@ public final class UriBuilder extends BaseUriBuilder {
             throw new IllegalArgumentException("Parameter 'value' must not be null!");
         }
 
-        Map<String, Object> templateValues = Maps.newHashMap();
+        final Map<String, Object> templateValues = Maps.newHashMap();
         templateValues.put(name, value);
         resolveTemplates(templateValues, encode, encodeSlashInPath);
         return this;
     }
 
-
-    /** {@inheritDoc} */
     @Override
-    public UriBuilder resolveTemplates(Map<String, Object> templateValues) throws IllegalArgumentException {
+    public UriBuilder resolveTemplates(final Map<String, Object> templateValues) throws IllegalArgumentException {
         resolveTemplates(templateValues, true, true);
         return this;
     }
 
-    /** {@inheritDoc} */
     @Override
-    public UriBuilder resolveTemplates(Map<String, Object> templateValues, boolean encodeSlashInPath) throws
-            IllegalArgumentException {
+    public UriBuilder resolveTemplates(final Map<String, Object> templateValues, final boolean encodeSlashInPath) throws
+        IllegalArgumentException {
         resolveTemplates(templateValues, true, encodeSlashInPath);
         return this;
     }
 
-    /** {@inheritDoc} */
     @Override
-    public UriBuilder resolveTemplatesFromEncoded(Map<String, Object> templateValues) {
+    public UriBuilder resolveTemplatesFromEncoded(final Map<String, Object> templateValues) {
         resolveTemplates(templateValues, false, false);
         return this;
     }
 
-
-    private UriBuilder resolveTemplates(Map<String, Object> templateValues, boolean encode, boolean encodeSlashInPath) {
+    private UriBuilder resolveTemplates(final Map<String, Object> templateValues, final boolean encode, final boolean encodeSlashInPath) {
         if (templateValues == null) {
             throw new IllegalArgumentException("Parameter 'templateValues' must not be null!");
         } else {
@@ -657,7 +693,7 @@ public final class UriBuilder extends BaseUriBuilder {
         path.append(newPath);
 
         final String newQuery = UriTemplate.resolveTemplateValues(UriComponent.Type.QUERY_PARAM, query.toString(), encode,
-                templateValues);
+            templateValues);
         query.setLength(0);
         query.append(newQuery);
 
@@ -666,13 +702,14 @@ public final class UriBuilder extends BaseUriBuilder {
         return this;
     }
 
-
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public UriBuilder fragment(String fragment) {
         this.fragment = (fragment != null)
-                ? encode(fragment, UriComponent.Type.FRAGMENT)
-                : null;
+            ? encode(fragment, UriComponent.Type.FRAGMENT)
+            : null;
         return this;
     }
 
@@ -706,7 +743,7 @@ public final class UriBuilder extends BaseUriBuilder {
         encodeMatrix();
 
         segments = encode(segments,
-                (isSegment) ? UriComponent.Type.PATH_SEGMENT : UriComponent.Type.PATH);
+            (isSegment) ? UriComponent.Type.PATH_SEGMENT : UriComponent.Type.PATH);
 
         final boolean pathEndsInSlash = path.length() > 0 && path.charAt(path.length() - 1) == '/';
         final boolean segmentStartsWithSlash = segments.charAt(0) == '/';
@@ -729,7 +766,7 @@ public final class UriBuilder extends BaseUriBuilder {
         }
 
         for (Map.Entry<String, List<String>> e : matrixParams.entrySet()) {
-            String name = e.getKey();
+            final String name = e.getKey();
 
             for (String value : e.getValue()) {
                 path.append(';').append(name);
@@ -759,25 +796,22 @@ public final class UriBuilder extends BaseUriBuilder {
         queryParams = null;
     }
 
-    private String encode(String s, UriComponent.Type type) {
+    private String encode(final String s, UriComponent.Type type) {
         return UriComponent.contextualEncode(s, type, true);
     }
 
-    /** {@inheritDoc} */
     @Override
-    public URI buildFromMap(Map<String, ?> values) {
+    public URI buildFromMap(final Map<String, ?> values) {
         return _buildFromMap(true, true, values);
     }
 
-    /** {@inheritDoc} */
     @Override
-    public URI buildFromMap(Map<String, ?> values, boolean encodeSlashInPath) {
+    public URI buildFromMap(final Map<String, ?> values, boolean encodeSlashInPath) {
         return _buildFromMap(true, encodeSlashInPath, values);
     }
 
-    /** {@inheritDoc} */
     @Override
-    public URI buildFromEncodedMap(Map<String, ?> values) throws IllegalArgumentException, UriBuilderException {
+    public URI buildFromEncodedMap(final Map<String, ?> values) throws IllegalArgumentException, UriBuilderException {
         return _buildFromMap(false, false, values);
     }
 
@@ -789,32 +823,37 @@ public final class UriBuilder extends BaseUriBuilder {
         encodeMatrix();
         encodeQuery();
 
-        String uri = UriTemplate.createURI(
-                scheme, authority,
-                userInfo, host, port,
-                path.toString(), query.toString(), fragment, values, encode, encodeSlashInPath);
+        final String uri = UriTemplate.createURI(
+            scheme, authority,
+            userInfo, host, port,
+            path.toString(), query.toString(), fragment, values, encode, encodeSlashInPath);
         return createURI(uri);
     }
 
-    /** {@inheritDoc} */
     @Override
-    public URI build(Object... values) {
+    public URI build(final Object... values) {
         return _build(true, true, values);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public URI build(Object[] values, boolean encodeSlashInPath) {
         return _build(true, encodeSlashInPath, values);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public URI buildFromEncoded(Object... values) {
         return _build(false, false, values);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toTemplate() {
         encodeMatrix();
@@ -886,10 +925,10 @@ public final class UriBuilder extends BaseUriBuilder {
         encodeMatrix();
         encodeQuery();
 
-        String uri = UriTemplate.createURI(
-                scheme, authority,
-                userInfo, host, port,
-                path.toString(), query.toString(), fragment, values, encode, encodeSlashInPath);
+        final String uri = UriTemplate.createURI(
+            scheme, authority,
+            userInfo, host, port,
+            path.toString(), query.toString(), fragment, values, encode, encodeSlashInPath);
         return createURI(uri);
     }
 

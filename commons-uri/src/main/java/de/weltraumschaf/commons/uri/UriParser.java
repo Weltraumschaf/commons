@@ -100,7 +100,7 @@ final class UriParser {
         int curlyBracketsCount = 0;
         int squareBracketsCount = 0;
 
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
 
         boolean endOfInput = false;
         Character c = ci.current();
@@ -151,7 +151,7 @@ final class UriParser {
             return;
         }
         ci.next();
-        String comp = parseComponent(":/?#", true);
+        final String comp = parseComponent(":/?#", true);
 
         if (ci.hasNext()) {
             this.ssp = ci.getInput().substring(ci.pos() + 1);
@@ -171,7 +171,7 @@ final class UriParser {
                 this.ssp = "";
                 return;
             }
-            char c = ci.next();
+            final char c = ci.next();
             if (c == '/') {
                 // hierarchical
                 parseHierarchicalUri();
@@ -209,7 +209,7 @@ final class UriParser {
     }
 
     private void parseAuthority() {
-        int start = ci.pos();
+        final int start = ci.pos();
         String comp = parseComponentWithIP("@/?#", true);
         if (ci.current() == '@') {
             this.userInfo = comp;

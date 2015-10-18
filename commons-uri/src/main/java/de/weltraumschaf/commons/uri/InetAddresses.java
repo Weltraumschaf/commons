@@ -133,7 +133,7 @@ final class InetAddresses {
      * @throws IllegalArgumentException if the argument is not a valid IP string literal
      */
     static InetAddress forString(String ipString) {
-        byte[] addr = ipStringToBytes(ipString);
+        final byte[] addr = ipStringToBytes(ipString);
 
         // The argument was malformed, i.e. not an IP string literal.
         if (addr == null) {
@@ -159,7 +159,7 @@ final class InetAddresses {
         boolean hasColon = false;
         boolean hasDot = false;
         for (int i = 0; i < ipString.length(); i++) {
-            char c = ipString.charAt(i);
+            final char c = ipString.charAt(i);
             if (c == '.') {
                 hasDot = true;
             } else if (c == ':') {
@@ -188,12 +188,12 @@ final class InetAddresses {
     }
 
     private static byte[] textToNumericFormatV4(String ipString) {
-        String[] address = ipString.split("\\.", IPV4_PART_COUNT + 1);
+        final String[] address = ipString.split("\\.", IPV4_PART_COUNT + 1);
         if (address.length != IPV4_PART_COUNT) {
             return null;
         }
 
-        byte[] bytes = new byte[IPV4_PART_COUNT];
+        final byte[] bytes = new byte[IPV4_PART_COUNT];
         try {
             for (int i = 0; i < bytes.length; i++) {
                 bytes[i] = parseOctet(address[i]);
@@ -207,12 +207,12 @@ final class InetAddresses {
 
     private static byte[] textToNumericFormatV6(String ipString) {
         // An address can have [2..8] colons, and N colons make N+1 parts.
-        String[] parts = ipString.split(":", IPV6_PART_COUNT + 2);
+        final String[] parts = ipString.split(":", IPV6_PART_COUNT + 2);
         if (parts.length < 3 || parts.length > IPV6_PART_COUNT + 1) {
             return null;
         }
 
-    // Disregarding the endpoints, find "::" with nothing in between.
+        // Disregarding the endpoints, find "::" with nothing in between.
         // This indicates that a run of zeroes has been skipped.
         int skipIndex = -1;
         for (int i = 1; i < parts.length - 1; i++) {
@@ -237,21 +237,21 @@ final class InetAddresses {
                 return null;  // :$ requires ::$
             }
         } else {
-      // Otherwise, allocate the entire address to partsHi.  The endpoints
+            // Otherwise, allocate the entire address to partsHi.  The endpoints
             // could still be empty, but parseHextet() will check for that.
             partsHi = parts.length;
             partsLo = 0;
         }
 
-    // If we found a ::, then we must have skipped at least one part.
+        // If we found a ::, then we must have skipped at least one part.
         // Otherwise, we must have exactly the right number of parts.
-        int partsSkipped = IPV6_PART_COUNT - (partsHi + partsLo);
+        final int partsSkipped = IPV6_PART_COUNT - (partsHi + partsLo);
         if (!(skipIndex >= 0 ? partsSkipped >= 1 : partsSkipped == 0)) {
             return null;
         }
 
         // Now parse the hextets into a byte array.
-        ByteBuffer rawBytes = ByteBuffer.allocate(2 * IPV6_PART_COUNT);
+        final ByteBuffer rawBytes = ByteBuffer.allocate(2 * IPV6_PART_COUNT);
         try {
             for (int i = 0; i < partsHi; i++) {
                 rawBytes.putShort(parseHextet(parts[i]));
@@ -269,22 +269,22 @@ final class InetAddresses {
     }
 
     private static String convertDottedQuadToHex(String ipString) {
-        int lastColon = ipString.lastIndexOf(':');
-        String initialPart = ipString.substring(0, lastColon + 1);
-        String dottedQuad = ipString.substring(lastColon + 1);
-        byte[] quad = textToNumericFormatV4(dottedQuad);
+        final int lastColon = ipString.lastIndexOf(':');
+        final String initialPart = ipString.substring(0, lastColon + 1);
+        final String dottedQuad = ipString.substring(lastColon + 1);
+        final byte[] quad = textToNumericFormatV4(dottedQuad);
         if (quad == null) {
             return null;
         }
-        String penultimate = Integer.toHexString(((quad[0] & 0xff) << 8) | (quad[1] & 0xff));
-        String ultimate = Integer.toHexString(((quad[2] & 0xff) << 8) | (quad[3] & 0xff));
+        final String penultimate = Integer.toHexString(((quad[0] & 0xff) << 8) | (quad[1] & 0xff));
+        final String ultimate = Integer.toHexString(((quad[2] & 0xff) << 8) | (quad[3] & 0xff));
         return initialPart + penultimate + ":" + ultimate;
     }
 
     private static byte parseOctet(String ipPart) {
         // Note: we already verified that this string contains only hex digits.
-        int octet = Integer.parseInt(ipPart);
-    // Disallow leading zeroes, because no clear standard exists on
+        final int octet = Integer.parseInt(ipPart);
+        // Disallow leading zeroes, because no clear standard exists on
         // whether these should be interpreted as decimal or octal.
         if (octet > 255 || (ipPart.startsWith("0") && ipPart.length() > 1)) {
             throw new NumberFormatException();
@@ -294,7 +294,7 @@ final class InetAddresses {
 
     private static short parseHextet(String ipPart) {
         // Note: we already verified that this string contains only hex digits.
-        int hextet = Integer.parseInt(ipPart, 16);
+        final int hextet = Integer.parseInt(ipPart, 16);
         if (hextet > 0xffff) {
             throw new NumberFormatException();
         }
@@ -338,7 +338,7 @@ final class InetAddresses {
                     runStart = i;
                 }
             } else if (runStart >= 0) {
-                int runLength = i - runStart;
+                final int runLength = i - runStart;
                 if (runLength > bestRunLength) {
                     bestRunStart = runStart;
                     bestRunLength = runLength;
@@ -368,10 +368,10 @@ final class InetAddresses {
          *   num->num   => ":num"    num->gap   => "::"
          *   gap->num   => "num"     gap->gap   => ""
          */
-        StringBuilder buf = new StringBuilder(39);
+        final StringBuilder buf = new StringBuilder(39);
         boolean lastWasNumber = false;
         for (int i = 0; i < hextets.length; i++) {
-            boolean thisIsNumber = hextets[i] >= 0;
+            final boolean thisIsNumber = hextets[i] >= 0;
             if (thisIsNumber) {
                 if (lastWasNumber) {
                     buf.append(':');
@@ -418,7 +418,7 @@ final class InetAddresses {
         }
 
         // Parse the address, and make sure the length/version is correct.
-        byte[] addr = ipStringToBytes(ipString);
+        final byte[] addr = ipStringToBytes(ipString);
         if (addr == null || addr.length != expectBytes) {
             throw new IllegalArgumentException(
                 String.format("Not a valid URI IP literal: '%s'", hostAddr));
@@ -470,7 +470,7 @@ final class InetAddresses {
             return false;
         }
 
-        byte[] bytes = ip.getAddress();
+        final byte[] bytes = ip.getAddress();
         if ((bytes[12] == 0) && (bytes[13] == 0) && (bytes[14] == 0)
             && ((bytes[15] == 0) || (bytes[15] == 1))) {
             return false;
@@ -495,7 +495,7 @@ final class InetAddresses {
      * @return {@code true} if the argument is a 6to4 address
      */
     static boolean is6to4Address(Inet6Address ip) {
-        byte[] bytes = ip.getAddress();
+        final byte[] bytes = ip.getAddress();
         return (bytes[0] == (byte) 0x20) && (bytes[1] == (byte) 0x02);
     }
 
@@ -576,7 +576,7 @@ final class InetAddresses {
      * @return {@code true} if the argument is a Teredo address
      */
     static boolean isTeredoAddress(Inet6Address ip) {
-        byte[] bytes = ip.getAddress();
+        final byte[] bytes = ip.getAddress();
         return (bytes[0] == (byte) 0x20) && (bytes[1] == (byte) 0x01)
             && (bytes[2] == 0) && (bytes[3] == 0);
     }
@@ -599,17 +599,17 @@ final class InetAddresses {
      */
     static boolean isIsatapAddress(Inet6Address ip) {
 
-    // If it's a Teredo address with the right port (41217, or 0xa101)
+        // If it's a Teredo address with the right port (41217, or 0xa101)
         // which would be encoded as 0x5efe then it can't be an ISATAP address.
         if (isTeredoAddress(ip)) {
             return false;
         }
 
-        byte[] bytes = ip.getAddress();
+        final byte[] bytes = ip.getAddress();
 
         if ((bytes[8] | (byte) 0x03) != (byte) 0x03) {
 
-      // Verify that high byte of the 64 bit identifier is zero, modulo
+            // Verify that high byte of the 64 bit identifier is zero, modulo
             // the U/L and G bits, with which we are not concerned.
             return false;
         }
@@ -657,7 +657,7 @@ final class InetAddresses {
      * @since 10.0
      */
     static boolean isMappedIPv4Address(String ipString) {
-        byte[] bytes = ipStringToBytes(ipString);
+        final byte[] bytes = ipStringToBytes(ipString);
         if (bytes != null && bytes.length == 16) {
             for (int i = 0; i < 10; i++) {
                 if (bytes[i] != 0) {
@@ -686,7 +686,7 @@ final class InetAddresses {
      * @throws UnknownHostException if IP address is of illegal length
      */
     static InetAddress fromLittleEndianByteArray(byte[] addr) throws UnknownHostException {
-        byte[] reversed = new byte[addr.length];
+        final byte[] reversed = new byte[addr.length];
         for (int i = 0; i < addr.length; i++) {
             reversed[i] = addr[addr.length - i - 1];
         }
@@ -703,7 +703,7 @@ final class InetAddresses {
      * @since 10.0
      */
     static InetAddress increment(InetAddress address) {
-        byte[] addr = address.getAddress();
+        final byte[] addr = address.getAddress();
         int i = addr.length - 1;
         while (i >= 0 && addr[i] == (byte) 0xff) {
             addr[i] = 0;
@@ -726,7 +726,7 @@ final class InetAddresses {
      * @param address TODO
      */
     static boolean isMaximum(InetAddress address) {
-        byte[] addr = address.getAddress();
+        final byte[] addr = address.getAddress();
         for (int i = 0; i < addr.length; i++) {
             if (addr[i] != (byte) 0xff) {
                 return false;

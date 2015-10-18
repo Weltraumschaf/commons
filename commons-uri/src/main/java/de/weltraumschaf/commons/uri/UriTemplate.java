@@ -322,7 +322,7 @@ class UriTemplate {
         }
 
         final String[] segments = path.split("/");
-        final Deque<String> resolvedSegments = new ArrayDeque<String>(segments.length);
+        final Deque<String> resolvedSegments = new ArrayDeque<>(segments.length);
 
         for (final String segment : segments) {
             if ((segment.length() == 0) || (".".equals(segment))) {
@@ -339,7 +339,7 @@ class UriTemplate {
             pathBuilder.append('/').append(segment);
         }
 
-        String resultString = createURIWithStringValues(uri.getScheme(),
+        final String resultString = createURIWithStringValues(uri.getScheme(),
                 uri.getAuthority(),
                 null,
                 null,
@@ -504,13 +504,13 @@ class UriTemplate {
      * @return the URI.
      */
     final String createURI(Map<String, String> values) {
-        StringBuilder b = new StringBuilder();
+        final StringBuilder b = new StringBuilder();
         // Find all template variables
-        Matcher m = TEMPLATE_NAMES_PATTERN.matcher(normalizedTemplate);
+        final Matcher m = TEMPLATE_NAMES_PATTERN.matcher(normalizedTemplate);
         int i = 0;
         while (m.find()) {
             b.append(normalizedTemplate, i, m.start());
-            String tValue = values.get(m.group(1));
+            final String tValue = values.get(m.group(1));
             if (tValue != null) {
                 b.append(tValue);
             }
@@ -545,16 +545,16 @@ class UriTemplate {
      * @return the URI.
      */
     final String createURI(String[] values, int offset, int length) {
-        Map<String, String> mapValues = new HashMap<String, String>();
-        StringBuilder b = new StringBuilder();
+        final Map<String, String> mapValues = new HashMap<>();
+        final StringBuilder b = new StringBuilder();
         // Find all template variables
-        Matcher m = TEMPLATE_NAMES_PATTERN.matcher(normalizedTemplate);
+        final Matcher m = TEMPLATE_NAMES_PATTERN.matcher(normalizedTemplate);
         int v = offset;
         length += offset;
         int i = 0;
         while (m.find()) {
             b.append(normalizedTemplate, i, m.start());
-            String tVariable = m.group(1);
+            final String tVariable = m.group(1);
             // Check if a template variable has already occurred
             // If so use the value to ensure that two or more declarations of
             // a template variable have the same value
@@ -600,7 +600,7 @@ class UriTemplate {
     @Override
     public final boolean equals(Object o) {
         if (o instanceof UriTemplate) {
-            UriTemplate that = (UriTemplate) o;
+            final UriTemplate that = (UriTemplate) o;
             return this.pattern.equals(that.pattern);
         } else {
             return false;
@@ -636,7 +636,7 @@ class UriTemplate {
             final String path, final String query, final String fragment,
             final Map<String, ?> values, final boolean encode, final boolean encodeSlashInPath) {
 
-        Map<String, String> stringValues = new HashMap<String, String>();
+        final Map<String, String> stringValues = new HashMap<>();
         for (Map.Entry<String, ?> e : values.entrySet()) {
             if (e.getValue() != null) {
                 stringValues.put(e.getKey(), e.getValue().toString());
@@ -710,7 +710,7 @@ class UriTemplate {
             final String path, final String query, final String fragment,
             final Object[] values, final boolean encode, final boolean encodeSlashInPath) {
 
-        String[] stringValues = new String[values.length];
+        final String[] stringValues = new String[values.length];
         for (int i = 0; i < values.length; i++) {
             if (values[i] != null) {
                 stringValues[i] = values[i].toString();
@@ -748,7 +748,7 @@ class UriTemplate {
             final String path, final String query, final String fragment,
             final String[] values, final boolean encode, final boolean encodeSlashInPath) {
 
-        final Map<String, Object> mapValues = new HashMap<String, Object>();
+        final Map<String, Object> mapValues = new HashMap<>();
         return createURIWithStringValues(
                 scheme, authority, userInfo, host, port, path, query, fragment, values, encode, encodeSlashInPath, mapValues);
     }
@@ -799,7 +799,7 @@ class UriTemplate {
                 sb.append("/");
             }
             // path template values are treated as path segments unless encodeSlashInPath is false.
-            UriComponent.Type t = (encodeSlashInPath) ? UriComponent.Type.PATH_SEGMENT : UriComponent.Type.PATH;
+            final UriComponent.Type t = (encodeSlashInPath) ? UriComponent.Type.PATH_SEGMENT : UriComponent.Type.PATH;
 
             offset = createURIComponent(t, path, values,
                     offset, encode, mapValues, sb);
@@ -827,7 +827,7 @@ class UriTemplate {
             final Map<String, ?> _mapValues,
             final StringBuilder b) {
 
-        Map<String, Object> mapValues = (Map<String, Object>) _mapValues;
+        final Map<String, Object> mapValues = (Map<String, Object>) _mapValues;
 
         if (template.indexOf('{') == -1) {
             b.append(template);
@@ -887,8 +887,8 @@ class UriTemplate {
             return template;
         }
 
-        Map<String, Object> mapValues = (Map<String, Object>) _mapValues;
-        StringBuilder sb = new StringBuilder();
+        final Map<String, Object> mapValues = (Map<String, Object>) _mapValues;
+        final StringBuilder sb = new StringBuilder();
 
         // Find all template variables
         template = new UriTemplateParser(template).getNormalizedTemplate();

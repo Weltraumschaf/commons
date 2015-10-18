@@ -49,7 +49,7 @@ import java.util.List;
  * This map has an additional ability to instantiate classes using the
  * individual string values as a constructor parameters.
  * </p>
- * 
+ *
  * @author Paul Sandoz
  * @author Marek Potociar (marek.potociar at oracle.com)
  */
@@ -86,7 +86,7 @@ final class MultivaluedStringMap extends MultivaluedHashMap<String, String> {
     }
 
      final <A> A getFirst(String key, Class<A> type) {
-        String value = getFirst(key);
+        final String value = getFirst(key);
         if (value == null) {
             return null;
         }
@@ -106,12 +106,12 @@ final class MultivaluedStringMap extends MultivaluedHashMap<String, String> {
 
     @SuppressWarnings("unchecked")
      final <A> A getFirst(String key, A defaultValue) {
-        String value = getFirst(key);
+        final String value = getFirst(key);
         if (value == null) {
             return defaultValue;
         }
 
-        Class<A> type = (Class<A>) defaultValue.getClass();
+        final Class<A> type = (Class<A>) defaultValue.getClass();
 
         Constructor<A> c = null;
         try {

@@ -137,7 +137,7 @@ class UriComponent {
      * @throws IllegalArgumentException if the encoded string contains illegal characters.
      */
     static void validate(String s, Type t, boolean template) {
-        int i = _valid(s, t, template);
+        final int i = _valid(s, t, template);
         if (i > -1) {
             throw new IllegalArgumentException(
                     String.format(
@@ -170,7 +170,7 @@ class UriComponent {
     }
 
     private static int _valid(String s, Type t, boolean template) {
-        boolean[] table = ENCODING_TABLES[t.ordinal()];
+        final boolean[] table = ENCODING_TABLES[t.ordinal()];
 
         for (int i = 0; i < s.length(); i++) {
             final char c = s.charAt(i);
@@ -341,9 +341,9 @@ class UriComponent {
     private static final boolean[][] ENCODING_TABLES = initEncodingTables();
 
     private static boolean[][] initEncodingTables() {
-        boolean[][] tables = new boolean[Type.values().length][];
+        final boolean[][] tables = new boolean[Type.values().length][];
 
-        List<String> l = new ArrayList<>();
+        final List<String> l = new ArrayList<>();
         l.addAll(Arrays.asList(SCHEME));
         tables[Type.SCHEME.ordinal()] = initEncodingTable(l);
 
@@ -391,7 +391,7 @@ class UriComponent {
     }
 
     private static boolean[] initEncodingTable(List<String> allowed) {
-        boolean[] table = new boolean[0x80];
+        final boolean[] table = new boolean[0x80];
         for (String range : allowed) {
             if (range.length() == 1) {
                 table[range.charAt(0)] = true;
@@ -519,7 +519,7 @@ class UriComponent {
      * @return the multivalued map of query parameters.
      */
     static MultivaluedMap<String, String> decodeQuery(String q, boolean decodeNames, boolean decodeValues) {
-        MultivaluedMap<String, String> queryParameters = new MultivaluedStringMap();
+        final MultivaluedMap<String, String> queryParameters = new MultivaluedStringMap();
 
         if (q == null || q.length() == 0) {
             return queryParameters;
@@ -527,7 +527,7 @@ class UriComponent {
 
         int s = 0;
         do {
-            int e = q.indexOf('&', s);
+            final int e = q.indexOf('&', s);
 
             if (e == -1) {
                 decodeQueryParam(queryParameters, q.substring(s), decodeNames, decodeValues);
@@ -544,7 +544,7 @@ class UriComponent {
     private static void decodeQueryParam(MultivaluedMap<String, String> params,
             String param, boolean decodeNames, boolean decodeValues) {
         try {
-            int equals = param.indexOf('=');
+            final int equals = param.indexOf('=');
             if (equals > 0) {
                 params.add(
                         (decodeNames) ? URLDecoder.decode(param.substring(0, equals), "UTF-8") : param.substring(0, equals),
@@ -621,7 +621,7 @@ class UriComponent {
      * @return the list of path segments.
      */
     static List<PathSegment> decodePath(String path, boolean decode) {
-        List<PathSegment> segments = new LinkedList<>();
+        final List<PathSegment> segments = new LinkedList<>();
 
         if (path == null) {
             return segments;
@@ -655,7 +655,7 @@ class UriComponent {
      * @param decode {@code true} if the path segment should be in a decoded form.
      */
     static void decodePathSegment(List<PathSegment> segments, String segment, boolean decode) {
-        int colon = segment.indexOf(';');
+        final int colon = segment.indexOf(';');
         if (colon != -1) {
             segments.add(new PathSegment(
                     (colon == 0) ? "" : segment.substring(0, colon),
@@ -676,7 +676,7 @@ class UriComponent {
      * @return the multivalued map of matrix parameters.
      */
     static MultivaluedMap<String, String> decodeMatrix(String pathSegment, boolean decode) {
-        MultivaluedMap<String, String> matrixMap = new MultivaluedStringMap();
+        final MultivaluedMap<String, String> matrixMap = new MultivaluedStringMap();
 
         // Skip over path segment
         int s = pathSegment.indexOf(';') + 1;
@@ -685,7 +685,7 @@ class UriComponent {
         }
 
         do {
-            int e = pathSegment.indexOf(';', s);
+            final int e = pathSegment.indexOf(';', s);
 
             if (e == -1) {
                 decodeMatrixParam(matrixMap, pathSegment.substring(s), decode);
@@ -701,7 +701,7 @@ class UriComponent {
     @SuppressWarnings("StatementWithEmptyBody")
     private static void decodeMatrixParam(MultivaluedMap<String, String> params,
             String param, boolean decode) {
-        int equals = param.indexOf('=');
+        final int equals = param.indexOf('=');
         if (equals > 0) {
             params.add(
                     UriComponent.decode(param.substring(0, equals), UriComponent.Type.MATRIX_PARAM),
@@ -815,7 +815,7 @@ class UriComponent {
                 bb.flip();
                 // Create a new byte buffer with the maximum number of possible
                 // octets, hence resize should only occur once
-                ByteBuffer bb_new = ByteBuffer.allocate(s.length() / 3);
+                final ByteBuffer bb_new = ByteBuffer.allocate(s.length() / 3);
                 bb_new.put(bb);
                 bb = bb_new;
             }
@@ -840,8 +840,7 @@ class UriComponent {
             sb.append((char) bb.get(0));
             return i + 2;
         } else {
-            //
-            CharBuffer cb = UTF_8_CHARSET.decode(bb);
+            final CharBuffer cb = UTF_8_CHARSET.decode(bb);
             sb.append(cb.toString());
             return i + bb.limit() * 3 - 1;
         }
@@ -860,7 +859,7 @@ class UriComponent {
     private static final int[] HEX_TABLE = initHexTable();
 
     private static int[] initHexTable() {
-        int[] table = new int[0x80];
+        final int[] table = new int[0x80];
         Arrays.fill(table, -1);
 
         for (char c = '0'; c <= '9'; c++) {

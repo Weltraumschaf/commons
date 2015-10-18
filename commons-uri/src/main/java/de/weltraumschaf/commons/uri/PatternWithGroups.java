@@ -274,7 +274,7 @@ class PatternWithGroups {
         }
 
         // Match regular expression
-        Matcher m = regexPattern.matcher(cs);
+        final Matcher m = regexPattern.matcher(cs);
         if (!m.matches()) {
             return null;
         }
@@ -311,7 +311,7 @@ class PatternWithGroups {
         }
 
         // Match the regular expression
-        Matcher m = regexPattern.matcher(cs);
+        final Matcher m = regexPattern.matcher(cs);
         if (!m.matches()) {
             return false;
         }
@@ -363,7 +363,7 @@ class PatternWithGroups {
         }
 
         // Match the regular expression
-        Matcher m = regexPattern.matcher(cs);
+        final Matcher m = regexPattern.matcher(cs);
         if (!m.matches()) {
             return false;
         }
@@ -371,12 +371,12 @@ class PatternWithGroups {
         // Assign the matched group values to group names
         groupValues.clear();
         for (int i = 0; i < groupNames.size(); i++) {
-            String name = groupNames.get(i);
-            String currentValue = m.group((groupIndexes.length > 0) ? groupIndexes[i] : i + 1);
+            final String name = groupNames.get(i);
+            final String currentValue = m.group((groupIndexes.length > 0) ? groupIndexes[i] : i + 1);
 
             // Group names can have the same name occuring more than once,
             // check that groups values are same.
-            String previousValue = groupValues.get(name);
+            final String previousValue = groupValues.get(name);
             if (previousValue != null && !previousValue.equals(currentValue)) {
                 return false;
             }

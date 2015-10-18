@@ -64,7 +64,7 @@ import java.lang.annotation.Target;
  *
  * <pre>
  * {@code
- *   &#064;RepeatUntilSuccess(3) // Max. three times.
+ *   &#064;RunMaxTimes(3) // Max. three times.
  *   public void someOtherTestMethod() {
  *       // ...
  *   }
@@ -76,17 +76,17 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface RepeatUntilSuccess {
+public @interface RunMaxTimes {
 
     /**
      * Default value for maximum executions.
      */
-    int DEFAULT_MAX_EXECUTION = 5;
+    int DEFAULT_MAX_TIMES = 5;
 
     /**
      * How many times a test should be executed at maximum if it fails.
      *
-     * @return must be greater than 0, defaults to {@link #DEFAULT_MAX_EXECUTION}
+     * @return must be greater than 0, defaults to {@link #DEFAULT_MAX_TIMES}
      */
-    int maxExecutions() default DEFAULT_MAX_EXECUTION;
+    int value() default DEFAULT_MAX_TIMES;
 }

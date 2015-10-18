@@ -23,9 +23,9 @@ import de.weltraumschaf.commons.testing.rules.Repeater.RepeatStatement;
 import de.weltraumschaf.commons.validate.Validate;
 
 /**
- * Tests for {@link Repeater}.
+ * Tests for {@link Repeater} with {@link RunTimes} annotation.
  */
-public class Repeater_RepeatTest {
+public class Repeater_WithRunTimesTest {
 
   private static final double ALLOWED_DEVIATION = 0.01d;
 
@@ -37,11 +37,11 @@ public class Repeater_RepeatTest {
   private final Repeater sut = new Repeater();
 
   private static Description createDescriptionWithoutAnnotations() {
-    return Description.createTestDescription(Repeater_RepeatTest.class, "foo");
+    return Description.createTestDescription(Repeater_WithRunTimesTest.class, "foo");
   }
 
   private static Description createDescriptionWithRepeatAnnotation(final int ruleValue) {
-    return Description.createTestDescription(Repeater_RepeatTest.class, "foo", new RuleStub(ruleValue));
+    return Description.createTestDescription(Repeater_WithRunTimesTest.class, "foo", new RuleStub(ruleValue));
   }
 
   @Test
@@ -176,7 +176,7 @@ public class Repeater_RepeatTest {
    */
   @SuppressWarnings("all")
   // Suppress warning about implementing Repeat annotation
-  private static class RuleStub implements Annotation, Repeat {
+  private static class RuleStub implements Annotation, RunTimes {
 
     private final int value;
 
@@ -185,13 +185,13 @@ public class Repeater_RepeatTest {
     }
 
     @Override
-    public int executions() {
+    public int value() {
       return value;
     }
 
     @Override
     public Class<? extends Annotation> annotationType() {
-      return Repeat.class;
+      return RunTimes.class;
     }
 
   }

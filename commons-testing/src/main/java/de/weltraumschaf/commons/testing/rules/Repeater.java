@@ -25,7 +25,7 @@ import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 /**
- * Rule which runs tests annotated with {@link Repeat} or {@link RepeatUntilSuccess} multiple times.
+ * Rule which runs tests annotated with {@link RunTimes} or {@link RunMaxTimes} multiple times.
  * <p>
  * The rule does not stop on any exceptions, but save them to throw a combined {@link AssertionError} at the end of the
  * evaluation of the {@link RepeatStatement}. So you will see how many tests failed of how many runs. Also you see the
@@ -44,13 +44,13 @@ import org.junit.runners.model.Statement;
  *      public final Repeater repeater = new Repeater();
  *
  *      &#064;Test
- *      &#064;Repeat(10) // Runs the test method ten times.
+ *      &#064;RunTimes(10) // Runs the test method ten times.
  *      public void someTestMethod() {
  *          // ...
  *      }
  *
  *      &#064;Test
- *      &#064;RepeatUntilSuccess(3) // Runs the test method until success, max five times.
+ *      &#064;RunMaxTimes(3) // Runs the test method until success, max five times.
  *      public void someOtherTestMethod() {
  *          // ...
  *      }
@@ -74,13 +74,13 @@ public final class Repeater implements TestRule {
 
         if (hasRepeatAnnotation(description)) {
             return new RepeatStatement(
-                description.getAnnotation(Repeat.class).executions(),
+                description.getAnnotation(RunTimes.class).value(),
                 base);
         }
 
         if (hasRepeatUntilSuccessAnnotation(description)) {
             return new RepeatUntilSuccessStatement(
-                description.getAnnotation(RepeatUntilSuccess.class).maxExecutions(),
+                description.getAnnotation(RunMaxTimes.class).value(),
                 base);
         }
 
@@ -88,23 +88,23 @@ public final class Repeater implements TestRule {
     }
 
     /**
-     * Whether the description has a {@link Repeat} annotation or not.
+     * Whether the description has a {@link RunTimes} annotation or not.
      *
      * @param description must not be {@code null}
      * @return {@code true} if present, else {@code false}
      */
     private boolean hasRepeatAnnotation(final Description description) {
-        return null != description.getAnnotation(Repeat.class);
+        return null != description.getAnnotation(RunTimes.class);
     }
 
     /**
-     * Whether the description has a {@link RepeatUntilSuccess} annotation or not.
+     * Whether the description has a {@link RunMaxTimes} annotation or not.
      *
      * @param description must not be {@code null}
      * @return {@code true} if present, else {@code false}
      */
     private boolean hasRepeatUntilSuccessAnnotation(final Description description) {
-        return null != description.getAnnotation(RepeatUntilSuccess.class);
+        return null != description.getAnnotation(RunMaxTimes.class);
     }
 
     /**

@@ -19,7 +19,7 @@ import de.weltraumschaf.commons.testing.rules.Repeater.RepeatUntilSuccessStateme
 import de.weltraumschaf.commons.validate.Validate;
 
 /**
- * Tests for {@link Repeater} with {@link RepeatUntilSuccess}.
+ * Tests for {@link Repeater} with {@link RunMaxTimes} annotation.
  */
 public class Repeater_RepeatUntilSuccess {
 
@@ -106,7 +106,7 @@ public class Repeater_RepeatUntilSuccess {
    */
   @SuppressWarnings("all")
   // Suppress warning about implementing Repeat annotation
-  private static class RuleStub implements Annotation, RepeatUntilSuccess {
+  private static class RuleStub implements Annotation, RunMaxTimes {
 
     private final int value;
 
@@ -115,13 +115,13 @@ public class Repeater_RepeatUntilSuccess {
     }
 
     @Override
-    public int maxExecutions() {
+    public int value() {
       return value;
     }
 
     @Override
     public Class<? extends Annotation> annotationType() {
-      return RepeatUntilSuccess.class;
+      return RunMaxTimes.class;
     }
   }
 

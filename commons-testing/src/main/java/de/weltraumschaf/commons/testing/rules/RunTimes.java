@@ -48,7 +48,7 @@ import java.lang.annotation.Target;
  * <pre>
  * {@code
  *   &#064;Test
- *   &#064;Repeat(10) // Runs this test ten times.
+ *   &#064;RunTimes(10) // Runs this test ten times.
  *   public void someTestMethod() {
  *       // ...
  *   }
@@ -66,12 +66,12 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface Repeat {
+public @interface RunTimes {
 
     /**
      * How many times a test must be executed.
      *
      * @return must be greater than 0
      */
-    int executions();
+    int value();
 }

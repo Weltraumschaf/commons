@@ -163,7 +163,12 @@ public class SwingFrame extends JFrame {
 
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+        } catch (
+            final ClassNotFoundException
+                | InstantiationException
+                | IllegalAccessException
+                | UnsupportedLookAndFeelException ex)
+        {
             LOGGER.log(Level.SEVERE, null, ex);
         }
     }

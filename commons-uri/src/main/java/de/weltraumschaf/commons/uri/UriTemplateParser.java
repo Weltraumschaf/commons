@@ -61,11 +61,11 @@ class UriTemplateParser {
 
     private static Set<Character> initReserved() {
         final char[] reserved = {
-                '.', '^', '&', '!',
-                '?', '-', ':', '<',
-                '(', '[', '$', '=',
-                ')', ']', ',', '>',
-                '*', '+', '|'};
+            '.', '^', '&', '!',
+            '?', '-', ':', '<',
+            '(', '[', '$', '=',
+            ')', ']', ',', '>',
+            '*', '+', '|'};
 
         final Set<Character> s = new HashSet<>(reserved.length);
         for (char c : reserved) {
@@ -91,10 +91,10 @@ class UriTemplateParser {
      * Parse a template.
      *
      * @param template the template.
-     * @throws IllegalArgumentException if the template is null, an empty string
-     *         or does not conform to a JAX-RS URI template.
+     * @throws IllegalArgumentException if the template is null, an empty string or does not conform to a JAX-RS URI
+     * template.
      */
-     UriTemplateParser(final String template) throws IllegalArgumentException {
+    UriTemplateParser(final String template) throws IllegalArgumentException {
         if (template == null || template.length() == 0) {
             throw new IllegalArgumentException();
         }
@@ -105,8 +105,8 @@ class UriTemplateParser {
             pattern = Pattern.compile(regex.toString());
         } catch (PatternSyntaxException ex) {
             throw new IllegalArgumentException("Invalid syntax for the template expression '"
-                    + regex + "'",
-                    ex);
+                + regex + "'",
+                ex);
         }
     }
 
@@ -115,7 +115,7 @@ class UriTemplateParser {
      *
      * @return the template.
      */
-     final String getTemplate() {
+    final String getTemplate() {
         return template;
     }
 
@@ -124,19 +124,18 @@ class UriTemplateParser {
      *
      * @return the pattern.
      */
-     final Pattern getPattern() {
+    final Pattern getPattern() {
         return pattern;
     }
 
     /**
      * Get the normalized template.
      * <p>
-     * A normalized template is a template without any explicit regular
-     * expressions.
+     * A normalized template is a template without any explicit regular expressions.
      *
      * @return the normalized template.
      */
-     final String getNormalizedTemplate() {
+    final String getNormalizedTemplate() {
         return normalizedTemplate.toString();
     }
 
@@ -145,7 +144,7 @@ class UriTemplateParser {
      *
      * @return the map of template names to patterns.
      */
-     final Map<String, Pattern> getNameToPattern() {
+    final Map<String, Pattern> getNameToPattern() {
         return nameToPattern;
     }
 
@@ -154,7 +153,7 @@ class UriTemplateParser {
      *
      * @return the list of template names.
      */
-     final List<String> getNames() {
+    final List<String> getNames() {
         return names;
     }
 
@@ -163,20 +162,19 @@ class UriTemplateParser {
      *
      * @return the capturing group counts.
      */
-     final List<Integer> getGroupCounts() {
+    final List<Integer> getGroupCounts() {
         return groupCounts;
     }
 
     /**
      * Get the group indexes to capturing groups.
      * <p>
-     * Any nested capturing groups will be ignored and the
-     * the group index will refer to the top-level capturing
-     * groups associated with the templates variables.
+     * Any nested capturing groups will be ignored and the the group index will refer to the top-level capturing groups
+     * associated with the templates variables.
      *
      * @return the group indexes to capturing groups.
      */
-     final int[] getGroupIndexes() {
+    final int[] getGroupIndexes() {
         if (names.isEmpty()) {
             return EMPTY_INT_ARRAY;
         }
@@ -199,7 +197,7 @@ class UriTemplateParser {
      *
      * @return the number of explicit regular expressions.
      */
-     final int getNumberOfExplicitRegexes() {
+    final int getNumberOfExplicitRegexes() {
         return numOfExplicitRegexes;
     }
 
@@ -208,7 +206,7 @@ class UriTemplateParser {
      *
      * @return the number of literal characters.
      */
-     final int getNumberOfLiteralCharacters() {
+    final int getNumberOfLiteralCharacters() {
         return literalCharacters;
     }
 
@@ -236,7 +234,7 @@ class UriTemplateParser {
             processLiteralCharacters();
         } catch (NoSuchElementException ex) {
             throw new IllegalArgumentException(
-                    String.format("Invalid syntax in the template \"%s\". Check if a path parameter is terminated with a \"}\".",
+                String.format("Invalid syntax in the template \"%s\". Check if a path parameter is terminated with a \"}\".",
                     template), ex);
         }
     }
@@ -290,7 +288,6 @@ class UriTemplateParser {
         return table;
     }
 
-
     private void parseName(final CharacterIterator ci) {
         char c = consumeWhiteSpace(ci);
 
@@ -300,7 +297,7 @@ class UriTemplateParser {
             nameBuffer.append(c);
         } else {
             throw new IllegalArgumentException(
-                    String.format("Illegal character \"%s\" at position %s is not allowed as a start of a name in a path template \"%s\".",
+                String.format("Illegal character \"%s\" at position %s is not allowed as a start of a name in a path template \"%s\".",
                     c, ci.pos(), template));
         }
 
@@ -327,12 +324,13 @@ class UriTemplateParser {
                 } else {
                     // Error
                     throw new IllegalArgumentException(
-                            String.format("Illegal character \"%s\" at position %s is not allowed after a name in a path template \"%s\".",
+                        String.format("Illegal character \"%s\" at position %s is not allowed after a name in a path template \"%s\".",
                             c, ci.pos(), template));
                 }
             } else {
                 throw new IllegalArgumentException(
-                        String.format("Illegal character \"%s\" at position %s is not allowed as a part of a name in a path template \"%s\".",
+                    String.format(
+                        "Illegal character \"%s\" at position %s is not allowed as a part of a name in a path template \"%s\".",
                         c, ci.pos(), template));
             }
         }
@@ -344,11 +342,12 @@ class UriTemplateParser {
                 numOfExplicitRegexes++;
             }
             final Pattern namePattern = (nameRegexString.length() == 0)
-                    ? TEMPLATE_VALUE_PATTERN : Pattern.compile(nameRegexString);
+                ? TEMPLATE_VALUE_PATTERN : Pattern.compile(nameRegexString);
             if (nameToPattern.containsKey(name)) {
                 if (!nameToPattern.get(name).equals(namePattern)) {
                     throw new IllegalArgumentException(
-                            String.format("The name \"%s\" is declared more than once with different regular expressions in a path template \"%s\".",
+                        String.format(
+                            "The name \"%s\" is declared more than once with different regular expressions in a path template \"%s\".",
                             name, template));
                 }
             } else {
@@ -361,14 +360,14 @@ class UriTemplateParser {
             groupCounts.add(g + 1);
 
             regex.append('(').
-                    append(namePattern).
-                    append(')');
+                append(namePattern).
+                append(')');
             normalizedTemplate.append('{').
-                    append(name).
-                    append('}');
+                append(name).
+                append('}');
         } catch (PatternSyntaxException ex) {
             throw new IllegalArgumentException(
-                    String.format("Invalid syntax in the template \"%s\". Check if a path parameter is terminated with a \"}\".",
+                String.format("Invalid syntax in the template \"%s\". Check if a path parameter is terminated with a \"}\".",
                     nameRegexString, name, template), ex);
         }
     }

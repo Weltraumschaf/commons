@@ -159,25 +159,25 @@ public final class JCommanderImproved<O> {
         // Sort them, so the order is same on different VMs.
         Collections.sort(parameters, new Comparator<ParameterDescription>() {
 
-          @Override
-          public int compare(final ParameterDescription o1, final ParameterDescription o2) {
-            return o1.getLongestName().compareTo(o2.getLongestName());
-          }
+            @Override
+            public int compare(final ParameterDescription o1, final ParameterDescription o2) {
+                return o1.getLongestName().compareTo(o2.getLongestName());
+            }
         });
 
         if (!parameters.isEmpty()) {
             help.append(DEFAULT_NEW_LINE)
-                    .append("Options")
-                    .append(DEFAULT_NEW_LINE)
-                    .append(DEFAULT_NEW_LINE);
+                .append("Options")
+                .append(DEFAULT_NEW_LINE)
+                .append(DEFAULT_NEW_LINE);
 
             final int leftColumnWidth = LEFT_COL_WIDTH;
             final int rightColumnwidth = AVAILABLE_WIDTH - leftColumnWidth;
 
             for (final ParameterDescription parameter : parameters) {
                 help.append(rightPad(indent + parameter.getNames(), leftColumnWidth))
-                        .append(lineBreak(parameter.getDescription(), rightColumnwidth, leftColumnWidth))
-                        .append(DEFAULT_NEW_LINE);
+                    .append(lineBreak(parameter.getDescription(), rightColumnwidth, leftColumnWidth))
+                    .append(DEFAULT_NEW_LINE);
             }
         }
 
@@ -185,8 +185,8 @@ public final class JCommanderImproved<O> {
 
         if (!example.trim().isEmpty()) {
             help.append("Example").append(DEFAULT_NEW_LINE)
-                    .append(DEFAULT_NEW_LINE)
-                    .append(indent).append(example.trim()).append(DEFAULT_NEW_LINE);
+                .append(DEFAULT_NEW_LINE)
+                .append(indent).append(example.trim()).append(DEFAULT_NEW_LINE);
         }
 
         help.append(DEFAULT_NEW_LINE);
@@ -262,9 +262,9 @@ public final class JCommanderImproved<O> {
         }
 
         return sb.toString()
-                .replace(
-                        DEFAULT_NEW_LINE,
-                        DEFAULT_NEW_LINE + spaces(leftPadLength));
+            .replace(
+                DEFAULT_NEW_LINE,
+                DEFAULT_NEW_LINE + spaces(leftPadLength));
     }
 
     /**

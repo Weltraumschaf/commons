@@ -148,7 +148,7 @@ final class UriComponent {
      * @return the encoded string.
      */
     static String contextualEncode(String s, Type t) {
-        return _encode(s, t, false, true);
+        return encode(s, t, false, true);
     }
 
     /**
@@ -162,7 +162,7 @@ final class UriComponent {
      * @return the encoded string.
      */
     static String contextualEncode(String s, Type t, boolean template) {
-        return _encode(s, t, template, true);
+        return encode(s, t, template, true);
     }
 
     /**
@@ -174,7 +174,7 @@ final class UriComponent {
      * @return the encoded string.
      */
     static String encode(String s, Type t) {
-        return _encode(s, t, false, false);
+        return encode(s, t, false, false);
     }
 
     /**
@@ -187,7 +187,7 @@ final class UriComponent {
      * @return the encoded string.
      */
     static String encode(String s, Type t, boolean template) {
-        return _encode(s, t, template, false);
+        return encode(s, t, template, false);
     }
 
     /**
@@ -210,7 +210,7 @@ final class UriComponent {
         return s;
     }
 
-    private static String _encode(String s, Type t, boolean template, boolean contextualEncode) {
+    private static String encode(String s, Type t, boolean template, boolean contextualEncode) {
         final boolean[] table = ENCODING_TABLES[t.ordinal()];
         boolean insideTemplateParam = false;
 
@@ -729,9 +729,9 @@ final class UriComponent {
                 bb.flip();
                 // Create a new byte buffer with the maximum number of possible
                 // octets, hence resize should only occur once
-                final ByteBuffer bb_new = ByteBuffer.allocate(s.length() / 3);
-                bb_new.put(bb);
-                bb = bb_new;
+                final ByteBuffer bbNew = ByteBuffer.allocate(s.length() / 3);
+                bbNew.put(bb);
+                bb = bbNew;
             }
         }
 

@@ -15,6 +15,7 @@ import de.weltraumschaf.commons.validate.Validate;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -70,6 +71,7 @@ public final class Repeater implements TestRule {
 
     @Override
     public Statement apply(final Statement base, final Description description) {
+        Validate.notNull(base, "base");
         Validate.notNull(description, "description");
 
         if (hasRepeatAnnotation(description)) {
@@ -93,7 +95,7 @@ public final class Repeater implements TestRule {
      * @param description must not be {@code null}
      * @return {@code true} if present, else {@code false}
      */
-    private boolean hasRepeatAnnotation(final Description description) {
+     boolean hasRepeatAnnotation(final Description description) {
         return null != description.getAnnotation(RunTimes.class);
     }
 
@@ -103,14 +105,14 @@ public final class Repeater implements TestRule {
      * @param description must not be {@code null}
      * @return {@code true} if present, else {@code false}
      */
-    private boolean hasRepeatUntilSuccessAnnotation(final Description description) {
+    boolean hasRepeatUntilSuccessAnnotation(final Description description) {
         return null != description.getAnnotation(RunMaxTimes.class);
     }
 
     /**
      * This statement executes the given base statement repeatedly.
      */
-    private abstract static class BaseRepeatStatement extends Statement {
+    abstract static class BaseRepeatStatement extends Statement {
 
         /**
          * Used for error rate calculation.
@@ -133,7 +135,7 @@ public final class Repeater implements TestRule {
          * @param times must be greater than 0
          * @param base must not be {@code null}
          */
-        private BaseRepeatStatement(final int times, final Statement base) {
+        BaseRepeatStatement(final int times, final Statement base) {
             super();
             Validate.isTrue(times > 0, "Parameter 'times' must be greater than 0!");
             this.times = times;
@@ -152,8 +154,7 @@ public final class Repeater implements TestRule {
         /**
          * The multiple times executed base statement.
          *
-         * @return never {
-         * @coce null}
+         * @return never {@code null}
          */
         Statement base() {
             return base;
@@ -161,18 +162,20 @@ public final class Repeater implements TestRule {
 
         /**
          * Assert that there are no errors during all repetitions.
+         * <p>
+         * Throws an {@link AssertionError} if list of errors is not empty.
+         * </p>
          *
          * @param errors must not be {@code null}
-         * @throws Throwable if list of errors is not empty
          */
-        void assertNoErrors(final Collection<Throwable> errors) throws Throwable { // NOSONAR We want all types here.
+        void assertNoErrors(final Collection<? extends Throwable> errors) { // NOSONAR We want all types here.
             Validate.notNull(errors, "errors");
 
             if (errors.isEmpty()) {
                 return;
             }
 
-            throw new AssertionError(formatErrors(errors, this.times));
+            throw new AssertionError(formatErrors(errors, times));
         }
 
         /**
@@ -186,7 +189,7 @@ public final class Repeater implements TestRule {
          * @param times must be greater than 0
          * @return never {@code null}
          */
-        static String formatErrors(final Collection<Throwable> errors, final int times) {
+        static String formatErrors(final Collection<? extends Throwable> errors, final int times) {
             Validate.notNull(errors, "errors");
             final StringBuilder message = new StringBuilder();
             message.append(String.format(Locale.US,
@@ -226,7 +229,7 @@ public final class Repeater implements TestRule {
          */
         static double calculateFailedRepetitionPercentage(final int times, final int errors) {
             Validate.isTrue(times > 0, "Parameter times must not be less than 1!");
-            Validate.isTrue(errors >= 0, "Parameter errors must not be less than 0l!");
+            Validate.isTrue(errors >= 0, "Parameter errors must not be less than 0!");
             return (errors * HUNDRED_PERCENT) / times;
         }
 

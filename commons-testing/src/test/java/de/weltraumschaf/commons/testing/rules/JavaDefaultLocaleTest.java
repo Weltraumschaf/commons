@@ -1,6 +1,5 @@
 package de.weltraumschaf.commons.testing.rules;
 
-import de.weltraumschaf.commons.testing.rules.JavaDefaultLocale;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -39,5 +38,5 @@ public class JavaDefaultLocaleTest {
         subjectUnderTest.after();
         assertThat(Locale.getDefault(), is(equalTo(Locale.ITALIAN)));
     }
-    
+
 }

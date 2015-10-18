@@ -154,8 +154,8 @@ abstract class BaseUriBuilder {
      * Create a copy of the BaseUriBuilder preserving its state. This is a more efficient means of creating a copy than
      * constructing a new BaseUriBuilder from a URI returned by the {@code #build(Object...)} method.
      */
-    @SuppressWarnings("CloneDoesntDeclareCloneNotSupportedException")
     @Override
+    @SuppressWarnings("CloneDoesntDeclareCloneNotSupportedException")
     public abstract BaseUriBuilder clone();
 
     /**

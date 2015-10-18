@@ -56,7 +56,7 @@ import java.util.List;
  * @author Paul Sandoz
  * @author Marek Potociar (marek.potociar at oracle.com)
  */
-class UriComponent {
+final class UriComponent {
 
     private static final String[] SCHEME = {"0-9", "A-Z", "a-z", "+", "-", "."};
     private static final String[] UNRESERVED = {"0-9", "A-Z", "a-z", "-", ".", "_", "~"};
@@ -64,9 +64,9 @@ class UriComponent {
     private static final boolean[][] ENCODING_TABLES = initEncodingTables();
     private static final Charset UTF_8_CHARSET = Charset.forName("UTF-8");
     private static final int[] HEX_TABLE = initHexTable();
-    private final static char[] HEX_DIGITS = {
+    private static final char[] HEX_DIGITS = {
         '0', '1', '2', '3', '4', '5', '6', '7',
-        '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
+        '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
     };
 
     private UriComponent() {

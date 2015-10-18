@@ -65,7 +65,8 @@ class UriTemplateParser {
             '?', '-', ':', '<',
             '(', '[', '$', '=',
             ')', ']', ',', '>',
-            '*', '+', '|'};
+            '*', '+', '|',
+        };
 
         final Set<Character> s = new HashSet<>(reserved.length);
         for (char c : reserved) {
@@ -75,7 +76,7 @@ class UriTemplateParser {
     }
 
     private static final Pattern TEMPLATE_VALUE_PATTERN = Pattern.compile("[^/]+?");
-    private final static String[] HEX_TO_UPPERCASE_REGEX = initHexToUpperCaseRegex();
+    private static final String[] HEX_TO_UPPERCASE_REGEX = initHexToUpperCaseRegex();
 
     private final String template;
     private final StringBuffer regex = new StringBuffer();

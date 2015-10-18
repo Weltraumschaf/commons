@@ -60,7 +60,7 @@ import java.util.regex.PatternSyntaxException;
  */
 class UriTemplate {
 
-    private static String[] EMPTY_VALUES = new String[0];
+    private static final String[] EMPTY_VALUES = new String[0];
 
     /**
      * Order the templates according to JAX-RS specification.
@@ -824,10 +824,10 @@ class UriTemplate {
             String template,
             final String[] values, final int offset,
             final boolean encode,
-            final Map<String, ?> _mapValues,
+            final Map<String, ?> aMapValues,
             final StringBuilder b) {
 
-        final Map<String, Object> mapValues = (Map<String, Object>) _mapValues;
+        final Map<String, Object> mapValues = (Map<String, Object>) aMapValues;
 
         if (template.indexOf('{') == -1) {
             b.append(template);
@@ -873,7 +873,7 @@ class UriTemplate {
      * @param type Type of the {@code template} (port, path, query, ...).
      * @param template Input uri component to resolve.
      * @param encode True if template values from {@code _mapValues} should be percent encoded.
-     * @param _mapValues Map with template variables as keys and template values as values. None of them should be null.
+     * @param aMapValues Map with template variables as keys and template values as values. None of them should be null.
      * @return String with resolved template variables.
      * @throws IllegalArgumentException when {@code _mapValues} value is null.
      */
@@ -881,13 +881,13 @@ class UriTemplate {
     static String resolveTemplateValues(UriComponent.Type type,
             String template,
             final boolean encode,
-            final Map<String, ?> _mapValues) {
+            final Map<String, ?> aMapValues) {
 
         if (template == null || template.isEmpty() || template.indexOf('{') == -1) {
             return template;
         }
 
-        final Map<String, Object> mapValues = (Map<String, Object>) _mapValues;
+        final Map<String, Object> mapValues = (Map<String, Object>) aMapValues;
         final StringBuilder sb = new StringBuilder();
 
         // Find all template variables

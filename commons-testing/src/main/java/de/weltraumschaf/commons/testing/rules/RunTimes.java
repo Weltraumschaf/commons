@@ -70,8 +70,9 @@ public @interface RunTimes {
 
     /**
      * How many times a test must be executed.
-     *
-     * @return must be greater than 0
+     * <p>
+     *  Must return an int greater than 0.
+     * </p>
      */
     int value();
 }

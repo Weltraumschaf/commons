@@ -85,8 +85,9 @@ public @interface RunMaxTimes {
 
     /**
      * How many times a test should be executed at maximum if it fails.
-     *
-     * @return must be greater than 0, defaults to {@link #DEFAULT_MAX_TIMES}
+     * <p>
+     *  Must return an int greater than 0 , defaults to {@link #DEFAULT_MAX_TIMES}.
+     * </p>
      */
     int value() default DEFAULT_MAX_TIMES;
 }

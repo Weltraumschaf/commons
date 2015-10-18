@@ -1,10 +1,8 @@
 package de.weltraumschaf.commons.testing.rules;
 
-import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import java.lang.annotation.Annotation;
 
@@ -14,7 +12,6 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
-import de.weltraumschaf.commons.testing.rules.Repeater.RepeatStatement;
 import de.weltraumschaf.commons.validate.Validate;
 
 /**
@@ -47,49 +44,43 @@ public class Repeater_WithRunTimesTest {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("The repeater annotation @RunTimes needs a value greater that 0! You gave 0.");
 
-        sut.apply(new StatementStub(), createDescriptionWithRepeatAnnotation(0));
+        sut.apply(new BaseStatement(1), createDescriptionWithRepeatAnnotation(0));
     }
 
     @Test
     public void apply_executesBaseStatementOneTime() throws Throwable {
-        final StatementStub base = new StatementStub();
-        final Statement repeeted = sut.apply(base, createDescriptionWithRepeatAnnotation(1));
+        final BaseStatement base = new BaseStatement(1);
 
-        assertThat(repeeted, is(instanceOf(RepeatStatement.class)));
-        repeeted.evaluate();
+        sut.apply(base, createDescriptionWithRepeatAnnotation(1)).evaluate();
+
         assertThat(base.getEvaluatedCount(), is(1));
     }
 
     @Test
     public void apply_executesBaseStatementThreeTimes() throws Throwable {
-        final StatementStub base = new StatementStub();
-        final Statement repeated = sut.apply(base, createDescriptionWithRepeatAnnotation(3));
+        final BaseStatement base = new BaseStatement(1);
 
-        assertThat(repeated, is(instanceOf(RepeatStatement.class)));
-        repeated.evaluate();
+        sut.apply(base, createDescriptionWithRepeatAnnotation(3)).evaluate();
+
         assertThat(base.getEvaluatedCount(), is(3));
     }
 
     @Test
     public void apply_executesBaseStatementTwentyTime() throws Throwable {
-        final StatementStub base = new StatementStub();
-        final Statement repeated = sut.apply(base, createDescriptionWithRepeatAnnotation(20));
+        final BaseStatement base = new BaseStatement(1);
 
-        assertThat(repeated, is(instanceOf(RepeatStatement.class)));
-        repeated.evaluate();
+        sut.apply(base, createDescriptionWithRepeatAnnotation(20)).evaluate();
+
         assertThat(base.getEvaluatedCount(), is(20));
     }
 
     @Test
     public void apply_doesEvaluateAllRunsAlthoughRunFails() throws Throwable {
-        final StatementStub base = new StatementStub(2);
+        thrown.expect(AssertionError.class);
+        thrown.expectMessage(startsWith("There were 10 (50.00 %) errors in 20 runs:"));
+        final BaseStatement base = new BaseStatement(2);
 
-        try {
-            sut.apply(base, createDescriptionWithRepeatAnnotation(20)).evaluate();
-            fail("Expected exception not thrown!");
-        } catch (final AssertionError e) {
-            assertThat(e.getMessage(), startsWith("There were 10 (50.00 %) errors in 20 runs:"));
-        }
+        sut.apply(base, createDescriptionWithRepeatAnnotation(20)).evaluate();
 
         assertThat(base.getEvaluatedCount(), is(20));
     }
@@ -97,7 +88,7 @@ public class Repeater_WithRunTimesTest {
     /**
      * Stubs the base statement which will be the executed test statement in real tests.
      */
-    private static class StatementStub extends Statement {
+    private static class BaseStatement extends Statement {
 
         /**
          * How many evaluations should throw an assertion error.
@@ -110,18 +101,11 @@ public class Repeater_WithRunTimesTest {
         private int count;
 
         /**
-         * Initializes {@link #failFactor} with one.
-         */
-        StatementStub() {
-            this(1);
-        }
-
-        /**
          * Dedicated constructor.
          *
          * @param failFactor must be greater than 0
          */
-        StatementStub(final int failFactor) {
+        BaseStatement(final int failFactor) {
             super();
             Validate.isTrue(failFactor > 0, "Parameter failFactor must be greater than 0!");
             this.failFactor = failFactor;

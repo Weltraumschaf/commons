@@ -1,7 +1,6 @@
 package de.weltraumschaf.commons.testing.rules;
 
 import de.weltraumschaf.commons.testing.rules.Repeater.BaseRepeatStatement;
-import de.weltraumschaf.commons.testing.rules.Repeater.RepeatStatement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +8,6 @@ import static org.hamcrest.Matchers.closeTo;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -86,19 +84,19 @@ public final class BaseRepeatStatementTest {
     @Test
     public void calculateFailedRepetitionPercentage() {
         assertThat(
-            RepeatStatement.calculateFailedRepetitionPercentage(5, 0),
+            BaseRepeatStatement.calculateFailedRepetitionPercentage(5, 0),
             is(closeTo(0.0d, ALLOWED_DEVIATION)));
         assertThat(
-            RepeatStatement.calculateFailedRepetitionPercentage(100, 10),
+            BaseRepeatStatement.calculateFailedRepetitionPercentage(100, 10),
             is(closeTo(10.0d, ALLOWED_DEVIATION)));
         assertThat(
-            RepeatStatement.calculateFailedRepetitionPercentage(100, 50),
+            BaseRepeatStatement.calculateFailedRepetitionPercentage(100, 50),
             is(closeTo(50.0d, ALLOWED_DEVIATION)));
         assertThat(
-            RepeatStatement.calculateFailedRepetitionPercentage(20, 10),
+            BaseRepeatStatement.calculateFailedRepetitionPercentage(20, 10),
             is(closeTo(50.0d, ALLOWED_DEVIATION)));
         assertThat(
-            RepeatStatement.calculateFailedRepetitionPercentage(70, 11),
+            BaseRepeatStatement.calculateFailedRepetitionPercentage(70, 11),
             is(closeTo(15.71d, ALLOWED_DEVIATION)));
     }
 
@@ -132,7 +130,7 @@ public final class BaseRepeatStatementTest {
         errors.add(t);
 
         assertThat(
-            RepeatStatement.formatErrors(errors, 1),
+            BaseRepeatStatement.formatErrors(errors, 1),
             is(equalTo("There were 1 (100.00 %) errors in 1 run:" + NL
                     + "1. java.lang.Throwable: snafu" + NL
                     + "\tat foo.bar(baz:42)" + NL)));

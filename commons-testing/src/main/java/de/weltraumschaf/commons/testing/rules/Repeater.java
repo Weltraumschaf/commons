@@ -257,7 +257,7 @@ public final class Repeater implements TestRule {
     /**
      * This statement executes the given base statement repeatedly.
      */
-    static final class RepeatStatement extends BaseRepeatStatement {
+    private static final class RepeatStatement extends BaseRepeatStatement {
 
         /**
          * Dedicated constructor.
@@ -288,7 +288,7 @@ public final class Repeater implements TestRule {
     /**
      * This statement executes the given base statement repeatedly until it succeeds or reaches times.
      */
-    static final class RepeatUntilSuccessStatement extends BaseRepeatStatement {
+    private static final class RepeatUntilSuccessStatement extends BaseRepeatStatement {
 
         /**
          * Dedicated constructor.

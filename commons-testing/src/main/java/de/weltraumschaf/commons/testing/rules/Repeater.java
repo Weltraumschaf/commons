@@ -303,18 +303,19 @@ public final class Repeater implements TestRule {
         @Override
         public void evaluate() throws Throwable {
             final List<Throwable> errors = new ArrayList<>();
+            boolean failed = true;
 
-            boolean success = false;
-            for (int i = 0; i < times() && !success; i++) {
+            for (int i = 0; i < times(); i++) {
                 try {
                     base().evaluate();
-                    success = true;
+                    failed = false;
+                    break;
                 } catch (final Throwable t) { // NOPMD Collect errors to throw one summary error after all repetitions.
                     errors.add(t);
                 }
             }
 
-            if (!success) {
+            if (failed) {
                 assertNoErrors(errors);
             }
         }

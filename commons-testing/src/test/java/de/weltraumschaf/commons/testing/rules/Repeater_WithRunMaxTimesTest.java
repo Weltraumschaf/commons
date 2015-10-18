@@ -3,7 +3,6 @@ package de.weltraumschaf.commons.testing.rules;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.startsWith;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 
 import java.lang.annotation.Annotation;
 
@@ -18,7 +17,7 @@ import de.weltraumschaf.commons.validate.Validate;
 /**
  * Tests for {@link Repeater} with {@link RunMaxTimes} annotation.
  */
-public class Repeater_WithRunMaxTimes {
+public class Repeater_WithRunMaxTimesTest {
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
@@ -26,7 +25,7 @@ public class Repeater_WithRunMaxTimes {
     private final Repeater sut = new Repeater();
 
     private static Description createDescriptionWithRepeatUntilSuccessAnnotation(final int times) {
-        return Description.createTestDescription(Repeater_WithRunMaxTimes.class, "foo", new RunMaxTimes() {
+        return Description.createTestDescription(Repeater_WithRunMaxTimesTest.class, "foo", new RunMaxTimes() {
 
             @Override
             public int value() {

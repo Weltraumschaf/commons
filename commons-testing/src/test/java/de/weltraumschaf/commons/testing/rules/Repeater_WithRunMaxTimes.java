@@ -20,7 +20,7 @@ import de.weltraumschaf.commons.validate.Validate;
 /**
  * Tests for {@link Repeater} with {@link RunMaxTimes} annotation.
  */
-public class Repeater_RepeatUntilSuccess {
+public class Repeater_WithRunMaxTimes {
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
@@ -28,7 +28,7 @@ public class Repeater_RepeatUntilSuccess {
     private final Repeater sut = new Repeater();
 
     private static Description createDescriptionWithRepeatUntilSuccessAnnotation(final int times) {
-        return Description.createTestDescription(Repeater_RepeatUntilSuccess.class, "foo", new RunMaxTimes() {
+        return Description.createTestDescription(Repeater_WithRunMaxTimes.class, "foo", new RunMaxTimes() {
 
             @Override
             public int value() {

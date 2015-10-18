@@ -75,18 +75,37 @@ public final class Repeater implements TestRule {
         Validate.notNull(description, "description");
 
         if (hasRunTimesAnnotation(description)) {
-            return new RepeatStatement(
-                description.getAnnotation(RunTimes.class).value(),
-                base);
+            final int times = description.getAnnotation(RunTimes.class).value();
+            validateTimes(times, RunTimes.class);
+            return new RepeatStatement(times, base);
         }
 
         if (hasRunMaxTimesAnnotation(description)) {
-            return new RepeatUntilSuccessStatement(
-                description.getAnnotation(RunMaxTimes.class).value(),
-                base);
+            final int times = description.getAnnotation(RunMaxTimes.class).value();
+            validateTimes(times, RunMaxTimes.class);
+            return new RepeatUntilSuccessStatement(times, base);
         }
 
         return base;
+    }
+
+    /**
+     * Validates that the given times value is not less than zero.
+     * <p>
+     * This method throws an {@link IllegalArgumentExceptio} with an user friendly error message to help test writers
+     * which accidentally used a wrong annotation value.
+     * </p>
+     *
+     * @param timesthe current annotation value
+     * @param annotation the current annotation type
+     */
+    private void validateTimes(final int times, Class<? extends Annotation> annotation) {
+        if (times < 1) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "The repeater annotation @%s needs a value greater that 0! You gave %d.",
+                    annotation.getSimpleName(), times));
+        }
     }
 
     /**
@@ -95,7 +114,7 @@ public final class Repeater implements TestRule {
      * @param description must not be {@code null}
      * @return {@code true} if present, else {@code false}
      */
-     boolean hasRunTimesAnnotation(final Description description) {
+    boolean hasRunTimesAnnotation(final Description description) {
         return null != description.getAnnotation(RunTimes.class);
     }
 

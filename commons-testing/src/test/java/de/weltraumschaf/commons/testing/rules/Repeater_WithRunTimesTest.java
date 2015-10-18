@@ -38,7 +38,7 @@ public class Repeater_WithRunTimesTest {
     @Test
     public void apply_throwsExcpetionIfRuleAnnotationWithLessThanOne() {
         thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("Parameter 'times' must be greater than 0!");
+        thrown.expectMessage("The repeater annotation @RunTimes needs a value greater that 0! You gave 0.");
 
         sut.apply(new StatementStub(), createDescriptionWithRepeatAnnotation(0));
     }

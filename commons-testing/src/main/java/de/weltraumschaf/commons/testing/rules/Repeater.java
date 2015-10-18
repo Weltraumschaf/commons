@@ -96,7 +96,7 @@ public final class Repeater implements TestRule {
      * which accidentally used a wrong annotation value.
      * </p>
      *
-     * @param timesthe current annotation value
+     * @param times the current annotation value
      * @param annotation the current annotation type
      */
     private void validateTimes(final int times, Class<? extends Annotation> annotation) {

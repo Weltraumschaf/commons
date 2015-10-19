@@ -18,7 +18,24 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
- * Does have a {@link Throwable} a message, which {@link Matcher matches something}?
+ * Does have a {@link Throwable} a message, which {@link Matcher matches something}.
+ * <p>
+ * Example:
+ * </p>
+ * <pre>
+ * {@code
+ *  public class MyTest {
+ *
+ *      private final SomeClass sut = new SomeClass();
+ *
+ *      &#064;Test
+ *      public void throwsFooException() {
+ *          final Throwable result = sut.makeError("foobar");
+ *
+ *          assertThat(result, hasMessage(is("foobar")));
+ *      }
+ *  }
+ * }</pre>
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  * @since 1.0.0

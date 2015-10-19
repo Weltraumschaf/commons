@@ -317,7 +317,23 @@ public class MyTest {
 
 ### HasMessage
 
-TODO
+This matcher helps you to match the message of any `Throwable`.
+
+Example:
+
+```
+public class MyTest {
+
+    private final SomeClass sut = new SomeClass();
+    
+    @Test
+    public void throwsFooException() {
+        final Throwable result = sut.makeError("foobar");
+        
+        assertThat(result, hasMessage(is("foobar")));
+    }
+}
+```
 
 ### IntegerIsCloseTo
 

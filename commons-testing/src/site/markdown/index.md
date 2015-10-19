@@ -278,7 +278,8 @@ multiple times until it succeeded or the given number of tries is exhausted.
 
 ## Custom Hamcrest Matchers
 
-This module provides custom matchers for [Hamcrest][hamcrest].
+This module provides  custom matchers for [Hamcrest][hamcrest]. All  of them are
+provided by the `CommonsTestingMatchers` factory.
 
 ### ApplicationExceptionCodeMatcher
 
@@ -345,7 +346,12 @@ public class MyTest {
 
 ### IsCloseTo Matcher for Integer/Long
 
-    TODO
+It is  common sense that floating  point numbers must not  be compared directly,
+but  with a  delta.  [Hamcrest][hamcrest] provides  an  `IsCloseTo` matcher  for
+doubles.
+
+Sometimes  there is  a rare  case you  want to  match an  integer number  with a
+delta. With `LongIsCloseTo` and `IntegerIsCloseTo` you can do that.
 
 [junit]:        http://junit.org/
 [junit-rules]:  https://github.com/junit-team/junit/wiki/Rules

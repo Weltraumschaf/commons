@@ -306,11 +306,19 @@ enum ExitCodeImpl implements ExitCode {
 public class MyTest {
 
     @Test
-    public void throwsFooException() {
+    public void testForExitCodeEnum() {
         final ApplicationException ex =
             new ApplicationException(ExitCodeImpl.FOO, "foo");
 
         assertThat(ex, hasExitCode(ExitCodeImpl.FOO));
+    }
+    
+    @Test
+    public void testForExitCodeEnum() {
+        final ApplicationException ex =
+            new ApplicationException(ExitCodeImpl.FOO, "foo");
+
+        assertThat(ex, hasExitCode(0));
     }
 }
 ```
@@ -335,13 +343,9 @@ public class MyTest {
 }
 ```
 
-### IntegerIsCloseTo
+### IsCloseTo Matcher for Integer/Long
 
-TODO
-
-### LongIsCloseTo
-
-TODO
+    TODO
 
 [junit]:        http://junit.org/
 [junit-rules]:  https://github.com/junit-team/junit/wiki/Rules

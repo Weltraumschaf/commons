@@ -41,7 +41,7 @@ import java.lang.annotation.Target;
  * </p>
  *
  * <p>
- * Use this annotation together with the {@link de.iteratec.stu.testtools.Repeater
+ * Use this annotation together with the {@link de.weltraumschaf.commons.testing.rules.Repeater
  * repeater rule}.
  * </p>
  *
@@ -88,6 +88,8 @@ public @interface RunMaxTimes {
      * <p>
      *  Must return an int greater than 0 , defaults to {@link #DEFAULT_MAX_TIMES}.
      * </p>
+     *
+     * @return greater 0
      */
     int value() default DEFAULT_MAX_TIMES;
 }

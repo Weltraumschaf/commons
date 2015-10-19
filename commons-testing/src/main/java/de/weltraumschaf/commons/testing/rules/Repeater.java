@@ -92,7 +92,7 @@ public final class Repeater implements TestRule {
     /**
      * Validates that the given times value is not less than zero.
      * <p>
-     * This method throws an {@link IllegalArgumentExceptio} with an user friendly error message to help test writers
+     * This method throws an {@link IllegalArgumentException} with an user friendly error message to help test writers
      * which accidentally used a wrong annotation value.
      * </p>
      *

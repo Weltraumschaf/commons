@@ -37,7 +37,7 @@ import java.lang.annotation.Target;
  * </p>
  *
  * <p>
- * Use this annotation together with the {@link de.iteratec.stu.testtools.Repeater
+ * Use this annotation together with the {@link de.weltraumschaf.commons.testing.rules.Repeater
  * repeater rule}.
  * </p>
  *
@@ -73,6 +73,8 @@ public @interface RunTimes {
      * <p>
      *  Must return an int greater than 0.
      * </p>
+     *
+     * @return greater 0
      */
     int value();
 }

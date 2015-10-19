@@ -41,7 +41,7 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
      * Convenience constructor.
      *
      * @param expectedExitCode must not be {@code null}
-     * @deprecated Use {@link CustomMatchers#hasExitCode(de.weltraumschaf.commons.system.ExitCode)} instead
+     * @deprecated Use {@link CommonsTestingMatchers#hasExitCode(de.weltraumschaf.commons.system.ExitCode)} instead
      */
     @Deprecated
     public ApplicationExceptionCodeMatcher(final ExitCode expectedExitCode) {

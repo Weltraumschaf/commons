@@ -26,7 +26,7 @@ import org.hamcrest.Matcher;
  * </p>
  *
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
- * @deprecated Use {@link CustomMatchers#closeTo(long, long)} instead
+ * @deprecated Use {@link CommonsTestingMatchers#closeTo(long, long)} instead
  */
 @Deprecated
 public class IsCloseTo extends LongIsCloseTo {

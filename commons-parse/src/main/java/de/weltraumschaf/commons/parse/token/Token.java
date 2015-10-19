@@ -31,7 +31,7 @@ public interface Token {
      * The raw string recognized by the scanner.
      * <p>
      * For example a string token {@code "foo"} has the raw value {@code "foo"} in contrast
-     * it's typed {@link #asString() string value} will be {@code foo}.
+     * it's typed string value will be {@code foo}.
      * </p>
      *
      * @return never {@code null}

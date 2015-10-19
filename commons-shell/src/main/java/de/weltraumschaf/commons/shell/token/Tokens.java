@@ -30,7 +30,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#BOOLEAN boolean} token.
+     * Creates a new {@link de.weltraumschaf.commons.shell.token.TokenType#BOOLEAN boolean} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}
@@ -42,7 +42,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#INTEGER integer} token.
+     * Creates a new {@link de.weltraumschaf.commons.shell.token.TokenType#INTEGER integer} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}
@@ -54,7 +54,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#FLOAT float} token.
+     * Creates a new {@link de.weltraumschaf.commons.shell.token.TokenType#FLOAT float} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}
@@ -66,7 +66,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#STRING string} token.
+     * Creates a new {@link de.weltraumschaf.commons.shell.token.TokenType#STRING string} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}
@@ -78,7 +78,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#KEYWORD keyword} token.
+     * Creates a new {@link de.weltraumschaf.commons.shell.token.TokenType#KEYWORD keyword} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}
@@ -90,7 +90,7 @@ public final class Tokens {
     }
 
     /**
-     * Creates a new {@link de.weltraumschaf.commons.token.TokenType#LITERAL literal} token.
+     * Creates a new {@link de.weltraumschaf.commons.shell.token.TokenType#LITERAL literal} token.
      *
      * @param position start position of token, must not be {@code null}
      * @param raw raw value of the token, must not be {@code null}

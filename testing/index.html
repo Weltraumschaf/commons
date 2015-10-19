@@ -369,7 +369,7 @@ final String content = out.toString();
 <p>In the example above the test is executed one time. If it didn&#x2019;t failed that&#x2019;s it. Unless the test is repeated and executed second time. If it didn&#x2019;t failed that&#x2019;s it. Unless the test is repeated again and executed third and last time. If it failed again, then the test is marked red. So the test is always executed multiple times until it succeeded or the given number of tries is exhausted.</p></div></div></div>
 <div class="section">
 <h2><a name="Custom_Hamcrest_Matchers"></a>Custom Hamcrest Matchers</h2>
-<p>This module provides custom matchers for <a class="externalLink" href="http://hamcrest.org/JavaHamcrest/">Hamcrest</a>.</p>
+<p>This module provides custom matchers for <a class="externalLink" href="http://hamcrest.org/JavaHamcrest/">Hamcrest</a>. All of them are provided by the <tt>CommonsTestingMatchers</tt> factory.</p>
 <div class="section">
 <h3><a name="ApplicationExceptionCodeMatcher"></a>ApplicationExceptionCodeMatcher</h3>
 <p>This matcher helps you to match your own exit code implementations (see application module).</p>
@@ -395,23 +395,45 @@ final String content = out.toString();
 public class MyTest {
 
     @Test
-    public void throwsFooException() {
+    public void testForExitCodeEnum() {
         final ApplicationException ex =
             new ApplicationException(ExitCodeImpl.FOO, &quot;foo&quot;);
 
         assertThat(ex, hasExitCode(ExitCodeImpl.FOO));
     }
+    
+    @Test
+    public void testForExitCodeEnum() {
+        final ApplicationException ex =
+            new ApplicationException(ExitCodeImpl.FOO, &quot;foo&quot;);
+
+        assertThat(ex, hasExitCode(0));
+    }
 }
 </pre></div></div></div>
 <div class="section">
 <h3><a name="HasMessage"></a>HasMessage</h3>
-<p>TODO</p></div>
+<p>This matcher helps you to match the message of any <tt>Throwable</tt>.</p>
+<p>Example:</p>
+
+<div class="source">
+<div class="source">
+<pre>public class MyTest {
+
+    private final SomeClass sut = new SomeClass();
+    
+    @Test
+    public void throwsFooException() {
+        final Throwable result = sut.makeError(&quot;foobar&quot;);
+        
+        assertThat(result, hasMessage(is(&quot;foobar&quot;)));
+    }
+}
+</pre></div></div></div>
 <div class="section">
-<h3><a name="IntegerIsCloseTo"></a>IntegerIsCloseTo</h3>
-<p>TODO</p></div>
-<div class="section">
-<h3><a name="LongIsCloseTo"></a>LongIsCloseTo</h3>
-<p>TODO</p></div></div>
+<h3><a name="IsCloseTo_Matcher_for_IntegerLong"></a>IsCloseTo Matcher for Integer/Long</h3>
+<p>It is common sense that floating point numbers must not be compared directly, but with a delta. <a class="externalLink" href="http://hamcrest.org/JavaHamcrest/">Hamcrest</a> provides an <tt>IsCloseTo</tt> matcher for doubles.</p>
+<p>Sometimes there is a rare case you want to match an integer number with a delta. With <tt>LongIsCloseTo</tt> and <tt>IntegerIsCloseTo</tt> you can do that.</p></div></div>
                   </div>
             </div>
           </div>

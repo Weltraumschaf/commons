@@ -4,7 +4,7 @@ This module contains utilities and helpers for unit testing.
 
 ## General Helpers
 
-### Capturing Print Stream
+### CapturingPrintStream
 
 `CapturingPrintStream` is a  class for capturing print stream which  may be used
 to capture the output printed to `System.out` or `System.err`.
@@ -31,7 +31,62 @@ final String content = out.toString();
 
 ### DelayedRepeater
 
-TODO
+`DelayedRepeater` is a  utility class to wait repeatadly for  something until it
+happens. The use  case are subject under test which  does something asynchronous
+over the  network or in other  threads, but does  not provide a callback  API to
+hook  in.   Usually  you   fire  your   acting  call  and   then  loop   with  a
+`Thread#sleep(int)` until you  can assert. But to  do this all over  the time by
+hand is  tedious and  error prone.  Also you  have untested  logic in  your test
+code.  `DelayedRepeater` abstracts  this "sleeping  loop"  away for  you and  is
+tested.
+
+The basic  idea is: You  make your  arangement and acting  of your test  code as
+uasual, but the assertion as a callback of the `DelayedRepeater`.
+
+Example with `Runnable` as callback:
+
+```
+public class TestSomething {
+    
+    @Test
+    public void testSomeThing() {
+        final SomeClass subjectUnderTest = new SomeClass();
+        
+        subjectUnderTest.doSomethingLongAsync();
+        
+        DelayedRepeater.create(500, 3).execute(new Runnable() {
+            public void run() {
+                assertThat(
+                    subjectUnderTest.getResult(),
+                    is("foobar"));
+            }
+        });
+    }
+    
+}
+```
+
+Example with `Callable` as callback:
+
+```
+public class TestSomething {
+    @Test
+    public void testSomeThing() {
+        final SomeClass subjectUnderTest = new SomeClass();
+        
+        subjectUnderTest.doSomethingLongAsync();
+        
+        DelayedRepeater.create(500, 3).execute(new Callable<Void>() {
+            public Void call() throws Exception {
+                assertThat(
+                    subjectUnderTest.getResult(),
+                    is("foobar"));
+                return null;
+            }
+        });
+    }
+}
+```
 
 ## JUnit Rules
 
@@ -43,10 +98,10 @@ For more information about JUnit rules see [the documentation][junit-rules].
 This  rule  utilizes the  `CapturingPrintStream`  to  redirect `System.out`  and
 `System.err` before each test method  invocation and restores them afterwards to
 the origins. The rule also provides  methods to set expectation matchers for the
-captured string.
+captured string. 
 
 ```
-public class OutputTest {
+public class TestSomething {
 
     @Rule
     public final CapturedOutput output = new CapturedOutput();

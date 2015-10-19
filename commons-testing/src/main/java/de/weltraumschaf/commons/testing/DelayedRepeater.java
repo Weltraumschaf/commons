@@ -63,7 +63,7 @@ import java.util.concurrent.Callable;
  *  final Scheduler sut = new Scheduler();
  *  sut.execute(jobs);
  *
- *  DelayedRepeater.create(500, 3).execute(new Runnable(){
+ *  DelayedRepeater.create(500, 3).execute(new Runnable() {
  *      public void run() {
  *          for (final Job job : jobs) {
  *              assertThat(job.isDone, is(true));
@@ -87,8 +87,8 @@ import java.util.concurrent.Callable;
  *
  *  final Scheduler sut = new Scheduler();
  *  sut.execute(jobs);
- *  DelayedRepeater.create(500, 3).execute(new Callable<Void>(){
- *      public Void run() {
+ *  DelayedRepeater.create(500, 3).execute(new Callable<Void>() {
+ *      public Void call() throws Exception {
  *          for (final Job job : jobs) {
  *              assertThat(job.isDone, is(true));
  *          }

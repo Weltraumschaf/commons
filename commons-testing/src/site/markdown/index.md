@@ -17,7 +17,7 @@ final String output = out.getCapturedOutput();
 ```
 
 Same    way    you    can    redirect    the    error    output    by    setting
-`System.setErr(PrintStream)`. Usualy  this is  helpful if  you have  legacy code
+`System.setErr(PrintStream)`. Usually  this is helpful  if you have  legacy code
 which uses  `System.out` or `System.err`  directly without any  abstraction. You
 can capture that output and inspect it.
 
@@ -31,7 +31,7 @@ final String content = out.toString();
 
 ### DelayedRepeater
 
-`DelayedRepeater` is a  utility class to wait repeatadly for  something until it
+`DelayedRepeater` is a  utility class to wait repeatedly for  something until it
 happens. The use  case are subject under test which  does something asynchronous
 over the  network or in other  threads, but does  not provide a callback  API to
 hook  in.   Usually  you   fire  your   acting  call  and   then  loop   with  a
@@ -40,8 +40,8 @@ hand is  tedious and  error prone.  Also you  have untested  logic in  your test
 code.  `DelayedRepeater` abstracts  this "sleeping  loop"  away for  you and  is
 tested.
 
-The basic  idea is: You  make your  arangement and acting  of your test  code as
-uasual, but the assertion as a callback of the `DelayedRepeater`.
+The basic  idea is: You make  your arrangement and  acting of your test  code as
+usual, but the assertion as a callback of the `DelayedRepeater`.
 
 Example with `Runnable` as callback:
 
@@ -158,7 +158,7 @@ public class TestSomething {
 ```
 
 But this approach  is tedious and error  prone. It is easy  to forget resetting.
-Also it  is code duplication and  violates DRY if you  do this in all  ou tests.
+Also it is code  duplication and violates DRY if you do this  in all your tests.
 The `JavaDefaultLocale` is for doing this tedious stuff for you:
 
 ```
@@ -184,12 +184,12 @@ Sometimes you  have legacy code with  weird timing issues or  other side effects
 and the  code only does  sometimes something  wrong. Imagine: The  customer says
 every one hundred  X or so the bug  happens. But when you runt  your tests every
 thing is  fine. Then you  start hitting  the run test  button over and  over and
-BANG!, the bug  occures. But the next time  it is gone. The nyou  start to write
+BANG!, the  bug occurs. But the  next time it is  gone. Then you start  to write
 loops in  your test code to  provoke the bug. But  this is not good  practice to
 add logic into your tests. (Because where are tests for this logic?)
 
 The repeat rule  is a tested helper to  do that. You add that  rule and annotate
-the tests you wanted repeatedly executed with an annoation:
+the tests you wanted repeatedly executed with an annotation:
 
 ```
 public class TestSomething {
@@ -208,21 +208,21 @@ public class TestSomething {
 #### RunMaxTimes Annotation
 
 Common pain  in the ass  are UI tests.  You have tests  which runs fine  on your
-machine and they run fine on the  CI almost always, but sometimes they fail. The
-nyou  investigate, but  they  rune fine  on  your  machine and  on  the CI.  But
+machine and  they run  fine on the  CI almost always,  but sometimes  they fail.
+Then you  investigate, but they  rune fine  on your machine  and on the  CI. But
 sometimes... The problem is timing: You have  to define timeouts in your UI test
 framework.  That's almost  always enough.  But  in rare  situation (heavy  load,
 solar wind,  what ever) the  timeout is not enough  and the tests  fail randomly
 without a reason.  This erodes the whole test suite  because everybody starts to
-ignore the red ci.
+ignore the red CI.
 
 A simple solution is: If a single UI  test fails, then start it again and see if
-fails again.  Unless everuthing is fine.  If it continues failing  then there is
-maybe a  r eal  bug. But  you don  ot wnat to  do this  manually with  the whole
-suite. For  this use  case is  the `RunMaxtimes` annotation.  In contrat  to the
-`RunTimes` annotation it  does not run the  test the given vlaue  times, it only
-runs the  test multiple  times if  it fails until  it succeds  or the  max times
-value is reached. If  one of the runs succeded the test is  marked green. If all
+fails again.  Unless everything is fine.  If it continues failing  then there is
+maybe a real bug.  But you don't want to do this manually  with the whole suite.
+For  this  use  case  is  the  `RunMaxtimes`  annotation.  In  contrast  to  the
+`RunTimes` annotation it  does not run the  test the given value  times, it only
+runs the  test multiple times  if it  fails until it  succeeds or the  max times
+value is reached. If one of the runs  succeeded the test is marked green. If all
 runs failed the test is marked red.
 
 Example:
@@ -245,7 +245,7 @@ In the example above  the test is executed one time. If  it didn't failed that's
 it. Unless the  test is repeated and  executed second time. If  it didn't failed
 that's it. Unless the  test is repeated again and executed  third and last time.
 If it failed again, then the test is  marked red. So the test is always executed
-multiple times until it succeded or the given number of tries is exhausted.
+multiple times until it succeeded or the given number of tries is exhausted.
 
 ## Custom Hamcrest Matchers
 

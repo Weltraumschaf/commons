@@ -168,7 +168,7 @@ System.setOut(out);
 System.out.print(&quot;hello, world&quot;);
 final String output = out.getCapturedOutput();
 </pre></div></div>
-<p>Same way you can redirect the error output by setting <tt>System.setErr(PrintStream)</tt>. Usualy this is helpful if you have legacy code which uses <tt>System.out</tt> or <tt>System.err</tt> directly without any abstraction. You can capture that output and inspect it.</p>
+<p>Same way you can redirect the error output by setting <tt>System.setErr(PrintStream)</tt>. Usually this is helpful if you have legacy code which uses <tt>System.out</tt> or <tt>System.err</tt> directly without any abstraction. You can capture that output and inspect it.</p>
 <p>So essentially <tt>CapturingPrintStream</tt> is a convenient shorthand for:</p>
 
 <div class="source">
@@ -179,8 +179,33 @@ final String content = out.toString();
 </pre></div></div></div>
 <div class="section">
 <h3><a name="DelayedRepeater"></a>DelayedRepeater</h3>
-<p><tt>DelayedRepeater</tt> is a utility class to wait repeatadly for something until it happens. The use case are subject under test which does something asynchronous over the network or in other threads, but does not provide a callback API to hook in. Usually you fire your acting call and then loop with a <tt>Thread#sleep(int)</tt> until you can assert. But to do this all over the time by hand is tedious and error prone. Also you have untested logic in your test code. <tt>DelayedRepeater</tt> abstracts this &#x201c;sleeping loop&#x201d; away for you and is tested.</p>
-<p>The basic idea is: You make your arangement and acting of your test code as uasual, but the assertion as a callback of the <tt>DelayedRepeater</tt>.</p>
+<p><tt>DelayedRepeater</tt> is a utility class to wait repeatedly for something until it happens. The use case are subject under test which does something asynchronous over the network or in other threads, but does not provide a callback API to hook in. Usually you fire your acting call and then loop with a <tt>Thread#sleep(int)</tt> until you can assert. But to do this all over the time by hand is tedious and error prone. Also you have untested logic in your test code. <tt>DelayedRepeater</tt> abstracts this &#x201c;sleeping loop&#x201d; away for you and is tested.</p>
+<p>The basic idea is: You make your arrangement and acting of your test code as usual, but the assertion as a callback of the <tt>DelayedRepeater</tt>. You can give the factory method two parameters: 1. the time in milliseconds to wait until the callback is executed, 2. the number of tries. If you create one for example like <tt>DelayedRepeater.create(500, 3)</tt> then it will wait 500 ms before invoking the give callback the first time. The sequence is like:</p>
+
+<div class="source">
+<div class="source">
+<pre> [ execute(...) ]
+        |
+        v
+  [ wait 500 ms ]
+        |
+        v
+[ 1st run()/call() ]
+        |
+        v
+  [ wait 500 ms ]
+        |
+        v
+[ 2nd run()/call() ]
+        |
+        v
+  [ wait 500 ms ]
+        |
+        v
+[ 3rd run()/call() ]
+        |
+        o
+</pre></div></div>
 <p>Example with <tt>Runnable</tt> as callback:</p>
 
 <div class="source">
@@ -284,7 +309,7 @@ final String content = out.toString();
     }
 }
 </pre></div></div>
-<p>But this approach is tedious and error prone. It is easy to forget resetting. Also it is code duplication and violates DRY if you do this in all ou tests. The <tt>JavaDefaultLocale</tt> is for doing this tedious stuff for you:</p>
+<p>But this approach is tedious and error prone. It is easy to forget resetting. Also it is code duplication and violates DRY if you do this in all your tests. The <tt>JavaDefaultLocale</tt> is for doing this tedious stuff for you:</p>
 
 <div class="source">
 <div class="source">
@@ -304,8 +329,8 @@ final String content = out.toString();
 <p>The repeater rule executes annotated tests multiple times.</p>
 <div class="section">
 <h4><a name="RunTimes_Annotation"></a>RunTimes Annotation</h4>
-<p>Sometimes you have legacy code with weird timing issues or other side effects and the code only does sometimes something wrong. Imagine: The customer says every one hundred X or so the bug happens. But when you runt your tests every thing is fine. Then you start hitting the run test button over and over and BANG!, the bug occures. But the next time it is gone. The nyou start to write loops in your test code to provoke the bug. But this is not good practice to add logic into your tests. (Because where are tests for this logic?)</p>
-<p>The repeat rule is a tested helper to do that. You add that rule and annotate the tests you wanted repeatedly executed with an annoation:</p>
+<p>Sometimes you have legacy code with weird timing issues or other side effects and the code only does sometimes something wrong. Imagine: The customer says every one hundred X or so the bug happens. But when you runt your tests every thing is fine. Then you start hitting the run test button over and over and BANG!, the bug occurs. But the next time it is gone. Then you start to write loops in your test code to provoke the bug. But this is not good practice to add logic into your tests. (Because where are tests for this logic?)</p>
+<p>The repeat rule is a tested helper to do that. You add that rule and annotate the tests you wanted repeatedly executed with an annotation:</p>
 
 <div class="source">
 <div class="source">
@@ -323,8 +348,8 @@ final String content = out.toString();
 </pre></div></div></div>
 <div class="section">
 <h4><a name="RunMaxTimes_Annotation"></a>RunMaxTimes Annotation</h4>
-<p>Common pain in the ass are UI tests. You have tests which runs fine on your machine and they run fine on the CI almost always, but sometimes they fail. The nyou investigate, but they rune fine on your machine and on the CI. But sometimes&#x2026; The problem is timing: You have to define timeouts in your UI test framework. That&#x2019;s almost always enough. But in rare situation (heavy load, solar wind, what ever) the timeout is not enough and the tests fail randomly without a reason. This erodes the whole test suite because everybody starts to ignore the red ci.</p>
-<p>A simple solution is: If a single UI test fails, then start it again and see if fails again. Unless everuthing is fine. If it continues failing then there is maybe a r eal bug. But you don ot wnat to do this manually with the whole suite. For this use case is the <tt>RunMaxtimes</tt> annotation. In contrat to the <tt>RunTimes</tt> annotation it does not run the test the given vlaue times, it only runs the test multiple times if it fails until it succeds or the max times value is reached. If one of the runs succeded the test is marked green. If all runs failed the test is marked red.</p>
+<p>Common pain in the ass are UI tests. You have tests which runs fine on your machine and they run fine on the CI almost always, but sometimes they fail. Then you investigate, but they rune fine on your machine and on the CI. But sometimes&#x2026; The problem is timing: You have to define timeouts in your UI test framework. That&#x2019;s almost always enough. But in rare situation (heavy load, solar wind, what ever) the timeout is not enough and the tests fail randomly without a reason. This erodes the whole test suite because everybody starts to ignore the red CI.</p>
+<p>A simple solution is: If a single UI test fails, then start it again and see if fails again. Unless everything is fine. If it continues failing then there is maybe a real bug. But you don&#x2019;t want to do this manually with the whole suite. For this use case is the <tt>RunMaxtimes</tt> annotation. In contrast to the <tt>RunTimes</tt> annotation it does not run the test the given value times, it only runs the test multiple times if it fails until it succeeds or the max times value is reached. If one of the runs succeeded the test is marked green. If all runs failed the test is marked red.</p>
 <p>Example:</p>
 
 <div class="source">
@@ -341,7 +366,7 @@ final String content = out.toString();
     }
 }
 </pre></div></div>
-<p>In the example above the test is executed one time. If it didn&#x2019;t failed that&#x2019;s it. Unless the test is repeated and executed second time. If it didn&#x2019;t failed that&#x2019;s it. Unless the test is repeated again and executed third and last time. If it failed again, then the test is marked red. So the test is always executed multiple times until it succeded or the given number of tries is exhausted.</p></div></div></div>
+<p>In the example above the test is executed one time. If it didn&#x2019;t failed that&#x2019;s it. Unless the test is repeated and executed second time. If it didn&#x2019;t failed that&#x2019;s it. Unless the test is repeated again and executed third and last time. If it failed again, then the test is marked red. So the test is always executed multiple times until it succeeded or the given number of tries is exhausted.</p></div></div></div>
 <div class="section">
 <h2><a name="Custom_Hamcrest_Matchers"></a>Custom Hamcrest Matchers</h2>
 <p>This module provides custom matchers for <a class="externalLink" href="http://hamcrest.org/JavaHamcrest/">Hamcrest</a>.</p>

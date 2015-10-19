@@ -212,7 +212,7 @@ public final class DelayedRepeater {
     /**
      * Factory method to create a new instance.
      *
-     * @param waitMillies milliseconds to wait before invoking the runnable, must be greater than 0
+     * @param waitMillies milliseconds to wait before invoking the callback, must be greater than 0
      * @param maxRetries maxim number of tries, must be greater than 0
      * @return never {@code null}, always new instance
      */

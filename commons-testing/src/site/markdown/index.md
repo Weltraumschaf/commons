@@ -41,7 +41,36 @@ code.  `DelayedRepeater` abstracts  this "sleeping  loop"  away for  you and  is
 tested.
 
 The basic  idea is: You make  your arrangement and  acting of your test  code as
-usual, but the assertion as a callback of the `DelayedRepeater`.
+usual, but  the assertion as a  callback of the `DelayedRepeater`.  You can give
+the factory  method two parameters:  1. the time  in milliseconds to  wait until
+the callback is executed, 2. the number  of tries. If you create one for example
+like `DelayedRepeater.create(500, 3)`  then it will wait 500  ms before invoking
+the give callback the first time. The sequence is like:
+
+```
+
+ [ execute(...) ]
+        |
+        v
+  [ wait 500 ms ]
+        |
+        v
+[ 1st run()/call() ]
+        |
+        v
+  [ wait 500 ms ]
+        |
+        v
+[ 2nd run()/call() ]
+        |
+        v
+  [ wait 500 ms ]
+        |
+        v
+[ 3rd run()/call() ]
+        |
+        o
+```
 
 Example with `Runnable` as callback:
 

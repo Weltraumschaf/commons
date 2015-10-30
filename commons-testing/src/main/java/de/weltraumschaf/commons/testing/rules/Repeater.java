@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
+import org.junit.Rule;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -73,6 +74,16 @@ public final class Repeater implements TestRule {
     public Statement apply(final Statement base, final Description description) {
         Validate.notNull(base, "base");
         Validate.notNull(description, "description");
+
+        if (description.isSuite()) {
+            throw new RuntimeException(
+                String.format(
+                    "The rule %s must not be used as class rule! You can only use it with @%s.",
+                    this.getClass().getName(),
+                    Rule.class.getSimpleName()
+                ));
+        }
+
 
         if (hasRunTimesAnnotation(description)) {
             final int times = description.getAnnotation(RunTimes.class).value();

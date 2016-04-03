@@ -52,6 +52,7 @@ import java.util.List;
  */
 public final class JCommanderImproved<O> {
 
+    private static final String INDENT = "  ";
     /**
      * Default width of left column (in characters) for generated help string.
      */
@@ -130,14 +131,38 @@ public final class JCommanderImproved<O> {
      * @return never {@code null} or empty
      */
     public String helpMessage(final String usage, final String descriptions, final String example) {
+        reset();
+
+        if (optionsParser.getParameters().isEmpty()) {
+            // This adds the filled escriptions first time.
+            gatherOptions(new String[0]);
+        }
+
+        final List<ParameterDescription> parameters = optionsParser.getParameters();
+        return helpMessage(usage, descriptions, example, programName, parameters);
+    }
+
+    /**
+     * Generic method to generate help message for given parameters.
+     * <p>
+     * This method is the generic form of {@link #helpMessage(java.lang.String, java.lang.String, java.lang.String)}.
+     * </p>
+     *
+     * @param usage must not be {@code null}
+     * @param descriptions must not be {@code null}
+     * @param example must not be {@code null}
+     * @param programName must not be {@code null} or empty
+     * @param parameters must not be {@code null}
+     * @return never {@code null} or empty
+     */
+    public static String helpMessage(final String usage, final String descriptions, final String example, final String programName, final List<ParameterDescription> parameters) {
         Validate.notNull(usage, "usage");
         Validate.notNull(descriptions, "descriptions");
         Validate.notNull(example, "example");
+        Validate.notEmpty(programName, "programName");
+        Validate.notNull(parameters, "parameters");
 
-        reset();
-        final String indent = "  ";
         final StringBuilder help = new StringBuilder();
-
         help.append("Usage: ").append(programName);
 
         if (!usage.trim().isEmpty()) {
@@ -150,12 +175,6 @@ public final class JCommanderImproved<O> {
             help.append(descriptions.trim()).append(DEFAULT_NEW_LINE);
         }
 
-        if (optionsParser.getParameters().isEmpty()) {
-            // This adds the filed escriptions first time.
-            gatherOptions(new String[0]);
-        }
-
-        final List<ParameterDescription> parameters = optionsParser.getParameters();
         // Sort them, so the order is same on different VMs.
         Collections.sort(parameters, new Comparator<ParameterDescription>() {
 
@@ -175,7 +194,7 @@ public final class JCommanderImproved<O> {
             final int rightColumnwidth = AVAILABLE_WIDTH - leftColumnWidth;
 
             for (final ParameterDescription parameter : parameters) {
-                help.append(rightPad(indent + parameter.getNames(), leftColumnWidth))
+                help.append(rightPad(INDENT + parameter.getNames(), leftColumnWidth))
                     .append(lineBreak(parameter.getDescription(), rightColumnwidth, leftColumnWidth))
                     .append(DEFAULT_NEW_LINE);
             }
@@ -186,7 +205,7 @@ public final class JCommanderImproved<O> {
         if (!example.trim().isEmpty()) {
             help.append("Example").append(DEFAULT_NEW_LINE)
                 .append(DEFAULT_NEW_LINE)
-                .append(indent).append(example.trim()).append(DEFAULT_NEW_LINE);
+                .append(INDENT).append(example.trim()).append(DEFAULT_NEW_LINE);
         }
 
         help.append(DEFAULT_NEW_LINE);

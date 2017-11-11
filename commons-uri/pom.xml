@@ -8,7 +8,6 @@
         <version>2.2.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>de.weltraumschaf.commons</groupId>
     <artifactId>uri</artifactId>
     <packaging>jar</packaging>
 

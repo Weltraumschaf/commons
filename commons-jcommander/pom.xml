@@ -8,7 +8,6 @@
         <version>2.2.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>de.weltraumschaf.commons</groupId>
     <artifactId>jcommander</artifactId>
     <packaging>jar</packaging>
 
@@ -22,7 +21,7 @@
         <maven.findbugs.excludefilterfile>${project.parent.basedir}/src/main/config/findbugs-exclude.xml</maven.findbugs.excludefilterfile>
         <maven.findbugs.includefilterfile>${project.parent.basedir}/src/main/config/findbugs-include.xml</maven.findbugs.includefilterfile>
 
-        <dependency.jcommander.version>1.35</dependency.jcommander.version>
+        <dependency.jcommander.version>1.72</dependency.jcommander.version>
     </properties>
 
     <dependencies>

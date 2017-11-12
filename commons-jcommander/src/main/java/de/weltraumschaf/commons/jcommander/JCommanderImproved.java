@@ -131,10 +131,8 @@ public final class JCommanderImproved<O> {
      * @return never {@code null} or empty
      */
     public String helpMessage(final String usage, final String descriptions, final String example) {
-        reset();
-
         if (optionsParser.getParameters().isEmpty()) {
-            // This adds the filled escriptions first time.
+            // This adds the filled descriptions first time.
             gatherOptions(new String[0]);
         }
 

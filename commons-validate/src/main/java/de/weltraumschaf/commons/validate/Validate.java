@@ -295,6 +295,178 @@ public final class Validate {
     }
 
     /**
+     * Tests that a given float reference value is greater than the given lower bound.
+     * <p>
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than or equal the
+     * given lower bound value.
+     * </p>
+     *
+     * @since 2.3.0
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
+    public static float greaterThan(final float reference, final float lowerBound, final String name) {
+        if (reference <= lowerBound) {
+            if (null == name) {
+                throw new NullPointerException(String.format(
+                    "Reference is not greater than lower bound: %f > %f!",
+                    reference,
+                    lowerBound));
+            } else {
+                throw new IllegalArgumentException(
+                    String.format("Parameter '%s' must be greater than %f (was %f)!", name, lowerBound, reference));
+            }
+        }
+
+        return reference;
+    }
+
+    /**
+     * Convenience method for {@link #greaterThan(float, float, java.lang.String)} with {@code null} as name.
+     *
+     * @since 2.3.0
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @return the reference, if it is valid
+     */
+    public static float greaterThan(final float reference, final float lowerBound) {
+        return greaterThan(reference, lowerBound, null);
+    }
+
+    /**
+     * Tests that a given float reference value is greater than or equal the given lower bound.
+     * <p>
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than the given
+     * lower bound value.
+     * </p>
+     *
+     * @since 2.3.0
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
+    public static float greaterThanOrEqual(final float reference, final float lowerBound, final String name) {
+        if (reference < lowerBound) {
+            if (null == name) {
+                throw new NullPointerException(String.format(
+                    "Reference is not less than lower bound: %f < %f!",
+                    reference,
+                    lowerBound));
+            } else {
+                throw new IllegalArgumentException(
+                    String.format(
+                        "Parameter '%s' must be greater or equal than %f (was %f)!",
+                        name,
+                        lowerBound,
+                        reference));
+            }
+        }
+
+        return reference;
+    }
+
+    /**
+     * Convenience method for {@link #greaterThanOrEqual(float, float, java.lang.String)} with {@code null} as name.
+     *
+     * @since 2.3.0
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @return the reference, if it is valid
+     */
+    public static float greaterThanOrEqual(final float reference, final float lowerBound) {
+        return greaterThanOrEqual(reference, lowerBound, null);
+    }
+
+    /**
+     * Tests that a given double reference value is greater than the given lower bound.
+     * <p>
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than or equal the
+     * given lower bound value.
+     * </p>
+     *
+     * @since 2.3.0
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
+    public static double greaterThan(final double reference, final double lowerBound, final String name) {
+        if (reference <= lowerBound) {
+            if (null == name) {
+                throw new NullPointerException(String.format(
+                    "Reference is not greater than lower bound: %f > %f!",
+                    reference,
+                    lowerBound));
+            } else {
+                throw new IllegalArgumentException(
+                    String.format("Parameter '%s' must be greater than %f (was %f)!", name, lowerBound, reference));
+            }
+        }
+
+        return reference;
+    }
+
+    /**
+     * Convenience method for {@link #greaterThan(double, double, java.lang.String)} with {@code null} as name.
+     *
+     * @since 2.3.0
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @return the reference, if it is valid
+     */
+    public static double greaterThan(final double reference, final double lowerBound) {
+        return greaterThan(reference, lowerBound, null);
+    }
+
+    /**
+     * Tests that a given double reference value is greater than or equal the given lower bound.
+     * <p>
+     * The method throws an {@link java.lang.IllegalArgumentException} if the given reference is less than the given
+     * lower bound value.
+     * </p>
+     *
+     * @since 2.3.0
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @param name name of validated reference, may be {@code null}
+     * @return the reference, if it is valid
+     */
+    public static double greaterThanOrEqual(final double reference, final double lowerBound, final String name) {
+        if (reference < lowerBound) {
+            if (null == name) {
+                throw new NullPointerException(String.format(
+                    "Reference is not less than lower bound: %f < %f!",
+                    reference,
+                    lowerBound));
+            } else {
+                throw new IllegalArgumentException(
+                    String.format(
+                        "Parameter '%s' must be greater or equal than %f (was %f)!",
+                        name,
+                        lowerBound,
+                        reference));
+            }
+        }
+
+        return reference;
+    }
+
+    /**
+     * Convenience method for {@link #greaterThanOrEqual(double, double, java.lang.String)} with {@code null} as name.
+     *
+     * @since 2.3.0
+     * @param reference validated reference
+     * @param lowerBound bound to test against
+     * @return the reference, if it is valid
+     */
+    public static double greaterThanOrEqual(final double reference, final double lowerBound) {
+        return greaterThanOrEqual(reference, lowerBound, null);
+    }
+
+    /**
      * Tests that a given expression is true.
      * <p>
      * Throws an {@link java.lang.IllegalArgumentException} if the expression is {@code false}.
@@ -315,8 +487,6 @@ public final class Validate {
      * Ensures that {@code index} specifies a valid <i>element</i> in an array, list or string of size {@code size}. An
      * element index may range from zero, inclusive, to {@code size}, exclusive.
      *
-     * TODO: Review this method.
-     *
      * @since 2.0
      * @param index a user-supplied index identifying an element of an array, list or string
      * @param size the size of that array, list or string
@@ -332,8 +502,6 @@ public final class Validate {
      * Ensures that {@code index} specifies a valid <i>element</i> in an array, list or string of size {@code size}. An
      * element index may range from zero, inclusive, to {@code size}, exclusive.
      *
-     * TODO: Review this method.
-     *
      * @since 2.0
      * @param index a user-supplied index identifying an element of an array, list or string
      * @param size the size of that array, list or string
@@ -343,10 +511,10 @@ public final class Validate {
      * @throws java.lang.IllegalArgumentException if {@code size} is negative
      */
     public static int checkElementIndex(int index, int size, String desc) {
-        // Carefully optimized for execution by hotspot (explanatory comment above)
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException(badElementIndex(index, size, desc));
         }
+
         return index;
     }
 

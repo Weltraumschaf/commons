@@ -13,11 +13,14 @@ package de.weltraumschaf.commons.validate;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.Matchers.either;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.Rule;
 import org.junit.rules.ExpectedException;
@@ -42,7 +45,7 @@ public class ValidateTest {
         ctor.setAccessible(true);
 
         thrown.expect(either(instanceOf(UnsupportedOperationException.class))
-                .or(instanceOf(InvocationTargetException.class)));
+            .or(instanceOf(InvocationTargetException.class)));
         ctor.newInstance();
     }
 
@@ -187,6 +190,78 @@ public class ValidateTest {
         thrown.expect(IllegalArgumentException.class);
         thrown.expectMessage("Parameter 'foo' must be greater than or equal 5 (was 4)!");
         Validate.greaterThanOrEqual(4L, 5L, "foo");
+    }
+
+    @Test
+    public void greaterThan_float_greaterThanReturnsReference() {
+        assertThat(Validate.greaterThan(5f, 4f, ""), is(5f));
+    }
+
+    @Test
+    public void greaterThan_float_sameValuesThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' must be greater than 5.000000 (was 5.000000)!");
+        Validate.greaterThan(5f, 5f, "foo");
+    }
+
+    @Test
+    public void greaterThan_float_referenceLessThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' must be greater than 5.000000 (was 4.000000)!");
+        Validate.greaterThan(4f, 5f, "foo");
+    }
+
+    @Test
+    public void greaterThanOrEqual_float_greaterThanReturnsReference() {
+        assertThat(Validate.greaterThanOrEqual(5f, 4f, ""), is(5f));
+    }
+
+    @Test
+    public void greaterThanOrEqual_float_sameValuesThrowsException() {
+        assertThat(Validate.greaterThanOrEqual(5f, 5f, ""), is(5f));
+    }
+
+    @Test
+    public void greaterThanOrEqual_float_referenceLessThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' must be greater or equal than 5.000000 (was 4.000000)!");
+        Validate.greaterThanOrEqual(4f, 5f, "foo");
+    }
+
+    @Test
+    public void greaterThan_double_greaterThanReturnsReference() {
+        assertThat(Validate.greaterThan(5d, 4d, ""), is(5d));
+    }
+
+    @Test
+    public void greaterThan_double_sameValuesThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' must be greater than 5.000000 (was 5.000000)!");
+        Validate.greaterThan(5d, 5d, "foo");
+    }
+
+    @Test
+    public void greaterThan_double_referenceLessThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' must be greater than 5.000000 (was 4.000000)!");
+        Validate.greaterThan(4d, 5d, "foo");
+    }
+
+    @Test
+    public void greaterThanOrEqual_double_greaterThanReturnsReference() {
+        assertThat(Validate.greaterThanOrEqual(5d, 4d, ""), is(5d));
+    }
+
+    @Test
+    public void greaterThanOrEqual_double_sameValuesThrowsException() {
+        assertThat(Validate.greaterThanOrEqual(5d, 5d, ""), is(5d));
+    }
+
+    @Test
+    public void greaterThanOrEqual_double_referenceLessThrowsException() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Parameter 'foo' must be greater or equal than 5.000000 (was 4.000000)!");
+        Validate.greaterThanOrEqual(4d, 5d, "foo");
     }
 
     @Test

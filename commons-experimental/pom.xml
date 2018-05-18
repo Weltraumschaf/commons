@@ -8,13 +8,12 @@
         <version>2.3.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>de.weltraumschaf.commons</groupId>
     <artifactId>experimental</artifactId>
     <packaging>jar</packaging>
 
     <name>Commons Experimental</name>
     <description>
-        This modul contains experimental API. Do not use in production code.
+        This module contains experimental API. Do not use in production code.
         Everything in this module may change drastically or may be vanish at least.
     </description>
 

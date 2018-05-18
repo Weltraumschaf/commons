@@ -12,7 +12,7 @@ fi
 
 echo "Make stage: ${STAGE}."
 mkdir -pv "${STAGE}"
-time mvn clean install site site:stage \
+time pmvn clean install site site:stage \
     -DskipTests=true \
     -DstagingDirectory="${STAGE}"
 

@@ -2,9 +2,9 @@
 
 # https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide
 
-mvn release:clean && \
-mvn release:prepare -DautoVersionSubmodules=true && \
-mvn release:perform
+pmvn release:clean && \
+pmvn release:prepare -DautoVersionSubmodules=true && \
+pmvn release:perform
 
 echo "Finished :-)"
 echo "Goto https://oss.sonatype.org/"

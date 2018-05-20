@@ -17,7 +17,9 @@ package de.weltraumschaf.commons.concurrent;
  *
  * @since 1.0.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @deprecated Will be removed because JDK provides concurrent collections
  */
+@Deprecated
 public final class Concurrent {
 
     /**

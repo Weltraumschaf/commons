@@ -20,7 +20,9 @@ import net.jcip.annotations.ThreadSafe;
  * @since 1.0.0
  * @param <E> type of stack entries
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @deprecated Will be removed because JDK provides concurrent collections
  */
+@Deprecated
 @ThreadSafe
 public interface Stack<E> {
 

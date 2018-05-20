@@ -15,7 +15,7 @@ import java.io.InputStream;
  * @since 2.3.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
-final class BaseCommand implements Command {
+public final class BaseCommand implements Command {
 
     /**
      * Command to execute.
@@ -30,11 +30,11 @@ final class BaseCommand implements Command {
      */
     private final ProcessBuilderWrapper builder;
 
-    BaseCommand(final String command) {
+    public BaseCommand(final String command) {
         this(command, "");
     }
 
-    BaseCommand(final String command, final String arguments) {
+    public BaseCommand(final String command, final String arguments) {
         this(command, arguments, new DefaultProcessBuilderWrapper());
     }
 
@@ -45,7 +45,7 @@ final class BaseCommand implements Command {
      * @param arguments must not be {@code null}, maybe empty
      * @param builder   must not be {@code null}
      */
-    BaseCommand(final String command, final String arguments, final ProcessBuilderWrapper builder) {
+    public BaseCommand(final String command, final String arguments, final ProcessBuilderWrapper builder) {
         super();
         this.command = Validate.notEmpty(command, "command");
         this.arguments = Validate.notNull(arguments, "arguments");

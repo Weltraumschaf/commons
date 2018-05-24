@@ -21,26 +21,26 @@ public class CommandResultTest {
     @Test(expected = NullPointerException.class)
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void constructor_stdoutMustNotBeNull() {
-        new CommandResult(0, null, "");
+        CommandResult.ok(null);
     }
 
     @Test(expected = NullPointerException.class)
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void constructor_stderrMustNotBeNull() {
-        new CommandResult(0, "", null);
+        CommandResult.error(0, null);
     }
 
     @Test
     public void isSuccessful() {
-        assertThat(new CommandResult(0, "", "").isSuccessful(), is(true));
-        assertThat(new CommandResult(-1, "", "").isSuccessful(), is(false));
-        assertThat(new CommandResult(1, "", "").isSuccessful(), is(false));
+        assertThat(CommandResult.ok("").isSuccessful(), is(true));
+        assertThat(CommandResult.error(-1, "").isSuccessful(), is(false));
+        assertThat(CommandResult.error(1, "").isSuccessful(), is(false));
     }
 
     @Test
     public void isFailed() {
-        assertThat(new CommandResult(0, "", "").isFailed(), is(false));
-        assertThat(new CommandResult(-1, "", "").isFailed(), is(true));
-        assertThat(new CommandResult(1, "", "").isFailed(), is(true));
+        assertThat(CommandResult.ok("").isFailed(), is(false));
+        assertThat(CommandResult.error(-1, "").isFailed(), is(true));
+        assertThat(CommandResult.error(1, "").isFailed(), is(true));
     }
 }

@@ -39,7 +39,25 @@ public class BaseCommandTest {
     }
 
     @Test
-    public void execute() throws IOException, InterruptedException {
+    public void execute_ok() throws IOException, InterruptedException {
+        final Process process = mock(Process.class);
+        when(process.getInputStream())
+            .thenReturn(new ByteArrayInputStream("std out ...".getBytes(StandardCharsets.UTF_8)));
+        when(process.getErrorStream())
+            .thenReturn(new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
+        when(process.waitFor()).thenReturn(0);
+        final ProcessBuilderWrapper builder = mock(ProcessBuilderWrapper.class);
+        when(builder.start("bar", "-baz snafu")).thenReturn(process);
+
+        final BaseCommand sut = new BaseCommand("bar", "-baz snafu", builder);
+
+        assertThat(
+            sut.execute(),
+            is(CommandResult.ok("std out ...")));
+    }
+
+    @Test
+    public void execute_error() throws IOException, InterruptedException {
         final Process process = mock(Process.class);
         when(process.getInputStream())
             .thenReturn(new ByteArrayInputStream("std out ...".getBytes(StandardCharsets.UTF_8)));
@@ -53,6 +71,6 @@ public class BaseCommandTest {
 
         assertThat(
             sut.execute(),
-            is(new CommandResult(42, "std out ...", "std err\nsnafu ...")));
+            is(CommandResult.error(42, "std err\nsnafu ...")));
     }
 }

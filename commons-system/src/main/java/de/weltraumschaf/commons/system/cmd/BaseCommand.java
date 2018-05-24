@@ -12,8 +12,8 @@ import java.io.InputStream;
  * tutorial</a> for more information.
  * </p>
  *
- * @since 2.3.0
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
+ * @since 2.3.0
  */
 public final class BaseCommand implements Command {
 
@@ -58,11 +58,15 @@ public final class BaseCommand implements Command {
         final InputThreadHandler stdout = prepareInputHandler(process.getInputStream());
         final InputThreadHandler stderr = prepareInputHandler(process.getErrorStream());
 
-        final int errCode = process.waitFor();
+        final int exitCode = process.waitFor();
         stdout.join();
         stderr.join();
 
-        return new CommandResult(errCode, stdout.getOutput(), stderr.getOutput());
+        if (exitCode == 0) {
+            return CommandResult.ok(stdout.getOutput());
+        }
+
+        return CommandResult.error(exitCode, stderr.getOutput());
     }
 
     private InputThreadHandler prepareInputHandler(final InputStream input) {

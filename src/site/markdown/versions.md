@@ -140,6 +140,7 @@
 ## Version 2.3.0
 
 - Validator methods to check if float/double are greater (or equal) a reference value.
+- API to execute command line programs 
 
 [junit]:    http://www.junit.org/
 [hamcrest]: http://hamcrest.org/JavaHamcrest/

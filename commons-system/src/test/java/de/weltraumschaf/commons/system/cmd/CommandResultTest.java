@@ -27,7 +27,7 @@ public class CommandResultTest {
     @Test(expected = NullPointerException.class)
     @SuppressWarnings("ResultOfObjectAllocationIgnored")
     public void constructor_stderrMustNotBeNull() {
-        CommandResult.error(0, null);
+        CommandResult.error(-1, null);
     }
 
     @Test

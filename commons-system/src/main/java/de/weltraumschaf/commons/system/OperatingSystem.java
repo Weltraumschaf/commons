@@ -42,6 +42,8 @@ public enum OperatingSystem {
      * Mac OS X.
      */
     MACOSX("mac os x"),
+    // TODO Find out.
+    BSD(""),
     /**
      * Unknown OS.
      */
@@ -49,8 +51,11 @@ public enum OperatingSystem {
 
     /**
      * Name to get OS name via {@link System#getProperty(java.lang.String)}.
+     *
+     * @deprecated use {@link SystemProperties.Names.OS_NAME} instead
      */
-    public static final String OS_SYSTEM_PROPERTY = "os.name";
+    @Deprecated
+    public static final String OS_SYSTEM_PROPERTY = SystemProperties.defaultProperties().get(SystemProperties.Names.OS_NAME);
 
     /**
      * OS osName.
@@ -60,7 +65,7 @@ public enum OperatingSystem {
     /**
      * Unknown OS osName.
      */
-    private OperatingSystem() {
+    OperatingSystem() {
         this("");
     }
 
@@ -69,7 +74,7 @@ public enum OperatingSystem {
      *
      * @param osName must not be {@code null}
      */
-    private OperatingSystem(final String osName) {
+    OperatingSystem(final String osName) {
         this.osName = Validate.notNull(osName, "osName");
     }
 

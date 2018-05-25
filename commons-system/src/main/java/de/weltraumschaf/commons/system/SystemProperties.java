@@ -118,7 +118,7 @@ public final class SystemProperties {
      *
      * @since 1.1.0
      */
-    public static enum Names {
+    public enum Names {
 
         /**
          * Character that separates components of a file path.
@@ -198,7 +198,7 @@ public final class SystemProperties {
          *
          * @param propertyName must not be {@code null} or empty.
          */
-        private Names(final String propertyName) {
+        Names(final String propertyName) {
             this.propertyName = Validate.notEmpty(propertyName, "propertyName");
         }
 

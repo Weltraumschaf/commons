@@ -13,11 +13,12 @@ package de.weltraumschaf.commons.swing;
 
 import de.weltraumschaf.commons.system.Exitable;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.WindowEvent;
 
 import static org.junit.Assert.*;
 
+import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -31,13 +32,16 @@ import static org.mockito.Mockito.*;
 public class SwingFrameTest {
 
     @Test
-    @Ignore
     public void constructObject() {
-        final String title = "foobar";
-        final SwingFrame sut = new SwingFrame(title);
-        assertEquals(title, sut.getTitle());
-        assertTrue(sut.getContentPane().getLayout() instanceof BorderLayout);
-        assertSame(sut.getPanel(), sut.getContentPane().getComponent(0));
+        try {
+            final String title = "foobar";
+            final SwingFrame sut = new SwingFrame(title);
+            assertEquals(title, sut.getTitle());
+            assertTrue(sut.getContentPane().getLayout() instanceof BorderLayout);
+            assertSame(sut.getPanel(), sut.getContentPane().getComponent(0));
+        } catch (final HeadlessException e) {
+            Assume.assumeTrue("Environment is headless", false);
+        }
     }
 
     @Test
@@ -66,30 +70,36 @@ public class SwingFrameTest {
     }
 
     @Test
-    @Ignore
     public void bindAndExitOnWindowClosing() {
-        final SwingFrame sut = new SwingFrame("foobar");
-        final Exitable exiter = mock(Exitable.class);
+        try {
+            final SwingFrame sut = new SwingFrame("foobar");
+            final Exitable exiter = mock(Exitable.class);
 
-        sut.setExiter(exiter);
-        sut.setExitOnCloseWindow(true);
-        sut.init();
-        sut.dispatchEvent(new WindowEvent(sut, WindowEvent.WINDOW_CLOSING));
+            sut.setExiter(exiter);
+            sut.setExitOnCloseWindow(true);
+            sut.init();
+            sut.dispatchEvent(new WindowEvent(sut, WindowEvent.WINDOW_CLOSING));
 
-        verify(exiter, times(1)).exit(0);
+            verify(exiter, times(1)).exit(0);
+        } catch (final HeadlessException e) {
+            Assume.assumeTrue("Environment is headless", false);
+        }
     }
 
     @Test
-    @Ignore
     public void notBindAndExitOnWindowClosing() {
-        final SwingFrame sut = new SwingFrame("foobar");
-        final Exitable exiter = mock(Exitable.class);
+        try {
+            final SwingFrame sut = new SwingFrame("foobar");
+            final Exitable exiter = mock(Exitable.class);
 
-        sut.setExiter(exiter);
-        sut.init();
-        sut.dispatchEvent(new WindowEvent(sut, WindowEvent.WINDOW_CLOSING));
+            sut.setExiter(exiter);
+            sut.init();
+            sut.dispatchEvent(new WindowEvent(sut, WindowEvent.WINDOW_CLOSING));
 
-        verify(exiter, never()).exit(0);
+            verify(exiter, never()).exit(0);
+        } catch (final HeadlessException e) {
+            Assume.assumeTrue("Environment is headless", false);
+        }
     }
 
 }

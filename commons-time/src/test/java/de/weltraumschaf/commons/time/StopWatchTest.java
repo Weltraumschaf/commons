@@ -29,7 +29,7 @@ public class StopWatchTest {
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
-    private static final long DELTA = 20L;
+    private static final long DELTA = 50L;
     private final StopWatch sut = new StopWatch();
 
     private void assertTime(final long actual, final long expected) {

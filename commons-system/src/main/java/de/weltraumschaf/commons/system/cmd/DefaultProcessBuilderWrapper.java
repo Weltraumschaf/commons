@@ -4,6 +4,7 @@ package de.weltraumschaf.commons.system.cmd;
 import de.weltraumschaf.commons.validate.Validate;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Default implementation which delegates to {@link ProcessBuilder}.

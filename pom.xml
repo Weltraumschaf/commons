@@ -32,6 +32,9 @@
     <url>http://weltraumschaf.github.com/commons/</url>
 
     <properties>
+        <project.build.version.source>1.8</project.build.version.source>
+        <project.build.version.target>1.8</project.build.version.target>
+
         <jacoco.exclude.1>**/ApplicationException.*</jacoco.exclude.1>
         <jacoco.exclude.2>**/NullExiter.*</jacoco.exclude.2>
 

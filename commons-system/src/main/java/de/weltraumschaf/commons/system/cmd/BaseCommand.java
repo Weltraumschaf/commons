@@ -30,10 +30,21 @@ public final class BaseCommand implements Command {
      */
     private final ProcessBuilderWrapper builder;
 
+    /**
+     * Convenience constructor for no arguments.
+     *
+     * @param command the command itself, must not be {@code null} or empty
+     */
     public BaseCommand(final String command) {
         this(command, "");
     }
 
+    /**
+     * Convenience constructor which initializes the {@link ProcessBuilderWrapper}.
+     *
+     * @param command   the command itself, must not be {@code null} or empty
+     * @param arguments must not be {@code null}, maybe empty
+     */
     public BaseCommand(final String command, final String arguments) {
         this(command, arguments, new DefaultProcessBuilderWrapper());
     }

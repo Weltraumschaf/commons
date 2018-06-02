@@ -140,7 +140,8 @@
 ## Version 2.3.0
 
 - Validator methods to check if float/double are greater (or equal) a reference value.
-- API to execute command line programs 
+- API to execute command line programs
+- Logging: With this version first modules introduce SLF4J logging. The whole library uses loglevel `DEBUG` or lower. 
 
 [junit]:    http://www.junit.org/
 [hamcrest]: http://hamcrest.org/JavaHamcrest/

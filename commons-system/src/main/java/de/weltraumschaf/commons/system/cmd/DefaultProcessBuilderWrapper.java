@@ -2,6 +2,8 @@ package de.weltraumschaf.commons.system.cmd;
 
 
 import de.weltraumschaf.commons.validate.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -13,6 +15,8 @@ import java.util.Arrays;
  * @author Sven Strittmatter &lt;weltraumschaf@googlemail.com&gt;
  */
 final class DefaultProcessBuilderWrapper implements ProcessBuilderWrapper {
+
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultProcessBuilderWrapper.class);
 
     @Override
     public Process start(final String... command) throws IOException {
@@ -26,6 +30,7 @@ final class DefaultProcessBuilderWrapper implements ProcessBuilderWrapper {
             Validate.notNull(command, i + "in command array");
         }
 
+        LOG.debug("Starting process with command: '{}'", Arrays.toString(command));
         return new ProcessBuilder(command).start();
     }
 }

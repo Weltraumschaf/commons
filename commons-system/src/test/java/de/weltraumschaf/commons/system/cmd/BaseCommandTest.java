@@ -5,6 +5,8 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Collections;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
@@ -20,12 +22,12 @@ public class BaseCommandTest {
 
     @Test(expected = NullPointerException.class)
     public void constructor_commandMustNotBeNull() {
-        new BaseCommand(null, "") ;
+        new BaseCommand(null) ;
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void constructor_commandMustNotBeEmpty() {
-        new BaseCommand("", "") ;
+        new BaseCommand("") ;
     }
 
     @Test(expected = NullPointerException.class)
@@ -35,7 +37,7 @@ public class BaseCommandTest {
 
     @Test(expected = NullPointerException.class)
     public void constructor_builderMustNotBeNull() {
-        new BaseCommand("bar", "", null) ;
+        new BaseCommand("bar", Collections.emptyList(), null) ;
     }
 
     @Test
@@ -47,9 +49,9 @@ public class BaseCommandTest {
             .thenReturn(new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
         when(process.waitFor()).thenReturn(0);
         final ProcessBuilderWrapper builder = mock(ProcessBuilderWrapper.class);
-        when(builder.start("bar", "-baz snafu")).thenReturn(process);
+        when(builder.start(Arrays.asList("bar", "-baz", "snafu"))).thenReturn(process);
 
-        final BaseCommand sut = new BaseCommand("bar", "-baz snafu", builder);
+        final BaseCommand sut = new BaseCommand("bar", Arrays.asList("-baz","snafu"), builder);
 
         assertThat(
             sut.execute(),
@@ -65,9 +67,9 @@ public class BaseCommandTest {
             .thenReturn(new ByteArrayInputStream("std err\nsnafu ...".getBytes(StandardCharsets.UTF_8)));
         when(process.waitFor()).thenReturn(42);
         final ProcessBuilderWrapper builder = mock(ProcessBuilderWrapper.class);
-        when(builder.start("bar", "-baz snafu")).thenReturn(process);
+        when(builder.start(Arrays.asList("bar", "-baz","snafu"))).thenReturn(process);
 
-        final BaseCommand sut = new BaseCommand("bar", "-baz snafu", builder);
+        final BaseCommand sut = new BaseCommand("bar", Arrays.asList("-baz","snafu"), builder);
 
         assertThat(
             sut.execute(),

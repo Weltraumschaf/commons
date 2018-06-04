@@ -21,10 +21,6 @@ final class DefaultProcessBuilderWrapper implements ProcessBuilderWrapper {
     private static final Logger LOG = LoggerFactory.getLogger(DefaultProcessBuilderWrapper.class);
 
     @Override
-    public Process start(final String... command) throws IOException {
-        return start(Arrays.stream(command).collect(Collectors.toList()));
-    }
-
     public Process start(final List<String> command) throws IOException {
         Validate.notNull(command, "command");
 

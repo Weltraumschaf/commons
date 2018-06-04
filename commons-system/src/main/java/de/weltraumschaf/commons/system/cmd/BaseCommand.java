@@ -4,6 +4,10 @@ import de.weltraumschaf.commons.validate.Validate;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Common base class for commands.
@@ -24,7 +28,7 @@ public final class BaseCommand implements Command {
     /**
      * Command arguments.
      */
-    private final String arguments;
+    private final Collection<String> arguments;
     /**
      * Abstracts the process builder for testability.
      */
@@ -36,7 +40,7 @@ public final class BaseCommand implements Command {
      * @param command the command itself, must not be {@code null} or empty
      */
     public BaseCommand(final String command) {
-        this(command, "");
+        this(command, Collections.emptyList());
     }
 
     /**
@@ -45,7 +49,7 @@ public final class BaseCommand implements Command {
      * @param command   the command itself, must not be {@code null} or empty
      * @param arguments must not be {@code null}, maybe empty
      */
-    public BaseCommand(final String command, final String arguments) {
+    public BaseCommand(final String command, final Collection<String> arguments) {
         this(command, arguments, new DefaultProcessBuilderWrapper());
     }
 
@@ -56,7 +60,7 @@ public final class BaseCommand implements Command {
      * @param arguments must not be {@code null}, maybe empty
      * @param builder   must not be {@code null}
      */
-    public BaseCommand(final String command, final String arguments, final ProcessBuilderWrapper builder) {
+    public BaseCommand(final String command, final Collection<String> arguments, final ProcessBuilderWrapper builder) {
         super();
         this.command = Validate.notEmpty(command, "command");
         this.arguments = Validate.notNull(arguments, "arguments");
@@ -65,7 +69,10 @@ public final class BaseCommand implements Command {
 
     @Override
     public final CommandResult execute() throws IOException, InterruptedException {
-        final Process process = builder.start(command, arguments);
+        final List<String> commandWithArguments = new ArrayList<>();
+        commandWithArguments.add(command);
+        commandWithArguments.addAll(arguments);
+        final Process process = builder.start(commandWithArguments);
         final InputThreadHandler stdout = prepareInputHandler(process.getInputStream());
         final InputThreadHandler stderr = prepareInputHandler(process.getErrorStream());
 

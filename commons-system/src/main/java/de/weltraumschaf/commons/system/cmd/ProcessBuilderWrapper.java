@@ -18,21 +18,6 @@ interface ProcessBuilderWrapper {
      * </p>
      * <pre>{@code
      * ProcessBuilderWrapper builder = ...;
-     * Process proc = builder.start("ls", "-la", "/foo/bar");
-     * }</pre>
-     *
-     * @param command must not be {@code null}
-     * @return never {@code null}
-     * @throws IOException if an I/O error occurs
-     */
-    Process start(String... command) throws IOException;
-    /**
-     * Creates and executes a command.
-     * <p>
-     * For example to execute {@literal ls -la /foo/bar} invoke:
-     * </p>
-     * <pre>{@code
-     * ProcessBuilderWrapper builder = ...;
      * Process proc = builder.start(Arrays.asList("ls", "-la", "/foo/bar"));
      * }</pre>
      *

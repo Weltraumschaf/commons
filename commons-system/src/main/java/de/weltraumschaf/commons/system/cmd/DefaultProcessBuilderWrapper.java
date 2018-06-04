@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Default implementation which delegates to {@link ProcessBuilder}.
@@ -20,17 +22,21 @@ final class DefaultProcessBuilderWrapper implements ProcessBuilderWrapper {
 
     @Override
     public Process start(final String... command) throws IOException {
+        return start(Arrays.stream(command).collect(Collectors.toList()));
+    }
+
+    public Process start(final List<String> command) throws IOException {
         Validate.notNull(command, "command");
 
-        if (command.length < 1) {
+        if (command.size() < 1) {
             throw new IllegalArgumentException("Parameter 'command' must not be empty!");
         }
 
-        for (int i = 0; i < command.length; ++i) {
+        for (int i = 0; i < command.size(); ++i) {
             Validate.notNull(command, i + "in command array");
         }
 
-        LOG.debug("Starting process with command: '{}'", Arrays.toString(command));
+        LOG.debug("Starting process with command: '{}'", command);
         return new ProcessBuilder(command).start();
     }
 }

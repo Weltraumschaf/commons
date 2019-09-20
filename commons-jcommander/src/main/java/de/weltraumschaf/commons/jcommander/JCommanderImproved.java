@@ -30,7 +30,7 @@ import java.util.List;
  *     // This option type is a typical JCommander annotated beanclass.
  *     // Note that this type must provide a zero argument constructor.
  *     // If not the constructor of JCommanderImproved throws an exception.
- *     final JCommanderImproved<Options> cliArgs = new JCommanderImproved<Options>("mytool", Options.class);
+ *     final JCommanderImproved<Options> cliArgs = new JCommanderImproved<>("mytool", Options.class);
  *
  *     // Parse and gather the options.
  *     final Options opts = cliArgs.gatherOptions(args);

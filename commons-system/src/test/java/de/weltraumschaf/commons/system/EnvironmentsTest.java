@@ -50,7 +50,7 @@ public class EnvironmentsTest {
     public void getByString() {
         assertThat(
             sut.get("SHELL"),
-            is(either(equalTo("/bin/bash")).or(equalTo("/usr/local/bin/bash"))));
+            is(anyOf(equalTo("/bin/bash"), equalTo("/usr/local/bin/bash"), equalTo("/bin/bash"))));
         assertThat(sut.get("_commons__unknown__"), is(equalTo("")));
     }
 
@@ -58,7 +58,7 @@ public class EnvironmentsTest {
     public void getByString_withFallback() {
         assertThat(
             sut.get("SHELL", "default"),
-            is(either(equalTo("/bin/bash")).or(equalTo("/usr/local/bin/bash"))));
+            is(anyOf(equalTo("/bin/bash"), equalTo("/usr/local/bin/bash"), equalTo("/bin/bash"))));
         assertThat(sut.get("_commons__unknown__", "default"), is(equalTo("default")));
     }
 
@@ -66,14 +66,14 @@ public class EnvironmentsTest {
     public void getByName() {
         assertThat(
             sut.get(Names.SHELL),
-            is(either(equalTo("/bin/bash")).or(equalTo("/usr/local/bin/bash"))));
+            is(anyOf(equalTo("/bin/bash"), equalTo("/usr/local/bin/bash"), equalTo("/bin/bash"))));
     }
 
     @Test
     public void getByName_withFallback() {
         assertThat(
             sut.get(Names.SHELL, "default"),
-            is(either(equalTo("/bin/bash")).or(equalTo("/usr/local/bin/bash"))));
+            is(anyOf(equalTo("/bin/bash"), equalTo("/usr/local/bin/bash"), equalTo("/bin/bash"))));
     }
 
     @Test(expected = NullPointerException.class)

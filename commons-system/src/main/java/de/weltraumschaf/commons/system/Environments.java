@@ -121,7 +121,7 @@ public final class Environments {
      *
      * @since 2.0.0
      */
-    public static enum Names {
+    public enum Names {
 
         /**
          * Maven home directory such as {@code /Users/johndoe/.m2}.

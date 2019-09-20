@@ -25,12 +25,12 @@ package de.weltraumschaf.commons.system;
  *
  *      private final int code;
  *
- *      public ExitCodeImpl(final int code) {
+ *      ExitCodeImpl(final int code) {
  *          this.code = code;
  *      }
  *
  *      &#064;Override
- *      public int getCode() [
+ *      public int getCode() {
  *          return code;
  *      }
  *

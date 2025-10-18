@@ -50,7 +50,13 @@ public class EnvironmentsTest {
     public void getByString() {
         assertThat(
             sut.get("SHELL"),
-            is(anyOf(equalTo("/bin/bash"), equalTo("/usr/local/bin/bash"), equalTo("/bin/csh"))));
+            is(
+                anyOf(
+                    equalTo("/bin/bash"),
+                    equalTo("/usr/local/bin/bash"),
+                    equalTo("/bin/csh"),
+                    equalTo("/opt/homebrew/bin/bash"))));
+
         assertThat(sut.get("_commons__unknown__"), is(equalTo("")));
     }
 
@@ -58,7 +64,13 @@ public class EnvironmentsTest {
     public void getByString_withFallback() {
         assertThat(
             sut.get("SHELL", "default"),
-            is(anyOf(equalTo("/bin/bash"), equalTo("/usr/local/bin/bash"), equalTo("/bin/csh"))));
+            is(
+                anyOf(
+                    equalTo("/bin/bash"),
+                    equalTo("/usr/local/bin/bash"),
+                    equalTo("/bin/csh"),
+                    equalTo("/opt/homebrew/bin/bash"))));
+
         assertThat(sut.get("_commons__unknown__", "default"), is(equalTo("default")));
     }
 
@@ -66,14 +78,24 @@ public class EnvironmentsTest {
     public void getByName() {
         assertThat(
             sut.get(Names.SHELL),
-            is(anyOf(equalTo("/bin/bash"), equalTo("/usr/local/bin/bash"), equalTo("/bin/csh"))));
+            is(
+                anyOf(
+                    equalTo("/bin/bash"),
+                    equalTo("/usr/local/bin/bash"),
+                    equalTo("/bin/csh"),
+                    equalTo("/opt/homebrew/bin/bash"))));
     }
 
     @Test
     public void getByName_withFallback() {
         assertThat(
             sut.get(Names.SHELL, "default"),
-            is(anyOf(equalTo("/bin/bash"), equalTo("/usr/local/bin/bash"), equalTo("/bin/csh"))));
+            is(
+                anyOf(
+                    equalTo("/bin/bash"),
+                    equalTo("/usr/local/bin/bash"),
+                    equalTo("/bin/csh"),
+                    equalTo("/opt/homebrew/bin/bash"))));
     }
 
     @Test(expected = NullPointerException.class)

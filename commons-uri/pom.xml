@@ -33,6 +33,12 @@
             <artifactId>guava</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>4.0.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

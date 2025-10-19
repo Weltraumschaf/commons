@@ -39,13 +39,14 @@
  */
 package de.weltraumschaf.commons.uri;
 
+import jakarta.xml.bind.annotation.XmlAnyAttribute;
+import jakarta.xml.bind.annotation.XmlAttribute;
+
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlAnyAttribute;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.namespace.QName;
 
 /**

@@ -11,7 +11,6 @@
  */
 package de.weltraumschaf.commons.testing.hamcrest;
 
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 /**
@@ -54,7 +53,6 @@ public class IsCloseTo extends LongIsCloseTo {
      * @param error the delta (+/-) within which matches will be allowed
      * @return never {@code null}, always new instance
      */
-    @Factory
     public static Matcher<Long> closeTo(final long operand, final long error) {
         return new IsCloseTo(operand, error);
     }

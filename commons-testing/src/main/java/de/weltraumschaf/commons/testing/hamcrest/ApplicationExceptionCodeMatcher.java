@@ -15,7 +15,6 @@ import de.weltraumschaf.commons.application.ApplicationException;
 import de.weltraumschaf.commons.system.ExitCode;
 import de.weltraumschaf.commons.validate.Validate;
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -107,8 +106,6 @@ public final class ApplicationExceptionCodeMatcher<T extends ApplicationExceptio
      * @param expectedExitCode code to match, must not be {@code null}
      * @return never {@code null}, always new instance
      */
-    @Factory
-    @SuppressWarnings("deprecation")
     public static <T extends ApplicationException> Matcher<T> hasExitCode(final ExitCode expectedExitCode) {
         return new ApplicationExceptionCodeMatcher<>(expectedExitCode);
     }

@@ -13,7 +13,6 @@ package de.weltraumschaf.commons.testing.hamcrest;
 
 import de.weltraumschaf.commons.validate.Validate;
 import org.hamcrest.Description;
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -88,7 +87,6 @@ final class HasMessage extends TypeSafeMatcher<Throwable> {
      * @param messageTextMatcher matcher for actual message., not {@code null}.
      * @return never {@code null}
      */
-    @Factory
     public static Matcher<Throwable> hasMessage(final Matcher<? super String> messageTextMatcher) {
         return new HasMessage(messageTextMatcher);
     }

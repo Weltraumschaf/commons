@@ -11,7 +11,6 @@
  */
 package de.weltraumschaf.commons.testing.hamcrest;
 
-import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
 /**
@@ -65,7 +64,6 @@ final class IntegerIsCloseTo extends BaseIsCloseTo<Integer> {
      * @param error the delta (+/-) within which matches will be allowed
      * @return never {@code null}
      */
-    @Factory
     public static Matcher<Integer> closeTo(final int operand, final int error) {
         return new IntegerIsCloseTo(operand, error);
     }
